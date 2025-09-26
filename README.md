@@ -1,8 +1,9 @@
-# Rise - [GROUPNAME]
+# Rise - GENT6
 
 ## Team Members
 
-- [MEMBER1_NAME] - [MEMBER1_EMAIL] - [MEMBER1_GITHUB_USERNAME]
+- Ninho Decaesteker - ninho.decaesteker@student.hogent.be - NinhoD
+- [MEMBER2_NAME] - [MEMBER2_EMAIL] - [MEMBER2_GITHUB_USERNAME]
 
 ## Technologies & Packages Used
 
