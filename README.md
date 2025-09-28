@@ -3,6 +3,7 @@
 ## Team Members
 
 - Ninho Decaesteker - ninho.decaesteker@student.hogent.be - NinhoD
+- Mariana Abukaeva - mariana.abukaeva@student.hogent.be - mariana-ab
 - [MEMBER2_NAME] - [MEMBER2_EMAIL] - [MEMBER2_GITHUB_USERNAME]
 
 ## Technologies & Packages Used
