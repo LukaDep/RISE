@@ -6,6 +6,8 @@
 - Mariana Abukaeva - mariana.abukaeva@student.hogent.be - mariana-ab
 - Seppe Dornon - seppe.dornon@student.hogent.be - seppedornon
 - Igor Casteleyn - igor.casteleyn@student.hogent.be - igorcasteleyn
+- Luka Depuydt - luka.depuydt@student.hogent.be - LukaDep
+
 - [MEMBER2_NAME] - [MEMBER2_EMAIL] - [MEMBER2_GITHUB_USERNAME]
 
 ## Technologies & Packages Used
