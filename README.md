@@ -7,8 +7,7 @@
 - Seppe Dornon - seppe.dornon@student.hogent.be - seppedornon
 - Igor Casteleyn - igor.casteleyn@student.hogent.be - igorcasteleyn
 - Luka Depuydt - luka.depuydt@student.hogent.be - LukaDep
-
-- [MEMBER2_NAME] - [MEMBER2_EMAIL] - [MEMBER2_GITHUB_USERNAME]
+- Seppe Landtsheer - seppe.landtsheer@student.hogent.be - Zepje
 
 ## Technologies & Packages Used
 
