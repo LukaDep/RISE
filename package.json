@@ -1,0 +1,20 @@
+{
+  "name": "rise.client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "tailwind": "tailwindcss -i ./src/Rise.Client/wwwroot/css/tailwind.css -o ./src/Rise.Client/wwwroot/css/output.css --watch",
+    "client": "dotnet watch run --project ./src/Rise.Client/Rise.Client.csproj",
+    "server": "dotnet watch run --project ./src/Rise.Server/Rise.Server.csproj",
+    "dev": "concurrently \"npm run tailwind\" \"npm run server\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.14",
+    "concurrently": "^9.2.1"
+  }
+}
