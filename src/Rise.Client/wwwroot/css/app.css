@@ -1,8 +1,58 @@
-@import "https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css";
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css";
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+#app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.main-content {
+    flex: 1 1 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+footer {
+    flex-shrink: 0;
+    width: 100%;
+}
+
+.active {
+    position: relative;
+}
+.active svg {
+    width: 2rem;
+    height: 2rem;
+}
+.navlink-bar {
+    position: absolute;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+    width: 0;
+    height: 4px;
+    background: #000;
+    border-radius: 2px;
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.active .navlink-bar{
+    width: 3rem;
+}
+
+.main-content {
+    flex: 1 1 auto;
 }
 
 h1:focus {

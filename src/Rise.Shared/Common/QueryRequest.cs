@@ -99,4 +99,3 @@ public static partial class QueryRequest
         public Dictionary<string, object?> Filters { get; set; } = new();
     }
 }
-
