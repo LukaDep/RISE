@@ -9,6 +9,7 @@
     --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
 <<<<<<< HEAD
+<<<<<<< HEAD
     --color-orange-100: oklch(95.4% 0.038 75.164);
     --color-orange-400: oklch(75% 0.183 55.934);
     --color-orange-500: oklch(70.5% 0.213 47.604);
@@ -48,6 +49,15 @@
     --font-weight-semibold: 600;
     --radius-md: 0.375rem;
     --radius-lg: 0.5rem;
+=======
+    --color-blue-500: oklch(62.3% 0.214 259.815);
+    --color-gray-100: oklch(96.7% 0.003 264.542);
+    --color-black: #000;
+    --spacing: 0.25rem;
+    --radius-xs: 0.125rem;
+    --default-transition-duration: 150ms;
+    --default-transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+>>>>>>> c985481 (begin update login icon)
     --default-font-family: var(--font-sans);
     --default-mono-font-family: var(--font-mono);
     --font-montserrat: "Montserrat", sans-serif;
@@ -202,11 +212,19 @@
   }
 }
 @layer utilities {
+<<<<<<< HEAD
   .relative {
     position: relative;
   }
   .static {
     position: static;
+=======
+  .absolute {
+    position: absolute;
+  }
+  .left-2\/4 {
+    left: calc(2/4 * 100%);
+>>>>>>> c985481 (begin update login icon)
   }
   .container {
     width: 100%;
@@ -233,6 +251,7 @@
     margin-top: calc(var(--spacing) * 3);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   .mt-4 {
     margin-top: calc(var(--spacing) * 4);
   }
@@ -250,6 +269,8 @@
   }
 =======
 >>>>>>> cd948a3 (Hogent housestyle added)
+=======
+>>>>>>> c985481 (begin update login icon)
   .flex {
     display: flex;
   }
@@ -259,6 +280,7 @@
   .table {
     display: table;
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
   .h-1 {
     height: calc(var(--spacing) * 1);
@@ -286,16 +308,50 @@
   }
   .w-3 {
     width: calc(var(--spacing) * 3);
+=======
+  .h-6 {
+    height: calc(var(--spacing) * 6);
+  }
+  .h-8 {
+    height: calc(var(--spacing) * 8);
+  }
+  .h-16 {
+    height: calc(var(--spacing) * 16);
+  }
+  .h-64 {
+    height: calc(var(--spacing) * 64);
+  }
+  .h-100 {
+    height: calc(var(--spacing) * 100);
+  }
+  .h-full {
+    height: 100%;
+  }
+  .h-max {
+    height: max-content;
+  }
+  .w-0 {
+    width: calc(var(--spacing) * 0);
+>>>>>>> c985481 (begin update login icon)
   }
   .w-6 {
     width: calc(var(--spacing) * 6);
   }
+<<<<<<< HEAD
   .w-full {
     width: 100%;
+=======
+  .w-8 {
+    width: calc(var(--spacing) * 8);
+  }
+  .w-10 {
+    width: calc(var(--spacing) * 10);
+>>>>>>> c985481 (begin update login icon)
   }
   .flex-1 {
     flex: 1;
   }
+<<<<<<< HEAD
   .grid-cols-6 {
     grid-template-columns: repeat(6, minmax(0, 1fr));
   }
@@ -526,6 +582,19 @@
   }
   .flex-1 {
     flex: 1;
+=======
+  .flex-shrink {
+    flex-shrink: 1;
+  }
+  .border-collapse {
+    border-collapse: collapse;
+  }
+  .transform {
+    transform: var(--tw-rotate-x,) var(--tw-rotate-y,) var(--tw-rotate-z,) var(--tw-skew-x,) var(--tw-skew-y,);
+  }
+  .resize {
+    resize: both;
+>>>>>>> c985481 (begin update login icon)
   }
   .flex-row {
     flex-direction: row;
@@ -539,6 +608,7 @@
   .bg-gray-100 {
     background-color: var(--color-gray-100);
   }
+<<<<<<< HEAD
 >>>>>>> cd948a3 (Hogent housestyle added)
   .filter {
     filter: var(--tw-blur,) var(--tw-brightness,) var(--tw-contrast,) var(--tw-grayscale,) var(--tw-hue-rotate,) var(--tw-invert,) var(--tw-saturate,) var(--tw-sepia,) var(--tw-drop-shadow,);
@@ -746,5 +816,12 @@
       --tw-drop-shadow-alpha: 100%;
       --tw-drop-shadow-size: initial;
     }
+=======
+  .align-middle {
+    vertical-align: middle;
+  }
+  .text-blue-500 {
+    color: var(--color-blue-500);
+>>>>>>> c985481 (begin update login icon)
   }
 }
