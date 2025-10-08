@@ -89,7 +89,7 @@ h1:focus {
     .blazor-error-boundary::after {
         content: "An error has occurred."
     }
-
+/* 
 .loading-progress {
     position: relative;
     display: block;
@@ -121,4 +121,4 @@ h1:focus {
 
     .loading-progress-text:after {
         content: var(--blazor-load-percentage-text, "Loading");
-    }
+    } */
