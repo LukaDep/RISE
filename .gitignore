@@ -1,8 +1,7 @@
 .vs/
-
+.vscode/
 node_modules/
 package-lock.json
-
 bin/
 obj/
 /packages/
@@ -22,3 +21,4 @@ src/Rise.Server/Rise.db
 src/Rise.Server/Rise.db-shm
 
 src/Rise.Server/Rise.db-wal
+output.css
