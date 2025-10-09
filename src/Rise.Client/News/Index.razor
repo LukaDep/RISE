@@ -1,0 +1,15 @@
+@page "/news"
+@using Rise.Client.News.Components
+
+<h3>News</h3>
+<p>This is the news page.</p>
+<div>
+    @for (int i = 0; i < 4; i++)
+    {
+        <NewsItem @key="i" title="Nieuwsbericht" shortDescription="Dit is een korte beschrijving van nieuwsbericht." date="@DateTime.Now.AddDays(-i).ToString("dd MMMM yyyy")" />
+    }
+</div>
+
+@code {
+    
+}
