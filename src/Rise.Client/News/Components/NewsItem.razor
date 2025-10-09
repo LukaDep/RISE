@@ -1,8 +1,8 @@
 @using Microsoft.AspNetCore.Components.Routing
 
-<NavLink class="flex border-4 border-black/15 rounded-xl p-4 m-4 bg-white shadow transition hover:bg-black/5 cursor-pointer" href=@($"/news/{Id}") Match="NavLinkMatch.Prefix" data-news-id="@Id">
+<NavLink class="flex items-center min-h-40 border-4 border-black/15 rounded-xl p-4 m-4 bg-white shadow transition  cursor-pointer" href=@($"/news/{Id}") Match="NavLinkMatch.Prefix" data-news-id="@Id">
     <!-- Image placeholder -->
-    <div class="w-16 h-16 bg-black/50 rounded-lg mr-4 flex-shrink-0"></div>
+    <div class="w-24 h-24 bg-black/50 rounded-lg mr-4 flex-shrink-0"></div>
     <!-- Content -->
     <div class="flex-1 flex flex-col justify-center">
         <h3 class="text-lg font-bold text-black/80">@Title</h3>
