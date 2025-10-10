@@ -1,0 +1,44 @@
+@page "/campus-plan"
+@inject IJSRuntime JS
+
+<div id="map" style="height: 100vh; width: 100vw;"></div>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var bounds = new object[] { new[] { 0, 0 }, new[] { 3809, 2860 } };
+            await JS.InvokeVoidAsync("leafletMap.initImage", "map", "/images/Schoonmeersen_plan_detail_page-0001.jpg", bounds);
+            await JS.InvokeVoidAsync("leafletMap.addMarker", 1684, 1615,"Resto D");
+        }
+    }
+}
+
+<script>
+    window.leafletMap = {
+        map: null,
+        imageLayer: null,
+        initImage: function (elementId, imageUrl, bounds) {
+            if (this.map) {
+                this.map.remove();
+            }
+            this.map = L.map(elementId, {
+                crs: L.CRS.Simple,
+                minZoom: -2,
+                maxBounds: bounds,
+                maxBoundsViscosity: 1.0 
+            });
+            this.imageLayer = L.imageOverlay(imageUrl, bounds).addTo(this.map);
+            this.map.fitBounds(bounds);
+
+            var minZoom = this.map.getBoundsZoom(bounds, false);
+            this.map.setMinZoom(minZoom);
+        },
+        addMarker: function(lat, lng, name) {
+            if (this.map) {
+                L.marker([lat, lng]).addTo(this.map) .bindPopup(name);
+            }
+        }
+    };
+</script>
