@@ -6,12 +6,6 @@ pipeline {
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
     }
 
-    stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'test-build', url: 'https://github.com/HOGENT-RISE/dotnet-2526-gent6.git'
-            }
-        }
 
         stage('Restore dependencies') {
             steps {
