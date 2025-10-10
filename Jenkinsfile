@@ -6,7 +6,7 @@ pipeline {
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
     }
 
-
+    stages {  // <-- hier moet stages openen
         stage('Restore dependencies') {
             steps {
                 sh 'dotnet restore'
@@ -36,7 +36,7 @@ pipeline {
                 archiveArtifacts artifacts: '**/bin/Release/**/*', fingerprint: true
             }
         }
-    }
+    } // <-- sluit stages
 
     post {
         success {
@@ -46,4 +46,4 @@ pipeline {
             echo 'Build failed!'
         }
     }
-}
+} // <-- sluit pipeline
