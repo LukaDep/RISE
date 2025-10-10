@@ -1,23 +1,41 @@
-using Microsoft.EntityFrameworkCore;
-using Rise.Persistence;
-using Rise.Services.Identity;
-using Rise.Shared.Identity;
-using Rise.Shared.Projects;
+using System.Text.Json;
+using Rise.Shared.TimeEdit;
+using Serilog;
 
-namespace Rise.Services.TimeEdits;
+namespace Rise.Services.TimeEdit;
 
-/// <summary>
-/// Service for managing and retrieving TimeEdit data (read-only schedule view).
-/// </summary>
-public class TimeEditService(ApplicationDbContext dbContext) : ITimeEditService
+public class MockTimeEditService : ITimeEditService
 {
-    /// <summary>
-    /// Retrieve schedule data from TimeEdit.
-    /// </summary>
-    public async Task<Result<TimeEditResponse.Schedule>> GetTimeEditData(TimeEditRequest.Schedule request, CancellationToken ctx = default)
+  private readonly string _mockFilePath;
+
+  public MockTimeEditService()
+  {
+    // Pad naar het JSON-bestand in de source code directory
+    var currentDirectory = Directory.GetCurrentDirectory();
+    // CurrentDirectory is Rise.Server, dus we gaan een level omhoog en dan naar Rise.Services
+    _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "TimeEdit", "mock", "TimeEditMockdata.json");
+    Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
+    Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
+    Log.Information("File exists: {FileExists}", File.Exists(_mockFilePath));
+  }
+
+  public async Task<Result<TimeEditDto.ApiResponse>> GetAsync(TimeEditRequest.Get req, CancellationToken ct)
+  {
+    if (!File.Exists(_mockFilePath))
     {
-        return {
-            data:
-        }
+      Log.Warning("Mock data file not found at: {MockFilePath}", _mockFilePath);
+      return Result<TimeEditDto.ApiResponse>.NotFound($"Mock data file not found at: {_mockFilePath}");
     }
+
+    var json = await File.ReadAllTextAsync(_mockFilePath, ct);
+    var data = JsonSerializer.Deserialize<TimeEditDto.ApiResponse>(json, new JsonSerializerOptions
+    {
+      PropertyNameCaseInsensitive = true
+    });
+
+    if (data == null)
+      return Result<TimeEditDto.ApiResponse>.Error("Deserialisatie mislukt");
+
+    return Result.Success(data);
+  }
 }

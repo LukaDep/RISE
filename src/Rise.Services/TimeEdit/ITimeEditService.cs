@@ -5,5 +5,5 @@ namespace Rise.Shared.TimeEdit;
 /// </summary>
 public interface ITimeEditService
 {
-  Task<Result> EditAsync(ProjectRequest.Edit req, CancellationToken ctx);
+  Task<Result<TimeEditDto.ApiResponse>> GetAsync(TimeEditRequest.Get req, CancellationToken ctx);
 }
