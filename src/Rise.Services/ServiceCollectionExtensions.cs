@@ -3,6 +3,8 @@ using Rise.Persistence;
 using Rise.Services.Products;
 using Rise.Services.Projects;
 using Rise.Services.Schedule;
+using Rise.Services.News;
+using Rise.Shared.News;
 using Rise.Shared.Products;
 using Rise.Shared.Projects;
 using Rise.Shared.Schedule;
@@ -16,8 +18,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<IScheduleService, MockScheduleService>();
-        services.AddTransient<DbSeeder>();
-
+        services.AddScoped<INewsService, NewsService>();
+        services.AddTransient<DbSeeder>();       
+        
+        // Add other application services here.
         return services;
     }
 }
