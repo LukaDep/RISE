@@ -9,6 +9,8 @@
             placeholder="Filter news..."
             class="absolute right-0 h-10 transition-all duration-300 ease-in-out bg-white shadow-lg rounded-full border border-gray-300 focus:outline-none focus:ring-0 pr-10 pl-3"
             style="width:@(isFilterOpen ? "94%" : "0px"); opacity:@(isFilterOpen ? '1' : '0'); pointer-events:@(isFilterOpen ? "auto" : "none");"
+            value="@searchTerm"
+            @onchange="SearchTermChanged"
         />
         <button type="button" class="absolute right-0 z-10 p-2 rounded-full hover:bg-gray-100 transition cursor-pointer" @onclick="ToggleFilter">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" stroke-width="1.5" class="w-6 h-6 text-gray-400">
@@ -24,7 +26,3 @@
     }
 </div>
 
-@code {
-    private bool isFilterOpen = false;
-    private void ToggleFilter() => isFilterOpen = !isFilterOpen;
-}
