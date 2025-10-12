@@ -20,7 +20,7 @@ public partial class Index
 
     private string? searchTerm;
 
-    protected override async Task OnParametersSetAsync()
+    protected override async Task OnInitializedAsync()
     {
         var request = new QueryRequest.SkipTake
         {
@@ -32,12 +32,15 @@ public partial class Index
 
         var result = await NewsService.GetIndexAsync(request);
         news = result.Value.News;
+        filteredNews = news;
     }
 
     //ff client-side filtering, server-side kan later komen
     private void SearchTermChanged(ChangeEventArgs e)
     {
-        filteredNews = searchTerm?.Length > 0 ?  news.Where(n => n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)): news ;
-
+        searchTerm = e.Value?.ToString();
+        filteredNews = !string.IsNullOrWhiteSpace(searchTerm)
+            ? news?.Where(n => n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
+            : news;
     }
 }

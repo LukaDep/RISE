@@ -20,9 +20,21 @@
     </div>
 </div>
 <div>
-    @for (int i = 0; i < 7; i++)
+    @* @for (int i = 0; i < 7; i++) *@
+    @* { *@
+    @*     <NewsItem Id="@i.ToString()" Title=@($"Nieuwsbericht {i}") ShortDescription=@($"Dit is een korte beschrijving van nieuwsbericht {i}.") Date=@(DateTime.Now.AddDays(-i).ToString("dd MMMM yyyy")) /> *@
+    @* } *@
+    @if (filteredNews == null)
     {
-        <NewsItem Id="@i.ToString()" Title=@($"Nieuwsbericht {i}") ShortDescription=@($"Dit is een korte beschrijving van nieuwsbericht {i}.") Date=@(DateTime.Now.AddDays(-i).ToString("dd MMMM yyyy")) />
+        <p>Loading...</p>
     }
+    else
+    {
+        @foreach (var news in filteredNews)
+        {
+            <NewsItem Id="@news.Id.ToString()" Title="@news.Title" ShortDescription="@news.Content" Date="@news.PublishDate.ToString("dd MMMM yyyy")" />
+        }
+    }
+    
 </div>
 
