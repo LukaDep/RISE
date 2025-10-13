@@ -1,10 +1,16 @@
 @import "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css";
 
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    box-sizing: border-box;
 #app {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
 }
 
 .main-content {
