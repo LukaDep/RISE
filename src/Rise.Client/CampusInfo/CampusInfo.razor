@@ -1,10 +1,244 @@
 ﻿@page "/campus"
+@using Rise.Client.CampusInfo.Components
 
-<div class="flex justify-between items-center mx-4">
-    <h3 class="text-4xl font-bold">Campussen</h3>
+<div>
+    <div>
+           <h3 class="text-4xl font-bold p-6">Campussen</h3>
+    </div>
+    
+
+    @foreach (var campus in Campussen)
+    {
+            <CampusCard 
+                Name="@campus.Name" 
+                Location="@campus.Location" 
+                Faculties="@campus.Faculties" 
+                ContactPhone="@campus.ContactPhone"
+                Description="@campus.Description"
+            />
+    }
 </div>
 
 
 @code {
+    private List<Campus> Campussen = new List<Campus>
+    {
+        new Campus
+        {
+            Name = "Campus Aalst",
+            Location = "Arbeidstraat 14, 9300 Aalst",
+            Faculties = new List<string>
+            {
+                "bachelor bedrijfsmanagement",
+                "bachelor toegepaste informatica",
+                "graduaat accounting administration",
+                "graduaat basisverpleegkunde",
+                "graduaat programmeren",
+                "graduaat systeem- en netwerkbeheer",
+                "postgraduaat ondernemen"
+            },
+            ContactPhone = "09 243 20 15",
+            Description = "Campus Aalst is vlot bereikbaar en centraal gelegen op wandelafstand van station Aalst (850 m), bushalte 'Vredeplein' (200 m), parking Hopmarkt (350 m) en parking Keizershallen (350 m)."
+        },
+        new Campus
+        {
+            Name = "Campus Bijloke",
+            Location = "Louis Pasteurlaan 2, 9000 Gent",
+            Faculties = new List<string>
+            {
+                "audiovisuele kunsten",
+                "beeldende kunsten",
+                "drama",
+                "interieurvormgeving",
+                "landschaps- en tuinarchitectuur",
+                "landschapsontwikkeling",
+                "hedendaagse muziek",
+                "educatieve master audiovisuele en beeldende kunsten",
+                "educatieve master muziek- en podiumkunsten"
+            },
+            ContactPhone = "09 243 20 13",
+            Description = "Campus Bijloke bevindt zich ideaal gelegen aan de kleine ring van Gent (R40), op 6 minuutjes fietsen of 15 minuten wandelen van het station Gent Sint-Pieters (1,5 km)."
+        },
+        new Campus
+        {
+            Name = "Campus Grote Sikkel",
+            Location = "Hoogpoort 64, 9000 Gent",
+            Faculties = new List<string>
+            {
+                "muziek",
+                "hedendaagse muziek",
+                "educatieve master muziek- en podiumkunsten"
+            },
+            ContactPhone = "09 243 20 18",
+            Description = "Campus Grote Sikkel bevindt zich in het centrum van Gent, vlak tussen de Sint-Baafskathedraal en het stadhuis en op 350 meter van bus- en tramhaltes 'Gent Korenmarkt' en 'Gent Duivelsteen'."
+        },
+        new Campus
+        {
+            Name = "Campus Ledeganck",
+            Location = "K.L. Ledeganckstraat 8, 9000 Gent",
+            Faculties = new List<string>
+            {
+                "bachelor kleuteronderwijs",
+                "bachelor lager onderwijs",
+                "bachelor secundair onderwijs",
+                "bachelor na bachelor zorgmanagement",
+                "postgraduaat diabeteseducator",
+                "postgraduaat Freinet"
+            },
+            ContactPhone = "09 243 20 11",
+            Description = "Campus Ledeganck ligt op 5 minuutjes fietsen of 15 minuten wandelen van het station Gent Sint-Pieters, aan de andere kant van het Citadelpark (1 km), vlak aan de kleine ring van Gent (R40) en de Overpoort."
+        },
+        new Campus
+        {
+            Name = "Campus Lokeren",
+            Location = "Groendreef 31, 9160 Lokeren",
+            Faculties = new List<string>
+            {
+                "graduaat accounting administration"
+            },
+            Description = "Campus Lokeren ligt vlak bij station Lokeren (200 m) en de gratis stationparking."
+        },
+        new Campus
+        {
+            Name = "Campus Melle",
+            Location = "Brusselsesteenweg 161, 9090 Melle",
+            Faculties = new List<string>
+            {
+                "bachelor agro- en biotechnologie",
+                "gereglementeerde vorming proefdierkunde"
+            },
+            ContactPhone = "09 243 28 00",
+            Description = "Campus Melle is vlot bereikbaar en goed gelegen aan de Brusselsesteenweg (N9). De bus brengt je op 16 minuten van station Gent Sint-Pieters naar bushalte 'Melle Tuinbouwschool'."
+        },
+        new Campus
+        {
+            Name = "Campus Mercator",
+            Location = "Henleykaai 84, 9000 Gent",
+            Faculties = new List<string>
+            {
+                "bachelor bedrijfsmanagement (accountancy fiscaliteit, financiën en verzekeringen, milieu- en duurzaamheidsmanagement, rechtspraktijk)",
+                "graduaat accounting administration",
+                "graduaat juridisch-administratieve ondersteuning (dagonderwijs)",
+                "graduaat marketing- en communicatiesupport",
+                "graduaat programmeren",
+                "graduaat sales support",
+                "gereglementeerde vorming energiedeskundige type A",
+                "gereglementeerde vorming preventieadviseur niveau 2",
+                "postgraduaat vastgoedbeheer"
+            },
+            ContactPhone = "09 243 20 16",
+            Description = "Campus Mercator bevindt zich ideaal gelegen op 4 minuutjes fietsen of 12 minuten wandelen van het centrum en van station Gent Sint-Pieters (1 km)."
+        },
+        new Campus
+        {
+            Name = "Campus Schoonmeersen",
+            Location = "V. Vaerwyckweg 1, 9000 Gent",
+            Faculties = new List<string>
+            {
+                "bachelor bedrijfsmanagement (kmo-management, marketing, supply chain management)",
+                "bachelor chemie",
+                "bachelor elektromechanica",
+                "bachelor houttechnologie",
+                "bachelor organisatie & management",
+                "bachelor orthopedagogie",
+                "bachelor retailmanagement",
+                "bachelor secundair onderwijs (lichamelijke opvoeding en bewegingsrecreatie)",
+                "bachelor sociaal werk",
+                "bachelor toegepaste informatica",
+                "bachelor vastgoed",
+                "graduaat accounting administration",
+                "graduaat biotechnologie",
+                "graduaat bouwkundig tekenen",
+                "graduaat educatieve graduaatsopleiding",
+                "graduaat elektromechanische systemen",
+                "graduaat HVAC-systemen",
+                "graduaat juridisch-administratieve ondersteuning (avond- en weekendonderwijs)",
+                "graduaat laboratoriumassistentie",
+                "graduaat marketing- en communicatiesupport",
+                "graduaat programmeren",
+                "graduaat systeem- en netwerkbeheer",
+                "graduaat werforganisatie",
+                "bachelor na bachelor internationaal bedrijfsmanagement",
+                "bachelor na bachelor toegepaste fiscaliteit",
+                "postgraduaat advanced personal trainer",
+                "postgraduaat coaching, intervisie en teambegeleiding",
+                "postgraduaat digitale marketing",
+                "postgraduaat fondsenwerving",
+                "postgraduaat gecertificeerd accountant",
+                "postgraduaat geo-ICT",
+                "postgraduaat salesmanagement"
+            },
+            ContactPhone = "09 243 20 04",
+            Description = "Campus Schoonmeersen is vlot bereikbaar en goed gelegen aan de ring rond Gent (R4) en op wandelafstand van station Gent Sint-Pieters (600 m)."
+        },
+        new Campus
+        {
+            Name = "Campus Vesalius",
+            Location = "Keramiekstraat 80, 9000 Gent",
+            Faculties = new List<string>
+            {
+                "bachelor biomedische laboratoriumtechnologie",
+                "bachelor ergotherapie",
+                "bachelor logopedie en audiologie",
+                "bachelor verpleegkunde",
+                "bachelor verpleegkunde: vervolgtraject HBO5",
+                "bachelor voedings- en dieetkunde",
+                "graduaat basisverpleegkunde",
+                "postgraduaat intensieve zorgen en spoedgevallenzorg",
+                "postgraduaat nefrologische diëtetiek",
+                "postgraduaat oncologische diëtetiek",
+                "postgraduaat pediatrie en neonatalogie"
+            },
+            ContactPhone = "09 243 20 09",
+            Description = "Campus Vesalius bevindt zich vlakbij UZ Gent en heeft een vlotte verbinding met station Gent Sint-Pieters (2,3 km) en met het centrum."
+        },
+        new Campus
+        {
+            Name = "Proefhoeve Bottelare",
+            Location = "Diepestraat 1, 9820 Bottelare",
+            Faculties = new List<string>
+            {
+                "bachelor agro- en biotechnologie"
+            },
+            ContactPhone = "09 243 24 01",
+            Description = "Proefhoeve Bottelare bevindt zich vlak bij het dorpscentrum van Bottelare, op 400 meter van bushalte 'Bottelare Dorpsstraat'."
+        },
+        new Campus
+        {
+            Name = "Site Geraard de Duivelstraat",
+            Location = "Geraard de Duivelstraat 5, 9000 Gent",
+            Faculties = new List<string>(),
+            ContactPhone = "09 243 33 33",
+            Description = "De Wijnaert bevindt zich in het centrum van Gent, vlak tussen de Sint-Baafskathedraal en de Reep en op 50 meter van bus- en tramhalte 'Gent Duivelsteen'."
+        },
+        new Campus
+        {
+            Name = "Site Buchtenstraat (FTI Lab)",
+            Location = "Buchtenstraat 11, 9051 Gent",
+            Faculties = new List<string>
+            {
+                "bachelor modetechnologie",
+                "bachelor textieltechnologie"
+            },
+            ContactPhone = "09 243 27 84",
+            Description = "Het FTI Lab (Fashion and Textiles Innovation Lab) ligt aan 'The Loop', een vlot bereikbare site vlakbij Flanders Expo."
+        },
+        new Campus
+        {
+            Name = "Sporthal",
+            Location = "Sint-Denijslaan 251, 9000 Gent",
+            Faculties = new List<string>(),
+            ContactPhone = "09 243 37 50",
+            Description = "De sporthal bevindt zich op campus Schoonmeersen aan de toegang langs de Sint-Denijslaan, vlakbij station Gent Sint-Pieters (400 m)."
+        }
+    };
 
+    private class Campus
+    {
+        public string Name { get; set; }
+        public string Location { get; set; }
+        public List<string> Faculties { get; set; } = new();
+        public string ContactPhone { get; set; }
+        public string Description { get; set; }
+    }
 }
