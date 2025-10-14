@@ -1,0 +1,19 @@
+@page "/schedule"
+@inject IStringLocalizer<SharedResources> L
+@using Rise.Client.Schedule
+
+<PageTitle>Schedule</PageTitle>
+
+<Tabs>
+  <Tab Title="Dag">
+    <DayView />
+  </Tab>
+
+  <Tab Title="Week">
+    <WeekView />
+  </Tab>
+
+  <Tab Title="Maand">
+    <MonthView />
+  </Tab>
+</Tabs>
