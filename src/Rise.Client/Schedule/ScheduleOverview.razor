@@ -1,0 +1,20 @@
+@page "/ScheduleOverview"
+@using Rise.Client.Schedule.Component
+
+<h1 class="text-2xl font-bold mb-6">Schedule</h1>
+
+<ScheduleItem 
+    Title="RISE Project" 
+    StartDateTime="@startDateTime" 
+    EndDateTime="@endDateTime" 
+    Type="Groepswerk" 
+    Note="Verplichte aanwezigheid" 
+    Course="Real-life Integrated Software Engineering" 
+    Campus="Schoonmeersen"                   
+    Classrooms="@classrooms" />
+
+@code {
+    private DateTime startDateTime = new DateTime(2025, 10, 17, 9, 0, 0);
+    private DateTime endDateTime = new DateTime(2025, 10, 17, 10, 30, 0);
+    private List<string> classrooms = new List<string> { "B001", "B002" };
+}
