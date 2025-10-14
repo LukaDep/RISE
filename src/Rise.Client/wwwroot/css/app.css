@@ -31,10 +31,12 @@ footer {
 .active {
   position: relative;
 }
+
 .active svg {
   width: 2rem;
   height: 2rem;
 }
+
 .navlink-bar {
   position: absolute;
   left: 50%;
