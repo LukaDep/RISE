@@ -1,15 +1,15 @@
-namespace Rise.Shared.TimeEdit;
+namespace Rise.Shared.Schedule;
 
 /// <summary>
-/// Contains data transfer objects (DTOs) used for timeedit data retrieval.
+/// Contains data transfer objects (DTOs) used for schedule data retrieval.
 /// </summary>
-public static class TimeEditDto
+public static class ScheduleApiResponse
 {
     /// <summary>
-    /// Represents a response from the timeedit api.
+    /// Represents a response from the schedule api.
     /// </summary>
     // Root object
-    public class ApiResponse
+    public class ScheduleData
     {
         public List<string> ColumnHeaders { get; set; } = new();
         public Info Info { get; set; } = new();
@@ -33,4 +33,6 @@ public static class TimeEditDto
         public string EndTime { get; set; } = default!;
         public List<string> Columns { get; set; } = new();
     }
+
+
 }

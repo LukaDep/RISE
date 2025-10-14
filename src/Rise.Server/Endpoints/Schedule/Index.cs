@@ -1,4 +1,5 @@
-using Rise.Shared.TimeEdit;
+using Rise.Shared.Schedule;
+using Rise.Shared.Common;
 
 namespace Rise.Server.Endpoints.Schedule;
 
@@ -6,17 +7,17 @@ namespace Rise.Server.Endpoints.Schedule;
 /// List all products.
 /// See https://fast-endpoints.com/
 /// </summary>
-/// <param name="productService"></param>
-public class Index(ITimeEditService timeEditService) : Endpoint<TimeEditRequest.Get, Result<TimeEditDto.ApiResponse>>
+/// <param name="ScheduleService"></param>
+public class Index(IScheduleService ScheduleService) : Endpoint<QueryRequest.SkipTake, Result<ScheduleDto.Data>>
 {
   public override void Configure()
   {
-    Get("/api/schedule");
+    Get("/api/Schedule");
     AllowAnonymous();
   }
 
-  public override Task<Result<TimeEditDto.ApiResponse>> ExecuteAsync(TimeEditRequest.Get req, CancellationToken ct)
+  public override Task<Result<ScheduleDto.Data>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
   {
-    return timeEditService.GetAsync(req, ct);
+    return ScheduleService.GetIndexAsync(req, ct);
   }
 }

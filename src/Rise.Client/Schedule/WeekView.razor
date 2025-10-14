@@ -1,0 +1,60 @@
+@using Microsoft.AspNetCore.Components
+
+<div class="week-view">
+    <div class="mb-4 flex justify-between items-center">
+        <h3 class="text-lg font-semibold text-gray-800">Week @WeekNumber - @WeekStartDate.ToString("d MMM") tot @WeekEndDate.ToString("d MMM yyyy")</h3>
+        <div class="flex gap-2">
+            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="PreviousWeek">Vorige</button>
+            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="NextWeek">Volgende</button>
+        </div>
+    </div>
+    
+    <div class="bg-white rounded-lg border border-gray-200 overflow-hidden">
+        <!-- Header met dagen -->
+        <div class="grid grid-cols-6 border-b border-gray-200">
+            <div class="p-3 text-center font-medium text-gray-600 border-r border-gray-200">Tijd</div>
+            @{
+                for (int i = 0; i < WeekDays.Count; i++)
+                {
+                    var day = WeekDays[i];
+                    <div class="p-3 text-center font-medium text-gray-600 @(i < WeekDays.Count - 1 ? "border-r border-gray-200" : "")">
+                        <div class="text-sm">@day.ToString("ddd")</div>
+                        <div class="text-xs text-gray-500">@day.ToString("d/M")</div>
+                    </div>
+                }
+            }
+        </div>
+        
+        <!-- Tijdslots 8-21 uur -->
+        @for (int hour = 8; hour <= 20; hour++)
+        {
+            <div class="grid grid-cols-6 border-b border-gray-100 min-h-[60px]">
+                <!-- Tijd kolom -->
+                <div class="p-2 text-center text-sm text-gray-600 border-r border-gray-200 bg-gray-50 flex items-center justify-center">
+                    @($"{hour:00}:00")
+                </div>
+                
+                <!-- Dag kolommen -->
+                @{
+                    for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
+                    {
+                        var currentDay = WeekDays[dayIndex];
+                        var hasEvent = HasEventAtTime(currentDay, hour);
+                        var eventInfo = GetEventAtTime(currentDay, hour);
+                        
+                        <div class="p-2 border-r border-gray-100 @(dayIndex == WeekDays.Count - 1 ? "" : "border-r-gray-200") relative">
+                            @if (hasEvent && eventInfo != null)
+                            {
+                                var bgColor = GetEventTypeBgColor(eventInfo.WorkForm);
+                                <div class="@bgColor rounded p-1 text-xs">
+                                    <div class="font-medium">@eventInfo.Course</div>
+                                    <div>@eventInfo.Room</div>
+                                </div>
+                            }
+                        </div>
+                    }
+                }
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,16 @@
+@using Microsoft.AspNetCore.Components
+
+@* Simple Tab component: provides a Title and content. On initialization it registers itself with the parent Tabs component via CascadingParameter. *@
+
+@code {
+    [CascadingParameter] private Tabs? Parent { get; set; }
+
+    [Parameter] public string? Title { get; set; }
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    protected override void OnInitialized()
+    {
+        base.OnInitialized();
+        Parent?.AddTab(this);
+    }
+}
