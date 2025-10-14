@@ -5,6 +5,7 @@ using Rise.Services.Projects;
 using Rise.Services.Schedule;
 using Rise.Services.News;
 using Rise.Shared.News;
+using Rise.Services.Schedule;
 using Rise.Shared.Products;
 using Rise.Shared.Projects;
 using Rise.Shared.Schedule;
