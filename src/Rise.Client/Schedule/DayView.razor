@@ -1,0 +1,59 @@
+@using Microsoft.AspNetCore.Components
+
+<div class="day-view">
+    <div class="mb-4 flex justify-between items-center">
+        <h3 class="text-lg font-semibold text-gray-800">@SelectedDate.ToString("dddd, d MMMM yyyy")</h3>
+        <div class="flex gap-2">
+            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md"
+                @onclick="PreviousDay">Vorige</button>
+            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md"
+                @onclick="NextDay">Volgende</button>
+        </div>
+    </div>
+
+    @if (DayReservations.Any())
+    {
+        <div class="space-y-3">
+            @foreach (var reservation in DayReservations.OrderBy(r => r.StartDateTime))
+            {
+                var startTime = reservation.StartDateTime;
+                var endTime = reservation.EndDateTime;
+                var borderColor = GetEventTypeColor(reservation.WorkForm);
+                var bgColor = GetEventTypeBgColor(reservation.WorkForm);
+
+                <div class="bg-white rounded-lg p-4 border-l-4 @borderColor shadow-sm border border-gray-100">
+                    <div class="flex justify-between items-start mb-3">
+                        <div class="text-sm font-medium text-gray-600">
+                            @startTime.ToString("HH:mm") - @endTime.ToString("HH:mm")
+                        </div>
+                        <span class="px-2 py-1 text-xs rounded-full @bgColor">
+                            @reservation.WorkForm
+                        </span>
+                    </div>
+                    <div class="text-base font-semibold text-gray-800 mb-2">@reservation.Course</div>
+                    <div class="flex flex-wrap gap-4 text-sm text-gray-600">
+                        <span class="flex items-center gap-1">
+                            📍 @reservation.Room
+                        </span>
+                        <span class="flex items-center gap-1">
+                            👨‍🏫 @reservation.Teacher
+                        </span>
+                        @if (!string.IsNullOrEmpty(reservation.Environment))
+                        {
+                            <span class="flex items-center gap-1">
+                                💻 @reservation.Environment
+                            </span>
+                        }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="text-center py-12 text-gray-500">
+            <div class="text-lg mb-2">🎉</div>
+            <p>Geen lessen vandaag!</p>
+        </div>
+    }
+</div>

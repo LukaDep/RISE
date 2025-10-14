@@ -1,0 +1,63 @@
+@using Microsoft.AspNetCore.Components
+@using Rise.Client.Schedule
+
+<div class="month-view">
+    <div class="mb-4 flex justify-between items-center">
+        <h3 class="text-lg font-semibold text-gray-800">@SelectedDate.ToString("MMMM yyyy")</h3>
+        <div class="flex gap-2">
+            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="PreviousMonth">Vorige</button>
+            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="NextMonth">Volgende</button>
+        </div>
+    </div>
+    
+    <div class="grid grid-cols-7 gap-1 mb-2">
+        @foreach (var day in DaysOfWeek)
+        {
+            <div class="text-center font-medium text-gray-600 py-2 text-sm">@day</div>
+        }
+    </div>
+    
+    <div class="grid grid-cols-7 gap-1">
+        @foreach (var day in MonthDays)
+        {
+            var isCurrentMonth = day.Month == SelectedDate.Month;
+            var isToday = day.Date == DateTime.Today.Date;
+            var hasEvents = HasEventsOnDay(day);
+            
+            <div class="border border-gray-200 rounded-lg p-2 min-h-[80px] @(isToday ? "bg-blue-50 border-blue-300" : isCurrentMonth ? "bg-white" : "bg-gray-50")">
+                <div class="text-sm @(isCurrentMonth ? "text-gray-800 font-medium" : "text-gray-400") mb-1">@day.Day</div>
+                
+                @if (hasEvents && isCurrentMonth)
+                {
+                    var dayReservations = GetReservationsForDate(day);
+                    <div class="space-y-1">
+                        @foreach (var reservation in dayReservations.Take(3))
+                        {
+                            var bgColor = GetEventTypeBgColor(reservation.WorkForm);
+                            <div class="w-full h-1 @bgColor rounded"></div>
+                        }
+                        @if (dayReservations.Count > 3)
+                        {
+                            <div class="text-[10px] text-gray-500">+@(dayReservations.Count - 3) meer</div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+    
+    <div class="mt-4 flex gap-4 text-xs text-gray-600">
+        <div class="flex items-center gap-1">
+            <div class="w-3 h-1 bg-blue-400 rounded"></div>
+            <span>Activerend Hoorcollege</span>
+        </div>
+        <div class="flex items-center gap-1">
+            <div class="w-3 h-1 bg-green-400 rounded"></div>
+            <span>Practicum</span>
+        </div>
+        <div class="flex items-center gap-1">
+            <div class="w-3 h-1 bg-orange-400 rounded"></div>
+            <span>Seminarie</span>
+        </div>
+    </div>
+</div>
