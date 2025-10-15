@@ -344,4 +344,16 @@
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Sign In</value>
   </data>
+  <data name="Account.Title" xml:space="preserve">
+    <value>Account</value>
+    <comment/>
+  </data>
+  <data name="Account.SelectOption" xml:space="preserve">
+    <value>Select an option from the menu.</value>
+    <comment/>
+  </data>
+  <data name="Account.Logout" xml:space="preserve">
+    <value>Logout</value>
+    <comment/>
+  </data>
 </root>
