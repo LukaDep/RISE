@@ -5,74 +5,74 @@
 @theme {
   --font-montserrat: "Montserrat", sans-serif;
   
-  --hogent-black-100: #000000;
-  --hogent-black-50: color-mix(in srgb, var(--hogent-black-100), white 50%);
-  --hogent-black-30: color-mix(in srgb, var(--hogent-black-100), white 70%);
-  --hogent-black-15: color-mix(in srgb, var(--hogent-black-100), white 85%);
-  --hogent-black: var(--hogent-black-100);
+  --color-hogent-black-100: #000000;
+  --color-hogent-black-50: color-mix(in srgb, var(--color-hogent-black-100), white 50%);
+  --color-hogent-black-30: color-mix(in srgb, var(--color-hogent-black-100), white 70%);
+  --color-hogent-black-15: color-mix(in srgb, var(--color-hogent-black-100), white 85%);
+  --color-hogent-black: var(--color-hogent-black-100);
   
-  --hogent-white-100: #FFFFFF;
-  --hogent-white: var(--hogent-white-100);
+  --color-hogent-white-100: #FFFFFF;
+  --color-hogent-white: var(--color-hogent-white-100);
   
-  --hogent-biotechnology-industrial_science-technology-100: #16B0A5;
-  --hogent-biotechnology-industrial_science-technology-50: color-mix(in srgb, var(--hogent-biotechnology-industrial_science-technology-100), white 50%);
-  --hogent-biotechnology-industrial_science-technology-30: color-mix(in srgb, var(--hogent-biotechnology-industrial_science-technology-100), white 70%);
-  --hogent-biotechnology-industrial_science-technology-15: color-mix(in srgb, var(--hogent-biotechnology-industrial_science-technology-100), white 85%);
-  --hogent-biotechnology-industrial_science-technology: var(--hogent-biotechnology-industrial_science-technology-100);
+  --color-hogent-biotechnology-industrial_science-technology-100: #16B0A5;
+  --color-hogent-biotechnology-industrial_science-technology-50: color-mix(in srgb, var(--color-hogent-biotechnology-industrial_science-technology-100), white 50%);
+  --color-hogent-biotechnology-industrial_science-technology-30: color-mix(in srgb, var(--color-hogent-biotechnology-industrial_science-technology-100), white 70%);
+  --color-hogent-biotechnology-industrial_science-technology-15: color-mix(in srgb, var(--color-hogent-biotechnology-industrial_science-technology-100), white 85%);
+  --color-hogent-biotechnology-industrial_science-technology: var(--color-hogent-biotechnology-industrial_science-technology-100);
   
-  --hogent-healthcare-100: #F19DA0;
-  --hogent-healthcare-50: color-mix(in srgb, var(--hogent-healthcare-100), white 50%);
-  --hogent-healthcare-30: color-mix(in srgb, var(--hogent-healthcare-100), white 70%);
-  --hogent-healthcare-15: color-mix(in srgb, var(--hogent-healthcare-100), white 85%);
-  --hogent-healthcare: var(--hogent-healthcare-100);
+  --color-hogent-healthcare-100: #F19DA0;
+  --color-hogent-healthcare-50: color-mix(in srgb, var(--color-hogent-healthcare-100), white 50%);
+  --color-hogent-healthcare-30: color-mix(in srgb, var(--color-hogent-healthcare-100), white 70%);
+  --color-hogent-healthcare-15: color-mix(in srgb, var(--color-hogent-healthcare-100), white 85%);
+  --color-hogent-healthcare: var(--color-hogent-healthcare-100);
   
-  --hogent-orange-100: #FABC32;
-  --hogent-orange-50: color-mix(in srgb, var(--hogent-orange-100), white 50%);
-  --hogent-orange-30: color-mix(in srgb, var(--hogent-orange-100), white 70%);
-  --hogent-orange-15: color-mix(in srgb, var(--hogent-orange-100), white 85%);
-  --hogent-orange: var(--hogent-orange-100);
+  --color-hogent-orange-100: #FABC32;
+  --color-hogent-orange-50: color-mix(in srgb, var(--color-hogent-orange-100), white 50%);
+  --color-hogent-orange-30: color-mix(in srgb, var(--color-hogent-orange-100), white 70%);
+  --color-hogent-orange-15: color-mix(in srgb, var(--color-hogent-orange-100), white 85%);
+  --color-hogent-orange: var(--color-hogent-orange-100);
   
-  --hogent-it-100: #EF8767;
-  --hogent-it-50: color-mix(in srgb, var(--hogent-it-100), white 50%);
-  --hogent-it-30: color-mix(in srgb, var(--hogent-it-100), white 70%);
-  --hogent-it-15: color-mix(in srgb, var(--hogent-it-100), white 85%);
-  --hogent-it: var(--hogent-it-100);
+  --color-hogent-it-100: #EF8767;
+  --color-hogent-it-50: color-mix(in srgb, var(--color-hogent-it-100), white 50%);
+  --color-hogent-it-30: color-mix(in srgb, var(--color-hogent-it-100), white 70%);
+  --color-hogent-it-15: color-mix(in srgb, var(--color-hogent-it-100), white 85%);
+  --color-hogent-it: var(--color-hogent-it-100);
   
-  --hogent-business-100: #BB90BD;
-  --hogent-business-50: color-mix(in srgb, var(--hogent-business-100), white 50%);
-  --hogent-business-30: color-mix(in srgb, var(--hogent-business-100), white 70%);
-  --hogent-business-15: color-mix(in srgb, var(--hogent-business-100), white 85%);
-  --hogent-business: var(--hogent-business-100);
+  --color-hogent-business-100: #BB90BD;
+  --color-hogent-business-50: color-mix(in srgb, var(--color-hogent-business-100), white 50%);
+  --color-hogent-business-30: color-mix(in srgb, var(--color-hogent-business-100), white 70%);
+  --color-hogent-business-15: color-mix(in srgb, var(--color-hogent-business-100), white 85%);
+  --color-hogent-business: var(--color-hogent-business-100);
   
-  --hogent-education-100: #4CA2D5;
-  --hogent-education-50: color-mix(in srgb, var(--hogent-education-100), white 50%);
-  --hogent-education-30: color-mix(in srgb, var(--hogent-education-100), white 70%);
-  --hogent-education-15: color-mix(in srgb, var(--hogent-education-100), white 85%);
-  --hogent-education: var(--hogent-education-100);
+  --color-hogent-education-100: #4CA2D5;
+  --color-hogent-education-50: color-mix(in srgb, var(--color-hogent-education-100), white 50%);
+  --color-hogent-education-30: color-mix(in srgb, var(--color-hogent-education-100), white 70%);
+  --color-hogent-education-15: color-mix(in srgb, var(--color-hogent-education-100), white 85%);
+  --color-hogent-education: var(--color-hogent-education-100);
   
-  --hogent-green-100: #A5CA72;
-  --hogent-green-50: color-mix(in srgb, var(--hogent-green-100), white 50%);
-  --hogent-green-30: color-mix(in srgb, var(--hogent-green-100), white 70%);
-  --hogent-green-15: color-mix(in srgb, var(--hogent-green-100), white 85%);
-  --hogent-green: var(--hogent-green-100);
+  --color-hogent-green-100: #A5CA72;
+  --color-hogent-green-50: color-mix(in srgb, var(--color-hogent-green-100), white 50%);
+  --color-hogent-green-30: color-mix(in srgb, var(--color-hogent-green-100), white 70%);
+  --color-hogent-green-15: color-mix(in srgb, var(--color-hogent-green-100), white 85%);
+  --color-hogent-green: var(--color-hogent-green-100);
   
-  --hogent-sand-100: #D8B083;
-  --hogent-sand-50: color-mix(in srgb, var(--hogent-sand-100), white 50%);
-  --hogent-sand-30: color-mix(in srgb, var(--hogent-sand-100), white 70%);
-  --hogent-sand-15: color-mix(in srgb, var(--hogent-sand-100), white 85%);
-  --hogent-sand: var(--hogent-sand-100);
+  --color-hogent-sand-100: #D8B083;
+  --color-hogent-sand-50: color-mix(in srgb, var(--color-hogent-sand-100), white 50%);
+  --color-hogent-sand-30: color-mix(in srgb, var(--color-hogent-sand-100), white 70%);
+  --color-hogent-sand-15: color-mix(in srgb, var(--color-hogent-sand-100), white 85%);
+  --color-hogent-sand: var(--color-hogent-sand-100);
   
-  --hogent-social-work-100: #C3BBAF;
-  --hogent-social-work-50: color-mix(in srgb, var(--hogent-social-work-100), white 50%);
-  --hogent-social-work-30: color-mix(in srgb, var(--hogent-social-work-100), white 70%);
-  --hogent-social-work-15: color-mix(in srgb, var(--hogent-social-work-100), white 85%);
-  --hogent-social-work: var(--hogent-social-work-100);
+  --color-hogent-social-work-100: #C3BBAF;
+  --color-hogent-social-work-50: color-mix(in srgb, var(--color-hogent-social-work-100), white 50%);
+  --color-hogent-social-work-30: color-mix(in srgb, var(--color-hogent-social-work-100), white 70%);
+  --color-hogent-social-work-15: color-mix(in srgb, var(--color-hogent-social-work-100), white 85%);
+  --color-hogent-social-work: var(--color-hogent-social-work-100);
   
-  --hogent-yellow-100: #F4DE00;
-  --hogent-yellow-50: color-mix(in srgb, var(--hogent-yellow-100), white 50%);
-  --hogent-yellow-30: color-mix(in srgb, var(--hogent-yellow-100), white 70%);
-  --hogent-yellow-15: color-mix(in srgb, var(--hogent-yellow-100), white 85%);
-  --hogent-yellow: var(--hogent-yellow-100);
+  --color-hogent-yellow-100: #F4DE00;
+  --color-hogent-yellow-50: color-mix(in srgb, var(--color-hogent-yellow-100), white 50%);
+  --color-hogent-yellow-30: color-mix(in srgb, var(--color-hogent-yellow-100), white 70%);
+  --color-hogent-yellow-15: color-mix(in srgb, var(--color-hogent-yellow-100), white 85%);
+  --color-hogent-yellow: var(--color-hogent-yellow-100);
 }
 
 @layer base {
