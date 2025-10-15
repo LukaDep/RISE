@@ -2,7 +2,9 @@
 
 <div class="week-view">
     <div class="mb-4 flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-gray-800">@WeekStartDate.ToString("d MMM") tot @WeekEndDate.ToString("d MMM yyyy")</h3>
+        <h3 class="text-lg font-semibold text-gray-800">
+            @WeekStartDate.ToString("d MMM") – @WeekEndDate.ToString("d MMM yyyy")
+        </h3>
         <div class="flex gap-2">
             <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="PreviousWeek">Vorige</button>
             <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="NextWeek">Volgende</button>
@@ -23,9 +25,8 @@
             }
         </div>
         
-        <!-- Grid container met relative positioning -->
+        <!-- Grid container -->
         <div class="relative" style="min-height: 780px;">
-            <!-- Tijdslots 8-21 uur (achtergrond grid) -->
             <div class="grid grid-cols-6">
                 <!-- Tijd kolom -->
                 <div class="border-r border-gray-200 bg-gray-50">
@@ -37,7 +38,7 @@
                     }
                 </div>
                 
-                <!-- Dag kolommen (lege cellen voor grid structuur) -->
+                <!-- Dag kolommen -->
                 @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
                 {
                     <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-gray-200" : "")">
@@ -49,7 +50,7 @@
                 }
             </div>
             
-            <!-- Absolute positioned events -->
+            <!-- Events -->
             @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
             {
                 var currentDay = WeekDays[dayIndex];
@@ -62,20 +63,15 @@
                     var endHour = evt.EndDateTime.Hour;
                     var endMinute = evt.EndDateTime.Minute;
                     
-                    // Bereken positie en hoogte in pixels (60px per uur)
-                    var topPosition = ((startHour - 8) * 60) + (startMinute);
+                    var topPosition = ((startHour - 8) * 60) + startMinute;
                     var durationMinutes = (endHour - startHour) * 60 + (endMinute - startMinute);
                     var height = durationMinutes;
-                    
-                    // Bereken horizontale positie
-                    // Time column is 1/6 = 16.666%
-                    // Each day column is also 1/6 = 16.666%
                     var leftPosition = 16.666 + (dayIndex * 16.666);
-                    
                     var bgColor = GetEventTypeBgColor(evt.WorkForm);
-                    
-                    <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden" 
-                         style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;">
+
+                    <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden cursor-pointer hover:opacity-90 transition"
+                         style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;"
+                         @onclick="() => OpenDetails(evt)">
                         <div class="font-semibold text-xs leading-tight mb-0.5">@evt.Course</div>
                         <div class="text-xs opacity-90">@evt.Room</div>
                         @if (durationMinutes >= 90)
@@ -87,4 +83,8 @@
             }
         </div>
     </div>
+@if (SelectedReservation is not null)
+{
+    <ScheduleItem Reservation="SelectedReservation" OnClose="CloseDetails" />
+}
 </div>

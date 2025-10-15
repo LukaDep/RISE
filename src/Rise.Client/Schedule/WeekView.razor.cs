@@ -6,6 +6,20 @@ namespace Rise.Client.Schedule;
 
 public partial class WeekView
 {
+  private ScheduleDto.Reservation? SelectedReservation;
+
+private void OpenDetails(ScheduleDto.Reservation reservation)
+{
+    SelectedReservation = reservation;
+    StateHasChanged();
+}
+
+private void CloseDetails()
+{
+    SelectedReservation = null;
+    StateHasChanged();
+}
+
   [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
   // Schedule data from service
@@ -21,7 +35,7 @@ public partial class WeekView
       Take = 100, // Enough items for week view
       OrderBy = "Id",
     };
-
+ 
     var result = await ScheduleService.GetIndexAsync(request);
     schedule = result.Value?.Reservations;
   }

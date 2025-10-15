@@ -5,18 +5,31 @@
 <PageTitle>Schedule</PageTitle>
 <div class="mt-10">
 
-
-  <Tabs>
+<Tabs @ref="TabsRef">
     <Tab Title="@L["Schedule.Day"]">
-      <DayView />
+        <DayView @ref="DayViewRef" SelectedDate="@SelectedDay" />
     </Tab>
 
     <Tab Title="@L["Schedule.Week"]">
-      <WeekView />
+        <WeekView SelectedDate="@SelectedDay" />
     </Tab>
 
     <Tab Title="@L["Schedule.Month"]">
-      <MonthView />
+        <MonthView OnDayClick="GoToDay" />
     </Tab>
-  </Tabs>
+</Tabs>
+
+@code {
+    private DayView? DayViewRef;
+    private DateTime SelectedDay = DateTime.Today;
+    private Tabs? TabsRef;
+
+    private void GoToDay(DateTime day)
+    {
+        SelectedDay = day;
+
+        // Activate the Day tab by title
+        TabsRef?.ActivateTab(L["Schedule.Day"]);
+    }
+}
 </div>
