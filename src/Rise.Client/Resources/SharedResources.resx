@@ -22,8 +22,10 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
+  mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
+  object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -59,7 +61,8 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -112,10 +115,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home.AuthMessage" xml:space="preserve">
     <value>After a user authenticates, the navigation menu shows a link to the</value>
@@ -128,5 +133,113 @@
   </data>
   <data name="Home.WelcomeMessage" xml:space="preserve">
     <value>Welcome to your new app.</value>
+  </data>
+  <data name="Schedule.Week" xml:space="preserve">
+    <value>Week</value>
+  </data>
+  <data name="Schedule.To" xml:space="preserve">
+    <value>to</value>
+  </data>
+  <data name="Schedule.Previous" xml:space="preserve">
+    <value>Previous</value>
+  </data>
+  <data name="Schedule.Next" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="Schedule.Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="Schedule.Day" xml:space="preserve">
+    <value>Day</value>
+  </data>
+  <data name="Schedule.Month" xml:space="preserve">
+    <value>Month</value>
+  </data>
+  <data name="Schedule.More" xml:space="preserve">
+    <value>more</value>
+  </data>
+  <data name="Schedule.NoClassesToday" xml:space="preserve">
+    <value>No classes today!</value>
+  </data>
+  <data name="Schedule.ActiveLecture" xml:space="preserve">
+    <value>Active Lecture</value>
+  </data>
+  <data name="Schedule.Practicum" xml:space="preserve">
+    <value>Practicum</value>
+  </data>
+  <data name="Schedule.Seminar" xml:space="preserve">
+    <value>Seminar</value>
+  </data>
+  <data name="News.Title" xml:space="preserve">
+    <value>News</value>
+  </data>
+  <data name="News.FilterPlaceholder" xml:space="preserve">
+    <value>Filter news...</value>
+  </data>
+  <data name="News.Loading" xml:space="preserve">
+    <value>Loading...</value>
+  </data>
+  <data name="News.By" xml:space="preserve">
+    <value>By</value>
+  </data>
+  <data name="Auth.LoggedInAs" xml:space="preserve">
+    <value>You're logged in as</value>
+  </data>
+  <data name="Auth.WithClaims" xml:space="preserve">
+    <value>With the following claims:</value>
+  </data>
+  <data name="Auth.Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Auth.Value" xml:space="preserve">
+    <value>Value</value>
+  </data>
+  <data name="Auth.EmailPlaceholder" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="Auth.PasswordPlaceholder" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="Auth.Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="Auth.Register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="Auth.AlreadyLoggedIn" xml:space="preserve">
+    <value>You're already logged in as</value>
+  </data>
+  <data name="Auth.RegisterNewUser" xml:space="preserve">
+    <value>Register as a new user.</value>
+  </data>
+  <data name="Auth.RegisterSuccess" xml:space="preserve">
+    <value>You successfully registered. Now you can</value>
+  </data>
+  <data name="Auth.LoginLink" xml:space="preserve">
+    <value>login</value>
+  </data>
+  <data name="Auth.ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Confirm Password</value>
+  </data>
+  <data name="Products.Title" xml:space="preserve">
+    <value>Products</value>
+  </data>
+  <data name="Products.FetchingData" xml:space="preserve">
+    <value>This component demonstrates fetching data from the server.</value>
+  </data>
+  <data name="Products.Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="Products.Id" xml:space="preserve">
+    <value>Id</value>
+  </data>
+  <data name="Products.Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Products.Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Common.Loading" xml:space="preserve">
+    <value>Loading...</value>
   </data>
 </root>

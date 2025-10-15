@@ -1,34 +1,35 @@
 ﻿@page "/product"
 @using Rise.Shared.Identity
+@inject IStringLocalizer<SharedResources> L
 
-<PageTitle>Products</PageTitle>
+<PageTitle>@L["Products.Title"]</PageTitle>
 
-<h1 class="title">Products</h1>
+<h1 class="title">@L["Products.Title"]</h1>
 
-<p>This component demonstrates fetching data from the server.</p>
+<p>@L["Products.FetchingData"]</p>
 
 <AuthorizeView Roles="@AppRoles.Administrator">
     <div class="is-flex is-justify-content-flex-end">
-        <a href="products/create" class="button is-dark">Create</a>
+        <a href="products/create" class="button is-dark">@L["Products.Create"]</a>
     </div>
 </AuthorizeView>
 
 @if (products == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>@L["Common.Loading"]</em></p>
 }
 else
 {
     <table class="table is-fullwidth">
-    <thead>
-        <tr>
-            <th>Id</th>
-            <th>Name</th>
-            <th>Description</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var product in products)
+        <thead>
+            <tr>
+                <th>@L["Products.Id"]</th>
+                <th>@L["Products.Name"]</th>
+                <th>@L["Products.Description"]</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in products)
             {
                 <tr @key="product.Id">
                     <td>@product.Id</td>

@@ -1,9 +1,10 @@
 ﻿@page "/news/{Id:int}"
+@inject IStringLocalizer<SharedResources> L
 
 @if (isLoading)
 {
   <div class="flex justify-center items-center min-h-screen">
-    <p class="text-lg">Loading...</p>
+    <p class="text-lg">@L["Common.Loading"]</p>
   </div>
 }
 else if (errorMessage != null)
@@ -16,20 +17,16 @@ else if (newsItem != null)
 {
   <div>
     <div class="relative w-full h-96 mb-8">
-      <img 
-        src="@GetThumbnailUrl()"
-        alt="@newsItem.Title" 
-        class="w-full h-full object-cover"
-      />
-      
-      <div class="absolute inset-0 bg-(--hogent-black) bg-opacity-40"></div>
-      
-      <div class="absolute inset-0 flex flex-col justify-end p-8 text-(--hogent-white)">
+      <img src="@GetThumbnailUrl()" alt="@newsItem.Title" class="w-full h-full object-cover" />
+
+      <div class="absolute inset-0 bg-hogent-black bg-opacity-40"></div>
+
+      <div class="absolute inset-0 flex flex-col justify-end p-8 text-hogent-white">
         <h1 class="text-4xl md:text-5xl font-bold mb-3 leading-tight">
           @newsItem.Title
         </h1>
         <p class="text-lg md:text-xl">
-          By @newsItem.Author | @newsItem.PublishDate.ToString("MMMM dd, yyyy")
+          @L["News.By"] @newsItem.Author | @newsItem.PublishDate.ToString("MMMM dd, yyyy")
         </p>
       </div>
     </div>
