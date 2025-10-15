@@ -1,6 +1,8 @@
 ﻿@page "/news/{Id:int}"
 @inject IStringLocalizer<SharedResources> L
 
+<PageTitle>@newsItem?.Title</PageTitle>
+
 @if (isLoading)
 {
   <div class="flex justify-center items-center min-h-screen">
@@ -17,6 +19,10 @@ else if (newsItem != null)
 {
   <div>
     <div class="relative w-full h-96 mb-8">
+      <NavLink href="/news"
+        class="absolute top-4 left-4 bg-hogent-black-30 hover:scale-105 duration-200 text-hogent-white px-4 py-2 rounded-full z-10">
+        <i class="fa-solid fa-chevron-left"></i>
+      </NavLink>
       <img src="@GetThumbnailUrl()" alt="@newsItem.Title" class="w-full h-full object-cover" />
 
       <div class="absolute inset-0 flex flex-col justify-end p-8 text-hogent-white">
