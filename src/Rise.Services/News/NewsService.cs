@@ -19,13 +19,13 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         if (!File.Exists(_mockFilePath))
             return Result<NewsResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
         var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-        
+
         // Deserialize the JSON data into a list of NewsDto.Index
         var query = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
 
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
-            query = query.Where(n => n.Title.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase) 
+            query = query.Where(n => n.Title.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)
                                      || n.Author.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
         }
         // Apply ordering
@@ -46,9 +46,9 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
             .Take(request.Take);
 
         return Result.Success(new NewsResponse.Index
-            {
-                News = news,
-            }
+        {
+            News = news,
+        }
         );
     }
 

@@ -28,8 +28,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IScheduleService, MockScheduleService>();
         services.AddScoped<INewsService, NewsService>();
         services.AddScoped<ICampusInfoService, CampusInfoService>();
-        services.AddTransient<DbSeeder>();       
-        
+        services.AddTransient<DbSeeder>();
+
         // Add other application services here.
         return services;
     }

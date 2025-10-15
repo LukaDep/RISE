@@ -8,5 +8,5 @@ namespace Rise.Shared.Schedule;
 public interface IScheduleService
 
 {
-  Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default);
+    Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default);
 }

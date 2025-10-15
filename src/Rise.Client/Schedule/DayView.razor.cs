@@ -2,9 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components; 
-using Rise.Shared.Schedule;           
-using Rise.Shared.Common;            
+using Microsoft.AspNetCore.Components;
+using Rise.Shared.Schedule;
+using Rise.Shared.Common;
 
 namespace Rise.Client.Schedule
 {

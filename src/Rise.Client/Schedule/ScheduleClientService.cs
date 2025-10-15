@@ -6,9 +6,9 @@ namespace Rise.Client.Schedule;
 
 public class ScheduleClientService(HttpClient httpClient) : IScheduleService
 {
-  public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default)
-  {
-    var result = await httpClient.GetFromJsonAsync<Result<ScheduleDto.Data>>("/api/schedule", cancellationToken: ctx);
-    return result!;
-  }
+    public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default)
+    {
+        var result = await httpClient.GetFromJsonAsync<Result<ScheduleDto.Data>>("/api/schedule", cancellationToken: ctx);
+        return result!;
+    }
 }

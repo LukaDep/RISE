@@ -23,6 +23,6 @@ public partial class CampusInfo
 
         var result = await CampusInfoService.GetIndexAsync(request);
         campusInfo = result.Value.CampusInfo;
-        
+
     }
 }

@@ -23,7 +23,7 @@ public partial class Index
     }
 
     private IEnumerable<NewsDto.Index>? news;
-    
+
 
     [Inject] public required INewsService NewsService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
@@ -45,26 +45,26 @@ public partial class Index
         {
             Skip = 0,
             Take = 20,
-            SearchTerm = SearchTerm?.Length > 0 ? SearchTerm: "",
+            SearchTerm = SearchTerm?.Length > 0 ? SearchTerm : "",
         };
 
         var result = await NewsService.GetIndexAsync(request);
         news = result.Value.News;
-        
+
     }
 
     protected override void OnParametersSet()
     {
         searchTerm = SearchTerm;
     }
-    
+
     private void SearchTermChanged(ChangeEventArgs args)
     {
         // When the inputfield changes...
         searchTerm = args.Value?.ToString();
         FilterProducts();
     }
-    
+
     private void FilterProducts()
     { // Navigate to the current page with the new SearchTerm parameter.
         Dictionary<string, object?> parameters = new();

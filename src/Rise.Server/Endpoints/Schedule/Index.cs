@@ -10,14 +10,14 @@ namespace Rise.Server.Endpoints.Schedule;
 /// <param name="ScheduleService"></param>
 public class Index(IScheduleService ScheduleService) : Endpoint<QueryRequest.SkipTake, Result<ScheduleDto.Data>>
 {
-  public override void Configure()
-  {
-    Get("/api/Schedule");
-    AllowAnonymous();
-  }
+    public override void Configure()
+    {
+        Get("/api/Schedule");
+        AllowAnonymous();
+    }
 
-  public override Task<Result<ScheduleDto.Data>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
-  {
-    return ScheduleService.GetIndexAsync(req, ct);
-  }
+    public override Task<Result<ScheduleDto.Data>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
+    {
+        return ScheduleService.GetIndexAsync(req, ct);
+    }
 }

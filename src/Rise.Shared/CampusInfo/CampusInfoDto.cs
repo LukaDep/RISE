@@ -13,7 +13,7 @@ namespace Rise.Shared.CampusInfo
             public required string Id { get; set; }
             public required string Name { get; set; }
             public required string Location { get; set; }
-            public required List<string> Faculties { get; set; } 
+            public required List<string> Faculties { get; set; }
             public string ContactPhone { get; set; }
             public required string Description { get; set; }
         }
