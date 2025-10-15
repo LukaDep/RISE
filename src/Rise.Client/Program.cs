@@ -9,7 +9,6 @@ using Rise.Client.CampusInfo;
 using Rise.Shared.CampusInfo;
 using Rise.Client.Schedule;
 using Rise.Shared.News;
-using Rise.Client.Schedule;
 using Rise.Shared.Products;
 using Rise.Shared.Schedule;
 

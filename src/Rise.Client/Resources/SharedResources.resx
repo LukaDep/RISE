@@ -170,6 +170,24 @@
   <data name="Schedule.Seminar" xml:space="preserve">
     <value>Seminar</value>
   </data>
+  <data name="Schedule.Test" xml:space="preserve">
+    <value>Test</value>
+  </data>
+  <data name="Schedule.Close" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="Schedule.Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="Schedule.Course" xml:space="preserve">
+    <value>Course</value>
+  </data>
+  <data name="Schedule.Note" xml:space="preserve">
+    <value>Note</value>
+  </data>
+  <data name="Schedule.Campus" xml:space="preserve">
+    <value>Campus</value>
+  </data>
   <data name="News.Title" xml:space="preserve">
     <value>News</value>
   </data>

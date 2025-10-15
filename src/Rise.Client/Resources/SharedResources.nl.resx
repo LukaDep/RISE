@@ -186,6 +186,30 @@
     <value>Seminarie</value>
     <comment/>
   </data>
+  <data name="Schedule.Test" xml:space="preserve">
+    <value>Test</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Close" xml:space="preserve">
+    <value>Sluiten</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Type" xml:space="preserve">
+    <value>Type</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Course" xml:space="preserve">
+    <value>Cursus</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Note" xml:space="preserve">
+    <value>Notitie</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Campus" xml:space="preserve">
+    <value>Campus</value>
+    <comment/>
+  </data>
   <data name="News.Title" xml:space="preserve">
     <value>Nieuws</value>
     <comment/>
