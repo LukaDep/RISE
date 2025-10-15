@@ -1,0 +1,43 @@
+﻿@page "/news/{Id:int}"
+
+@if (isLoading)
+{
+  <div class="flex justify-center items-center min-h-screen">
+    <p class="text-lg">Loading...</p>
+  </div>
+}
+else if (errorMessage != null)
+{
+  <div class="flex justify-center items-center min-h-screen">
+    <p class="text-red-500 text-lg">@errorMessage</p>
+  </div>
+}
+else if (newsItem != null)
+{
+  <div>
+    <div class="relative w-full h-96 mb-8">
+      <img 
+        src="@GetThumbnailUrl()"
+        alt="@newsItem.Title" 
+        class="w-full h-full object-cover"
+      />
+      
+      <div class="absolute inset-0 bg-(--hogent-black) bg-opacity-40"></div>
+      
+      <div class="absolute inset-0 flex flex-col justify-end p-8 text-(--hogent-white)">
+        <h1 class="text-4xl md:text-5xl font-bold mb-3 leading-tight">
+          @newsItem.Title
+        </h1>
+        <p class="text-lg md:text-xl">
+          By @newsItem.Author | @newsItem.PublishDate.ToString("MMMM dd, yyyy")
+        </p>
+      </div>
+    </div>
+
+    <div class="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 pb-12">
+      <div class="prose prose-lg max-w-none">
+        @newsItem.Content
+      </div>
+    </div>
+  </div>
+}

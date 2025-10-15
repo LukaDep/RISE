@@ -1,3 +1,8 @@
+using System.Collections.Generic;
+using System.Linq;
+using FuzzySharp;
+using FuzzySharp.SimilarityRatio;
+using FuzzySharp.SimilarityRatio.Scorer.StrategySensitive;
 using Microsoft.AspNetCore.Components;
 using Rise.Shared.Common;
 using Rise.Shared.News;
@@ -6,12 +11,20 @@ namespace Rise.Client.News;
 
 public partial class Index
 {
+    ElementReference filterInput;
     private bool isFilterOpen = false;
-    private void ToggleFilter() => isFilterOpen = !isFilterOpen;
+    private async Task ToggleFilter()
+    {
+        isFilterOpen = !isFilterOpen;
+        if (isFilterOpen)
+        {
+            await filterInput.FocusAsync();
+        }
+    }
 
     private IEnumerable<NewsDto.Index>? news;
     private IEnumerable<NewsDto.Index>? filteredNews;
-    
+
     [Inject] public required INewsService NewsService { get; set; }
 
     //dit id voor server-side filtering, als da er nog zou komen
@@ -19,6 +32,7 @@ public partial class Index
     // public string? SearchTerm { get; set; }
 
     private string? searchTerm;
+    private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
 
     protected override async Task OnInitializedAsync()
     {
@@ -35,12 +49,27 @@ public partial class Index
         filteredNews = news;
     }
 
-    //ff client-side filtering, server-side kan later komen
     private void SearchTermChanged(ChangeEventArgs e)
     {
         searchTerm = e.Value?.ToString();
-        filteredNews = !string.IsNullOrWhiteSpace(searchTerm)
-            ? news?.Where(n => n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase))
-            : news;
+
+        if (string.IsNullOrWhiteSpace(searchTerm))
+        {
+            filteredNews = news;
+            return;
+        }
+
+        filteredNews = news?.Where(n =>
+            // Exact match still gets priority
+            n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+            // Fuzzy search
+            Fuzz.PartialRatio(n.Title, searchTerm) >= FuzzyScoreThreshold ||
+            Fuzz.PartialRatio(n.Content, searchTerm) >= FuzzyScoreThreshold
+        ).OrderByDescending(n =>
+            Math.Max(
+                Fuzz.PartialRatio(n.Title, searchTerm),
+                Fuzz.PartialRatio(n.Content, searchTerm)
+            )
+        );
     }
 }
