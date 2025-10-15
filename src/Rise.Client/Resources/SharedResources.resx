@@ -188,6 +188,27 @@
   <data name="Schedule.Campus" xml:space="preserve">
     <value>Campus</value>
   </data>
+  <data name="Schedule.Monday" xml:space="preserve">
+    <value>Mon</value>
+  </data>
+  <data name="Schedule.Tuesday" xml:space="preserve">
+    <value>Tue</value>
+  </data>
+  <data name="Schedule.Wednesday" xml:space="preserve">
+    <value>Wed</value>
+  </data>
+  <data name="Schedule.Thursday" xml:space="preserve">
+    <value>Thu</value>
+  </data>
+  <data name="Schedule.Friday" xml:space="preserve">
+    <value>Fri</value>
+  </data>
+  <data name="Schedule.Saturday" xml:space="preserve">
+    <value>Sat</value>
+  </data>
+  <data name="Schedule.Sunday" xml:space="preserve">
+    <value>Sun</value>
+  </data>
   <data name="News.Title" xml:space="preserve">
     <value>News</value>
   </data>

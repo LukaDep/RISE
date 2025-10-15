@@ -15,15 +15,13 @@
     <div class="bg-hogent-white rounded-lg border border-hogent-black-30 overflow-visible">
         <!-- Header met dagen -->
         <div class="grid grid-cols-6 border-b border-hogent-black-30">
-            <div
-                class="p-3 text-center font-medium text-hogent-black-50 border-r border-hogent-black-30 bg-hogent-black-15">
-                @L["Schedule.Time"]</div>
+            <div class="p-3 border-r border-hogent-black-30"></div>
             @for (int i = 0; i < WeekDays.Count; i++)
             {
                 var day = WeekDays[i];
                 <div
                     class="p-3 text-center font-medium text-hogent-black-50 @(i < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
-                    <div class="text-sm">@day.ToString("ddd")</div>
+                    <div class="text-sm">@GetLocalizedDayName(day)</div>
                     <div class="text-xs text-hogent-black-50">@day.ToString("d/M")</div>
                 </div>
             }
@@ -33,7 +31,7 @@
         <div class="relative" style="min-height: 780px;">
             <div class="grid grid-cols-6">
                 <!-- Tijd kolom -->
-                <div class="border-r border-hogent-black-30 bg-hogent-black-15">
+                <div class="border-r border-hogent-black-15">
                     @for (int hour = 8; hour <= 20; hour++)
                     {
                         <div
@@ -81,8 +79,8 @@
                     var bgColor = GetEventTypeBgColor(evt.WorkForm);
 
                     <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden cursor-pointer hover:opacity-90 transition"
-                         style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;"
-                         @onclick="() => OpenDetails(evt)">
+                        style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;"
+                        @onclick="() => OpenDetails(evt)">
                         <div class="font-semibold text-xs leading-tight mb-0.5">@evt.Course</div>
                         <div class="text-xs opacity-90">@evt.Room</div>
                         @if (durationMinutes >= 90)
@@ -94,8 +92,8 @@
             }
         </div>
     </div>
-@if (SelectedReservation is not null)
-{
-    <ScheduleItem Reservation="SelectedReservation" OnClose="CloseDetails" />
-}
+    @if (SelectedReservation is not null)
+    {
+        <ScheduleItem Reservation="SelectedReservation" OnClose="CloseDetails" />
+    }
 </div>
