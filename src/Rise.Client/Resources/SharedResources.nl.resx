@@ -263,8 +263,7 @@
     <comment/>
   </data>
   <data name="Auth.RegisterNewUser" xml:space="preserve">
-    <value>Registreer als nieuwe gebruiker.</value>
-    <comment/>
+    <value>Heb je geen account?</value>
   </data>
   <data name="Auth.RegisterSuccess" xml:space="preserve">
     <value>Je hebt je succesvol geregistreerd. Nu kun je</value>
@@ -305,5 +304,8 @@
   <data name="Common.Loading" xml:space="preserve">
     <value>Laden...</value>
     <comment/>
+  </data>
+  <data name="Auth.SignIn" xml:space="preserve">
+    <value>Log In</value>
   </data>
 </root>

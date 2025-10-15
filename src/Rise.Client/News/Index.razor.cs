@@ -23,53 +23,77 @@ public partial class Index
     }
 
     private IEnumerable<NewsDto.Index>? news;
-    private IEnumerable<NewsDto.Index>? filteredNews;
+    
 
     [Inject] public required INewsService NewsService { get; set; }
+    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
 
     //dit id voor server-side filtering, als da er nog zou komen
     // [SupplyParameterFromQuery]
     // public string? SearchTerm { get; set; }
 
+    [Parameter, EditorRequired]
+    [SupplyParameterFromQuery]
+    public string? SearchTerm { get; set; } = default!;
+
     private string? searchTerm;
     private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        var request = new QueryRequest.SkipTake
+        QueryRequest.SkipTake request = new()
         {
             Skip = 0,
-            Take = 50,
-            OrderBy = "Id",
-            //SearchTerm = SearchTerm
+            Take = 20,
+            SearchTerm = SearchTerm?.Length > 0 ? SearchTerm: "",
         };
 
         var result = await NewsService.GetIndexAsync(request);
         news = result.Value.News;
-        filteredNews = news;
+        
     }
 
-    private void SearchTermChanged(ChangeEventArgs e)
+    protected override void OnParametersSet()
     {
-        searchTerm = e.Value?.ToString();
-
-        if (string.IsNullOrWhiteSpace(searchTerm))
-        {
-            filteredNews = news;
-            return;
-        }
-
-        filteredNews = news?.Where(n =>
-            // Exact match still gets priority
-            n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-            // Fuzzy search
-            Fuzz.PartialRatio(n.Title, searchTerm) >= FuzzyScoreThreshold ||
-            Fuzz.PartialRatio(n.Content, searchTerm) >= FuzzyScoreThreshold
-        ).OrderByDescending(n =>
-            Math.Max(
-                Fuzz.PartialRatio(n.Title, searchTerm),
-                Fuzz.PartialRatio(n.Content, searchTerm)
-            )
-        );
+        searchTerm = SearchTerm;
     }
+    
+    private void SearchTermChanged(ChangeEventArgs args)
+    {
+        // When the inputfield changes...
+        searchTerm = args.Value?.ToString();
+        FilterProducts();
+    }
+    
+    private void FilterProducts()
+    { // Navigate to the current page with the new SearchTerm parameter.
+        Dictionary<string, object?> parameters = new();
+        parameters.Add(nameof(searchTerm), searchTerm);
+        var uri = NavigationManager.GetUriWithQueryParameters(parameters);
+        NavigationManager.NavigateTo(uri);
+    }
+
+    // private void SearchTermChanged(ChangeEventArgs e)
+    // {
+    //     searchTerm = e.Value?.ToString();
+    //
+    //     if (string.IsNullOrWhiteSpace(searchTerm))
+    //     {
+    //         filteredNews = news;
+    //         return;
+    //     }
+    //
+    //     filteredNews = news?.Where(n =>
+    //         // Exact match still gets priority
+    //         n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+    //         // Fuzzy search
+    //         Fuzz.PartialRatio(n.Title, searchTerm) >= FuzzyScoreThreshold ||
+    //         Fuzz.PartialRatio(n.Content, searchTerm) >= FuzzyScoreThreshold
+    //     ).OrderByDescending(n =>
+    //         Math.Max(
+    //             Fuzz.PartialRatio(n.Title, searchTerm),
+    //             Fuzz.PartialRatio(n.Content, searchTerm)
+    //         )
+    //     );
+    // }
 }
