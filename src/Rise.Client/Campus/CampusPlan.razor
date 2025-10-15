@@ -1,44 +1,47 @@
-@page "/campus-plan"
+@page "/campus-plan/{id}"
+@inject HttpClient Http
 @inject IJSRuntime JS
+@using Rise.Shared.Campus
 
-<div id="map" style="height: 100vh; width: 100vw;"></div>
+@if (campus is null)
+{
+    <p>Campus Loading</p>
+}
+else
+{
+    <div id="map" style="height: calc(100vh - 60px); width: 100vw;"></div>
+}
 
 @code {
+    [Parameter] public required string id { get; set; }
+    private CampusDto.Index? campus;
+    private bool mapInitialized = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.GetFromJsonAsync<CampusResponse.GetById<CampusDto.Index>>($"/api/campuses/{id}");
+        campus = response?.Value;
+    }
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
-        if (firstRender)
+        if (!mapInitialized && campus != null)
         {
-            var bounds = new object[] { new[] { 0, 0 }, new[] { 3809, 2860 } };
-            await JS.InvokeVoidAsync("leafletMap.initImage", "map", "/images/Schoonmeersen_plan_detail_page-0001.jpg", bounds);
-            await JS.InvokeVoidAsync("leafletMap.addMarker", 1684, 1615,"Resto D");
+            mapInitialized = true;
+            if (campus.MapImageUrl != null && campus.ImageWidth.HasValue && campus.ImageHeight.HasValue)
+            {
+                var bounds = new object[] { new[] { 0, 0 }, new[] { campus.ImageHeight, campus.ImageWidth } };
+                await JS.InvokeVoidAsync("leafletMap.initImage", "map", campus.MapImageUrl, bounds);
+                foreach (var b in campus.Buildings)
+                {
+                    await JS.InvokeVoidAsync("leafletMap.addMarker", b.Y, b.X, b.Name);
+                }
+            }
+            else if (campus.Latitude.HasValue && campus.Longitude.HasValue)
+            {
+                await JS.InvokeVoidAsync("leafletMap.initTileMap", "map", campus.Latitude, campus.Longitude, 17);
+                await JS.InvokeVoidAsync("leafletMap.addLatLngMarker", campus.Latitude, campus.Longitude, campus.Name);
+            }
         }
     }
 }
-
-<script>
-    window.leafletMap = {
-        map: null,
-        imageLayer: null,
-        initImage: function (elementId, imageUrl, bounds) {
-            if (this.map) {
-                this.map.remove();
-            }
-            this.map = L.map(elementId, {
-                crs: L.CRS.Simple,
-                minZoom: -2,
-                maxBounds: bounds,
-                maxBoundsViscosity: 1.0 
-            });
-            this.imageLayer = L.imageOverlay(imageUrl, bounds).addTo(this.map);
-            this.map.fitBounds(bounds);
-
-            var minZoom = this.map.getBoundsZoom(bounds, false);
-            this.map.setMinZoom(minZoom);
-        },
-        addMarker: function(lat, lng, name) {
-            if (this.map) {
-                L.marker([lat, lng]).addTo(this.map) .bindPopup(name);
-            }
-        }
-    };
-</script>

@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Rise.Client;
 using Rise.Client.Identity;
 using Rise.Client.Products;
+using Rise.Client.Campus;
 using Rise.Shared.Products;
+using Rise.Shared.Campus;
 
 try
 {
@@ -40,6 +42,13 @@ try
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });
+    builder.Services.AddHttpClient<ICampusService, CampusClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+
+    });
+
+    builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 
     await builder.Build().RunAsync();
 }
