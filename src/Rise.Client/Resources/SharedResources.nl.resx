@@ -126,6 +126,78 @@
     <value>Nadat een gebruiker inlogt, toont het navigatiemenu een link naar de</value>
     <comment/>
   </data>
+  <data name="Home.HelloWorld" xml:space="preserve">
+    <value>Hallo, wereld!</value>
+    <comment/>
+  </data>
+  <data name="Home.PrivatePage" xml:space="preserve">
+    <value>Privé-pagina</value>
+    <comment/>
+  </data>
+  <data name="Home.WelcomeMessage" xml:space="preserve">
+    <value>Welkom bij je nieuwe app.</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Week" xml:space="preserve">
+    <value>Week</value>
+    <comment/>
+  </data>
+  <data name="Schedule.To" xml:space="preserve">
+    <value>tot</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Previous" xml:space="preserve">
+    <value>Vorige</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Next" xml:space="preserve">
+    <value>Volgende</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Time" xml:space="preserve">
+    <value>Tijd</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Day" xml:space="preserve">
+    <value>Dag</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Month" xml:space="preserve">
+    <value>Maand</value>
+    <comment/>
+  </data>
+  <data name="Schedule.More" xml:space="preserve">
+    <value>meer</value>
+    <comment/>
+  </data>
+  <data name="Schedule.NoClassesToday" xml:space="preserve">
+    <value>Geen lessen vandaag!</value>
+    <comment/>
+  </data>
+  <data name="Schedule.ActiveLecture" xml:space="preserve">
+    <value>Activerend Hoorcollege</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Practicum" xml:space="preserve">
+    <value>Practicum</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Seminar" xml:space="preserve">
+    <value>Seminarie</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Test" xml:space="preserve">
+    <value>Test</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Close" xml:space="preserve">
+    <value>Sluiten</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Type" xml:space="preserve">
+    <value>Type</value>
+    <comment/>
+  </data>
   <data name="Schedule.Course" xml:space="preserve">
     <value>Cursus</value>
     <comment/>
