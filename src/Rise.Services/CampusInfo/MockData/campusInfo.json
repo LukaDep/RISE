@@ -1,5 +1,6 @@
 [
   {
+    "Id": "1",
     "Name": "Campus Aalst",
     "Location": "Arbeidstraat 14, 9300 Aalst",
     "Faculties": [
@@ -15,6 +16,7 @@
     "Description": "Campus Aalst is vlot bereikbaar en centraal gelegen op wandelafstand van station Aalst (850 m), bushalte 'Vredeplein' (200 m), parking Hopmarkt (350 m) en parking Keizershallen (350 m)."
   },
   {
+    "Id": "2",
     "Name": "Campus Bijloke",
     "Location": "Louis Pasteurlaan 2, 9000 Gent",
     "Faculties": [
@@ -32,6 +34,7 @@
     "Description": "Campus Bijloke bevindt zich ideaal gelegen aan de kleine ring van Gent (R40), op 6 minuutjes fietsen of 15 minuten wandelen van het station Gent Sint-Pieters (1,5 km)."
   },
   {
+    "Id": "3",
     "Name": "Campus Grote Sikkel",
     "Location": "Hoogpoort 64, 9000 Gent",
     "Faculties": [
@@ -43,6 +46,7 @@
     "Description": "Campus Grote Sikkel bevindt zich in het centrum van Gent, vlak tussen de Sint-Baafskathedraal en het stadhuis en op 350 meter van bus- en tramhaltes 'Gent Korenmarkt' en 'Gent Duivelsteen'."
   },
   {
+    "Id": "4",
     "Name": "Campus Ledeganck",
     "Location": "K.L. Ledeganckstraat 8, 9000 Gent",
     "Faculties": [
@@ -57,6 +61,7 @@
     "Description": "Campus Ledeganck ligt op 5 minuutjes fietsen of 15 minuten wandelen van het station Gent Sint-Pieters, aan de andere kant van het Citadelpark (1 km), vlak aan de kleine ring van Gent (R40) en de Overpoort."
   },
   {
+    "Id": "5",
     "Name": "Campus Lokeren",
     "Location": "Groendreef 31, 9160 Lokeren",
     "Faculties": [
@@ -65,6 +70,7 @@
     "Description": "Campus Lokeren ligt vlak bij station Lokeren (200 m) en de gratis stationparking."
   },
   {
+    "Id": "6",
     "Name": "Campus Melle",
     "Location": "Brusselsesteenweg 161, 9090 Melle",
     "Faculties": [
@@ -75,10 +81,11 @@
     "Description": "Campus Melle is vlot bereikbaar en goed gelegen aan de Brusselsesteenweg (N9). De bus brengt je op 16 minuten van station Gent Sint-Pieters naar bushalte 'Melle Tuinbouwschool'."
   },
   {
+    "Id": "7",
     "Name": "Campus Mercator",
     "Location": "Henleykaai 84, 9000 Gent",
     "Faculties": [
-      "bachelor bedrijfsmanagement (accountancy fiscaliteit, financi�n en verzekeringen, milieu- en duurzaamheidsmanagement, rechtspraktijk)",
+      "bachelor bedrijfsmanagement (accountancy fiscaliteit, financiën en verzekeringen, milieu- en duurzaamheidsmanagement, rechtspraktijk)",
       "graduaat accounting administration",
       "graduaat juridisch-administratieve ondersteuning (dagonderwijs)",
       "graduaat marketing- en communicatiesupport",
@@ -92,6 +99,7 @@
     "Description": "Campus Mercator bevindt zich ideaal gelegen op 4 minuutjes fietsen of 12 minuten wandelen van het centrum en van station Gent Sint-Pieters (1 km)."
   },
   {
+    "Id": "8",
     "Name": "Campus Schoonmeersen",
     "Location": "V. Vaerwyckweg 1, 9000 Gent",
     "Faculties": [
@@ -132,6 +140,7 @@
     "Description": "Campus Schoonmeersen is vlot bereikbaar en goed gelegen aan de ring rond Gent (R4) en op wandelafstand van station Gent Sint-Pieters (600 m)."
   },
   {
+    "Id": "9",
     "Name": "Campus Vesalius",
     "Location": "Keramiekstraat 80, 9000 Gent",
     "Faculties": [
@@ -143,14 +152,15 @@
       "bachelor voedings- en dieetkunde",
       "graduaat basisverpleegkunde",
       "postgraduaat intensieve zorgen en spoedgevallenzorg",
-      "postgraduaat nefrologische di�tetiek",
-      "postgraduaat oncologische di�tetiek",
+      "postgraduaat nefrologische diëtetiek",
+      "postgraduaat oncologische diëtetiek",
       "postgraduaat pediatrie en neonatalogie"
     ],
     "ContactPhone": "09 243 20 09",
     "Description": "Campus Vesalius bevindt zich vlakbij UZ Gent en heeft een vlotte verbinding met station Gent Sint-Pieters (2,3 km) en met het centrum."
   },
   {
+    "Id": "10",
     "Name": "Proefhoeve Bottelare",
     "Location": "Diepestraat 1, 9820 Bottelare",
     "Faculties": [
@@ -160,6 +170,7 @@
     "Description": "Proefhoeve Bottelare bevindt zich vlak bij het dorpscentrum van Bottelare, op 400 meter van bushalte 'Bottelare Dorpsstraat'."
   },
   {
+    "Id": "11",
     "Name": "Site Geraard de Duivelstraat",
     "Location": "Geraard de Duivelstraat 5, 9000 Gent",
     "Faculties": [],
@@ -167,6 +178,7 @@
     "Description": "De Wijnaert bevindt zich in het centrum van Gent, vlak tussen de Sint-Baafskathedraal en de Reep en op 50 meter van bus- en tramhalte 'Gent Duivelsteen'."
   },
   {
+    "Id": "12",
     "Name": "Site Buchtenstraat (FTI Lab)",
     "Location": "Buchtenstraat 11, 9051 Gent",
     "Faculties": [
@@ -177,6 +189,7 @@
     "Description": "Het FTI Lab (Fashion and Textiles Innovation Lab) ligt aan 'The Loop', een vlot bereikbare site vlakbij Flanders Expo."
   },
   {
+    "Id": "13",
     "Name": "Sporthal",
     "Location": "Sint-Denijslaan 251, 9000 Gent",
     "Faculties": [],

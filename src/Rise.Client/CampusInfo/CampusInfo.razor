@@ -13,6 +13,7 @@ else
     @foreach (var campus in campusInfo)
     {
         <CampusCard 
+            Id="@campus.Id"
             Name="@campus.Name" 
             Location="@campus.Location" 
             Faculties="@campus.Faculties" 
