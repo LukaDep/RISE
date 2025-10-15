@@ -46,18 +46,17 @@ namespace Rise.Client.Schedule
             while (SelectedDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
         }
 
-public void OpenDetails(ScheduleDto.Reservation reservation)
-{
-    SelectedReservation = reservation;
-    StateHasChanged();
-}
-   
+        public void OpenDetails(ScheduleDto.Reservation reservation)
+        {
+            SelectedReservation = reservation;
+            StateHasChanged();
+        }
 
-public void CloseDetails()
-{
-    SelectedReservation = null;
-    StateHasChanged(); // popup verdwijnt direct
-   
+        public void CloseDetails()
+        {
+            SelectedReservation = null;
+            StateHasChanged(); // popup verdwijnt direct
+        }
 
         public string GetEventTypeColor(string type) => type.ToLower() switch
         {
@@ -73,7 +72,6 @@ public void CloseDetails()
             "practicum" => "bg-green-100 text-green-800",
             "seminarie" => "bg-orange-100 text-orange-800",
             _ => "bg-hogent-black-15 text-hogent-black"
-}
         };
     }
 }
