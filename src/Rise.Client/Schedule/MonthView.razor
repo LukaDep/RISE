@@ -13,9 +13,9 @@
     </div>
     
     <div class="grid grid-cols-7 gap-1 mb-2">
-        @foreach (var day in DaysOfWeek)
+        @foreach (var day in WeekDays)
         {
-            <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@day</div>
+            <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@day.ToString("ddd")</div>
         }
     </div>
 
