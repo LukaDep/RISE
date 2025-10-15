@@ -1,13 +1,17 @@
 @using Microsoft.AspNetCore.Components
+@using Rise.Shared.Schedule
+@using Rise.Client.Schedule
+
 
 <div class="day-view">
+    <!-- Header and navigation -->
     <div class="mb-4 flex justify-between items-center">
         <h3 class="text-lg font-semibold text-gray-800">@SelectedDate.ToString("dddd, d MMMM yyyy")</h3>
         <div class="flex gap-2">
             <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md"
-                @onclick="PreviousDay">Vorige</button>
+                    @onclick="PreviousDay">Vorige</button>
             <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md"
-                @onclick="NextDay">Volgende</button>
+                    @onclick="NextDay">Volgende</button>
         </div>
     </div>
 
@@ -21,10 +25,11 @@
                 var borderColor = GetEventTypeColor(reservation.WorkForm);
                 var bgColor = GetEventTypeBgColor(reservation.WorkForm);
 
-                <div class="bg-white rounded-lg p-4 border-l-4 @borderColor shadow-sm border border-gray-100">
+                <div class="bg-white rounded-lg p-4 border-l-4 @borderColor shadow-sm border border-gray-100 hover:shadow-md cursor-pointer transition-all"
+                     @onclick="@(() => OpenDetails(reservation))">
                     <div class="flex justify-between items-start mb-3">
                         <div class="text-sm font-medium text-gray-600">
-                            @startTime.ToString("HH:mm") - @endTime.ToString("HH:mm")
+                            @(startTime.ToString("HH:mm")) - @(endTime.ToString("HH:mm"))
                         </div>
                         <span class="px-2 py-1 text-xs rounded-full @bgColor">
                             @reservation.WorkForm
@@ -32,17 +37,11 @@
                     </div>
                     <div class="text-base font-semibold text-gray-800 mb-2">@reservation.Course</div>
                     <div class="flex flex-wrap gap-4 text-sm text-gray-600">
-                        <span class="flex items-center gap-1">
-                            📍 @reservation.Room
-                        </span>
-                        <span class="flex items-center gap-1">
-                            👨‍🏫 @reservation.Teacher
-                        </span>
+                        <span class="flex items-center gap-1">📍 @reservation.Room</span>
+                        <span class="flex items-center gap-1">👨‍🏫 @reservation.Teacher</span>
                         @if (!string.IsNullOrEmpty(reservation.Environment))
                         {
-                            <span class="flex items-center gap-1">
-                                💻 @reservation.Environment
-                            </span>
+                            <span class="flex items-center gap-1">💻 @reservation.Environment</span>
                         }
                     </div>
                 </div>
@@ -57,3 +56,9 @@
         </div>
     }
 </div>
+
+@if (SelectedReservation is not null)
+{
+    <ScheduleItem Reservation="SelectedReservation" OnClose="CloseDetails" />
+}
+

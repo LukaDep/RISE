@@ -16,14 +16,12 @@
             <div class="text-center font-medium text-gray-600 py-2 text-sm">@day</div>
         }
     </div>
-    
     <div class="grid grid-cols-7 gap-1">
         @foreach (var day in MonthDays)
         {
             var isCurrentMonth = day.Month == SelectedDate.Month;
             var isToday = day.Date == DateTime.Today.Date;
             var hasEvents = HasEventsOnDay(day);
-            
             <div class="border border-gray-200 rounded-lg p-2 min-h-[80px] @(isToday ? "bg-blue-50 border-blue-300" : isCurrentMonth ? "bg-white" : "bg-gray-50")">
                 <div class="text-sm @(isCurrentMonth ? "text-gray-800 font-medium" : "text-gray-400") mb-1">@day.Day</div>
                 
