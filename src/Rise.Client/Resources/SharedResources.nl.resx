@@ -210,6 +210,34 @@
     <value>Campus</value>
     <comment/>
   </data>
+  <data name="Schedule.Monday" xml:space="preserve">
+    <value>Ma</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Tuesday" xml:space="preserve">
+    <value>Di</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Wednesday" xml:space="preserve">
+    <value>Wo</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Thursday" xml:space="preserve">
+    <value>Do</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Friday" xml:space="preserve">
+    <value>Vr</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Saturday" xml:space="preserve">
+    <value>Za</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Sunday" xml:space="preserve">
+    <value>Zo</value>
+    <comment/>
+  </data>
   <data name="News.Title" xml:space="preserve">
     <value>Nieuws</value>
     <comment/>

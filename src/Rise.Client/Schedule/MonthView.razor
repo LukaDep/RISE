@@ -7,16 +7,21 @@
     <div class="mb-4 flex justify-between items-center">
         <h3 class="text-lg font-semibold text-hogent-black">@SelectedDate.ToString("MMMM yyyy")</h3>
         <div class="flex gap-2">
-            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md" @onclick="PreviousMonth">@L["Schedule.Previous"]</button>
-            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md" @onclick="NextMonth">@L["Schedule.Next"]</button>
+            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
+                @onclick="PreviousMonth">@L["Schedule.Previous"]</button>
+            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
+                @onclick="NextMonth">@L["Schedule.Next"]</button>
         </div>
     </div>
-    
+
     <div class="grid grid-cols-7 gap-1 mb-2">
-        @foreach (var day in MonthDays)
-        {
-            <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@day.ToString("ddd")</div>
-        }
+        <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@L["Schedule.Monday"]</div>
+        <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@L["Schedule.Tuesday"]</div>
+        <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@L["Schedule.Wednesday"]</div>
+        <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@L["Schedule.Thursday"]</div>
+        <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@L["Schedule.Friday"]</div>
+        <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@L["Schedule.Saturday"]</div>
+        <div class="text-center font-medium text-hogent-black-50 py-2 text-sm">@L["Schedule.Sunday"]</div>
     </div>
 
     <div class="grid grid-cols-7 gap-1">
@@ -25,20 +30,18 @@
             var isCurrentMonth = day.Month == SelectedDate.Month;
             var isToday = day.Date == DateTime.Today.Date;
             var hasEvents = HasEventsOnDay(day);
-            
-            <!-- 👇 hier maken we de hele dagcel klikbaar -->
-           <div class="border border-hogent-black-30 rounded-lg p-2 min-h-[80px] 
-            cursor-pointer transition hover:shadow-md hover:bg-hogent-black-10 
-            @(isToday ? "bg-hogent-education-15 border-hogent-education" 
-                      : isCurrentMonth ? "bg-hogent-white" 
-                                       : "bg-hogent-black-15")"
-     @onclick="() => GoToDayView(day)">
+
+            <div class="border border-hogent-black-30 rounded-lg p-2 min-h-[80px] 
+                cursor-pointer transition hover:shadow-md hover:bg-hogent-black-10 
+                @(isToday ? "bg-hogent-education-15 border-hogent-education"
+                                       : isCurrentMonth ? "bg-hogent-white" 
+                                                        : "bg-hogent-black-15")" @onclick="() => GoToDayView(day)">
 
 
                 <div class="text-sm @(isCurrentMonth ? "text-hogent-black font-medium" : "text-hogent-black-30") mb-1">
                     @day.Day
                 </div>
-                
+
                 @if (hasEvents && isCurrentMonth)
                 {
                     var dayReservations = GetReservationsForDate(day);
@@ -57,7 +60,7 @@
             </div>
         }
     </div>
-    
+
     <div class="mt-4 flex gap-4 text-xs text-hogent-black-50">
         <div class="flex items-center gap-1">
             <div class="w-3 h-1 bg-blue-400 rounded"></div>

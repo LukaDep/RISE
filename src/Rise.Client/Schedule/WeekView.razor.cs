@@ -111,4 +111,19 @@ private void CloseDetails()
     "seminarie" => "bg-orange-100 text-orange-800",
     _ => "bg-hogent-black-15 text-hogent-black"
   };
+
+  private string GetLocalizedDayName(DateTime day)
+  {
+    return day.DayOfWeek switch
+    {
+      DayOfWeek.Monday => L["Schedule.Monday"],
+      DayOfWeek.Tuesday => L["Schedule.Tuesday"],
+      DayOfWeek.Wednesday => L["Schedule.Wednesday"],
+      DayOfWeek.Thursday => L["Schedule.Thursday"],
+      DayOfWeek.Friday => L["Schedule.Friday"],
+      DayOfWeek.Saturday => L["Schedule.Saturday"],
+      DayOfWeek.Sunday => L["Schedule.Sunday"],
+      _ => day.ToString("ddd")
+    };
+  }
 }
