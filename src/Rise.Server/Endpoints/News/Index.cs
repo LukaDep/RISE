@@ -8,7 +8,7 @@ namespace Rise.Server.Endpoints.News;
 /// See https://fast-endpoints.com/
 /// </summary>
 /// <param name="newsService"></param>
-public class CampusInfo(INewsService newsService) : Endpoint<QueryRequest.SkipTake, Result<NewsResponse.Index>>
+public class Index(INewsService newsService) : Endpoint<QueryRequest.SkipTake, Result<NewsResponse.Index>>
 {
     public override void Configure()
     {
