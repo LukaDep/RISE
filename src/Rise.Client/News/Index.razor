@@ -2,7 +2,7 @@
 @using Rise.Client.News.Components
 @inject IStringLocalizer<SharedResources> L
 
-<div class="flex justify-between items-center mx-4">
+<div class="flex justify-between items-center mx-4 mt-10">
     <h3 class="text-4xl font-bold">@L["News.Title"]</h3>
     <div class="relative w-72 flex items-center justify-end">
         <input @ref="filterInput" type="text" placeholder="@L["News.FilterPlaceholder"]"
@@ -25,15 +25,17 @@
     @* { *@
     @*     <NewsItem Id="@i.ToString()" Title=@($"Nieuwsbericht {i}") ShortDescription=@($"Dit is een korte beschrijving van nieuwsbericht {i}.") Date=@(DateTime.Now.AddDays(-i).ToString("dd MMMM yyyy")) /> *@
     @* } *@
-    @if (filteredNews == null)
+    @if (news == null)
     {
-        <p>@L["Common.Loading"]</p>
+        <div class="flex justify-center items-center h-16 mt-16">
+            <div class="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-b-hogent-education"></div>
+        </div>
     }
     else
     {
-        @foreach (var news in filteredNews)
+        @foreach (var newsItem in news)
         {
-            <NewsItem newsItem="@news" />
+            <NewsItem newsItem="@newsItem" />
         }
     }
 
