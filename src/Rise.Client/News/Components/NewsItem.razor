@@ -1,0 +1,20 @@
+@using Microsoft.AspNetCore.Components.Routing
+@using Rise.Shared.News
+
+<NavLink
+    class="flex items-center min-h-40 border-4 border-black/15 rounded-xl p-4 m-4 bg-white shadow transition  cursor-pointer"
+    href=@($"/news/{newsItem.Id}") Match="NavLinkMatch.Prefix" data-news-id="@newsItem.Id">
+    <!-- Image placeholder -->
+    <div class="w-24 h-24 bg-black/50 rounded-lg mr-4 flex-shrink-0"></div>
+    <!-- Content -->
+    <div class="flex-1 flex flex-col justify-center">
+        <h3 class="text-lg font-bold text-black/80">@newsItem.Title</h3>
+        <p class="text-black/60 text-sm">@newsItem.Content</p>
+        <p class="text-black/40 text-xs mt-1">@newsItem.PublishDate</p>
+    </div>
+</NavLink>
+
+@code {
+    [Parameter]
+    public required NewsDto.Index newsItem { get; set; }
+}
