@@ -5,6 +5,8 @@ using Rise.Client;
 using Rise.Client.Identity;
 using Rise.Client.News;
 using Rise.Client.Products;
+using Rise.Client.CampusInfo;
+using Rise.Shared.CampusInfo;
 using Rise.Shared.News;
 using Rise.Shared.Products;
 
@@ -44,6 +46,11 @@ try
     });
     
     builder.Services.AddHttpClient<INewsService, NewsService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
+
+    builder.Services.AddHttpClient<ICampusInfoService, CampusInfoService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });

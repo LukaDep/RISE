@@ -6,6 +6,8 @@ using Rise.Services.News;
 using Rise.Shared.News;
 using Rise.Shared.Products;
 using Rise.Shared.Projects;
+using Rise.Shared.CampusInfo;
+using Rise.Services.CampusInfo;
 
 namespace Rise.Services;
 
@@ -16,6 +18,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IProductService, ProductService>();        
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<INewsService, NewsService>();
+        services.AddScoped<ICampusInfoService, CampusInfoService>();
         services.AddTransient<DbSeeder>();       
         
         // Add other application services here.
