@@ -28,41 +28,41 @@
 - [Shouldly](https://docs.shouldly.org) - Helper for testing.
 - [Destructurama.Attributed](https://github.com/destructurama/attributed) - Masking for sensitive datatypes.
 
-## Software 
+## Software
+
 1. Install [Rider](https://www.jetbrains.com/rider/) or [Visual Studio](https://visualstudio.microsoft.com/)
-2. Make sure you have [ASP.NET 9](https://dotnet.microsoft.com/en-us/download) installed (comes with Rider and Visual Studio) 
+2. Make sure you have [ASP.NET 9](https://dotnet.microsoft.com/en-us/download) installed (comes with Rider and Visual Studio)
 
 ## Installation Instructions
 
 1. Clone the repository
 
-2. Open the `Rise.sln` file in [Rider](https://www.jetbrains.com/rider/), [Visual Studio](https://visualstudio.microsoft.com/) or  [Visual Studio Code](https://code.visualstudio.com/). (we prefer Rider, but you're free to choose.)
+2. Open the `Rise.sln` file in [Rider](https://www.jetbrains.com/rider/), [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/). (we prefer Rider, but you're free to choose.)
 
 3. Run the project using the `Rise.Server` project as the startup project
 
 4. The project should open in your default browser on port 5001.
 
-5. The database (SQLite) will be created. However you will have to switch the database provider of your choosing 
+5. The database (SQLite) will be created. However you will have to switch the database provider of your choosing
+    1. **SQL Server**
 
-   1. **SQL Server**
+        Package: Microsoft.EntityFrameworkCore.SqlServer
 
-      Package: Microsoft.EntityFrameworkCore.SqlServer
+        🔗 [NuGet Link](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)
 
-      🔗 [NuGet Link](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)
+    2. **MariaDB**
 
-   2. **MariaDB**
+        Package: Pomelo.EntityFrameworkCore.MySql
 
-      Package: Pomelo.EntityFrameworkCore.MySql
+        🔗 [NuGet Link](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql/)
 
-      🔗 [NuGet Link](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql/)
+    3. **PostgreSQL**
 
-   3. **PostgreSQL**
+        Package: Npgsql.EntityFrameworkCore.PostgreSQL
 
-      Package: Npgsql.EntityFrameworkCore.PostgreSQL
+        🔗 [NuGet Link](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/)
 
-      🔗 [NuGet Link](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/)
-
-   4. Mongo etc... 
+    4. Mongo etc...
 
 ## Creation of the database
 
@@ -90,7 +90,7 @@ dotnet ef database update --startup-project Rise.Server --project Rise.Persisten
 
 In the `src/Rise.Server` folder
 
-`dotnet watch --non-interactive` 
+`dotnet watch --non-interactive`
 
 The `dotnet watch` command is a file watcher. When it detects a change, it runs the `dotnet run` command or a specified `dotnet` command. If it runs `dotnet run`, and the change is supported for [hot reload](https://learn.microsoft.com/en-us/dotnet/core/tools/dotnet-watch#hot-reload), it hot reloads the specified application. If the change isn't supported, it restarts the application. This process enables fast iterative development from the command line.
 
@@ -100,7 +100,7 @@ The `dotnet run` command provides a convenient option to run your application fr
 
 `dotnet clean `- you won't need this often
 
-The `dotnet clean` command cleans the output of the previous build. It's implemented as an [MSBuild target](https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-targets), so the project is evaluated when the command is run. Only the outputs created during the build are cleaned. Both intermediate (*obj*) and final output (*bin*) folders are cleaned.
+The `dotnet clean` command cleans the output of the previous build. It's implemented as an [MSBuild target](https://learn.microsoft.com/en-us/visualstudio/msbuild/msbuild-targets), so the project is evaluated when the command is run. Only the outputs created during the build are cleaned. Both intermediate (_obj_) and final output (_bin_) folders are cleaned.
 
 ## Authentication
 
@@ -133,7 +133,7 @@ There are 3 built-in roles, but adjust as needed
 
 The template is designed as a boilerplate or template for .NET solutions, following best practices for structuring projects, separation of concerns, and maintainability. Here's a breakdown of the solution structure and its workings, explained:
 
-When you open the solution, you’ll notice it’s organized into multiple projects, which is a common approach in large, enterprise-level applications. Each project within the solution has a specific responsibility. This approach is based on the **Clean Architecture**, **Domain-Driven Design (DDD)** and **Vertical Slicing**  principles. The goal is to keep different aspects of the application separated and independent, making it easier to scale, maintain, and test.
+When you open the solution, you’ll notice it’s organized into multiple projects, which is a common approach in large, enterprise-level applications. Each project within the solution has a specific responsibility. This approach is based on the **Clean Architecture**, **Domain-Driven Design (DDD)** and **Vertical Slicing** principles. The goal is to keep different aspects of the application separated and independent, making it easier to scale, maintain, and test.
 
 Here are the main projects in the solution:
 
@@ -146,7 +146,7 @@ Here are the main projects in the solution:
 
 Let’s look at each of these in more detail:
 
-------
+---
 
 ### 1. **Domain Project**
 
@@ -160,11 +160,11 @@ Let’s look at each of these in more detail:
 
 - **Value Objects**: Immutable objects that represent a concept (like `Money` or `Address`).
 
-  > Currently not provided in the template, but you can read more here: [Domain Driven Design - Best Practises](https://hogent-web.github.io/csharp/chapters/03/slides/index.html#75)
+    > Currently not provided in the template, but you can read more here: [Domain Driven Design - Best Practises](https://hogent-web.github.io/csharp/chapters/03/slides/index.html#75)
 
 **Why this separation?**: Keeping the domain logic separate ensures that the business rules remain consistent even if the application’s presentation or infrastructure changes. This allows for flexibility and ensures that changes to other parts of the system don't break the business logic.
 
-------
+---
 
 ### 2. **Services Project**
 
@@ -176,13 +176,13 @@ Let’s look at each of these in more detail:
 
 - **Use Cases**: These classes are responsible for specific actions in the system, like creating an order or processing a payment.
 
-**Why this separation?**: This project enforces the **Separation of Concerns (SoC)**. It also makes testing easier, as this layer can be unit tested without worrying about external dependencies. 
+**Why this separation?**: This project enforces the **Separation of Concerns (SoC)**. It also makes testing easier, as this layer can be unit tested without worrying about external dependencies.
 
 > Note that we can swap out the API for something else, for example a console application and the business rules will still apply.
 >
 > We do not recommend abstracting your database as we see it as a migration to another database provider, not an abstraction. Read more about it [Should you Abstract the Database ](https://enterprisecraftsmanship.com/posts/should-you-abstract-database/). However you will have to switch to a real database provider not SQLite.
 
-------
+---
 
 ### 3. **Persistence Project**
 
@@ -198,7 +198,7 @@ Let’s look at each of these in more detail:
 
 **Why this separation?**: So it's easier to find the configurations and keep them out of the **Domain** logic, Domain classes should **not** know how they're stored.
 
-------
+---
 
 ### 4. **Server Project**
 
@@ -220,6 +220,7 @@ You might notice something interesting about how endpoints send responses. In `P
 So how are responses sent? We use a custom **Post-Processor** called `GlobalResponseSender`. This processor runs after every endpoint and is responsible for creating the final HTTP response. It takes the object returned by your endpoint—typically an `Ardalis.Result`—and intelligently maps it to the correct HTTP status code.
 
 For example:
+
 - If your endpoint returns a successful `Result<ProductDto>`, the processor creates a `200 OK` response containing the product data.
 - If it returns `Result.Invalid(errors)`, the processor creates a `400 Bad Request` response with the validation errors.
 - If it returns `Result.NotFound()`, it becomes a `404 Not Found` response.
@@ -228,13 +229,13 @@ This pattern is powerful because it keeps your endpoint logic clean and focused 
 
 **Why this separation?**: The **API** layer provides a clean separation between the user interface (UI) and the business logic. This project acts as the boundary between your back-end system and the outside world, and it enforces that external clients (e.g., mobile apps or front-end websites) communicate in a consistent and defined way.
 
-------
+---
 
 ### 5. **Client Project**
 
-**Folder**: `Client` 
+**Folder**: `Client`
 
-A Blazor Web Assembly Standalone client, just like React, Vue, Svelte, Angular,... but written in C#. 
+A Blazor Web Assembly Standalone client, just like React, Vue, Svelte, Angular,... but written in C#.
 
 ---
 
@@ -245,7 +246,7 @@ The **Shared** project is the glue between the **Client** and the **Server**. It
 - **Service Interfaces**: The contract between the **Client** and **API**.
 - **Data Transfer Objects**: Simple classes without any domain logic. They're used to transfer data from the **API** to the **Client**.
 
-------
+---
 
 ### 7. **Testing Projects**
 
@@ -257,7 +258,7 @@ While not always included in the base template, most well-architected solutions 
 
 - **Integration Tests**: Ensure different parts of the system work together correctly (e.g., API and database).
 
-  > We did not provide any integration tests, these are for you to figure out. But you can take a look [here](https://fast-endpoints.com/docs/integration-unit-testing#integration-testing) to get you in the right direction.
+    > We did not provide any integration tests, these are for you to figure out. But you can take a look [here](https://fast-endpoints.com/docs/integration-unit-testing#integration-testing) to get you in the right direction.
 
 By separating the tests into their own projects, you ensure that they remain maintainable, modular, and focused on the specific functionality being tested.
 
@@ -267,7 +268,7 @@ By separating the tests into their own projects, you ensure that they remain mai
 
 In some solutions, you may see additional projects or services to handle **cross-cutting concerns** like **logging**, **caching**, **authorization**, or **exception handling**. These concerns can be plugged into multiple layers of the solution but are typically handled in the **Persistence** / **Infrastructure** and **Server** projects.
 
-------
+---
 
 ### Key Concepts Explained
 
@@ -275,7 +276,7 @@ In some solutions, you may see additional projects or services to handle **cross
 2. **Dependency Injection (DI)**: This design pattern is used to inject dependencies into classes. The **API** project often configures DI, so classes get the services or repositories they need without creating them directly. This promotes loose coupling and makes the code easier to test.
 3. **Domain-Driven Design (DDD)**: The structure of the **Domain** project follows DDD principles, where the business rules and logic are core to the application and should be isolated from infrastructure concerns. This keeps your business logic intact even as external technologies evolve.
 
-------
+---
 
 ### Conclusion
 
@@ -289,7 +290,6 @@ The `dotnet-template` solution is structured to encourage scalability, maintaina
 
 ## Course
 
-There is .NET course from 1-2 years ago which is no longer maintained but still relevant. 
+There is .NET course from 1-2 years ago which is no longer maintained but still relevant.
 
 https://hogent-web.github.io/csharp/
-
