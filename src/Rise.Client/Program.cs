@@ -7,7 +7,6 @@ using Rise.Client.News;
 using Rise.Client.Products;
 using Rise.Client.Schedule;
 using Rise.Shared.News;
-using Rise.Client.Schedule;
 using Rise.Shared.Products;
 using Rise.Shared.Schedule;
 

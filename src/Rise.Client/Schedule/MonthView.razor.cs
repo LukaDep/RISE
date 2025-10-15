@@ -13,7 +13,17 @@ public partial class MonthView
 
   [Inject] public required IScheduleService ScheduleService { get; set; }
 
-  private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
+  private List<DateTime> WeekDays
+  {
+    get
+    {
+      var daysFromMonday = ((int)SelectedDate.DayOfWeek + 6) % 7;
+      var startOfWeek = SelectedDate.AddDays(-daysFromMonday).Date;
+      return Enumerable.Range(0, 7)
+                       .Select(i => startOfWeek.AddDays(i))
+                       .ToList();
+    }
+  }
 
   protected override async Task OnInitializedAsync()
   {
@@ -76,7 +86,7 @@ public partial class MonthView
     "activerend hoorcollege" => "border-blue-500",
     "practicum" => "border-green-500",
     "seminarie" => "border-orange-500",
-    _ => "border-gray-500"
+    _ => "border-hogent-black-30"
   };
 
   private string GetEventTypeBgColor(string type) => type.ToLower() switch
@@ -84,6 +94,6 @@ public partial class MonthView
     "activerend hoorcollege" => "bg-blue-100 text-blue-800",
     "practicum" => "bg-green-100 text-green-800",
     "seminarie" => "bg-orange-100 text-orange-800",
-    _ => "bg-gray-100 text-gray-800"
+    _ => "bg-hogent-black-15 text-hogent-black"
   };
 }

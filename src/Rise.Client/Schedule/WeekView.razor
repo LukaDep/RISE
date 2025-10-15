@@ -1,81 +1,89 @@
 @using Microsoft.AspNetCore.Components
+@inject IStringLocalizer<SharedResources> L
 
 <div class="week-view">
     <div class="mb-4 flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-gray-800">@WeekStartDate.ToString("d MMM") tot @WeekEndDate.ToString("d MMM yyyy")</h3>
+        <h3 class="text-lg font-semibold text-hogent-black">@WeekStartDate.ToString("d MMM") @L["Schedule.To"]
+            @WeekEndDate.ToString("d MMM yyyy")</h3>
         <div class="flex gap-2">
-            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="PreviousWeek">Vorige</button>
-            <button class="px-3 py-1 text-sm bg-gray-100 hover:bg-gray-200 rounded-md" @onclick="NextWeek">Volgende</button>
+            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
+                @onclick="PreviousWeek">@L["Schedule.Previous"]</button>
+            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
+                @onclick="NextWeek">@L["Schedule.Next"]</button>
         </div>
     </div>
-    
-    <div class="bg-white rounded-lg border border-gray-200 overflow-visible">
+
+    <div class="bg-hogent-white rounded-lg border border-hogent-black-30 overflow-visible">
         <!-- Header met dagen -->
-        <div class="grid grid-cols-6 border-b border-gray-200">
-            <div class="p-3 text-center font-medium text-gray-600 border-r border-gray-200 bg-gray-50">Tijd</div>
+        <div class="grid grid-cols-6 border-b border-hogent-black-30">
+            <div
+                class="p-3 text-center font-medium text-hogent-black-50 border-r border-hogent-black-30 bg-hogent-black-15">
+                @L["Schedule.Time"]</div>
             @for (int i = 0; i < WeekDays.Count; i++)
             {
                 var day = WeekDays[i];
-                <div class="p-3 text-center font-medium text-gray-600 @(i < WeekDays.Count - 1 ? "border-r border-gray-200" : "")">
+                <div
+                    class="p-3 text-center font-medium text-hogent-black-50 @(i < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
                     <div class="text-sm">@day.ToString("ddd")</div>
-                    <div class="text-xs text-gray-500">@day.ToString("d/M")</div>
+                    <div class="text-xs text-hogent-black-50">@day.ToString("d/M")</div>
                 </div>
             }
         </div>
-        
+
         <!-- Grid container met relative positioning -->
         <div class="relative" style="min-height: 780px;">
             <!-- Tijdslots 8-21 uur (achtergrond grid) -->
             <div class="grid grid-cols-6">
                 <!-- Tijd kolom -->
-                <div class="border-r border-gray-200 bg-gray-50">
+                <div class="border-r border-hogent-black-30 bg-hogent-black-15">
                     @for (int hour = 8; hour <= 20; hour++)
                     {
-                        <div class="h-[60px] border-b border-gray-100 p-2 text-center text-sm text-gray-600 flex items-center justify-center">
+                        <div
+                            class="h-[60px] border-b border-hogent-black-15 p-2 text-center text-sm text-hogent-black-50 flex items-center justify-center">
                             @($"{hour:00}:00")
                         </div>
                     }
                 </div>
-                
+
                 <!-- Dag kolommen (lege cellen voor grid structuur) -->
                 @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
                 {
-                    <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-gray-200" : "")">
+                    <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
                         @for (int hour = 8; hour <= 20; hour++)
                         {
-                            <div class="h-[60px] border-b border-gray-100"></div>
+                            <div class="h-[60px] border-b border-hogent-black-15"></div>
                         }
                     </div>
                 }
             </div>
-            
+
             <!-- Absolute positioned events -->
             @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
             {
                 var currentDay = WeekDays[dayIndex];
                 var dayEvents = GetReservationsForDate(currentDay);
-                
+
                 @foreach (var evt in dayEvents)
                 {
                     var startHour = evt.StartDateTime.Hour;
                     var startMinute = evt.StartDateTime.Minute;
                     var endHour = evt.EndDateTime.Hour;
                     var endMinute = evt.EndDateTime.Minute;
-                    
+
                     // Bereken positie en hoogte in pixels (60px per uur)
                     var topPosition = ((startHour - 8) * 60) + (startMinute);
                     var durationMinutes = (endHour - startHour) * 60 + (endMinute - startMinute);
                     var height = durationMinutes;
-                    
+
                     // Bereken horizontale positie
                     // Time column is 1/6 = 16.666%
                     // Each day column is also 1/6 = 16.666%
                     var leftPosition = 16.666 + (dayIndex * 16.666);
-                    
+
                     var bgColor = GetEventTypeBgColor(evt.WorkForm);
-                    
-                    <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden" 
-                         style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;">
+
+                    <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden"
+                        style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;">
                         <div class="font-semibold text-xs leading-tight mb-0.5">@evt.Course</div>
                         <div class="text-xs opacity-90">@evt.Room</div>
                         @if (durationMinutes >= 90)

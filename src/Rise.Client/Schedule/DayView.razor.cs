@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
-using Rise.Shared.Schedule;
 using Rise.Shared.Common;
+using Rise.Shared.Schedule;
 
 namespace Rise.Client.Schedule;
 
@@ -55,7 +55,7 @@ public partial class DayView
     "activerend hoorcollege" => "border-blue-500",
     "practicum" => "border-green-500",
     "seminarie" => "border-orange-500",
-    _ => "border-gray-500"
+    _ => "border-hogent-black-30"
   };
 
   private string GetEventTypeBgColor(string type) => type.ToLower() switch
@@ -63,6 +63,6 @@ public partial class DayView
     "activerend hoorcollege" => "bg-blue-100 text-blue-800",
     "practicum" => "bg-green-100 text-green-800",
     "seminarie" => "bg-orange-100 text-orange-800",
-    _ => "bg-gray-100 text-gray-800"
+    _ => "bg-hogent-black-15 text-hogent-black"
   };
 }
