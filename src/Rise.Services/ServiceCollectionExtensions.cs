@@ -8,6 +8,8 @@ using Rise.Shared.News;
 using Rise.Services.Schedule;
 using Rise.Shared.Products;
 using Rise.Shared.Projects;
+using Rise.Shared.CampusInfo;
+using Rise.Services.CampusInfo;
 using Rise.Shared.Schedule;
 
 namespace Rise.Services;
@@ -20,6 +22,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<IScheduleService, MockScheduleService>();
         services.AddScoped<INewsService, NewsService>();
+        services.AddScoped<ICampusInfoService, CampusInfoService>();
         services.AddTransient<DbSeeder>();       
         
         // Add other application services here.
