@@ -24,7 +24,7 @@ public partial class NewsArticle : ComponentBase
   {
     try
     {
-      var result = await NewsService.GetAsync(Id);
+      var result = await NewsService.GetByIdAsync(Id);
 
       if (result.IsSuccess && result.Value?.NewsItem != null)
       {
