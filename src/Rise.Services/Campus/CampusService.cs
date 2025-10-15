@@ -26,7 +26,7 @@ public class CampusService() : ICampusService
         return Result.Success(response);
     }
 
-    public async Task<Result<CampusDto.Index>> GetByIdAsync(string id, CancellationToken ct = default)
+    public async Task<Result<CampusDto.Index>> GetCampusByIdAsync(string id, CancellationToken ct = default)
     {
         if (!File.Exists(_mockFilePath))
             return Result<CampusDto.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");

@@ -13,7 +13,7 @@ public class CampusClientService(HttpClient httpClient) : ICampusService
         return result!;
     }
 
-    public async Task<Result<CampusDto.Index>> GetByIdAsync(string id, CancellationToken ct = default)
+    public async Task<Result<CampusDto.Index>> GetCampusByIdAsync(string id, CancellationToken ct = default)
     {
         var result = await httpClient.GetFromJsonAsync<Result<CampusDto.Index>>($"/api/campuses/{id}", cancellationToken: ct);
         Console.WriteLine($"Fetching campus data for ID {id} from API...");

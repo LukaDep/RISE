@@ -8,5 +8,5 @@ using Rise.Shared.Common;
 public interface ICampusService
 {
     Task<Result<CampusResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default);
-    Task<Result<CampusDto.Index>> GetByIdAsync(string id, CancellationToken ct = default);
+    Task<Result<CampusDto.Index>> GetCampusByIdAsync(string id, CancellationToken ct = default);
 }
