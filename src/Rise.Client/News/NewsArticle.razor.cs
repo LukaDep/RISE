@@ -17,7 +17,7 @@ public partial class NewsArticle : ComponentBase
   {
     // Return a placeholder image URL - you can customize this
     // to use actual image URLs from your news items when available
-    return "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=1200&h=400&fit=crop";
+    return "https://www.bureaupartners.be/images/projecten-detail/hogent-sporthal/hogent-sporthal-01.jpg";
   }
 
   protected override async Task OnInitializedAsync()
