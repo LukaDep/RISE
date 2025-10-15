@@ -1,0 +1,47 @@
+@page "/campus-plan/{id}"
+@inject HttpClient Http
+@inject IJSRuntime JS
+@using Rise.Shared.Campus
+
+@if (campus is null)
+{
+    <p>Campus Loading</p>
+}
+else
+{
+    <div id="map" style="height: calc(100vh - 60px); width: 100vw;"></div>
+}
+
+@code {
+    [Parameter] public required string id { get; set; }
+    private CampusDto.Index? campus;
+    private bool mapInitialized = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var response = await Http.GetFromJsonAsync<CampusResponse.GetById<CampusDto.Index>>($"/api/campuses/{id}");
+        campus = response?.Value;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (!mapInitialized && campus != null)
+        {
+            mapInitialized = true;
+            if (campus.MapImageUrl != null && campus.ImageWidth.HasValue && campus.ImageHeight.HasValue)
+            {
+                var bounds = new object[] { new[] { 0, 0 }, new[] { campus.ImageHeight, campus.ImageWidth } };
+                await JS.InvokeVoidAsync("leafletMap.initImage", "map", campus.MapImageUrl, bounds);
+                foreach (var b in campus.Buildings)
+                {
+                    await JS.InvokeVoidAsync("leafletMap.addMarker", b.Y, b.X, b.Name);
+                }
+            }
+            else if (campus.Latitude.HasValue && campus.Longitude.HasValue)
+            {
+                await JS.InvokeVoidAsync("leafletMap.initTileMap", "map", campus.Latitude, campus.Longitude, 17);
+                await JS.InvokeVoidAsync("leafletMap.addLatLngMarker", campus.Latitude, campus.Longitude, campus.Name);
+            }
+        }
+    }
+}
