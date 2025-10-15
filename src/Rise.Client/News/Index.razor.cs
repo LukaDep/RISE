@@ -32,7 +32,7 @@ public partial class Index
     // public string? SearchTerm { get; set; }
 
     private string? searchTerm;
-    private const int FuzzyScoreThreshold = 70; // Minimum score for a match (0-100)
+    private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
 
     protected override async Task OnInitializedAsync()
     {
