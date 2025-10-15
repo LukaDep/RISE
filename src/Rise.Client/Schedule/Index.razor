@@ -3,17 +3,18 @@
 @using Rise.Client.Schedule
 
 <PageTitle>Schedule</PageTitle>
+<div class="mt-10">
+  <Tabs>
+    <Tab Title="Dag">
+      <DayView />
+    </Tab>
 
-<Tabs>
-  <Tab Title="Dag">
-    <DayView />
-  </Tab>
+    <Tab Title="Week">
+      <WeekView />
+    </Tab>
 
-  <Tab Title="Week">
-    <WeekView />
-  </Tab>
-
-  <Tab Title="Maand">
-    <MonthView />
-  </Tab>
-</Tabs>
+    <Tab Title="Maand">
+      <MonthView />
+    </Tab>
+  </Tabs>
+</div>
