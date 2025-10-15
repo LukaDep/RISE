@@ -60,8 +60,56 @@
                             }
                         </div>
                     }
+                </div>
+                
+                <!-- Dag kolommen (lege cellen voor grid structuur) -->
+                @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
+                {
+                    <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-gray-200" : "")">
+                        @for (int hour = 8; hour <= 20; hour++)
+                        {
+                            <div class="h-[60px] border-b border-gray-100"></div>
+                        }
+                    </div>
                 }
             </div>
-        }
+            
+            <!-- Absolute positioned events -->
+            @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
+            {
+                var currentDay = WeekDays[dayIndex];
+                var dayEvents = GetReservationsForDate(currentDay);
+                
+                @foreach (var evt in dayEvents)
+                {
+                    var startHour = evt.StartDateTime.Hour;
+                    var startMinute = evt.StartDateTime.Minute;
+                    var endHour = evt.EndDateTime.Hour;
+                    var endMinute = evt.EndDateTime.Minute;
+                    
+                    // Bereken positie en hoogte in pixels (60px per uur)
+                    var topPosition = ((startHour - 8) * 60) + (startMinute);
+                    var durationMinutes = (endHour - startHour) * 60 + (endMinute - startMinute);
+                    var height = durationMinutes;
+                    
+                    // Bereken horizontale positie
+                    // Time column is 1/6 = 16.666%
+                    // Each day column is also 1/6 = 16.666%
+                    var leftPosition = 16.666 + (dayIndex * 16.666);
+                    
+                    var bgColor = GetEventTypeBgColor(evt.WorkForm);
+                    
+                    <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden" 
+                         style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;">
+                        <div class="font-semibold text-xs leading-tight mb-0.5">@evt.Course</div>
+                        <div class="text-xs opacity-90">@evt.Room</div>
+                        @if (durationMinutes >= 90)
+                        {
+                            <div class="text-xs opacity-75 mt-1">@evt.Teacher</div>
+                        }
+                    </div>
+                }
+            }
+        </div>
     </div>
 </div>
