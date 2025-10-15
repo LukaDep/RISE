@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -22,44 +22,47 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
+  mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
+  object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -112,21 +115,195 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home.AuthMessage" xml:space="preserve">
     <value>Nadat een gebruiker inlogt, toont het navigatiemenu een link naar de</value>
+    <comment/>
   </data>
   <data name="Home.HelloWorld" xml:space="preserve">
     <value>Hallo, wereld!</value>
+    <comment/>
   </data>
   <data name="Home.PrivatePage" xml:space="preserve">
     <value>Privé-pagina</value>
+    <comment/>
   </data>
   <data name="Home.WelcomeMessage" xml:space="preserve">
     <value>Welkom bij je nieuwe app.</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Week" xml:space="preserve">
+    <value>Week</value>
+    <comment/>
+  </data>
+  <data name="Schedule.To" xml:space="preserve">
+    <value>tot</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Previous" xml:space="preserve">
+    <value>Vorige</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Next" xml:space="preserve">
+    <value>Volgende</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Time" xml:space="preserve">
+    <value>Tijd</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Day" xml:space="preserve">
+    <value>Dag</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Month" xml:space="preserve">
+    <value>Maand</value>
+    <comment/>
+  </data>
+  <data name="Schedule.More" xml:space="preserve">
+    <value>meer</value>
+    <comment/>
+  </data>
+  <data name="Schedule.NoClassesToday" xml:space="preserve">
+    <value>Geen lessen vandaag!</value>
+    <comment/>
+  </data>
+  <data name="Schedule.ActiveLecture" xml:space="preserve">
+    <value>Activerend Hoorcollege</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Practicum" xml:space="preserve">
+    <value>Practicum</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Seminar" xml:space="preserve">
+    <value>Seminarie</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Test" xml:space="preserve">
+    <value>Test</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Close" xml:space="preserve">
+    <value>Sluiten</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Type" xml:space="preserve">
+    <value>Type</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Course" xml:space="preserve">
+    <value>Cursus</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Note" xml:space="preserve">
+    <value>Notitie</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Campus" xml:space="preserve">
+    <value>Campus</value>
+    <comment/>
+  </data>
+  <data name="News.Title" xml:space="preserve">
+    <value>Nieuws</value>
+    <comment/>
+  </data>
+  <data name="News.FilterPlaceholder" xml:space="preserve">
+    <value>Filter nieuws...</value>
+    <comment/>
+  </data>
+  <data name="News.Loading" xml:space="preserve">
+    <value>Laden...</value>
+    <comment/>
+  </data>
+  <data name="News.By" xml:space="preserve">
+    <value>Door</value>
+    <comment/>
+  </data>
+  <data name="Auth.LoggedInAs" xml:space="preserve">
+    <value>Je bent ingelogd als</value>
+    <comment/>
+  </data>
+  <data name="Auth.WithClaims" xml:space="preserve">
+    <value>Met de volgende claims:</value>
+    <comment/>
+  </data>
+  <data name="Auth.Type" xml:space="preserve">
+    <value>Type</value>
+    <comment/>
+  </data>
+  <data name="Auth.Value" xml:space="preserve">
+    <value>Waarde</value>
+    <comment/>
+  </data>
+  <data name="Auth.EmailPlaceholder" xml:space="preserve">
+    <value>E-mail</value>
+    <comment/>
+  </data>
+  <data name="Auth.PasswordPlaceholder" xml:space="preserve">
+    <value>Wachtwoord</value>
+    <comment/>
+  </data>
+  <data name="Auth.Login" xml:space="preserve">
+    <value>Inloggen</value>
+    <comment/>
+  </data>
+  <data name="Auth.Register" xml:space="preserve">
+    <value>Registreren</value>
+    <comment/>
+  </data>
+  <data name="Auth.AlreadyLoggedIn" xml:space="preserve">
+    <value>Je bent al ingelogd als</value>
+    <comment/>
+  </data>
+  <data name="Auth.RegisterNewUser" xml:space="preserve">
+    <value>Registreer als nieuwe gebruiker.</value>
+    <comment/>
+  </data>
+  <data name="Auth.RegisterSuccess" xml:space="preserve">
+    <value>Je hebt je succesvol geregistreerd. Nu kun je</value>
+    <comment/>
+  </data>
+  <data name="Auth.LoginLink" xml:space="preserve">
+    <value>inloggen</value>
+    <comment/>
+  </data>
+  <data name="Auth.ConfirmPasswordPlaceholder" xml:space="preserve">
+    <value>Bevestig wachtwoord</value>
+    <comment/>
+  </data>
+  <data name="Products.Title" xml:space="preserve">
+    <value>Producten</value>
+    <comment/>
+  </data>
+  <data name="Products.FetchingData" xml:space="preserve">
+    <value>Dit component toont data van de server.</value>
+    <comment/>
+  </data>
+  <data name="Products.Create" xml:space="preserve">
+    <value>Aanmaken</value>
+    <comment/>
+  </data>
+  <data name="Products.Id" xml:space="preserve">
+    <value>Id</value>
+    <comment/>
+  </data>
+  <data name="Products.Name" xml:space="preserve">
+    <value>Naam</value>
+    <comment/>
+  </data>
+  <data name="Products.Description" xml:space="preserve">
+    <value>Beschrijving</value>
+    <comment/>
+  </data>
+  <data name="Common.Loading" xml:space="preserve">
+    <value>Laden...</value>
+    <comment/>
   </data>
 </root>

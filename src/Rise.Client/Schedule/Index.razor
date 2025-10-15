@@ -1,0 +1,35 @@
+@page "/schedule"
+@inject IStringLocalizer<SharedResources> L
+@using Rise.Client.Schedule
+
+<PageTitle>Schedule</PageTitle>
+<div class="mt-10">
+
+<Tabs @ref="TabsRef">
+    <Tab Title="@L["Schedule.Day"]">
+        <DayView @ref="DayViewRef" SelectedDate="@SelectedDay" />
+    </Tab>
+
+    <Tab Title="@L["Schedule.Week"]">
+        <WeekView SelectedDate="@SelectedDay" />
+    </Tab>
+
+    <Tab Title="@L["Schedule.Month"]">
+        <MonthView OnDayClick="GoToDay" />
+    </Tab>
+</Tabs>
+
+@code {
+    private DayView? DayViewRef;
+    private DateTime SelectedDay = DateTime.Today;
+    private Tabs? TabsRef;
+
+    private void GoToDay(DateTime day)
+    {
+        SelectedDay = day;
+
+        // Activate the Day tab by title
+        TabsRef?.ActivateTab(L["Schedule.Day"]);
+    }
+}
+</div>

@@ -1,0 +1,70 @@
+@using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Web
+
+<CascadingValue Value="this">
+    <div class="rounded-lg p-2">
+        <div class="flex gap-2 bg-hogent-black-15 p-1 rounded-full justify-center" role="tablist"
+            aria-label="Schedule view tabs">
+            @foreach (var tab in TabItems)
+            {
+                var isActive = tab == ActiveTab;
+                <button
+                    class="rounded-full w-full px-4 py-2 font-semibold focus:outline-none @(isActive ? "bg-hogent-white text-hogent-black shadow" : "text-hogent-black-50")"
+                    role="tab" aria-selected="@(isActive)" @onclick="() => Activate(tab)">
+                    @tab.Title
+                </button>
+            }
+        </div>
+
+        <div class="mt-3 bg-hogent-white p-3 rounded-lg min-h-[180px]">
+            @if (ActiveTab != null)
+            {
+                @ActiveTab.ChildContent
+            }
+        </div>
+
+        @ChildContent
+    </div>
+</CascadingValue>
+
+@code {
+    [Parameter] public RenderFragment? ChildContent { get; set; }
+
+    internal List<Tab> TabItems { get; } = new List<Tab>();
+    private Tab? ActiveTab { get; set; }
+
+    internal void AddTab(Tab tab)
+    {
+        if (!TabItems.Contains(tab))
+            TabItems.Add(tab);
+
+        if (ActiveTab == null)
+            ActiveTab = tab;
+
+        StateHasChanged();
+    }
+
+    // Keep internal for button clicks
+    private void Activate(Tab tab)
+    {
+        ActiveTab = tab;
+        StateHasChanged();
+    }
+
+    // PUBLIC method for external activation (MonthView → DayView)
+    public void ActivateTab(Tab tab)
+    {
+        ActiveTab = tab;
+        StateHasChanged();
+    }
+
+    // Optional: activate by title
+    public void ActivateTab(string title)
+    {
+        var tab = TabItems.FirstOrDefault(t => t.Title == title);
+        if (tab != null)
+        {
+            ActivateTab(tab);
+        }
+    }
+}

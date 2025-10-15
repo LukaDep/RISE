@@ -1,9 +1,9 @@
 ﻿@inherits LayoutComponentBase
-<main class="main-content">
-    <section class="section">
-        @Body
-    </section>
-</main>
-<footer>
-    <NavBar />
-</footer>
+    <main class="flex-1 overflow-y-auto pb-16">
+        
+            @Body
+        
+    </main>
+    <footer class="fixed bottom-0 left-0 w-full z-50">
+        <NavBar />
+    </footer>
