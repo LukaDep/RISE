@@ -1,7 +1,6 @@
 @using Microsoft.AspNetCore.Components
 @using Microsoft.AspNetCore.Components.Web
 
-@* Tabs container component. Child `Tab` components register themselves via CascadingParameter *@
 <CascadingValue Value="this">
     <div class="rounded-lg p-2">
         <div class="flex gap-2 bg-hogent-black-15 p-1 rounded-full justify-center" role="tablist"
@@ -24,7 +23,6 @@
             }
         </div>
 
-        @* Render child Tab components so they can initialize and register themselves *@
         @ChildContent
     </div>
 </CascadingValue>
@@ -33,7 +31,6 @@
     [Parameter] public RenderFragment? ChildContent { get; set; }
 
     internal List<Tab> TabItems { get; } = new List<Tab>();
-
     private Tab? ActiveTab { get; set; }
 
     internal void AddTab(Tab tab)
@@ -47,8 +44,27 @@
         StateHasChanged();
     }
 
+    // Keep internal for button clicks
     private void Activate(Tab tab)
     {
         ActiveTab = tab;
+        StateHasChanged();
+    }
+
+    // PUBLIC method for external activation (MonthView → DayView)
+    public void ActivateTab(Tab tab)
+    {
+        ActiveTab = tab;
+        StateHasChanged();
+    }
+
+    // Optional: activate by title
+    public void ActivateTab(string title)
+    {
+        var tab = TabItems.FirstOrDefault(t => t.Title == title);
+        if (tab != null)
+        {
+            ActivateTab(tab);
+        }
     }
 }

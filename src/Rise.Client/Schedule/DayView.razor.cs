@@ -1,68 +1,77 @@
-using Microsoft.AspNetCore.Components;
-using Rise.Shared.Common;
-using Rise.Shared.Schedule;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components; 
+using Rise.Shared.Schedule;           
+using Rise.Shared.Common;            
 
-namespace Rise.Client.Schedule;
-
-public partial class DayView
+namespace Rise.Client.Schedule
 {
-  [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
-
-  // Schedule data from service
-  private List<ScheduleDto.Reservation>? schedule;
-
-  [Inject] public required IScheduleService ScheduleService { get; set; }
-
-  protected override async Task OnInitializedAsync()
-  {
-    var request = new QueryRequest.SkipTake
+    public partial class DayView : ComponentBase
     {
-      Skip = 0,
-      Take = 50,
-      OrderBy = "Id",
-    };
+        [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
-    var result = await ScheduleService.GetIndexAsync(request);
-    schedule = result.Value?.Reservations;
-  }
+        private ScheduleDto.Reservation? SelectedReservation;
+        private List<ScheduleDto.Reservation>? schedule;
 
-  private List<ScheduleDto.Reservation> DayReservations =>
-      schedule?
-          .Where(r => r.StartDateTime.Date == SelectedDate.Date)
-          .ToList()
-      ?? new List<ScheduleDto.Reservation>();
+        [Inject] public required IScheduleService ScheduleService { get; set; }
 
-  private void PreviousDay()
-  {
-    // Skip weekends
-    do
-    {
-      SelectedDate = SelectedDate.AddDays(-1);
-    } while (SelectedDate.DayOfWeek == DayOfWeek.Saturday || SelectedDate.DayOfWeek == DayOfWeek.Sunday);
-  }
+        protected override async Task OnInitializedAsync()
+        {
+            var request = new QueryRequest.SkipTake
+            {
+                Skip = 0,
+                Take = 50,
+                OrderBy = "Id"
+            };
 
-  private void NextDay()
-  {
-    // Skip weekends
-    do
-    {
-      SelectedDate = SelectedDate.AddDays(1);
-    } while (SelectedDate.DayOfWeek == DayOfWeek.Saturday || SelectedDate.DayOfWeek == DayOfWeek.Sunday);
-  }
+            var result = await ScheduleService.GetIndexAsync(request);
+            schedule = result.Value?.Reservations;
+        }
 
-  private string GetEventTypeColor(string type) => type.ToLower() switch
-  {
-    "activerend hoorcollege" => "border-blue-500",
-    "practicum" => "border-green-500",
-    "seminarie" => "border-orange-500",
-    _ => "border-hogent-black-30"
-  };
+        public List<ScheduleDto.Reservation> DayReservations =>
+            schedule?.Where(r => r.StartDateTime.Date == SelectedDate.Date).ToList()
+            ?? new List<ScheduleDto.Reservation>();
 
-  private string GetEventTypeBgColor(string type) => type.ToLower() switch
-  {
-    "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-    "practicum" => "bg-green-100 text-green-800",
-    "seminarie" => "bg-orange-100 text-orange-800",
-    _ => "bg-hogent-black-15 text-hogent-black"
-  };
+        public void PreviousDay()
+        {
+            do { SelectedDate = SelectedDate.AddDays(-1); }
+            while (SelectedDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+        }
+
+        public void NextDay()
+        {
+            do { SelectedDate = SelectedDate.AddDays(1); }
+            while (SelectedDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+        }
+
+        public void OpenDetails(ScheduleDto.Reservation reservation)
+        {
+            SelectedReservation = reservation;
+            StateHasChanged();
+        }
+
+        public void CloseDetails()
+        {
+            SelectedReservation = null;
+            StateHasChanged(); // popup verdwijnt direct
+        }
+
+        public string GetEventTypeColor(string type) => type.ToLower() switch
+        {
+            "activerend hoorcollege" => "border-blue-500",
+            "practicum" => "border-green-500",
+            "seminarie" => "border-orange-500",
+            _ => "border-hogent-black-30"
+        };
+
+        public string GetEventTypeBgColor(string type) => type.ToLower() switch
+        {
+            "activerend hoorcollege" => "bg-blue-100 text-blue-800",
+            "practicum" => "bg-green-100 text-green-800",
+            "seminarie" => "bg-orange-100 text-orange-800",
+            _ => "bg-hogent-black-15 text-hogent-black"
+        };
+    }
 }

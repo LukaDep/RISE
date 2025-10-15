@@ -3,8 +3,7 @@
 
 <div class="week-view">
     <div class="mb-4 flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-hogent-black">@WeekStartDate.ToString("d MMM") @L["Schedule.To"]
-            @WeekEndDate.ToString("d MMM yyyy")</h3>
+        <h3 class="text-lg font-semibold text-hogent-black">@WeekStartDate.ToString("d MMM") @L["Schedule.To"]</h3>
         <div class="flex gap-2">
             <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
                 @onclick="PreviousWeek">@L["Schedule.Previous"]</button>
@@ -32,7 +31,6 @@
 
         <!-- Grid container met relative positioning -->
         <div class="relative" style="min-height: 780px;">
-            <!-- Tijdslots 8-21 uur (achtergrond grid) -->
             <div class="grid grid-cols-6">
                 <!-- Tijd kolom -->
                 <div class="border-r border-hogent-black-30 bg-hogent-black-15">
@@ -82,8 +80,9 @@
 
                     var bgColor = GetEventTypeBgColor(evt.WorkForm);
 
-                    <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden"
-                        style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;">
+                    <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden cursor-pointer hover:opacity-90 transition"
+                         style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;"
+                         @onclick="() => OpenDetails(evt)">
                         <div class="font-semibold text-xs leading-tight mb-0.5">@evt.Course</div>
                         <div class="text-xs opacity-90">@evt.Room</div>
                         @if (durationMinutes >= 90)
@@ -95,4 +94,8 @@
             }
         </div>
     </div>
+@if (SelectedReservation is not null)
+{
+    <ScheduleItem Reservation="SelectedReservation" OnClose="CloseDetails" />
+}
 </div>
