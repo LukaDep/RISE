@@ -6,8 +6,10 @@ namespace Rise.Client.Schedule;
 
 public partial class WeekView
 {
-    private ScheduleDto.Reservation? SelectedReservation;
+[Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
 
+    private ScheduleDto.Reservation? SelectedReservation;
+  
     private void OpenDetails(ScheduleDto.Reservation reservation)
     {
         SelectedReservation = reservation;
@@ -59,6 +61,18 @@ public partial class WeekView
         Enumerable.Range(0, 5) // Only Mon-Fri
                   .Select(i => WeekStartDate.AddDays(i))
                   .ToList();
+private async Task GoToToday()
+{
+    SelectedDate = DateTime.Today;
+
+    // Ga rechtstreeks naar de dagweergave van vandaag
+    if (OnDayClick.HasDelegate)
+    {
+        await OnDayClick.InvokeAsync(DateTime.Today);
+    }
+
+    StateHasChanged();
+}
 
     private void PreviousWeek()
     {

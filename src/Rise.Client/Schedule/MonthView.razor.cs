@@ -16,6 +16,17 @@ public partial class MonthView
     [Inject] public required IScheduleService ScheduleService { get; set; }
 
     private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
+    private async void GoToToday()
+    {
+        SelectedDate = DateTime.Today;
+        if (OnDayClick.HasDelegate)
+        {
+           await OnDayClick.InvokeAsync(DateTime.Today);
+        }
+
+        StateHasChanged();
+    }
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -70,4 +81,5 @@ public partial class MonthView
             await OnDayClick.InvokeAsync(date);
         }
     }
+   
 }

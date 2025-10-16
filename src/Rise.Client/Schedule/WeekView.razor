@@ -5,6 +5,8 @@
     <div class="mb-4 flex justify-between items-center">
         <h3 class="text-lg font-semibold text-hogent-black">@WeekStartDate.ToString("d MMM") @L["Schedule.To"]</h3>
         <div class="flex gap-2">
+           <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
+               @onclick="GoToToday">@L["Schedule.Today"]</button>
             <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
                 @onclick="PreviousWeek">@L["Schedule.Previous"]</button>
             <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"

@@ -34,6 +34,12 @@ namespace Rise.Client.Schedule
             schedule?.Where(r => r.StartDateTime.Date == SelectedDate.Date).ToList()
             ?? new List<ScheduleDto.Reservation>();
 
+        public void GoToToday()
+        {
+             SelectedDate = DateTime.Today;
+             StateHasChanged();
+        }
+
         public void PreviousDay()
         {
             do { SelectedDate = SelectedDate.AddDays(-1); }

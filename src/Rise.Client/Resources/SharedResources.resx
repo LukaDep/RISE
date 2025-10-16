@@ -146,6 +146,10 @@
     <value>to</value>
     <comment/>
   </data>
+      <data name="Schedule.Today" xml:space="preserve">
+  <value>Today </value>
+     <comment/>
+  </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Previous</value>
     <comment/>
