@@ -36,8 +36,8 @@ namespace Rise.Client.Schedule
 
         public void GoToToday()
         {
-             SelectedDate = DateTime.Today;
-             StateHasChanged();
+            SelectedDate = DateTime.Today;
+            StateHasChanged();
         }
 
         public void PreviousDay()

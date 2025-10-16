@@ -21,7 +21,7 @@ public partial class MonthView
         SelectedDate = DateTime.Today;
         if (OnDayClick.HasDelegate)
         {
-           await OnDayClick.InvokeAsync(DateTime.Today);
+            await OnDayClick.InvokeAsync(DateTime.Today);
         }
 
         StateHasChanged();
@@ -81,5 +81,5 @@ public partial class MonthView
             await OnDayClick.InvokeAsync(date);
         }
     }
-   
+
 }
