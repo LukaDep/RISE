@@ -23,10 +23,6 @@
     </div>
 </div>
 <div>
-    @* @for (int i = 0; i < 7; i++) *@
-    @* { *@
-    @*     <NewsItem Id="@i.ToString()" Title=@($"Nieuwsbericht {i}") ShortDescription=@($"Dit is een korte beschrijving van nieuwsbericht {i}.") Date=@(DateTime.Now.AddDays(-i).ToString("dd MMMM yyyy")) /> *@
-    @* } *@
     @if (news == null)
     {
         <div class="flex justify-center items-center h-16 mt-16">
@@ -39,6 +35,19 @@
         {
             <NewsItem newsItem="@newsItem" />
         }
+        <div class="flex flex-col items-center justify-center">
+            @if (totalCount != currentCount)
+            {
+                <button class="flex items-center justify-center gap-2 w-32 h-10 mb-2 border-2 border-hogent-black text-hogent-black rounded-2xl shadow hover:bg-hogent-blue transition disabled:opacity-50" @onclick="LoadMoreNews">
+                    @L["News.LoadMore"]
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640" class="w-4 h-4">
+                        <path d="M297.4 566.6C309.9 579.1 330.2 579.1 342.7 566.6L502.7 406.6C515.2 394.1 515.2 373.8 502.7 361.3C490.2 348.8 469.9 348.8 457.4 361.3L352 466.7L352 96C352 78.3 337.7 64 320 64C302.3 64 288 78.3 288 96L288 466.7L182.6 361.3C170.1 348.8 149.8 348.8 137.3 361.3C124.8 373.8 124.8 394.1 137.3 406.6L297.3 566.6z"/>
+                    </svg>
+                </button>
+            }
+            <p class="text-hogent-black-15 mb-3">@currentCount @L["News.Count"] @totalCount</p>
+        </div>
     }
 
 </div>
+

@@ -7,6 +7,8 @@ public static partial class NewsResponse
     public class Index
     {
         public IEnumerable<NewsDto.Index> News { get; set; } = [];
+        public int TotalCount { get; set; }
+        public int CurrentCount { get; set; }
     }
 }
 

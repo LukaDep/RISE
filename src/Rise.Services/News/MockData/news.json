@@ -33,5 +33,243 @@
         "PublishDate": "2025-10-12T08:45:00Z",
         "Content": "Top tips for developing with .NET 8 shared by the Rise team.",
         "Author": "Chris Evans"
+    },
+    {
+        "Id": 6,
+        "Title": "Rise Mobile App Launched",
+        "PublishDate": "2025-10-13T10:00:00Z",
+        "Content": "The Rise mobile app is now available for download.",
+        "Author": "Emily Clark"
+    },
+    {
+        "Id": 7,
+        "Title": "New Documentation Portal",
+        "PublishDate": "2025-10-14T12:00:00Z",
+        "Content": "Access the new documentation portal for Rise products.",
+        "Author": "Michael Brown"
+    },
+    {
+        "Id": 8,
+        "Title": "User Feedback Survey",
+        "PublishDate": "2025-10-15T09:30:00Z",
+        "Content": "Participate in our user feedback survey and win prizes.",
+        "Author": "Sarah Lee"
+    },
+    {
+        "Id": 9,
+        "Title": "Performance Improvements",
+        "PublishDate": "2025-10-16T08:00:00Z",
+        "Content": "Major performance improvements have been deployed.",
+        "Author": "David Kim"
+    },
+    {
+        "Id": 10,
+        "Title": "Rise API v2 Released",
+        "PublishDate": "2025-10-17T11:00:00Z",
+        "Content": "Rise API v2 is now available with enhanced features.",
+        "Author": "Anna White"
+    },
+    {
+        "Id": 11,
+        "Title": "Integration with Azure",
+        "PublishDate": "2025-10-18T13:00:00Z",
+        "Content": "Rise now integrates seamlessly with Microsoft Azure.",
+        "Author": "James Green"
+    },
+    {
+        "Id": 12,
+        "Title": "Bug Bounty Program",
+        "PublishDate": "2025-10-19T15:00:00Z",
+        "Content": "Join our bug bounty program and help improve security.",
+        "Author": "Olivia Black"
+    },
+    {
+        "Id": 13,
+        "Title": "Rise Community Forum",
+        "PublishDate": "2025-10-20T17:00:00Z",
+        "Content": "Connect with other users on the Rise community forum.",
+        "Author": "William Scott"
+    },
+    {
+        "Id": 14,
+        "Title": "New Feature: Dark Mode",
+        "PublishDate": "2025-10-21T19:00:00Z",
+        "Content": "Dark mode is now available in Rise applications.",
+        "Author": "Jessica Adams"
+    },
+    {
+        "Id": 15,
+        "Title": "Rise Webinar Announced",
+        "PublishDate": "2025-10-22T09:00:00Z",
+        "Content": "Register for our upcoming Rise webinar.",
+        "Author": "Matthew Turner"
+    },
+    {
+        "Id": 16,
+        "Title": "Accessibility Improvements",
+        "PublishDate": "2025-10-23T11:00:00Z",
+        "Content": "Rise apps now offer improved accessibility features.",
+        "Author": "Laura Hill"
+    },
+    {
+        "Id": 17,
+        "Title": "Rise Partner Program",
+        "PublishDate": "2025-10-24T13:00:00Z",
+        "Content": "Become a partner and grow with Rise.",
+        "Author": "Brian Young"
+    },
+    {
+        "Id": 18,
+        "Title": "Cloud Migration Guide",
+        "PublishDate": "2025-10-25T15:00:00Z",
+        "Content": "Check out our new guide for cloud migration.",
+        "Author": "Samantha King"
+    },
+    {
+        "Id": 19,
+        "Title": "Rise Hackathon Winners",
+        "PublishDate": "2025-10-26T17:00:00Z",
+        "Content": "Congratulations to the winners of the Rise hackathon.",
+        "Author": "Eric Wright"
+    },
+    {
+        "Id": 20,
+        "Title": "New Marketplace Features",
+        "PublishDate": "2025-10-27T09:00:00Z",
+        "Content": "Explore new features in the Rise marketplace.",
+        "Author": "Rachel Evans"
+    },
+    {
+        "Id": 21,
+        "Title": "Rise CLI Updated",
+        "PublishDate": "2025-10-28T11:00:00Z",
+        "Content": "The Rise CLI has been updated with new commands.",
+        "Author": "Kevin Harris"
+    },
+    {
+        "Id": 22,
+        "Title": "Data Analytics Module",
+        "PublishDate": "2025-10-29T13:00:00Z",
+        "Content": "Analyze your data with the new analytics module.",
+        "Author": "Natalie Brooks"
+    },
+    {
+        "Id": 23,
+        "Title": "Rise Support Expansion",
+        "PublishDate": "2025-10-30T15:00:00Z",
+        "Content": "Rise support is now available in more regions.",
+        "Author": "Patrick Reed"
+    },
+    {
+        "Id": 24,
+        "Title": "Mobile Push Notifications",
+        "PublishDate": "2025-10-31T17:00:00Z",
+        "Content": "Receive updates via mobile push notifications.",
+        "Author": "Linda Carter"
+    },
+    {
+        "Id": 25,
+        "Title": "Rise API Documentation",
+        "PublishDate": "2025-11-01T09:00:00Z",
+        "Content": "Check out the updated API documentation.",
+        "Author": "Steven Hall"
+    },
+    {
+        "Id": 26,
+        "Title": "New User Onboarding",
+        "PublishDate": "2025-11-02T11:00:00Z",
+        "Content": "Improved onboarding experience for new users.",
+        "Author": "Megan Fox"
+    },
+    {
+        "Id": 27,
+        "Title": "Rise DevOps Tools",
+        "PublishDate": "2025-11-03T13:00:00Z",
+        "Content": "DevOps tools are now integrated with Rise.",
+        "Author": "Ryan Cooper"
+    },
+    {
+        "Id": 28,
+        "Title": "Security Best Practices",
+        "PublishDate": "2025-11-04T15:00:00Z",
+        "Content": "Learn about security best practices for Rise.",
+        "Author": "Kimberly Wood"
+    },
+    {
+        "Id": 29,
+        "Title": "Rise API Rate Limits",
+        "PublishDate": "2025-11-05T17:00:00Z",
+        "Content": "API rate limits have been updated for better performance.",
+        "Author": "Justin Bell"
+    },
+    {
+        "Id": 30,
+        "Title": "Rise UI Kit Released",
+        "PublishDate": "2025-11-06T09:00:00Z",
+        "Content": "Build apps faster with the new Rise UI Kit.",
+        "Author": "Stephanie Moore"
+    },
+    {
+        "Id": 31,
+        "Title": "Rise Training Sessions",
+        "PublishDate": "2025-11-07T11:00:00Z",
+        "Content": "Sign up for Rise training sessions this month.",
+        "Author": "Gregory Adams"
+    },
+    {
+        "Id": 32,
+        "Title": "Marketplace Vendor Program",
+        "PublishDate": "2025-11-08T13:00:00Z",
+        "Content": "Become a vendor in the Rise marketplace.",
+        "Author": "Vanessa Lee"
+    },
+    {
+        "Id": 33,
+        "Title": "Rise API Changelog",
+        "PublishDate": "2025-11-09T15:00:00Z",
+        "Content": "View the latest changes in the Rise API changelog.",
+        "Author": "Samuel Clark"
+    },
+    {
+        "Id": 34,
+        "Title": "Rise Community Awards",
+        "PublishDate": "2025-11-10T17:00:00Z",
+        "Content": "Nominate your peers for the Rise community awards.",
+        "Author": "Tina Brooks"
+    },
+    {
+        "Id": 35,
+        "Title": "Rise Platform Roadmap",
+        "PublishDate": "2025-11-11T09:00:00Z",
+        "Content": "See what's coming next in the Rise platform roadmap.",
+        "Author": "Oscar Grant"
+    },
+    {
+        "Id": 36,
+        "Title": "Rise API Security Update",
+        "PublishDate": "2025-11-12T11:00:00Z",
+        "Content": "Important security update for the Rise API.",
+        "Author": "Paula Stewart"
+    },
+    {
+        "Id": 37,
+        "Title": "Rise Community Meetup",
+        "PublishDate": "2025-11-13T13:00:00Z",
+        "Content": "Join the next Rise community meetup online.",
+        "Author": "Henry Foster"
+    },
+    {
+        "Id": 38,
+        "Title": "Rise Platform Milestone",
+        "PublishDate": "2025-11-14T15:00:00Z",
+        "Content": "Rise platform reaches a major milestone.",
+        "Author": "Diana Ross"
+    },
+    {
+        "Id": 39,
+        "Title": "Rise API Usage Tips",
+        "PublishDate": "2025-11-15T17:00:00Z",
+        "Content": "Tips for optimizing your Rise API usage.",
+        "Author": "Frank Murphy"
     }
 ]
