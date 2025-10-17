@@ -40,10 +40,18 @@ pipeline {
         stage('Deploy to appserver') {
             steps {
                 script {
-                    // Copy code naar VM (voorbeeld: via rsync over SSH)
+                    // Eerst de code naar de appserver kopiëren
                     sh '''
-                    rsync -avz --delete ./ vagrant@192.168.56.50:/vagrant/
-                    ssh vagrant@192.168.56.50 'cd /vagrant && dotnet publish -c Release -o ./publish && systemctl restart myapp.service || dotnet ./publish/Rise.Client.dll'
+                    rsync -avz -e "ssh -i /vagrant/src/appserver/.vagrant/machines/default/virtualbox/private_key -o StrictHostKeyChecking=no" ./ vagrant@192.168.56.50:/vagrant/
+                    '''
+
+                    // Dan publishen en runnen op de appserver
+                    sh '''
+                    ssh -i "/vagrant/src/appserver/.vagrant/machines/default/virtualbox/private_key" -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
+                        cd /vagrant
+                        dotnet publish -c Release -o ./publish
+                        dotnet ./publish/Rise.Client.dll
+ENDSSH
                     '''
                 }
             }
@@ -52,10 +60,10 @@ pipeline {
 
     post {
         success {
-            echo 'Build succeeded!'
+            echo 'Build & Deploy succeeded!'
         }
         failure {
-            echo 'Build failed!'
+            echo 'Build or Deploy failed!'
         }
     }
 }
