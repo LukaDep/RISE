@@ -38,6 +38,19 @@ pipeline {
         }
     } // <-- sluit stages
 
+     stage('Deploy to appserver') {
+            steps {
+                script {
+                    // Copy code naar VM (voorbeeld: via rsync over SSH)
+                    sh '''
+                    rsync -avz --delete ./ vagrant@192.168.56.50:/vagrant/
+                    ssh vagrant@192.168.56.50 'cd /vagrant && dotnet publish -c Release -o ./publish && systemctl restart myapp.service || dotnet ./publish/Rise.Client.dll'
+                    '''
+                }
+            }
+        }
+    }
+
     post {
         success {
             echo 'Build succeeded!'
