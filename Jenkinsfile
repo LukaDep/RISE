@@ -6,7 +6,7 @@ pipeline {
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
     }
 
-    stages {  // <-- hier moet stages openen
+    stages { 
         stage('Restore dependencies') {
             steps {
                 sh 'dotnet restore'
@@ -36,9 +36,8 @@ pipeline {
                 archiveArtifacts artifacts: '**/bin/Release/**/*', fingerprint: true
             }
         }
-    } // <-- sluit stages
 
-     stage('Deploy to appserver') {
+        stage('Deploy to appserver') {
             steps {
                 script {
                     // Copy code naar VM (voorbeeld: via rsync over SSH)
@@ -49,7 +48,7 @@ pipeline {
                 }
             }
         }
-    }
+    } // <-- sluit stages
 
     post {
         success {
@@ -59,4 +58,4 @@ pipeline {
             echo 'Build failed!'
         }
     }
-} // <-- sluit pipeline
+}
