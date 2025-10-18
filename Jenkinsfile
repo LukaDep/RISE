@@ -41,15 +41,17 @@ pipeline {
         stage('Deploy to appserver') {
             steps {
                 sh """
-                    rsync -avz \
+                    # Rsync naar de appserver met expliciete chmod voor permissies
+                    rsync -avz --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
                         --exclude '.git' \
                         --exclude 'bin' \
                         --exclude 'obj' \
                         --exclude '*.lock' \
-                        -e 'ssh -i ~/.ssh/appserver_key -o StrictHostKeyChecking=no' \
+                        -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' \
                         ./ vagrant@192.168.56.50:/vagrant/
 
-                    ssh -i ~/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
+                    # SSH naar de appserver om te publishen en runnen
+                    ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
                         cd /vagrant
                         dotnet publish -c Release -o ./publish
                         dotnet ./publish/Rise.Client.dll
