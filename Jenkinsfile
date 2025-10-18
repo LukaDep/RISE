@@ -54,7 +54,7 @@ pipeline {
 
                     // Publish en run op de appserver via SSH
                     sh '''
-                    ssh -i "/vagrant/id_rsa_appserver" -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
+                    ssh -i "/vagrant/appserver_key" -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
                         cd /vagrant
                         dotnet publish -c Release -o ./publish
                         dotnet ./publish/Rise.Client.dll
