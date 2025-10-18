@@ -32,31 +32,25 @@ pipeline {
             }
         }
 
-        stage('Archive artifacts') {
+        stage('Publish project') {
             steps {
-                archiveArtifacts artifacts: '**/bin/Release/**/*', fingerprint: true
+                // Framework-dependent publish; server moet .NET runtime hebben
+                sh 'dotnet publish -c Release -o ./publish'
             }
         }
 
         stage('Deploy to appserver') {
             steps {
-                sh """
-                    # Rsync naar appserver, exclude NuGet cache en build-artifacts
-                    rsync -aq \
-                        --exclude 'bin' \
-                        --exclude 'obj' \
-                        --exclude '.local' \
-                        -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' \
-                        ./ vagrant@192.168.56.50:/vagrant/ 2> rsync.err || true
-                    cat rsync.err
+                sh '''
+                    # Kopieer publish folder naar appserver
+                    rsync -aq -e "ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no" ./publish/ vagrant@192.168.56.50:/vagrant/publish/
 
-                    # SSH naar appserver om te publishen en runnen
+                    # SSH naar appserver en run de app
                     ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
-                        cd /vagrant
-                        dotnet publish -c Release -o ./publish
-                        dotnet ./publish/Rise.Client.dll
+                        cd /vagrant/publish
+                        dotnet Rise.Client.dll
 ENDSSH
-                """
+                '''
             }
         }
     }
@@ -66,7 +60,7 @@ ENDSSH
             echo 'Build & Deploy succeeded!'
         }
         failure {
-            echo 'Build or Deploy failed! Controleer rsync.err voor eventuele fouten.'
+            echo 'Build or Deploy failed!'
         }
     }
 }
