@@ -48,7 +48,7 @@ pipeline {
                         --exclude "obj" \
                         --exclude "*.user" \
                         --exclude "*.vs" \
-                        -e "ssh -i /vagrant/id_rsa_appserver -o StrictHostKeyChecking=no" \
+                        -e "ssh -i /vagrant/appserver_key -o StrictHostKeyChecking=no" \
                         ./ vagrant@192.168.56.50:/vagrant/
                     '''
 
