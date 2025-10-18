@@ -32,14 +32,19 @@ pipeline {
             }
         }
 
+        stage('Archive artifacts') {
+            steps {
+                archiveArtifacts artifacts: '**/bin/Release/**/*', fingerprint: true
+            }
+        }
+
         stage('Deploy to appserver') {
             steps {
                 sh """
-                    # Rsync alles naar de appserver
-                    rsync -avz -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' \
-                        ./ vagrant@192.168.56.50:/vagrant/
+                    # Rsync stil uitvoeren en fouten naar bestand
+                    rsync -aq -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' ./ vagrant@192.168.56.50:/vagrant/ 2>rsync.err
 
-                    # SSH naar de appserver om te publishen en runnen
+                    # SSH naar appserver om te publiceren en runnen
                     ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
                         cd /vagrant
                         dotnet publish -c Release -o ./publish
@@ -55,7 +60,7 @@ ENDSSH
             echo 'Build & Deploy succeeded!'
         }
         failure {
-            echo 'Build or Deploy failed!'
+            echo 'Build or Deploy failed! Controleer rsync.err voor eventuele synchronisatiefouten.'
         }
     }
 }
