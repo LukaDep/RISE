@@ -41,10 +41,16 @@ pipeline {
         stage('Deploy to appserver') {
             steps {
                 sh """
-                    # Rsync stil uitvoeren en fouten naar bestand
-                    rsync -aq -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' ./ vagrant@192.168.56.50:/vagrant/ 2>rsync.err
+                    # Rsync naar appserver, exclude NuGet cache en build-artifacts
+                    rsync -aq \
+                        --exclude 'bin' \
+                        --exclude 'obj' \
+                        --exclude '.local' \
+                        -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' \
+                        ./ vagrant@192.168.56.50:/vagrant/ 2> rsync.err || true
+                    cat rsync.err
 
-                    # SSH naar appserver om te publiceren en runnen
+                    # SSH naar appserver om te publishen en runnen
                     ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
                         cd /vagrant
                         dotnet publish -c Release -o ./publish
@@ -60,7 +66,7 @@ ENDSSH
             echo 'Build & Deploy succeeded!'
         }
         failure {
-            echo 'Build or Deploy failed! Controleer rsync.err voor eventuele synchronisatiefouten.'
+            echo 'Build or Deploy failed! Controleer rsync.err voor eventuele fouten.'
         }
     }
 }
