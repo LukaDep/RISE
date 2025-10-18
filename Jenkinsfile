@@ -6,7 +6,8 @@ pipeline {
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
     }
 
-    stages { 
+    stages {
+
         stage('Restore dependencies') {
             steps {
                 sh 'dotnet restore'
@@ -39,24 +40,19 @@ pipeline {
 
         stage('Deploy to appserver') {
             steps {
-                script {
-                    // Eerst de code naar de appserver kopiëren
-                    sh '''
-                    rsync -avz -e "ssh -i /vagrant/src/appserver/.vagrant/machines/default/virtualbox/private_key -o StrictHostKeyChecking=no" ./ vagrant@192.168.56.50:/vagrant/
-                    '''
+                sh """
+                    rsync -avz -e 'ssh -i ~/.ssh/appserver_key -o StrictHostKeyChecking=no' \
+                        ./ vagrant@192.168.56.50:/vagrant/
 
-                    // Dan publishen en runnen op de appserver
-                    sh '''
-                    ssh -i "/vagrant/src/appserver/.vagrant/machines/default/virtualbox/private_key" -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
+                    ssh -i ~/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
                         cd /vagrant
                         dotnet publish -c Release -o ./publish
                         dotnet ./publish/Rise.Client.dll
 ENDSSH
-                    '''
-                }
+                """
             }
         }
-    } // <-- sluit stages
+    }
 
     post {
         success {
