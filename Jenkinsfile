@@ -32,22 +32,11 @@ pipeline {
             }
         }
 
-        stage('Archive artifacts') {
-            steps {
-                archiveArtifacts artifacts: '**/bin/Release/**/*', fingerprint: true
-            }
-        }
-
         stage('Deploy to appserver') {
             steps {
                 sh """
-                    # Rsync naar de appserver met expliciete chmod voor permissies
-                    rsync -avz --chmod=Du=rwx,Dgo=rx,Fu=rw,Fgo=r \
-                        --exclude '.git' \
-                        --exclude 'bin' \
-                        --exclude 'obj' \
-                        --exclude '*.lock' \
-                        -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' \
+                    # Rsync alles naar de appserver
+                    rsync -avz -e 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no' \
                         ./ vagrant@192.168.56.50:/vagrant/
 
                     # SSH naar de appserver om te publishen en runnen
