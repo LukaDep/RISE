@@ -45,6 +45,7 @@ pipeline {
                         --exclude '.git' \
                         --exclude 'bin' \
                         --exclude 'obj' \
+                        --exclude '*.lock' \
                         -e 'ssh -i ~/.ssh/appserver_key -o StrictHostKeyChecking=no' \
                         ./ vagrant@192.168.56.50:/vagrant/
 
