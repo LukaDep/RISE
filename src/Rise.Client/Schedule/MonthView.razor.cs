@@ -57,10 +57,12 @@ public partial class MonthView
 
     private string GetEventTypeBgColor(string type) => type.ToLower() switch
     {
-        "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-        "practicum" => "bg-green-100 text-green-800",
-        "seminarie" => "bg-orange-100 text-orange-800",
-        _ => "bg-gray-100 text-gray-800"
+        "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
+        "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
+        "practicum" => "bg-hogent-green-15 text-hogent-green",
+        "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
+        "seminarie" => "bg-hogent-business-15 text-hogent-business",
+        _ => "bg-hogent-black-15 text-hogent-black"
     };
 
     private async Task GoToDayView(DateTime date)
