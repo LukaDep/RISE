@@ -1,0 +1,72 @@
+[
+    {
+      "id": 1,
+      "name": "Alice",
+      "reason": "Sick Leave",
+      "startDate": "2025-10-01",
+      "endDate": "2025-10-01"
+    },
+    {
+      "id": 2,
+      "name": "Bob",
+      "reason": "Vacation",
+      "startDate": "2025-09-15",
+      "endDate": "2025-09-18"
+    },
+    {
+      "id": 3,
+      "name": "Carla",
+      "reason": "Medical Appointment",
+      "startDate": "2025-10-06",
+      "endDate": "2025-10-06"
+    },
+    {
+      "id": 4,
+      "name": "Daniel",
+      "reason": "Conference",
+      "startDate": "2025-11-03",
+      "endDate": "2025-11-07"
+    },
+    {
+      "id": 5,
+      "name": "Emma",
+      "reason": "Personal Leave",
+      "startDate": "2025-08-21",
+      "endDate": "2025-08-21"
+    },
+    {
+      "id": 6,
+      "name": "Frank",
+      "reason": "Family Visit",
+      "startDate": "2025-12-20",
+      "endDate": "2025-12-26"
+    },
+    {
+      "id": 7,
+      "name": "Grace",
+      "reason": "Training",
+      "startDate": "2025-10-20",
+      "endDate": "2025-10-21"
+    },
+    {
+      "id": 8,
+      "name": "Hugo",
+      "reason": "Remote Work",
+      "startDate": "2025-10-02",
+      "endDate": "2025-10-02"
+    },
+    {
+      "id": 9,
+      "name": "Ingrid",
+      "reason": "Holiday",
+      "startDate": "2025-12-24",
+      "endDate": "2025-12-25"
+    },
+    {
+      "id": 10,
+      "name": "Jack",
+      "reason": "Onboarding",
+      "startDate": "2025-07-28",
+      "endDate": "2025-07-30"
+    }
+]

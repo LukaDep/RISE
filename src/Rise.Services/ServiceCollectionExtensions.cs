@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Rise.Persistence;
+using Rise.Services.Absences;
 using Rise.Services.Products;
 using Rise.Services.Projects;
 using Rise.Services.Schedule;
@@ -12,6 +13,7 @@ using Rise.Shared.Campus;
 using Rise.Services.Campus;
 using Rise.Shared.CampusInfo;
 using Rise.Services.CampusInfo;
+using Rise.Shared.Absences;
 using Rise.Shared.Schedule;
 
 namespace Rise.Services;
@@ -28,6 +30,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IScheduleService, MockScheduleService>();
         services.AddScoped<INewsService, NewsService>();
         services.AddScoped<ICampusInfoService, CampusInfoService>();
+        services.AddScoped<IAbsencesService, AbsencesService>();
         services.AddTransient<DbSeeder>();
 
         // Add other application services here.
