@@ -3,8 +3,17 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Rise.Client;
 using Rise.Client.Identity;
+using Rise.Client.News;
 using Rise.Client.Products;
+using Rise.Client.Campus;
 using Rise.Shared.Products;
+using Rise.Shared.Campus;
+using Rise.Client.CampusInfo;
+using Rise.Shared.CampusInfo;
+using Rise.Client.Schedule;
+using Rise.Shared.News;
+using Rise.Shared.Products;
+using Rise.Shared.Schedule;
 
 try
 {
@@ -37,6 +46,28 @@ try
         .AddHttpMessageHandler<CookieHandler>();
 
     builder.Services.AddHttpClient<IProductService, ProductService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
+    builder.Services.AddHttpClient<ICampusService, CampusClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+
+    });
+
+    builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
+
+    builder.Services.AddHttpClient<INewsService, NewsService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
+
+    builder.Services.AddHttpClient<ICampusInfoService, CampusInfoService>(client =>
+        {
+            client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+        });
+
+    builder.Services.AddHttpClient<IScheduleService, ScheduleClientService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });

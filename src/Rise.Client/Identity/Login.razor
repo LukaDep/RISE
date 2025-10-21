@@ -1,64 +1,32 @@
 @page "/login"
+@inject IStringLocalizer<SharedResources> L
 
-<PageTitle>Login</PageTitle>
+<PageTitle>@L["Auth.Login"]</PageTitle>
 
-<AuthorizeView>
-    <Authorized Context="authContext">
-        <div class="notification">You're logged in as @authContext.User.Identity?.Name.</div>
-        <div><strong>With the following claims:</strong>
-            <div class="fixed-grid has-2-cols">
-                <div class="grid is-gap-1">
-                    <div class="cel"><strong>Type</strong></div>
-                    <div class="cel"><strong>Value</strong></div>
-                    @foreach (var claim in authContext.User.Claims)
-                    {
-                        <div class="cel">@claim.Type</div>
-                        <div class="cel">@claim.Value</div>
-                    }
-                </div>
-            </div>
-        </div>
-    </Authorized>
-    <NotAuthorized>
-        <div class="container">
+        <div class="min-h-screen flex flex-col items-center mx-4 mt-30 bg-hogent-white">
+            <h2 class="text-3xl font-extrabold text-center text-hogent-black mb-2">@L["Auth.SignIn"]</h2>
             @foreach (var error in _result.Errors)
             {
-                <div class="notification is-danger">@error</div>
+                <div class="mb-4 px-4 py-2 rounded-lg bg-hogent-it-50 text-hogent-white border border-hogent-it text-sm text-center w-full max-w-md">@error</div>
             }
-        <div class="columns is-centered">
-            <section class="column is-one-third">
-                <EditForm Model="Model" OnValidSubmit="LoginUser" Context="formContext">
-                    <FluentValidationValidator/>
-                    <div class="field">
-                        <p class="control has-icons-left has-icons-right">
-                            <InputText @bind-Value="Model.Email" type="email" autocomplete="username" class="input" placeholder="Email"/>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-envelope"></i>
-                            </span>
-                        </p>
-                        <ValidationMessage For="() => Model.Email" class="has-text-danger"/>
-                    </div>
-                    <div class="field">
-                        <p class="control has-icons-left">
-                            <InputText @bind-Value="Model.Password" class="input" type="password" placeholder="Password"/>
-                            <span class="icon is-small is-left">
-                                <i class="fas fa-lock"></i>
-                            </span>
-                        </p>
-                        <ValidationMessage For="() => Model.Password" class="has-text-danger"/>
-                    </div>
-                    <div class="field is-grouped is-grouped-right">
-                        <p class="control">
-                            <button class="button is-light">Login</button>
-                        </p>
-                        <p class="control">
-                            <a href="register" class="button is-light">Register</a>
-                        </p>
-                    </div>
-                </EditForm>
-            </section>
+            <EditForm Model="Model" OnValidSubmit="LoginUser" Context="formContext" class="w-full max-w-md">
+                <FluentValidationValidator/>
+                <div class="mb-4">
+                    <label class="block text-hogent-15 font-medium mb-1" for="email">@L["Auth.EmailPlaceholder"]</label>
+                    <InputText @bind-Value="Model.Email" type="email" autocomplete="username" id="email"
+                        class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" placeholder="Email" />
+                    <ValidationMessage For="() => Model.Email" class="text-xs text-hogent-it mt-1" />
+                </div>
+                <div class="mb-6">
+                    <label class="block text-gray-700 font-medium mb-1" for="password">@L["Auth.PasswordPlaceholder"]</label>
+                    <InputText @bind-Value="Model.Password" class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" type="password" id="password" placeholder="Password" />
+                    <ValidationMessage For="() => Model.Password" class="text-xs text-hogent-it mt-1" />
+                </div>
+                <button class="w-full py-2 px-4 bg-hogent-education hover:bg-hogent-education-50 text-white font-semibold rounded-lg shadow transition duration-150 mb-4">@L["Auth.Login"]</button>
+                <div class="text-center">
+                    <span class="text-hogent-black-50">@L["Auth.RegisterNewUser"]</span>
+                    <a href="register" class="ml-2 text-hogent-education hover:text-hogent-education-50 font-semibold transition duration-150">@L["Auth.Register"]</a>
+                </div>
+            </EditForm>
         </div>
-    </div>
-
-    </NotAuthorized>
-</AuthorizeView>
+        

@@ -1,20 +1,26 @@
 {
-  "name": "rise.client",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "tailwind": "tailwindcss -i ./src/Rise.Client/wwwroot/css/tailwind.css -o ./src/Rise.Client/wwwroot/css/output.css --watch",
-    "client": "dotnet watch run --project ./src/Rise.Client/Rise.Client.csproj",
-    "server": "dotnet watch run --project ./src/Rise.Server/Rise.Server.csproj",
-    "dev": "concurrently \"npm run tailwind\" \"npm run server\""
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "@tailwindcss/cli": "^4.1.14",
-    "concurrently": "^9.2.1"
-  }
+    "name": "rise.client",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "tailwind": "tailwindcss -i ./src/Rise.Client/wwwroot/css/tailwind.css -o ./src/Rise.Client/wwwroot/css/output.css --watch",
+        "client": "dotnet watch run --project ./src/Rise.Client/Rise.Client.csproj",
+        "server": "dotnet watch run --project ./src/Rise.Server/Rise.Server.csproj",
+        "dev": "concurrently \"npm run tailwind\" \"npm run server\"",
+        "prepare": "husky",
+        "format:dotnet": "dotnet format",
+        "format:prettier": "prettier --write ."
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "commonjs",
+    "devDependencies": {
+        "@tailwindcss/cli": "^4.1.14",
+        "concurrently": "^9.2.1",
+        "husky": "^9.1.7",
+        "prettier": "^3.6.2",
+        "prettier-plugin-tailwindcss": "^0.7.0"
+    }
 }

@@ -1,0 +1,25 @@
+﻿@page "/campus"
+@using Rise.Client.CampusInfo.Components
+
+<div>
+<div> <h3 class="text-4xl font-bold p-6">Campussen</h3> </div>
+
+@if (campusInfo == null || !campusInfo.Any())
+{
+    <p>Campussen worden geladen...</p>
+}
+else
+{
+    @foreach (var campus in campusInfo)
+    {
+        <CampusCard 
+            Id="@campus.Id"
+            Name="@campus.Name" 
+            Location="@campus.Location" 
+            Faculties="@campus.Faculties" 
+            ContactPhone="@campus.ContactPhone"
+            Description="@campus.Description"
+        />
+    }
+}
+</div>

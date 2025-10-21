@@ -1,0 +1,37 @@
+[
+    {
+        "Id": 1,
+        "Title": "Blazor Server Released",
+        "PublishDate": "2025-10-01T09:00:00Z",
+        "Content": "Microsoft announces the release of Blazor Server for .NET 8.",
+        "Author": "Jane Doe"
+    },
+    {
+        "Id": 2,
+        "Title": "Rise Platform Update",
+        "PublishDate": "2025-10-05T14:30:00Z",
+        "Content": "Rise platform receives a major update with new features and bug fixes.",
+        "Author": "John Smith"
+    },
+    {
+        "Id": 3,
+        "Title": "Community Event Scheduled",
+        "PublishDate": "2025-10-10T18:00:00Z",
+        "Content": "Join us for the upcoming Rise community event in Amsterdam.",
+        "Author": "Alice Johnson"
+    },
+    {
+        "Id": 4,
+        "Title": "Security Patch Released",
+        "PublishDate": "2025-09-28T11:15:00Z",
+        "Content": "A new security patch is available for all Rise applications.",
+        "Author": "Bob Lee"
+    },
+    {
+        "Id": 5,
+        "Title": "Developer Tips: .NET 8",
+        "PublishDate": "2025-10-12T08:45:00Z",
+        "Content": "Top tips for developing with .NET 8 shared by the Rise team.",
+        "Author": "Chris Evans"
+    }
+]

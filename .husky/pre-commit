@@ -1,0 +1,5 @@
+echo "Running Prettier for frontend files..."
+npx prettier --write .
+
+echo "Running dotnet format for C# and Razor files..."
+dotnet format

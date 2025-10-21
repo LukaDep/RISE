@@ -1,0 +1,2894 @@
+{
+    "columnheaders": [
+        "Olod",
+        "Werkvorm",
+        "Onderwerp",
+        "Info werkvorm",
+        "Leer- of toetsomgeving",
+        "Lokaal",
+        "Lesgever"
+    ],
+    "info": { "reservationlimit": 1000, "reservationcount": 3 },
+    "reservations": [
+        {
+            "id": "sept01-001",
+            "startdate": "01-09-2025",
+            "starttime": "08:30",
+            "enddate": "01-09-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept01-002",
+            "startdate": "01-09-2025",
+            "starttime": "11:00",
+            "enddate": "01-09-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept01-003",
+            "startdate": "01-09-2025",
+            "starttime": "14:00",
+            "enddate": "01-09-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept02-001",
+            "startdate": "02-09-2025",
+            "starttime": "09:00",
+            "enddate": "02-09-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept02-002",
+            "startdate": "02-09-2025",
+            "starttime": "13:30",
+            "enddate": "02-09-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "sept03-001",
+            "startdate": "03-09-2025",
+            "starttime": "08:15",
+            "enddate": "03-09-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "sept03-002",
+            "startdate": "03-09-2025",
+            "starttime": "10:45",
+            "enddate": "03-09-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "sept03-003",
+            "startdate": "03-09-2025",
+            "starttime": "14:00",
+            "enddate": "03-09-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept04-001",
+            "startdate": "04-09-2025",
+            "starttime": "09:00",
+            "enddate": "04-09-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept04-002",
+            "startdate": "04-09-2025",
+            "starttime": "13:00",
+            "enddate": "04-09-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept05-001",
+            "startdate": "05-09-2025",
+            "starttime": "08:30",
+            "enddate": "05-09-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept05-002",
+            "startdate": "05-09-2025",
+            "starttime": "11:00",
+            "enddate": "05-09-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "sept05-003",
+            "startdate": "05-09-2025",
+            "starttime": "14:00",
+            "enddate": "05-09-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "sept08-001",
+            "startdate": "08-09-2025",
+            "starttime": "08:15",
+            "enddate": "08-09-2025",
+            "endtime": "11:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "sept08-002",
+            "startdate": "08-09-2025",
+            "starttime": "13:30",
+            "enddate": "08-09-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept09-001",
+            "startdate": "09-09-2025",
+            "starttime": "09:00",
+            "enddate": "09-09-2025",
+            "endtime": "12:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept09-002",
+            "startdate": "09-09-2025",
+            "starttime": "14:00",
+            "enddate": "09-09-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept10-001",
+            "startdate": "10-09-2025",
+            "starttime": "08:30",
+            "enddate": "10-09-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept10-002",
+            "startdate": "10-09-2025",
+            "starttime": "11:00",
+            "enddate": "10-09-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "sept10-003",
+            "startdate": "10-09-2025",
+            "starttime": "14:00",
+            "enddate": "10-09-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "sept11-001",
+            "startdate": "11-09-2025",
+            "starttime": "09:00",
+            "enddate": "11-09-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "sept11-002",
+            "startdate": "11-09-2025",
+            "starttime": "13:30",
+            "enddate": "11-09-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept12-001",
+            "startdate": "12-09-2025",
+            "starttime": "08:15",
+            "enddate": "12-09-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept12-002",
+            "startdate": "12-09-2025",
+            "starttime": "10:45",
+            "enddate": "12-09-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept12-003",
+            "startdate": "12-09-2025",
+            "starttime": "14:00",
+            "enddate": "12-09-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept15-001",
+            "startdate": "15-09-2025",
+            "starttime": "08:30",
+            "enddate": "15-09-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "sept15-002",
+            "startdate": "15-09-2025",
+            "starttime": "11:00",
+            "enddate": "15-09-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "sept15-003",
+            "startdate": "15-09-2025",
+            "starttime": "14:00",
+            "enddate": "15-09-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "sept16-001",
+            "startdate": "16-09-2025",
+            "starttime": "09:00",
+            "enddate": "16-09-2025",
+            "endtime": "12:00",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept16-002",
+            "startdate": "16-09-2025",
+            "starttime": "13:30",
+            "enddate": "16-09-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept17-001",
+            "startdate": "17-09-2025",
+            "starttime": "08:15",
+            "enddate": "17-09-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept17-002",
+            "startdate": "17-09-2025",
+            "starttime": "10:45",
+            "enddate": "17-09-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept17-003",
+            "startdate": "17-09-2025",
+            "starttime": "14:00",
+            "enddate": "17-09-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "sept18-001",
+            "startdate": "18-09-2025",
+            "starttime": "09:00",
+            "enddate": "18-09-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "sept18-002",
+            "startdate": "18-09-2025",
+            "starttime": "13:30",
+            "enddate": "18-09-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "sept19-001",
+            "startdate": "19-09-2025",
+            "starttime": "08:30",
+            "enddate": "19-09-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept19-002",
+            "startdate": "19-09-2025",
+            "starttime": "11:00",
+            "enddate": "19-09-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept19-003",
+            "startdate": "19-09-2025",
+            "starttime": "14:00",
+            "enddate": "19-09-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept22-001",
+            "startdate": "22-09-2025",
+            "starttime": "08:15",
+            "enddate": "22-09-2025",
+            "endtime": "11:15",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept22-002",
+            "startdate": "22-09-2025",
+            "starttime": "13:00",
+            "enddate": "22-09-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "sept23-001",
+            "startdate": "23-09-2025",
+            "starttime": "09:00",
+            "enddate": "23-09-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "sept23-002",
+            "startdate": "23-09-2025",
+            "starttime": "13:30",
+            "enddate": "23-09-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "sept24-001",
+            "startdate": "24-09-2025",
+            "starttime": "08:30",
+            "enddate": "24-09-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept24-002",
+            "startdate": "24-09-2025",
+            "starttime": "11:00",
+            "enddate": "24-09-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept24-003",
+            "startdate": "24-09-2025",
+            "starttime": "14:00",
+            "enddate": "24-09-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept25-001",
+            "startdate": "25-09-2025",
+            "starttime": "09:00",
+            "enddate": "25-09-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept25-002",
+            "startdate": "25-09-2025",
+            "starttime": "13:30",
+            "enddate": "25-09-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "sept26-001",
+            "startdate": "26-09-2025",
+            "starttime": "08:15",
+            "enddate": "26-09-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "sept26-002",
+            "startdate": "26-09-2025",
+            "starttime": "10:45",
+            "enddate": "26-09-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "sept26-003",
+            "startdate": "26-09-2025",
+            "starttime": "14:00",
+            "enddate": "26-09-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "sept29-001",
+            "startdate": "29-09-2025",
+            "starttime": "08:30",
+            "enddate": "29-09-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "sept29-002",
+            "startdate": "29-09-2025",
+            "starttime": "13:00",
+            "enddate": "29-09-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "sept30-001",
+            "startdate": "30-09-2025",
+            "starttime": "09:00",
+            "enddate": "30-09-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "sept30-002",
+            "startdate": "30-09-2025",
+            "starttime": "13:30",
+            "enddate": "30-09-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "okt01-001",
+            "startdate": "01-10-2025",
+            "starttime": "08:15",
+            "enddate": "01-10-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "okt01-002",
+            "startdate": "01-10-2025",
+            "starttime": "10:45",
+            "enddate": "01-10-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "okt01-003",
+            "startdate": "01-10-2025",
+            "starttime": "14:00",
+            "enddate": "01-10-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "okt02-001",
+            "startdate": "02-10-2025",
+            "starttime": "09:00",
+            "enddate": "02-10-2025",
+            "endtime": "12:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "okt02-002",
+            "startdate": "02-10-2025",
+            "starttime": "13:30",
+            "enddate": "02-10-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "okt03-001",
+            "startdate": "03-10-2025",
+            "starttime": "08:30",
+            "enddate": "03-10-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "okt03-002",
+            "startdate": "03-10-2025",
+            "starttime": "11:00",
+            "enddate": "03-10-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "okt03-003",
+            "startdate": "03-10-2025",
+            "starttime": "14:00",
+            "enddate": "03-10-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "okt06-001",
+            "startdate": "06-10-2025",
+            "starttime": "08:15",
+            "enddate": "06-10-2025",
+            "endtime": "11:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "okt06-002",
+            "startdate": "06-10-2025",
+            "starttime": "13:00",
+            "enddate": "06-10-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "okt07-001",
+            "startdate": "07-10-2025",
+            "starttime": "09:00",
+            "enddate": "07-10-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "okt07-002",
+            "startdate": "07-10-2025",
+            "starttime": "13:30",
+            "enddate": "07-10-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "okt08-001",
+            "startdate": "08-10-2025",
+            "starttime": "08:30",
+            "enddate": "08-10-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "okt08-002",
+            "startdate": "08-10-2025",
+            "starttime": "11:00",
+            "enddate": "08-10-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "okt08-003",
+            "startdate": "08-10-2025",
+            "starttime": "14:00",
+            "enddate": "08-10-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "okt09-001",
+            "startdate": "09-10-2025",
+            "starttime": "09:00",
+            "enddate": "09-10-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "okt09-002",
+            "startdate": "09-10-2025",
+            "starttime": "13:30",
+            "enddate": "09-10-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "okt10-001",
+            "startdate": "10-10-2025",
+            "starttime": "08:15",
+            "enddate": "10-10-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "okt10-002",
+            "startdate": "10-10-2025",
+            "starttime": "10:45",
+            "enddate": "10-10-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "okt10-003",
+            "startdate": "10-10-2025",
+            "starttime": "14:00",
+            "enddate": "10-10-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d",
+            "startdate": "13-10-2025",
+            "starttime": "08:15",
+            "enddate": "13-10-2025",
+            "endtime": "12:30",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6e",
+            "startdate": "14-10-2025",
+            "starttime": "13:30",
+            "enddate": "14-10-2025",
+            "endtime": "17:45",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7f",
+            "startdate": "15-10-2025",
+            "starttime": "09:00",
+            "enddate": "15-10-2025",
+            "endtime": "12:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8a",
+            "startdate": "16-10-2025",
+            "starttime": "10:00",
+            "enddate": "16-10-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9b",
+            "startdate": "17-10-2025",
+            "starttime": "14:00",
+            "enddate": "17-10-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0c",
+            "startdate": "20-10-2025",
+            "starttime": "08:30",
+            "enddate": "20-10-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "f6a7b8c9-d0e1-4f2a-3b4c-5d6e7f8a9b0d",
+            "startdate": "20-10-2025",
+            "starttime": "13:30",
+            "enddate": "20-10-2025",
+            "endtime": "15:30",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1d",
+            "startdate": "21-10-2025",
+            "starttime": "08:15",
+            "enddate": "21-10-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1e",
+            "startdate": "21-10-2025",
+            "starttime": "10:45",
+            "enddate": "21-10-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "a7b8c9d0-e1f2-4a3b-4c5d-6e7f8a9b0c1f",
+            "startdate": "21-10-2025",
+            "starttime": "13:00",
+            "enddate": "21-10-2025",
+            "endtime": "16:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2e",
+            "startdate": "22-10-2025",
+            "starttime": "09:15",
+            "enddate": "22-10-2025",
+            "endtime": "12:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "b8c9d0e1-f2a3-4b4c-5d6e-7f8a9b0c1d2f",
+            "startdate": "22-10-2025",
+            "starttime": "13:30",
+            "enddate": "22-10-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3e",
+            "startdate": "23-10-2025",
+            "starttime": "08:30",
+            "enddate": "23-10-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3g",
+            "startdate": "23-10-2025",
+            "starttime": "11:00",
+            "enddate": "23-10-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "c9d0e1f2-a3b4-4c5d-6e7f-8a9b0c1d2e3f",
+            "startdate": "23-10-2025",
+            "starttime": "14:30",
+            "enddate": "23-10-2025",
+            "endtime": "17:45",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4b",
+            "startdate": "24-10-2025",
+            "starttime": "08:15",
+            "enddate": "24-10-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4c",
+            "startdate": "24-10-2025",
+            "starttime": "10:45",
+            "enddate": "24-10-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4d",
+            "startdate": "24-10-2025",
+            "starttime": "14:00",
+            "enddate": "24-10-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "d0e1f2a3-b4c5-4d6e-7f8a-9b0c1d2e3f4a",
+            "startdate": "27-10-2025",
+            "starttime": "08:15",
+            "enddate": "27-10-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "e1f2a3b4-c5d6-4e7f-8a9b-0c1d2e3f4a5b",
+            "startdate": "28-10-2025",
+            "starttime": "13:30",
+            "enddate": "28-10-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "f2a3b4c5-d6e7-4f8a-9b0c-1d2e3f4a5b6c",
+            "startdate": "29-10-2025",
+            "starttime": "10:00",
+            "enddate": "29-10-2025",
+            "endtime": "13:15",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "a3b4c5d6-e7f8-4a9b-0c1d-2e3f4a5b6c7d",
+            "startdate": "30-10-2025",
+            "starttime": "14:00",
+            "enddate": "30-10-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "b4c5d6e7-f8a9-4b0c-1d2e-3f4a5b6c7d8e",
+            "startdate": "03-11-2025",
+            "starttime": "08:30",
+            "enddate": "03-11-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "c5d6e7f8-a9b0-4c1d-2e3f-4a5b6c7d8e9f",
+            "startdate": "03-11-2025",
+            "starttime": "11:00",
+            "enddate": "03-11-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "d6e7f8a9-b0c1-4d2e-3f4a-5b6c7d8e9f0a",
+            "startdate": "03-11-2025",
+            "starttime": "14:00",
+            "enddate": "03-11-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "e7f8a9b0-c1d2-4e3f-4a5b-6c7d8e9f0a1b",
+            "startdate": "04-11-2025",
+            "starttime": "09:00",
+            "enddate": "04-11-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "f8a9b0c1-d2e3-4f4a-5b6c-7d8e9f0a1b2c",
+            "startdate": "04-11-2025",
+            "starttime": "13:30",
+            "enddate": "04-11-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "a9b0c1d2-e3f4-4a5b-6c7d-8e9f0a1b2c3d",
+            "startdate": "05-11-2025",
+            "starttime": "08:15",
+            "enddate": "05-11-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "b0c1d2e3-f4a5-4b6c-7d8e-9f0a1b2c3d4e",
+            "startdate": "05-11-2025",
+            "starttime": "10:45",
+            "enddate": "05-11-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "c1d2e3f4-a5b6-4c7d-8e9f-0a1b2c3d4e5f",
+            "startdate": "05-11-2025",
+            "starttime": "14:00",
+            "enddate": "05-11-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "d2e3f4a5-b6c7-4d8e-9f0a-1b2c3d4e5f6a",
+            "startdate": "06-11-2025",
+            "starttime": "09:00",
+            "enddate": "06-11-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "e3f4a5b6-c7d8-4e9f-0a1b-2c3d4e5f6a7b",
+            "startdate": "06-11-2025",
+            "starttime": "13:00",
+            "enddate": "06-11-2025",
+            "endtime": "16:15",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "f4a5b6c7-d8e9-4f0a-1b2c-3d4e5f6a7b8c",
+            "startdate": "07-11-2025",
+            "starttime": "08:30",
+            "enddate": "07-11-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "a5b6c7d8-e9f0-4a1b-2c3d-4e5f6a7b8c9d",
+            "startdate": "07-11-2025",
+            "starttime": "11:00",
+            "enddate": "07-11-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "b6c7d8e9-f0a1-4b2c-3d4e-5f6a7b8c9d0e",
+            "startdate": "07-11-2025",
+            "starttime": "14:00",
+            "enddate": "07-11-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "c7d8e9f0-a1b2-4c3d-4e5f-6a7b8c9d0e1f",
+            "startdate": "10-11-2025",
+            "starttime": "08:15",
+            "enddate": "10-11-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "d8e9f0a1-b2c3-4d4e-5f6a-7b8c9d0e1f2a",
+            "startdate": "10-11-2025",
+            "starttime": "13:30",
+            "enddate": "10-11-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "e9f0a1b2-c3d4-4e5f-6a7b-8c9d0e1f2a3b",
+            "startdate": "11-11-2025",
+            "starttime": "09:00",
+            "enddate": "11-11-2025",
+            "endtime": "12:15",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "f0a1b2c3-d4e5-4f6a-7b8c-9d0e1f2a3b4c",
+            "startdate": "11-11-2025",
+            "starttime": "14:00",
+            "enddate": "11-11-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5e",
+            "startdate": "12-11-2025",
+            "starttime": "08:30",
+            "enddate": "12-11-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "b2c3d4e5-f6a7-4b8c-9d0e-1f2a3b4c5d6f",
+            "startdate": "12-11-2025",
+            "starttime": "11:00",
+            "enddate": "12-11-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "c3d4e5f6-a7b8-4c9d-0e1f-2a3b4c5d6e7g",
+            "startdate": "12-11-2025",
+            "starttime": "14:00",
+            "enddate": "12-11-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "d4e5f6a7-b8c9-4d0e-1f2a-3b4c5d6e7f8b",
+            "startdate": "13-11-2025",
+            "starttime": "09:00",
+            "enddate": "13-11-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "e5f6a7b8-c9d0-4e1f-2a3b-4c5d6e7f8a9c",
+            "startdate": "13-11-2025",
+            "starttime": "13:30",
+            "enddate": "13-11-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "nov17-001",
+            "startdate": "17-11-2025",
+            "starttime": "08:30",
+            "enddate": "17-11-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "nov17-002",
+            "startdate": "17-11-2025",
+            "starttime": "11:00",
+            "enddate": "17-11-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "nov17-003",
+            "startdate": "17-11-2025",
+            "starttime": "14:00",
+            "enddate": "17-11-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "nov18-001",
+            "startdate": "18-11-2025",
+            "starttime": "09:00",
+            "enddate": "18-11-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "nov18-002",
+            "startdate": "18-11-2025",
+            "starttime": "13:30",
+            "enddate": "18-11-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "nov19-001",
+            "startdate": "19-11-2025",
+            "starttime": "08:15",
+            "enddate": "19-11-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "nov19-002",
+            "startdate": "19-11-2025",
+            "starttime": "10:45",
+            "enddate": "19-11-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "nov19-003",
+            "startdate": "19-11-2025",
+            "starttime": "14:00",
+            "enddate": "19-11-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "nov20-001",
+            "startdate": "20-11-2025",
+            "starttime": "08:30",
+            "enddate": "20-11-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "nov20-002",
+            "startdate": "20-11-2025",
+            "starttime": "11:00",
+            "enddate": "20-11-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "nov20-003",
+            "startdate": "20-11-2025",
+            "starttime": "14:00",
+            "enddate": "20-11-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "nov21-001",
+            "startdate": "21-11-2025",
+            "starttime": "09:00",
+            "enddate": "21-11-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "nov21-002",
+            "startdate": "21-11-2025",
+            "starttime": "13:30",
+            "enddate": "21-11-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "nov24-001",
+            "startdate": "24-11-2025",
+            "starttime": "08:15",
+            "enddate": "24-11-2025",
+            "endtime": "11:15",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "nov24-002",
+            "startdate": "24-11-2025",
+            "starttime": "13:00",
+            "enddate": "24-11-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "nov25-001",
+            "startdate": "25-11-2025",
+            "starttime": "09:00",
+            "enddate": "25-11-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "nov25-002",
+            "startdate": "25-11-2025",
+            "starttime": "13:30",
+            "enddate": "25-11-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "nov26-001",
+            "startdate": "26-11-2025",
+            "starttime": "08:30",
+            "enddate": "26-11-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "nov26-002",
+            "startdate": "26-11-2025",
+            "starttime": "11:00",
+            "enddate": "26-11-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "nov26-003",
+            "startdate": "26-11-2025",
+            "starttime": "14:00",
+            "enddate": "26-11-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "nov27-001",
+            "startdate": "27-11-2025",
+            "starttime": "09:00",
+            "enddate": "27-11-2025",
+            "endtime": "12:00",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "nov27-002",
+            "startdate": "27-11-2025",
+            "starttime": "13:30",
+            "enddate": "27-11-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "nov28-001",
+            "startdate": "28-11-2025",
+            "starttime": "08:15",
+            "enddate": "28-11-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "nov28-002",
+            "startdate": "28-11-2025",
+            "starttime": "10:45",
+            "enddate": "28-11-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "nov28-003",
+            "startdate": "28-11-2025",
+            "starttime": "14:00",
+            "enddate": "28-11-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "dec01-001",
+            "startdate": "01-12-2025",
+            "starttime": "08:30",
+            "enddate": "01-12-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "dec01-002",
+            "startdate": "01-12-2025",
+            "starttime": "11:00",
+            "enddate": "01-12-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "dec01-003",
+            "startdate": "01-12-2025",
+            "starttime": "14:00",
+            "enddate": "01-12-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "dec02-001",
+            "startdate": "02-12-2025",
+            "starttime": "09:00",
+            "enddate": "02-12-2025",
+            "endtime": "12:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "dec02-002",
+            "startdate": "02-12-2025",
+            "starttime": "13:30",
+            "enddate": "02-12-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "dec03-001",
+            "startdate": "03-12-2025",
+            "starttime": "08:15",
+            "enddate": "03-12-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "dec03-002",
+            "startdate": "03-12-2025",
+            "starttime": "10:45",
+            "enddate": "03-12-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "dec03-003",
+            "startdate": "03-12-2025",
+            "starttime": "14:00",
+            "enddate": "03-12-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "dec04-001",
+            "startdate": "04-12-2025",
+            "starttime": "09:00",
+            "enddate": "04-12-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "dec04-002",
+            "startdate": "04-12-2025",
+            "starttime": "13:30",
+            "enddate": "04-12-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "dec05-001",
+            "startdate": "05-12-2025",
+            "starttime": "08:30",
+            "enddate": "05-12-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "dec05-002",
+            "startdate": "05-12-2025",
+            "starttime": "11:00",
+            "enddate": "05-12-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "dec05-003",
+            "startdate": "05-12-2025",
+            "starttime": "14:00",
+            "enddate": "05-12-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "dec08-001",
+            "startdate": "08-12-2025",
+            "starttime": "08:15",
+            "enddate": "08-12-2025",
+            "endtime": "11:15",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "dec08-002",
+            "startdate": "08-12-2025",
+            "starttime": "13:00",
+            "enddate": "08-12-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "dec09-001",
+            "startdate": "09-12-2025",
+            "starttime": "09:00",
+            "enddate": "09-12-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "dec09-002",
+            "startdate": "09-12-2025",
+            "starttime": "13:30",
+            "enddate": "09-12-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "dec10-001",
+            "startdate": "10-12-2025",
+            "starttime": "08:30",
+            "enddate": "10-12-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "dec10-002",
+            "startdate": "10-12-2025",
+            "starttime": "11:00",
+            "enddate": "10-12-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "dec10-003",
+            "startdate": "10-12-2025",
+            "starttime": "14:00",
+            "enddate": "10-12-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "dec11-001",
+            "startdate": "11-12-2025",
+            "starttime": "09:00",
+            "enddate": "11-12-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "dec11-002",
+            "startdate": "11-12-2025",
+            "starttime": "13:30",
+            "enddate": "11-12-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "dec12-001",
+            "startdate": "12-12-2025",
+            "starttime": "08:15",
+            "enddate": "12-12-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "dec12-002",
+            "startdate": "12-12-2025",
+            "starttime": "10:45",
+            "enddate": "12-12-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "dec12-003",
+            "startdate": "12-12-2025",
+            "starttime": "14:00",
+            "enddate": "12-12-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "dec15-001",
+            "startdate": "15-12-2025",
+            "starttime": "08:30",
+            "enddate": "15-12-2025",
+            "endtime": "11:30",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "dec15-002",
+            "startdate": "15-12-2025",
+            "starttime": "13:00",
+            "enddate": "15-12-2025",
+            "endtime": "16:00",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "dec16-001",
+            "startdate": "16-12-2025",
+            "starttime": "09:00",
+            "enddate": "16-12-2025",
+            "endtime": "11:00",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "dec16-002",
+            "startdate": "16-12-2025",
+            "starttime": "13:30",
+            "enddate": "16-12-2025",
+            "endtime": "16:45",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "dec17-001",
+            "startdate": "17-12-2025",
+            "starttime": "08:15",
+            "enddate": "17-12-2025",
+            "endtime": "10:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        },
+        {
+            "id": "dec17-002",
+            "startdate": "17-12-2025",
+            "starttime": "10:45",
+            "enddate": "17-12-2025",
+            "endtime": "12:45",
+            "columns": [
+                "PBA-TIN/Web Ontwikkeling 2",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.009",
+                "Bert Van Vreckem"
+            ]
+        },
+        {
+            "id": "dec17-003",
+            "startdate": "17-12-2025",
+            "starttime": "14:00",
+            "enddate": "17-12-2025",
+            "endtime": "17:00",
+            "columns": [
+                "PBA-TIN/Databanken II",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.012",
+                "Thomas Parmentier"
+            ]
+        },
+        {
+            "id": "dec18-001",
+            "startdate": "18-12-2025",
+            "starttime": "09:00",
+            "enddate": "18-12-2025",
+            "endtime": "12:00",
+            "columns": [
+                "PBA-TIN/Software Engineering",
+                "Activerend hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.026",
+                "Chloé De Leenheer"
+            ]
+        },
+        {
+            "id": "dec18-002",
+            "startdate": "18-12-2025",
+            "starttime": "13:30",
+            "enddate": "18-12-2025",
+            "endtime": "16:30",
+            "columns": [
+                "PBA-TIN/Machine Learning",
+                "Seminarie",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.015",
+                "Jan Decorte"
+            ]
+        },
+        {
+            "id": "dec19-001",
+            "startdate": "19-12-2025",
+            "starttime": "08:30",
+            "enddate": "19-12-2025",
+            "endtime": "10:30",
+            "columns": [
+                "PBA-TIN/Mobile Development",
+                "Werkcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.018",
+                "Sarah Vermeulen"
+            ]
+        },
+        {
+            "id": "dec19-002",
+            "startdate": "19-12-2025",
+            "starttime": "11:00",
+            "enddate": "19-12-2025",
+            "endtime": "13:00",
+            "columns": [
+                "PBA-TIN/Security & Privacy",
+                "Hoorcollege",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.2.020",
+                "Lien Decorte"
+            ]
+        },
+        {
+            "id": "dec19-003",
+            "startdate": "19-12-2025",
+            "starttime": "14:00",
+            "enddate": "19-12-2025",
+            "endtime": "17:15",
+            "columns": [
+                "PBA-TIN/Cloud Computing",
+                "Practicum",
+                "",
+                "",
+                "Digitaal (laptop/PC)",
+                "GSCHB.3.021",
+                "Marc Desmet"
+            ]
+        }
+    ]
+}
