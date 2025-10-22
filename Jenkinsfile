@@ -4,6 +4,8 @@ pipeline {
     environment {
         DOTNET_CLI_TELEMETRY_OPTOUT = '1'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
+        APP_SERVER = '10.11.2.31'
+        DEPLOY_PATH = '/var/www/dotnetapp'
     }
 
     stages {
@@ -34,33 +36,35 @@ pipeline {
 
         stage('Publish project') {
             steps {
-                // Framework-dependent publish; server moet .NET runtime hebben
                 sh 'dotnet publish -c Release -o ./publish'
             }
         }
 
         stage('Deploy to appserver') {
             steps {
-                sh '''
-                    # Kopieer publish folder naar appserver
-                    rsync -aq -e "ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no" ./publish/ vagrant@192.168.56.50:/vagrant/publish/
+                sshagent(['appserver-ssh']) {
+                    sh '''
+                        echo "Deploying to $APP_SERVER..."
 
-                    # SSH naar appserver en run de app
-                    ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 << 'ENDSSH'
-                        cd /vagrant/publish
-                        dotnet Rise.Client.dll
-ENDSSH
-                '''
+                        ssh -o StrictHostKeyChecking=no vicuser@$APP_SERVER "mkdir -p $DEPLOY_PATH"
+
+                        rsync -aq -e "ssh -o StrictHostKeyChecking=no" ./publish/ vicuser@$APP_SERVER:$DEPLOY_PATH/
+
+                        ssh -o StrictHostKeyChecking=no vicuser@$APP_SERVER 'sudo systemctl restart dotnetapp.service || echo "Service not found, skipping restart."'
+
+                        echo "Deployment complete."
+                    '''
+                }
             }
         }
     }
 
     post {
         success {
-            echo 'Build & Deploy succeeded!'
+            echo 'Build & Deploy succeeded.'
         }
         failure {
-            echo 'Build or Deploy failed!'
+            echo 'Build or Deploy failed.'
         }
     }
 }
