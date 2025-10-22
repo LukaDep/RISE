@@ -8,7 +8,7 @@ namespace Rise.Server.Endpoints.Menus;
 /// Zie https://fast-endpoints.com/
 /// </summary>
 /// <param name="menuService"></param>
-public class Index(IMenuService menuService) 
+public class Index(IMenuService menuService)
     : Endpoint<QueryRequest.SkipTake, Result<MenuResponse.Index>>
 {
     public override void Configure()

@@ -1,4 +1,5 @@
 using System.Text.Json;
+using System.Text.Json.Serialization;
 using Rise.Shared.Common;
 using Rise.Shared.Menus;
 using Serilog;
@@ -16,7 +17,7 @@ public class MockMenuService : IMenuService
     {
         var currentDirectory = Directory.GetCurrentDirectory();
         // CurrentDirectory is Rise.Server → ga één niveau omhoog en dan naar Rise.Services
-        _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Menus", "MockData", "menus.json");
+        _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Menu", "MockData", "MenuMockData.json");
 
         Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
         Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
@@ -24,27 +25,36 @@ public class MockMenuService : IMenuService
     }
 
     public async Task<Result<MenuResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ct = default)
-{
-    if (!File.Exists(_mockFilePath))
-        return Result<MenuResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-
-    var json = await File.ReadAllTextAsync(_mockFilePath, ct);
-
-    var data = JsonSerializer.Deserialize<List<MenuDto.Index>>(json, new JsonSerializerOptions
     {
-        PropertyNameCaseInsensitive = true
-    });
+        if (!File.Exists(_mockFilePath))
+        {
+            Log.Warning("Mock data file not found at: {MockFilePath}", _mockFilePath);
+            return Result<MenuResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
+        }
 
-    if (data == null)
-        return Result<MenuResponse.Index>.Error("Deserialisatie mislukt");
+        var json = await File.ReadAllTextAsync(_mockFilePath, ct);
 
-    var paged = data.Skip(request.Skip).Take(request.Take).ToList();
+        var options = new JsonSerializerOptions
+        {
+            PropertyNameCaseInsensitive = true,
+            Converters = { new JsonStringEnumConverter() } // 🔸 zorgt dat "Belegdebroodje" enz. werken
+        };
 
-    var response = new MenuResponse.Index
-    {
-        Menus = paged
-    };
+        var data = JsonSerializer.Deserialize<List<MenuDto.Index>>(json, options);
 
-    return Result.Success(response);
-}
+        if (data == null)
+        {
+            Log.Error("Deserialisatie van menu mockdata mislukt.");
+            return Result<MenuResponse.Index>.Error("Deserialisatie mislukt");
+        }
+
+        var paged = data.Skip(request.Skip).Take(request.Take).ToList();
+
+        var response = new MenuResponse.Index
+        {
+            Menus = paged
+        };
+
+        return Result.Success(response);
+    }
 }
