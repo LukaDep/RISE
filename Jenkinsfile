@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOTNET_CLI_TELEMETRY_OPTOUT = '1'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
+        NUGET_PACKAGES = '/var/lib/jenkins/.nuget/packages'
         APP_SERVER = '10.11.2.31'
         DEPLOY_PATH = '/var/www/dotnetapp'
     }
