@@ -356,4 +356,7 @@
     <value>Logout</value>
     <comment/>
   </data>
+  <data name="Schedule.Absent" xml:space="preserve">
+    <value>Absent</value>
+  </data>
 </root>

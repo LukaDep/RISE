@@ -368,4 +368,7 @@
     <value>Uitloggen</value>
     <comment/>
   </data>
+  <data name="Schedule.Absent" xml:space="preserve">
+    <value>Afwezig</value>
+  </data>
 </root>
