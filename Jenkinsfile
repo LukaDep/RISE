@@ -12,7 +12,7 @@ pipeline {
 
         stage('Restore dependencies') {
             steps {
-                sh 'dotnet restore'
+                sh 'dotnet restore --disable-parallel'
             }
         }
 
