@@ -1,0 +1,139 @@
+ [
+  {
+    "Id": "R001",
+    "RestoName": "Resto D Schoonmeersen",
+    "Type": "WarmeMaaltijd",
+    "Menus": [
+      {
+        "Id": "M001",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+          {
+            "Id": "MI001",
+            "Name": "Spaghetti Bolognese",
+            "Description": "Traditionele pasta met rundsgehakt en tomatensaus",
+            "PriceStudent": 4.50,
+            "PriceExtern": 7.00,
+            "Type": "WarmeMaaltijd",
+            "IsVegan": false,
+            "IsVeggie": false
+          },
+          {
+            "Id": "MI002",
+            "Name": "Vegetarische lasagne",
+            "Description": "Lasagne met groenten en kaassaus",
+            "PriceStudent": 4.80,
+            "PriceExtern": 7.20,
+            "Type": "WarmeMaaltijd",
+            "IsVegan": false,
+            "IsVeggie": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": "R002",
+    "RestoName": "Broodjesbar Mercator",
+    "Type": "Belegdebroodje",
+    "Menus": [
+      {
+        "Id": "M002",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+          {
+            "Id": "B001",
+            "Name": "Basis broodje",
+            "Description": "Kies je broodsoort en beleg naar keuze",
+            "PriceStudent": 2.80,
+            "PriceExtern": 4.50,
+            "Type": "Belegdebroodje",
+            "IsVegan": false,
+            "IsVeggie": true,
+            "Options": {
+              "BreadTypes": ["Wit", "Bruin", "Ciabatta"],
+              "Toppings": ["Kaas", "Kip curry", "Hummus", "Tonijnsalade", "Ham"],
+              "ExtraPricePerTopping": 0.50
+            }
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": "R003",
+    "RestoName": "Saladebar Vesalius",
+    "Type": "KoudeMaaltijd",
+    "Menus": [
+      {
+        "Id": "M003",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+          {
+            "Id": "MI005",
+            "Name": "Caesarsalade",
+            "Description": "Koude salade met kip, Parmezaan en croutons",
+            "PriceStudent": 4.20,
+            "PriceExtern": 6.80,
+            "Type": "KoudeMaaltijd",
+            "IsVegan": false,
+            "IsVeggie": false
+          },
+          {
+            "Id": "MI006",
+            "Name": "Pastasalade",
+            "Description": "Frisse salade met groenten en pasta",
+            "PriceStudent": 4.00,
+            "PriceExtern": 6.50,
+            "Type": "KoudeMaaltijd",
+            "IsVegan": true,
+            "IsVeggie": true
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "Id": "R004",
+    "RestoName": "Koffiebar Ledeganck",
+    "Type": "Koffiebar",
+    "Menus": [
+      {
+        "Id": "M004",
+        "Date": "2025-10-22T08:00:00",
+        "MenuItems": [
+          {
+            "Id": "MI007",
+            "Name": "Cappuccino",
+            "Description": "Warme koffie met melk",
+            "PriceStudent": 2.00,
+            "PriceExtern": 3.00,
+            "Type": "Koffiebar",
+            "IsVegan": false,
+            "IsVeggie": true
+          },
+          {
+            "Id": "MI008",
+            "Name": "Espresso",
+            "Description": "Sterke zwarte koffie",
+            "PriceStudent": 1.80,
+            "PriceExtern": 2.50,
+            "Type": "Koffiebar",
+            "IsVegan": true,
+            "IsVeggie": true
+          },
+          {
+            "Id": "MI009",
+            "Name": "Croissant",
+            "Description": "Verse boter croissant",
+            "PriceStudent": 1.50,
+            "PriceExtern": 2.00,
+            "Type": "Koffiebar",
+            "IsVegan": false,
+            "IsVeggie": true
+          }
+        ]
+      }
+    ]
+  }
+]

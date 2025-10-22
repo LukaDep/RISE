@@ -13,6 +13,8 @@ using Rise.Services.Campus;
 using Rise.Shared.CampusInfo;
 using Rise.Services.CampusInfo;
 using Rise.Shared.Schedule;
+using Rise.Shared.Menus;
+using Rise.Services.Menus;
 
 namespace Rise.Services;
 
@@ -24,6 +26,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<ICampusService, CampusService>();
         services.AddTransient<DbSeeder>();
+        services.AddScoped<IMenuService, MockMenuService>();
+
 
         services.AddScoped<IScheduleService, MockScheduleService>();
         services.AddScoped<INewsService, NewsService>();
