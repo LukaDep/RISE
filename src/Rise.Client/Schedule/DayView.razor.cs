@@ -58,19 +58,13 @@ namespace Rise.Client.Schedule
             StateHasChanged(); // popup verdwijnt direct
         }
 
-        public string GetEventTypeColor(string type) => type.ToLower() switch
-        {
-            "activerend hoorcollege" => "border-blue-500",
-            "practicum" => "border-green-500",
-            "seminarie" => "border-orange-500",
-            _ => "border-hogent-black-30"
-        };
-
         public string GetEventTypeBgColor(string type) => type.ToLower() switch
         {
-            "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-            "practicum" => "bg-green-100 text-green-800",
-            "seminarie" => "bg-orange-100 text-orange-800",
+            "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
+            "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
+            "practicum" => "bg-hogent-green-15 text-hogent-green",
+            "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
+            "seminarie" => "bg-hogent-business-15 text-hogent-business",
             _ => "bg-hogent-black-15 text-hogent-black"
         };
     }
