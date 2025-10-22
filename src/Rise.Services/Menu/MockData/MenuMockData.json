@@ -1,53 +1,188 @@
 [
-  {
-    "Id": "M001",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      { "Id": "W001", "Name": "Spaghetti Bolognese", "Description": "Met rundsgehakt en tomatensaus", "PriceStudent": 4.50, "PriceExtern": 7.00, "Type": "WarmeMaaltijd", "IsVegan": false, "IsVeggie": false },
-      { "Id": "W002", "Name": "Vegetarische lasagne", "Description": "Met groenten en kaassaus", "PriceStudent": 4.80, "PriceExtern": 7.20, "Type": "WarmeMaaltijd", "IsVegan": false, "IsVeggie": true }
-    ]
-  },
-  {
-    "Id": "M002",
-    "Date": "2025-10-21T11:30:00",
-    "MenuItems": [
-      { "Id": "W003", "Name": "Stoofvlees met frietjes", "Description": "Klassiek gerecht", "PriceStudent": 5.00, "PriceExtern": 7.50, "Type": "WarmeMaaltijd", "IsVegan": false, "IsVeggie": false },
-      { "Id": "W004", "Name": "Curry met groenten", "Description": "Vegetarische curry", "PriceStudent": 4.70, "PriceExtern": 7.00, "Type": "WarmeMaaltijd", "IsVegan": true, "IsVeggie": true }
-    ]
-  },
-  {
-    "Id": "M003",
-    "Date": "2025-10-22T11:30:00",
-    "MenuItems": [
-      { "Id": "W005", "Name": "Vol-au-vent", "Description": "Met kip en champignons", "PriceStudent": 5.20, "PriceExtern": 7.50, "Type": "WarmeMaaltijd", "IsVegan": false, "IsVeggie": false },
-      { "Id": "W006", "Name": "Pasta pesto", "Description": "Vegetarische pasta", "PriceStudent": 4.50, "PriceExtern": 6.80, "Type": "WarmeMaaltijd", "IsVegan": true, "IsVeggie": true }
-    ]
-  },
-  {
-    "Id": "M004",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      { "Id": "B001", "Name": "Basis broodje", "Description": "Stel je broodje samen naar keuze (wit, bruin of ciabatta)", "PriceStudent": 2.80, "PriceExtern": 4.50, "Type": "Belegdebroodje", "IsVegan": false, "IsVeggie": true },
-      { "Id": "B002", "Name": "Extra topping", "Description": "Topping naar keuze (kaas, kip curry, hummus, tonijn, ham, ei)", "PriceStudent": 0.50, "PriceExtern": 0.80, "Type": "Belegdebroodje", "IsVegan": true, "IsVeggie": true }
-    ]
-  },
-  {
-    "Id": "M005",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      { "Id": "S001", "Name": "Saladebasis", "Description": "Stel je salade samen (pasta, rijst of quinoa)", "PriceStudent": 4.00, "PriceExtern": 6.50, "Type": "KoudeMaaltijd", "IsVegan": true, "IsVeggie": true },
-      { "Id": "S002", "Name": "Extra topping", "Description": "Topping naar keuze (kip, hummus, tonijn, feta, groenten...)", "PriceStudent": 0.50, "PriceExtern": 0.80, "Type": "KoudeMaaltijd", "IsVegan": true, "IsVeggie": true }
-    ]
-  },
-  {
-    "Id": "M006",
-    "Date": "2025-10-20T08:00:00",
-    "MenuItems": [
-      { "Id": "K001", "Name": "Espresso", "Description": "Sterke zwarte koffie", "PriceStudent": 1.80, "PriceExtern": 2.50, "Type": "Koffiebar", "IsVegan": true, "IsVeggie": true },
-      { "Id": "K002", "Name": "Cappuccino", "Description": "Warme koffie met melk", "PriceStudent": 2.00, "PriceExtern": 3.00, "Type": "Koffiebar", "IsVegan": false, "IsVeggie": true },
-      { "Id": "K003", "Name": "Latte macchiato", "Description": "Melkkoffie", "PriceStudent": 2.20, "PriceExtern": 3.20, "Type": "Koffiebar", "IsVegan": false, "IsVeggie": true },
-      { "Id": "K004", "Name": "Croissant", "Description": "Verse boter croissant", "PriceStudent": 1.50, "PriceExtern": 2.00, "Type": "Koffiebar", "IsVegan": false, "IsVeggie": true },
-      { "Id": "K005", "Name": "Chocoladebroodje", "Description": "Vers gebakken", "PriceStudent": 1.80, "PriceExtern": 2.20, "Type": "Koffiebar", "IsVegan": false, "IsVeggie": true }
-    ]
-  }
+    {
+        "Id": "M001",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "W001",
+                "Name": "Spaghetti Bolognese",
+                "Description": "Met rundsgehakt en tomatensaus",
+                "PriceStudent": 4.5,
+                "PriceExtern": 7.0,
+                "Type": "WarmeMaaltijd",
+                "IsVegan": false,
+                "IsVeggie": false
+            },
+            {
+                "Id": "W002",
+                "Name": "Vegetarische lasagne",
+                "Description": "Met groenten en kaassaus",
+                "PriceStudent": 4.8,
+                "PriceExtern": 7.2,
+                "Type": "WarmeMaaltijd",
+                "IsVegan": false,
+                "IsVeggie": true
+            }
+        ]
+    },
+    {
+        "Id": "M002",
+        "Date": "2025-10-21T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "W003",
+                "Name": "Stoofvlees met frietjes",
+                "Description": "Klassiek gerecht",
+                "PriceStudent": 5.0,
+                "PriceExtern": 7.5,
+                "Type": "WarmeMaaltijd",
+                "IsVegan": false,
+                "IsVeggie": false
+            },
+            {
+                "Id": "W004",
+                "Name": "Curry met groenten",
+                "Description": "Vegetarische curry",
+                "PriceStudent": 4.7,
+                "PriceExtern": 7.0,
+                "Type": "WarmeMaaltijd",
+                "IsVegan": true,
+                "IsVeggie": true
+            }
+        ]
+    },
+    {
+        "Id": "M003",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "W005",
+                "Name": "Vol-au-vent",
+                "Description": "Met kip en champignons",
+                "PriceStudent": 5.2,
+                "PriceExtern": 7.5,
+                "Type": "WarmeMaaltijd",
+                "IsVegan": false,
+                "IsVeggie": false
+            },
+            {
+                "Id": "W006",
+                "Name": "Pasta pesto",
+                "Description": "Vegetarische pasta",
+                "PriceStudent": 4.5,
+                "PriceExtern": 6.8,
+                "Type": "WarmeMaaltijd",
+                "IsVegan": true,
+                "IsVeggie": true
+            }
+        ]
+    },
+    {
+        "Id": "M004",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "B001",
+                "Name": "Basis broodje",
+                "Description": "Stel je broodje samen naar keuze (wit, bruin of ciabatta)",
+                "PriceStudent": 2.8,
+                "PriceExtern": 4.5,
+                "Type": "Belegdebroodje",
+                "IsVegan": false,
+                "IsVeggie": true
+            },
+            {
+                "Id": "B002",
+                "Name": "Extra topping",
+                "Description": "Topping naar keuze (kaas, kip curry, hummus, tonijn, ham, ei)",
+                "PriceStudent": 0.5,
+                "PriceExtern": 0.8,
+                "Type": "Belegdebroodje",
+                "IsVegan": true,
+                "IsVeggie": true
+            }
+        ]
+    },
+    {
+        "Id": "M005",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "S001",
+                "Name": "Saladebasis",
+                "Description": "Stel je salade samen (pasta, rijst of quinoa)",
+                "PriceStudent": 4.0,
+                "PriceExtern": 6.5,
+                "Type": "KoudeMaaltijd",
+                "IsVegan": true,
+                "IsVeggie": true
+            },
+            {
+                "Id": "S002",
+                "Name": "Extra topping",
+                "Description": "Topping naar keuze (kip, hummus, tonijn, feta, groenten...)",
+                "PriceStudent": 0.5,
+                "PriceExtern": 0.8,
+                "Type": "KoudeMaaltijd",
+                "IsVegan": true,
+                "IsVeggie": true
+            }
+        ]
+    },
+    {
+        "Id": "M006",
+        "Date": "2025-10-20T08:00:00",
+        "MenuItems": [
+            {
+                "Id": "K001",
+                "Name": "Espresso",
+                "Description": "Sterke zwarte koffie",
+                "PriceStudent": 1.8,
+                "PriceExtern": 2.5,
+                "Type": "Koffiebar",
+                "IsVegan": true,
+                "IsVeggie": true
+            },
+            {
+                "Id": "K002",
+                "Name": "Cappuccino",
+                "Description": "Warme koffie met melk",
+                "PriceStudent": 2.0,
+                "PriceExtern": 3.0,
+                "Type": "Koffiebar",
+                "IsVegan": false,
+                "IsVeggie": true
+            },
+            {
+                "Id": "K003",
+                "Name": "Latte macchiato",
+                "Description": "Melkkoffie",
+                "PriceStudent": 2.2,
+                "PriceExtern": 3.2,
+                "Type": "Koffiebar",
+                "IsVegan": false,
+                "IsVeggie": true
+            },
+            {
+                "Id": "K004",
+                "Name": "Croissant",
+                "Description": "Verse boter croissant",
+                "PriceStudent": 1.5,
+                "PriceExtern": 2.0,
+                "Type": "Koffiebar",
+                "IsVegan": false,
+                "IsVeggie": true
+            },
+            {
+                "Id": "K005",
+                "Name": "Chocoladebroodje",
+                "Description": "Vers gebakken",
+                "PriceStudent": 1.8,
+                "PriceExtern": 2.2,
+                "Type": "Koffiebar",
+                "IsVegan": false,
+                "IsVeggie": true
+            }
+        ]
+    }
 ]
