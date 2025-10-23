@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Publish project') {
             steps {
-                sh 'dotnet publish -c Release -o ./publish --no-build'
+                sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
             }
         }
         stage('Deploy to appserver') {
