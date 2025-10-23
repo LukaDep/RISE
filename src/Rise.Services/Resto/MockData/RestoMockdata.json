@@ -1,0 +1,38 @@
+[
+    {
+        "Id": "R1",
+        "Name": "Resto Schoonmeersen",
+        "Description": "Gezellig studentenresto op campus Schoonmeersen.",
+        "BuildingId": "D",
+        "OpeningHours": {
+            "Monday": "08:00-17:00",
+            "Tuesday": "08:00-17:00",
+            "Wednesday": "08:00-17:00",
+            "Thursday": "08:00-17:00",
+            "Friday": "08:00-15:00"
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Cold",
+        "PhoneNumber": "+3291234567",
+        "Email": "resto.schoonmeersen@example.com",
+        "ImageUrl": "/images/resto_schoonmeersen.jpg"
+    },
+    {
+        "Id": "R2",
+        "Name": "Resto Mercator",
+        "Description": "Kleine bistro met warme maaltijden.",
+        "BuildingId": "B",
+        "OpeningHours": {
+            "Monday": "09:00-16:00",
+            "Tuesday": "09:00-16:00",
+            "Wednesday": "09:00-16:00",
+            "Thursday": "09:00-16:00",
+            "Friday": "09:00-14:00"
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Hot",
+        "PhoneNumber": "+3297654321",
+        "Email": "resto.mercator@example.com",
+        "ImageUrl": "/images/resto_mercator.jpg"
+    }
+]
