@@ -31,7 +31,7 @@ pipeline {
         }
         stage('Publish project') {
             steps {
-                sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
+                sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build -p:ExcludeAssets="test;xunit"'
             }
         }
         stage('Deploy to appserver') {
