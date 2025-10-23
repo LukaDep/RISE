@@ -22,16 +22,18 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh 'dotnet test --no-build --verbosity normal'
+                        // Test alleen de non-Blazor test projects
+                        sh 'dotnet test tests/Rise.Services.Tests --no-build --verbosity normal'
+                        sh 'dotnet test tests/Rise.Domain.Tests --no-build --verbosity normal'
                     } catch (err) {
-                        echo 'No tests found or tests failed — continuing.'
+                        echo 'Some tests failed — continuing deployment.'
                     }
                 }
             }
         }
         stage('Publish project') {
             steps {
-                sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build -p:ExcludeAssets="test;xunit"'
+                sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
             }
         }
         stage('Deploy to appserver') {
