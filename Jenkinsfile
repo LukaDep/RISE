@@ -23,28 +23,74 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
-                    # Stop service eerst
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo systemctl stop ${APP_NAME} || true"
-                    
-                    # Maak directory aan en zet permissions
+                    # Kopieer files
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo mkdir -p ${DEPLOY_PATH} && sudo chown vagrant:vagrant ${DEPLOY_PATH}"
-                    
-                    # Kopieer files met rsync (werkt beter met permissions)
                     rsync -av -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
                     
-                    # Start service
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo systemctl start ${APP_NAME}"
+                    # Maak service aan
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
+                        # Stop service als deze bestaat
+                        sudo systemctl stop ${APP_NAME} || true
+                        
+                        # Create service file
+                        sudo tee /etc/systemd/system/${APP_NAME} > /dev/null <<EOF
+[Unit]
+Description=.NET Rise App
+After=network.target
+
+[Service]
+Type=notify
+WorkingDirectory=${DEPLOY_PATH}
+ExecStart=/usr/bin/dotnet ${DEPLOY_PATH}/Rise.Server.dll
+Restart=always
+RestartSec=10
+KillSignal=SIGINT
+Environment=ASPNETCORE_ENVIRONMENT=Production
+Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
+
+[Install]
+WantedBy=multi-user.target
+EOF
+                        
+                        # Activeer service
+                        sudo systemctl daemon-reload
+                        sudo systemctl enable ${APP_NAME}
+                        sudo systemctl start ${APP_NAME}
+                    "
                     '''
                 }
             }
         }
         stage('Verify') {
             steps {
-                sh '''
-                sleep 3
-                curl -f http://${APP_SERVER}:5000/ || echo "App is not responding yet"
-                '''
+                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
+                    sh '''
+                    # Wacht even voor de service om op te starten
+                    sleep 5
+                    
+                    # Check service status
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
+                        echo '=== Service Status ==='
+                        sudo systemctl status ${APP_NAME} --no-pager --lines=5
+                        
+                        echo '=== Application Logs ==='
+                        sudo journalctl -u ${APP_NAME} --no-pager -n 10
+                    "
+                    
+                    # Test de applicatie
+                    echo '=== Testing Application ==='
+                    curl -f http://${APP_SERVER}:5000/ || echo 'Application is starting...'
+                    '''
+                }
             }
+        }
+    }
+    post {
+        success {
+            echo 'Build & Deploy succeeded!'
+        }
+        failure {
+            echo 'Build or Deploy failed.'
         }
     }
 }
