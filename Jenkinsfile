@@ -19,7 +19,7 @@ pipeline {
                 sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
             }
         }
-        stage('Deploy') {
+        stage('Deploy and Debug') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
@@ -27,70 +27,25 @@ pipeline {
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo mkdir -p ${DEPLOY_PATH} && sudo chown vagrant:vagrant ${DEPLOY_PATH}"
                     rsync -av -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
                     
-                    # Maak service aan
+                    # Start de app handmatig om de echte error te zien
+                    echo "=== Starting app manually to see real error ==="
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                        # Stop service als deze bestaat
-                        sudo systemctl stop ${APP_NAME} || true
-                        
-                        # Create service file
-                        sudo tee /etc/systemd/system/${APP_NAME} > /dev/null <<EOF
-[Unit]
-Description=.NET Rise App
-After=network.target
-
-[Service]
-Type=notify
-WorkingDirectory=${DEPLOY_PATH}
-ExecStart=/usr/bin/dotnet ${DEPLOY_PATH}/Rise.Server.dll
-Restart=always
-RestartSec=10
-KillSignal=SIGINT
-Environment=ASPNETCORE_ENVIRONMENT=Production
-Environment=DOTNET_PRINT_TELEMETRY_MESSAGE=false
-
-[Install]
-WantedBy=multi-user.target
-EOF
-                        
-                        # Activeer service
-                        sudo systemctl daemon-reload
-                        sudo systemctl enable ${APP_NAME}
-                        sudo systemctl start ${APP_NAME}
-                    "
-                    '''
-                }
-            }
-        }
-        stage('Verify') {
-            steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
-                    sh '''
-                    # Wacht even voor de service om op te starten
-                    sleep 5
-                    
-                    # Check service status
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                        echo '=== Service Status ==='
-                        sudo systemctl status ${APP_NAME} --no-pager --lines=5
-                        
-                        echo '=== Application Logs ==='
-                        sudo journalctl -u ${APP_NAME} --no-pager -n 10
-                    "
-                    
-                    # Test de applicatie
-                    echo '=== Testing Application ==='
-                    curl -f http://${APP_SERVER}:5000/ || echo 'Application is starting...'
+                        cd ${DEPLOY_PATH}
+                        echo 'Current directory:'
+                        pwd
+                        echo 'Files in directory:'
+                        ls -la
+                        echo 'Starting application...'
+                        dotnet Rise.Server.dll
+                    " || true
                     '''
                 }
             }
         }
     }
     post {
-        success {
-            echo 'Build & Deploy succeeded!'
-        }
-        failure {
-            echo 'Build or Deploy failed.'
+        always {
+            echo 'Pipeline completed - check console output for the actual error'
         }
     }
 }
