@@ -4,43 +4,12 @@ using Rise.Shared.CampusInfo;
 
 namespace Rise.Client.CampusInfo;
 
-public partial class CampusInfo
+public partial class CampusInfo : ComponentBase
 {
     private IEnumerable<CampusInfoDto.Index>? campusInfo;
 
     private ElementReference filterInput;
     private bool isFilterOpen = false;
-
-    [Parameter, SupplyParameterFromQuery]
-    public string? SearchTerm { get; set; } = string.Empty;
-
-    [Inject] public required ICampusInfoService CampusInfoService { get; set; }
-    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
-
-    protected override async Task OnInitializedAsync()
-    {
-        await LoadCampusesAsync();
-    }
-
-    protected override async Task OnParametersSetAsync()
-    {
-        await LoadCampusesAsync();
-    }
-
-    private async Task LoadCampusesAsync()
-    {
-        var request = new QueryRequest.SkipTake
-        {
-            Skip = 0,
-            Take = 50,
-            OrderBy = "Id",
-            SearchTerm = SearchTerm ?? string.Empty
-        };
-
-        var result = await CampusInfoService.GetIndexAsync(request);
-        campusInfo = result.Value.CampusInfo;
-    }
-
     private async Task ToggleFilter()
     {
         isFilterOpen = !isFilterOpen;
@@ -50,23 +19,39 @@ public partial class CampusInfo
         }
     }
 
-    private async Task SearchTermChanged(ChangeEventArgs args)
+    [Parameter, SupplyParameterFromQuery]
+    public string? SearchTerm { get; set; } = default!;
+
+    private string? searchTerm;
+
+    [Inject] public required ICampusInfoService CampusInfoService { get; set; }
+    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+
+    protected override async Task OnParametersSetAsync()
     {
-        var newValue = args.Value?.ToString() ?? string.Empty;
+        QueryRequest.SkipTake request = new()
+        {
+            Skip = 0,
+            Take = 20,
+            SearchTerm = SearchTerm?.Length > 0 ? SearchTerm : "",
+        };
 
-        if (newValue.Equals(SearchTerm, StringComparison.OrdinalIgnoreCase))
-            return;
+        var result = await CampusInfoService.GetIndexAsync(request);
+        campusInfo = result.Value.CampusInfo;
 
-        SearchTerm = newValue;
+    }
 
-        var uri = NavigationManager.GetUriWithQueryParameters(
-            new Dictionary<string, object?>
-            {
-                { nameof(SearchTerm), SearchTerm }
-            });
+    private void SearchTermChanged(ChangeEventArgs args)
+    {
+        searchTerm = args.Value?.ToString();
+        FilterProducts();
+    }
 
-        NavigationManager.NavigateTo(uri, forceLoad: false);
-
-        await LoadCampusesAsync();
+    private void FilterProducts()
+    {
+        Dictionary<string, object?> parameters = new();
+        parameters.Add(nameof(searchTerm), searchTerm);
+        var uri = NavigationManager.GetUriWithQueryParameters(parameters);
+        NavigationManager.NavigateTo(uri);
     }
 }
