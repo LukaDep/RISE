@@ -1,28 +1,23 @@
 pipeline {
     agent any
-
     environment {
         DOTNET_CLI_TELEMETRY_OPTOUT = '1'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
         NUGET_PACKAGES = '/var/lib/jenkins/.nuget/packages'
-        APP_SERVER = '10.11.2.31'
+        APP_SERVER = '192.168.56.50'
         DEPLOY_PATH = '/var/www/dotnetapp'
     }
-
     stages {
-
         stage('Restore dependencies') {
             steps {
-                sh 'dotnet restore --disable-parallel'
+                sh 'dotnet restore'
             }
         }
-
         stage('Build project') {
             steps {
-                sh 'dotnet build --configuration Release --no-restore -m:1 -v:q'
+                sh 'dotnet build --configuration Release --no-restore'
             }
         }
-
         stage('Run tests') {
             steps {
                 script {
@@ -34,32 +29,25 @@ pipeline {
                 }
             }
         }
-
         stage('Publish project') {
             steps {
                 sh 'dotnet publish -c Release -o ./publish'
             }
         }
-
         stage('Deploy to appserver') {
             steps {
                 sshagent(['appserver-ssh']) {
                     sh '''
-                        echo "Deploying to $APP_SERVER..."
-
-                        ssh -o StrictHostKeyChecking=no vicuser@$APP_SERVER "mkdir -p $DEPLOY_PATH"
-
-                        rsync -aq -e "ssh -o StrictHostKeyChecking=no" ./publish/ vicuser@$APP_SERVER:$DEPLOY_PATH/
-
-                        ssh -o StrictHostKeyChecking=no vicuser@$APP_SERVER 'sudo systemctl restart dotnetapp.service || echo "Service not found, skipping restart."'
-
-                        echo "Deployment complete."
+                    echo "Deploying to $APP_SERVER..."
+                    ssh -o StrictHostKeyChecking=no vagrant@$APP_SERVER "mkdir -p $DEPLOY_PATH"
+                    rsync -av -e "ssh -o StrictHostKeyChecking=no" ./publish/ vagrant@$APP_SERVER:$DEPLOY_PATH/
+                    ssh -o StrictHostKeyChecking=no vagrant@$APP_SERVER 'sudo systemctl restart dotnetapp.service || echo "Service not found, skipping restart."'
+                    echo "Deployment complete."
                     '''
                 }
             }
         }
     }
-
     post {
         success {
             echo 'Build & Deploy succeeded.'
