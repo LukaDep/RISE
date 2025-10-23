@@ -39,7 +39,7 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     sh '''
                     echo "Deploying to $APP_SERVER..."
-                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY $SSH_USER@$APP_SERVER "mkdir -p $DEPLOY_PATH"
+                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY $SSH_USER@$APP_SERVER "sudo mkdir -p $DEPLOY_PATH && sudo chown vagrant:vagrant $DEPLOY_PATH"
                     rsync -av -e "ssh -o StrictHostKeyChecking=no -i $SSH_KEY" ./publish/ $SSH_USER@$APP_SERVER:$DEPLOY_PATH/
                     ssh -o StrictHostKeyChecking=no -i $SSH_KEY $SSH_USER@$APP_SERVER 'sudo systemctl restart dotnetapp.service || echo "Service not found, skipping restart."'
                     echo "Deployment complete."
