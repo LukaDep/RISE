@@ -27,14 +27,16 @@ public partial class Index
 
     [Inject] public required INewsService NewsService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
-
-    //dit id voor server-side filtering, als da er nog zou komen
-    // [SupplyParameterFromQuery]
-    // public string? SearchTerm { get; set; }
-
+    
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
-    public string? SearchTerm { get; set; } = default!;
+    public string? SearchTerm { get; set; }
+    
+    private int skip = 0;
+    private int take = 10;
+    private int totalCount;
+    private int currentCount;
+    
 
     private string? searchTerm;
     private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
@@ -44,12 +46,15 @@ public partial class Index
         QueryRequest.SkipTake request = new()
         {
             Skip = 0,
-            Take = 20,
-            SearchTerm = SearchTerm?.Length > 0 ? SearchTerm : "",
+            Take = 10,
+            SearchTerm = SearchTerm,
         };
 
         var result = await NewsService.GetIndexAsync(request);
         news = result.Value.News;
+        totalCount = result.Value.TotalCount;
+        currentCount = result.Value.CurrentCount;
+        skip = 0;
 
     }
 
@@ -96,4 +101,23 @@ public partial class Index
     //         )
     //     );
     // }
+
+    private async Task LoadMoreNews()
+    {
+        skip += take;
+        QueryRequest.SkipTake request = new()
+        {
+            Skip = skip,
+            Take = take,
+            SearchTerm = SearchTerm,
+        };
+
+        var result = await NewsService.GetIndexAsync(request);
+
+        // Append new items to the existing list
+        news = news?.Concat(result.Value.News) ?? result.Value.News;
+        currentCount += result.Value.CurrentCount;
+
+        StateHasChanged();
+    }
 }
