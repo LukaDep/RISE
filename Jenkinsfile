@@ -31,17 +31,17 @@ pipeline {
         }
         stage('Publish project') {
             steps {
-                sh 'dotnet publish -c Release -o ./publish'
+                sh 'dotnet publish -c Release -o ./publish --no-build'
             }
         }
         stage('Deploy to appserver') {
             steps {
-                sshagent(['appserver-ssh']) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY', usernameVariable: 'SSH_USER')]) {
                     sh '''
                     echo "Deploying to $APP_SERVER..."
-                    ssh -o StrictHostKeyChecking=no vagrant@$APP_SERVER "mkdir -p $DEPLOY_PATH"
-                    rsync -av -e "ssh -o StrictHostKeyChecking=no" ./publish/ vagrant@$APP_SERVER:$DEPLOY_PATH/
-                    ssh -o StrictHostKeyChecking=no vagrant@$APP_SERVER 'sudo systemctl restart dotnetapp.service || echo "Service not found, skipping restart."'
+                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY $SSH_USER@$APP_SERVER "mkdir -p $DEPLOY_PATH"
+                    rsync -av -e "ssh -o StrictHostKeyChecking=no -i $SSH_KEY" ./publish/ $SSH_USER@$APP_SERVER:$DEPLOY_PATH/
+                    ssh -o StrictHostKeyChecking=no -i $SSH_KEY $SSH_USER@$APP_SERVER 'sudo systemctl restart dotnetapp.service || echo "Service not found, skipping restart."'
                     echo "Deployment complete."
                     '''
                 }
