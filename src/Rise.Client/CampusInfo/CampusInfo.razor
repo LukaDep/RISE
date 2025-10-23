@@ -1,9 +1,25 @@
 ﻿@page "/campus"
 @using Rise.Client.CampusInfo.Components
 
-<div>
-<div> <h3 class="text-4xl font-bold p-6">Campussen</h3> </div>
+<div class="flex justify-between items-center p-6">
+    
+    <!-- Title -->
+    <h3 class="text-4xl font-bold">Campussen</h3>
 
+    <!-- Search Bar Container -->
+    <div class="relative w-72 flex items-center justify-end">
+        <input @ref="filterInput" type="text" placeholder="Placeholder"
+            class="absolute right-0 h-10 transition-all duration-300 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
+            style="width:@(isFilterOpen ? "94%" : "0px"); opacity:@(isFilterOpen ? '1' : '0'); pointer-events:@(isFilterOpen ? "auto" : "none");"
+            value="@SearchTerm" @oninput="SearchTermChanged" />
+        <button type="button"
+            class="absolute right-0 z-10 p-2 rounded-full hover:bg-hogent-black-15 transition cursor-pointer"
+            @onclick="ToggleFilter">
+            <i class="fa-solid fa-search"></i>
+        </button>
+    </div>
+</div>
+<div>
 @if (campusInfo == null || !campusInfo.Any())
 {
     <p>Campussen worden geladen...</p>
@@ -19,6 +35,7 @@ else
             Faculties="@campus.Faculties" 
             ContactPhone="@campus.ContactPhone"
             Description="@campus.Description"
+            SearchTerm="@SearchTerm"
         />
     }
 }

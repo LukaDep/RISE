@@ -1,72 +1,50 @@
 ﻿@using System.Collections.Generic
-@inject NavigationManager Navigation
-
-<div class="bg-white shadow-sm border rounded-2xl p-4 mb-3 transition-all hover:shadow-md">
-    <div class="flex justify-between items-center cursor-pointer" @onclick="ToggleOpen">
-        <h2 class="font-semibold text-lg">@Name</h2>
-        @if (IsOpen)
-        {
-            <i class="fa-solid fa-chevron-up"></i>
-        }
-        else
-        {
-            <i class="fa-solid fa-chevron-down"></i>
-        }
-    </div>
-
-    @if (IsOpen)
-    {
-        <div class="mt-3 text-sm text-gray-600 space-y-2">
-            <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition" @onclick="GoToPlan">
-                Campus map
-            </button>
-            <p><span class="font-medium">Locatie:</span> @Location</p>
-            @if (Faculties != null && Faculties.Count > 0)
+@if (isVisible)
+{
+    <div class="bg-white shadow-sm border rounded-2xl p-4 mb-3 transition-all hover:shadow-md">
+        <div class="flex justify-between items-center cursor-pointer" @onclick="ToggleOpen">
+            <h2 class="font-semibold text-lg">@Name</h2>
+            @if (IsOpen)
             {
-                <p class="font-medium">Faculteiten:</p>
-                <ul class="list-disc list-inside ml-4">
-                    @foreach (var faculty in Faculties)
-                    {
-                        <li>@faculty</li>
-                    }
-                </ul>
+                <i class="fa-solid fa-chevron-up"></i>
             }
-            @if (!string.IsNullOrWhiteSpace(ContactPhone))
+            else
             {
-                <p><span class="font-medium">Telefoon:</span> @ContactPhone</p>
-            }
-            @if (!string.IsNullOrWhiteSpace(Website))
-            {
-                <p><span class="font-medium">Website:</span> <a href="@Website" class="text-blue-500 hover:underline"
-                        target="_blank">@Website</a></p>
-            }
-            @if (!string.IsNullOrWhiteSpace(Description))
-            {
-                <p><span class="font-medium">Beschrijving:</span> @Description</p>
+                <i class="fa-solid fa-chevron-down"></i>
             }
         </div>
-    }
-</div>
 
-@code {
-    [Parameter] public string Name { get; set; }
-    [Parameter] public string Location { get; set; }
-    [Parameter] public List<string> Faculties { get; set; } = new();
-    [Parameter] public string ContactPhone { get; set; }
-    [Parameter] public string Website { get; set; }
-    [Parameter] public string Description { get; set; }
-    [Parameter] public string Id { get; set; }
-
-    private bool IsOpen { get; set; } = false;
-
-    private void ToggleOpen()
-    {
-        IsOpen = !IsOpen;
-    }
-
-    private void GoToPlan()
-    {
-        // Implement navigation to the campus plan
-        Navigation.NavigateTo($"/campus-plan/{Id}");
-    }
+        @if (IsOpen)
+        {
+            <div class="mt-3 text-sm text-gray-600 space-y-2">
+                <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition" @onclick="GoToPlan">
+                    Campus map
+                </button>
+                <p><span class="font-medium">Locatie:</span> @Location</p>
+                @if (Faculties != null && Faculties.Count > 0)
+                {
+                    <p class="font-medium">Faculteiten:</p>
+                    <ul class="list-disc list-inside ml-4">
+                        @foreach (var faculty in Faculties)
+                        {
+                            <li>@faculty</li>
+                        }
+                    </ul>
+                }
+                @if (!string.IsNullOrWhiteSpace(ContactPhone))
+                {
+                    <p><span class="font-medium">Telefoon:</span> @ContactPhone</p>
+                }
+                @if (!string.IsNullOrWhiteSpace(Website))
+                {
+                    <p><span class="font-medium">Website:</span> <a href="@Website" class="text-blue-500 hover:underline"
+                            target="_blank">@Website</a></p>
+                }
+                @if (!string.IsNullOrWhiteSpace(Description))
+                {
+                    <p><span class="font-medium">Beschrijving:</span> @Description</p>
+                }
+            </div>
+        }
+    </div>
 }
