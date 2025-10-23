@@ -5,11 +5,13 @@ using Rise.Services.Projects;
 using Rise.Services.Schedule;
 using Rise.Services.News;
 using Rise.Shared.News;
-using Rise.Services.Schedule;
+// duplicate using removed
 using Rise.Shared.Products;
 using Rise.Shared.Projects;
 using Rise.Shared.Campus;
 using Rise.Services.Campus;
+using Rise.Services.Resto;
+using Rise.Shared.Resto;
 using Rise.Shared.CampusInfo;
 using Rise.Services.CampusInfo;
 using Rise.Shared.Schedule;
@@ -26,6 +28,7 @@ public static class ServiceCollectionExtensions
         services.AddTransient<DbSeeder>();
 
         services.AddScoped<IScheduleService, MockScheduleService>();
+        services.AddScoped<IRestoService, MockRestoService>();
         services.AddScoped<INewsService, NewsService>();
         services.AddScoped<ICampusInfoService, CampusInfoService>();
         services.AddTransient<DbSeeder>();
