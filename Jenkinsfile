@@ -26,16 +26,14 @@ pipeline {
                     # Stop service eerst
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo systemctl stop ${APP_NAME} || true"
                     
-                    # Kopieer files
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo rm -rf ${DEPLOY_PATH} && sudo mkdir -p ${DEPLOY_PATH}"
-                    scp -i ${SSH_KEY} -o StrictHostKeyChecking=no -r ./publish/* vagrant@${APP_SERVER}:${DEPLOY_PATH}/
+                    # Maak directory aan en zet permissions
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo mkdir -p ${DEPLOY_PATH} && sudo chown vagrant:vagrant ${DEPLOY_PATH}"
                     
-                    # Fix permissions en start service
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                        sudo chown -R vagrant:vagrant ${DEPLOY_PATH}
-                        sudo chmod -R 755 ${DEPLOY_PATH}
-                        sudo systemctl start ${APP_NAME}
-                    "
+                    # Kopieer files met rsync (werkt beter met permissions)
+                    rsync -av -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
+                    
+                    # Start service
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo systemctl start ${APP_NAME}"
                     '''
                 }
             }
