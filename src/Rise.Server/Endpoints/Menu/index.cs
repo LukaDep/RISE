@@ -3,10 +3,6 @@ using Rise.Shared.Common;
 
 namespace Rise.Server.Endpoints.Menus;
 
-/// <summary>
-/// List all menus.
-/// Zie https://fast-endpoints.com/
-/// </summary>
 /// <param name="menuService"></param>
 public class Index(IMenuService menuService)
     : Endpoint<QueryRequest.SkipTake, Result<MenuResponse.Index>>

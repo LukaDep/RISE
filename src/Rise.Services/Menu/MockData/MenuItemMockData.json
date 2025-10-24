@@ -1,0 +1,94 @@
+[
+  {
+    "Id": "1",
+    "Date": "2025-10-20T11:30:00",
+    "MenuItems": [
+      { "Id": "1", "MenuId": "1", "Name": "Bloemkoolsoep", "Description": "Romige bloemkoolsoep, vegetarisch", "Type": "Soep", "PriceStudent": 1.00, "PriceExtern": 2.15, "IsVeggie": true },
+      { "Id": "2", "MenuId": "1", "Name": "Slasoep", "Description": "Lichte soep van sla en groenten", "Type": "Soep", "PriceStudent": 1.00, "PriceExtern": 2.15, "IsVeggie": true },
+
+      { "Id": "3", "MenuId": "1", "Name": "Quornblokjes met zoetzure saus", "Description": "Vegetarische wokschotel met quorn en zoetzure saus", "Type": "WarmeMaaltijd", "PriceStudent": 4.99, "PriceExtern": 11.00, "IsVegan": true, "IsVeggie": true },
+      { "Id": "4", "MenuId": "1", "Name": "Kipfilet", "Description": "Gegrilde kipfilet", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "5", "MenuId": "1", "Name": "Kalkoenlapje", "Description": "Gebakken kalkoenlapje", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+
+      { "Id": "6", "MenuId": "1", "Name": "Zoetzure saus", "Description": "Zoetzure saus op basis van groenten en kruiden", "Type": "Saus", "PriceStudent": 0.50, "PriceExtern": 1.10 },
+
+      { "Id": "7", "MenuId": "1", "Name": "Ananas", "Description": "Verse stukjes ananas", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "8", "MenuId": "1", "Name": "Wokgroenten", "Description": "Mix van seizoensgroenten gewokt", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "9", "MenuId": "1", "Name": "Princessenbonen", "Description": "Gestoomde sperziebonen", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+
+      { "Id": "10", "MenuId": "1", "Name": "Witte rijst", "Description": "Basmatirijst", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+      { "Id": "11", "MenuId": "1", "Name": "Natuuraardappelen", "Description": "Gekookte aardappelen", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+      { "Id": "12", "MenuId": "1", "Name": "Gestoomde krieltjes", "Description": "Krielaardappeltjes gestoomd", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+
+      { "Id": "13", "MenuId": "1", "Name": "Vol au vent met champignons", "Description": "Klassiek gerecht met kip en champignons in roomsaus", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "14", "MenuId": "1", "Name": "Lasagne bolognaise", "Description": "Huisgemaakte lasagne met bolognesesaus", "Type": "Pasta", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+
+      { "Id": "15", "MenuId": "1", "Name": "Worstenbroodje", "Description": "Bladerdeeg gevuld met worst", "Type": "Snack", "PriceStudent": 2.40, "PriceExtern": 3.30 },
+      { "Id": "16", "MenuId": "1", "Name": "Panini tomaat en mozzarella", "Description": "Warme panini met tomaat en mozzarella", "Type": "Snack", "PriceStudent": 2.40, "PriceExtern": 3.30, "IsVeggie": true },
+      { "Id": "17", "MenuId": "1", "Name": "Divers aanbod", "Description": "Assortiment belegde broodjes en basisopties", "Type": "Belegdbroodje", "PriceStudent": 1.70, "PriceExtern": 2.25 },
+
+      { "Id": "80", "MenuId": "1", "Name": "Stuk fruit", "Description": "Seizoensfruit", "Type": "Dessert", "PriceStudent": 0.60, "PriceExtern": 0.80 },
+      { "Id": "81", "MenuId": "1", "Name": "Fruitsla", "Description": "Mix van vers fruit", "Type": "Dessert", "PriceStudent": 1.20, "PriceExtern": 1.65 },
+      { "Id": "82", "MenuId": "1", "Name": "Yoghurt", "Description": "Natuur of met smaak", "Type": "Dessert", "PriceStudent": 1.00, "PriceExtern": 1.30 },
+      { "Id": "83", "MenuId": "1", "Name": "Tiramisu", "Description": "Italiaans dessert met mascarpone", "Type": "Dessert", "PriceStudent": 1.80, "PriceExtern": 2.45 },
+      { "Id": "84", "MenuId": "1", "Name": "Muffin", "Description": "Zachte cake", "Type": "Dessert", "PriceStudent": 1.60, "PriceExtern": 2.10 },
+      { "Id": "85", "MenuId": "1", "Name": "Cookie", "Description": "Koekje met chocolade", "Type": "Dessert", "PriceStudent": 1.20, "PriceExtern": 1.65 },
+
+      { "Id": "86", "MenuId": "1", "Name": "Water 50 cl", "Description": "Plat water 50cl", "Type": "Drank", "PriceStudent": 1.20, "PriceExtern": 1.20 },
+      { "Id": "87", "MenuId": "1", "Name": "Water 1 L", "Description": "Plat water 1L", "Type": "Drank", "PriceStudent": 1.70, "PriceExtern": 1.70 },
+      { "Id": "88", "MenuId": "1", "Name": "Frisdrank gesuikerd 50cl", "Description": "Diverse frisdranken met suiker", "Type": "Drank", "PriceStudent": 1.95, "PriceExtern": 1.95 },
+      { "Id": "89", "MenuId": "1", "Name": "Frisdrank zero 50cl", "Description": "Diverse frisdranken zonder suiker", "Type": "Drank", "PriceStudent": 1.85, "PriceExtern": 1.85 },
+      { "Id": "90", "MenuId": "1", "Name": "Fruitsap Tönissteiner 50cl", "Description": "Fruitsap", "Type": "Drank", "PriceStudent": 2.20, "PriceExtern": 2.20 },
+      { "Id": "91", "MenuId": "1", "Name": "TAO", "Description": "Iced tea TAO", "Type": "Drank", "PriceStudent": 1.80, "PriceExtern": 1.80 },
+      { "Id": "92", "MenuId": "1", "Name": "Bionina", "Description": "Bio frisdrank", "Type": "Drank", "PriceStudent": 2.10, "PriceExtern": 2.10 },
+      { "Id": "93", "MenuId": "1", "Name": "Nalu", "Description": "Energy drink Nalu", "Type": "Drank", "PriceStudent": 2.20, "PriceExtern": 2.20 },
+      { "Id": "94", "MenuId": "1", "Name": "Fristi", "Description": "Fristi drink", "Type": "Drank", "PriceStudent": 1.70, "PriceExtern": 1.70 },
+      { "Id": "95", "MenuId": "1", "Name": "Koude chocomelk", "Description": "Chocomelk koud geserveerd", "Type": "Drank", "PriceStudent": 1.20, "PriceExtern": 1.20 },
+      { "Id": "96", "MenuId": "1", "Name": "Warme chocomelk", "Description": "Chocomelk warm geserveerd", "Type": "Drank", "PriceStudent": 1.60, "PriceExtern": 1.60 },
+      { "Id": "97", "MenuId": "1", "Name": "Koffie / thee", "Description": "Warme drank naar keuze", "Type": "Drank", "PriceStudent": 1.20, "PriceExtern": 1.20 }
+    ]
+  },
+  {
+    "Id": "2",
+    "Date": "2025-10-21T11:30:00",
+    "MenuItems": [
+      { "Id": "18", "MenuId": "2", "Name": "Preisoep", "Description": "Soep van prei", "Type": "Soep", "PriceStudent": 1.00, "PriceExtern": 2.15 },
+      { "Id": "19", "MenuId": "2", "Name": "Paprikasoep", "Description": "Paprikasoep met zachte smaak", "Type": "Soep", "PriceStudent": 1.00, "PriceExtern": 2.15 },
+      { "Id": "20", "MenuId": "2", "Name": "Wokreepjes", "Description": "Vegetarische wokreepjes", "Type": "WarmeMaaltijd", "PriceStudent": 4.99, "PriceExtern": 11.00, "IsVeggie": true },
+      { "Id": "21", "MenuId": "2", "Name": "Pitta reepjes", "Description": "Pittareepjes van kip", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "22", "MenuId": "2", "Name": "Runderreepjes", "Description": "Reepjes rundvlees", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "23", "MenuId": "2", "Name": "Looksaus", "Description": "Romige looksaus", "Type": "Saus", "PriceStudent": 0.50, "PriceExtern": 1.10 },
+      { "Id": "24", "MenuId": "2", "Name": "Paprikareepjes", "Description": "Rode en gele paprika", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "25", "MenuId": "2", "Name": "Oventomaat", "Description": "Geroosterde tomaat", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "26", "MenuId": "2", "Name": "Groentenmix", "Description": "Mix van seizoensgroenten", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "27", "MenuId": "2", "Name": "Patato wedges", "Description": "Krokante aardappelpartjes", "Type": "Zetmeel", "PriceStudent": 2.40, "PriceExtern": 3.60 },
+      { "Id": "28", "MenuId": "2", "Name": "Aardappelen met tuinkruiden", "Description": "Kruidenaardappelen", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+      { "Id": "29", "MenuId": "2", "Name": "Bulgur", "Description": "Gekookte bulgur", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+      { "Id": "30", "MenuId": "2", "Name": "Lasagne bolognaise", "Description": "Huisgemaakte lasagne met bolognesesaus", "Type": "Pasta", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "31", "MenuId": "2", "Name": "Worstenbroodje", "Description": "Bladerdeeg gevuld met worst", "Type": "Snack", "PriceStudent": 2.40, "PriceExtern": 3.30 },
+      { "Id": "32", "MenuId": "2", "Name": "Panini tomaat en mozzarella", "Description": "Warme panini met tomaat en mozzarella", "Type": "Snack", "PriceStudent": 2.40, "PriceExtern": 3.30, "IsVeggie": true },
+      { "Id": "33", "MenuId": "2", "Name": "Divers aanbod", "Description": "Assortiment belegde broodjes en basisopties", "Type": "Belegdbroodje", "PriceStudent": 1.70, "PriceExtern": 2.25 }
+    ]
+  },
+  {
+    "Id": "3",
+    "Date": "2025-10-22T11:30:00",
+    "MenuItems": [
+      { "Id": "34", "MenuId": "3", "Name": "Pastinaaksoep", "Description": "Soep van pastinaak", "Type": "Soep", "PriceStudent": 1.00, "PriceExtern": 2.15 },
+      { "Id": "35", "MenuId": "3", "Name": "Wortelsoep met pompoen en kokosmelk", "Description": "Wortelsoep met pompoen en kokosmelk, vegetarisch", "Type": "Soep", "PriceStudent": 1.00, "PriceExtern": 2.15, "IsVeggie": true },
+      { "Id": "36", "MenuId": "3", "Name": "Stoofpotje", "Description": "Stoofpotje van vlees", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "37", "MenuId": "3", "Name": "Kalkoenstoofpot", "Description": "Stoofpot van kalkoen", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "38", "MenuId": "3", "Name": "Kalfsblanquette met brunoise", "Description": "Romige kalfsblanquette met groenten", "Type": "WarmeMaaltijd", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "39", "MenuId": "3", "Name": "Erwten en wortelen", "Description": "Gekookte erwten en wortelen", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "40", "MenuId": "3", "Name": "Gebakken witloof", "Description": "Gebakken witloof", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "41", "MenuId": "3", "Name": "Gestoomde broccoli", "Description": "Broccoli gestoomd", "Type": "Groente", "PriceStudent": 1.50, "PriceExtern": 3.30 },
+      { "Id": "42", "MenuId": "3", "Name": "Natuuraardappelen", "Description": "Gekookte aardappelen", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+      { "Id": "43", "MenuId": "3", "Name": "Couscous met rozemarijn", "Description": "Couscous gekruid met rozemarijn", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+      { "Id": "44", "MenuId": "3", "Name": "Gebakken krieltjes", "Description": "Krieltjes krokant gebakken", "Type": "Zetmeel", "PriceStudent": 1.80, "PriceExtern": 2.65 },
+      { "Id": "45", "MenuId": "3", "Name": "Lasagne bolognaise", "Description": "Huisgemaakte lasagne met bolognesesaus", "Type": "Pasta", "PriceStudent": 5.30, "PriceExtern": 11.70 },
+      { "Id": "46", "MenuId": "3", "Name": "Worstenbroodje", "Description": "Bladerdeeg gevuld met worst", "Type": "Snack", "PriceStudent": 2.40, "PriceExtern": 3.30 },
+      { "Id": "47", "MenuId": "3", "Name": "Panini tomaat en mozzarella", "Description": "Warme panini met tomaat en mozzarella", "Type": "Snack", "PriceStudent": 2.40, "PriceExtern": 3.30, "IsVeggie": true },
+      { "Id": "48", "MenuId": "3", "Name": "Divers aanbod", "Description": "Assortiment belegde broodjes en basisopties", "Type": "Belegdbroodje", "PriceStudent": 1.70, "PriceExtern": 2.25 }
+    ]
+  }
+]

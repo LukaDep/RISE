@@ -14,6 +14,8 @@ using Rise.Client.Schedule;
 using Rise.Shared.News;
 using Rise.Shared.Products;
 using Rise.Shared.Schedule;
+using Rise.Client.Menus;
+using Rise.Shared.Menus;
 
 try
 {
@@ -71,7 +73,10 @@ try
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });
-
+    builder.Services.AddHttpClient<IMenuService, MenuClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
     await builder.Build().RunAsync();
 }
 catch (Exception ex)

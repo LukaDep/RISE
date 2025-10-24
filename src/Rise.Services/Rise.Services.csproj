@@ -18,6 +18,9 @@
     </ItemGroup>
 
     <ItemGroup>
+      <None Update="Menu\MockData\MenuItemMockData.json">
+    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+  </None>
       <Folder Include="CampusInfo\MockData\" />
     </ItemGroup>
 

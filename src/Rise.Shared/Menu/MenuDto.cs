@@ -15,6 +15,7 @@ namespace Rise.Shared.Menus
         public class Index
         {
             public required string Id { get; set; }
+            public required string MenuId { get; set; }
             public required string Name { get; set; }
             public required string Description { get; set; }
             public double PriceStudent { get; set; }
@@ -25,11 +26,18 @@ namespace Rise.Shared.Menus
         }
     }
 
-    public enum FoodType
-    {
-        WarmeMaaltijd,
-        KoudeMaaltijd,
-        Belegdebroodje,
-        Koffiebar
+   public enum FoodType{
+    WarmeMaaltijd,
+    KoudeMaaltijd,
+    Belegdbroodje,
+    Koffiebar,
+    Soep,
+    Groente,
+    Saus,
+    Zetmeel,
+    Dessert,
+    Drank,
+    Snack,
+    Pasta
     }
-}
+}   

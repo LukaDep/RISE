@@ -17,7 +17,7 @@ public class MockMenuService : IMenuService
     {
         var currentDirectory = Directory.GetCurrentDirectory();
         // CurrentDirectory is Rise.Server → ga één niveau omhoog en dan naar Rise.Services
-        _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Menu", "MockData", "MenuMockData.json");
+        _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Menu", "MockData", "MenuItemMockData.json");
 
         Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
         Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
