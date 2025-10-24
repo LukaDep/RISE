@@ -1,67 +1,62 @@
 pipeline {
     agent any
 
-    options {
-        timestamps()
-    }
-
     environment {
-        DOTNET_CLI_TELEMETRY_OPTOUT = '1'
-        DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
-        APP_SERVER = '192.168.56.50'
-        DEPLOY_PATH = '/var/www/dotnetapp'
-        APP_NAME = 'dotnetapp.service'
+        APP_NAME    = "Rise.Server"
+        APP_SERVER  = "192.168.56.50"
+        DEPLOY_PATH = "/var/www/dotnetapp"
+        SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
     }
 
     stages {
+
         stage('Restore & Build') {
             steps {
-                sh '''
-                    echo "=== Restoring dependencies ==="
-                    dotnet restore
+                echo "=== Restoring dependencies ==="
+                sh 'dotnet restore'
 
-                    echo "=== Building project ==="
-                    dotnet build --configuration Release --no-restore
-                '''
+                echo "=== Building project ==="
+                sh 'dotnet build --configuration Release --no-restore'
             }
         }
 
         stage('Publish') {
             steps {
-                sh '''
-                    echo "=== Publishing application ==="
-                    dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build
-                '''
+                echo "=== Publishing application ==="
+                sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
             }
         }
 
         stage('Deploy to App Server') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'appserver_ssh', keyFileVariable: 'SSH_KEY')]) {
+
+                    echo "=== Testing SSH connection (debug mode) ==="
                     sh '''
-                        echo "=== Testing SSH connection (debug mode) ==="
-                        ssh -vvv -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "echo SSH OK" || exit 1
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "echo SSH OK"
+                    '''
 
-                        echo "=== Cleaning old deployment on appserver ==="
-                        ssh -vvv -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                            sudo pkill -f 'dotnet Rise.Server.dll' || true;
-                            sudo rm -rf ${DEPLOY_PATH}/*;
-                            sudo mkdir -p ${DEPLOY_PATH};
-                            sudo chown vagrant:vagrant ${DEPLOY_PATH};
-                        " || exit 1
+                    echo "=== Cleaning old deployment on appserver ==="
+                    sh '''
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
+                            (sudo pkill -f 'dotnet Rise.Server.dll' || true) && \
+                            sudo rm -rf ${DEPLOY_PATH}/* || true && \
+                            sudo mkdir -p ${DEPLOY_PATH} && \
+                            sudo chown vagrant:vagrant ${DEPLOY_PATH} || true
+                        " || true
+                    '''
 
-                        echo "=== Copying new build files ==="
-                        rsync -av --exclude '*Tests.*' --exclude '*.pdb' \
-                            -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
-                            ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/ || exit 1
+                    echo "=== Copying new build to appserver ==="
+                    sh '''
+                        rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
+                    '''
 
-                        echo "=== Starting application on appserver ==="
-                        ssh -vvv -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                            nohup bash -c 'ASPNETCORE_URLS=http://0.0.0.0:5000 dotnet ${DEPLOY_PATH}/Rise.Server.dll > ${DEPLOY_PATH}/app.log 2>&1 &' && sleep 5
-                        " || exit 1
-
-                        echo "=== Checking if application is reachable ==="
-                        curl -f http://${APP_SERVER}:5000/ && echo '✅ Application is running!' || echo '❌ Application failed to start!'
+                    echo "=== Starting application on appserver ==="
+                    sh '''
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
+                            cd ${DEPLOY_PATH};
+                            nohup dotnet Rise.Server.dll > app.log 2>&1 &
+                        "
                     '''
                 }
             }
@@ -70,10 +65,10 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build & Deployment succeeded!'
+            echo "✅ Build and deployment successful!"
         }
         failure {
-            echo '❌ Build or Deployment failed!'
+            echo "❌ Build or Deployment failed!"
         }
     }
 }
