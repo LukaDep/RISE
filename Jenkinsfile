@@ -1,6 +1,11 @@
 pipeline {
     agent any
 
+    options {
+        ansiColor('xterm')
+        timestamps()
+    }
+
     environment {
         DOTNET_CLI_TELEMETRY_OPTOUT = '1'
         DOTNET_SKIP_FIRST_TIME_EXPERIENCE = 'true'
@@ -10,6 +15,18 @@ pipeline {
     }
 
     stages {
+        stage('Environment Info') {
+            steps {
+                sh '''
+                    echo "=== Environment Info ==="
+                    whoami
+                    hostname
+                    dotnet --info
+                    ls -la /var/lib/jenkins/.ssh || true
+                '''
+            }
+        }
+
         stage('Restore & Build') {
             steps {
                 sh '''
@@ -35,6 +52,9 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
+                        echo "=== Testing SSH connection ==="
+                        ssh -v -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "echo SSH connection OK"
+
                         echo "=== Cleaning old deployment on appserver ==="
                         ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
                             sudo pkill -f 'dotnet Rise.Server.dll' || true;
@@ -45,8 +65,8 @@ pipeline {
 
                         echo "=== Copying new build files ==="
                         rsync -av --exclude '*Tests.*' --exclude '*.pdb' \
-                          -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
-                          ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
+                            -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
+                            ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
 
                         echo "=== Starting application on appserver ==="
                         ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
@@ -54,7 +74,7 @@ pipeline {
                         "
 
                         echo "=== Checking if application is reachable ==="
-                        curl -f http://${APP_SERVER}:5000/ && echo 'Application is running!' || echo 'Application failed to start!'
+                        curl -f http://${APP_SERVER}:5000/ && echo '✅ Application is running!' || echo '❌ Application failed to start!'
                     '''
                 }
             }
