@@ -18,18 +18,6 @@ pipeline {
             steps {
                 sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
                 
-                // Verwijder test assemblies na publish
-                sh '''
-                cd ./publish
-                # Verwijder test-related files
-                rm -f *Tests.*
-                rm -f Serilog.Sinks.XUnit.*
-                rm -f xunit.*
-                rm -f coverlet.*
-                rm -f NSubstitute.*
-                rm -f Shouldly.*
-                rm -rf CodeCoverage/
-                '''
             }
         }
         stage('Deploy') {
