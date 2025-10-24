@@ -36,7 +36,12 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
                     sh '''
                         echo "=== Cleaning old deployment on appserver ==="
-                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "sudo pkill -f 'dotnet Rise.Server.dll' || true && sudo rm -rf ${DEPLOY_PATH}/* && sudo mkdir -p ${DEPLOY_PATH} && sudo chown vagrant:vagrant ${DEPLOY_PATH}"
+                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
+                            sudo pkill -f 'dotnet Rise.Server.dll' || true;
+                            sudo rm -rf ${DEPLOY_PATH}/*;
+                            sudo mkdir -p ${DEPLOY_PATH};
+                            sudo chown vagrant:vagrant ${DEPLOY_PATH};
+                        "
 
                         echo "=== Copying new build files ==="
                         rsync -av --exclude '*Tests.*' --exclude '*.pdb' \
@@ -58,10 +63,3 @@ pipeline {
 
     post {
         success {
-            echo '✅ Build & Deployment succeeded!'
-        }
-        failure {
-            echo '❌ Build or Deployment failed!'
-        }
-    }
-}
