@@ -26,18 +26,19 @@ namespace Rise.Shared.Menus
         }
     }
 
-   public enum FoodType{
-    WarmeMaaltijd,
-    KoudeMaaltijd,
-    Belegdbroodje,
-    Koffiebar,
-    Soep,
-    Groente,
-    Saus,
-    Zetmeel,
-    Dessert,
-    Drank,
-    Snack,
-    Pasta
+    public enum FoodType
+    {
+        WarmeMaaltijd,
+        KoudeMaaltijd,
+        Belegdbroodje,
+        Koffiebar,
+        Soep,
+        Groente,
+        Saus,
+        Zetmeel,
+        Dessert,
+        Drank,
+        Snack,
+        Pasta
     }
-}   
+}
