@@ -29,7 +29,7 @@ pipeline {
 
         stage('Deploy to App Server') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'appserver_ssh', keyFileVariable: 'SSH_KEY')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
 
                     echo "=== Testing SSH connection (debug mode) ==="
                     sh '''
