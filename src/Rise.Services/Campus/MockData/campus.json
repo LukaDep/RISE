@@ -26,11 +26,61 @@
         "Latitude": 51.045049214656395,
         "Longitude": 3.7146069594104048,
         "Buildings": [
-            { "Id": "GBPAU", "CampusId": "GB", "Name": "Pauli", "Address": "J. Kluyskensstraat 2, 9000 Gent", "Type": "building", "Latitude": 51.045049214656395, "Longitude": 3.7146069594104048, "X": 0, "Y": 0 },
-            { "Id": "GBCLO", "CampusId": "GB", "Name": "Cloquet", "Address": "Pasteurlaan 2, 9000 Gent", "Type": "building", "Latitude": 51.045049214656395, "Longitude": 3.7146069594104048, "X": 0, "Y": 0 },
-            { "Id": "GBMAR", "CampusId": "GB", "Name": "Marissal", "Address": "Pasteurlaan 2, 9000 Gent", "Type": "building", "Latitude": 51.045049214656395, "Longitude": 3.7146069594104048, "X": 0, "Y": 0 },
-            { "Id": "GBKAA", "CampusId": "GB", "Name": "Bijlokekaai", "Address": "Bijlokekaai 5, 9000 Gent", "Type": "building", "Latitude": 51.045049214656395, "Longitude": 3.7146069594104048, "X": 0, "Y": 0 },
-            { "Id": "GBKUB", "CampusId": "GB", "Name": "Kunstenbibliotheek Huis van de Abdis", "Address": "Godshuizenlaan 2, 9000 Gent", "Type": "library", "Latitude": 51.045049214656395, "Longitude": 3.7146069594104048, "X": 0, "Y": 0 }
+            {
+                "Id": "GBPAU",
+                "CampusId": "GB",
+                "Name": "Pauli",
+                "Address": "J. Kluyskensstraat 2, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.045049214656395,
+                "Longitude": 3.7146069594104048,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GBCLO",
+                "CampusId": "GB",
+                "Name": "Cloquet",
+                "Address": "Pasteurlaan 2, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.045049214656395,
+                "Longitude": 3.7146069594104048,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GBMAR",
+                "CampusId": "GB",
+                "Name": "Marissal",
+                "Address": "Pasteurlaan 2, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.045049214656395,
+                "Longitude": 3.7146069594104048,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GBKAA",
+                "CampusId": "GB",
+                "Name": "Bijlokekaai",
+                "Address": "Bijlokekaai 5, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.045049214656395,
+                "Longitude": 3.7146069594104048,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GBKUB",
+                "CampusId": "GB",
+                "Name": "Kunstenbibliotheek Huis van de Abdis",
+                "Address": "Godshuizenlaan 2, 9000 Gent",
+                "Type": "library",
+                "Latitude": 51.045049214656395,
+                "Longitude": 3.7146069594104048,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -46,9 +96,39 @@
         "Latitude": 51.05376586462268,
         "Longitude": 3.7265563026441186,
         "Buildings": [
-            { "Id": "GGSBK", "CampusId": "GGS", "Name": "Biezekapelstraat", "Address": "Hoogpoort 64, 9000 Gent", "Type": "building", "Latitude": 51.05376586462268, "Longitude": 3.7265563026441186, "X": 0, "Y": 0 },
-            { "Id": "GGSNE", "CampusId": "GGS", "Name": "Nederpolder", "Address": "Nederpolder 26, 9000 Gent", "Type": "building", "Latitude": 51.05376586462268, "Longitude": 3.7265563026441186, "X": 0, "Y": 0 },
-            { "Id": "GGSPA", "CampusId": "GGS", "Name": "Paddenhoek", "Address": "Paddenhoek 12, 9000 Gent", "Type": "building", "Latitude": 51.05376586462268, "Longitude": 3.7265563026441186, "X": 0, "Y": 0 }
+            {
+                "Id": "GGSBK",
+                "CampusId": "GGS",
+                "Name": "Biezekapelstraat",
+                "Address": "Hoogpoort 64, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.05376586462268,
+                "Longitude": 3.7265563026441186,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GGSNE",
+                "CampusId": "GGS",
+                "Name": "Nederpolder",
+                "Address": "Nederpolder 26, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.05376586462268,
+                "Longitude": 3.7265563026441186,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GGSPA",
+                "CampusId": "GGS",
+                "Name": "Paddenhoek",
+                "Address": "Paddenhoek 12, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.05376586462268,
+                "Longitude": 3.7265563026441186,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -64,7 +144,17 @@
         "Latitude": 51.0365068204106,
         "Longitude": 3.724652944967813,
         "Buildings": [
-            { "Id": "GLEDE", "CampusId": "GLEDE", "Name": "Ledeganck", "Address": "K.L.Ledeganckstraat 8, 9000 Gent", "Type": "building", "Latitude": 51.0365068204106, "Longitude": 3.724652944967813, "X": 0, "Y": 0 }
+            {
+                "Id": "GLEDE",
+                "CampusId": "GLEDE",
+                "Name": "Ledeganck",
+                "Address": "K.L.Ledeganckstraat 8, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0365068204106,
+                "Longitude": 3.724652944967813,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -94,7 +184,17 @@
         "Latitude": 51.01450594534445,
         "Longitude": 3.787075759078285,
         "Buildings": [
-            { "Id": "GMELL", "CampusId": "GMELL", "Name": "Melle", "Address": "Brusselsesteenweg 161, 9090 Melle", "Type": "building", "Latitude": 51.01450594534445, "Longitude": 3.787075759078285, "X": 0, "Y": 0 }
+            {
+                "Id": "GMELL",
+                "CampusId": "GMELL",
+                "Name": "Melle",
+                "Address": "Brusselsesteenweg 161, 9090 Melle",
+                "Type": "building",
+                "Latitude": 51.01450594534445,
+                "Longitude": 3.787075759078285,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -110,10 +210,50 @@
         "Latitude": 51.04246772832513,
         "Longitude": 3.715410727376597,
         "Buildings": [
-            { "Id": "GMRCC", "CampusId": "GMRC", "Name": "Gebouw C", "Address": "Nonnemeersstraat 19-21, 9000 Gent", "Type": "building", "Latitude": 51.0478, "Longitude": 3.7315, "X": 0, "Y": 0 },
-            { "Id": "GMRCD", "CampusId": "GMRC", "Name": "Gebouw D", "Address": "Nonnemeersstraat 15-17, 9000 Gent", "Type": "building", "Latitude": 51.0478, "Longitude": 3.7315, "X": 0, "Y": 0 },
-            { "Id": "GMRCE", "CampusId": "GMRC", "Name": "Gebouw E", "Address": "Nonnemeersstraat 24, 9000 Gent", "Type": "building", "Latitude": 51.0478, "Longitude": 3.7315, "X": 0, "Y": 0 },
-            { "Id": "GMRCG", "CampusId": "GMRC", "Name": "Gebouw G", "Address": "Henleykaai 84, 9000 Gent", "Type": "building", "Latitude": 51.0478, "Longitude": 3.7315, "X": 0, "Y": 0 }
+            {
+                "Id": "GMRCC",
+                "CampusId": "GMRC",
+                "Name": "Gebouw C",
+                "Address": "Nonnemeersstraat 19-21, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0478,
+                "Longitude": 3.7315,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GMRCD",
+                "CampusId": "GMRC",
+                "Name": "Gebouw D",
+                "Address": "Nonnemeersstraat 15-17, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0478,
+                "Longitude": 3.7315,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GMRCE",
+                "CampusId": "GMRC",
+                "Name": "Gebouw E",
+                "Address": "Nonnemeersstraat 24, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0478,
+                "Longitude": 3.7315,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GMRCG",
+                "CampusId": "GMRC",
+                "Name": "Gebouw G",
+                "Address": "Henleykaai 84, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0478,
+                "Longitude": 3.7315,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -129,14 +269,94 @@
         "Latitude": 51.0361,
         "Longitude": 3.7039,
         "Buildings": [
-            { "Id": "GSCHB", "CampusId": "GSCH", "Name": "Gebouw B", "Address": "Valentin Vaerwyckweg 1, 9000 Gent", "Type": "building", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 },
-            { "Id": "GSCHC", "CampusId": "GSCH", "Name": "Gebouw C", "Address": "Valentin Vaerwyckweg 1, 9000 Gent", "Type": "building", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 },
-            { "Id": "GSCHD", "CampusId": "GSCH", "Name": "Gebouw D", "Address": "Valentin Vaerwyckweg 1, 9000 Gent", "Type": "building", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 },
-            { "Id": "GSCHE", "CampusId": "GSCH", "Name": "Gebouw E", "Address": "Valentin Vaerwyckweg 1, 9000 Gent", "Type": "building", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 },
-            { "Id": "GSCHP", "CampusId": "GSCH", "Name": "Gebouw P", "Address": "Valentin Vaerwyckweg 1, 9000 Gent", "Type": "building", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 },
-            { "Id": "GSCHS", "CampusId": "GSCH", "Name": "Sporthal", "Address": "Sint-Denijslaan 251, 9000 Gent", "Type": "sport", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 },
-            { "Id": "GSCHT", "CampusId": "GSCH", "Name": "Gebouw T", "Address": "Voskenslaan 364A, 9000 Gent", "Type": "building", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 },
-            { "Id": "GSCHR", "CampusId": "GSCH", "Name": "Studentenresidentie", "Address": "Overwale 42, 9000 Gent", "Type": "residence", "Latitude": 51.0361, "Longitude": 3.7039, "X": 0, "Y": 0 }
+            {
+                "Id": "GSCHB",
+                "CampusId": "GSCH",
+                "Name": "Gebouw B",
+                "Address": "Valentin Vaerwyckweg 1, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GSCHC",
+                "CampusId": "GSCH",
+                "Name": "Gebouw C",
+                "Address": "Valentin Vaerwyckweg 1, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GSCHD",
+                "CampusId": "GSCH",
+                "Name": "Gebouw D",
+                "Address": "Valentin Vaerwyckweg 1, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GSCHE",
+                "CampusId": "GSCH",
+                "Name": "Gebouw E",
+                "Address": "Valentin Vaerwyckweg 1, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GSCHP",
+                "CampusId": "GSCH",
+                "Name": "Gebouw P",
+                "Address": "Valentin Vaerwyckweg 1, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GSCHS",
+                "CampusId": "GSCH",
+                "Name": "Sporthal",
+                "Address": "Sint-Denijslaan 251, 9000 Gent",
+                "Type": "sport",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GSCHT",
+                "CampusId": "GSCH",
+                "Name": "Gebouw T",
+                "Address": "Voskenslaan 364A, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            },
+            {
+                "Id": "GSCHR",
+                "CampusId": "GSCH",
+                "Name": "Studentenresidentie",
+                "Address": "Overwale 42, 9000 Gent",
+                "Type": "residence",
+                "Latitude": 51.0361,
+                "Longitude": 3.7039,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -152,7 +372,17 @@
         "Latitude": 51.02000885717049,
         "Longitude": 3.7273519431215525,
         "Buildings": [
-            { "Id": "GVESA", "CampusId": "GVESA", "Name": "Vesalius", "Address": "Keramiekstraat 80, 9000 Gent", "Type": "building", "Latitude": 51.02000885717049, "Longitude": 3.7273519431215525, "X": 0, "Y": 0 }
+            {
+                "Id": "GVESA",
+                "CampusId": "GVESA",
+                "Name": "Vesalius",
+                "Address": "Keramiekstraat 80, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.02000885717049,
+                "Longitude": 3.7273519431215525,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -168,7 +398,17 @@
         "Latitude": 50.96222479137004,
         "Longitude": 3.7612173100371185,
         "Buildings": [
-            { "Id": "GBPRO", "CampusId": "GBPRO", "Name": "Proefhoeve", "Address": "Diepestraat 1, 9820 Merelbeke-Bottelare", "Type": "building", "Latitude": 50.96222479137004, "Longitude": 3.7612173100371185, "X": 0, "Y": 0 }
+            {
+                "Id": "GBPRO",
+                "CampusId": "GBPRO",
+                "Name": "Proefhoeve",
+                "Address": "Diepestraat 1, 9820 Merelbeke-Bottelare",
+                "Type": "building",
+                "Latitude": 50.96222479137004,
+                "Longitude": 3.7612173100371185,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -184,7 +424,17 @@
         "Latitude": 51.02998376115468,
         "Longitude": 3.6885711026262613,
         "Buildings": [
-            { "Id": "GBFTI", "CampusId": "GBFTI", "Name": "FTI-lab", "Address": "Buchtenstraat 9 - 11 ,9051 Gent", "Type": "lab", "Latitude": 51.02998376115468, "Longitude": 3.6885711026262613, "X": 0, "Y": 0 }
+            {
+                "Id": "GBFTI",
+                "CampusId": "GBFTI",
+                "Name": "FTI-lab",
+                "Address": "Buchtenstraat 9 - 11 ,9051 Gent",
+                "Type": "lab",
+                "Latitude": 51.02998376115468,
+                "Longitude": 3.6885711026262613,
+                "X": 0,
+                "Y": 0
+            }
         ]
     },
     {
@@ -200,7 +450,17 @@
         "Latitude": 51.05259680094251,
         "Longitude": 3.728838938877625,
         "Buildings": [
-            { "Id": "GDWIJ", "CampusId": "GDWIJ", "Name": "De Wijnaert", "Address": "Geraard de Duivelstraat 5, 9000 Gent", "Type": "building", "Latitude": 51.05259680094251, "Longitude": 3.728838938877625, "X": 0, "Y": 0 }
+            {
+                "Id": "GDWIJ",
+                "CampusId": "GDWIJ",
+                "Name": "De Wijnaert",
+                "Address": "Geraard de Duivelstraat 5, 9000 Gent",
+                "Type": "building",
+                "Latitude": 51.05259680094251,
+                "Longitude": 3.728838938877625,
+                "X": 0,
+                "Y": 0
+            }
         ]
     }
 ]
