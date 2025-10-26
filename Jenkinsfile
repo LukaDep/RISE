@@ -11,6 +11,9 @@ pipeline {
 
         stage('Restore & Build') {
             steps {
+                echo "=== Ensuring required package is installed ==="
+                sh 'dotnet add src/Rise.Server/Rise.Server.csproj package Serilog.Expressions --version 5.0.0 || true'
+
                 echo "=== Restoring dependencies ==="
                 sh 'dotnet restore'
 
@@ -21,36 +24,35 @@ pipeline {
 
         stage('Publish') {
             steps {
-                echo "=== Publishing application ==="
+                echo "=== Publishing ==="
                 sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
             }
         }
 
         stage('Deploy to App Server') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: "appserver-ssh", keyFileVariable: "SSH_KEY")]) {
 
-                    echo "=== Stopping old app ==="
+                    echo "=== Stopping existing app ==="
                     sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            pkill -f 'dotnet Rise.Server.dll' || true
-                        "
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "pkill -f 'dotnet Rise.Server.dll' || true"
                     '''
 
-                    echo "=== Copying published files ==="
+                    echo "=== Syncing new build ==="
                     sh '''
                         rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
-                          ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
+                            ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
-                    echo "=== Starting new version ==="
+                    echo "=== Starting application ==="
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            nohup bash -c 'ASPNETCORE_URLS=http://0.0.0.0:5000 dotnet ${DEPLOY_PATH}/Rise.Server.dll > ${DEPLOY_PATH}/app.log 2>&1 &' 
+                            cd ${DEPLOY_PATH} &&
+                            nohup bash -c 'ASPNETCORE_URLS=http://0.0.0.0:5000 dotnet Rise.Server.dll > app.log 2>&1 &' 
                         "
                     '''
 
-                    echo "=== Checking service health ==="
+                    echo "=== Checking health ==="
                     sh '''
                         sleep 5
                         curl -f http://$APP_SERVER:5000/ || exit 1
@@ -62,14 +64,14 @@ pipeline {
 
     post {
         success {
-            echo "✅ Build & Deployment success!"
+            echo "✅ Success! Deployed & running!"
         }
         failure {
-            echo "❌ Build or Deployment failed! Showing logs:"
-            sh """
+            echo "❌ Build or Deploy failed! Showing logs..."
+            sh '''
                 ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@$APP_SERVER \
-                'tail -n 200 ${DEPLOY_PATH}/app.log || echo \"No logs available\"'
-            """
+                "tail -n 200 ${DEPLOY_PATH}/app.log"
+            '''
         }
     }
 }
