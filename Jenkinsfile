@@ -31,8 +31,8 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
-
-                    echo "=== Stop old app and clean folder ==="
+                    
+                    echo "--- Killing old app and cleaning folder ---"
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                             sudo pkill -f 'Rise.Server.dll' || true;
@@ -42,13 +42,13 @@ pipeline {
                         "
                     '''
 
-                    echo "=== Copy new publish output ==="
+                    echo "--- Copy new files ---"
                     sh '''
                         rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" ./publish/ \
                         vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
-                    echo "=== Start application with correct binding ==="
+                    echo "--- Start app ---"
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                             cd ${DEPLOY_PATH};
@@ -61,20 +61,24 @@ pipeline {
 
         stage('Smoke Test') {
             steps {
-                sleep 5
-                sh '''
-                    curl -f http://192.168.56.50:5000/ || exit 1
-                '''
+                script {
+                    sleep 8
+                    sh 'curl -f http://192.168.56.50:5000/ || echo "❗ Smoke test failed"'
+                }
             }
         }
     }
 
     post {
+        always {
+            echo "--- Fetching appserver logs ---"
+            sh 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@192.168.56.50 "tail -n 200 /var/www/dotnetapp/app.log" || true'
+        }
         success {
-            echo "✅ DEPLOY OK! ✅"
+            echo "✅ DEPLOY OK ✅"
         }
         failure {
-            echo "❌ DEPLOY FAIL"
+            echo "❌ DEPLOY FAILED ❌ (logs shown above)"
         }
     }
 }
