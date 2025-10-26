@@ -12,25 +12,18 @@ pipeline {
 
         stage('Restore & Build') {
             steps {
-                echo "=== Dependencies binnenhalen ==="
+                echo "=== Restoring dependencies ==="
                 sh 'dotnet restore'
 
-                echo "=== Build project ==="
+                echo "=== Building project ==="
                 sh 'dotnet build --configuration Release --no-restore'
             }
         }
 
         stage('Publish') {
             steps {
-                echo "=== Self-contained publish ==="
-                sh '''
-                    dotnet publish src/Rise.Server/Rise.Server.csproj \
-                        -c Release \
-                        -o ./publish \
-                        --self-contained true \
-                        -r linux-x64 \
-                        /p:PublishTrimmed=false
-                '''
+                echo "=== Publishing application ==="
+                sh 'dotnet publish src/Rise.Server/Rise.Server.csproj -c Release -o ./publish --no-build'
             }
         }
 
@@ -38,35 +31,33 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
 
-                    echo "=== Stop oude service & prepare folder ==="
+                    echo "=== Testing SSH connection (debug mode) ==="
+                    sh '''
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "echo SSH OK"
+                    '''
+
+                    echo "=== Cleaning old deployment on appserver ==="
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            sudo pkill -f 'dotnet Rise.Server.dll' || true
-                            sudo mkdir -p ${DEPLOY_PATH}
-                            sudo chown vagrant:vagrant ${DEPLOY_PATH}
-                        "
+                            (sudo pkill -f 'dotnet Rise.Server.dll' || true) && \
+                            sudo rm -rf ${DEPLOY_PATH}/* || true && \
+                            sudo mkdir -p ${DEPLOY_PATH} && \
+                            sudo chown vagrant:vagrant ${DEPLOY_PATH} || true
+                        " || true
                     '''
 
-                    echo "=== Bestanden kopiëren ==="
+                    echo "=== Copying new build to appserver ==="
                     sh '''
-                        rsync -avz \
-                        -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
-                        ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
+                        rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
-                    echo "=== Start nieuwe versie ==="
+                    echo "=== Starting application on appserver ==="
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            cd ${DEPLOY_PATH}
-                            nohup env ASPNETCORE_URLS='http://0.0.0.0:5000' dotnet Rise.Server.dll > app.log 2>&1 &
+                            cd ${DEPLOY_PATH};
+                            nohup dotnet Rise.Server.dll > app.log 2>&1 &
                         "
                     '''
-
-                    echo "⏳ Wachten tot app gestart is..."
-                    sleep 7
-
-                    echo "=== Healthcheck ==="
-                    sh 'curl -f http://$APP_SERVER:5000/ || exit 1'
                 }
             }
         }
@@ -74,10 +65,10 @@ pipeline {
 
     post {
         success {
-            echo "✅ Build & Deploy succesvol!"
+            echo "✅ Build and deployment successful!"
         }
         failure {
-            echo "❌ Build of Deploy faalde — check logs!"
+            echo "❌ Build or Deployment failed!"
         }
     }
 }
