@@ -11,6 +11,7 @@ pipeline {
 
         stage('Restore & Build') {
             steps {
+                echo "=== Restore & Build ==="
                 sh 'dotnet restore'
                 sh 'dotnet build --configuration Release --no-restore'
             }
@@ -18,6 +19,7 @@ pipeline {
 
         stage('Publish Self-Contained Linux') {
             steps {
+                echo "=== Publishing (Linux-x64 Self-contained) ==="
                 sh '''
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
                       -c Release \
@@ -32,26 +34,27 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
 
-                    echo "--- Kill running app & clean folder ---"
+                    echo "--- Stop service & Clean deploy folder ---"
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            sudo pkill -f 'Rise.Server' || true;
-                            sudo rm -rf ${DEPLOY_PATH};
+                            sudo systemctl stop rise || true;
+                            sudo rm -rf ${DEPLOY_PATH}/*;
                             sudo mkdir -p ${DEPLOY_PATH};
                             sudo chown -R vagrant:vagrant ${DEPLOY_PATH};
                         "
                     '''
 
-                    echo "--- Copy files ---"
+                    echo "--- Copy new publish files ---"
                     sh '''
-                        rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
+                        rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
+                        ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
-                    echo "--- Start app with correct binding ---"
+                    echo "--- Restart Rise service ---"
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            cd ${DEPLOY_PATH};
-                            ASPNETCORE_URLS=http://0.0.0.0:5000 nohup ./Rise.Server > app.log 2>&1 &
+                            sudo systemctl daemon-reload;
+                            sudo systemctl restart rise;
                         "
                     '''
                 }
@@ -60,7 +63,8 @@ pipeline {
 
         stage('Smoke Test') {
             steps {
-                sh "sleep 3"
+                echo "--- Smoke Test: HTTP check ---"
+                sh "sleep 4"
                 sh "curl -f http://${APP_SERVER}:5000 || exit 1"
             }
         }
@@ -71,8 +75,11 @@ pipeline {
             echo '✅ Deployment succesvol!'
         }
         failure {
-            echo '❌ Deployment mislukt! — logs ophalen'
-            sh "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} 'tail -n 200 ${DEPLOY_PATH}/app.log' || true"
+            echo '❌ Deployment mislukt — logs ophalen ↓'
+            sh '''
+                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+                vagrant@${APP_SERVER} "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log"
+            ''' || true
         }
     }
 }
