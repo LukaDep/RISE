@@ -34,6 +34,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
 
+                    echo "=== Stop oude service & prepare folder ==="
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                             sudo pkill -f 'dotnet Rise.Server.dll' || true;
@@ -42,21 +43,24 @@ pipeline {
                         "
                     '''
 
+                    echo "=== Bestanden kopiëren ==="
                     sh '''
                         rsync -avz \
                         -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
                         ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
+                    echo "=== Start nieuwe service ==="
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                             cd ${DEPLOY_PATH};
-                            nohup env ASPNETCORE_URLS='http://0.0.0.0:5000' dotnet Rise.Server.dll --urls=http://0.0.0.0:5000 > app.log 2>&1 &
+                            nohup env ASPNETCORE_URLS='http://0.0.0.0:5000' dotnet Rise.Server.dll > app.log 2>&1 &
                         "
                     '''
 
                     sleep 8
 
+                    echo "=== Test ==="
                     sh '''
                         curl -f http://$APP_SERVER:5000/ || exit 1
                     '''
@@ -71,7 +75,7 @@ pipeline {
         }
         failure {
             echo "❌ Deploy mislukt — logs:"
-            sh 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@$APP_SERVER "tail -n 200 /var/www/dotnetapp/app.log || echo NoLogs" || true'
+            sh 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@$APP_SERVER "tail -n 200 /var/www/dotnetapp/app.log || echo GeenLogs" || true'
         }
     }
 }
