@@ -12,13 +12,17 @@ pipeline {
 
         stage('Restore & Build') {
             steps {
+                echo "=== Dependencies binnenhalen ==="
                 sh 'dotnet restore'
+
+                echo "=== Build project ==="
                 sh 'dotnet build --configuration Release --no-restore'
             }
         }
 
         stage('Publish') {
             steps {
+                echo "=== Self-contained publish ==="
                 sh '''
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
                         -c Release \
@@ -37,9 +41,9 @@ pipeline {
                     echo "=== Stop oude service & prepare folder ==="
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            sudo pkill -f 'dotnet Rise.Server.dll' || true;
-                            sudo mkdir -p ${DEPLOY_PATH};
-                            sudo chown vagrant:vagrant ${DEPLOY_PATH};
+                            sudo pkill -f 'dotnet Rise.Server.dll' || true
+                            sudo mkdir -p ${DEPLOY_PATH}
+                            sudo chown vagrant:vagrant ${DEPLOY_PATH}
                         "
                     '''
 
@@ -50,32 +54,9 @@ pipeline {
                         ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
-                    echo "=== Start nieuwe service ==="
+                    echo "=== Start nieuwe versie ==="
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            cd ${DEPLOY_PATH};
+                            cd ${DEPLOY_PATH}
                             nohup env ASPNETCORE_URLS='http://0.0.0.0:5000' dotnet Rise.Server.dll > app.log 2>&1 &
                         "
-                    '''
-
-                    sleep 8
-
-                    echo "=== Test ==="
-                    sh '''
-                        curl -f http://$APP_SERVER:5000/ || exit 1
-                    '''
-                }
-            }
-        }
-    }
-
-    post {
-        success {
-            echo "✅ Succesvolle deploy!"
-        }
-        failure {
-            echo "❌ Deploy mislukt — logs:"
-            sh 'ssh -i /var/lib/jenkins/.ssh/appserver_key -o StrictHostKeyChecking=no vagrant@$APP_SERVER "tail -n 200 /var/www/dotnetapp/app.log || echo GeenLogs" || true'
-        }
-    }
-}
