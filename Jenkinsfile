@@ -24,7 +24,8 @@ pipeline {
                         -o ./publish \
                         --self-contained true \
                         -r linux-x64 \
-                        /p:PublishTrimmed=false
+                        /p:PublishTrimmed=false \
+                         /p:IncludeReferencedAssemblies=true
                 '''
             }
         }
