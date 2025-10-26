@@ -60,3 +60,24 @@ pipeline {
                             cd ${DEPLOY_PATH}
                             nohup env ASPNETCORE_URLS='http://0.0.0.0:5000' dotnet Rise.Server.dll > app.log 2>&1 &
                         "
+                    '''
+
+                    echo "⏳ Wachten tot app gestart is..."
+                    sleep 7
+
+                    echo "=== Healthcheck ==="
+                    sh 'curl -f http://$APP_SERVER:5000/ || exit 1'
+                }
+            }
+        }
+    }
+
+    post {
+        success {
+            echo "✅ Build & Deploy succesvol!"
+        }
+        failure {
+            echo "❌ Build of Deploy faalde — check logs!"
+        }
+    }
+}
