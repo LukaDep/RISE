@@ -21,16 +21,15 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
 
                     echo "--- Clean & copy repo to AppServer ---"
-                    sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            sudo pkill -f 'Rise.Server' || true;
+                    sh """
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER '
+                            sudo pkill -f "Rise.Server" || true;
                             sudo rm -rf ${DEPLOY_PATH};
                             sudo mkdir -p ${DEPLOY_PATH};
                             sudo chown -R vagrant:vagrant ${DEPLOY_PATH};
-                        "
-
+                        '
                         rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" ./ vagrant@$APP_SERVER:${DEPLOY_PATH}/
-                    '''
+                    """
                 }
             }
         }
@@ -38,13 +37,15 @@ pipeline {
         stage('Build & Run on AppServer') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
-                    sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            cd ${DEPLOY_PATH}/src/Rise.Server;
-                            dotnet build -c Release;
-                            ASPNETCORE_URLS=http://0.0.0.0:5000 nohup dotnet run > app.log 2>&1 &
-                        "
-                    '''
+                    echo "--- Build & Start app ---"
+                    sh """
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER '
+                            cd ${DEPLOY_PATH};
+                            dotnet restore;
+                            dotnet build --configuration Release;
+                            ASPNETCORE_URLS=http://0.0.0.0:5000 nohup dotnet src/Rise.Server/bin/Release/net9.0/Rise.Server.dll > app.log 2>&1 &
+                        '
+                    """
                 }
             }
         }
@@ -58,10 +59,12 @@ pipeline {
     }
 
     post {
-        success { echo "✅ Deploy gelukt!" }
         failure {
-            echo "❌ Deploy mislukt — showing logs"
-            sh "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} 'tail -n 200 ${DEPLOY_PATH}/src/Rise.Server/app.log' || true"
+            echo "❌ Deploy mislukt — logs ophalen"
+            sh "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} 'tail -n 200 ${DEPLOY_PATH}/app.log' || true"
+        }
+        success {
+            echo "✅ Deployment gelukt!"
         }
     }
 }
