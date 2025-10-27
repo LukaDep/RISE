@@ -14,7 +14,7 @@ public class MockScheduleService : IScheduleService
         // Pad naar het JSON-bestand in de source code directory
         var currentDirectory = Directory.GetCurrentDirectory();
         // CurrentDirectory is Rise.Server, dus we gaan een level omhoog en dan naar Rise.Services
-        _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");
+        _mockFilePath = Path.Combine(currentDirectory, "Schedule", "MockData", "ScheduleMockdata.json");
         Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
         Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
         Log.Information("File exists: {FileExists}", File.Exists(_mockFilePath));
