@@ -15,45 +15,57 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
     private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "News", "MockData", "news.json");
     public async Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
-        //read from mock json file
-        if (!File.Exists(_mockFilePath))
-            return Result<NewsResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-
-        // Deserialize the JSON data into a list of NewsDto.Index
-        var query = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+        // //read from mock json file
+        // if (!File.Exists(_mockFilePath))
+        //     return Result<NewsResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
+        // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
+        //
+        // // Deserialize the JSON data into a list of NewsDto.Index
+        // var query = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+        
+        var query = dbContext.NewsItems.AsQueryable();
+        
+        var totalCount = await query.CountAsync(ctx);
 
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
             query = query.Where(n => n.Title.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)
-                                     || n.Author.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                                     || n.Author.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase));
         }
         // Apply ordering
         if (!string.IsNullOrWhiteSpace(request.OrderBy))
         {
             query = request.OrderDescending
-                ? query.OrderByDescending(e => EF.Property<object>(e, request.OrderBy)).ToList()
-                : query.OrderBy(e => EF.Property<object>(e, request.OrderBy)).ToList();
+                ? query.OrderByDescending(e => EF.Property<object>(e, request.OrderBy))
+                : query.OrderBy(e => EF.Property<object>(e, request.OrderBy));
         }
         else
         {
             // Default order
-            query = query.OrderBy(p => p.Title).ToList();
+            query = query.OrderBy(p => p.Title);
         }
-        var totalCount = query.Count();
 
-        var news = query
+        var news = await query.AsNoTracking()
             .Skip(request.Skip)
             .Take(request.Take)
-            .ToList();
-        var currentCount = news.Count;
+            .Select(n => new NewsDto.Index
+            {
+                Id = n.Id,
+                Title = n.Title,
+                Description = n.Description,
+                Type = n.Type,
+                PublishDate = n.PublishDate,
+                Content = n.Content,
+                Author = n.Author
+            })
+            .ToListAsync(ctx);
+        
         
 
         return Result.Success(new NewsResponse.Index
         {
             News = news,
             TotalCount = totalCount,
-            CurrentCount = currentCount,
         }
         );
     }

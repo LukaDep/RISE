@@ -57,7 +57,7 @@ public partial class Index
         var result = await NewsService.GetIndexAsync(request);
         news = result.Value.News;
         totalCount = result.Value.TotalCount;
-        currentCount = result.Value.CurrentCount;
+        currentCount = news.Count();
         skip = 0;
 
     }
@@ -120,7 +120,7 @@ public partial class Index
 
         // Append new items to the existing list
         news = news?.Concat(result.Value.News) ?? result.Value.News;
-        currentCount += result.Value.CurrentCount;
+        currentCount = news.Count();
 
         StateHasChanged();
     }
