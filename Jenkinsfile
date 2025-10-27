@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         APP_SERVER  = "192.168.56.50"
-        DEPLOY_PATH = "/opt/Rise.Server"
+        DEPLOY_PATH = "/home/vagrant/riseapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
         APP_PORT    = "5000"
     }
