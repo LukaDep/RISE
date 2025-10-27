@@ -83,15 +83,18 @@ pipeline {
 
         failure {
             echo "❌ Deployment mislukt. Logs ophalen..."
-            script {
-                sh """
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${APP_USER}@${APP_SERVER} '
-                        echo "--- Laatste regels van app.log ---"
-                        sudo tail -n 40 ${DEPLOY_PATH}/app.log || echo "Geen logbestand gevonden"
-                        echo "--- Processtatus ---"
-                        sudo ps aux | grep Rise.Server | grep -v grep || echo "Geen actief proces"
-                    '
-                """
+            // Fix: opnieuw SSH-key beschikbaar maken
+            withCredentials([sshUserPrivateKey(credentialsId: "${SSH_KEY_ID}", keyFileVariable: 'SSH_KEY')]) {
+                script {
+                    sh """
+                        ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${APP_USER}@${APP_SERVER} '
+                            echo "--- Laatste regels van app.log ---"
+                            sudo tail -n 40 ${DEPLOY_PATH}/app.log || echo "Geen logbestand gevonden"
+                            echo "--- Processtatus ---"
+                            sudo ps aux | grep Rise.Server | grep -v grep || echo "Geen actief proces"
+                        '
+                    """
+                }
             }
         }
     }
