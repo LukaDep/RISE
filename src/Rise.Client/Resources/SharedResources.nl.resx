@@ -423,5 +423,10 @@
   <data name="Day.Sunday" xml:space="preserve">
     <value>Zondag</value>
     <comment/>
+  <data name="News.LoadMore" xml:space="preserve">
+    <value>Lees meer</value>
+  </data>
+  <data name="News.Count" xml:space="preserve">
+    <value>van de</value>
   </data>
 </root>
