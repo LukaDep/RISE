@@ -18,10 +18,16 @@ pipeline {
             }
         }
         
+        stage('Clean Workspace') {
+            steps {
+                echo "=== Cleaning workspace ==="
+                sh 'rm -rf publish || true'
+            }
+        }
+        
         stage('Restore & Build') {
             steps {
                 echo "=== Restore & Build ==="
-                // Gebruik framework-dependent in plaats van self-contained voor Blazor
                 sh 'dotnet restore'
                 sh 'dotnet build --configuration Release --no-restore'
             }
@@ -35,7 +41,6 @@ pipeline {
                     -c Release \
                     -o publish \
                     --self-contained false \
-                    -r linux-x64 \
                     --no-restore
                 '''
             }
@@ -73,24 +78,27 @@ pipeline {
                                 # Remove existing current directory/symlink
                                 sudo rm -rf ${CURRENT_PATH} || true;
                                 
-                                # Create proper symlink
+                                # Create proper symlink from current to release
                                 sudo ln -sf ${releaseDir} ${CURRENT_PATH};
                                 sudo chown -h ${APP_SERVER_USER}:${APP_SERVER_USER} ${CURRENT_PATH};
                                 
-                                echo 'Deployment structure:'
+                                echo '=== Deployment Verification ==='
+                                echo 'Base structure:'
                                 ls -la ${DEPLOY_BASE_PATH}/
+                                echo 'Current symlink:'
+                                ls -la ${CURRENT_PATH}
                                 echo 'Release contents:'
                                 ls -la ${releaseDir}/ | head -10
+                                echo 'DLL check:'
+                                ls -la ${CURRENT_PATH}/Rise.Server.dll || echo 'DLL not found in current'
+                                ls -la ${releaseDir}/Rise.Server.dll || echo 'DLL not found in release'
                                 
-                                # STOP en DISABLE de oude service eerst
+                                # CRITICAL: Remove OLD service file and create NEW one
                                 sudo systemctl stop rise || true
                                 sudo systemctl disable rise || true
-                                sudo systemctl daemon-reload
-                                
-                                # Verwijder de oude service file die naar verkeerde directory wijst
                                 sudo rm -f /etc/systemd/system/rise.service
                                 
-                                # Create new service file with CORRECT paths
+                                # Create NEW service file with CORRECT paths
                                 sudo bash -c 'cat > /etc/systemd/system/rise.service << EOF
 [Unit]
 Description=Rise .NET Application
@@ -111,16 +119,16 @@ Environment=DOTNET_ROOT=/usr/share/dotnet
 WantedBy=multi-user.target
 EOF'
                                 
-                                # Fix permissions on service file
+                                # Set proper permissions on service file
                                 sudo chmod 644 /etc/systemd/system/rise.service;
                                 
-                                # Reload and restart service
+                                # Reload systemd and start service
                                 sudo systemctl daemon-reload;
                                 sudo systemctl enable rise;
                                 sudo systemctl start rise;
                                 
-                                echo 'Service status after restart:'
-                                sudo systemctl status rise --no-pager || echo 'Service not running';
+                                echo '=== Service Status ==='
+                                sudo systemctl status rise --no-pager || echo 'Service status check failed';
                             "
                         """
                     }
@@ -131,41 +139,45 @@ EOF'
         stage('Health Check') {
             steps {
                 echo "--- Health Check ---"
-                sh "sleep 8"
+                sh "sleep 10"
                 script {
                     withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
                         echo "--- Checking service status ---"
                         sh """
                             ssh -i $SSH_KEY -o StrictHostKeyChecking=no ${APP_SERVER_USER}@$APP_SERVER "
-                                echo '=== Service Status ==='
+                                echo '=== Final Verification ==='
+                                echo '1. Service Status:'
                                 sudo systemctl status rise --no-pager && echo '✅ Service is running' || echo '❌ Service failed';
                                 
-                                echo '=== Process Check ==='
-                                sudo ps aux | grep -E '(Rise.Server|dotnet)' | grep -v grep || echo 'No application process found';
+                                echo '2. Process Check:'
+                                sudo ps aux | grep -E 'dotnet.*Rise.Server' | grep -v grep || echo 'No application process found';
                                 
-                                echo '=== Port Check ==='
+                                echo '3. Port Check:'
                                 sudo ss -tlnp | grep :5000 || echo 'No process listening on port 5000';
                                 
-                                echo '=== Recent Logs ==='
+                                echo '4. Recent Logs:'
                                 sudo journalctl -u rise --no-pager -n 10 || echo 'No journal logs available';
                                 
-                                echo '=== Verify Paths ==='
-                                echo 'Current path:'
+                                echo '5. Path Verification:'
+                                echo 'Current symlink points to:'
                                 readlink -f ${CURRENT_PATH}
-                                echo 'DLL exists:'
-                                ls -la ${CURRENT_PATH}/Rise.Server.dll || echo 'DLL not found'
+                                echo 'DLL exists at:'
+                                ls -la \\$(readlink -f ${CURRENT_PATH})/Rise.Server.dll || echo 'DLL not found at resolved path'
+                                
+                                echo '6. Manual Connection Test:'
+                                curl -f http://localhost:5000 && echo '✅ Local connection successful' || echo '❌ Local connection failed';
                             "
                         """
                         
                         // External health check
                         echo "--- Testing external connection ---"
                         sh """
-                            for i in {1}{1..3}; do
+                            for i in 1 2 3; do
+                                echo \"Health check attempt \$i...\"
                                 if curl -f --connect-timeout 10 http://${APP_SERVER}:5000; then
                                     echo '✅ Health check passed!'
                                     exit 0
                                 fi
-                                echo 'Attempt \$i failed, retrying in 3 seconds...'
                                 sleep 3
                             done
                             echo '❌ All health check attempts failed'
@@ -188,35 +200,41 @@ EOF'
                     sh """
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no ${APP_SERVER_USER}@$APP_SERVER "
                             echo '=== COMPREHENSIVE TROUBLESHOOTING ==='
-                            echo '1. Current Service File:'
-                            sudo cat /etc/systemd/system/rise.service || echo 'No service file found'
+                            echo '1. Current Service File Content:'
+                            sudo cat /etc/systemd/system/rise.service 2>/dev/null || echo 'No service file found'
                             
                             echo '2. Service Status:'
-                            sudo systemctl status rise --no-pager || echo 'Service not accessible'
+                            sudo systemctl status rise --no-pager 2>/dev/null || echo 'Service not accessible'
                             
-                            echo '3. Full Service Logs:'
-                            sudo journalctl -u rise --no-pager -n 30 || echo 'No journal logs'
+                            echo '3. Service File Exists:'
+                            sudo ls -la /etc/systemd/system/rise.service 2>/dev/null || echo 'Service file does not exist'
                             
                             echo '4. Directory Structure:'
                             ls -la ${DEPLOY_BASE_PATH}/
-                            echo 'Current symlink target:'
-                            ls -la ${CURRENT_PATH}/
-                            echo 'DLL check:'
-                            ls -la ${CURRENT_PATH}/Rise.Server.dll || echo 'DLL missing'
+                            echo 'Current symlink:'
+                            ls -la ${CURRENT_PATH} 2>/dev/null || echo 'Current not accessible'
+                            echo 'Actual release directory:'
+                            ls -la ${RELEASES_PATH}/*/ 2>/dev/null | head -5 || echo 'No releases found'
                             
-                            echo '5. Manual Start Test:'
+                            echo '5. File Check in Current:'
+                            find ${CURRENT_PATH} -name '*.dll' -type f 2>/dev/null | head -5 || echo 'No DLLs found in current'
+                            
+                            echo '6. Manual Start Test:'
                             sudo systemctl stop rise 2>/dev/null || true
                             sleep 2
-                            if [ -f ${CURRENT_PATH}/Rise.Server.dll ]; then
-                                echo 'Testing manual start...'
-                                cd ${CURRENT_PATH} && /usr/bin/dotnet Rise.Server.dll --urls http://0.0.0.0:5000 &
+                            RELEASE_DIR=\\$(readlink -f ${CURRENT_PATH})
+                            if [ -f \\$RELEASE_DIR/Rise.Server.dll ]; then
+                                echo 'Testing manual start from: \\$RELEASE_DIR'
+                                cd \\$RELEASE_DIR && /usr/bin/dotnet Rise.Server.dll --urls http://0.0.0.0:5000 &
                                 sleep 5
-                                echo 'Manual start processes:'
+                                echo 'Manual start result:'
                                 ps aux | grep 'dotnet.*Rise.Server' | grep -v grep || echo 'No manual processes'
-                                echo 'Port check:'
                                 sudo ss -tlnp | grep :5000 || echo 'No port 5000'
                                 # Cleanup
                                 pkill -f 'dotnet.*Rise.Server' 2>/dev/null || true
+                            else
+                                echo 'DLL not found at: \\$RELEASE_DIR/Rise.Server.dll'
+                                find ${DEPLOY_BASE_PATH} -name 'Rise.Server.dll' -type f || echo 'DLL not found anywhere'
                             fi
                         "
                     """
