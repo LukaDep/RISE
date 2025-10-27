@@ -374,4 +374,7 @@
   <data name="News.Count" xml:space="preserve">
     <value>van de</value>
   </data>
+  <data name="News.NotFound" xml:space="preserve">
+    <value>Geen Nieuws Gevonden</value>
+  </data>
 </root>

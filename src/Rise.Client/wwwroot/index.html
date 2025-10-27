@@ -25,8 +25,11 @@
             <a href="" class="reload">Reload</a>
             <a class="dismiss">🗙</a>
         </div>
-        <script src="_framework/blazor.webassembly.js"></script>
+        <!-- load helper scripts before Blazor so components can call them on first render -->
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script src="leafletInterop.js"></script>
+        <script src="scrollTop.js"></script>
+        <script src="_framework/blazor.webassembly.js"></script>
     </body>
 </html>
+

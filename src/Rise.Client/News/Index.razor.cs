@@ -4,6 +4,7 @@ using FuzzySharp;
 using FuzzySharp.SimilarityRatio;
 using FuzzySharp.SimilarityRatio.Scorer.StrategySensitive;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.News;
 
@@ -36,6 +37,9 @@ public partial class Index
     private int take = 10;
     private int totalCount;
     private int currentCount;
+    
+    //js scroll to top 
+    private bool _initialized;
     
 
     private string? searchTerm;
@@ -119,5 +123,16 @@ public partial class Index
         currentCount += result.Value.CurrentCount;
 
         StateHasChanged();
+    }
+    
+    
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_initialized)
+        {
+            _initialized = true;
+            await JS.InvokeVoidAsync("scrollTop.init", "scrollToTopBtn");
+        }
     }
 }

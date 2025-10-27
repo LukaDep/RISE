@@ -1,10 +1,11 @@
 @page "/news"
 @using Rise.Client.News.Components
 @inject IStringLocalizer<SharedResources> L
+@inject IJSRuntime JS
 
 <PageTitle>@L["News.Title"]</PageTitle>
 
-<div class="flex justify-between items-center mx-4 mt-10">
+<div id="top" class="flex justify-between items-center mx-4 mt-10">
     <h3 class="text-4xl font-bold">@L["News.Title"]</h3>
     <div class="relative w-72 flex items-center justify-end">
         <input @ref="filterInput" type="text" placeholder="@L["News.FilterPlaceholder"]"
@@ -32,7 +33,10 @@
             <NewsItem newsItem="@newsItem" />
         }
         <div class="flex flex-col items-center justify-center">
-            @if (totalCount != currentCount)
+            @if (totalCount == 0)
+            {
+                <p class="mt-10 text-2xl">@L["News.NotFound"]</p>
+            } else if (totalCount != currentCount)
             {
                 <button class="flex items-center justify-center gap-2 w-32 h-10 mb-2 border-2 border-hogent-black text-hogent-black rounded-2xl shadow hover:bg-hogent-blue transition disabled:opacity-50" @onclick="LoadMoreNews">
                     @L["News.LoadMore"]
@@ -41,9 +45,19 @@
                     </svg>
                 </button>
             }
-            <p class="text-hogent-black-15 mb-3">@currentCount @L["News.Count"] @totalCount</p>
+            @if (totalCount != 0)
+            {
+                <p class="text-hogent-black-15 mb-3">@currentCount @L["News.Count"] @totalCount</p>
+
+            }
         </div>
     }
+    <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
+    <button id="scrollToTopBtn"
+            aria-label="Scroll to top"
+            class="fixed right-6 w-12 h-12 flex items-center justify-center rounded-full border-2 border-b-hogent-black bg-hogent-white text-hogent-black shadow-lg opacity-0 pointer-events-none transform translate-y-4 transition-all duration-300"
+            style="bottom:6rem; z-index:1000;">
+        <i class="fa-solid fa-chevron-up"></i>
+    </button>
 
 </div>
-

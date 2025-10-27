@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Rise.Domain.Products;
 using Rise.Domain.Projects;
+using Rise.Domain.News;
 
 namespace Rise.Persistence;
 /// <summary>
@@ -18,6 +19,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await RolesAsync();
         await UsersAsync();
         await ProductsAsync();
+        await NewsAsync();
         await ProjectsAsync();
     }
 
@@ -110,6 +112,62 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             new Product { Name = "Speaker", Description = "Bluetooth portable speaker" }
         );
 
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task NewsAsync()
+    {
+        if (dbContext.NewsItems.Any())
+            return;
+        
+        dbContext.NewsItems.AddRange(
+            new NewsItem
+            {
+                Title = "Blazor Server Released",
+                Description = "Microsoft announces the release of Blazor Server for .NET 8.",
+                Type = "Release",
+                PublishDate = DateTime.Parse("2025-10-01T09:00:00Z"),
+                Content = "Full article: Microsoft has released Blazor Server for .NET 8. Learn about performance improvements and migration guidance.",
+                Author = "Jane Doe"
+            },
+            new NewsItem
+            {
+                Title = "Rise Platform Update",
+                Description = "Rise platform receives a major update with new features and bug fixes.",
+                Type = "Update",
+                PublishDate = DateTime.Parse("2025-10-05T14:30:00Z"),
+                Content = "Full article: This platform update includes several new modules, stability fixes and UX improvements across the product.",
+                Author = "John Smith"
+            },
+            new NewsItem
+            {
+                Title = "Community Event Scheduled",
+                Description = "Join us for the upcoming Rise community event in Amsterdam.",
+                Type = "Event",
+                PublishDate = DateTime.Parse("2025-10-10T18:00:00Z"),
+                Content = "Full article: The Rise community event will feature talks, workshops and networking opportunities. Registration details inside.",
+                Author = "Alice Johnson"
+            },
+            new NewsItem
+            {
+                Title = "Security Patch Released",
+                Description = "A new security patch is available for all Rise applications.",
+                Type = "Security",
+                PublishDate = DateTime.Parse("2025-09-28T11:15:00Z"),
+                Content = "Full article: We recommend applying this security patch immediately — it addresses vulnerabilities in authentication and input validation.",
+                Author = "Bob Lee"
+            },
+            new NewsItem
+            {
+                Title = "Developer Tips: .NET 8",
+                Description = "Top tips for developing with .NET 8 shared by the Rise team.",
+                Type = "Tip",
+                PublishDate = DateTime.Parse("2025-10-12T08:45:00Z"),
+                Content = "Full article: A curated list of best practices, performance tips and tooling improvements for .NET 8 developers.",
+                Author = "Chris Evans"
+            }
+            );
+        
         await dbContext.SaveChangesAsync();
     }
 
