@@ -18,53 +18,59 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
-                    echo "--- Stop existing processes ---"
+                    echo "--- Full deployment in one command ---"
                     sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                      # Eenvoudige kill die we weten dat werkt
-                      echo 'Killing all dotnet processes...';
-                      sudo pkill -f 'dotnet' || true;
-                      sleep 3;
-                      echo 'Processes stopped';
+                      set -e
+                      echo '=== Starting full deployment ==='
+                      
+                      # Stop existing processes
+                      echo '1. Killing all dotnet processes...'
+                      sudo pkill -f 'dotnet' || true
+                      sleep 3
+                      
+                      # Clean deploy folder
+                      echo '2. Cleaning deploy folder...'
+                      sudo rm -rf ${DEPLOY_PATH}/*
+                      sudo mkdir -p ${DEPLOY_PATH}
+                      sudo chown -R vagrant:vagrant ${DEPLOY_PATH}
+                      
+                      echo '3. Processes stopped and folder cleaned'
                     "
-                    '''
                     
-                    echo "--- Clean deploy folder ---"
-                    sh '''
-                    ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                      sudo rm -rf ${DEPLOY_PATH}/*;
-                      sudo mkdir -p ${DEPLOY_PATH};
-                      sudo chown -R vagrant:vagrant ${DEPLOY_PATH};
-                    "
-                    '''
-                    
-                    echo "--- Copy FULL repository ---"
-                    sh '''
-                    rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
+                    # Copy repository (separate command for better progress)
+                    echo '4. Copying repository...'
+                    rsync -avz -e \"ssh -i $SSH_KEY -o StrictHostKeyChecking=no\" \
                       ./ vagrant@$APP_SERVER:${DEPLOY_PATH}/ \
                       --exclude='.git/' \
                       --exclude='bin/' \
                       --exclude='obj/' \
                       --exclude='.vs/' \
                       --exclude='TestResults/'
-                    '''
                     
-                    echo "--- Build and start on server ---"
-                    sh '''
+                    # Build and start application
+                    echo '5. Building and starting application...'
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                      cd ${DEPLOY_PATH};
-                      echo '=== Building on server ===';
-                      dotnet build src/Rise.Server/Rise.Server.csproj -c Release;
-                      echo '=== Starting application ===';
-                      nohup dotnet run --project src/Rise.Server/Rise.Server.csproj --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
-                      echo 'Application started in background';
-                      sleep 15;
-                      echo '=== Process check ===';
-                      ps aux | grep 'dotnet.*Rise.Server' | grep -v grep;
-                      echo '=== Port check ===';
-                      ss -tlnp | grep :5000 || echo 'Port 5000 not listening';
-                      echo '=== Recent logs ===';
-                      tail -n 10 app.log 2>/dev/null || echo 'No logs yet';
+                      set -e
+                      cd ${DEPLOY_PATH}
+                      
+                      echo '6. Building on server...'
+                      dotnet build src/Rise.Server/Rise.Server.csproj -c Release
+                      
+                      echo '7. Starting application...'
+                      nohup dotnet run --project src/Rise.Server/Rise.Server.csproj --urls \\\"http://0.0.0.0:5000\\\" > app.log 2>&1 &
+                      
+                      echo '8. Waiting for startup...'
+                      sleep 15
+                      
+                      echo '9. Checking deployment...'
+                      echo '=== Process check ==='
+                      ps aux | grep 'dotnet.*Rise.Server' | grep -v grep
+                      echo '=== Port check ==='
+                      ss -tlnp | grep :5000 || echo 'Port 5000 not listening'
+                      echo '=== Recent logs ==='
+                      tail -n 10 app.log 2>/dev/null || echo 'No logs yet'
+                      echo '=== Deployment completed ==='
                     "
                     '''
                 }
@@ -99,7 +105,7 @@ pipeline {
                       echo '=== App logs ===';
                       cd ${DEPLOY_PATH} && tail -n 30 app.log 2>/dev/null || echo 'No app.log found';
                       echo '=== Directory structure ===';
-                      find ${DEPLOY_PATH} -type f -name '*.cs' | head -10;
+                      ls -la ${DEPLOY_PATH}/ | head -10;
                     "
                     """
                 }
