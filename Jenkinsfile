@@ -24,10 +24,10 @@ pipeline {
                 sh '''
                     rm -rf publish
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
-                      -c Release \
-                      -o publish \
-                      --self-contained true \
-                      -r linux-x64
+                        -c Release \
+                        -o publish \
+                        --self-contained true \
+                        -r linux-x64
                 '''
             }
         }
@@ -35,31 +35,34 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 echo "--- Cleaning and Deploying ---"
-                sh '''
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
+                sh """
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
+                        set -e
+                        echo "[1/3] Cleaning target directory"
                         sudo mkdir -p ${DEPLOY_PATH};
                         sudo pkill -f Rise.Server || true;
                         sudo rm -rf ${DEPLOY_PATH}/*;
                         sudo chown -R vagrant:vagrant ${DEPLOY_PATH};
-                    "
-                '''
+                    '
+                """
 
-                sh '''
+                echo "[2/3] Copying published build"
+                sh """
                     rsync -avz -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
                         ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
-                '''
+                """
 
-                echo "--- Starting app manually on 0.0.0.0:${APP_PORT} ---"
-                sh '''
-                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
+                echo "[3/3] Starting app manually on 0.0.0.0:${APP_PORT}"
+                sh """
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
                         export ASPNETCORE_URLS=http://0.0.0.0:${APP_PORT};
                         export ASPNETCORE_ENVIRONMENT=Production;
                         cd ${DEPLOY_PATH};
                         nohup ./Rise.Server > app.log 2>&1 &
                         sleep 3;
-                        sudo ps aux | grep Rise.Server | grep -v grep || echo 'App failed to start';
-                    "
-                '''
+                        ps aux | grep Rise.Server | grep -v grep || echo "⚠️ App failed to start";
+                    '
+                """
             }
         }
 
@@ -79,15 +82,17 @@ pipeline {
 
         failure {
             echo "❌ Deployment mislukt — logs ophalen ↓"
-            sh '''
-                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                    echo '--- Processtatus ---';
-                    sudo ps aux | grep Rise.Server | grep -v grep || echo 'Geen actief proces';
-                    echo '';
-                    echo '--- Laatste logregels ---';
-                    sudo tail -n 50 ${DEPLOY_PATH}/app.log || echo 'Geen logbestand gevonden';
-                "
-            ''' || true
+            script {
+                sh """
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
+                        echo "--- Processtatus ---"
+                        ps aux | grep Rise.Server | grep -v grep || echo "Geen actief proces"
+                        echo ""
+                        echo "--- Laatste logregels ---"
+                        sudo tail -n 50 ${DEPLOY_PATH}/app.log || echo "Geen logbestand gevonden"
+                    '
+                """
+            }
         }
     }
 }
