@@ -54,16 +54,22 @@ pipeline {
                       ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
                     
-                    echo "--- Start application directly (listening on 0.0.0.0:5000) ---"
+                    echo "--- Set execute permissions and start application ---"
                     sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                       cd ${DEPLOY_PATH};
-                      # Stop any running instance on port 5000
+                      # Stop any running instance
+                      sudo pkill -f 'Rise.Server' || true;
                       sudo pkill -f 'dotnet.*5000' || true;
                       sleep 2;
+                      # Make sure the binary is executable
+                      chmod +x Rise.Server;
                       # Start the app directly on 0.0.0.0:5000
-                      nohup ./Rise.Server --urls http://0.0.0.0:5000 > app.log 2>&1 &
+                      nohup ./Rise.Server --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
                       echo 'Application started on 0.0.0.0:5000';
+                      sleep 3;
+                      # Check if process is running
+                      ps aux | grep Rise.Server | grep -v grep;
                     "
                     '''
                 }
@@ -86,10 +92,20 @@ pipeline {
         }
         failure {
             echo '❌ Deployment mislukt — logs ophalen ↓'
-            sh '''
-            ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-              vagrant@${APP_SERVER} "cd ${DEPLOY_PATH} && tail -n 100 app.log" \
-            ''' || true
+            script {
+                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
+                    sh """
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
+                      echo '=== Process status ===';
+                      ps aux | grep Rise.Server | grep -v grep || echo 'No Rise.Server process found';
+                      echo '=== App logs ==='; 
+                      cd ${DEPLOY_PATH} && tail -n 50 app.log 2>/dev/null || echo 'No app.log found';
+                      echo '=== Check port 5000 ===';
+                      sudo netstat -tlnp | grep :5000 || echo 'Nothing listening on port 5000';
+                    "
+                    """
+                }
+            }
         }
     }
 }
