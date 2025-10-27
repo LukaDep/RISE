@@ -23,15 +23,14 @@ pipeline {
             }
         }
         
-        stage('Publish Self-Contained Linux') {
+        stage('Publish Framework Dependent') {
             steps {
-                echo "=== Publishing (Linux-x64 Self-contained) ==="
+                echo "=== Publishing (Framework Dependent) ==="
                 sh '''
                 dotnet publish src/Rise.Server/Rise.Server.csproj \
                   -c Release \
                   -o publish \
-                  --self-contained true \
-                  -r linux-x64
+                  --self-contained false
                 '''
             }
         }
@@ -54,24 +53,25 @@ pipeline {
                       ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
                     
-                    echo "--- Start application with dotnet command ---"
+                    echo "--- Start application ---"
                     sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                       cd ${DEPLOY_PATH};
                       # Stop any running instance
                       sudo pkill -f 'dotnet.*Rise.Server.dll' || true;
                       sleep 2;
-                      # Start using dotnet command (more reliable)
+                      # Start application with explicit logging
+                      echo 'Starting application...';
                       nohup dotnet Rise.Server.dll --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
-                      echo 'Application started with dotnet on 0.0.0.0:5000';
-                      sleep 5;
+                      echo 'Application start command executed';
+                      sleep 8;
                       # Check if process is running
-                      echo '=== Checking process ===';
+                      echo '=== Process check ===';
                       ps aux | grep 'dotnet.*Rise.Server.dll' | grep -v grep;
-                      echo '=== Checking app log ===';
-                      tail -n 10 app.log 2>/dev/null || echo 'No app.log yet';
-                      echo '=== Checking port ===';
-                      ss -tlnp | grep :5000 || echo 'Port 5000 not listening yet';
+                      echo '=== Recent logs ===';
+                      tail -n 20 app.log 2>/dev/null || echo 'No logs yet';
+                      echo '=== Port check ===';
+                      ss -tlnp | grep :5000 || echo 'Port 5000 not listening';
                     "
                     '''
                 }
@@ -81,7 +81,7 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 echo "--- Smoke Test: HTTP check ---"
-                sh "sleep 8"
+                sh "sleep 10"
                 sh "curl -f http://${APP_SERVER}:5000 || exit 1"
                 echo "✅ Site is accessible!"
             }
@@ -93,21 +93,22 @@ pipeline {
             echo '✅ Deployment succesvol!'
         }
         failure {
-            echo '❌ Deployment mislukt — logs ophalen ↓'
+            echo '❌ Deployment mislukt — debugging info ↓'
             script {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
                     sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                      echo '=== Process status ===';
-                      ps aux | grep 'dotnet.*Rise.Server.dll' | grep -v grep || echo 'No dotnet process found';
-                      echo '=== App logs ==='; 
-                      cd ${DEPLOY_PATH} && tail -n 30 app.log 2>/dev/null || echo 'No app.log found';
-                      echo '=== Check port 5000 ===';
-                      ss -tlnp | grep :5000 || echo 'Nothing listening on port 5000';
-                      echo '=== Check dotnet version ===';
-                      dotnet --version || echo 'Dotnet not installed';
-                      echo '=== Check files ===';
-                      ls -la ${DEPLOY_PATH}/ | head -10;
+                      echo '=== Full diagnostics ===';
+                      echo '=== Current directory and files ===';
+                      cd ${DEPLOY_PATH} && pwd && ls -la;
+                      echo '=== Dotnet info ===';
+                      dotnet --info;
+                      echo '=== Try to run app directly ===';
+                      dotnet Rise.Server.dll --urls 'http://0.0.0.0:5000' || echo 'Direct run failed';
+                      echo '=== Check dependencies ===';
+                      ldd Rise.Server.dll 2>/dev/null || echo 'ldd not available';
+                      echo '=== Full app logs ===';
+                      cat app.log 2>/dev/null || echo 'No app.log found';
                     "
                     """
                 }
