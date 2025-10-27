@@ -44,7 +44,6 @@ public class MockRestoService : IRestoService
         var take = req.Take <= 0 ? 20 : req.Take;
         var paged = items.Skip(skip).Take(take).ToList();
 
-        // Compute IsCurrentlyOpen for each returned resto based on OpeningHours and current server time
         var now = DateTimeOffset.Now;
         foreach (var resto in paged)
         {
@@ -54,7 +53,6 @@ public class MockRestoService : IRestoService
             }
             catch (Exception ex)
             {
-                // If any parsing error occurs, log and leave IsCurrentlyOpen false
                 Log.Warning(ex, "Failed to compute IsCurrentlyOpen for resto {RestoId}", resto.Id);
                 resto.IsCurrentlyOpen = false;
             }
@@ -112,7 +110,5 @@ public class MockRestoService : IRestoService
 
         return false;
     }
-
-
 }
 
