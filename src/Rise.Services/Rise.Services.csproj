@@ -21,11 +21,4 @@
       <Folder Include="CampusInfo\MockData\" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Include="..\Rise.Services\News\MockData\*.json" CopyToOutputDirectory="Always" />
-      <Content Include="Schedule/MockData/*.json" CopyToOutputDirectory="Always" />
-      <Content Include="Campus/MockData/*.json" CopyToOutputDirectory="Always" />
-      <Content Include="CampusInfo/MockData/*.json" CopyToOutputDirectory="Always" />
-    </ItemGroup>
-
 </Project>
