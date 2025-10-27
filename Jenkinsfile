@@ -173,7 +173,7 @@ EOF'
                         echo "--- Testing external connection ---"
                         sh """
                             for i in 1 2 3; do
-                                echo \"Health check attempt \$i...\"
+                                echo "Health check attempt \$i..."
                                 if curl -f --connect-timeout 10 http://${APP_SERVER}:5000; then
                                     echo '✅ Health check passed!'
                                     exit 0
@@ -223,9 +223,9 @@ EOF'
                             sudo systemctl stop rise 2>/dev/null || true
                             sleep 2
                             RELEASE_DIR=\\$(readlink -f ${CURRENT_PATH})
-                            if [ -f \\$RELEASE_DIR/Rise.Server.dll ]; then
-                                echo 'Testing manual start from: \\$RELEASE_DIR'
-                                cd \\$RELEASE_DIR && /usr/bin/dotnet Rise.Server.dll --urls http://0.0.0.0:5000 &
+                            if [ -f \\\\$RELEASE_DIR/Rise.Server.dll ]; then
+                                echo 'Testing manual start from: \\\\$RELEASE_DIR'
+                                cd \\\\$RELEASE_DIR && /usr/bin/dotnet Rise.Server.dll --urls http://0.0.0.0:5000 &
                                 sleep 5
                                 echo 'Manual start result:'
                                 ps aux | grep 'dotnet.*Rise.Server' | grep -v grep || echo 'No manual processes'
@@ -233,7 +233,7 @@ EOF'
                                 # Cleanup
                                 pkill -f 'dotnet.*Rise.Server' 2>/dev/null || true
                             else
-                                echo 'DLL not found at: \\$RELEASE_DIR/Rise.Server.dll'
+                                echo 'DLL not found at: \\\\$RELEASE_DIR/Rise.Server.dll'
                                 find ${DEPLOY_BASE_PATH} -name 'Rise.Server.dll' -type f || echo 'DLL not found anywhere'
                             fi
                         "
