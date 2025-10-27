@@ -40,10 +40,13 @@ pipeline {
                         echo "--- Cleaning old files and copying new build ---"
                         sh """
                             ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${APP_USER}@${APP_SERVER} '
-                                mkdir -p ${DEPLOY_PATH}
-                                pkill -f "Rise.Server" || true
-                                rm -rf ${DEPLOY_PATH}/*
+                                sudo mkdir -p ${DEPLOY_PATH}
+                                sudo pkill -f "Rise.Server" || true
+                                sudo rm -rf ${DEPLOY_PATH}/*
                             '
+                        """
+
+                        sh """
                             rsync -avz -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
                                 ./publish/ ${APP_USER}@${APP_SERVER}:${DEPLOY_PATH}/
                         """
@@ -54,9 +57,9 @@ pipeline {
                                 export ASPNETCORE_URLS="http://0.0.0.0:${APP_PORT}"
                                 export ASPNETCORE_ENVIRONMENT=Production
                                 cd ${DEPLOY_PATH}
-                                nohup ./Rise.Server > app.log 2>&1 &
-                                sleep 2
-                                ps aux | grep Rise.Server | grep -v grep || echo "App failed to start!"
+                                sudo nohup ./Rise.Server > app.log 2>&1 &
+                                sleep 3
+                                sudo ps aux | grep Rise.Server | grep -v grep || echo "App failed to start!"
                             '
                         """
                     }
@@ -77,13 +80,19 @@ pipeline {
         success {
             echo "✅ Deployment succesvol! App draait op http://${APP_SERVER}:${APP_PORT}"
         }
+
         failure {
             echo "❌ Deployment mislukt. Logs ophalen..."
-            sh '''
-                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
-                    tail -n 40 /opt/Rise.Server/app.log || echo 'Geen logbestand gevonden'
-                "
-            ''' || true
+            script {
+                sh """
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${APP_USER}@${APP_SERVER} '
+                        echo "--- Laatste regels van app.log ---"
+                        sudo tail -n 40 ${DEPLOY_PATH}/app.log || echo "Geen logbestand gevonden"
+                        echo "--- Processtatus ---"
+                        sudo ps aux | grep Rise.Server | grep -v grep || echo "Geen actief proces"
+                    '
+                """
+            }
         }
     }
 }
