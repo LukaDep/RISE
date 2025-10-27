@@ -15,46 +15,17 @@ pipeline {
             }
         }
         
-        stage('Restore & Build') {
-            steps {
-                echo "=== Restore & Build ==="
-                sh 'dotnet restore'
-                sh 'dotnet build --configuration Release --no-restore'
-            }
-        }
-        
-        stage('Publish Server Only') {
-            steps {
-                echo "=== Publishing Server Only ==="
-                sh '''
-                # Clean publish directory
-                rm -rf publish
-                # Publish only the server project (skip client)
-                dotnet publish src/Rise.Server/Rise.Server.csproj \
-                  -c Release \
-                  -o publish \
-                  --self-contained false \
-                  --no-restore
-                '''
-            }
-        }
-        
         stage('Deploy to App Server') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
                     echo "--- Stop existing processes ---"
                     sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                      # Force kill any process on port 5000
-                      echo 'Killing processes on port 5000...';
-                      sudo pkill -f 'dotnet.*Rise.Server.dll' || true;
-                      sleep 2;
-                      # Double kill using port
-                      PID=\$(sudo lsof -ti:5000) && echo 'Killing process on port 5000:' \$PID && sudo kill -9 \$PID || echo 'No process on port 5000';
-                      sleep 2;
-                      # Verify port is free
-                      echo '=== Port status ===';
-                      sudo ss -tulpn | grep :5000 && echo 'WARNING: Port 5000 still in use' || echo 'Port 5000 is free';
+                      # Eenvoudige kill die we weten dat werkt
+                      echo 'Killing all dotnet processes...';
+                      sudo pkill -f 'dotnet' || true;
+                      sleep 3;
+                      echo 'Processes stopped';
                     "
                     '''
                     
@@ -67,27 +38,33 @@ pipeline {
                     "
                     '''
                     
-                    echo "--- Copy new publish files ---"
+                    echo "--- Copy FULL repository ---"
                     sh '''
                     rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
-                      ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
+                      ./ vagrant@$APP_SERVER:${DEPLOY_PATH}/ \
+                      --exclude='.git/' \
+                      --exclude='bin/' \
+                      --exclude='obj/' \
+                      --exclude='.vs/' \
+                      --exclude='TestResults/'
                     '''
                     
-                    echo "--- Start application ---"
+                    echo "--- Build and start on server ---"
                     sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                       cd ${DEPLOY_PATH};
-                      echo 'Starting application...';
-                      nohup dotnet Rise.Server.dll --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
-                      echo 'Application start command executed';
-                      sleep 10;
-                      # Check if process is running
+                      echo '=== Building on server ===';
+                      dotnet build src/Rise.Server/Rise.Server.csproj -c Release;
+                      echo '=== Starting application ===';
+                      nohup dotnet run --project src/Rise.Server/Rise.Server.csproj --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
+                      echo 'Application started in background';
+                      sleep 15;
                       echo '=== Process check ===';
-                      ps aux | grep 'dotnet.*Rise.Server.dll' | grep -v grep;
-                      echo '=== Recent logs ===';
-                      tail -n 20 app.log 2>/dev/null || echo 'No logs yet';
+                      ps aux | grep 'dotnet.*Rise.Server' | grep -v grep;
                       echo '=== Port check ===';
                       ss -tlnp | grep :5000 || echo 'Port 5000 not listening';
+                      echo '=== Recent logs ===';
+                      tail -n 10 app.log 2>/dev/null || echo 'No logs yet';
                     "
                     '''
                 }
@@ -97,7 +74,7 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 echo "--- Smoke Test: HTTP check ---"
-                sh "sleep 12"
+                sh "sleep 5"
                 sh "curl -f http://${APP_SERVER}:5000 || exit 1"
                 echo "✅ Site is accessible!"
             }
@@ -115,14 +92,14 @@ pipeline {
                     sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
                       echo '=== Full diagnostics ===';
-                      echo '=== Check what is using port 5000 ===';
-                      sudo ss -tulpn | grep :5000 || echo 'Port 5000 is free';
-                      echo '=== Current dotnet processes ===';
+                      echo '=== Current processes ===';
                       ps aux | grep dotnet | grep -v grep;
+                      echo '=== Port 5000 status ===';
+                      ss -tulpn | grep :5000 || echo 'Port 5000 is free';
                       echo '=== App logs ===';
-                      cd ${DEPLOY_PATH} && cat app.log 2>/dev/null || echo 'No app.log found';
-                      echo '=== Directory contents ===';
-                      ls -la ${DEPLOY_PATH}/ | head -10;
+                      cd ${DEPLOY_PATH} && tail -n 30 app.log 2>/dev/null || echo 'No app.log found';
+                      echo '=== Directory structure ===';
+                      find ${DEPLOY_PATH} -type f -name '*.cs' | head -10;
                     "
                     """
                 }
