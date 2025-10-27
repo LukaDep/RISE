@@ -39,31 +39,34 @@ pipeline {
                 // 1️⃣ Clean remote deploy folder
                 sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
+                        set -e
                         echo "[1/3] Cleaning target directory"
-                        mkdir -p ${DEPLOY_PATH} || true;
-                        pkill -f Rise.Server || true;
-                        rm -rf ${DEPLOY_PATH}/* || true;
+                        mkdir -p ${DEPLOY_PATH} || true
+                        pkill -f Rise.Server || echo "Geen proces gevonden of geen rechten"
+                        rm -rf ${DEPLOY_PATH}/* || true
                         echo "Clean complete"
+                        exit 0
                     '
                 """
 
-                // 2️⃣ Copy new files
+                // 2️⃣ Copy new build
                 echo "[2/3] Copying published build"
                 sh """
                     rsync -avz -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
                         ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
                 """
 
-                // 3️⃣ Start app on port 5000 (listening on 0.0.0.0)
+                // 3️⃣ Start application
                 echo "[3/3] Starting Rise.Server"
                 sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
-                        export ASPNETCORE_URLS=http://0.0.0.0:${APP_PORT};
-                        export ASPNETCORE_ENVIRONMENT=Production;
-                        cd ${DEPLOY_PATH};
+                        set -e
+                        export ASPNETCORE_URLS=http://0.0.0.0:${APP_PORT}
+                        export ASPNETCORE_ENVIRONMENT=Production
+                        cd ${DEPLOY_PATH}
                         nohup ./Rise.Server > app.log 2>&1 &
-                        sleep 3;
-                        ps aux | grep Rise.Server | grep -v grep || echo "⚠️ App failed to start";
+                        sleep 3
+                        ps aux | grep Rise.Server | grep -v grep || echo "⚠️ App failed to start"
                         exit 0
                     '
                 """
