@@ -2,9 +2,11 @@ pipeline {
     agent any
 
     environment {
-        APP_SERVER  = "192.168.56.50"
-        DEPLOY_PATH = "/var/www/dotnetapp"
-        SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
+        APP_SERVER   = "192.168.56.50"
+        APP_USER     = "vagrant"
+        DEPLOY_PATH  = "/opt/Rise.Server"
+        SSH_KEY_ID   = "appserver-ssh"
+        APP_PORT     = "5000"
     }
 
     stages {
@@ -17,10 +19,11 @@ pipeline {
             }
         }
 
-        stage('Publish Self-Contained Linux') {
+        stage('Publish for Linux') {
             steps {
                 echo "=== Publishing (Linux-x64 Self-contained) ==="
                 sh '''
+                    rm -rf publish
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
                       -c Release \
                       -o publish \
@@ -30,55 +33,56 @@ pipeline {
             }
         }
 
-        stage('Deploy to App Server') {
+        stage('Deploy & Run App') {
             steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
+                withCredentials([sshUserPrivateKey(credentialsId: "${SSH_KEY_ID}", keyFileVariable: 'SSH_KEY')]) {
+                    script {
+                        echo "--- Cleaning old files and copying new build ---"
+                        sh """
+                            ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${APP_USER}@${APP_SERVER} '
+                                mkdir -p ${DEPLOY_PATH}
+                                pkill -f "Rise.Server" || true
+                                rm -rf ${DEPLOY_PATH}/*
+                            '
+                            rsync -avz -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
+                                ./publish/ ${APP_USER}@${APP_SERVER}:${DEPLOY_PATH}/
+                        """
 
-                    echo "--- Stop service & Clean deploy folder ---"
-                    sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            sudo systemctl stop rise || true;
-                            sudo rm -rf ${DEPLOY_PATH}/*;
-                            sudo mkdir -p ${DEPLOY_PATH};
-                            sudo chown -R vagrant:vagrant ${DEPLOY_PATH};
-                        "
-                    '''
-
-                    echo "--- Copy new publish files ---"
-                    sh '''
-                        rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
-                        ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
-                    '''
-
-                    echo "--- Restart Rise service ---"
-                    sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
-                            sudo systemctl daemon-reload;
-                            sudo systemctl restart rise;
-                        "
-                    '''
+                        echo "--- Starting application manually ---"
+                        sh """
+                            ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no ${APP_USER}@${APP_SERVER} '
+                                export ASPNETCORE_URLS="http://0.0.0.0:${APP_PORT}"
+                                export ASPNETCORE_ENVIRONMENT=Production
+                                cd ${DEPLOY_PATH}
+                                nohup ./Rise.Server > app.log 2>&1 &
+                                sleep 2
+                                ps aux | grep Rise.Server | grep -v grep || echo "App failed to start!"
+                            '
+                        """
+                    }
                 }
             }
         }
 
-        stage('Smoke Test') {
+        stage('Health Check') {
             steps {
-                echo "--- Smoke Test: HTTP check ---"
-                sh "sleep 4"
-                sh "curl -f http://${APP_SERVER}:5000 || exit 1"
+                echo "--- Checking if app is reachable ---"
+                sh "sleep 5"
+                sh "curl -f http://${APP_SERVER}:${APP_PORT} || (echo '❌ App not responding!' && exit 1)"
             }
         }
     }
 
     post {
         success {
-            echo '✅ Deployment succesvol!'
+            echo "✅ Deployment succesvol! App draait op http://${APP_SERVER}:${APP_PORT}"
         }
         failure {
-            echo '❌ Deployment mislukt — logs ophalen ↓'
+            echo "❌ Deployment mislukt. Logs ophalen..."
             sh '''
-                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-                vagrant@${APP_SERVER} "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log"
+                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
+                    tail -n 40 /opt/Rise.Server/app.log || echo 'Geen logbestand gevonden'
+                "
             ''' || true
         }
     }
