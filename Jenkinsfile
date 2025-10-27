@@ -34,24 +34,28 @@ pipeline {
 
         stage('Deploy to App Server') {
             steps {
-                echo "--- Cleaning and Deploying ---"
+                echo "--- Deploying build to app server ---"
+
+                // 1️⃣ Clean remote deploy folder
                 sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
                         echo "[1/3] Cleaning target directory"
-                        sudo mkdir -p ${DEPLOY_PATH} || true;
-                        sudo pkill -f Rise.Server || true;
-                        sudo rm -rf ${DEPLOY_PATH}/* || true;
-                        sudo chown -R vagrant:vagrant ${DEPLOY_PATH} || true;
+                        mkdir -p ${DEPLOY_PATH} || true;
+                        pkill -f Rise.Server || true;
+                        rm -rf ${DEPLOY_PATH}/* || true;
+                        echo "Clean complete"
                     '
                 """
 
+                // 2️⃣ Copy new files
                 echo "[2/3] Copying published build"
                 sh """
                     rsync -avz -e "ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no" \
                         ./publish/ vagrant@${APP_SERVER}:${DEPLOY_PATH}/
                 """
 
-                echo "[3/3] Starting app manually on 0.0.0.0:${APP_PORT}"
+                // 3️⃣ Start app on port 5000 (listening on 0.0.0.0)
+                echo "[3/3] Starting Rise.Server"
                 sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
                         export ASPNETCORE_URLS=http://0.0.0.0:${APP_PORT};
@@ -60,6 +64,7 @@ pipeline {
                         nohup ./Rise.Server > app.log 2>&1 &
                         sleep 3;
                         ps aux | grep Rise.Server | grep -v grep || echo "⚠️ App failed to start";
+                        exit 0
                     '
                 """
             }
@@ -88,7 +93,7 @@ pipeline {
                         ps aux | grep Rise.Server | grep -v grep || echo "Geen actief proces"
                         echo ""
                         echo "--- Laatste logregels ---"
-                        sudo tail -n 50 ${DEPLOY_PATH}/app.log || echo "Geen logbestand gevonden"
+                        tail -n 50 ${DEPLOY_PATH}/app.log || echo "Geen logbestand gevonden"
                     '
                 """
             }
