@@ -40,10 +40,8 @@ public class MockRestoService : IRestoService
         }
 
         // Paging
-        var skip = Math.Max(0, req.Skip);
-        var take = req.Take <= 0 ? 20 : req.Take;
-        var paged = items.Skip(skip).Take(take).ToList();
-
+        var paged = items.Skip(req.Skip).Take(req.Take).ToList();
+        
         var now = DateTimeOffset.Now;
         foreach (var resto in paged)
         {
