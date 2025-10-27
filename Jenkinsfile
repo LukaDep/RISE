@@ -9,10 +9,10 @@ pipeline {
         SSH_KEY_ID = 'appserver-ssh'  // Jenkins credentials ID voor SSH key
         
         // Build configuration
-        DOTNET_VERSION = '9.0'  // Pas aan als nodig
+        DOTNET_VERSION = '9.0'
         BUILD_CONFIGURATION = 'Release'
         PUBLISH_DIR = 'publish'
-        MAIN_PROJECT = 'src/Rise.Server/Rise.Server.csproj'  // Pas aan naar je project path
+        MAIN_PROJECT = 'src/Rise.Server/Rise.Server.csproj'
     }
     
     stages {
@@ -42,17 +42,22 @@ pipeline {
                 withCredentials([sshUserPrivateKey(credentialsId: SSH_KEY_ID, keyFileVariable: 'SSH_KEY')]) {
                     echo "--- Clean deploy folder ---"
                     sh """
-                    ssh -i \${SSH_KEY} -o StrictHostKeyChecking=no ${APP_SERVER_USER}@${APP_SERVER} "
-                        sudo rm -rf ${DEPLOY_PATH}/*;
-                        sudo mkdir -p ${DEPLOY_PATH};
-                        sudo chown -R ${APP_SERVER_USER}:${APP_SERVER_USER} ${DEPLOY_PATH};
-                    "
+                    ssh -i \${SSH_KEY} -o StrictHostKeyChecking=no ${APP_SERVER_USER}@${APP_SERVER} \
+                        "sudo rm -rf ${DEPLOY_PATH}/*; \
+                         sudo mkdir -p ${DEPLOY_PATH}; \
+                         sudo chown -R ${APP_SERVER_USER}:${APP_SERVER_USER} ${DEPLOY_PATH}"
                     """
                     
-                    echo "--- Copy new publish files ---"
+                    echo "--- Copy publish files ---"
                     sh """
                     rsync -avz -e "ssh -i \${SSH_KEY} -o StrictHostKeyChecking=no" \
                         ./${PUBLISH_DIR}/ ${APP_SERVER_USER}@${APP_SERVER}:${DEPLOY_PATH}/
+                    """
+                    
+                    echo "--- Copy mockdata ---"
+                    sh """
+                    rsync -avz -e "ssh -i \${SSH_KEY} -o StrictHostKeyChecking=no" \
+                        ./src/Rise.Services/Schedule/MockData/ ${APP_SERVER_USER}@${APP_SERVER}:${DEPLOY_PATH}/Rise.Services/Schedule/MockData/
                     """
                     
                     echo "--- Run the application in background on 0.0.0.0:5000 ---"
@@ -61,11 +66,11 @@ pipeline {
                         # Stop any existing process on port 5000
                         sudo fuser -k 5000/tcp || true
                         
-                        # Run the app in background with nohup, listening on 0.0.0.0:5000
+                        # Run the app in background with nohup
                         cd ${DEPLOY_PATH}
                         nohup dotnet Rise.Server.dll --urls http://0.0.0.0:5000 > app.log 2>&1 &
                         
-                        # Wait a bit for startup
+                        # Wait for startup
                         sleep 5
                         
                         # Check if it's running
@@ -75,7 +80,7 @@ pipeline {
                             echo "Failed to start application - check logs in ${DEPLOY_PATH}/app.log"
                             exit 1
                         fi
-                    EOF
+EOF
                     """
                 }
             }
