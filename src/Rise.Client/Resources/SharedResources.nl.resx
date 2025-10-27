@@ -370,5 +370,10 @@
   </data>
   <data name="Schedule.Absent" xml:space="preserve">
     <value>Afwezig</value>
+  <data name="News.LoadMore" xml:space="preserve">
+    <value>Lees meer</value>
+  </data>
+  <data name="News.Count" xml:space="preserve">
+    <value>van de</value>
   </data>
 </root>

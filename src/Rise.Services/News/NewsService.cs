@@ -40,14 +40,20 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
             // Default order
             query = query.OrderBy(p => p.Title).ToList();
         }
+        var totalCount = query.Count();
 
         var news = query
             .Skip(request.Skip)
-            .Take(request.Take);
+            .Take(request.Take)
+            .ToList();
+        var currentCount = news.Count;
+        
 
         return Result.Success(new NewsResponse.Index
         {
             News = news,
+            TotalCount = totalCount,
+            CurrentCount = currentCount,
         }
         );
     }

@@ -40,6 +40,24 @@ public class CampusService() : ICampusService
 
         return Result.Success(campus);
     }
+    public async Task<Result<BuildingDto.Index>> GetBuildingByIdAsync(string buildingId, CancellationToken ct = default)
+    {
+        if (!File.Exists(_mockFilePath))
+            return Result<BuildingDto.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
 
+        var json = await File.ReadAllTextAsync(_mockFilePath, ct);
+        var items = JsonSerializer.Deserialize<List<CampusDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+
+        foreach (var campus in items)
+        {
+            var building = campus.Buildings?.FirstOrDefault(b => string.Equals(b.Id?.ToString(), buildingId, StringComparison.OrdinalIgnoreCase));
+            if (building != null)
+            {
+                return Result.Success(building);
+            }
+        }
+
+        return Result<BuildingDto.Index>.NotFound($"Building not found. Id: {buildingId}");
+    }
 
 }
