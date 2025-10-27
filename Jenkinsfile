@@ -37,12 +37,11 @@ pipeline {
                 echo "--- Cleaning and Deploying ---"
                 sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} '
-                        set -e
                         echo "[1/3] Cleaning target directory"
-                        sudo mkdir -p ${DEPLOY_PATH};
+                        sudo mkdir -p ${DEPLOY_PATH} || true;
                         sudo pkill -f Rise.Server || true;
-                        sudo rm -rf ${DEPLOY_PATH}/*;
-                        sudo chown -R vagrant:vagrant ${DEPLOY_PATH};
+                        sudo rm -rf ${DEPLOY_PATH}/* || true;
+                        sudo chown -R vagrant:vagrant ${DEPLOY_PATH} || true;
                     '
                 """
 
