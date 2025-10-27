@@ -54,22 +54,24 @@ pipeline {
                       ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
                     
-                    echo "--- Set execute permissions and start application ---"
+                    echo "--- Start application with dotnet command ---"
                     sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                       cd ${DEPLOY_PATH};
                       # Stop any running instance
-                      sudo pkill -f 'Rise.Server' || true;
-                      sudo pkill -f 'dotnet.*5000' || true;
+                      sudo pkill -f 'dotnet.*Rise.Server.dll' || true;
                       sleep 2;
-                      # Make sure the binary is executable
-                      chmod +x Rise.Server;
-                      # Start the app directly on 0.0.0.0:5000
-                      nohup ./Rise.Server --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
-                      echo 'Application started on 0.0.0.0:5000';
-                      sleep 3;
+                      # Start using dotnet command (more reliable)
+                      nohup dotnet Rise.Server.dll --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
+                      echo 'Application started with dotnet on 0.0.0.0:5000';
+                      sleep 5;
                       # Check if process is running
-                      ps aux | grep Rise.Server | grep -v grep;
+                      echo '=== Checking process ===';
+                      ps aux | grep 'dotnet.*Rise.Server.dll' | grep -v grep;
+                      echo '=== Checking app log ===';
+                      tail -n 10 app.log 2>/dev/null || echo 'No app.log yet';
+                      echo '=== Checking port ===';
+                      ss -tlnp | grep :5000 || echo 'Port 5000 not listening yet';
                     "
                     '''
                 }
@@ -79,7 +81,7 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 echo "--- Smoke Test: HTTP check ---"
-                sh "sleep 5"
+                sh "sleep 8"
                 sh "curl -f http://${APP_SERVER}:5000 || exit 1"
                 echo "✅ Site is accessible!"
             }
@@ -97,11 +99,15 @@ pipeline {
                     sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
                       echo '=== Process status ===';
-                      ps aux | grep Rise.Server | grep -v grep || echo 'No Rise.Server process found';
+                      ps aux | grep 'dotnet.*Rise.Server.dll' | grep -v grep || echo 'No dotnet process found';
                       echo '=== App logs ==='; 
-                      cd ${DEPLOY_PATH} && tail -n 50 app.log 2>/dev/null || echo 'No app.log found';
+                      cd ${DEPLOY_PATH} && tail -n 30 app.log 2>/dev/null || echo 'No app.log found';
                       echo '=== Check port 5000 ===';
-                      sudo netstat -tlnp | grep :5000 || echo 'Nothing listening on port 5000';
+                      ss -tlnp | grep :5000 || echo 'Nothing listening on port 5000';
+                      echo '=== Check dotnet version ===';
+                      dotnet --version || echo 'Dotnet not installed';
+                      echo '=== Check files ===';
+                      ls -la ${DEPLOY_PATH}/ | head -10;
                     "
                     """
                 }
