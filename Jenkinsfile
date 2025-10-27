@@ -53,14 +53,19 @@ pipeline {
                       ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
                     '''
                     
-                    echo "--- Start application ---"
+                    echo "--- Stop existing processes and start application ---"
                     sh '''
                     ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
                       cd ${DEPLOY_PATH};
-                      # Stop any running instance
+                      # Stop any process using port 5000
+                      echo 'Stopping processes on port 5000...';
+                      sudo fuser -k 5000/tcp || true;
+                      # Also stop any dotnet processes
                       sudo pkill -f 'dotnet.*Rise.Server.dll' || true;
-                      sleep 2;
-                      # Start application with explicit logging
+                      sleep 3;
+                      # Clear port 5000
+                      sudo ss -tulpn | grep :5000 && echo 'Port 5000 still in use' || echo 'Port 5000 is free';
+                      # Start application
                       echo 'Starting application...';
                       nohup dotnet Rise.Server.dll --urls \"http://0.0.0.0:5000\" > app.log 2>&1 &
                       echo 'Application start command executed';
@@ -99,16 +104,12 @@ pipeline {
                     sh """
                     ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vagrant@${APP_SERVER} "
                       echo '=== Full diagnostics ===';
-                      echo '=== Current directory and files ===';
-                      cd ${DEPLOY_PATH} && pwd && ls -la;
-                      echo '=== Dotnet info ===';
-                      dotnet --info;
-                      echo '=== Try to run app directly ===';
-                      dotnet Rise.Server.dll --urls 'http://0.0.0.0:5000' || echo 'Direct run failed';
-                      echo '=== Check dependencies ===';
-                      ldd Rise.Server.dll 2>/dev/null || echo 'ldd not available';
-                      echo '=== Full app logs ===';
-                      cat app.log 2>/dev/null || echo 'No app.log found';
+                      echo '=== Check what is using port 5000 ===';
+                      sudo ss -tulpn | grep :5000 || echo 'Port 5000 is free';
+                      echo '=== Current processes ===';
+                      ps aux | grep dotnet | grep -v grep;
+                      echo '=== App logs ===';
+                      cd ${DEPLOY_PATH} && cat app.log 2>/dev/null || echo 'No app.log found';
                     "
                     """
                 }
