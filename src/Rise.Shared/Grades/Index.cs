@@ -12,11 +12,3 @@ public static partial class GradesResponse
     }
 
 }
-
-public static partial class GradesRequest
-{
-    public class CourseById
-    {
-        public required string CourseId { get; set; }
-    }
-}

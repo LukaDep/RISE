@@ -7,9 +7,9 @@ public static class GradesDto
         public required int Year { get; set; }
         public required int Semester { get; set; }
         public double? FinalScore { get; set; }
-        public required List<Assessment> Assessments { get; set; }
+        public required List<Grade> Grades { get; set; }
     }
-    public class Assessment
+    public class Grade
     {
         public required string Id { get; set; }
         public required string Name { get; set; }

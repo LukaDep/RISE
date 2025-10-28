@@ -12,26 +12,12 @@ public class Index(IGradesService gradesService) : Endpoint<QueryRequest.SkipTak
 {
     public override void Configure()
     {
-        Get("/api/grades/courses");
+        Get("/api/grades");
         AllowAnonymous();
     }
 
     public override Task<Result<GradesResponse.CourseList>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
     {
         return gradesService.GetCoursesAsync(req, ct);
-    }
-}
-public class CourseById(IGradesService gradesService) : EndpointWithoutRequest<Result<GradesResponse.CourseById>>
-{
-    public override void Configure()
-    {
-        Get("/api/grades/courses/{courseId}");
-        AllowAnonymous();
-    }
-
-    public override Task<Result<GradesResponse.CourseById>> ExecuteAsync(CancellationToken ct)
-    {
-        var courseId = Route<string>("courseId");
-        return gradesService.GetCourseByIdAsync(courseId, ct);
     }
 }

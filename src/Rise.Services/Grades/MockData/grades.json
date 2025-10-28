@@ -5,7 +5,7 @@
     "Year": 2025,
     "Semester": 1,
     "FinalScore": null,
-    "Assessments": [
+    "Grades": [
       {
         "Id": "A10101-1",
         "Name": "Project 1 - Portfolio Website",
@@ -54,7 +54,7 @@
     "Year": 2025,
     "Semester": 1,
     "FinalScore": null,
-    "Assessments": [
+    "Grades": [
       {
         "Id": "A10202-1",
         "Name": "Normalization Assignment",
@@ -103,7 +103,7 @@
     "Year": 2025,
     "Semester": 1,
     "FinalScore": null,
-    "Assessments": [
+    "Grades": [
       {
         "Id": "A10303-1",
         "Name": "Lab 3 - Camera API",
@@ -142,7 +142,7 @@
     "Year": 2025,
     "Semester": 2,
     "FinalScore": 10.67,
-    "Assessments": [
+    "Grades": [
       {
         "Id": "A10404-1",
         "Name": "Sprint 1 - Scrum Board",
@@ -171,7 +171,7 @@
     "Year": 2025,
     "Semester": 2,
     "FinalScore": 8.00,
-    "Assessments": [
+    "Grades": [
       {
         "Id": "A10505-1",
         "Name": "Exercise Sheet 4 - Regression",
