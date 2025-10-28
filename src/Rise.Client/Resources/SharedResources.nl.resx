@@ -430,4 +430,22 @@
   <data name="News.Count" xml:space="preserve">
     <value>van de</value>
   </data>
+  <data name="Grades.Title" xml:space="preserve">
+    <value>Mijn punten</value>
+  </data>
+  <data name="Course.Final" xml:space="preserve">
+    <value>Eindscore</value>
+  </data>
+  <data name="Course.Average" xml:space="preserve">
+    <value>Gemiddelde</value>
+  </data>
+  <data name="Course.Submitted" xml:space="preserve">
+    <value>Ingediend</value>
+  </data>
+  <data name="Course.Pending" xml:space="preserve">
+    <value>In afwachting</value>
+  </data>
+  <data name="Course.YearSemester" xml:space="preserve">
+    <value>{0} • Semester {1}</value>
+  </data>
 </root>

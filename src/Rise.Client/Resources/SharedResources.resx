@@ -418,4 +418,22 @@
   <data name="News.Count" xml:space="preserve">
     <value>of</value>
   </data>
+  <data name="Grades.Title" xml:space="preserve">
+    <value>My Grades</value>
+  </data>
+  <data name="Course.Final" xml:space="preserve">
+    <value>Final</value>
+  </data>
+  <data name="Course.Average" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="Course.Submitted" xml:space="preserve">
+    <value>Submitted</value>
+  </data>
+  <data name="Course.Pending" xml:space="preserve">
+    <value>Pending</value>
+  </data>
+  <data name="Course.YearSemester" xml:space="preserve">
+    <value>{0} • Semester {1}</value>
+  </data>
 </root>
