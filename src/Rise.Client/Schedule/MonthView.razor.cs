@@ -15,7 +15,6 @@ public partial class MonthView
 
     [Inject] public required IScheduleService ScheduleService { get; set; }
 
-    private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,7 +30,6 @@ public partial class MonthView
     }
 
     private DateTime FirstDayOfMonth => new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
-    private DateTime LastDayOfMonth => FirstDayOfMonth.AddMonths(1).AddDays(-1);
 
     private List<DateTime> MonthDays
     {
