@@ -15,6 +15,8 @@ using Rise.Shared.Resto;
 using Rise.Shared.CampusInfo;
 using Rise.Services.CampusInfo;
 using Rise.Shared.Schedule;
+using Rise.Services.Contact;
+using Rise.Shared.Contact;
 
 namespace Rise.Services;
 
@@ -31,6 +33,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRestoService, MockRestoService>();
         services.AddScoped<INewsService, NewsService>();
         services.AddScoped<ICampusInfoService, CampusInfoService>();
+        services.AddScoped<IContactService, ContactService>();
         services.AddTransient<DbSeeder>();
 
         // Add other application services here.

@@ -1,0 +1,215 @@
+[
+  {
+    "Id": 1,
+    "Type": "organisatie",
+    "Name": "HOGENT",
+    "PhoneNumber": "09 243 33 33",
+    "Email": "info@hogent.be"
+  },
+  {
+    "Id": 2,
+    "Type": "departement",
+    "Name": "Bedrijf en Organisatie",
+    "ContactPerson": "Rudi Madalijns",
+    "Email": "Rudi.Madalijns@hogent.be",
+    "Campusses": [ 12, 13, 14 ]
+  },
+  {
+    "Id": 3,
+    "Type": "departement",
+    "Name": "Biowetenschappen en Industri�le Technologie",
+    "ContactPerson": "Christel Meert",
+    "Email": "Christel.Meert@hogent.be",
+    "Campusses": [ 12, 15, 16, 17 ]
+  },
+  {
+    "Id": 4,
+    "Type": "departement",
+    "Name": "Gezondheidszorg",
+    "ContactPerson": "Liesbeth Van Coppenolle",
+    "Email": "Liesbeth.VanCoppenolle@hogent.be",
+    "Campusses": [ 18 ]
+  },
+  {
+    "Id": 5,
+    "Type": "departement",
+    "Name": "IT en Digitale Innovatie",
+    "ContactPerson": "Chantal Teerlinck",
+    "Email": "Chantal.Teerlinck@hogent.be",
+    "Campusses": [ 12, 14 ]
+  },
+  {
+    "Id": 6,
+    "Type": "departement",
+    "Name": "Lerarenopleiding",
+    "ContactPerson": "Lincy Van Twembeke",
+    "Email": "Lincy.VanTwembeke@hogent.be",
+    "Campusses": [ 19 ]
+  },
+  {
+    "Id": 7,
+    "Type": "departement",
+    "Name": "Omgeving",
+    "ContactPerson": "Mieke Paelinck",
+    "Email": "Mieke.Paelinck@hogent.be",
+    "Campusses": [ 12 ]
+  },
+  {
+    "Id": 8,
+    "Type": "departement",
+    "Name": "Sociaal-Agogisch Werk",
+    "ContactPerson": "Claudia Claes",
+    "Email": "claudia.claes@hogent.be"
+  },
+  {
+    "Id": 9,
+    "Type": "departement",
+    "Name": "GO5",
+    "ContactPerson": "Jan Vanden Berghe",
+    "Email": "Jan.VandenBerghe@hogent.be",
+    "Campusses": [ 21 ]
+  },
+  {
+    "Id": 10,
+    "Type": "departement",
+    "Name": "KASK & Conservatorium",
+    "ContactPerson": "Filip Rath�",
+    "Email": "Filip.Rathe@hogent.be",
+    "Campusses": [ 22, 23 ]
+  },
+  {
+    "Id": 11,
+    "Type": "campus",
+    "Name": "Campus Schoonmeersen",
+    "PhoneNumber": "09 243 20 04"
+  },
+  {
+    "Id": 12,
+    "Type": "campus",
+    "Name": "Campus Mercator",
+    "PhoneNumber": "09 243 20 16"
+  },
+  {
+    "Id": 13,
+    "Type": "campus",
+    "Name": "Campus Aalst",
+    "PhoneNumber": "09 243 38 00"
+  },
+  {
+    "Id": 14,
+    "Type": "campus",
+    "Name": "Campus Melle",
+    "PhoneNumber": "09 243 28 00"
+  },
+  {
+    "Id": 15,
+    "Type": "campus",
+    "Name": "Proefhoeve Bottelare",
+    "PhoneNumber": "09 243 24 01"
+  },
+  {
+    "Id": 16,
+    "Type": "campus",
+    "Name": "Site Buchtenstraat",
+    "PhoneNumber": "09 243 27 84"
+  },
+  {
+    "Id": 17,
+    "Type": "campus",
+    "Name": "Campus Vesalius",
+    "PhoneNumber": "09 243 23 30"
+  },
+  {
+    "Id": 18,
+    "Type": "campus",
+    "Name": "Campus Ledeganck",
+    "PhoneNumber": "09 243 30 30"
+  },
+  {
+    "Id": 19,
+    "Type": "campus",
+    "Name": "Campus Schoonmeersen - Voskenslaan",
+    "PhoneNumber": "09 243 20 01"
+  },
+  {
+    "Id": 21,
+    "Type": "campus",
+    "Name": "Campus Bijloke",
+    "PhoneNumber": "09 243 36 00"
+  },
+  {
+    "Id": 22,
+    "Type": "campus",
+    "Name": "Campus Grote Sikkel",
+    "PhoneNumber": "09 243 36 00"
+  },
+  {
+    "Id": 23,
+    "Type": "directie",
+    "Name": "Algemene directie",
+    "ContactPerson": "Koen Goethals",
+    "Email": "koen.goethals@hogent.be"
+  },
+  {
+    "Id": 24,
+    "Type": "directie",
+    "Name": "Directie Onderwijsaangelegenheden",
+    "ContactPerson": "Robin Stevens",
+    "Email": "Robin.Stevens@hogent.be"
+  },
+  {
+    "Id": 25,
+    "Type": "directie",
+    "Name": "Directie Onderzoeksaangelegenheden",
+    "ContactPerson": "Els Stuyven",
+    "Email": "els.stuyven@hogent.be"
+  },
+  {
+    "Id": 26,
+    "Type": "directie",
+    "Name": "Directie Financi�n en Personeel",
+    "ContactPerson": "Sofie Jaques",
+    "Email": "Sofie.Jaques@hogent.be"
+  },
+  {
+    "Id": 27,
+    "Type": "directie",
+    "Name": "Directie IT",
+    "ContactPerson": "Bart De Rouck",
+    "Email": "Bart.DeRouck@hogent.be"
+  },
+  {
+    "Id": 28,
+    "Type": "directie",
+    "Name": "Directie Infrastructuur en Facilitair Beheer",
+    "ContactPerson": "Rudi De Vierman",
+    "Email": "rudi.devierman@hogent.be"
+  },
+  {
+    "Id": 29,
+    "Type": "directie",
+    "Name": "Directie Studentenvoorzieningen",
+    "ContactPerson": "Sebastien Malfait",
+    "Email": "sebastien.malfait@hogent.be"
+  },
+  {
+    "Id": 30,
+    "Type": "directie",
+    "Name": "Directie Communicatie",
+    "Email": "communicatie@hogent.be"
+  },
+  {
+    "Id": 31,
+    "Type": "andere",
+    "Name": "Studentenraad",
+    "ContactPerson": "Studentenraad",
+    "Email": "revolte@hogent.be"
+  },
+  {
+    "Id": 32,
+    "Type": "andere",
+    "Name": "Sportdienst",
+    "ContactPerson": "Sportdienst",
+    "Email": "sport@hogent.be"
+  }
+]

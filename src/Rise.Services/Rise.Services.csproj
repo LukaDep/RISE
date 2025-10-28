@@ -19,6 +19,7 @@
 
     <ItemGroup>
       <Folder Include="CampusInfo\MockData\" />
+      <Folder Include="Contact\MockData\" />
     </ItemGroup>
 
 </Project>
