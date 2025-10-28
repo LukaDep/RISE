@@ -28,7 +28,7 @@ public class MockRestoService : IRestoService
         }
 
         var json = await File.ReadAllTextAsync(_mockFilePath, ct);
-        var items = JsonSerializer.Deserialize<List<RestoDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+        IEnumerable<RestoDto.Index> items = JsonSerializer.Deserialize<List<RestoDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
 
         // Basic search
         if (!string.IsNullOrWhiteSpace(req.SearchTerm))
@@ -36,12 +36,12 @@ public class MockRestoService : IRestoService
             var term = req.SearchTerm.Trim();
             items = items.Where(i => (i.Name ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
                                   || (i.Description ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
-                                  || (i.KitchenType ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)).ToList();
+                                  || (i.KitchenType ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase));
         }
 
         // Paging
-        var paged = items.Skip(req.Skip).Take(req.Take).ToList();
-        
+        var paged = items.Skip(Math.Max(0, req.Skip)).Take(req.Take <= 0 ? 20 : req.Take).ToList();
+
         var now = DateTimeOffset.Now;
         foreach (var resto in paged)
         {
@@ -109,4 +109,3 @@ public class MockRestoService : IRestoService
         return false;
     }
 }
-
