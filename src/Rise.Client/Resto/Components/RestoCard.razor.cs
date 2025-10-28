@@ -19,9 +19,8 @@ public partial class RestoCard
     {
         if (Resto.OpeningHours == null) return Enumerable.Empty<KeyValuePair<DayOfWeek, string>>();
 
-        var today = DateTime.Now.DayOfWeek;
         var sorted = Resto.OpeningHours
-            .OrderBy(x => ((int)x.Key - (int)today + 7) % 7)
+            .OrderBy(x => x.Key == DayOfWeek.Sunday ? 7 : (int)x.Key)
             .ToList();
 
         return sorted;

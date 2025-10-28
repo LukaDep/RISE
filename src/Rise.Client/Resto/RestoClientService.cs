@@ -14,12 +14,3 @@ public class RestoClientService(HttpClient httpClient) : IRestoService
         return result!;
     }
 }
-
-public static class RestoClientServiceExtensions
-{
-    public static IServiceCollection AddRestoClientService(this IServiceCollection services)
-    {
-        services.AddScoped<IRestoService, RestoClientService>();
-        return services;
-    }
-}

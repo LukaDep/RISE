@@ -6,6 +6,6 @@ public static class RestoResponse
 {
     public class Index
     {
-        public List<RestoDto.Index> Restos { get; set; } = new();
+        public IEnumerable<RestoDto.Index> Restos { get; set; } = new List<RestoDto.Index>();
     }
 }

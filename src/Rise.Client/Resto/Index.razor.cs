@@ -29,7 +29,7 @@ public partial class Index : ComponentBase
     public string? SearchTerm { get; set; } = default!;
 
     private string? searchTerm;
-    private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
+    private const int FuzzyScoreThreshold = 60;
 
     protected override async Task OnInitializedAsync()
     {
@@ -42,7 +42,7 @@ public partial class Index : ComponentBase
         {
             Skip = 0,
             Take = 20,
-            SearchTerm = SearchTerm?.Length > 0 ? SearchTerm : "",
+            SearchTerm = SearchTerm ?? string.Empty,
         };
 
         var result = await RestoService.GetIndexAsync(request);
@@ -73,7 +73,6 @@ public partial class Index : ComponentBase
             {
                 Skip = 0,
                 Take = 100,
-                SearchTerm = "",
             };
 
             var result = await RestoService.GetIndexAsync(request);

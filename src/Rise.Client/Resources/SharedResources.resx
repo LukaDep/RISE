@@ -410,7 +410,8 @@
   </data>
   <data name="Day.Sunday" xml:space="preserve">
     <value>Sunday</value>
-    <comment/>
+    <comment/> 
+   </data>
   <data name="News.LoadMore" xml:space="preserve">
     <value>Read more</value>
   </data>
