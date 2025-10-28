@@ -1,0 +1,142 @@
+[
+    {
+        "Id": "R1",
+        "Name": "Resto Schoonmeersen",
+        "Description": "Gezellig studentenresto op campus Schoonmeersen. Betaalbare dagschotels, broodjes en warme dranken.",
+        "BuildingId": "D",
+        "OpeningHours": {
+            "Monday": "08:00-17:00",
+            "Tuesday": "08:00-17:00",
+            "Wednesday": "08:00-17:00",
+            "Thursday": "08:00-17:00",
+            "Friday": "08:00-15:00",
+            "Saturday": null,
+            "Sunday": null
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Mixed",
+        "PhoneNumber": "+32 9 123 45 67",
+        "Email": "resto.schoonmeersen@hogent.be",
+        "ImageUrl": "/images/resto_schoonmeersen.jpg"
+    },
+    {
+        "Id": "R2",
+        "Name": "Resto Mercator",
+        "Description": "Kleine bistro dicht bij de faculteit met warme maaltijden en gezonde salades.",
+        "BuildingId": "B",
+        "OpeningHours": {
+            "Monday": "09:00-16:00",
+            "Tuesday": "09:00-16:00",
+            "Wednesday": "09:00-16:00",
+            "Thursday": "09:00-16:00",
+            "Friday": "09:00-14:00",
+            "Saturday": null,
+            "Sunday": null
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Hot",
+        "PhoneNumber": "+32 9 76 54 321",
+        "Email": "resto.mercator@hogent.be",
+        "ImageUrl": "/images/resto_mercator.jpg"
+    },
+    {
+        "Id": "R3",
+        "Name": "Resto Schoonmeersen - Snackcorner",
+        "Description": "Snackcorner met broodjes, panini's, koffie en snelle hapjes voor studenten on-the-go.",
+        "BuildingId": "D",
+        "OpeningHours": {
+            "Monday": "08:00-19:00",
+            "Tuesday": "08:00-19:00",
+            "Wednesday": "08:00-19:00",
+            "Thursday": "08:00-19:00",
+            "Friday": "08:00-17:00",
+            "Saturday": null,
+            "Sunday": null
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "FastFood",
+        "PhoneNumber": "+32 9 123 45 68",
+        "Email": "snack.schoonmeersen@hogent.be",
+        "ImageUrl": "/images/resto_snackcorner.jpg"
+    },
+    {
+        "Id": "R4",
+        "Name": "Campus Resto Kantien",
+        "Description": "Grote kantine met buffet en ruime keuze aan vegetarische en internationale gerechten.",
+        "BuildingId": "C",
+        "OpeningHours": {
+            "Monday": "07:30-18:00",
+            "Tuesday": "07:30-18:00",
+            "Wednesday": "07:30-18:00",
+            "Thursday": "07:30-18:00",
+            "Friday": "07:30-16:00",
+            "Saturday": null,
+            "Sunday": null
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Hot",
+        "PhoneNumber": "+32 9 111 22 33",
+        "Email": "kantien@hogent.be",
+        "ImageUrl": "/images/resto_kantien.jpg"
+    },
+    {
+        "Id": "R5",
+        "Name": "Resto Technologieplein",
+        "Description": "Praktisch gelegen naast de lab- en praktijklokalen; snelle warme maaltijden en soep van de dag.",
+        "BuildingId": "T",
+        "OpeningHours": {
+            "Monday": "08:30-16:30",
+            "Tuesday": "08:30-16:30",
+            "Wednesday": "08:30-16:30",
+            "Thursday": "08:30-16:30",
+            "Friday": "08:30-15:00",
+            "Saturday": null,
+            "Sunday": null
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Mixed",
+        "PhoneNumber": "+32 9 222 33 44",
+        "Email": "resto.tech@hogent.be",
+        "ImageUrl": "/images/resto_tech.jpg"
+    },
+    {
+        "Id": "R6",
+        "Name": "Resto RestoBar Zuid",
+        "Description": "Informele bar/restaurant waar studenten 's avonds samenkomen voor pizza's, tapas en drankjes.",
+        "BuildingId": "Z",
+        "OpeningHours": {
+            "Monday": "11:00-22:00",
+            "Tuesday": "11:00-22:00",
+            "Wednesday": "11:00-22:00",
+            "Thursday": "11:00-23:00",
+            "Friday": "11:00-23:00",
+            "Saturday": "12:00-23:00",
+            "Sunday": "12:00-20:00"
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Bar",
+        "PhoneNumber": "+32 9 333 44 55",
+        "Email": "restobar.zuid@hogent.be",
+        "ImageUrl": "/images/resto_restobar.jpg"
+    },
+    {
+        "Id": "R7",
+        "Name": "Resto Bibliotheek",
+        "Description": "Kleine koffie- en studieruimte in de buurt van de bibliotheek met koffiespecialiteiten en gezonde snacks.",
+        "BuildingId": "L",
+        "OpeningHours": {
+            "Monday": "08:00-20:00",
+            "Tuesday": "08:00-20:00",
+            "Wednesday": "08:00-20:00",
+            "Thursday": "08:00-20:00",
+            "Friday": "08:00-18:00",
+            "Saturday": "10:00-16:00",
+            "Sunday": null
+        },
+        "IsCurrentlyOpen": false,
+        "KitchenType": "Cafe",
+        "PhoneNumber": "+32 9 444 55 66",
+        "Email": "bibliotheek.restocard@hogent.be",
+        "ImageUrl": "/images/resto_bibliotheek.jpg"
+    }
+]
