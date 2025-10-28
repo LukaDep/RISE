@@ -356,6 +356,62 @@
     <value>Logout</value>
     <comment/>
   </data>
+  <data name="Resto.Title" xml:space="preserve">
+    <value>Restaurants</value>
+    <comment/>
+  </data>
+  <data name="Resto.FilterPlaceholder" xml:space="preserve">
+    <value>Search restaurants...</value>
+    <comment/>
+  </data>
+  <data name="Resto.NoResults" xml:space="preserve">
+    <value>No restaurants found</value>
+    <comment/>
+  </data>
+  <data name="Resto.Open" xml:space="preserve">
+    <value>Open</value>
+    <comment/>
+  </data>
+  <data name="Resto.Closed" xml:space="preserve">
+    <value>Closed</value>
+    <comment/>
+  </data>
+  <data name="Resto.OpeningHours" xml:space="preserve">
+    <value>Opening Hours</value>
+    <comment/>
+  </data>
+  <data name="Resto.ViewMenu" xml:space="preserve">
+    <value>View menu</value>
+    <comment/>
+  </data>
+  <data name="Day.Monday" xml:space="preserve">
+    <value>Monday</value>
+    <comment/>
+  </data>
+  <data name="Day.Tuesday" xml:space="preserve">
+    <value>Tuesday</value>
+    <comment/>
+  </data>
+  <data name="Day.Wednesday" xml:space="preserve">
+    <value>Wednesday</value>
+    <comment/>
+  </data>
+  <data name="Day.Thursday" xml:space="preserve">
+    <value>Thursday</value>
+    <comment/>
+  </data>
+  <data name="Day.Friday" xml:space="preserve">
+    <value>Friday</value>
+    <comment/>
+  </data>
+  <data name="Day.Saturday" xml:space="preserve">
+    <value>Saturday</value>
+    <comment/>
+  </data>
+  <data name="Day.Sunday" xml:space="preserve">
+    <value>Sunday</value>
+    <comment/> 
+   </data>
   <data name="News.LoadMore" xml:space="preserve">
     <value>Read more</value>
   </data>
