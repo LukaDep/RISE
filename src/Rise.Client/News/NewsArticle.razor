@@ -3,16 +3,16 @@
 
 <PageTitle>@newsItem?.Title</PageTitle>
 
-@if (isLoading)
+@if (errorMessage != null)
+{
+  <div class="flex justify-center items-center min-h-screen">
+    <p class="text-lg text-red-500">@errorMessage</p>
+  </div>
+}
+else if (newsItem == null)
 {
   <div class="flex justify-center items-center min-h-screen">
     <p class="text-lg">@L["Common.Loading"]</p>
-  </div>
-}
-else if (errorMessage != null)
-{
-  <div class="flex justify-center items-center min-h-screen">
-    <p class="text-red-500 text-lg">@errorMessage</p>
   </div>
 }
 else if (newsItem != null)

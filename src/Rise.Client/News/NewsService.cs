@@ -14,7 +14,8 @@ public class NewsService(HttpClient httpClient) : INewsService
 
     public async Task<Result<NewsResponse.Get>> GetByIdAsync(int id, CancellationToken ctx = default)
     {
-        var result = await httpClient.GetFromJsonAsync<Result<NewsResponse.Get>>($"/api/news/{id}", cancellationToken: ctx);
+        var response = await httpClient.GetAsync($"/api/news/{id}", cancellationToken: ctx);
+        var result = await response.Content.ReadFromJsonAsync<Result<NewsResponse.Get>>(cancellationToken: ctx);
         return result!;
     }
 }

@@ -6,12 +6,11 @@ using Rise.Client.Identity;
 using Rise.Client.News;
 using Rise.Client.Products;
 using Rise.Client.Campus;
-using Rise.Shared.Products;
-using Rise.Shared.Campus;
 using Rise.Client.CampusInfo;
 using Rise.Shared.CampusInfo;
 using Rise.Client.Schedule;
 using Rise.Shared.News;
+using Rise.Shared.Campus;
 using Rise.Shared.Products;
 using Rise.Shared.Schedule;
 
