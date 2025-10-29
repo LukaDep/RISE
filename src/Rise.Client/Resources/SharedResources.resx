@@ -434,6 +434,9 @@
   <data name="News.Count" xml:space="preserve">
     <value>of</value>
   </data>
+  <data name="News.NotFound" xml:space="preserve">
+    <value>No News Found</value>
+  </data>
   <data name="Resto.Student" xml:space="preserve">
   <value>Student</value>
   <comment>Price for students</comment>

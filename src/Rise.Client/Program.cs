@@ -26,6 +26,12 @@ try
     builder.RootComponents.Add<HeadOutlet>("head::after");
     builder.Services.AddLocalization();
 
+    // Determine the backend URL once. If BackendUrl is not configured,
+    // fall back to the current host origin (same origin). This avoids
+    // mixed-protocol or wrong-host network errors when running in dev.
+    var backend = builder.Configuration["BackendUrl"] ?? builder.HostEnvironment.BaseAddress;
+    Log.Information("Configured backend URL: {Backend}", backend);
+
     Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Information()
         .WriteTo.BrowserConsole(outputTemplate: "[{Timestamp:HH:mm:ss}{Level:u3}]{Message:lj} {NewLine}{Exception}")
