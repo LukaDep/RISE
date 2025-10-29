@@ -437,4 +437,52 @@
   <data name="News.NotFound" xml:space="preserve">
     <value>Geen Nieuws Gevonden</value>
   </data>
+  <data name="Resto.Student" xml:space="preserve">
+  <value>Student</value>
+  <comment>Prijs voor studenten</comment>
+</data>
+
+<data name="Resto.Extern" xml:space="preserve">
+  <value>Extern</value>
+  <comment>Prijs voor externe bezoekers</comment>
+</data>
+
+<data name="Resto.Legende" xml:space="preserve">
+  <value>Legende</value>
+  <comment>Legenda voor iconen in het menu</comment>
+</data>
+
+<data name="Resto.Vegetarisch" xml:space="preserve">
+  <value>Vegetarisch</value>
+  <comment>Icoon en aanduiding voor vegetarisch gerecht</comment>
+</data>
+
+<data name="Resto.Vegan" xml:space="preserve">
+  <value>Vegan</value>
+  <comment>Icoon en aanduiding voor vegan gerecht</comment>
+</data>
+
+<data name="Resto.MenuTitle" xml:space="preserve">
+  <value>Week Menu</value>
+  <comment>Titel van de menupagina</comment>
+</data>
+
+<data name="Resto.NoMenu" xml:space="preserve">
+  <value>Er is momenteel geen menu beschikbaar.</value>
+  <comment>Tekst die verschijnt wanneer er geen menu is</comment>
+</data>
+<data name="Resto.Filter.All" xml:space="preserve">
+  <value>Alles</value>
+  <comment>Knop voor het tonen van alle menu-items</comment>
+</data>
+<data name="Resto.NoItemsForFilter" xml:space="preserve">
+  <value>Er zijn geen menu-items die voldoen aan de huidige filter.</value>
+  <comment>Bericht dat getoond wordt wanneer er geen resultaten zijn voor de gekozen filter</comment>
+</data>
+  <data name="Resto.Return" xml:space="preserve">
+    <value>Terug naar overzicht</value>
+  </data>
+  <data name="Resto.BackShort" xml:space="preserve">
+  <value>Terug</value>
+</data>
 </root>

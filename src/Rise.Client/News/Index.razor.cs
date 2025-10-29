@@ -28,11 +28,11 @@ public partial class Index : IAsyncDisposable
 
     [Inject] public required INewsService NewsService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
-    
+
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
     public string? SearchTerm { get; set; }
-    
+
     private int skip = 0;
     private int take = 10;
     private int totalCount;
