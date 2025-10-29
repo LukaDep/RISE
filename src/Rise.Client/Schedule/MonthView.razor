@@ -17,14 +17,12 @@
             </span>
         </button>
 
-        <!-- Midden: maand + jaar -->
         <div class="flex-1 text-center">
             <span class="text-lg font-semibold text-hogent-black">
                 @SelectedDate.ToString("MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture)
             </span>
         </div>
 
-        <!-- Volgende maand -->
         <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md flex items-center justify-center"
                 @onclick="NextMonthAnimated">
             <span class="hidden sm:inline">@L["Schedule.Next"]</span>
