@@ -1,1747 +1,1747 @@
 [
-  {
-    "Id": "1",
-    "RestoId": "R1",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      {
+    {
         "Id": "1",
-        "MenuId": "1",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R1",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "1",
+                "MenuId": "1",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "2",
+                "MenuId": "1",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "3",
+                "MenuId": "1",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "4",
+                "MenuId": "1",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "5",
+                "MenuId": "1",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "6",
+                "MenuId": "1",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "2",
-        "MenuId": "1",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R1",
+        "Date": "2025-10-21T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "7",
+                "MenuId": "2",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "8",
+                "MenuId": "2",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "9",
+                "MenuId": "2",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "10",
+                "MenuId": "2",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "11",
+                "MenuId": "2",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "12",
+                "MenuId": "2",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "3",
-        "MenuId": "1",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R1",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "13",
+                "MenuId": "3",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "14",
+                "MenuId": "3",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "15",
+                "MenuId": "3",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "16",
+                "MenuId": "3",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "17",
+                "MenuId": "3",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "18",
+                "MenuId": "3",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "4",
-        "MenuId": "1",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R1",
+        "Date": "2025-10-23T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "19",
+                "MenuId": "4",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "20",
+                "MenuId": "4",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "21",
+                "MenuId": "4",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "22",
+                "MenuId": "4",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "23",
+                "MenuId": "4",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "24",
+                "MenuId": "4",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "5",
-        "MenuId": "1",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R1",
+        "Date": "2025-10-24T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "25",
+                "MenuId": "5",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "26",
+                "MenuId": "5",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "27",
+                "MenuId": "5",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "28",
+                "MenuId": "5",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "29",
+                "MenuId": "5",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "30",
+                "MenuId": "5",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "6",
-        "MenuId": "1",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "2",
-    "RestoId": "R1",
-    "Date": "2025-10-21T11:30:00",
-    "MenuItems": [
-      {
+        "RestoId": "R2",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "31",
+                "MenuId": "6",
+                "Name": "Preisoep",
+                "Description": "Soep van prei",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "32",
+                "MenuId": "6",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "33",
+                "MenuId": "6",
+                "Name": "Rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "7",
-        "MenuId": "2",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R2",
+        "Date": "2025-10-21T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "34",
+                "MenuId": "7",
+                "Name": "Preisoep",
+                "Description": "Soep van prei",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "35",
+                "MenuId": "7",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "36",
+                "MenuId": "7",
+                "Name": "Rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "8",
-        "MenuId": "2",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R2",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "37",
+                "MenuId": "8",
+                "Name": "Preisoep",
+                "Description": "Soep van prei",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "38",
+                "MenuId": "8",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "39",
+                "MenuId": "8",
+                "Name": "Rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "9",
-        "MenuId": "2",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R2",
+        "Date": "2025-10-23T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "40",
+                "MenuId": "9",
+                "Name": "Preisoep",
+                "Description": "Soep van prei",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "41",
+                "MenuId": "9",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "42",
+                "MenuId": "9",
+                "Name": "Rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "10",
-        "MenuId": "2",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R2",
+        "Date": "2025-10-24T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "43",
+                "MenuId": "10",
+                "Name": "Preisoep",
+                "Description": "Soep van prei",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "44",
+                "MenuId": "10",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "45",
+                "MenuId": "10",
+                "Name": "Rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "11",
-        "MenuId": "2",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R3",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "46",
+                "MenuId": "11",
+                "Name": "Worstenbroodje",
+                "Description": "Bladerdeeg gevuld met worst",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "47",
+                "MenuId": "11",
+                "Name": "Panini tomaat en mozzarella",
+                "Description": "Warme panini",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true
+            },
+            {
+                "Id": "48",
+                "MenuId": "11",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "49",
+                "MenuId": "11",
+                "Name": "Koffie",
+                "Description": "Warme drank naar keuze",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "12",
-        "MenuId": "2",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "3",
-    "RestoId": "R1",
-    "Date": "2025-10-22T11:30:00",
-    "MenuItems": [
-      {
+        "RestoId": "R3",
+        "Date": "2025-10-21T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "50",
+                "MenuId": "12",
+                "Name": "Worstenbroodje",
+                "Description": "Bladerdeeg gevuld met worst",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "51",
+                "MenuId": "12",
+                "Name": "Panini tomaat en mozzarella",
+                "Description": "Warme panini",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true
+            },
+            {
+                "Id": "52",
+                "MenuId": "12",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "53",
+                "MenuId": "12",
+                "Name": "Koffie",
+                "Description": "Warme drank naar keuze",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "13",
-        "MenuId": "3",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R3",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "54",
+                "MenuId": "13",
+                "Name": "Worstenbroodje",
+                "Description": "Bladerdeeg gevuld met worst",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "55",
+                "MenuId": "13",
+                "Name": "Panini tomaat en mozzarella",
+                "Description": "Warme panini",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true
+            },
+            {
+                "Id": "56",
+                "MenuId": "13",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "57",
+                "MenuId": "13",
+                "Name": "Koffie",
+                "Description": "Warme drank naar keuze",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "14",
-        "MenuId": "3",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R3",
+        "Date": "2025-10-23T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "58",
+                "MenuId": "14",
+                "Name": "Worstenbroodje",
+                "Description": "Bladerdeeg gevuld met worst",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "59",
+                "MenuId": "14",
+                "Name": "Panini tomaat en mozzarella",
+                "Description": "Warme panini",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true
+            },
+            {
+                "Id": "60",
+                "MenuId": "14",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "61",
+                "MenuId": "14",
+                "Name": "Koffie",
+                "Description": "Warme drank naar keuze",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "15",
-        "MenuId": "3",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R3",
+        "Date": "2025-10-24T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "62",
+                "MenuId": "15",
+                "Name": "Worstenbroodje",
+                "Description": "Bladerdeeg gevuld met worst",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "63",
+                "MenuId": "15",
+                "Name": "Panini tomaat en mozzarella",
+                "Description": "Warme panini",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true
+            },
+            {
+                "Id": "64",
+                "MenuId": "15",
+                "Name": "Cookie",
+                "Description": "Koekje met chocolade",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "65",
+                "MenuId": "15",
+                "Name": "Koffie",
+                "Description": "Warme drank naar keuze",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "16",
-        "MenuId": "3",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R4",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "66",
+                "MenuId": "16",
+                "Name": "Tomatensoep",
+                "Description": "Verse tomatensoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "67",
+                "MenuId": "16",
+                "Name": "Kalkoenlapje",
+                "Description": "Gebakken kalkoen",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "68",
+                "MenuId": "16",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "69",
+                "MenuId": "16",
+                "Name": "Aardappelen",
+                "Description": "Gekookte aardappelen",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "70",
+                "MenuId": "16",
+                "Name": "Tiramisu",
+                "Description": "Italiaans dessert",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "71",
+                "MenuId": "16",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "17",
-        "MenuId": "3",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R4",
+        "Date": "2025-10-21T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "72",
+                "MenuId": "17",
+                "Name": "Tomatensoep",
+                "Description": "Verse tomatensoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "73",
+                "MenuId": "17",
+                "Name": "Kalkoenlapje",
+                "Description": "Gebakken kalkoen",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "74",
+                "MenuId": "17",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "75",
+                "MenuId": "17",
+                "Name": "Aardappelen",
+                "Description": "Gekookte aardappelen",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "76",
+                "MenuId": "17",
+                "Name": "Tiramisu",
+                "Description": "Italiaans dessert",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "77",
+                "MenuId": "17",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "18",
-        "MenuId": "3",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "4",
-    "RestoId": "R1",
-    "Date": "2025-10-23T11:30:00",
-    "MenuItems": [
-      {
+        "RestoId": "R4",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "78",
+                "MenuId": "18",
+                "Name": "Tomatensoep",
+                "Description": "Verse tomatensoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "79",
+                "MenuId": "18",
+                "Name": "Kalkoenlapje",
+                "Description": "Gebakken kalkoen",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "80",
+                "MenuId": "18",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "81",
+                "MenuId": "18",
+                "Name": "Aardappelen",
+                "Description": "Gekookte aardappelen",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "82",
+                "MenuId": "18",
+                "Name": "Tiramisu",
+                "Description": "Italiaans dessert",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "83",
+                "MenuId": "18",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "19",
-        "MenuId": "4",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R4",
+        "Date": "2025-10-23T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "84",
+                "MenuId": "19",
+                "Name": "Tomatensoep",
+                "Description": "Verse tomatensoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "85",
+                "MenuId": "19",
+                "Name": "Kalkoenlapje",
+                "Description": "Gebakken kalkoen",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "86",
+                "MenuId": "19",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "87",
+                "MenuId": "19",
+                "Name": "Aardappelen",
+                "Description": "Gekookte aardappelen",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "88",
+                "MenuId": "19",
+                "Name": "Tiramisu",
+                "Description": "Italiaans dessert",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "89",
+                "MenuId": "19",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "20",
-        "MenuId": "4",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R4",
+        "Date": "2025-10-24T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "90",
+                "MenuId": "20",
+                "Name": "Tomatensoep",
+                "Description": "Verse tomatensoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "91",
+                "MenuId": "20",
+                "Name": "Kalkoenlapje",
+                "Description": "Gebakken kalkoen",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "92",
+                "MenuId": "20",
+                "Name": "Quornblokjes",
+                "Description": "Vegetarische wok",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "93",
+                "MenuId": "20",
+                "Name": "Aardappelen",
+                "Description": "Gekookte aardappelen",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "94",
+                "MenuId": "20",
+                "Name": "Tiramisu",
+                "Description": "Italiaans dessert",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "95",
+                "MenuId": "20",
+                "Name": "Water 50cl",
+                "Description": "Plat water",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "21",
-        "MenuId": "4",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R5",
+        "Date": "2025-10-20T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "96",
+                "MenuId": "21",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "97",
+                "MenuId": "21",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "98",
+                "MenuId": "21",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "22",
-        "MenuId": "4",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R5",
+        "Date": "2025-10-21T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "99",
+                "MenuId": "22",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "100",
+                "MenuId": "22",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "101",
+                "MenuId": "22",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "23",
-        "MenuId": "4",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R5",
+        "Date": "2025-10-22T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "102",
+                "MenuId": "23",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "103",
+                "MenuId": "23",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "104",
+                "MenuId": "23",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "24",
-        "MenuId": "4",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "5",
-    "RestoId": "R1",
-    "Date": "2025-10-24T11:30:00",
-    "MenuItems": [
-      {
+        "RestoId": "R5",
+        "Date": "2025-10-23T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "105",
+                "MenuId": "24",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "106",
+                "MenuId": "24",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "107",
+                "MenuId": "24",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "25",
-        "MenuId": "5",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R5",
+        "Date": "2025-10-24T11:30:00",
+        "MenuItems": [
+            {
+                "Id": "108",
+                "MenuId": "25",
+                "Name": "Bloemkoolsoep",
+                "Description": "Romige bloemkoolsoep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "109",
+                "MenuId": "25",
+                "Name": "Kipfilet",
+                "Description": "Gegrilde kip",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false
+            },
+            {
+                "Id": "110",
+                "MenuId": "25",
+                "Name": "Witte rijst",
+                "Description": "Basmatirijst",
+                "Type": "Zetmeel",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "26",
-        "MenuId": "5",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R6",
+        "Date": "2025-10-20T17:00:00",
+        "MenuItems": [
+            {
+                "Id": "111",
+                "MenuId": "26",
+                "Name": "Pizza Margherita",
+                "Description": "Verse pizza met tomaat en mozzarella",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true
+            },
+            {
+                "Id": "112",
+                "MenuId": "26",
+                "Name": "Tapasbord",
+                "Description": "Mix van hapjes",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "113",
+                "MenuId": "26",
+                "Name": "Bier",
+                "Description": "Lokaal bier",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "114",
+                "MenuId": "26",
+                "Name": "Mocktail",
+                "Description": "Alcoholvrije cocktail",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "27",
-        "MenuId": "5",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R6",
+        "Date": "2025-10-21T17:00:00",
+        "MenuItems": [
+            {
+                "Id": "115",
+                "MenuId": "27",
+                "Name": "Pizza Margherita",
+                "Description": "Verse pizza met tomaat en mozzarella",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true
+            },
+            {
+                "Id": "116",
+                "MenuId": "27",
+                "Name": "Tapasbord",
+                "Description": "Mix van hapjes",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "117",
+                "MenuId": "27",
+                "Name": "Bier",
+                "Description": "Lokaal bier",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "118",
+                "MenuId": "27",
+                "Name": "Mocktail",
+                "Description": "Alcoholvrije cocktail",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "28",
-        "MenuId": "5",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R6",
+        "Date": "2025-10-22T17:00:00",
+        "MenuItems": [
+            {
+                "Id": "119",
+                "MenuId": "28",
+                "Name": "Pizza Margherita",
+                "Description": "Verse pizza met tomaat en mozzarella",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true
+            },
+            {
+                "Id": "120",
+                "MenuId": "28",
+                "Name": "Tapasbord",
+                "Description": "Mix van hapjes",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "121",
+                "MenuId": "28",
+                "Name": "Bier",
+                "Description": "Lokaal bier",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "122",
+                "MenuId": "28",
+                "Name": "Mocktail",
+                "Description": "Alcoholvrije cocktail",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "29",
-        "MenuId": "5",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R6",
+        "Date": "2025-10-23T17:00:00",
+        "MenuItems": [
+            {
+                "Id": "123",
+                "MenuId": "29",
+                "Name": "Pizza Margherita",
+                "Description": "Verse pizza met tomaat en mozzarella",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true
+            },
+            {
+                "Id": "124",
+                "MenuId": "29",
+                "Name": "Tapasbord",
+                "Description": "Mix van hapjes",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "125",
+                "MenuId": "29",
+                "Name": "Bier",
+                "Description": "Lokaal bier",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "126",
+                "MenuId": "29",
+                "Name": "Mocktail",
+                "Description": "Alcoholvrije cocktail",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "30",
-        "MenuId": "5",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "6",
-    "RestoId": "R2",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      {
+        "RestoId": "R6",
+        "Date": "2025-10-24T17:00:00",
+        "MenuItems": [
+            {
+                "Id": "127",
+                "MenuId": "30",
+                "Name": "Pizza Margherita",
+                "Description": "Verse pizza met tomaat en mozzarella",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true
+            },
+            {
+                "Id": "128",
+                "MenuId": "30",
+                "Name": "Tapasbord",
+                "Description": "Mix van hapjes",
+                "Type": "Snack",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "129",
+                "MenuId": "30",
+                "Name": "Bier",
+                "Description": "Lokaal bier",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "130",
+                "MenuId": "30",
+                "Name": "Mocktail",
+                "Description": "Alcoholvrije cocktail",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "31",
-        "MenuId": "6",
-        "Name": "Preisoep",
-        "Description": "Soep van prei",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R7",
+        "Date": "2025-10-20T09:00:00",
+        "MenuItems": [
+            {
+                "Id": "131",
+                "MenuId": "31",
+                "Name": "Cappuccino",
+                "Description": "Warme cappuccino",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "132",
+                "MenuId": "31",
+                "Name": "Espresso",
+                "Description": "Sterke zwarte koffie",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "133",
+                "MenuId": "31",
+                "Name": "Brownie",
+                "Description": "Chocoladebrownie",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "134",
+                "MenuId": "31",
+                "Name": "Muffin",
+                "Description": "Zachte cake",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "32",
-        "MenuId": "6",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R7",
+        "Date": "2025-10-21T09:00:00",
+        "MenuItems": [
+            {
+                "Id": "135",
+                "MenuId": "32",
+                "Name": "Cappuccino",
+                "Description": "Warme cappuccino",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "136",
+                "MenuId": "32",
+                "Name": "Espresso",
+                "Description": "Sterke zwarte koffie",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "137",
+                "MenuId": "32",
+                "Name": "Brownie",
+                "Description": "Chocoladebrownie",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "138",
+                "MenuId": "32",
+                "Name": "Muffin",
+                "Description": "Zachte cake",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "33",
-        "MenuId": "6",
-        "Name": "Rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "7",
-    "RestoId": "R2",
-    "Date": "2025-10-21T11:30:00",
-    "MenuItems": [
-      {
+        "RestoId": "R7",
+        "Date": "2025-10-22T09:00:00",
+        "MenuItems": [
+            {
+                "Id": "139",
+                "MenuId": "33",
+                "Name": "Cappuccino",
+                "Description": "Warme cappuccino",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "140",
+                "MenuId": "33",
+                "Name": "Espresso",
+                "Description": "Sterke zwarte koffie",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "141",
+                "MenuId": "33",
+                "Name": "Brownie",
+                "Description": "Chocoladebrownie",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "142",
+                "MenuId": "33",
+                "Name": "Muffin",
+                "Description": "Zachte cake",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "34",
-        "MenuId": "7",
-        "Name": "Preisoep",
-        "Description": "Soep van prei",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
+        "RestoId": "R7",
+        "Date": "2025-10-23T09:00:00",
+        "MenuItems": [
+            {
+                "Id": "143",
+                "MenuId": "34",
+                "Name": "Cappuccino",
+                "Description": "Warme cappuccino",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "144",
+                "MenuId": "34",
+                "Name": "Espresso",
+                "Description": "Sterke zwarte koffie",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "145",
+                "MenuId": "34",
+                "Name": "Brownie",
+                "Description": "Chocoladebrownie",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "146",
+                "MenuId": "34",
+                "Name": "Muffin",
+                "Description": "Zachte cake",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    },
+    {
         "Id": "35",
-        "MenuId": "7",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "36",
-        "MenuId": "7",
-        "Name": "Rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "8",
-    "RestoId": "R2",
-    "Date": "2025-10-22T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "37",
-        "MenuId": "8",
-        "Name": "Preisoep",
-        "Description": "Soep van prei",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "38",
-        "MenuId": "8",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "39",
-        "MenuId": "8",
-        "Name": "Rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "9",
-    "RestoId": "R2",
-    "Date": "2025-10-23T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "40",
-        "MenuId": "9",
-        "Name": "Preisoep",
-        "Description": "Soep van prei",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "41",
-        "MenuId": "9",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "42",
-        "MenuId": "9",
-        "Name": "Rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "10",
-    "RestoId": "R2",
-    "Date": "2025-10-24T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "43",
-        "MenuId": "10",
-        "Name": "Preisoep",
-        "Description": "Soep van prei",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "44",
-        "MenuId": "10",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "45",
-        "MenuId": "10",
-        "Name": "Rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "11",
-    "RestoId": "R3",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "46",
-        "MenuId": "11",
-        "Name": "Worstenbroodje",
-        "Description": "Bladerdeeg gevuld met worst",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "47",
-        "MenuId": "11",
-        "Name": "Panini tomaat en mozzarella",
-        "Description": "Warme panini",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": true
-      },
-      {
-        "Id": "48",
-        "MenuId": "11",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "49",
-        "MenuId": "11",
-        "Name": "Koffie",
-        "Description": "Warme drank naar keuze",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "12",
-    "RestoId": "R3",
-    "Date": "2025-10-21T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "50",
-        "MenuId": "12",
-        "Name": "Worstenbroodje",
-        "Description": "Bladerdeeg gevuld met worst",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "51",
-        "MenuId": "12",
-        "Name": "Panini tomaat en mozzarella",
-        "Description": "Warme panini",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": true
-      },
-      {
-        "Id": "52",
-        "MenuId": "12",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "53",
-        "MenuId": "12",
-        "Name": "Koffie",
-        "Description": "Warme drank naar keuze",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "13",
-    "RestoId": "R3",
-    "Date": "2025-10-22T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "54",
-        "MenuId": "13",
-        "Name": "Worstenbroodje",
-        "Description": "Bladerdeeg gevuld met worst",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "55",
-        "MenuId": "13",
-        "Name": "Panini tomaat en mozzarella",
-        "Description": "Warme panini",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": true
-      },
-      {
-        "Id": "56",
-        "MenuId": "13",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "57",
-        "MenuId": "13",
-        "Name": "Koffie",
-        "Description": "Warme drank naar keuze",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "14",
-    "RestoId": "R3",
-    "Date": "2025-10-23T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "58",
-        "MenuId": "14",
-        "Name": "Worstenbroodje",
-        "Description": "Bladerdeeg gevuld met worst",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "59",
-        "MenuId": "14",
-        "Name": "Panini tomaat en mozzarella",
-        "Description": "Warme panini",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": true
-      },
-      {
-        "Id": "60",
-        "MenuId": "14",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "61",
-        "MenuId": "14",
-        "Name": "Koffie",
-        "Description": "Warme drank naar keuze",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "15",
-    "RestoId": "R3",
-    "Date": "2025-10-24T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "62",
-        "MenuId": "15",
-        "Name": "Worstenbroodje",
-        "Description": "Bladerdeeg gevuld met worst",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "63",
-        "MenuId": "15",
-        "Name": "Panini tomaat en mozzarella",
-        "Description": "Warme panini",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": true
-      },
-      {
-        "Id": "64",
-        "MenuId": "15",
-        "Name": "Cookie",
-        "Description": "Koekje met chocolade",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "65",
-        "MenuId": "15",
-        "Name": "Koffie",
-        "Description": "Warme drank naar keuze",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "16",
-    "RestoId": "R4",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "66",
-        "MenuId": "16",
-        "Name": "Tomatensoep",
-        "Description": "Verse tomatensoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "67",
-        "MenuId": "16",
-        "Name": "Kalkoenlapje",
-        "Description": "Gebakken kalkoen",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "68",
-        "MenuId": "16",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "69",
-        "MenuId": "16",
-        "Name": "Aardappelen",
-        "Description": "Gekookte aardappelen",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "70",
-        "MenuId": "16",
-        "Name": "Tiramisu",
-        "Description": "Italiaans dessert",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "71",
-        "MenuId": "16",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "17",
-    "RestoId": "R4",
-    "Date": "2025-10-21T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "72",
-        "MenuId": "17",
-        "Name": "Tomatensoep",
-        "Description": "Verse tomatensoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "73",
-        "MenuId": "17",
-        "Name": "Kalkoenlapje",
-        "Description": "Gebakken kalkoen",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "74",
-        "MenuId": "17",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "75",
-        "MenuId": "17",
-        "Name": "Aardappelen",
-        "Description": "Gekookte aardappelen",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "76",
-        "MenuId": "17",
-        "Name": "Tiramisu",
-        "Description": "Italiaans dessert",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "77",
-        "MenuId": "17",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "18",
-    "RestoId": "R4",
-    "Date": "2025-10-22T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "78",
-        "MenuId": "18",
-        "Name": "Tomatensoep",
-        "Description": "Verse tomatensoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "79",
-        "MenuId": "18",
-        "Name": "Kalkoenlapje",
-        "Description": "Gebakken kalkoen",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "80",
-        "MenuId": "18",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "81",
-        "MenuId": "18",
-        "Name": "Aardappelen",
-        "Description": "Gekookte aardappelen",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "82",
-        "MenuId": "18",
-        "Name": "Tiramisu",
-        "Description": "Italiaans dessert",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "83",
-        "MenuId": "18",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "19",
-    "RestoId": "R4",
-    "Date": "2025-10-23T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "84",
-        "MenuId": "19",
-        "Name": "Tomatensoep",
-        "Description": "Verse tomatensoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "85",
-        "MenuId": "19",
-        "Name": "Kalkoenlapje",
-        "Description": "Gebakken kalkoen",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "86",
-        "MenuId": "19",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "87",
-        "MenuId": "19",
-        "Name": "Aardappelen",
-        "Description": "Gekookte aardappelen",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "88",
-        "MenuId": "19",
-        "Name": "Tiramisu",
-        "Description": "Italiaans dessert",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "89",
-        "MenuId": "19",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "20",
-    "RestoId": "R4",
-    "Date": "2025-10-24T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "90",
-        "MenuId": "20",
-        "Name": "Tomatensoep",
-        "Description": "Verse tomatensoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "91",
-        "MenuId": "20",
-        "Name": "Kalkoenlapje",
-        "Description": "Gebakken kalkoen",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "92",
-        "MenuId": "20",
-        "Name": "Quornblokjes",
-        "Description": "Vegetarische wok",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "93",
-        "MenuId": "20",
-        "Name": "Aardappelen",
-        "Description": "Gekookte aardappelen",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "94",
-        "MenuId": "20",
-        "Name": "Tiramisu",
-        "Description": "Italiaans dessert",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "95",
-        "MenuId": "20",
-        "Name": "Water 50cl",
-        "Description": "Plat water",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "21",
-    "RestoId": "R5",
-    "Date": "2025-10-20T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "96",
-        "MenuId": "21",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "97",
-        "MenuId": "21",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "98",
-        "MenuId": "21",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "22",
-    "RestoId": "R5",
-    "Date": "2025-10-21T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "99",
-        "MenuId": "22",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "100",
-        "MenuId": "22",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "101",
-        "MenuId": "22",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "23",
-    "RestoId": "R5",
-    "Date": "2025-10-22T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "102",
-        "MenuId": "23",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "103",
-        "MenuId": "23",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "104",
-        "MenuId": "23",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "24",
-    "RestoId": "R5",
-    "Date": "2025-10-23T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "105",
-        "MenuId": "24",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "106",
-        "MenuId": "24",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "107",
-        "MenuId": "24",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "25",
-    "RestoId": "R5",
-    "Date": "2025-10-24T11:30:00",
-    "MenuItems": [
-      {
-        "Id": "108",
-        "MenuId": "25",
-        "Name": "Bloemkoolsoep",
-        "Description": "Romige bloemkoolsoep",
-        "Type": "Soep",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "109",
-        "MenuId": "25",
-        "Name": "Kipfilet",
-        "Description": "Gegrilde kip",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": false
-      },
-      {
-        "Id": "110",
-        "MenuId": "25",
-        "Name": "Witte rijst",
-        "Description": "Basmatirijst",
-        "Type": "Zetmeel",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "26",
-    "RestoId": "R6",
-    "Date": "2025-10-20T17:00:00",
-    "MenuItems": [
-      {
-        "Id": "111",
-        "MenuId": "26",
-        "Name": "Pizza Margherita",
-        "Description": "Verse pizza met tomaat en mozzarella",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": true
-      },
-      {
-        "Id": "112",
-        "MenuId": "26",
-        "Name": "Tapasbord",
-        "Description": "Mix van hapjes",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "113",
-        "MenuId": "26",
-        "Name": "Bier",
-        "Description": "Lokaal bier",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "114",
-        "MenuId": "26",
-        "Name": "Mocktail",
-        "Description": "Alcoholvrije cocktail",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "27",
-    "RestoId": "R6",
-    "Date": "2025-10-21T17:00:00",
-    "MenuItems": [
-      {
-        "Id": "115",
-        "MenuId": "27",
-        "Name": "Pizza Margherita",
-        "Description": "Verse pizza met tomaat en mozzarella",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": true
-      },
-      {
-        "Id": "116",
-        "MenuId": "27",
-        "Name": "Tapasbord",
-        "Description": "Mix van hapjes",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "117",
-        "MenuId": "27",
-        "Name": "Bier",
-        "Description": "Lokaal bier",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "118",
-        "MenuId": "27",
-        "Name": "Mocktail",
-        "Description": "Alcoholvrije cocktail",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "28",
-    "RestoId": "R6",
-    "Date": "2025-10-22T17:00:00",
-    "MenuItems": [
-      {
-        "Id": "119",
-        "MenuId": "28",
-        "Name": "Pizza Margherita",
-        "Description": "Verse pizza met tomaat en mozzarella",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": true
-      },
-      {
-        "Id": "120",
-        "MenuId": "28",
-        "Name": "Tapasbord",
-        "Description": "Mix van hapjes",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "121",
-        "MenuId": "28",
-        "Name": "Bier",
-        "Description": "Lokaal bier",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "122",
-        "MenuId": "28",
-        "Name": "Mocktail",
-        "Description": "Alcoholvrije cocktail",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "29",
-    "RestoId": "R6",
-    "Date": "2025-10-23T17:00:00",
-    "MenuItems": [
-      {
-        "Id": "123",
-        "MenuId": "29",
-        "Name": "Pizza Margherita",
-        "Description": "Verse pizza met tomaat en mozzarella",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": true
-      },
-      {
-        "Id": "124",
-        "MenuId": "29",
-        "Name": "Tapasbord",
-        "Description": "Mix van hapjes",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "125",
-        "MenuId": "29",
-        "Name": "Bier",
-        "Description": "Lokaal bier",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "126",
-        "MenuId": "29",
-        "Name": "Mocktail",
-        "Description": "Alcoholvrije cocktail",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "30",
-    "RestoId": "R6",
-    "Date": "2025-10-24T17:00:00",
-    "MenuItems": [
-      {
-        "Id": "127",
-        "MenuId": "30",
-        "Name": "Pizza Margherita",
-        "Description": "Verse pizza met tomaat en mozzarella",
-        "Type": "WarmeMaaltijd",
-        "PriceStudent": 5.3,
-        "PriceExtern": 11.7,
-        "IsVeggie": true
-      },
-      {
-        "Id": "128",
-        "MenuId": "30",
-        "Name": "Tapasbord",
-        "Description": "Mix van hapjes",
-        "Type": "Snack",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "129",
-        "MenuId": "30",
-        "Name": "Bier",
-        "Description": "Lokaal bier",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "130",
-        "MenuId": "30",
-        "Name": "Mocktail",
-        "Description": "Alcoholvrije cocktail",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "31",
-    "RestoId": "R7",
-    "Date": "2025-10-20T09:00:00",
-    "MenuItems": [
-      {
-        "Id": "131",
-        "MenuId": "31",
-        "Name": "Cappuccino",
-        "Description": "Warme cappuccino",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "132",
-        "MenuId": "31",
-        "Name": "Espresso",
-        "Description": "Sterke zwarte koffie",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "133",
-        "MenuId": "31",
-        "Name": "Brownie",
-        "Description": "Chocoladebrownie",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "134",
-        "MenuId": "31",
-        "Name": "Muffin",
-        "Description": "Zachte cake",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "32",
-    "RestoId": "R7",
-    "Date": "2025-10-21T09:00:00",
-    "MenuItems": [
-      {
-        "Id": "135",
-        "MenuId": "32",
-        "Name": "Cappuccino",
-        "Description": "Warme cappuccino",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "136",
-        "MenuId": "32",
-        "Name": "Espresso",
-        "Description": "Sterke zwarte koffie",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "137",
-        "MenuId": "32",
-        "Name": "Brownie",
-        "Description": "Chocoladebrownie",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "138",
-        "MenuId": "32",
-        "Name": "Muffin",
-        "Description": "Zachte cake",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "33",
-    "RestoId": "R7",
-    "Date": "2025-10-22T09:00:00",
-    "MenuItems": [
-      {
-        "Id": "139",
-        "MenuId": "33",
-        "Name": "Cappuccino",
-        "Description": "Warme cappuccino",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "140",
-        "MenuId": "33",
-        "Name": "Espresso",
-        "Description": "Sterke zwarte koffie",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "141",
-        "MenuId": "33",
-        "Name": "Brownie",
-        "Description": "Chocoladebrownie",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "142",
-        "MenuId": "33",
-        "Name": "Muffin",
-        "Description": "Zachte cake",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "34",
-    "RestoId": "R7",
-    "Date": "2025-10-23T09:00:00",
-    "MenuItems": [
-      {
-        "Id": "143",
-        "MenuId": "34",
-        "Name": "Cappuccino",
-        "Description": "Warme cappuccino",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "144",
-        "MenuId": "34",
-        "Name": "Espresso",
-        "Description": "Sterke zwarte koffie",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "145",
-        "MenuId": "34",
-        "Name": "Brownie",
-        "Description": "Chocoladebrownie",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "146",
-        "MenuId": "34",
-        "Name": "Muffin",
-        "Description": "Zachte cake",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  },
-  {
-    "Id": "35",
-    "RestoId": "R7",
-    "Date": "2025-10-24T09:00:00",
-    "MenuItems": [
-      {
-        "Id": "147",
-        "MenuId": "35",
-        "Name": "Cappuccino",
-        "Description": "Warme cappuccino",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "148",
-        "MenuId": "35",
-        "Name": "Espresso",
-        "Description": "Sterke zwarte koffie",
-        "Type": "Drank",
-        "PriceStudent": 1.2,
-        "PriceExtern": 1.2,
-        "IsVeggie": false
-      },
-      {
-        "Id": "149",
-        "MenuId": "35",
-        "Name": "Brownie",
-        "Description": "Chocoladebrownie",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      },
-      {
-        "Id": "150",
-        "MenuId": "35",
-        "Name": "Muffin",
-        "Description": "Zachte cake",
-        "Type": "Dessert",
-        "PriceStudent": 1.0,
-        "PriceExtern": 2.15,
-        "IsVeggie": false
-      }
-    ]
-  }
+        "RestoId": "R7",
+        "Date": "2025-10-24T09:00:00",
+        "MenuItems": [
+            {
+                "Id": "147",
+                "MenuId": "35",
+                "Name": "Cappuccino",
+                "Description": "Warme cappuccino",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "148",
+                "MenuId": "35",
+                "Name": "Espresso",
+                "Description": "Sterke zwarte koffie",
+                "Type": "Drank",
+                "PriceStudent": 1.2,
+                "PriceExtern": 1.2,
+                "IsVeggie": false
+            },
+            {
+                "Id": "149",
+                "MenuId": "35",
+                "Name": "Brownie",
+                "Description": "Chocoladebrownie",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            },
+            {
+                "Id": "150",
+                "MenuId": "35",
+                "Name": "Muffin",
+                "Description": "Zachte cake",
+                "Type": "Dessert",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": false
+            }
+        ]
+    }
 ]
