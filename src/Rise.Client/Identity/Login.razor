@@ -14,12 +14,12 @@
                 <div class="mb-4">
                     <label class="block text-hogent-15 font-medium mb-1" for="email">@L["Auth.EmailPlaceholder"]</label>
                     <InputText @bind-Value="Model.Email" type="email" autocomplete="username" id="email"
-                        class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" placeholder="Email" />
+                        class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" placeholder="@L["Auth.EmailPlaceholder"]" />
                     <ValidationMessage For="() => Model.Email" class="text-xs text-hogent-it mt-1" />
                 </div>
                 <div class="mb-6">
                     <label class="block text-gray-700 font-medium mb-1" for="password">@L["Auth.PasswordPlaceholder"]</label>
-                    <InputText @bind-Value="Model.Password" class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" type="password" id="password" placeholder="Password" />
+                    <InputText @bind-Value="Model.Password" class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" type="password" id="password" placeholder="@L["Auth.PasswordPlaceholder"]" />
                     <ValidationMessage For="() => Model.Password" class="text-xs text-hogent-it mt-1" />
                 </div>
                 <button class="w-full py-2 px-4 bg-hogent-education hover:bg-hogent-education-50 text-white font-semibold rounded-lg shadow transition duration-150 mb-4">@L["Auth.Login"]</button>
