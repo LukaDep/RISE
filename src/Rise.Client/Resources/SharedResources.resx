@@ -422,4 +422,52 @@
   <data name="News.Count" xml:space="preserve">
     <value>of</value>
   </data>
+  <data name="Resto.Student" xml:space="preserve">
+  <value>Student</value>
+  <comment>Price for students</comment>
+</data>
+
+<data name="Resto.Extern" xml:space="preserve">
+  <value>External</value>
+  <comment>Price for external visitors</comment>
+</data>
+
+<data name="Resto.Legende" xml:space="preserve">
+  <value>Legend</value>
+  <comment>Legend for icons in the menu</comment>
+</data>
+
+<data name="Resto.Vegetarisch" xml:space="preserve">
+  <value>Vegetarian</value>
+  <comment>Icon and label for vegetarian dishes</comment>
+</data>
+
+<data name="Resto.Vegan" xml:space="preserve">
+  <value>Vegan</value>
+  <comment>Icon and label for vegan dishes</comment>
+</data>
+
+<data name="Resto.MenuTitle" xml:space="preserve">
+  <value>Week Menu</value>
+  <comment>Title of the menu page</comment>
+</data>
+
+<data name="Resto.NoMenu" xml:space="preserve">
+  <value>No menu available at the moment.</value>
+  <comment>Text shown when no menu is available</comment>
+</data>
+<data name="Resto.Filter.All" xml:space="preserve">
+  <value>All</value>
+  <comment>Button to show all menu items</comment>
+</data>
+<data name="Resto.NoItemsForFilter" xml:space="preserve">
+  <value>There are no menu items matching the current filter.</value>
+  <comment>Message shown when no results match the selected filter</comment>
+</data>
+<data name="Resto.Return" xml:space="preserve">
+  <value>Return to overview</value>
+</data>
+<data name="Resto.BackShort" xml:space="preserve">
+  <value>Back</value>
+</data>
 </root>
