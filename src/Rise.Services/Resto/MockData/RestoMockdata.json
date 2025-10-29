@@ -17,7 +17,7 @@
         "KitchenType": "Mixed",
         "PhoneNumber": "+32 9 123 45 67",
         "Email": "resto.schoonmeersen@hogent.be",
-        "ImageUrl": "/images/resto_schoonmeersen.jpg"
+        "ImageUrl": "https://images.hln.be/ZmQ4ZDdhNGZkMjYxMmM1Yzg0NDgvZGlvLzE3NjQ5NTMzOS9maXQtd2lkdGgvMTIwMA/in-het-studentenrestaurant-van-hogent-mag-je-maar-met-2-aan-een-tafel-van-6-zitten"
     },
     {
         "Id": "R2",
@@ -37,7 +37,7 @@
         "KitchenType": "Hot",
         "PhoneNumber": "+32 9 76 54 321",
         "Email": "resto.mercator@hogent.be",
-        "ImageUrl": "/images/resto_mercator.jpg"
+        "ImageUrl": "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
     },
     {
         "Id": "R3",
@@ -57,7 +57,7 @@
         "KitchenType": "FastFood",
         "PhoneNumber": "+32 9 123 45 68",
         "Email": "snack.schoonmeersen@hogent.be",
-        "ImageUrl": "/images/resto_snackcorner.jpg"
+        "ImageUrl": "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
     },
     {
         "Id": "R4",
@@ -77,7 +77,7 @@
         "KitchenType": "Hot",
         "PhoneNumber": "+32 9 111 22 33",
         "Email": "kantien@hogent.be",
-        "ImageUrl": "/images/resto_kantien.jpg"
+        "ImageUrl": "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
     },
     {
         "Id": "R5",
@@ -97,7 +97,7 @@
         "KitchenType": "Mixed",
         "PhoneNumber": "+32 9 222 33 44",
         "Email": "resto.tech@hogent.be",
-        "ImageUrl": "/images/resto_tech.jpg"
+        "ImageUrl": "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
     },
     {
         "Id": "R6",
@@ -117,7 +117,7 @@
         "KitchenType": "Bar",
         "PhoneNumber": "+32 9 333 44 55",
         "Email": "restobar.zuid@hogent.be",
-        "ImageUrl": "/images/resto_restobar.jpg"
+        "ImageUrl": "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
     },
     {
         "Id": "R7",
@@ -137,6 +137,6 @@
         "KitchenType": "Cafe",
         "PhoneNumber": "+32 9 444 55 66",
         "Email": "bibliotheek.restocard@hogent.be",
-        "ImageUrl": "/images/resto_bibliotheek.jpg"
+        "ImageUrl": "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
     }
 ]
