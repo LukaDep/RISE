@@ -15,7 +15,8 @@ public class GradesClientService(HttpClient httpClient) : IGradesService
     }
     public async Task<Result<GradesResponse.GradeById>> GetGradeByIdAsync(string gradeId, CancellationToken ctx = default)
     {
-        var result = await httpClient.GetFromJsonAsync<Result<GradesResponse.GradeById>>($"/api/grades/{gradeId}", cancellationToken: ctx);
+        var response = await httpClient.GetAsync($"/api/grades/{gradeId}", cancellationToken: ctx);
+        var result = await response.Content.ReadFromJsonAsync<Result<GradesResponse.GradeById>>(cancellationToken: ctx);
         return result!;
     }
 }
