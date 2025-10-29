@@ -472,5 +472,10 @@
   <value>Er zijn geen menu-items die voldoen aan de huidige filter.</value>
   <comment>Bericht dat getoond wordt wanneer er geen resultaten zijn voor de gekozen filter</comment>
 </data>
-
+  <data name="Resto.Return" xml:space="preserve">
+    <value>Terug naar overzicht</value>
+  </data>
+  <data name="Resto.BackShort" xml:space="preserve">
+  <value>Terug</value>
+</data>
 </root>

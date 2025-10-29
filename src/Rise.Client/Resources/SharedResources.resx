@@ -460,5 +460,10 @@
   <value>There are no menu items matching the current filter.</value>
   <comment>Message shown when no results match the selected filter</comment>
 </data>
-
+<data name="Resto.Return" xml:space="preserve">
+  <value>Return to overview</value>
+</data>
+<data name="Resto.BackShort" xml:space="preserve">
+  <value>Back</value>
+</data>
 </root>

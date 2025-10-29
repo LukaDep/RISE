@@ -5,64 +5,37 @@
         "Date": "2025-10-20T11:30:00",
         "MenuItems": [
             {
-                "Id": "1",
+                "Id": "5000",
                 "MenuId": "1",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "2",
+                "Id": "5001",
                 "MenuId": "1",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Varkensgebraad met mosterdsaus",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "3",
+                "Id": "5002",
                 "MenuId": "1",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "4",
-                "MenuId": "1",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "5",
-                "MenuId": "1",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "6",
-                "MenuId": "1",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -72,64 +45,37 @@
         "Date": "2025-10-21T11:30:00",
         "MenuItems": [
             {
-                "Id": "7",
+                "Id": "5003",
                 "MenuId": "2",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Champignonsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "8",
+                "Id": "5004",
                 "MenuId": "2",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Stoofvlees met frieten",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "9",
+                "Id": "5005",
                 "MenuId": "2",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "10",
-                "MenuId": "2",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "11",
-                "MenuId": "2",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "12",
-                "MenuId": "2",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -139,64 +85,37 @@
         "Date": "2025-10-22T11:30:00",
         "MenuItems": [
             {
-                "Id": "13",
+                "Id": "5006",
                 "MenuId": "3",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Kervelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "14",
+                "Id": "5007",
                 "MenuId": "3",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Kabeljauw met puree",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "15",
+                "Id": "5008",
                 "MenuId": "3",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "16",
-                "MenuId": "3",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "17",
-                "MenuId": "3",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "18",
-                "MenuId": "3",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -206,64 +125,37 @@
         "Date": "2025-10-23T11:30:00",
         "MenuItems": [
             {
-                "Id": "19",
+                "Id": "5009",
                 "MenuId": "4",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Groentesoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "20",
+                "Id": "5010",
                 "MenuId": "4",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Stoofvlees met frieten",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "21",
+                "Id": "5011",
                 "MenuId": "4",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "22",
-                "MenuId": "4",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "23",
-                "MenuId": "4",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Vegan muffin",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "24",
-                "MenuId": "4",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -273,64 +165,37 @@
         "Date": "2025-10-24T11:30:00",
         "MenuItems": [
             {
-                "Id": "25",
+                "Id": "5012",
                 "MenuId": "5",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Wortelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "26",
+                "Id": "5013",
                 "MenuId": "5",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Groenteburger met quinoa",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "27",
+                "Id": "5014",
                 "MenuId": "5",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "28",
-                "MenuId": "5",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "29",
-                "MenuId": "5",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "30",
-                "MenuId": "5",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -340,34 +205,37 @@
         "Date": "2025-10-20T11:30:00",
         "MenuItems": [
             {
-                "Id": "31",
+                "Id": "5015",
                 "MenuId": "6",
-                "Name": "Preisoep",
-                "Description": "Soep van prei",
+                "Name": "Champignonsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "32",
+                "Id": "5016",
                 "MenuId": "6",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Lasagne",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "33",
+                "Id": "5017",
                 "MenuId": "6",
-                "Name": "Rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Rijstpap",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -377,34 +245,37 @@
         "Date": "2025-10-21T11:30:00",
         "MenuItems": [
             {
-                "Id": "34",
+                "Id": "5018",
                 "MenuId": "7",
-                "Name": "Preisoep",
-                "Description": "Soep van prei",
+                "Name": "Kervelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "35",
+                "Id": "5019",
                 "MenuId": "7",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Vegan curry met kikkererwten",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "36",
+                "Id": "5020",
                 "MenuId": "7",
-                "Name": "Rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -414,34 +285,37 @@
         "Date": "2025-10-22T11:30:00",
         "MenuItems": [
             {
-                "Id": "37",
+                "Id": "5021",
                 "MenuId": "8",
-                "Name": "Preisoep",
-                "Description": "Soep van prei",
+                "Name": "Paprikasoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "38",
+                "Id": "5022",
                 "MenuId": "8",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Spaghetti bolognese",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "39",
+                "Id": "5023",
                 "MenuId": "8",
-                "Name": "Rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -451,34 +325,37 @@
         "Date": "2025-10-23T11:30:00",
         "MenuItems": [
             {
-                "Id": "40",
+                "Id": "5024",
                 "MenuId": "9",
-                "Name": "Preisoep",
-                "Description": "Soep van prei",
+                "Name": "Wortelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "41",
+                "Id": "5025",
                 "MenuId": "9",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Vegan curry met kikkererwten",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "42",
+                "Id": "5026",
                 "MenuId": "9",
-                "Name": "Rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -488,34 +365,37 @@
         "Date": "2025-10-24T11:30:00",
         "MenuItems": [
             {
-                "Id": "43",
+                "Id": "5027",
                 "MenuId": "10",
-                "Name": "Preisoep",
-                "Description": "Soep van prei",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "44",
+                "Id": "5028",
                 "MenuId": "10",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Kipfilet met pepersaus",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "45",
+                "Id": "5029",
                 "MenuId": "10",
-                "Name": "Rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -525,44 +405,37 @@
         "Date": "2025-10-20T11:30:00",
         "MenuItems": [
             {
-                "Id": "46",
+                "Id": "5030",
                 "MenuId": "11",
-                "Name": "Worstenbroodje",
-                "Description": "Bladerdeeg gevuld met worst",
-                "Type": "Snack",
+                "Name": "Pompoensoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "47",
+                "Id": "5031",
                 "MenuId": "11",
-                "Name": "Panini tomaat en mozzarella",
-                "Description": "Warme panini",
-                "Type": "Snack",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": true
+                "Name": "Falafel met couscous",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "48",
+                "Id": "5032",
                 "MenuId": "11",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "49",
-                "MenuId": "11",
-                "Name": "Koffie",
-                "Description": "Warme drank naar keuze",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -572,44 +445,37 @@
         "Date": "2025-10-21T11:30:00",
         "MenuItems": [
             {
-                "Id": "50",
+                "Id": "5033",
                 "MenuId": "12",
-                "Name": "Worstenbroodje",
-                "Description": "Bladerdeeg gevuld met worst",
-                "Type": "Snack",
+                "Name": "Champignonsoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "51",
+                "Id": "5034",
                 "MenuId": "12",
-                "Name": "Panini tomaat en mozzarella",
-                "Description": "Warme panini",
-                "Type": "Snack",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": true
+                "Name": "Stoofvlees met frieten",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "52",
+                "Id": "5035",
                 "MenuId": "12",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "53",
-                "MenuId": "12",
-                "Name": "Koffie",
-                "Description": "Warme drank naar keuze",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -619,44 +485,37 @@
         "Date": "2025-10-22T11:30:00",
         "MenuItems": [
             {
-                "Id": "54",
+                "Id": "5036",
                 "MenuId": "13",
-                "Name": "Worstenbroodje",
-                "Description": "Bladerdeeg gevuld met worst",
-                "Type": "Snack",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "55",
+                "Id": "5037",
                 "MenuId": "13",
-                "Name": "Panini tomaat en mozzarella",
-                "Description": "Warme panini",
-                "Type": "Snack",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": true
+                "Name": "Vegetarische chili sin carne",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "56",
+                "Id": "5038",
                 "MenuId": "13",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "57",
-                "MenuId": "13",
-                "Name": "Koffie",
-                "Description": "Warme drank naar keuze",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -666,44 +525,37 @@
         "Date": "2025-10-23T11:30:00",
         "MenuItems": [
             {
-                "Id": "58",
+                "Id": "5039",
                 "MenuId": "14",
-                "Name": "Worstenbroodje",
-                "Description": "Bladerdeeg gevuld met worst",
-                "Type": "Snack",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "59",
+                "Id": "5040",
                 "MenuId": "14",
-                "Name": "Panini tomaat en mozzarella",
-                "Description": "Warme panini",
-                "Type": "Snack",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": true
+                "Name": "Vegan curry met kikkererwten",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "60",
+                "Id": "5041",
                 "MenuId": "14",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "61",
-                "MenuId": "14",
-                "Name": "Koffie",
-                "Description": "Warme drank naar keuze",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -713,44 +565,37 @@
         "Date": "2025-10-24T11:30:00",
         "MenuItems": [
             {
-                "Id": "62",
+                "Id": "5042",
                 "MenuId": "15",
-                "Name": "Worstenbroodje",
-                "Description": "Bladerdeeg gevuld met worst",
-                "Type": "Snack",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "63",
+                "Id": "5043",
                 "MenuId": "15",
-                "Name": "Panini tomaat en mozzarella",
-                "Description": "Warme panini",
-                "Type": "Snack",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": true
+                "Name": "Kipfilet met pepersaus",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "64",
+                "Id": "5044",
                 "MenuId": "15",
-                "Name": "Cookie",
-                "Description": "Koekje met chocolade",
+                "Name": "Vegan muffin",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "65",
-                "MenuId": "15",
-                "Name": "Koffie",
-                "Description": "Warme drank naar keuze",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -760,64 +605,37 @@
         "Date": "2025-10-20T11:30:00",
         "MenuItems": [
             {
-                "Id": "66",
+                "Id": "5045",
                 "MenuId": "16",
-                "Name": "Tomatensoep",
-                "Description": "Verse tomatensoep",
+                "Name": "Groentesoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "67",
+                "Id": "5046",
                 "MenuId": "16",
-                "Name": "Kalkoenlapje",
-                "Description": "Gebakken kalkoen",
+                "Name": "Kip tikka masala",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "68",
+                "Id": "5047",
                 "MenuId": "16",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "69",
-                "MenuId": "16",
-                "Name": "Aardappelen",
-                "Description": "Gekookte aardappelen",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "70",
-                "MenuId": "16",
-                "Name": "Tiramisu",
-                "Description": "Italiaans dessert",
+                "Name": "Vegan muffin",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "71",
-                "MenuId": "16",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -827,64 +645,37 @@
         "Date": "2025-10-21T11:30:00",
         "MenuItems": [
             {
-                "Id": "72",
+                "Id": "5048",
                 "MenuId": "17",
-                "Name": "Tomatensoep",
-                "Description": "Verse tomatensoep",
+                "Name": "Pompoensoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "73",
+                "Id": "5049",
                 "MenuId": "17",
-                "Name": "Kalkoenlapje",
-                "Description": "Gebakken kalkoen",
+                "Name": "Varkensgebraad met mosterdsaus",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "74",
+                "Id": "5050",
                 "MenuId": "17",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "75",
-                "MenuId": "17",
-                "Name": "Aardappelen",
-                "Description": "Gekookte aardappelen",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "76",
-                "MenuId": "17",
-                "Name": "Tiramisu",
-                "Description": "Italiaans dessert",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "77",
-                "MenuId": "17",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -894,64 +685,37 @@
         "Date": "2025-10-22T11:30:00",
         "MenuItems": [
             {
-                "Id": "78",
+                "Id": "5051",
                 "MenuId": "18",
-                "Name": "Tomatensoep",
-                "Description": "Verse tomatensoep",
+                "Name": "Kervelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "79",
+                "Id": "5052",
                 "MenuId": "18",
-                "Name": "Kalkoenlapje",
-                "Description": "Gebakken kalkoen",
+                "Name": "Groenteburger met quinoa",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "80",
+                "Id": "5053",
                 "MenuId": "18",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "81",
-                "MenuId": "18",
-                "Name": "Aardappelen",
-                "Description": "Gekookte aardappelen",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "82",
-                "MenuId": "18",
-                "Name": "Tiramisu",
-                "Description": "Italiaans dessert",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "83",
-                "MenuId": "18",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -961,64 +725,37 @@
         "Date": "2025-10-23T11:30:00",
         "MenuItems": [
             {
-                "Id": "84",
+                "Id": "5054",
                 "MenuId": "19",
-                "Name": "Tomatensoep",
-                "Description": "Verse tomatensoep",
+                "Name": "Wortelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "85",
+                "Id": "5055",
                 "MenuId": "19",
-                "Name": "Kalkoenlapje",
-                "Description": "Gebakken kalkoen",
+                "Name": "Kabeljauw met puree",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "86",
+                "Id": "5056",
                 "MenuId": "19",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "87",
-                "MenuId": "19",
-                "Name": "Aardappelen",
-                "Description": "Gekookte aardappelen",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "88",
-                "MenuId": "19",
-                "Name": "Tiramisu",
-                "Description": "Italiaans dessert",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "89",
-                "MenuId": "19",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1028,64 +765,37 @@
         "Date": "2025-10-24T11:30:00",
         "MenuItems": [
             {
-                "Id": "90",
+                "Id": "5057",
                 "MenuId": "20",
-                "Name": "Tomatensoep",
-                "Description": "Verse tomatensoep",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "91",
+                "Id": "5058",
                 "MenuId": "20",
-                "Name": "Kalkoenlapje",
-                "Description": "Gebakken kalkoen",
+                "Name": "Lasagne",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "92",
+                "Id": "5059",
                 "MenuId": "20",
-                "Name": "Quornblokjes",
-                "Description": "Vegetarische wok",
-                "Type": "WarmeMaaltijd",
-                "PriceStudent": 5.3,
-                "PriceExtern": 11.7,
-                "IsVeggie": false
-            },
-            {
-                "Id": "93",
-                "MenuId": "20",
-                "Name": "Aardappelen",
-                "Description": "Gekookte aardappelen",
-                "Type": "Zetmeel",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "94",
-                "MenuId": "20",
-                "Name": "Tiramisu",
-                "Description": "Italiaans dessert",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "95",
-                "MenuId": "20",
-                "Name": "Water 50cl",
-                "Description": "Plat water",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1095,34 +805,37 @@
         "Date": "2025-10-20T11:30:00",
         "MenuItems": [
             {
-                "Id": "96",
+                "Id": "5060",
                 "MenuId": "21",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "97",
+                "Id": "5061",
                 "MenuId": "21",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Groenteburger met quinoa",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "98",
+                "Id": "5062",
                 "MenuId": "21",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1132,34 +845,37 @@
         "Date": "2025-10-21T11:30:00",
         "MenuItems": [
             {
-                "Id": "99",
+                "Id": "5063",
                 "MenuId": "22",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Wortelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "100",
+                "Id": "5064",
                 "MenuId": "22",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Groenteburger met quinoa",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "101",
+                "Id": "5065",
                 "MenuId": "22",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1169,34 +885,37 @@
         "Date": "2025-10-22T11:30:00",
         "MenuItems": [
             {
-                "Id": "102",
+                "Id": "5066",
                 "MenuId": "23",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "103",
+                "Id": "5067",
                 "MenuId": "23",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Varkensgebraad met mosterdsaus",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "104",
+                "Id": "5068",
                 "MenuId": "23",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Vegan muffin",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -1206,34 +925,37 @@
         "Date": "2025-10-23T11:30:00",
         "MenuItems": [
             {
-                "Id": "105",
+                "Id": "5069",
                 "MenuId": "24",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Kervelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "106",
+                "Id": "5070",
                 "MenuId": "24",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Vegetarische chili sin carne",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "107",
+                "Id": "5071",
                 "MenuId": "24",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1243,34 +965,37 @@
         "Date": "2025-10-24T11:30:00",
         "MenuItems": [
             {
-                "Id": "108",
+                "Id": "5072",
                 "MenuId": "25",
-                "Name": "Bloemkoolsoep",
-                "Description": "Romige bloemkoolsoep",
+                "Name": "Wortelsoep",
+                "Description": "Dagverse soep",
                 "Type": "Soep",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "109",
+                "Id": "5073",
                 "MenuId": "25",
-                "Name": "Kipfilet",
-                "Description": "Gegrilde kip",
+                "Name": "Vegetarische chili sin carne",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "110",
+                "Id": "5074",
                 "MenuId": "25",
-                "Name": "Witte rijst",
-                "Description": "Basmatirijst",
-                "Type": "Zetmeel",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1280,44 +1005,37 @@
         "Date": "2025-10-20T17:00:00",
         "MenuItems": [
             {
-                "Id": "111",
+                "Id": "5075",
                 "MenuId": "26",
-                "Name": "Pizza Margherita",
-                "Description": "Verse pizza met tomaat en mozzarella",
+                "Name": "Champignonsoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": true
+            },
+            {
+                "Id": "5076",
+                "MenuId": "26",
+                "Name": "Kabeljauw met puree",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": true
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "112",
+                "Id": "5077",
                 "MenuId": "26",
-                "Name": "Tapasbord",
-                "Description": "Mix van hapjes",
-                "Type": "Snack",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "113",
-                "MenuId": "26",
-                "Name": "Bier",
-                "Description": "Lokaal bier",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
-            },
-            {
-                "Id": "114",
-                "MenuId": "26",
-                "Name": "Mocktail",
-                "Description": "Alcoholvrije cocktail",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1327,44 +1045,37 @@
         "Date": "2025-10-21T17:00:00",
         "MenuItems": [
             {
-                "Id": "115",
+                "Id": "5078",
                 "MenuId": "27",
-                "Name": "Pizza Margherita",
-                "Description": "Verse pizza met tomaat en mozzarella",
+                "Name": "Champignonsoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": true
+            },
+            {
+                "Id": "5079",
+                "MenuId": "27",
+                "Name": "Groenteburger met quinoa",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": true
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "116",
+                "Id": "5080",
                 "MenuId": "27",
-                "Name": "Tapasbord",
-                "Description": "Mix van hapjes",
-                "Type": "Snack",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "117",
-                "MenuId": "27",
-                "Name": "Bier",
-                "Description": "Lokaal bier",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
-            },
-            {
-                "Id": "118",
-                "MenuId": "27",
-                "Name": "Mocktail",
-                "Description": "Alcoholvrije cocktail",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1374,44 +1085,37 @@
         "Date": "2025-10-22T17:00:00",
         "MenuItems": [
             {
-                "Id": "119",
+                "Id": "5081",
                 "MenuId": "28",
-                "Name": "Pizza Margherita",
-                "Description": "Verse pizza met tomaat en mozzarella",
+                "Name": "Groentesoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": true
+            },
+            {
+                "Id": "5082",
+                "MenuId": "28",
+                "Name": "Kipfilet met pepersaus",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": true
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "120",
+                "Id": "5083",
                 "MenuId": "28",
-                "Name": "Tapasbord",
-                "Description": "Mix van hapjes",
-                "Type": "Snack",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "121",
-                "MenuId": "28",
-                "Name": "Bier",
-                "Description": "Lokaal bier",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
-            },
-            {
-                "Id": "122",
-                "MenuId": "28",
-                "Name": "Mocktail",
-                "Description": "Alcoholvrije cocktail",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1421,44 +1125,37 @@
         "Date": "2025-10-23T17:00:00",
         "MenuItems": [
             {
-                "Id": "123",
+                "Id": "5084",
                 "MenuId": "29",
-                "Name": "Pizza Margherita",
-                "Description": "Verse pizza met tomaat en mozzarella",
+                "Name": "Kervelsoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": false
+            },
+            {
+                "Id": "5085",
+                "MenuId": "29",
+                "Name": "Vegan curry met kikkererwten",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": true
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "124",
+                "Id": "5086",
                 "MenuId": "29",
-                "Name": "Tapasbord",
-                "Description": "Mix van hapjes",
-                "Type": "Snack",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "125",
-                "MenuId": "29",
-                "Name": "Bier",
-                "Description": "Lokaal bier",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
-            },
-            {
-                "Id": "126",
-                "MenuId": "29",
-                "Name": "Mocktail",
-                "Description": "Alcoholvrije cocktail",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -1468,44 +1165,37 @@
         "Date": "2025-10-24T17:00:00",
         "MenuItems": [
             {
-                "Id": "127",
+                "Id": "5087",
                 "MenuId": "30",
-                "Name": "Pizza Margherita",
-                "Description": "Verse pizza met tomaat en mozzarella",
+                "Name": "Kervelsoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": false
+            },
+            {
+                "Id": "5088",
+                "MenuId": "30",
+                "Name": "Lasagne",
+                "Description": "Vers bereid hoofdgerecht",
                 "Type": "WarmeMaaltijd",
                 "PriceStudent": 5.3,
                 "PriceExtern": 11.7,
-                "IsVeggie": true
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "128",
+                "Id": "5089",
                 "MenuId": "30",
-                "Name": "Tapasbord",
-                "Description": "Mix van hapjes",
-                "Type": "Snack",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
+                "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "129",
-                "MenuId": "30",
-                "Name": "Bier",
-                "Description": "Lokaal bier",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
-            },
-            {
-                "Id": "130",
-                "MenuId": "30",
-                "Name": "Mocktail",
-                "Description": "Alcoholvrije cocktail",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1515,44 +1205,37 @@
         "Date": "2025-10-20T09:00:00",
         "MenuItems": [
             {
-                "Id": "131",
+                "Id": "5090",
                 "MenuId": "31",
-                "Name": "Cappuccino",
-                "Description": "Warme cappuccino",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Courgettesoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "132",
+                "Id": "5091",
                 "MenuId": "31",
-                "Name": "Espresso",
-                "Description": "Sterke zwarte koffie",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Kabeljauw met puree",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "133",
+                "Id": "5092",
                 "MenuId": "31",
-                "Name": "Brownie",
-                "Description": "Chocoladebrownie",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "134",
-                "MenuId": "31",
-                "Name": "Muffin",
-                "Description": "Zachte cake",
-                "Type": "Dessert",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1562,44 +1245,37 @@
         "Date": "2025-10-21T09:00:00",
         "MenuItems": [
             {
-                "Id": "135",
+                "Id": "5093",
                 "MenuId": "32",
-                "Name": "Cappuccino",
-                "Description": "Warme cappuccino",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Champignonsoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "136",
+                "Id": "5094",
                 "MenuId": "32",
-                "Name": "Espresso",
-                "Description": "Sterke zwarte koffie",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Kip tikka masala",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "137",
+                "Id": "5095",
                 "MenuId": "32",
-                "Name": "Brownie",
-                "Description": "Chocoladebrownie",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "138",
-                "MenuId": "32",
-                "Name": "Muffin",
-                "Description": "Zachte cake",
-                "Type": "Dessert",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1609,44 +1285,37 @@
         "Date": "2025-10-22T09:00:00",
         "MenuItems": [
             {
-                "Id": "139",
+                "Id": "5096",
                 "MenuId": "33",
-                "Name": "Cappuccino",
-                "Description": "Warme cappuccino",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Tomatensoep met balletjes",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "140",
+                "Id": "5097",
                 "MenuId": "33",
-                "Name": "Espresso",
-                "Description": "Sterke zwarte koffie",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Spaghetti bolognese",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "141",
+                "Id": "5098",
                 "MenuId": "33",
-                "Name": "Brownie",
-                "Description": "Chocoladebrownie",
+                "Name": "Fruitkom",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "142",
-                "MenuId": "33",
-                "Name": "Muffin",
-                "Description": "Zachte cake",
-                "Type": "Dessert",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": true
             }
         ]
     },
@@ -1656,44 +1325,37 @@
         "Date": "2025-10-23T09:00:00",
         "MenuItems": [
             {
-                "Id": "143",
+                "Id": "5099",
                 "MenuId": "34",
-                "Name": "Cappuccino",
-                "Description": "Warme cappuccino",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Paprikasoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "144",
+                "Id": "5100",
                 "MenuId": "34",
-                "Name": "Espresso",
-                "Description": "Sterke zwarte koffie",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Vegetarische chili sin carne",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": true,
+                "IsVegan": true
             },
             {
-                "Id": "145",
+                "Id": "5101",
                 "MenuId": "34",
-                "Name": "Brownie",
-                "Description": "Chocoladebrownie",
+                "Name": "Pudding vanille",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "146",
-                "MenuId": "34",
-                "Name": "Muffin",
-                "Description": "Zachte cake",
-                "Type": "Dessert",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     },
@@ -1703,44 +1365,37 @@
         "Date": "2025-10-24T09:00:00",
         "MenuItems": [
             {
-                "Id": "147",
+                "Id": "5102",
                 "MenuId": "35",
-                "Name": "Cappuccino",
-                "Description": "Warme cappuccino",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Groentesoep",
+                "Description": "Dagverse soep",
+                "Type": "Soep",
+                "PriceStudent": 1.0,
+                "PriceExtern": 2.15,
+                "IsVeggie": true,
+                "IsVegan": false
             },
             {
-                "Id": "148",
+                "Id": "5103",
                 "MenuId": "35",
-                "Name": "Espresso",
-                "Description": "Sterke zwarte koffie",
-                "Type": "Drank",
-                "PriceStudent": 1.2,
-                "PriceExtern": 1.2,
-                "IsVeggie": false
+                "Name": "Kipfilet met pepersaus",
+                "Description": "Vers bereid hoofdgerecht",
+                "Type": "WarmeMaaltijd",
+                "PriceStudent": 5.3,
+                "PriceExtern": 11.7,
+                "IsVeggie": false,
+                "IsVegan": false
             },
             {
-                "Id": "149",
+                "Id": "5104",
                 "MenuId": "35",
-                "Name": "Brownie",
-                "Description": "Chocoladebrownie",
+                "Name": "Chocomousse",
+                "Description": "Dessert van de dag",
                 "Type": "Dessert",
                 "PriceStudent": 1.0,
                 "PriceExtern": 2.15,
-                "IsVeggie": false
-            },
-            {
-                "Id": "150",
-                "MenuId": "35",
-                "Name": "Muffin",
-                "Description": "Zachte cake",
-                "Type": "Dessert",
-                "PriceStudent": 1.0,
-                "PriceExtern": 2.15,
-                "IsVeggie": false
+                "IsVeggie": true,
+                "IsVegan": false
             }
         ]
     }
