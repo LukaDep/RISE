@@ -42,7 +42,7 @@ namespace Rise.Client.CampusInfo.Components
             Navigation.NavigateTo($"/campus-plan/{Id}");
         }
 
-        
+
         protected override void OnInitialized()
         {
             Navigation.LocationChanged += OnLocationChanged;

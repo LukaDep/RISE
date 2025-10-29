@@ -3,19 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Rise.Shared.Schedule;
 using Rise.Shared.Common;
 
 namespace Rise.Client.Schedule
 {
-    public partial class DayView : ComponentBase
+    public partial class DayView : ComponentBase, IAsyncDisposable
     {
         [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
         private ScheduleDto.Reservation? SelectedReservation;
         private List<ScheduleDto.Reservation>? schedule;
+        private DotNetObjectReference<DayView>? dotNetRef;
+
+        private string swipeClass = string.Empty;
 
         [Inject] public required IScheduleService ScheduleService { get; set; }
+        [Inject] public required IJSRuntime JSRuntime { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -30,20 +35,61 @@ namespace Rise.Client.Schedule
             schedule = result.Value?.Reservations;
         }
 
+        protected override async Task OnAfterRenderAsync(bool firstRender)
+        {
+            if (firstRender)
+            {
+                dotNetRef = DotNetObjectReference.Create(this);
+                await JSRuntime.InvokeVoidAsync("initSwipe", "dayViewContainer", dotNetRef);
+            }
+        }
+
         public List<ScheduleDto.Reservation> DayReservations =>
             schedule?.Where(r => r.StartDateTime.Date == SelectedDate.Date).ToList()
             ?? new List<ScheduleDto.Reservation>();
+
+        public void GoToToday()
+        {
+            SelectedDate = DateTime.Today;
+            StateHasChanged();
+        }
+
+        private async Task AnimateSwipe(string direction)
+        {
+            swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
+            StateHasChanged();
+
+            // Wait for the CSS animation to finish
+            await Task.Delay(250);
+
+            swipeClass = string.Empty;
+            StateHasChanged();
+        }
+
+        public async Task PreviousDayAnimated()
+        {
+            await AnimateSwipe("right");
+            PreviousDay();
+        }
+
+        public async Task NextDayAnimated()
+        {
+            await AnimateSwipe("left");
+            NextDay();
+        }
 
         public void PreviousDay()
         {
             do { SelectedDate = SelectedDate.AddDays(-1); }
             while (SelectedDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+            StateHasChanged();
         }
 
         public void NextDay()
         {
             do { SelectedDate = SelectedDate.AddDays(1); }
             while (SelectedDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+            StateHasChanged();
         }
 
         public void OpenDetails(ScheduleDto.Reservation reservation)
@@ -55,20 +101,33 @@ namespace Rise.Client.Schedule
         public void CloseDetails()
         {
             SelectedReservation = null;
-            StateHasChanged(); // popup verdwijnt direct
+            StateHasChanged();
         }
 
-        public static string GetEventTypeBgColor(string type) => type.ToLower() switch
+        [JSInvokable]
+        public async Task SwipeNext()
         {
-            "hoorcollege" => "bg-hogent-education-30 text-hogent-education",
-            "activerend hoorcollege" => "bg-hogent-it-30 text-hogent-it",
-            "practicum" => "bg-hogent-green-30 text-hogent-green",
-            "werkcollege" => "bg-hogent-orange-30 text-hogent-orange",
-            "seminarie" => "bg-hogent-business-30 text-hogent-business",
-            _ => "bg-hogent-black-30 text-hogent-black"
-        };
+            await NextDayAnimated();
+        }
+
+        [JSInvokable]
+        public async Task SwipePrevious()
+        {
+            await PreviousDayAnimated();
+        }
+
+      public static string GetEventTypeBgColor(string type) => type.ToLower() switch
+{
+    "hoorcollege" => "bg-hogent-education-30 text-hogent-education",
+    "activerend hoorcollege" => "bg-hogent-it-30 text-hogent-it",
+    "practicum" => "bg-hogent-green-30 text-hogent-green",
+    "werkcollege" => "bg-hogent-orange-30 text-hogent-orange",
+    "seminarie" => "bg-hogent-business-30 text-hogent-business",
+    _ => "bg-hogent-black-30 text-hogent-black"
+};
+
         
-        public string GetEventTypeBorderColor(string type) => type.ToLower() switch
+        public static string GetEventTypeBorderColor(string type) => type.ToLower() switch
         {
             "hoorcollege" => "border-hogent-education-30 text-hogent-education",
             "activerend hoorcollege" => "border-hogent-it-30 text-hogent-it",
@@ -77,5 +136,10 @@ namespace Rise.Client.Schedule
             "seminarie" => "border-hogent-business-30 text-hogent-business",
             _ => "border-hogent-black-30 text-hogent-black"
         };
+
+        public async ValueTask DisposeAsync()
+        {
+            dotNetRef?.Dispose();
+        }
     }
 }
