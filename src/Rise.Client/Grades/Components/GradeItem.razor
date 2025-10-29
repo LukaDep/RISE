@@ -1,0 +1,24 @@
+@namespace Rise.Client.Grades.Components
+@using Rise.Shared.Grades
+
+<div class="items-center min-h-15 border-2 rounded-xl p-4 m-4 shadow transition cursor-pointer font-montserrat @CardBackgroundClass"
+    @onclick="SeeGradeDetails">
+
+    <div class="flex justify-between items-center">
+
+        <div class="flex flex-col">
+            <h4 class="text-base font-semibold">@Grade.Name</h4>
+            <span class="text-xs text-hogent-black-50">@Grade.CourseName</span>
+        </div>
+
+        <div class="text-right font-semibold text-base ml-4">
+            @Grade.Score / @Grade.MaxPoints
+        </div>
+    </div>
+
+    @if (seeDetails)
+    {
+        <div class="text-xs">@Grade.Feedback</div>
+    }
+
+</div>

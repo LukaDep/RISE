@@ -17,6 +17,8 @@ using Rise.Shared.Schedule;
 using Rise.Client.Menu;
 using Rise.Shared.Menu;
 using Rise.Shared.Resto;
+using Rise.Client.Grades;
+using Rise.Shared.Grades;
 
 try
 {
@@ -80,6 +82,12 @@ try
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });
+  
+    builder.Services.AddHttpClient<IGradesService, GradesClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
+  
     builder.Services.AddHttpClient<IMenuService, MenuClientService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");

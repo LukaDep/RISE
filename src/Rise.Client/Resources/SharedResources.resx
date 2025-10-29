@@ -434,6 +434,27 @@
   <data name="News.Count" xml:space="preserve">
     <value>of</value>
   </data>
+  <data name="Grades.Title" xml:space="preserve">
+    <value>My Grades</value>
+  </data>
+  <data name="Grades.YearFilterPlaceholder" xml:space="preserve">
+    <value>Year</value>
+  </data>
+  <data name="Grades.SemesterFilterPlaceholder" xml:space="preserve">
+    <value>Semester</value>
+  </data>
+  <data name="Grades.SemesterFilterOption1" xml:space="preserve">
+    <value>Semester 1</value>
+  </data>
+  <data  name="Grades.SemesterFilterOption2" xml:space="preserve">
+    <value>Semester 2</value>
+  </data>
+  <data name="Grades.SearchTermPlaceholder" xml:space="preserve">
+    <value>Search grades...</value>
+  </data>
+  <data name="Grades.NoGradesFound" xml:space="preserve">
+    <value>No grades found.</value>
+  </data>
   <data name="News.NotFound" xml:space="preserve">
     <value>No News Found</value>
   </data>
