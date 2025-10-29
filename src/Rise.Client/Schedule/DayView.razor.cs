@@ -117,13 +117,22 @@ namespace Rise.Client.Schedule
         }
 
         public string GetEventTypeBgColor(string type) => type.ToLower() switch
+            "hoorcollege" => "bg-hogent-education-30 text-hogent-education",
+            "activerend hoorcollege" => "bg-hogent-it-30 text-hogent-it",
+            "practicum" => "bg-hogent-green-30 text-hogent-green",
+            "werkcollege" => "bg-hogent-orange-30 text-hogent-orange",
+            "seminarie" => "bg-hogent-business-30 text-hogent-business",
+            _ => "bg-hogent-black-30 text-hogent-black"
+        };
+        
+        public string GetEventTypeBorderColor(string type) => type.ToLower() switch
         {
-            "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
-            "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
-            "practicum" => "bg-hogent-green-15 text-hogent-green",
-            "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
-            "seminarie" => "bg-hogent-business-15 text-hogent-business",
-            _ => "bg-hogent-black-15 text-hogent-black"
+            "hoorcollege" => "border-hogent-education-30 text-hogent-education",
+            "activerend hoorcollege" => "border-hogent-it-30 text-hogent-it",
+            "practicum" => "border-hogent-green-30 text-hogent-green",
+            "werkcollege" => "border-hogent-orange-30 text-hogent-orange",
+            "seminarie" => "border-hogent-business-30 text-hogent-business",
+            _ => "border-hogent-black-30 text-hogent-black"
         };
 
         public async ValueTask DisposeAsync()

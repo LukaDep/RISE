@@ -1,72 +1,65 @@
 ﻿@using System.Collections.Generic
-@inject NavigationManager Navigation
 
-<div class="bg-white shadow-sm border rounded-2xl p-4 mb-3 transition-all hover:shadow-md">
-    <div class="flex justify-between items-center cursor-pointer" @onclick="ToggleOpen">
-        <h2 class="font-semibold text-lg">@Name</h2>
+@if (isVisible)
+{
+        <div class="flex flex-col border-4 border-hogent-black-15 rounded-xl p-4 m-4 bg-hogent-white shadow transition cursor-pointer hover:shadow-lg"
+             @onclick="ToggleOpen">
+
+            <div class="flex justify-between items-center">
+                <span>
+                    <h2 class="text-lg font-bold text-hogent-black">@Name</h2>
+                @if (!IsOpen) {
+                    <h1 text-hogent-black-50> @Location </h1>
+                }
+                        
+                </span>
+                
+
+                <i class="fa-solid @(IsOpen ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-50"></i>
+            </div>
+
         @if (IsOpen)
         {
-            <i class="fa-solid fa-chevron-up"></i>
-        }
-        else
-        {
-            <i class="fa-solid fa-chevron-down"></i>
-        }
-    </div>
+                    <div class="mt-3 text-sm text-hogent-black-50 space-y-2">
 
-    @if (IsOpen)
-    {
-        <div class="mt-3 text-sm text-gray-600 space-y-2">
-            <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition" @onclick="GoToPlan">
-                Campus map
-            </button>
-            <p><span class="font-medium">Locatie:</span> @Location</p>
-            @if (Faculties != null && Faculties.Count > 0)
-            {
-                <p class="font-medium">Faculteiten:</p>
-                <ul class="list-disc list-inside ml-4">
-                    @foreach (var faculty in Faculties)
-                    {
-                        <li>@faculty</li>
-                    }
-                </ul>
-            }
-            @if (!string.IsNullOrWhiteSpace(ContactPhone))
-            {
-                <p><span class="font-medium">Telefoon:</span> @ContactPhone</p>
-            }
-            @if (!string.IsNullOrWhiteSpace(Website))
-            {
-                <p><span class="font-medium">Website:</span> <a href="@Website" class="text-blue-500 hover:underline"
-                        target="_blank">@Website</a></p>
-            }
-            @if (!string.IsNullOrWhiteSpace(Description))
-            {
-                <p><span class="font-medium">Beschrijving:</span> @Description</p>
-            }
+                                <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition" @onclick="GoToPlan"> Campus map </button>
+
+                        <p><span class="font-medium text-hogent-black">Locatie:</span> @Location</p>
+
+                @if (!string.IsNullOrWhiteSpace(ContactPhone))
+                {
+                                <p><span class="font-medium text-hogent-black">Telefoon:</span> @ContactPhone</p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Website))
+                {
+                                <p>
+                                    <span class="font-medium text-hogent-black">Website:</span>
+                                    <a href="@Website"
+                                       class="text-hogent-blue hover:underline"
+                                       target="_blank">@Website</a>
+                                </p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Description))
+                {
+                                <p><span class="font-medium text-hogent-black">Beschrijving:</span> @Description</p>
+                }
+
+                @if (Faculties != null && Faculties.Count > 0)
+                {
+                                            <div>
+                                                <p class="font-medium text-hogent-black">Faculteiten:</p>
+                                                <ul class="list-disc list-inside ml-4">
+                            @foreach (var faculty in Faculties)
+                            {
+                                                                <li>@faculty</li>
+                            }
+                                                </ul>
+                                            </div>
+                }
+                    </div>
+        }
         </div>
-    }
-</div>
-
-@code {
-    [Parameter] public string Name { get; set; }
-    [Parameter] public string Location { get; set; }
-    [Parameter] public List<string> Faculties { get; set; } = new();
-    [Parameter] public string ContactPhone { get; set; }
-    [Parameter] public string Website { get; set; }
-    [Parameter] public string Description { get; set; }
-    [Parameter] public string Id { get; set; }
-
-    private bool IsOpen { get; set; } = false;
-
-    private void ToggleOpen()
-    {
-        IsOpen = !IsOpen;
-    }
-
-    private void GoToPlan()
-    {
-        // Implement navigation to the campus plan
-        Navigation.NavigateTo($"/campus-plan/{Id}");
-    }
 }
+

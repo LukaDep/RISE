@@ -16,6 +16,7 @@ public static class CampusDto
         public int? ImageHeight { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
-        public List<BuildingDto>? Buildings { get; set; }
+        public List<BuildingDto.Index>? Buildings { get; set; }
     }
+
 }

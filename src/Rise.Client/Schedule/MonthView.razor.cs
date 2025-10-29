@@ -64,7 +64,6 @@ public partial class MonthView : IAsyncDisposable
     }
 
     private DateTime FirstDayOfMonth => new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
-    private DateTime LastDayOfMonth => FirstDayOfMonth.AddMonths(1).AddDays(-1);
 
     private List<DateTime> MonthDays
     {

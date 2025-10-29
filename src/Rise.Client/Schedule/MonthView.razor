@@ -71,7 +71,7 @@
                     <div class="space-y-1">
                         @foreach (var reservation in dayReservations.Take(3))
                         {
-                            var bgColor = GetEventTypeBgColor(reservation.WorkForm);
+                            var bgColor = DayView.GetEventTypeBgColor(reservation.WorkForm);
                             <div class="w-full h-1 @bgColor rounded"></div>
                         }
                         @if (dayReservations.Count > 3)

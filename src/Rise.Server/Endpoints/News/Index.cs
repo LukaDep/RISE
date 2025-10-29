@@ -4,7 +4,7 @@ using Rise.Shared.Common;
 namespace Rise.Server.Endpoints.News;
 
 /// <summary>
-/// List all products.
+/// List all news.
 /// See https://fast-endpoints.com/
 /// </summary>
 /// <param name="newsService"></param>
