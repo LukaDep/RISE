@@ -9,7 +9,7 @@
     that is mostly human readable. The generation and parsing of the
     various data types are done through the TypeConverter classes
     associated with the data types.
-
+ 
     Example:
 
     ... ado.net/XML headers & schema ...
@@ -138,6 +138,10 @@
     <value>Welcome to your new app.</value>
     <comment/>
   </data>
+   <data name="Schedule.Title" xml:space="preserve">
+    <value>Schedule</value>
+    <comment/>
+  </data>
   <data name="Schedule.Week" xml:space="preserve">
     <value>Week</value>
     <comment/>
@@ -145,6 +149,10 @@
   <data name="Schedule.To" xml:space="preserve">
     <value>to</value>
     <comment/>
+  </data>
+      <data name="Schedule.ToToday" xml:space="preserve">
+  <value>Go to today </value>
+     <comment/>
   </data>
       <data name="Schedule.Today" xml:space="preserve">
   <value>Today </value>

@@ -1,14 +1,54 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.Schedule;
 
 namespace Rise.Client.Schedule;
 
-public partial class WeekView
+public partial class WeekView : IAsyncDisposable
 {
     [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
+    [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
     private ScheduleDto.Reservation? SelectedReservation;
+    private List<ScheduleDto.Reservation>? schedule;
+
+    [Inject] public required IScheduleService ScheduleService { get; set; }
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
+
+    private DotNetObjectReference<WeekView>? dotNetRef;
+    private string swipeClass = string.Empty;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new QueryRequest.SkipTake
+        {
+            Skip = 0,
+            Take = 100,
+            OrderBy = "Id",
+        };
+
+        var result = await ScheduleService.GetIndexAsync(request);
+        schedule = result.Value?.Reservations;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetRef = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("initSwipe", "weekViewContainer", dotNetRef);
+        }
+    }
+
+    private async Task AnimateSwipe(string direction)
+    {
+        swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
+        StateHasChanged();
+        await Task.Delay(250);
+        swipeClass = string.Empty;
+        StateHasChanged();
+    }
 
     private void OpenDetails(ScheduleDto.Reservation reservation)
     {
@@ -22,33 +62,11 @@ public partial class WeekView
         StateHasChanged();
     }
 
-    [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
-
-    // Schedule data from service
-    private List<ScheduleDto.Reservation>? schedule;
-
-    [Inject] public required IScheduleService ScheduleService { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var request = new QueryRequest.SkipTake
-        {
-            Skip = 0,
-            Take = 100, // Enough items for week view
-            OrderBy = "Id",
-        };
-
-        var result = await ScheduleService.GetIndexAsync(request);
-        schedule = result.Value?.Reservations;
-    }
-
-    // Calculate week start (Monday)
     private DateTime WeekStartDate
     {
         get
         {
             var dayOfWeek = (int)SelectedDate.DayOfWeek;
-            // If Sunday (0), go back 6 days, otherwise go back to Monday
             var daysToSubtract = dayOfWeek == 0 ? 6 : dayOfWeek - 1;
             return SelectedDate.AddDays(-daysToSubtract);
         }
@@ -58,71 +76,74 @@ public partial class WeekView
     private int WeekNumber => System.Globalization.ISOWeek.GetWeekOfYear(WeekStartDate);
 
     private List<DateTime> WeekDays =>
-        Enumerable.Range(0, 5) // Only Mon-Fri
+        Enumerable.Range(0, 5)
                   .Select(i => WeekStartDate.AddDays(i))
                   .ToList();
+
     private async Task GoToToday()
     {
         SelectedDate = DateTime.Today;
-
-        // Ga rechtstreeks naar de dagweergave van vandaag
         if (OnDayClick.HasDelegate)
         {
             await OnDayClick.InvokeAsync(DateTime.Today);
         }
-
         StateHasChanged();
     }
 
-    private void PreviousWeek()
+    public async Task PreviousWeekAnimated()
     {
-        SelectedDate = SelectedDate.AddDays(-7);
+        await AnimateSwipe("right");
+        PreviousWeek();
     }
 
-    private void NextWeek()
+    public async Task NextWeekAnimated()
     {
-        SelectedDate = SelectedDate.AddDays(7);
+        await AnimateSwipe("left");
+        NextWeek();
+    }
+
+    private void PreviousWeek() => SelectedDate = SelectedDate.AddDays(-7);
+    private void NextWeek() => SelectedDate = SelectedDate.AddDays(7);
+
+    [JSInvokable]
+    public async Task SwipeNext()
+    {
+        await NextWeekAnimated();
+    }
+
+    [JSInvokable]
+    public async Task SwipePrevious()
+    {
+        await PreviousWeekAnimated();
     }
 
     private bool HasEventAtTime(DateTime day, int hour)
     {
         return schedule?.Any(r =>
-        {
-            return r.StartDateTime.Date == day.Date &&
-               r.StartDateTime.Hour <= hour &&
-               r.EndDateTime.Hour > hour;
-        }) ?? false;
+            r.StartDateTime.Date == day.Date &&
+            r.StartDateTime.Hour <= hour &&
+            r.EndDateTime.Hour > hour) ?? false;
     }
 
     private ScheduleDto.Reservation? GetEventAtTime(DateTime day, int hour)
     {
         return schedule?.FirstOrDefault(r =>
-        {
-            return r.StartDateTime.Date == day.Date &&
-               r.StartDateTime.Hour <= hour &&
-               r.EndDateTime.Hour > hour;
-        });
+            r.StartDateTime.Date == day.Date &&
+            r.StartDateTime.Hour <= hour &&
+            r.EndDateTime.Hour > hour);
     }
 
     private List<ScheduleDto.Reservation> GetReservationsForDate(DateTime date) =>
-        schedule?
-            .Where(r => r.StartDateTime.Date == date.Date)
-            .ToList()
+        schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList()
         ?? new List<ScheduleDto.Reservation>();
-
-    private string GetEventTypeColor(string type) => type.ToLower() switch
-    {
-        "activerend hoorcollege" => "border-blue-500",
-        "practicum" => "border-green-500",
-        "seminarie" => "border-orange-500",
-        _ => "border-hogent-black-30"
-    };
 
     private string GetEventTypeBgColor(string type) => type.ToLower() switch
     {
-        "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-        "practicum" => "bg-green-100 text-green-800",
-        "seminarie" => "bg-orange-100 text-orange-800",
+        "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
+        "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
+        "practicum" => "bg-hogent-green-15 text-hogent-green",
+        "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
+        "seminarie" => "bg-hogent-business-15 text-hogent-business",
         _ => "bg-hogent-black-15 text-hogent-black"
     };
 
@@ -139,5 +160,10 @@ public partial class WeekView
             DayOfWeek.Sunday => L["Schedule.Sunday"],
             _ => day.ToString("ddd")
         };
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        dotNetRef?.Dispose();
     }
 }

@@ -30,7 +30,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ICampusInfoService, CampusInfoService>();
         services.AddTransient<DbSeeder>();
 
-        // Add other application services here.
         return services;
     }
 }

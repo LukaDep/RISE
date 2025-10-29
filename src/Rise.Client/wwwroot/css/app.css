@@ -138,3 +138,32 @@ a,
 button {
     cursor: pointer;
 }
+
+.swipe-left {
+    animation: swipe-left 0.25s ease;
+}
+.swipe-right {
+    animation: swipe-right 0.25s ease;
+}
+
+@keyframes swipe-left {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(-50px);
+        opacity: 0;
+    }
+}
+
+@keyframes swipe-right {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(50px);
+        opacity: 0;
+    }
+}

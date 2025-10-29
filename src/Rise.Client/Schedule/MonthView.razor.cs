@@ -1,10 +1,11 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Rise.Shared.Schedule;
 using Rise.Shared.Common;
 
 namespace Rise.Client.Schedule;
 
-public partial class MonthView
+public partial class MonthView : IAsyncDisposable
 {
     [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
@@ -14,19 +15,12 @@ public partial class MonthView
     private List<ScheduleDto.Reservation>? schedule;
 
     [Inject] public required IScheduleService ScheduleService { get; set; }
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
+
+    private DotNetObjectReference<MonthView>? dotNetRef;
+    private string swipeClass = string.Empty;
 
     private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
-    private async void GoToToday()
-    {
-        SelectedDate = DateTime.Today;
-        if (OnDayClick.HasDelegate)
-        {
-            await OnDayClick.InvokeAsync(DateTime.Today);
-        }
-
-        StateHasChanged();
-    }
-
 
     protected override async Task OnInitializedAsync()
     {
@@ -39,6 +33,34 @@ public partial class MonthView
 
         var result = await ScheduleService.GetIndexAsync(request);
         schedule = result.Value?.Reservations;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetRef = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("initSwipe", "monthViewContainer", dotNetRef);
+        }
+    }
+
+    private async Task AnimateSwipe(string direction)
+    {
+        swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
+        StateHasChanged();
+        await Task.Delay(250);
+        swipeClass = string.Empty;
+        StateHasChanged();
+    }
+
+    private async Task GoToToday()
+    {
+        SelectedDate = DateTime.Today;
+        if (OnDayClick.HasDelegate)
+        {
+            await OnDayClick.InvokeAsync(DateTime.Today);
+        }
+        StateHasChanged();
     }
 
     private DateTime FirstDayOfMonth => new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
@@ -61,17 +83,44 @@ public partial class MonthView
     private List<ScheduleDto.Reservation> GetReservationsForDate(DateTime date) =>
         schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList() ?? new List<ScheduleDto.Reservation>();
 
-    private bool HasEventsOnDay(DateTime day) => schedule?.Any(r => r.StartDateTime.Date == day.Date) ?? false;
+    private bool HasEventsOnDay(DateTime day) =>
+        schedule?.Any(r => r.StartDateTime.Date == day.Date) ?? false;
+
+    public async Task PreviousMonthAnimated()
+    {
+        await AnimateSwipe("right");
+        PreviousMonth();
+    }
+
+    public async Task NextMonthAnimated()
+    {
+        await AnimateSwipe("left");
+        NextMonth();
+    }
 
     private void PreviousMonth() => SelectedDate = SelectedDate.AddMonths(-1);
     private void NextMonth() => SelectedDate = SelectedDate.AddMonths(1);
 
+    [JSInvokable]
+    public async Task SwipeNext()
+    {
+        await NextMonthAnimated();
+    }
+
+    [JSInvokable]
+    public async Task SwipePrevious()
+    {
+        await PreviousMonthAnimated();
+    }
+
     private string GetEventTypeBgColor(string type) => type.ToLower() switch
     {
-        "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-        "practicum" => "bg-green-100 text-green-800",
-        "seminarie" => "bg-orange-100 text-orange-800",
-        _ => "bg-gray-100 text-gray-800"
+        "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
+        "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
+        "practicum" => "bg-hogent-green-15 text-hogent-green",
+        "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
+        "seminarie" => "bg-hogent-business-15 text-hogent-business",
+        _ => "bg-hogent-black-15 text-hogent-black"
     };
 
     private async Task GoToDayView(DateTime date)
@@ -82,4 +131,8 @@ public partial class MonthView
         }
     }
 
+    public async ValueTask DisposeAsync()
+    {
+        dotNetRef?.Dispose();
+    }
 }
