@@ -1,9 +1,9 @@
 using System.Text.Json;
 using Rise.Services.Absences;
 using Rise.Shared.Absences;
+using Rise.Shared.Common;
 using Rise.Shared.Schedule;
 using Serilog;
-using Rise.Shared.Common;
 
 namespace Rise.Services.Schedule;
 
@@ -38,7 +38,7 @@ public class MockScheduleService : IScheduleService
 
 
         var data = ConvertToDto(json);
-        
+
         //get absences data
         var absencesResult = await _absencesService.GetIndexAsync(new QueryRequest.SkipTake
         {
@@ -63,7 +63,7 @@ public class MockScheduleService : IScheduleService
         return Result.Success(data);
     }
 
-    private static ScheduleDto.Data ConvertToDto(string json)
+    public static ScheduleDto.Data ConvertToDto(string json)
     {
         // Deserialize the raw API response
         var rawData = JsonSerializer.Deserialize<ScheduleApiResponse.ScheduleData>(json, new JsonSerializerOptions

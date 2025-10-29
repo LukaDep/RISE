@@ -62,10 +62,9 @@ public class ScheduleServiceShould
         };
 
         var json = JsonSerializer.Serialize(mockData);
-        var service = new MockScheduleService();
 
         // Act
-        var result = service.convertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json);
 
         // Assert
         result.ShouldNotBeNull();
@@ -113,10 +112,9 @@ public class ScheduleServiceShould
         };
 
         var json = JsonSerializer.Serialize(mockData);
-        var service = new MockScheduleService();
 
         // Act
-        var result = service.convertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json);
 
         // Assert
         result.ShouldNotBeNull();
@@ -172,10 +170,9 @@ public class ScheduleServiceShould
         };
 
         var json = JsonSerializer.Serialize(mockData);
-        var service = new MockScheduleService();
 
         // Act
-        var result = service.convertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json);
 
         // Assert
         result.ShouldNotBeNull();
@@ -208,10 +205,9 @@ public class ScheduleServiceShould
         };
 
         var json = JsonSerializer.Serialize(mockData);
-        var service = new MockScheduleService();
 
         // Act
-        var result = service.convertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json);
 
         // Assert
         var reservation = result.Reservations[0];

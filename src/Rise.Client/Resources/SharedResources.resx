@@ -343,6 +343,7 @@
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Sign In</value>
+    <comment/>
   </data>
   <data name="Account.Title" xml:space="preserve">
     <value>Account</value>
@@ -358,6 +359,7 @@
   </data>
   <data name="Schedule.Absent" xml:space="preserve">
     <value>Absent</value>
+  </data>
   <data name="Resto.Title" xml:space="preserve">
     <value>Restaurants</value>
     <comment/>
