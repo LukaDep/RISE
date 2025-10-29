@@ -462,6 +462,30 @@
     <value>van de</value>
     <comment/>
   </data>
+  <data name="Grades.Title" xml:space="preserve">
+    <value>Mijn punten</value>
+  </data>
+ <data name="Grades.YearFilterPlaceholder" xml:space="preserve">
+    <value>Jaar</value>
+  </data>
+  <data name="Grades.SemesterFilterPlaceholder" xml:space="preserve">
+    <value>Semester</value>
+  </data>
+  <data name="Grades.SemesterFilterOption1" xml:space="preserve">
+    <value>Semester 1</value>
+  </data>
+  <data name="Grades.SemesterFilterOption2" xml:space="preserve">
+    <value>Semester 2</value>
+  </data>
+  <data name="Grades.SearchTermPlaceholder" xml:space="preserve">
+    <value>Zoek punten...</value>
+  </data>
+  <data name="Grades.NoGradesFound" xml:space="preserve">
+    <value>Geen punten gevonden.</value>
+  </data>
+  <data name="News.NotFound" xml:space="preserve">
+    <value>Geen Nieuws Gevonden</value>
+  </data>
   <data name="Resto.Student" xml:space="preserve">
     <value>Student</value>
     <comment>Prijs voor studenten</comment>

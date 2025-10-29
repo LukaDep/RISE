@@ -8,7 +8,7 @@ using Rise.Shared.Grades;
 /// See https://fast-endpoints.com/
 /// </summary>
 /// <param name="gradesService"></param>
-public class Index(IGradesService gradesService) : Endpoint<QueryRequest.SkipTake, Result<GradesResponse.CourseList>>
+public class Index(IGradesService gradesService) : Endpoint<QueryRequest.SkipTake, Result<GradesResponse.Index>>
 {
     public override void Configure()
     {
@@ -16,8 +16,8 @@ public class Index(IGradesService gradesService) : Endpoint<QueryRequest.SkipTak
         AllowAnonymous();
     }
 
-    public override Task<Result<GradesResponse.CourseList>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
+    public override Task<Result<GradesResponse.Index>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
     {
-        return gradesService.GetCoursesAsync(req, ct);
+        return gradesService.GetIndexAsync(req, ct);
     }
 }

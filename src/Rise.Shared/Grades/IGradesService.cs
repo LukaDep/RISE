@@ -10,6 +10,6 @@ using Rise.Shared.Grades;
 public interface IGradesService
 
 {
-    Task<Result<GradesResponse.CourseList>> GetCoursesAsync(QueryRequest.SkipTake req, CancellationToken ctx = default);
-    Task<Result<GradesResponse.CourseById>> GetCourseByIdAsync(string id, CancellationToken ctx = default);
+    Task<Result<GradesResponse.Index>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default);
+    Task<Result<GradesResponse.GradeById>> GetGradeByIdAsync(string id, CancellationToken ctx = default);
 }
