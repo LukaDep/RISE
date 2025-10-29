@@ -138,6 +138,10 @@
     <value>Welkom bij je nieuwe app.</value>
     <comment/>
   </data>
+  <data name="Schedule.Title" xml:space="preserve">
+    <value>Agenda</value>
+    <comment/>
+  </data>
   <data name="Schedule.Week" xml:space="preserve">
     <value>Week</value>
     <comment/>
@@ -145,6 +149,14 @@
   <data name="Schedule.To" xml:space="preserve">
     <value>tot</value>
     <comment/>
+  </data>
+    <data name="Schedule.ToToday" xml:space="preserve">
+  <value>Naar vandaag </value>
+     <comment/>
+  </data>
+     <data name="Schedule.Today" xml:space="preserve">
+  <value>Vandaag </value>
+     <comment/>
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Vorige</value>

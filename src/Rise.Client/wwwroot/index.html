@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Blazor WASM Auth</title>
+        <title>HOGENT Campus App</title>
         <base href="/" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/output.css" />
@@ -25,7 +25,8 @@
             <a href="" class="reload">Reload</a>
             <a class="dismiss">🗙</a>
         </div>
-        <!-- load helper scripts before Blazor so components can call them on first render -->
+        <script src="js/swipeInterop.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script src="leafletInterop.js"></script>
         <script src="scrollTop.js"></script>

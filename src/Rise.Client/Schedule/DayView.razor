@@ -1,17 +1,59 @@
 @using Microsoft.AspNetCore.Components
 @inject IStringLocalizer<SharedResources> L
 
-<div class="day-view">
-    <!-- Header and navigation -->
-    <div class="mb-4 flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-hogent-black">@SelectedDate.ToString("dddd, d MMMM yyyy")</h3>
-        <div class="flex gap-2">
-            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
-                @onclick="PreviousDay">@L["Schedule.Previous"]</button>
-            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
-                @onclick="NextDay">@L["Schedule.Next"]</button>
+<div id="dayViewContainer" class="day-view min-h-screen flex flex-col @swipeClass">
+    <div class="mb-4 flex items-center justify-between">
+        <!-- Previous Day -->
+        <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md flex items-center justify-center"
+                @onclick="PreviousDayAnimated">
+            <span class="hidden sm:inline">@L["Schedule.Previous"]</span>
+            <span class="sm:hidden w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 105.4-105.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/>
+                </svg>
+            </span>
+        </button>
+
+        <!-- Selected Date / Today -->
+        <div class="flex-1 text-center">
+            @if (SelectedDate.Date == DateTime.Today)
+            {
+                <span class="text-lg font-semibold text-hogent-black">@L["Schedule.Today"]</span>
+            }
+            else
+            {
+                <span class="text-lg font-semibold text-hogent-black">
+                    @SelectedDate.ToString("dddd, d MMM", System.Globalization.CultureInfo.CurrentCulture)
+                </span>
+            }
         </div>
+
+        <!-- Next Day -->
+        <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md flex items-center justify-center"
+                @onclick="NextDayAnimated">
+            <span class="hidden sm:inline">@L["Schedule.Next"]</span>
+            <span class="sm:hidden w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/>
+                </svg>
+            </span>
+        </button>
     </div>
+
+    @if (SelectedDate.Date != DateTime.Today)
+    {
+        <div class="flex justify-center mb-4">
+            <button class="flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-hogent-black bg-white/60 backdrop-blur-sm
+                           hover:bg-white hover:shadow-md active:scale-95 border border-hogent-black-20 rounded-full transition-all"
+                    @onclick="GoToToday">
+                <svg class="w-4 h-4 opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M19 4h-1V2a1 1 0 0 0-2 0v2H8V2a1 1 0 0 0-2 0v2H5a2 2 0 0 0-2 2v14a2 
+                             2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z" />
+                </svg>
+                <span>@L["Schedule.ToToday"]</span>
+            </button>
+        </div>
+    }
 
     @if (DayReservations.Any())
     {
