@@ -25,5 +25,6 @@ public static class ScheduleDto
         public string Environment { get; set; } = default!;
         public string Room { get; set; } = default!;
         public string Teacher { get; set; } = default!;
+        public bool IsAbsent { get; set; } = false;
     }
 }

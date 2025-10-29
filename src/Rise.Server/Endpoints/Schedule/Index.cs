@@ -12,7 +12,7 @@ public class Index(IScheduleService ScheduleService) : Endpoint<QueryRequest.Ski
 {
     public override void Configure()
     {
-        Get("/api/Schedule");
+        Get("/api/schedules");
         AllowAnonymous();
     }
 

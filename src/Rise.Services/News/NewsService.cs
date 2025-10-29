@@ -47,7 +47,7 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
             .Take(request.Take)
             .ToList();
         var currentCount = news.Count;
-        
+
 
         return Result.Success(new NewsResponse.Index
         {

@@ -1,13 +1,17 @@
 using System.Text.Json;
+using Rise.Services.Absences;
+using Rise.Shared.Absences;
+using Rise.Shared.Common;
 using Rise.Shared.Schedule;
 using Serilog;
-using Rise.Shared.Common;
 
 namespace Rise.Services.Schedule;
 
 public class MockScheduleService : IScheduleService
 {
     private readonly string _mockFilePath;
+
+    private AbsencesService _absencesService;
 
     public MockScheduleService()
     {
@@ -18,6 +22,8 @@ public class MockScheduleService : IScheduleService
         Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
         Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
         Log.Information("File exists: {FileExists}", File.Exists(_mockFilePath));
+        //AbsencesService aanmaken
+        _absencesService = new AbsencesService();
     }
 
     public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)
@@ -31,7 +37,25 @@ public class MockScheduleService : IScheduleService
         var json = await File.ReadAllTextAsync(_mockFilePath, ct);
 
 
-        var data = convertToDto(json);
+        var data = ConvertToDto(json);
+
+        //get absences data
+        var absencesResult = await _absencesService.GetIndexAsync(new QueryRequest.SkipTake
+        {
+            Skip = 0,
+            Take = 100,
+        }, ct);
+
+        var absences = absencesResult?.Value?.Absences ?? Enumerable.Empty<AbsenceDto.Index>();
+
+        data.Reservations.ForEach(r =>
+        {
+            r.IsAbsent = absences.Any(a =>
+                string.Equals(a.Name, r.Teacher, StringComparison.OrdinalIgnoreCase)
+                && r.StartDateTime.Date >= a.StartDate.Date
+                && r.StartDateTime.Date <= a.EndDate.Date
+            );
+        });
 
         if (data == null)
             return Result<ScheduleDto.Data>.Error("Deserialisatie mislukt");
@@ -39,7 +63,7 @@ public class MockScheduleService : IScheduleService
         return Result.Success(data);
     }
 
-    public ScheduleDto.Data convertToDto(string json)
+    public static ScheduleDto.Data ConvertToDto(string json)
     {
         // Deserialize the raw API response
         var rawData = JsonSerializer.Deserialize<ScheduleApiResponse.ScheduleData>(json, new JsonSerializerOptions
@@ -75,7 +99,7 @@ public class MockScheduleService : IScheduleService
     /// Parses date and time strings into a DateTime object.
     /// Expected format: date = "dd-MM-yyyy", time = "HH:mm"
     /// </summary>
-    private DateTime ParseDateTime(string date, string time)
+    private static DateTime ParseDateTime(string date, string time)
     {
         var dateParts = date.Split('-');
         var timeParts = time.Split(':');
