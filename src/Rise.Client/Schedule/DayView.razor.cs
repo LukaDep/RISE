@@ -116,16 +116,18 @@ namespace Rise.Client.Schedule
             await PreviousDayAnimated();
         }
 
-        public string GetEventTypeBgColor(string type) => type.ToLower() switch
-            "hoorcollege" => "bg-hogent-education-30 text-hogent-education",
-            "activerend hoorcollege" => "bg-hogent-it-30 text-hogent-it",
-            "practicum" => "bg-hogent-green-30 text-hogent-green",
-            "werkcollege" => "bg-hogent-orange-30 text-hogent-orange",
-            "seminarie" => "bg-hogent-business-30 text-hogent-business",
-            _ => "bg-hogent-black-30 text-hogent-black"
-        };
+      public static string GetEventTypeBgColor(string type) => type.ToLower() switch
+{
+    "hoorcollege" => "bg-hogent-education-30 text-hogent-education",
+    "activerend hoorcollege" => "bg-hogent-it-30 text-hogent-it",
+    "practicum" => "bg-hogent-green-30 text-hogent-green",
+    "werkcollege" => "bg-hogent-orange-30 text-hogent-orange",
+    "seminarie" => "bg-hogent-business-30 text-hogent-business",
+    _ => "bg-hogent-black-30 text-hogent-black"
+};
+
         
-        public string GetEventTypeBorderColor(string type) => type.ToLower() switch
+        public static string GetEventTypeBorderColor(string type) => type.ToLower() switch
         {
             "hoorcollege" => "border-hogent-education-30 text-hogent-education",
             "activerend hoorcollege" => "border-hogent-it-30 text-hogent-it",
