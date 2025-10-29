@@ -96,21 +96,7 @@ public partial class WeekView
             .ToList()
         ?? new List<ScheduleDto.Reservation>();
 
-    private string GetEventTypeColor(string type) => type.ToLower() switch
-    {
-        "activerend hoorcollege" => "border-blue-500",
-        "practicum" => "border-green-500",
-        "seminarie" => "border-orange-500",
-        _ => "border-hogent-black-30"
-    };
-
-    private string GetEventTypeBgColor(string type) => type.ToLower() switch
-    {
-        "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-        "practicum" => "bg-green-100 text-green-800",
-        "seminarie" => "bg-orange-100 text-orange-800",
-        _ => "bg-hogent-black-15 text-hogent-black"
-    };
+    
 
     private string GetLocalizedDayName(DateTime day)
     {

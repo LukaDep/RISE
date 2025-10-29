@@ -14,29 +14,29 @@
 
     <div class="bg-hogent-white rounded-lg border border-hogent-black-30 overflow-visible">
         <!-- Header met dagen -->
-        <div class="grid grid-cols-6 border-b border-hogent-black-30">
-            <div class="p-3 border-r border-hogent-black-30"></div>
+        <div class="grid border-b border-hogent-black-30" style="grid-template-columns: 48px repeat(5, 1fr);">
+            <div class="flex justify-center items-center border-r border-hogent-black-30 text-hogent-black-50 p-2 text-sm font-medium">@WeekNumber</div>
             @for (int i = 0; i < WeekDays.Count; i++)
             {
                 var day = WeekDays[i];
                 <div
                     class="p-3 text-center font-medium text-hogent-black-50 @(i < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
                     <div class="text-sm">@GetLocalizedDayName(day)</div>
-                    <div class="text-xs text-hogent-black-50">@day.ToString("d/M")</div>
+                    <div class="text-xs">@day.ToString("d/M")</div>
                 </div>
             }
         </div>
 
         <!-- Grid container met relative positioning -->
         <div class="relative" style="min-height: 780px;">
-            <div class="grid grid-cols-6">
+            <div class="grid" style="grid-template-columns: 48px repeat(5, 1fr);">
                 <!-- Tijd kolom -->
                 <div class="border-r border-hogent-black-15">
                     @for (int hour = 8; hour <= 20; hour++)
                     {
                         <div
-                            class="h-[60px] border-b border-hogent-black-15 p-2 text-center text-sm text-hogent-black-50 flex items-center justify-center">
-                            @($"{hour:00}:00")
+                            class="h-16 border-b border-hogent-black-15 p-1 text-center text-sm text-hogent-black-50 flex items-center justify-center">
+                            @hour
                         </div>
                     }
                 </div>
@@ -47,13 +47,15 @@
                     <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
                         @for (int hour = 8; hour <= 20; hour++)
                         {
-                            <div class="h-[60px] border-b border-hogent-black-15"></div>
+                            <div class="h-16 border-b border-hogent-black-15"></div>
                         }
                     </div>
                 }
             </div>
 
-            <!-- Absolute positioned events -->
+            <!-- Slanted repeated red-bar background (non-interactive, behind events) -->
+            
+
             @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
             {
                 var currentDay = WeekDays[dayIndex];
@@ -66,26 +68,31 @@
                     var endHour = evt.EndDateTime.Hour;
                     var endMinute = evt.EndDateTime.Minute;
 
-                    // Bereken positie en hoogte in pixels (60px per uur)
-                    var topPosition = ((startHour - 8) * 60) + (startMinute);
+                    // Bereken positie en hoogte in pixels (64px per uur)
+                    var topPosition = ((startHour - 8) * 64) + ((startMinute * 64) / 60);
                     var durationMinutes = (endHour - startHour) * 60 + (endMinute - startMinute);
-                    var height = durationMinutes;
+                    var height = (durationMinutes * 64) / 60;
 
                     // Bereken horizontale positie
-                    // Time column is 1/6 = 16.666%
-                    // Each day column is also 1/6 = 16.666%
-                    var leftPosition = 16.666 + (dayIndex * 16.666);
+                    // Time column is 48px, each day column is (100% - 48px) / 5
+                    var leftPosition = $"calc(48px + {dayIndex} * ((100% - 48px) / 5) + 6px)";
+                    var widthCalc = "calc(((100% - 48px) / 5) - 12px)";
 
-                    var bgColor = GetEventTypeBgColor(evt.WorkForm);
+                    var bgColor = DayView.GetEventTypeBgColor(evt.WorkForm);
 
                     <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden cursor-pointer hover:opacity-90 transition"
-                        style="top: @(topPosition + 4)px; left: @(leftPosition.ToString("F2", System.Globalization.CultureInfo.InvariantCulture))%; height: @(height - 8)px; width: calc(16.666% - 12px); margin-left: 6px; margin-right: 6px;"
-                        @onclick="() => OpenDetails(evt)">
+                         style="top: @(topPosition + 4)px; left: @leftPosition; height: @(height - 8)px; width: @widthCalc;"
+                         @onclick="() => OpenDetails(evt)">
                         <div class="font-semibold text-xs leading-tight mb-0.5">@evt.Course</div>
                         <div class="text-xs opacity-90">@evt.Room</div>
                         @if (durationMinutes >= 90)
                         {
                             <div class="text-xs opacity-75 mt-1">@evt.Teacher</div>
+                        }
+                        @if (evt.IsAbsent)
+                        {
+                            <div class="absolute inset-0 z-10 pointer-events-none rounded-lg bg-[repeating-linear-gradient(135deg,rgba(220,38,38,0.08)_0_12px,transparent_12px_24px)]">
+                            </div>
                         }
                     </div>
                 }

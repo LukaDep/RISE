@@ -1,8 +1,9 @@
-@page "/campus-plan/{id}"
+@page "/campus-plan/{campusId}"
 @inject HttpClient Http
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
 @using Rise.Shared.Campus
+@using Rise.Shared.Common
 
 @if (campus is null)
 {
@@ -11,18 +12,19 @@
 else
 {
     <div style="position: absolute; top: 20px; left: 20px; z-index: 1000;">
-        <button @onclick="GoBack" style="
-                            display: flex;
-                            align-items: center;
-                            background: white;
-                            border: none;
-                            border-radius: 999px;
-                            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-                            padding: 8px 18px;
-                            font-size: 1rem;
-                            font-weight: 500;
-                            cursor: pointer;
-                        ">
+        <button @onclick="GoBack"
+            style="
+                                                                                                                                                                                                                                                    display: flex;
+                                                                                                                                                                                                                                                    align-items: center;
+                                                                                                                                                                                                                                                    background: white;
+                                                                                                                                                                                                                                                    border: none;
+                                                                                                                                                                                                                                                    border-radius: 999px;
+                                                                                                                                                                                                                                                    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+                                                                                                                                                                                                                                                    padding: 8px 18px;
+                                                                                                                                                                                                                                                    font-size: 1rem;
+                                                                                                                                                                                                                                                    font-weight: 500;
+                                                                                                                                                                                                                                                    cursor: pointer;
+                                                                                                                                                                                                                                                ">
             <span style="font-size: 1.2em; margin-right: 8px;">&#8592;</span>
             Terug naar campussen
         </button>
@@ -31,9 +33,12 @@ else
 }
 
 @code {
-    [Parameter] public required string id { get; set; }
+    [Parameter] public required string campusId { get; set; }
+    [Parameter] public string? buildingId { get; set; }
     private CampusDto.Index? campus;
+    private BuildingDto.Index? building;
     private bool mapInitialized = false;
+    [Inject] public required ICampusService CampusClientService { get; set; }
 
     private void GoBack()
     {
@@ -42,29 +47,83 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        var response = await Http.GetFromJsonAsync<CampusResponse.GetById<CampusDto.Index>>($"/api/campuses/{id}");
+        if (string.IsNullOrEmpty(campusId) && string.IsNullOrEmpty(buildingId))
+        {
+            Navigation.NavigateTo("/campus");
+            return;
+        }
+        else if (!string.IsNullOrEmpty(buildingId))
+        {
+            var buildingResponse = await CampusClientService.GetBuildingByIdAsync(buildingId);
+            building = buildingResponse?.Value;
+            if (building != null)
+            {
+                campusId = building.CampusId;
+            }
+            else
+            {
+                Navigation.NavigateTo("/campus");
+                return;
+            }
+        }
+
+        var response = await CampusClientService.GetCampusByIdAsync(campusId);
         campus = response?.Value;
+
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
+        // building id from de url
+        var uri = new Uri(Navigation.Uri);
+        var fragment = uri.Fragment; // "#building-GSCHB"
+        if (fragment.StartsWith("#building-"))
+        {
+            buildingId = fragment.Substring("#building-".Length);
+        }
+
         if (!mapInitialized && campus != null)
         {
-            mapInitialized = true;
-            if (campus.MapImageUrl != null && campus.ImageWidth.HasValue && campus.ImageHeight.HasValue)
+            // mapInitialized = true;
+            // if campus has its own plan image
+            // if (campus.MapImageUrl != null && campus.ImageWidth.HasValue && campus.ImageHeight.HasValue)
+            // {
+            // var bounds = new object[] { new[] { 0, 0 }, new[] { campus.ImageHeight, campus.ImageWidth } };
+            // await JS.InvokeVoidAsync("leafletMap.initImage", "map", campus.MapImageUrl, bounds);
+            // foreach (var b in campus.Buildings ?? Enumerable.Empty<BuildingDto>())
+            // {
+            // await JS.InvokeVoidAsync("leafletMap.addMarker", b.Y, b.X, b.Name);
+            // }
+
+            // building marker
+            // if (buildingId != null)
+            // {
+            // var building = campus.Buildings?.FirstOrDefault(b => b.Id.Equals(buildingId, StringComparison.OrdinalIgnoreCase));
+            // if (building != null)
+            // {
+            // await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", building.Y, building.X, building.Name);
+            // await JS.InvokeVoidAsync("leafletMap.setView", building.Y, building.X, 18);
+            // }
+            // }
+            // }
+
+            // map as campus plan if no plan image
+            // else if (campus.Latitude.HasValue && campus.Longitude.HasValue)
+            // {
+            await JS.InvokeVoidAsync("leafletMap.initTileMap", "map", campus.Latitude, campus.Longitude, 17);
+            //await JS.InvokeVoidAsync("leafletMap.addLatLngMarker", campus.Latitude, campus.Longitude, campus.Name);
+
+            if (buildingId != null)
             {
-                var bounds = new object[] { new[] { 0, 0 }, new[] { campus.ImageHeight, campus.ImageWidth } };
-                await JS.InvokeVoidAsync("leafletMap.initImage", "map", campus.MapImageUrl, bounds);
-                foreach (var b in campus.Buildings)
+                building = campus.Buildings?.FirstOrDefault(b => b.Id.Equals(buildingId,
+                StringComparison.OrdinalIgnoreCase));
+                if (building != null)
                 {
-                    await JS.InvokeVoidAsync("leafletMap.addMarker", b.Y, b.X, b.Name);
+                    await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", building.Latitude, building.Longitude, building.Name);
+                    await JS.InvokeVoidAsync("leafletMap.setView", building.Latitude, building.Longitude, 18);
                 }
             }
-            else if (campus.Latitude.HasValue && campus.Longitude.HasValue)
-            {
-                await JS.InvokeVoidAsync("leafletMap.initTileMap", "map", campus.Latitude, campus.Longitude, 17);
-                await JS.InvokeVoidAsync("leafletMap.addLatLngMarker", campus.Latitude, campus.Longitude, campus.Name);
-            }
+            // }
         }
     }
 }

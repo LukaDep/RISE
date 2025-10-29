@@ -6,14 +6,15 @@ using Rise.Client.Identity;
 using Rise.Client.News;
 using Rise.Client.Products;
 using Rise.Client.Campus;
+using Rise.Client.Resto;
 using Rise.Shared.Products;
 using Rise.Shared.Campus;
 using Rise.Client.CampusInfo;
 using Rise.Shared.CampusInfo;
 using Rise.Client.Schedule;
 using Rise.Shared.News;
-using Rise.Shared.Products;
 using Rise.Shared.Schedule;
+using Rise.Shared.Resto;
 
 try
 {
@@ -74,6 +75,11 @@ try
         });
 
     builder.Services.AddHttpClient<IScheduleService, ScheduleClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
+
+    builder.Services.AddHttpClient<IRestoService, RestoClientService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });

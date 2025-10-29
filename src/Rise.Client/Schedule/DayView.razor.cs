@@ -58,20 +58,24 @@ namespace Rise.Client.Schedule
             StateHasChanged(); // popup verdwijnt direct
         }
 
-        public string GetEventTypeColor(string type) => type.ToLower() switch
+        public static string GetEventTypeBgColor(string type) => type.ToLower() switch
         {
-            "activerend hoorcollege" => "border-blue-500",
-            "practicum" => "border-green-500",
-            "seminarie" => "border-orange-500",
-            _ => "border-hogent-black-30"
+            "hoorcollege" => "bg-hogent-education-30 text-hogent-education",
+            "activerend hoorcollege" => "bg-hogent-it-30 text-hogent-it",
+            "practicum" => "bg-hogent-green-30 text-hogent-green",
+            "werkcollege" => "bg-hogent-orange-30 text-hogent-orange",
+            "seminarie" => "bg-hogent-business-30 text-hogent-business",
+            _ => "bg-hogent-black-30 text-hogent-black"
         };
-
-        public string GetEventTypeBgColor(string type) => type.ToLower() switch
+        
+        public string GetEventTypeBorderColor(string type) => type.ToLower() switch
         {
-            "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-            "practicum" => "bg-green-100 text-green-800",
-            "seminarie" => "bg-orange-100 text-orange-800",
-            _ => "bg-hogent-black-15 text-hogent-black"
+            "hoorcollege" => "border-hogent-education-30 text-hogent-education",
+            "activerend hoorcollege" => "border-hogent-it-30 text-hogent-it",
+            "practicum" => "border-hogent-green-30 text-hogent-green",
+            "werkcollege" => "border-hogent-orange-30 text-hogent-orange",
+            "seminarie" => "border-hogent-business-30 text-hogent-business",
+            _ => "border-hogent-black-30 text-hogent-black"
         };
     }
 }

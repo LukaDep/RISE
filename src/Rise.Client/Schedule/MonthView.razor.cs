@@ -15,7 +15,6 @@ public partial class MonthView
 
     [Inject] public required IScheduleService ScheduleService { get; set; }
 
-    private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
 
     protected override async Task OnInitializedAsync()
     {
@@ -31,7 +30,6 @@ public partial class MonthView
     }
 
     private DateTime FirstDayOfMonth => new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
-    private DateTime LastDayOfMonth => FirstDayOfMonth.AddMonths(1).AddDays(-1);
 
     private List<DateTime> MonthDays
     {
@@ -54,14 +52,6 @@ public partial class MonthView
 
     private void PreviousMonth() => SelectedDate = SelectedDate.AddMonths(-1);
     private void NextMonth() => SelectedDate = SelectedDate.AddMonths(1);
-
-    private string GetEventTypeBgColor(string type) => type.ToLower() switch
-    {
-        "activerend hoorcollege" => "bg-blue-100 text-blue-800",
-        "practicum" => "bg-green-100 text-green-800",
-        "seminarie" => "bg-orange-100 text-orange-800",
-        _ => "bg-gray-100 text-gray-800"
-    };
 
     private async Task GoToDayView(DateTime date)
     {
