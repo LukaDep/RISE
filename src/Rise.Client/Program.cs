@@ -14,9 +14,9 @@ using Rise.Shared.CampusInfo;
 using Rise.Client.Schedule;
 using Rise.Shared.News;
 using Rise.Shared.Schedule;
-using Rise.Shared.Resto;
 using Rise.Client.Menu;
 using Rise.Shared.Menu;
+using Rise.Shared.Resto;
 
 try
 {

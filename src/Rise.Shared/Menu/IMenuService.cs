@@ -1,6 +1,6 @@
 using Rise.Shared.Common;
 
-namespace Rise.Shared.Menus;
+namespace Rise.Shared.Menu;
 
 public interface IMenuService
 {

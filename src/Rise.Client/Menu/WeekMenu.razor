@@ -1,0 +1,40 @@
+@inherits WeekMenuBase
+
+<div class="flex flex-wrap gap-2 mb-6">
+    <button
+        class="px-4 py-2 rounded-full border transition 
+               @(ActiveFilter == "All" ? "bg-blue-600 text-white border-blue-600" : "border-gray-300 text-gray-700 hover:bg-gray-100")"
+        @onclick='() => SetFilter("All")'>
+        🍽️ All
+    </button>
+
+    <button
+        class="px-4 py-2 rounded-full border transition 
+               @(ActiveFilter == "Veggie" ? "bg-green-600 text-white border-green-600" : "border-gray-300 text-gray-700 hover:bg-gray-100")"
+        @onclick='() => SetFilter("Veggie")'>
+        🥬 Veggie
+    </button>
+
+    <button
+        class="px-4 py-2 rounded-full border transition 
+               @(ActiveFilter == "Vegan" ? "bg-emerald-600 text-white border-emerald-600" : "border-gray-300 text-gray-700 hover:bg-gray-100")"
+        @onclick='() => SetFilter("Vegan")'>
+        🌿 Vegan
+    </button>
+</div>
+
+@if (IsLoading)
+{
+    <div class="flex justify-center p-6 text-gray-500">Loading weekly menu…</div>
+}
+else if (FilteredMenus?.Any() == true)
+{
+    @foreach (var menu in FilteredMenus.OrderBy(m => m.Date))
+    {
+        <DayMenu Date="menu.Date" MenuItems="menu.MenuItems" />
+    }
+}
+else
+{
+    <p class="text-gray-500 italic p-6">No menu items match your filter.</p>
+}

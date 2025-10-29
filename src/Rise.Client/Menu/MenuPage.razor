@@ -1,0 +1,148 @@
+@page "/resto/{RestoId}/menu"
+@using Rise.Shared.Resto
+@using Rise.Shared.Menu
+@inject IStringLocalizer<SharedResources> L
+
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-10">
+
+    <h2 class="text-4xl font-extrabold mb-6 tracking-tight text-hogent-black">
+        @L["Resto.MenuTitle"]
+    </h2>
+
+ 
+    <div class="flex flex-wrap gap-3 mb-8">
+        <button @onclick="() => SetFilter(MenuFilter.All)"
+                class="px-4 py-2 rounded-full border text-sm font-medium transition
+                       @(currentFilter == MenuFilter.All ? "bg-hogent-education text-white" : "bg-white text-hogent-black border-hogent-black-15 hover:bg-hogent-black-5")">
+            @L["Resto.Filter.All"]
+        </button>
+        <button @onclick="() => SetFilter(MenuFilter.Veggie)"
+                class="px-4 py-2 rounded-full border text-sm font-medium transition
+                       @(currentFilter == MenuFilter.Veggie ? "bg-green-600 text-white" : "bg-white text-green-600 border-green-600 hover:bg-green-50")">
+            <i class="fa-solid fa-leaf mr-1"></i> @L["Resto.Vegetarisch"]
+        </button>
+        <button @onclick="() => SetFilter(MenuFilter.Vegan)"
+                class="px-4 py-2 rounded-full border text-sm font-medium transition
+                       @(currentFilter == MenuFilter.Vegan ? "bg-emerald-500 text-white" : "bg-white text-emerald-500 border-emerald-500 hover:bg-emerald-50")">
+            <i class="fa-solid fa-seedling mr-1"></i> @L["Resto.Vegan"]
+        </button>
+    </div>
+
+    @if (isLoading)
+    {
+        <div class="flex justify-center items-center h-32">
+            <div class="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-hogent-education"></div>
+        </div>
+    }
+    else if (menus == null || !menus.Any())
+    {
+        <div class="text-center text-hogent-black-50 mt-12">
+            <i class="fa-solid fa-utensils fa-3x mb-4 text-hogent-education"></i>
+            <p class="text-lg">@L["Resto.NoMenu"]</p>
+        </div>
+    }
+    else
+    {
+        var filteredDays = menus
+            .OrderBy(m => m.Date)
+            .GroupBy(m => m.Date.Date)
+            .Where(group => group.SelectMany(m => m.MenuItems).Any(ShouldShowItem))
+            .ToList();
+
+        if (!filteredDays.Any())
+        {
+            <div class="text-center text-hogent-black-50 mt-12">
+                <p class="text-lg">@L["Resto.NoItemsForFilter"]</p>
+            </div>
+        }
+        else
+        {
+            @foreach (var dayGroup in filteredDays)
+            {
+                var isExpanded = expandedDays.Contains(dayGroup.Key);
+
+                <section class="mb-6 border border-hogent-black-15 rounded-2xl shadow-sm bg-white">
+                    <button @onclick="() => ToggleDay(dayGroup.Key)"
+                            class="w-full flex justify-between items-center px-5 py-4 bg-hogent-black-5 hover:bg-hogent-black-10 transition rounded-2xl">
+                        <h3 class="text-2xl font-semibold text-hogent-black capitalize">
+                       @dayGroup.Key.ToString("dddd")
+                        </h3>
+                        <i class="fa-solid @(isExpanded ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-70 text-xl"></i>
+                    </button>
+
+                    @if (isExpanded)
+                    {
+                        <div class="px-5 py-4 border-t border-hogent-black-15">
+                            @foreach (var menu in dayGroup)
+                            {
+                             @foreach (var group in menu.MenuItems.GroupBy(m => m.Type))
+{
+    var visibleItems = group.Where(ShouldShowItem).ToList();
+    if (visibleItems.Count == 0)
+        continue;
+
+    <div class="mb-6 bg-white rounded-xl overflow-hidden">
+        <div class="px-5 py-3 bg-hogent-black-5 border-b border-hogent-black-10/50">
+            <h4 class="text-xl font-semibold text-hogent-black">@group.Key</h4>
+        </div>
+        <ul class="divide-y divide-hogent-black-10/30">
+            @foreach (var item in visibleItems)
+            {
+                <li class="flex justify-between items-start px-5 py-3 hover:bg-hogent-black-5 transition">
+                    <div class="flex flex-col gap-1">
+                        <div class="flex items-center gap-2">
+                            <p class="font-medium text-hogent-black">@item.Name</p>
+                            @if (item.IsVeggie)
+                            {
+                                <i class="fa-solid fa-leaf text-green-600" title="@L["Resto.Vegetarisch"]"></i>
+                            }
+                            @if (item.IsVegan)
+                            {
+                                <i class="fa-solid fa-seedling text-emerald-500" title="@L["Resto.Vegan"]"></i>
+                            }
+                        </div>
+                        @if (!string.IsNullOrEmpty(item.Description))
+                        {
+                            <p class="text-sm text-hogent-black-70">@item.Description</p>
+                        }
+                    </div>
+
+                    <div class="text-right text-sm whitespace-nowrap pl-4">
+                        <div class="text-hogent-black font-semibold">
+                            € @item.PriceStudent.ToString("0.00")
+                            <span class="text-hogent-black-50"> (@L["Resto.Student"])</span>
+                        </div>
+                        <div class="text-emerald-600 font-semibold">
+                            € @item.PriceExtern.ToString("0.00")
+                            <span class="text-hogent-black-50"> (@L["Resto.Extern"])</span>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+    </div>
+}
+
+                            }
+                        </div>
+                    }
+                </section>
+            }
+        }
+
+        <!-- Legende onderaan -->
+        <div class="mt-8 border-t border-hogent-black-15 pt-4 text-sm text-hogent-black-70">
+            <p class="font-semibold mb-2">@L["Resto.Legende"]:</p>
+            <div class="flex items-center gap-6">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-leaf text-green-600"></i>
+                    <span>@L["Resto.Vegetarisch"]</span>
+                </div>
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-seedling text-emerald-500"></i>
+                    <span>@L["Resto.Vegan"]</span>
+                </div>
+            </div>
+        </div>
+    }
+</div>

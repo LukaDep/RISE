@@ -1,10 +1,9 @@
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using Rise.Shared.Common;
-using Rise.Shared.Menus;
+using Rise.Shared.Menu;
 using Serilog;
-
-namespace Rise.Services.Menus;
+namespace Rise.Services.Menu;
 
 /// <summary>
 /// Mock service voor Menu's — leest JSON bestand en geeft lijst met menu's terug.
@@ -16,7 +15,6 @@ public class MockMenuService : IMenuService
     public MockMenuService()
     {
         var currentDirectory = Directory.GetCurrentDirectory();
-        // CurrentDirectory is Rise.Server → ga één niveau omhoog en dan naar Rise.Services
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Menu", "MockData", "MenuItemMockData.json");
 
         Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
@@ -37,7 +35,7 @@ public class MockMenuService : IMenuService
         var options = new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true,
-            Converters = { new JsonStringEnumConverter() } // 🔸 zorgt dat "Belegdebroodje" enz. werken
+            Converters = { new JsonStringEnumConverter() }
         };
 
         var data = JsonSerializer.Deserialize<List<MenuDto.Index>>(json, options);

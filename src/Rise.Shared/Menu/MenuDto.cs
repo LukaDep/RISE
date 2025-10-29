@@ -1,10 +1,11 @@
-namespace Rise.Shared.Menus
+namespace Rise.Shared.Menu
 {
     public static class MenuDto
     {
         public class Index
         {
             public required string Id { get; set; }
+            public string RestoId { get; set; } = default!;
             public required DateTime Date { get; set; }
             public required List<MenuItemDto.Index> MenuItems { get; set; }
         }

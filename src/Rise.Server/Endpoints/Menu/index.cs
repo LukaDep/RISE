@@ -1,4 +1,4 @@
-using Rise.Shared.Menus;
+using Rise.Shared.Menu;
 using Rise.Shared.Common;
 
 namespace Rise.Server.Endpoints.Menus;
@@ -9,7 +9,7 @@ public class Index(IMenuService menuService)
 {
     public override void Configure()
     {
-        Get("/api/menus");
+        Get("/api/Menu");
         AllowAnonymous();
     }
 

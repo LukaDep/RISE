@@ -1,17 +1,13 @@
 using System.Net.Http.Json;
-using Rise.Shared.Menus;
+using Rise.Shared.Menu;
 using Rise.Shared.Common;
-
-namespace Rise.Client.Menus;
+namespace Rise.Client.Menu;
 
 public class MenuClientService(HttpClient httpClient) : IMenuService
 {
-    public async Task<Result<MenuResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ct = default)
+    public async Task<Result<MenuResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
-        var url = $"/api/menus?skip={request.Skip}&take={request.Take}";
-        var result = await httpClient.GetFromJsonAsync<Result<MenuResponse.Index>>(url, cancellationToken: ct);
-
-        Console.WriteLine($"📡 Fetching menu data (skip={request.Skip}, take={request.Take}) from API...");
+        var result = await httpClient.GetFromJsonAsync<Result<MenuResponse.Index>>("/api/Menu", cancellationToken: ctx);
         return result!;
     }
 }
