@@ -1,12 +1,12 @@
 @page "/logout"
 
-<PageTitle>Logout</PageTitle>
+<PageTitle>@L["Auth.LogoutTitle"]</PageTitle>
 
 <AuthorizeView>
     <Authorized>
-        <div class="alert alert-info">Logging you out...</div>
+        <div class="alert alert-info">@L["Auth.LoggingOut"]</div>
     </Authorized>
     <NotAuthorized>
-        <div class="alert alert-success">You're logged out. <a href="/login">Log in.</a></div>
+        <div class="alert alert-success">@L["Auth.Redirecting"]</div>
     </NotAuthorized>
 </AuthorizeView>

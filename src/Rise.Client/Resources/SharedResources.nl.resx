@@ -150,13 +150,13 @@
     <value>tot</value>
     <comment/>
   </data>
-    <data name="Schedule.ToToday" xml:space="preserve">
-  <value>Naar vandaag </value>
-     <comment/>
+  <data name="Schedule.ToToday" xml:space="preserve">
+    <value>Naar vandaag </value>
+    <comment/>
   </data>
-     <data name="Schedule.Today" xml:space="preserve">
-  <value>Vandaag </value>
-     <comment/>
+  <data name="Schedule.Today" xml:space="preserve">
+    <value>Vandaag </value>
+    <comment/>
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Vorige</value>
@@ -304,6 +304,7 @@
   </data>
   <data name="Auth.RegisterNewUser" xml:space="preserve">
     <value>Heb je geen account?</value>
+    <comment/>
   </data>
   <data name="Auth.RegisterSuccess" xml:space="preserve">
     <value>Je hebt je succesvol geregistreerd. Nu kun je</value>
@@ -347,6 +348,7 @@
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Log In</value>
+    <comment/>
   </data>
   <data name="Common.ComingSoon" xml:space="preserve">
     <value>Binnenkort beschikbaar...</value>
@@ -404,6 +406,18 @@
     <value>Gesloten</value>
     <comment/>
   </data>
+  <data name="Resto.KitchenType.Hot" xml:space="preserve">
+    <value>Warm</value>
+    <comment>Keukentype label voor warme gerechten</comment>
+  </data>
+  <data name="Resto.KitchenType.Cold" xml:space="preserve">
+    <value>Koud</value>
+    <comment>Keukentype label voor koude gerechten</comment>
+  </data>
+  <data name="Resto.KitchenType.FastFood" xml:space="preserve">
+    <value>Fastfood</value>
+    <comment>Keukentype label voor fastfood / afhaal</comment>
+  </data>
   <data name="Resto.OpeningHours" xml:space="preserve">
     <value>Openingsuren</value>
     <comment/>
@@ -438,60 +452,178 @@
   </data>
   <data name="Day.Sunday" xml:space="preserve">
     <value>Zondag</value>
-    <comment/>  
+    <comment/>
   </data>
   <data name="News.LoadMore" xml:space="preserve">
     <value>Lees meer</value>
+    <comment/>
   </data>
   <data name="News.Count" xml:space="preserve">
     <value>van de</value>
+    <comment/>
   </data>
   <data name="Resto.Student" xml:space="preserve">
-  <value>Student</value>
-  <comment>Prijs voor studenten</comment>
-</data>
-
-<data name="Resto.Extern" xml:space="preserve">
-  <value>Extern</value>
-  <comment>Prijs voor externe bezoekers</comment>
-</data>
-
-<data name="Resto.Legende" xml:space="preserve">
-  <value>Legende</value>
-  <comment>Legenda voor iconen in het menu</comment>
-</data>
-
-<data name="Resto.Vegetarisch" xml:space="preserve">
-  <value>Vegetarisch</value>
-  <comment>Icoon en aanduiding voor vegetarisch gerecht</comment>
-</data>
-
-<data name="Resto.Vegan" xml:space="preserve">
-  <value>Vegan</value>
-  <comment>Icoon en aanduiding voor vegan gerecht</comment>
-</data>
-
-<data name="Resto.MenuTitle" xml:space="preserve">
-  <value>Week Menu</value>
-  <comment>Titel van de menupagina</comment>
-</data>
-
-<data name="Resto.NoMenu" xml:space="preserve">
-  <value>Er is momenteel geen menu beschikbaar.</value>
-  <comment>Tekst die verschijnt wanneer er geen menu is</comment>
-</data>
-<data name="Resto.Filter.All" xml:space="preserve">
-  <value>Alles</value>
-  <comment>Knop voor het tonen van alle menu-items</comment>
-</data>
-<data name="Resto.NoItemsForFilter" xml:space="preserve">
-  <value>Er zijn geen menu-items die voldoen aan de huidige filter.</value>
-  <comment>Bericht dat getoond wordt wanneer er geen resultaten zijn voor de gekozen filter</comment>
-</data>
+    <value>Student</value>
+    <comment>Prijs voor studenten</comment>
+  </data>
+  <data name="Resto.Extern" xml:space="preserve">
+    <value>Extern</value>
+    <comment>Prijs voor externe bezoekers</comment>
+  </data>
+  <data name="Resto.Legende" xml:space="preserve">
+    <value>Legende</value>
+    <comment>Legenda voor iconen in het menu</comment>
+  </data>
+  <data name="Resto.Vegetarisch" xml:space="preserve">
+    <value>Vegetarisch</value>
+    <comment>Icoon en aanduiding voor vegetarisch gerecht</comment>
+  </data>
+  <data name="Resto.Vegan" xml:space="preserve">
+    <value>Vegan</value>
+    <comment>Icoon en aanduiding voor vegan gerecht</comment>
+  </data>
+  <data name="Resto.MenuTitle" xml:space="preserve">
+    <value>Week Menu</value>
+    <comment>Titel van de menupagina</comment>
+  </data>
+  <data name="Resto.NoMenu" xml:space="preserve">
+    <value>Er is momenteel geen menu beschikbaar.</value>
+    <comment>Tekst die verschijnt wanneer er geen menu is</comment>
+  </data>
+  <data name="Resto.Filter.All" xml:space="preserve">
+    <value>Alles</value>
+    <comment>Knop voor het tonen van alle menu-items</comment>
+  </data>
+  <data name="Resto.NoItemsForFilter" xml:space="preserve">
+    <value>Er zijn geen menu-items die voldoen aan de huidige filter.</value>
+    <comment>Bericht dat getoond wordt wanneer er geen resultaten zijn voor de gekozen filter</comment>
+  </data>
   <data name="Resto.Return" xml:space="preserve">
     <value>Terug naar overzicht</value>
+    <comment/>
   </data>
   <data name="Resto.BackShort" xml:space="preserve">
-  <value>Terug</value>
-</data>
+    <value>Terug</value>
+    <comment/>
+  </data>
+  <data name="Account.Calendar" xml:space="preserve">
+    <value>Kalender</value>
+    <comment/>
+  </data>
+  <data name="Account.Grades" xml:space="preserve">
+    <value>Cijfers</value>
+    <comment/>
+  </data>
+  <data name="Auth.LogoutTitle" xml:space="preserve">
+    <value>Uitloggen</value>
+    <comment/>
+  </data>
+  <data name="Auth.LoggingOut" xml:space="preserve">
+    <value>Je wordt uitgelogd...</value>
+    <comment/>
+  </data>
+  <data name="Auth.Redirecting" xml:space="preserve">
+    <value>Je wordt doorgestuurd...</value>
+    <comment/>
+  </data>
+  <data name="Counter.Title" xml:space="preserve">
+    <value>Teller</value>
+    <comment/>
+  </data>
+  <data name="Counter.CurrentCount" xml:space="preserve">
+    <value>Huidige waarde: {0}</value>
+    <comment/>
+  </data>
+  <data name="Counter.ClickMe" xml:space="preserve">
+    <value>Klik mij</value>
+    <comment/>
+  </data>
+  <data name="Home.AuthenticatedMessage" xml:space="preserve">
+    <value>Hallo, {0}! Je bent ingelogd, dus je kunt deze pagina zien die je claims toont.</value>
+    <comment/>
+  </data>
+  <data name="Home.PrivateAdministratorPage" xml:space="preserve">
+    <value>Privépagina voor beheerders</value>
+    <comment/>
+  </data>
+  <data name="Roles.Administrator" xml:space="preserve">
+    <value>Beheerder</value>
+    <comment/>
+  </data>
+  <data name="Campus.Title" xml:space="preserve">
+    <value>Campussen</value>
+    <comment/>
+  </data>
+  <data name="Campus.Loading" xml:space="preserve">
+    <value>Campussen worden geladen...</value>
+    <comment/>
+  </data>
+  <data name="Campus.SearchPlaceholder" xml:space="preserve">
+    <value>Zoekterm</value>
+    <comment/>
+  </data>
+  <data name="Campus.MapButton" xml:space="preserve">
+    <value>Campuskaart</value>
+    <comment/>
+  </data>
+  <data name="Campus.LocationLabel" xml:space="preserve">
+    <value>Locatie:</value>
+    <comment/>
+  </data>
+  <data name="Campus.ContactPhoneLabel" xml:space="preserve">
+    <value>Telefoon:</value>
+    <comment/>
+  </data>
+  <data name="Campus.WebsiteLabel" xml:space="preserve">
+    <value>Website:</value>
+    <comment/>
+  </data>
+  <data name="Campus.DescriptionLabel" xml:space="preserve">
+    <value>Beschrijving:</value>
+    <comment/>
+  </data>
+  <data name="Campus.FacultiesLabel" xml:space="preserve">
+    <value>Faculteiten:</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Room" xml:space="preserve">
+    <value>Lokaal:</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Teacher" xml:space="preserve">
+    <value>Docent:</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Environment" xml:space="preserve">
+    <value>Omgeving:</value>
+    <comment/>
+  </data>
+  <data name="Products.CreateNew" xml:space="preserve">
+    <value>Maak een nieuw product aan</value>
+    <comment/>
+  </data>
+  <data name="Products.NamePlaceholder" xml:space="preserve">
+    <value>Naam</value>
+    <comment/>
+  </data>
+  <data name="Products.DescriptionPlaceholder" xml:space="preserve">
+    <value>Beschrijving</value>
+    <comment/>
+  </data>
+  <data name="Common.Reset" xml:space="preserve">
+    <value>Reset</value>
+    <comment/>
+  </data>
+  <data name="Campus.PlanLoading" xml:space="preserve">
+    <value>Campus wordt geladen...</value>
+    <comment/>
+  </data>
+  <data name="Campus.BackToCampuses" xml:space="preserve">
+    <value>Terug naar campussen</value>
+    <comment/>
+  </data>
+  <data name="Common.NotFoundTitle" xml:space="preserve">
+    <value>Niet gevonden</value>
+    <comment/>
+  </data>
 </root>

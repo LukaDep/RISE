@@ -1,5 +1,5 @@
 ﻿<CascadingAuthenticationState>
-    <Router AppAssembly="typeof(App).Assembly" >
+    <Router AppAssembly="typeof(App).Assembly">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
                 <NotAuthorized>
@@ -11,7 +11,7 @@
             <FocusOnNavigate RouteData="routeData" Selector="h1" />
         </Found>
         <NotFound>
-            <PageTitle>Not found</PageTitle>
+            <PageTitle>@L["Common.NotFoundTitle"]</PageTitle>
             <LayoutView Layout="typeof(MainLayout)">
                 <Rise.Client.Pages.NotFound />
             </LayoutView>

@@ -2,7 +2,7 @@
 @using Rise.Shared.Identity
 @* @attribute [Authorize(Roles = AppRoles.Administrator)] *@
 
-<h3 class="title">Create a new product</h3>
+<h3 class="title">@L["Products.CreateNew"]</h3>
 
 @if (_result is not null && !_result.IsSuccess)
 {
@@ -10,28 +10,29 @@
 }
 
 <EditForm Model="@Model" OnValidSubmit="@CreateProductAsync">
-    <FluentValidationValidator/>
-    
+    <FluentValidationValidator />
+
     <div class="field">
         <p class="control">
-            <InputText @bind-Value="Model.Name" class="input" placeholder="Name"/>
+            <InputText @bind-Value="Model.Name" class="input" placeholder="@L["Products.NamePlaceholder"]" />
         </p>
-        <ValidationMessage For="() => Model.Name" class="has-text-danger"/>
+        <ValidationMessage For="() => Model.Name" class="has-text-danger" />
     </div>
-    
+
     <div class="field">
         <p class="control">
-            <InputTextArea @bind-Value="Model.Description" class="textarea" placeholder="Description" rows="3"/>
+            <InputTextArea @bind-Value="Model.Description" class="textarea"
+                placeholder="@L["Products.DescriptionPlaceholder"]" rows="3" />
         </p>
-        <ValidationMessage For="() => Model.Description" class="has-text-danger"/>
+        <ValidationMessage For="() => Model.Description" class="has-text-danger" />
     </div>
-    
+
     <div class="field is-grouped is-grouped-right">
         <p class="control">
-            <button class="button is-light" type="submit">Create</button>
+            <button class="button is-light" type="submit">@L["Products.Create"]</button>
         </p>
         <p class="control">
-            <button type="reset" href="register" class="button is-light">Reset</button>
+            <button type="reset" href="register" class="button is-light">@L["Common.Reset"]</button>
         </p>
     </div>
 </EditForm>
