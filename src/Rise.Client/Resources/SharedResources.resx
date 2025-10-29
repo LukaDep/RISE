@@ -9,7 +9,7 @@
     that is mostly human readable. The generation and parsing of the
     various data types are done through the TypeConverter classes
     associated with the data types.
-
+ 
     Example:
 
     ... ado.net/XML headers & schema ...
@@ -138,6 +138,10 @@
     <value>Welcome to your new app.</value>
     <comment/>
   </data>
+   <data name="Schedule.Title" xml:space="preserve">
+    <value>Schedule</value>
+    <comment/>
+  </data>
   <data name="Schedule.Week" xml:space="preserve">
     <value>Week</value>
     <comment/>
@@ -145,6 +149,14 @@
   <data name="Schedule.To" xml:space="preserve">
     <value>to</value>
     <comment/>
+  </data>
+      <data name="Schedule.ToToday" xml:space="preserve">
+  <value>Go to today </value>
+     <comment/>
+  </data>
+      <data name="Schedule.Today" xml:space="preserve">
+  <value>Today </value>
+     <comment/>
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Previous</value>
@@ -343,6 +355,7 @@
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Sign In</value>
+    <comment/>
   </data>
   <data name="Account.Title" xml:space="preserve">
     <value>Account</value>
@@ -355,6 +368,9 @@
   <data name="Account.Logout" xml:space="preserve">
     <value>Logout</value>
     <comment/>
+  </data>
+  <data name="Schedule.Absent" xml:space="preserve">
+    <value>Absent</value>
   </data>
   <data name="Resto.Title" xml:space="preserve">
     <value>Restaurants</value>
@@ -439,4 +455,55 @@
   <data name="Grades.NoGradesFound" xml:space="preserve">
     <value>No grades found.</value>
   </data>
+  <data name="News.NotFound" xml:space="preserve">
+    <value>No News Found</value>
+  </data>
+  <data name="Resto.Student" xml:space="preserve">
+  <value>Student</value>
+  <comment>Price for students</comment>
+</data>
+
+<data name="Resto.Extern" xml:space="preserve">
+  <value>External</value>
+  <comment>Price for external visitors</comment>
+</data>
+
+<data name="Resto.Legende" xml:space="preserve">
+  <value>Legend</value>
+  <comment>Legend for icons in the menu</comment>
+</data>
+
+<data name="Resto.Vegetarisch" xml:space="preserve">
+  <value>Vegetarian</value>
+  <comment>Icon and label for vegetarian dishes</comment>
+</data>
+
+<data name="Resto.Vegan" xml:space="preserve">
+  <value>Vegan</value>
+  <comment>Icon and label for vegan dishes</comment>
+</data>
+
+<data name="Resto.MenuTitle" xml:space="preserve">
+  <value>Week Menu</value>
+  <comment>Title of the menu page</comment>
+</data>
+
+<data name="Resto.NoMenu" xml:space="preserve">
+  <value>No menu available at the moment.</value>
+  <comment>Text shown when no menu is available</comment>
+</data>
+<data name="Resto.Filter.All" xml:space="preserve">
+  <value>All</value>
+  <comment>Button to show all menu items</comment>
+</data>
+<data name="Resto.NoItemsForFilter" xml:space="preserve">
+  <value>There are no menu items matching the current filter.</value>
+  <comment>Message shown when no results match the selected filter</comment>
+</data>
+<data name="Resto.Return" xml:space="preserve">
+  <value>Return to overview</value>
+</data>
+<data name="Resto.BackShort" xml:space="preserve">
+  <value>Back</value>
+</data>
 </root>

@@ -4,12 +4,13 @@ using FuzzySharp;
 using FuzzySharp.SimilarityRatio;
 using FuzzySharp.SimilarityRatio.Scorer.StrategySensitive;
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.News;
 
 namespace Rise.Client.News;
 
-public partial class Index
+public partial class Index : IAsyncDisposable
 {
     ElementReference filterInput;
     private bool isFilterOpen = false;
@@ -27,15 +28,18 @@ public partial class Index
 
     [Inject] public required INewsService NewsService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
-    
+
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
     public string? SearchTerm { get; set; }
-    
+
     private int skip = 0;
     private int take = 10;
     private int totalCount;
     private int currentCount;
+    
+    //js scroll to top 
+    private bool _initialized;
     
 
     private string? searchTerm;
@@ -53,7 +57,7 @@ public partial class Index
         var result = await NewsService.GetIndexAsync(request);
         news = result.Value.News;
         totalCount = result.Value.TotalCount;
-        currentCount = result.Value.CurrentCount;
+        currentCount = news.Count();
         skip = 0;
 
     }
@@ -116,8 +120,43 @@ public partial class Index
 
         // Append new items to the existing list
         news = news?.Concat(result.Value.News) ?? result.Value.News;
-        currentCount += result.Value.CurrentCount;
+        currentCount = news.Count();
 
         StateHasChanged();
+    }
+    
+    
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_initialized)
+        {
+            _initialized = true;
+            try
+            {
+                // Call the global wrapper defined in wwwroot/scrollTop.js
+                await JS.InvokeVoidAsync("initScrollTop", "scrollToTopBtn");
+            }
+            catch
+            {
+                // swallow JS errors — avoids breaking rendering if script not present
+            }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_initialized)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("disposeScrollTop", "scrollToTopBtn");
+            }
+            catch
+            {
+                // ignore disposal errors
+            }
+            _initialized = false;
+        }
     }
 }
