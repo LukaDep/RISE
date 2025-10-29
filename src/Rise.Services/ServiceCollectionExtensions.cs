@@ -20,6 +20,8 @@ using Rise.Services.CampusInfo;
 using Rise.Shared.Absences;
 using Rise.Shared.Schedule;
 using Rise.Shared.Grades;
+using Rise.Shared.Menu;
+using Rise.Services.Menu;
 
 namespace Rise.Services;
 
@@ -30,6 +32,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<ICampusService, CampusService>();
+        services.AddScoped<IMenuService, MockMenuService>();
         services.AddScoped<IScheduleService, MockScheduleService>();
         services.AddScoped<IRestoService, MockRestoService>();
         services.AddScoped<INewsService, NewsService>();
