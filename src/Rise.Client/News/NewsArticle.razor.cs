@@ -8,9 +8,7 @@ public partial class NewsArticle : ComponentBase
 {
     [Inject] public required INewsService NewsService { get; set; }
     [Parameter] public int Id { get; set; }
-
     private NewsDto.Index? newsItem;
-    private bool isLoading = true;
     private string? errorMessage;
 
     private string GetThumbnailUrl()
@@ -22,26 +20,15 @@ public partial class NewsArticle : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        try
-        {
-            var result = await NewsService.GetByIdAsync(Id);
+        var result = await NewsService.GetByIdAsync(Id);
 
-            if (result.IsSuccess && result.Value?.NewsItem != null)
-            {
-                newsItem = result.Value.NewsItem;
-            }
-            else
-            {
-                errorMessage = result.Errors.FirstOrDefault() ?? "News item not found";
-            }
-        }
-        catch (Exception ex)
+        if (result.IsSuccess)
         {
-            errorMessage = $"Error loading news: {ex.Message}";
+            newsItem = result.Value.NewsItem;
         }
-        finally
+        else
         {
-            isLoading = false;
+            errorMessage = result.Errors.FirstOrDefault();
         }
     }
 }
