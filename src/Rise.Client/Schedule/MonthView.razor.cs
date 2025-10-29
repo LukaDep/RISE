@@ -53,16 +53,6 @@ public partial class MonthView
     private void PreviousMonth() => SelectedDate = SelectedDate.AddMonths(-1);
     private void NextMonth() => SelectedDate = SelectedDate.AddMonths(1);
 
-    private string GetEventTypeBgColor(string type) => type.ToLower() switch
-    {
-        "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
-        "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
-        "practicum" => "bg-hogent-green-15 text-hogent-green",
-        "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
-        "seminarie" => "bg-hogent-business-15 text-hogent-business",
-        _ => "bg-hogent-black-15 text-hogent-black"
-    };
-
     private async Task GoToDayView(DateTime date)
     {
         if (OnDayClick.HasDelegate)

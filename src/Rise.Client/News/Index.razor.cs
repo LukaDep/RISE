@@ -27,16 +27,16 @@ public partial class Index
 
     [Inject] public required INewsService NewsService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
-    
+
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
     public string? SearchTerm { get; set; }
-    
+
     private int skip = 0;
     private int take = 10;
     private int totalCount;
     private int currentCount;
-    
+
 
     private string? searchTerm;
     private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
