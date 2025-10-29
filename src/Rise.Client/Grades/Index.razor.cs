@@ -30,7 +30,6 @@ namespace Rise.Client.Grades
         private IEnumerable<GradesDto.Grade> Grades { get; set; } = Array.Empty<GradesDto.Grade>();
         private IEnumerable<GradesDto.Grade> FilteredGrades { get; set; } = Array.Empty<GradesDto.Grade>();
         // injections
-        [Inject] public IStringLocalizer<SharedResources> L { get; set; } = default!;
         [Inject] public required IGradesService GradesClientService { get; set; }
         [Inject] public required NavigationManager Navigation { get; set; }
         // filter parameters
