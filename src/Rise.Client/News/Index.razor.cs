@@ -10,7 +10,7 @@ using Rise.Shared.News;
 
 namespace Rise.Client.News;
 
-public partial class Index
+public partial class Index : IAsyncDisposable
 {
     ElementReference filterInput;
     private bool isFilterOpen = false;
@@ -132,7 +132,31 @@ public partial class Index
         if (firstRender && !_initialized)
         {
             _initialized = true;
-            await JS.InvokeVoidAsync("scrollTop.init", "scrollToTopBtn");
+            try
+            {
+                // Call the global wrapper defined in wwwroot/scrollTop.js
+                await JS.InvokeVoidAsync("initScrollTop", "scrollToTopBtn");
+            }
+            catch
+            {
+                // swallow JS errors — avoids breaking rendering if script not present
+            }
+        }
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (_initialized)
+        {
+            try
+            {
+                await JS.InvokeVoidAsync("disposeScrollTop", "scrollToTopBtn");
+            }
+            catch
+            {
+                // ignore disposal errors
+            }
+            _initialized = false;
         }
     }
 }
