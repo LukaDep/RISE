@@ -1,4 +1,4 @@
-namespace Rise.Client.Grades.Components;
+namespace Rise.Client.Components;
 
 using Microsoft.AspNetCore.Components;
 
