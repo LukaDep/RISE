@@ -17,6 +17,8 @@ using Rise.Shared.Schedule;
 using Rise.Client.Menu;
 using Rise.Shared.Menu;
 using Rise.Shared.Resto;
+using Rise.Shared.Contact;
+using Rise.Client.Contact;
 
 try
 {
@@ -80,6 +82,11 @@ try
     });
 
     builder.Services.AddHttpClient<IRestoService, RestoClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
+
+    builder.Services.AddHttpClient<IContactService, ContactService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });
