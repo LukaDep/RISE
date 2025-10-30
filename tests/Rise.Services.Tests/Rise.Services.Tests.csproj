@@ -33,8 +33,4 @@
       <ProjectReference Include="..\..\src\Rise.Services\Rise.Services.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="News\" />
-    </ItemGroup>
-
 </Project>
