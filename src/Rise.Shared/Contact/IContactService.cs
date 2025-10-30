@@ -10,6 +10,5 @@ namespace Rise.Shared.Contact
     public interface IContactService
     {
         Task<Result<ContactResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default);
-        Task<Result<ContactResponse.Get>> GetByIdAsync(int id, CancellationToken ctx = default);
     }
 }

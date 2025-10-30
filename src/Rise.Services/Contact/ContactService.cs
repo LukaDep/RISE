@@ -50,21 +50,5 @@ namespace Rise.Services.Contact
             }
             );
         }
-
-        public async Task<Result<ContactResponse.Get>> GetByIdAsync(int id, CancellationToken ctx = default)
-        {
-            if (!File.Exists(_mockFilePath))
-                return Result<ContactResponse.Get>.NotFound($"Mock data file not found at: {_mockFilePath}");
-
-            var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-            var items = JsonSerializer.Deserialize<List<ContactDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-
-            var contactItem = items.FirstOrDefault(n => n.Id == id);
-            if (contactItem == null)
-                return Result<ContactResponse.Get>.NotFound($"News item with id {id} not found.");
-
-            var response = new ContactResponse.Get { ContactItem = contactItem };
-            return Result.Success(response);
-        }
     }
 }
