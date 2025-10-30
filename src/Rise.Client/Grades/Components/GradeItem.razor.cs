@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Components;
 using Rise.Shared.Grades;
+using Rise.Client.Components;
 
 namespace Rise.Client.Grades.Components;
 

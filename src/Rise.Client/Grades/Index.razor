@@ -1,6 +1,7 @@
 @page "/grades"
 @using Rise.Shared.Grades
 @using Rise.Client.Grades.Components
+@using Rise.Client.Components
 
 <h3 class="text-4xl font-bold flex-shrink-0 mx-4 mt-10">@L["Grades.Title"]</h3>
 
@@ -44,21 +45,24 @@
     </div>
   </div>
 </div>
-
-@if (!Grades.Any())
-{
-  <div class="flex justify-center items-center h-16 mt-16">
-    <div class="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-b-hogent-education"></div>
-  </div>
-}
-else if (!FilteredGrades.Any())
-{
-  <div class="text-sm text-gray-500 mt-6 mx-4">@L["Grades.NoGradesFound"]</div>
-}
-else
-{
-  @foreach (var grade in FilteredGrades)
+<div>
+  @if (!Grades.Any())
   {
-    <GradeItem Grade="grade" />
+    <div class="flex justify-center items-center h-16 mt-16">
+      <div class="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-b-hogent-education"></div>
+    </div>
   }
-}
+  else if (!FilteredGrades.Any())
+  {
+    <div class="text-sm text-gray-500 mt-6 mx-4">@L["Grades.NoGradesFound"]</div>
+  }
+  else
+  {
+    @foreach (var grade in FilteredGrades)
+    {
+      <GradeItem Grade="grade" />
+    }
+  }
+  <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
+  <ScrollToTop />
+</div>
