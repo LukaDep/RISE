@@ -36,7 +36,7 @@ public class MockRestoService : IRestoService
             var term = req.SearchTerm.Trim();
             items = items.Where(i => (i.Name ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
                                   || (i.Description ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
-                                  || (i.KitchenType ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase));
+                                  || (i.KitchenType != null && i.KitchenType.Any(type => type.Contains(term, StringComparison.OrdinalIgnoreCase))));
         }
 
         // Paging

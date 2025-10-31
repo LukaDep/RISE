@@ -19,6 +19,8 @@ using Rise.Shared.CampusInfo;
 using Rise.Services.CampusInfo;
 using Rise.Shared.Absences;
 using Rise.Shared.Schedule;
+using Rise.Services.Contact;
+using Rise.Shared.Contact;
 using Rise.Shared.Grades;
 using Rise.Shared.Menu;
 using Rise.Services.Menu;
@@ -37,6 +39,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IRestoService, MockRestoService>();
         services.AddScoped<INewsService, NewsService>();
         services.AddScoped<ICampusInfoService, CampusInfoService>();
+        services.AddScoped<IContactService, ContactService>();
         services.AddScoped<IAbsencesService, AbsencesService>();
         services.AddScoped<IGradesService, GradesService>();
         services.AddTransient<DbSeeder>();

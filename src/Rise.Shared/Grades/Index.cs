@@ -2,13 +2,13 @@ namespace Rise.Shared.Grades;
 
 public static partial class GradesResponse
 {
-    public class CourseList
+    public class Index
     {
-        public IEnumerable<GradesDto.Course> Courses { get; set; } = [];
+        public IEnumerable<GradesDto.Grade> Grades { get; set; } = [];
     }
-    public class CourseById
+    public class GradeById
     {
-        public GradesDto.Course Course { get; set; } = default!;
+        public GradesDto.Grade Grade { get; set; } = default!;
     }
 
 }

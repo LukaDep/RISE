@@ -1,197 +1,212 @@
 [
-    {
-        "CourseId": "C10101",
-        "CourseName": "Web Development 3",
-        "Year": 2025,
-        "Semester": 1,
-        "FinalScore": null,
-        "Grades": [
-            {
-                "Id": "A10101-1",
-                "Name": "Project 1 - Portfolio Website",
-                "ActivityType": "Assignment",
-                "MaxPoints": 20,
-                "Score": 17,
-                "Feedback": "Excellent structure and clean styling. Minor accessibility issues with ARIA labels.",
-                "SubmissionDate": "2025-03-18T10:25:00Z",
-                "DueDate": "2025-03-17T23:59:00Z"
-            },
-            {
-                "Id": "A10101-2",
-                "Name": "Quiz 2 - JavaScript Concepts",
-                "ActivityType": "Quiz",
-                "MaxPoints": 10,
-                "Score": 8,
-                "Feedback": "Solid understanding of closures; review promises syntax.",
-                "SubmissionDate": "2025-04-02T09:40:00Z",
-                "DueDate": "2025-04-01T23:59:00Z"
-            },
-            {
-                "Id": "A10101-3",
-                "Name": "Midterm Assignment",
-                "ActivityType": "Assignment",
-                "MaxPoints": 20,
-                "Score": null,
-                "Feedback": null,
-                "SubmissionDate": null,
-                "DueDate": "2025-05-15T23:59:00Z"
-            },
-            {
-                "Id": "A10101-4",
-                "Name": "Group Presentation",
-                "ActivityType": "Presentation",
-                "MaxPoints": 10,
-                "Score": null,
-                "Feedback": null,
-                "SubmissionDate": null,
-                "DueDate": "2025-06-01T23:59:00Z"
-            }
-        ]
-    },
-    {
-        "CourseId": "C10202",
-        "CourseName": "Databases 2",
-        "Year": 2025,
-        "Semester": 1,
-        "FinalScore": null,
-        "Grades": [
-            {
-                "Id": "A10202-1",
-                "Name": "Normalization Assignment",
-                "ActivityType": "Assignment",
-                "MaxPoints": 20,
-                "Score": 14,
-                "Feedback": "Good normalization work, but ensure all tables have proper keys.",
-                "SubmissionDate": "2025-02-12T15:10:00Z",
-                "DueDate": "2025-02-11T23:59:00Z"
-            },
-            {
-                "Id": "A10202-2",
-                "Name": "SQL Midterm Quiz",
-                "ActivityType": "Quiz",
-                "MaxPoints": 20,
-                "Score": 19,
-                "Feedback": "Outstanding! Queries optimized and efficient.",
-                "SubmissionDate": "2025-03-05T08:20:00Z",
-                "DueDate": "2025-03-04T23:59:00Z"
-            },
-            {
-                "Id": "A10202-3",
-                "Name": "Final Project - Database App",
-                "ActivityType": "Project",
-                "MaxPoints": 40,
-                "Score": null,
-                "Feedback": null,
-                "SubmissionDate": null,
-                "DueDate": "2025-06-01T23:59:00Z"
-            },
-            {
-                "Id": "A10202-4",
-                "Name": "Schema Review",
-                "ActivityType": "Assignment",
-                "MaxPoints": 10,
-                "Score": null,
-                "Feedback": null,
-                "SubmissionDate": null,
-                "DueDate": "2025-05-20T23:59:00Z"
-            }
-        ]
-    },
-    {
-        "CourseId": "C10303",
-        "CourseName": "Mobile Development",
-        "Year": 2025,
-        "Semester": 1,
-        "FinalScore": null,
-        "Grades": [
-            {
-                "Id": "A10303-1",
-                "Name": "Lab 3 - Camera API",
-                "ActivityType": "Lab",
-                "MaxPoints": 10,
-                "Score": 9,
-                "Feedback": "Good use of permissions; minor bug with gallery picker.",
-                "SubmissionDate": "2025-03-25T11:05:00Z",
-                "DueDate": "2025-03-24T23:59:00Z"
-            },
-            {
-                "Id": "A10303-2",
-                "Name": "Final Project - PWA",
-                "ActivityType": "Project",
-                "MaxPoints": 40,
-                "Score": 16,
-                "Feedback": "Nice UI and offline support; add loading states.",
-                "SubmissionDate": "2025-05-10T13:45:00Z",
-                "DueDate": "2025-05-09T23:59:00Z"
-            },
-            {
-                "Id": "A10303-3",
-                "Name": "Beta Release",
-                "ActivityType": "Milestone",
-                "MaxPoints": 20,
-                "Score": null,
-                "Feedback": null,
-                "SubmissionDate": null,
-                "DueDate": "2025-05-30T23:59:00Z"
-            }
-        ]
-    },
-    {
-        "CourseId": "C10404",
-        "CourseName": "Software Engineering",
-        "Year": 2025,
-        "Semester": 2,
-        "FinalScore": 10.67,
-        "Grades": [
-            {
-                "Id": "A10404-1",
-                "Name": "Sprint 1 - Scrum Board",
-                "ActivityType": "Assignment",
-                "MaxPoints": 10,
-                "Score": 7,
-                "Feedback": "Missing some user stories; improve sprint planning.",
-                "SubmissionDate": "2025-03-02T09:00:00Z",
-                "DueDate": "2025-03-01T23:59:00Z"
-            },
-            {
-                "Id": "A10404-2",
-                "Name": "Final Report",
-                "ActivityType": "Report",
-                "MaxPoints": 20,
-                "Score": 9,
-                "Feedback": "Incomplete documentation; missing diagrams and analysis.",
-                "SubmissionDate": "2025-05-18T16:20:00Z",
-                "DueDate": "2025-05-17T23:59:00Z"
-            }
-        ]
-    },
-    {
-        "CourseId": "C10505",
-        "CourseName": "Statistics",
-        "Year": 2025,
-        "Semester": 2,
-        "FinalScore": 8.0,
-        "Grades": [
-            {
-                "Id": "A10505-1",
-                "Name": "Exercise Sheet 4 - Regression",
-                "ActivityType": "Assignment",
-                "MaxPoints": 10,
-                "Score": 5,
-                "Feedback": "Partial answers; recheck formulas for slope and intercept.",
-                "SubmissionDate": "2025-04-15T12:10:00Z",
-                "DueDate": "2025-04-14T23:59:00Z"
-            },
-            {
-                "Id": "A10505-2",
-                "Name": "Final Exam",
-                "ActivityType": "Exam",
-                "MaxPoints": 20,
-                "Score": 7,
-                "Feedback": "Needs stronger statistical interpretation in open questions.",
-                "SubmissionDate": "2025-06-20T08:30:00Z",
-                "DueDate": "2025-06-19T23:59:00Z"
-            }
-        ]
-    }
+  {
+    "CourseId": "C10101",
+    "CourseName": "Web Development 3",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10101-1",
+    "Name": "Project 1 - Portfolio Website",
+    "ActivityType": "Assignment",
+    "MaxPoints": 20,
+    "Score": 17,
+    "Feedback": "Excellent structure and clean styling. Minor accessibility issues with ARIA labels.",
+    "SubmissionDate": "2025-03-18T10:25:00Z",
+    "Date": "2025-03-17T23:59:00Z"
+  },
+  {
+    "CourseId": "C10101",
+    "CourseName": "Web Development 3",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10101-2",
+    "Name": "Quiz 2 - JavaScript Concepts",
+    "ActivityType": "Quiz",
+    "MaxPoints": 10,
+    "Score": 8,
+    "Feedback": "Solid understanding of closures; review promises syntax.",
+    "SubmissionDate": "2025-04-02T09:40:00Z",
+    "Date": "2025-04-01T23:59:00Z"
+  },
+  {
+    "CourseId": "C10101",
+    "CourseName": "Web Development 3",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10101-3",
+    "Name": "Midterm Assignment",
+    "ActivityType": "Assignment",
+    "MaxPoints": 20,
+    "Score": 15,
+  "Feedback": "Solid work overall. A few small improvements would make this excellent (see rubric).",
+    "SubmissionDate": null,
+    "Date": "2025-05-15T23:59:00Z"
+  },
+  {
+    "CourseId": "C10101",
+    "CourseName": "Web Development 3",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10101-4",
+    "Name": "Group Presentation",
+    "ActivityType": "Presentation",
+    "MaxPoints": 10,
+    "Score": 9,
+  "Feedback": "Nice presentation and clear slides. Consider adding more concrete examples to illustrate key points.",
+    "SubmissionDate": null,
+    "Date": "2025-06-01T23:59:00Z"
+  },
+  {
+    "CourseId": "C10202",
+    "CourseName": "Databases 2",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10202-1",
+    "Name": "Normalization Assignment",
+    "ActivityType": "Assignment",
+    "MaxPoints": 20,
+    "Score": 14,
+    "Feedback": "Good normalization work, but ensure all tables have proper keys.",
+    "SubmissionDate": "2025-02-12T15:10:00Z",
+    "Date": "2025-02-11T23:59:00Z"
+  },
+  {
+    "CourseId": "C10202",
+    "CourseName": "Databases 2",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10202-2",
+    "Name": "SQL Midterm Quiz",
+    "ActivityType": "Quiz",
+    "MaxPoints": 20,
+    "Score": 19,
+    "Feedback": "Outstanding! Queries optimized and efficient.",
+    "SubmissionDate": "2025-03-05T08:20:00Z",
+    "Date": "2025-03-04T23:59:00Z"
+  },
+  {
+    "CourseId": "C10202",
+    "CourseName": "Databases 2",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10202-3",
+    "Name": "Final Project - Database App",
+    "ActivityType": "Project",
+    "MaxPoints": 40,
+    "Score": 32,
+  "Feedback": "Well-structured project with good use of database indexes; finish remaining integration tests before final submission.",
+    "SubmissionDate": null,
+    "Date": "2025-06-01T23:59:00Z"
+  },
+  {
+    "CourseId": "C10202",
+    "CourseName": "Databases 2",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10202-4",
+    "Name": "Schema Review",
+    "ActivityType": "Assignment",
+    "MaxPoints": 10,
+    "Score": 8,
+  "Feedback": "Schema is mostly correct; ensure foreign keys and constraints are documented and add a brief data dictionary.",
+    "SubmissionDate": null,
+    "Date": "2025-05-20T23:59:00Z"
+  },
+  {
+    "CourseId": "C10303",
+    "CourseName": "Mobile Development",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10303-1",
+    "Name": "Lab 3 - Camera API",
+    "ActivityType": "Lab",
+    "MaxPoints": 10,
+    "Score": 9,
+    "Feedback": "Good use of permissions; minor bug with gallery picker.",
+    "SubmissionDate": "2025-03-25T11:05:00Z",
+    "Date": "2025-03-24T23:59:00Z"
+  },
+  {
+    "CourseId": "C10303",
+    "CourseName": "Mobile Development",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10303-2",
+    "Name": "Final Project - PWA",
+    "ActivityType": "Project",
+    "MaxPoints": 40,
+    "Score": 16,
+    "Feedback": "Nice UI and offline support; add loading states.",
+    "SubmissionDate": "2025-05-10T13:45:00Z",
+    "Date": "2025-05-09T23:59:00Z"
+  },
+  {
+    "CourseId": "C10303",
+    "CourseName": "Mobile Development",
+    "Year": "2024-2025",
+    "Semester": 1,
+    "Id": "A10303-3",
+    "Name": "Beta Release",
+    "ActivityType": "Milestone",
+    "MaxPoints": 20,
+    "Score": 18,
+  "Feedback": "Great progress on the PWA — add better error handling for offline scenarios and polish the loading indicators.",
+    "SubmissionDate": null,
+    "Date": "2025-05-30T23:59:00Z"
+  },
+  {
+    "CourseId": "C10404",
+    "CourseName": "Software Engineering",
+    "Year": "2024-2025",
+    "Semester": 2,
+    "Id": "A10404-1",
+    "Name": "Sprint 1 - Scrum Board",
+    "ActivityType": "Assignment",
+    "MaxPoints": 10,
+    "Score": 7,
+    "Feedback": "Missing some user stories; improve sprint planning.",
+    "SubmissionDate": "2025-03-02T09:00:00Z",
+    "Date": "2025-03-01T23:59:00Z"
+  },
+  {
+    "CourseId": "C10404",
+    "CourseName": "Software Engineering",
+    "Year": "2024-2025",
+    "Semester": 2,
+    "Id": "A10404-2",
+    "Name": "Final Report",
+    "ActivityType": "Report",
+    "MaxPoints": 20,
+    "Score": 9,
+    "Feedback": "Incomplete documentation; missing diagrams and analysis.",
+    "SubmissionDate": "2025-05-18T16:20:00Z",
+    "Date": "2025-05-17T23:59:00Z"
+  },
+  {
+    "CourseId": "C10505",
+    "CourseName": "Statistics",
+    "Year": "2024-2025",
+    "Semester": 2,
+    "Id": "A10505-1",
+    "Name": "Exercise Sheet 4 - Regression",
+    "ActivityType": "Assignment",
+    "MaxPoints": 10,
+    "Score": 5,
+    "Feedback": "Partial answers; recheck formulas for slope and intercept.",
+    "SubmissionDate": "2025-04-15T12:10:00Z",
+    "Date": "2025-04-14T23:59:00Z"
+  },
+  {
+    "CourseId": "C10505",
+    "CourseName": "Statistics",
+    "Year": "2024-2025",
+    "Semester": 2,
+    "Id": "A10505-2",
+    "Name": "Final Exam",
+    "ActivityType": "Exam",
+    "MaxPoints": 20,
+    "Score": 7,
+    "Feedback": "Needs stronger statistical interpretation in open questions.",
+    "SubmissionDate": "2025-06-20T08:30:00Z",
+    "Date": "2025-06-19T23:59:00Z"
+  }
 ]

@@ -1,0 +1,9 @@
+@inject IJSRuntime JS
+@implements IAsyncDisposable
+
+<!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
+<button id="scrollToTopBtn" aria-label="Scroll to top"
+    class="fixed right-6 w-12 h-12 flex items-center justify-center rounded-full border-2 border-b-hogent-black bg-hogent-white text-hogent-black shadow-lg opacity-0 pointer-events-none transform translate-y-4 transition-all duration-300"
+    style="bottom:6rem; z-index:1000;">
+    <i class="fa-solid fa-chevron-up"></i>
+</button>

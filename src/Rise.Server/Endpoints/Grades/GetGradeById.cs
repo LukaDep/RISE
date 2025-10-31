@@ -9,7 +9,7 @@ using Rise.Shared.Grades;
 /// </summary>
 /// <param name="gradesService"></param>
 
-public class CourseById(IGradesService gradesService) : EndpointWithoutRequest<Result<GradesResponse.CourseById>>
+public class CourseById(IGradesService gradesService) : EndpointWithoutRequest<Result<GradesResponse.GradeById>>
 {
     public override void Configure()
     {
@@ -17,9 +17,9 @@ public class CourseById(IGradesService gradesService) : EndpointWithoutRequest<R
         AllowAnonymous();
     }
 
-    public override Task<Result<GradesResponse.CourseById>> ExecuteAsync(CancellationToken ct)
+    public override Task<Result<GradesResponse.GradeById>> ExecuteAsync(CancellationToken ct)
     {
-        var courseId = Route<string>("courseId");
-        return gradesService.GetCourseByIdAsync(courseId, ct);
+        var gradeId = Route<string>("gradeId");
+        return gradesService.GetGradeByIdAsync(gradeId, ct);
     }
 }
