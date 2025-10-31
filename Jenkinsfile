@@ -2,7 +2,8 @@ pipeline {
     agent any
 
     environment {
-        APP_SERVER  = "192.168.56.50"
+        // === Cloud configuratie ===
+        APP_SERVER  = "10.11.2.31"          // <-- pas dit aan naar het echte IP van je appserver in de cloud
         DEPLOY_PATH = "/var/www/dotnetapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
     }
@@ -36,23 +37,23 @@ pipeline {
 
                     echo "--- Stop service & Clean deploy folder ---"
                     sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
                             sudo systemctl stop rise || true;
                             sudo rm -rf ${DEPLOY_PATH}/*;
                             sudo mkdir -p ${DEPLOY_PATH};
-                            sudo chown -R vagrant:vagrant ${DEPLOY_PATH};
+                            sudo chown -R vicuser:vicuser ${DEPLOY_PATH};
                         "
                     '''
 
                     echo "--- Copy new publish files ---"
                     sh '''
                         rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
-                        ./publish/ vagrant@$APP_SERVER:${DEPLOY_PATH}/
+                        ./publish/ vicuser@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
                     echo "--- Restart Rise service ---"
                     sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vagrant@$APP_SERVER "
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
                             sudo systemctl daemon-reload;
                             sudo systemctl restart rise;
                         "
@@ -64,7 +65,7 @@ pipeline {
         stage('Smoke Test') {
             steps {
                 echo "--- Smoke Test: HTTP check ---"
-                sh "sleep 4"
+                sh "sleep 5"
                 sh "curl -f http://${APP_SERVER}:5000 || exit 1"
             }
         }
@@ -72,13 +73,13 @@ pipeline {
 
     post {
         success {
-            echo '✅ Deployment succesvol!'
+            echo '✅ Deployment succesvol (cloud)!'
         }
         failure {
             echo '❌ Deployment mislukt — logs ophalen ↓'
             sh '''
                 ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-                vagrant@${APP_SERVER} "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log"
+                vicuser@${APP_SERVER} "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log"
             ''' || true
         }
     }
