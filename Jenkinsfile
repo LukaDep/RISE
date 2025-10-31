@@ -66,7 +66,7 @@ pipeline {
             steps {
                 echo "--- Smoke Test: HTTP check ---"
                 sh "sleep 5"
-                sh "curl -f http://${APP_SERVER}:5000 || exit 1"
+                sh "curl -f http://${APP_SERVER}:80 || exit 1"
             }
         }
     }
