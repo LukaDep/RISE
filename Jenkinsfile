@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     environment {
-        // === Cloud configuratie ===
         APP_SERVER  = "10.11.2.31"
         DEPLOY_PATH = "/var/www/dotnetapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
@@ -75,10 +74,12 @@ pipeline {
         }
         failure {
             echo '❌ Deployment mislukt — logs ophalen ↓'
-            sh '''
-                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
-                vicuser@${APP_SERVER} "tail -n 100 ${DEPLOY_PATH}/app.log"
-            ''' || true
+            script {
+                sh """
+                    ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+                    vicuser@${APP_SERVER} 'tail -n 100 ${DEPLOY_PATH}/app.log || echo \"Geen logbestand gevonden\"'
+                """
+            }
         }
     }
 }
