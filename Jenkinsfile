@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // === Cloud configuratie ===
-        APP_SERVER  = "10.11.2.31"          // <-- pas dit aan naar het echte IP van je appserver in de cloud
+        APP_SERVER  = "10.11.2.31"   
         DEPLOY_PATH = "/var/www/dotnetapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
     }
