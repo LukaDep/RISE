@@ -8,7 +8,7 @@ public partial class NewsArticle : ComponentBase
 {
     [Inject] public required INewsService NewsService { get; set; }
     [Parameter] public int Id { get; set; }
-    private NewsDto.Index? newsItem;
+    private NewsDto.Index? newsArticle;
     private string? errorMessage;
 
     private string GetThumbnailUrl()
@@ -23,7 +23,7 @@ public partial class NewsArticle : ComponentBase
 
         if (result.IsSuccess)
         {
-            newsItem = result.Value.NewsItem;
+            newsArticle = result.Value.NewsArticle;
         }
         else
         {

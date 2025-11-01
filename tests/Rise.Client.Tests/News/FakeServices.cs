@@ -71,7 +71,7 @@ public class FakeNewsService : INewsService
 
         var wrapper = new NewsResponse.Get
         {
-            NewsItem = item
+            NewsArticle = item
         };
 
         return Task.FromResult(Result.Success(wrapper));

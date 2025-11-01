@@ -19,8 +19,8 @@ public class NewsServiceShould
         
         using var dbContext = new ApplicationDbContext(options);
         
-        dbContext.NewsItems.AddRange(
-            new NewsItem
+        dbContext.NewsArticles.AddRange(
+            new NewsArticle
             {
                 Title = "Test News 1",
                 Description = "Test description 1",
@@ -29,7 +29,7 @@ public class NewsServiceShould
                 Content = "Test content 1",
                 Author = "Test Author 1"
             },
-            new NewsItem
+            new NewsArticle
             {
                 Title = "Test News 2",
                 Description = "Test description 2",
@@ -38,7 +38,7 @@ public class NewsServiceShould
                 Content = "Test content 2",
                 Author = "Test Author 2"
             },
-            new NewsItem
+            new NewsArticle
             {
                 Title = "Test News 3",
                 Description = "Test description 3",
@@ -83,8 +83,8 @@ public class NewsServiceShould
         
         using var dbContext = new ApplicationDbContext(options);
         
-        dbContext.NewsItems.AddRange(
-            new NewsItem
+        dbContext.NewsArticles.AddRange(
+            new NewsArticle
             {
                 Title = "Test News 1",
                 Description = "Test description 1",
@@ -93,7 +93,7 @@ public class NewsServiceShould
                 Content = "Test content 1",
                 Author = "Test Author 1"
             },
-            new NewsItem
+            new NewsArticle
             {
                 Title = "Test News 2",
                 Description = "Test description 2",
@@ -102,7 +102,7 @@ public class NewsServiceShould
                 Content = "Test content 2",
                 Author = "Test Author 2"
             },
-            new NewsItem
+            new NewsArticle
             {
                 Title = "Test News 3",
                 Description = "Test description 3",
@@ -149,7 +149,7 @@ public class NewsServiceShould
         
         using var dbContext = new ApplicationDbContext(options);
         
-        var newsItem = new NewsItem
+        var newsArticle = new NewsArticle
         {
             Title = "Test News 1",
             Description = "Test description 1",
@@ -159,7 +159,7 @@ public class NewsServiceShould
             Author = "Test Author 1"
         };
         
-        dbContext.NewsItems.Add(newsItem);
+        dbContext.NewsArticles.Add(newsArticle);
     
         await dbContext.SaveChangesAsync();
         
@@ -168,14 +168,14 @@ public class NewsServiceShould
         
 
         // Act
-        var result = await service.GetByIdAsync(newsItem.Id);
+        var result = await service.GetByIdAsync(newsArticle.Id);
 
         // Assert
         if (result.IsSuccess)
         {
             result.Value.ShouldNotBeNull();
-            result.Value.NewsItem.ShouldNotBeNull();
-            result.Value.NewsItem.Id.ShouldBe(newsItem.Id);
+            result.Value.NewsArticle.ShouldNotBeNull();
+            result.Value.NewsArticle.Id.ShouldBe(newsArticle.Id);
         }
         else
         {
