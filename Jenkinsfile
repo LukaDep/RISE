@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // === Cloud configuratie ===
-        APP_SERVER  = "10.11.2.31"   
+        APP_SERVER  = "10.11.2.31"
         DEPLOY_PATH = "/var/www/dotnetapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
     }
@@ -18,10 +18,9 @@ pipeline {
             }
         }
 
-        stage('Publish Linux') {
+        stage('Publish Self-Contained Linux') {
             steps {
-                echo "=== Publishing (Linux-x64, framework-dependent) ==="
-                // Let op: gebruik --no-self-contained i.p.v. false
+                echo "=== Publishing (Linux-x64 Self-contained) ==="
                 sh '''
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
                       -c Release \
@@ -78,7 +77,6 @@ pipeline {
         }
         failure {
             echo '❌ Deployment mislukt — logs ophalen ↓'
-            // fix: alles tussen quotes zetten zodat shell het als string ziet
             sh '''
                 ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
                 vicuser@$APP_SERVER "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log || true"
