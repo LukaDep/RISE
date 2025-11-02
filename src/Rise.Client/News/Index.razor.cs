@@ -37,10 +37,10 @@ public partial class Index : IAsyncDisposable
     private int take = 10;
     private int totalCount;
     private int currentCount;
-    
+
     //js scroll to top 
     private bool _initialized;
-    
+
 
     private string? searchTerm;
     private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
@@ -124,8 +124,8 @@ public partial class Index : IAsyncDisposable
 
         StateHasChanged();
     }
-    
-    
+
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
