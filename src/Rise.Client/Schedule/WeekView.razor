@@ -54,7 +54,8 @@
             @for (int i = 0; i < WeekDays.Count; i++)
             {
                 var day = WeekDays[i];
-                <div class="p-3 text-center font-medium text-hogent-black-50 @(i < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
+                var isToday = day.Date == DateTime.Today.Date;
+                <div class="p-3 text-center font-medium text-hogent-black-50 @(i < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "") @(isToday ? "bg-blue-50" : "")">
                     <div class="text-sm">@GetLocalizedDayName(day)</div>
                     <div class="text-xs">@day.ToString("d/M")</div>
                 </div>
@@ -78,7 +79,9 @@
                 <!-- Dag kolommen (lege cellen voor grid structuur) -->
                 @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
                 {
-                    <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
+                    var currentDay = WeekDays[dayIndex];
+                    var isTodayCol = currentDay.Date == DateTime.Today.Date;
+                    <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "") @(isTodayCol ? "bg-blue-50" : "")">
                         @for (int hour = 8; hour <= 20; hour++)
                         {
                             <div class="h-16 border-b border-hogent-black-15"></div>
