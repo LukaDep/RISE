@@ -1,9 +1,17 @@
+using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
+using Rise.Domain.Absences;
+using Rise.Domain.Campus;
+using Rise.Domain.CampusInfo;
+using Rise.Domain.Contact;
+using Rise.Domain.Grades;
+using Rise.Domain.Menu;
+using Rise.Domain.News;
 using Rise.Domain.Products;
 using Rise.Domain.Projects;
-using Rise.Domain.News;
+using Rise.Domain.Restos;
+using Rise.Domain.Schedule;
 
 namespace Rise.Persistence;
 /// <summary>
@@ -22,6 +30,13 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await ProductsAsync();
         await NewsAsync();
         await ProjectsAsync();
+        await AbsencesAsync();
+        await CampusesAsync();
+        await CampusInfoAsync();
+        await ContactsAsync();
+        await GradesAsync();
+        await RestosAndMenusAsync();
+        await ReservationsAsync();
     }
 
     private async Task RolesAsync()
@@ -155,7 +170,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             new NewsArticle { Title = "Marketplace Vendor Program", PublishDate = DateTime.Parse("2025-11-08T13:00:00Z"), Description = "Become a vendor in the Rise marketplace.", Type = "Marketplace", Content = "Full article: Vendor onboarding steps, fees and promotional opportunities.", Author = "Vanessa Lee" },
             new NewsArticle { Title = "Rise API Changelog", PublishDate = DateTime.Parse("2025-11-09T15:00:00Z"), Description = "View the latest changes in the Rise API changelog.", Type = "Changelog", Content = "Full article: A summary of bug fixes, enhancements and breaking changes in recent releases.", Author = "Samuel Clark" },
             new NewsArticle { Title = "Rise Community Awards", PublishDate = DateTime.Parse("2025-11-10T17:00:00Z"), Description = "Nominate your peers for the Rise community awards.", Type = "Community", Content = "Full article: Categories, nomination process and judging criteria for the community awards.", Author = "Tina Brooks" }
-        
+
         );
         await dbContext.SaveChangesAsync();
     }
@@ -191,6 +206,457 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         };
 
         dbContext.Projects.AddRange(projects);
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task AbsencesAsync()
+    {
+        if (dbContext.Absences.Any())
+            return;
+
+        dbContext.Absences.AddRange(
+            new Absence { Name = "Bert Van Vreckem", Reason = "Sick Leave", StartDate = DateTime.Parse("2025-12-23"), EndDate = DateTime.Parse("2025-12-24") },
+            new Absence { Name = "Thomas Parmentier", Reason = "Conference", StartDate = DateTime.Parse("2025-12-27"), EndDate = DateTime.Parse("2025-12-29") },
+            new Absence { Name = "Chloé De Leenheer", Reason = "Parental Leave", StartDate = DateTime.Parse("2025-11-01"), EndDate = DateTime.Parse("2025-12-31") },
+            new Absence { Name = "Jan Decorte", Reason = "Volunteer Work", StartDate = DateTime.Parse("2025-12-10"), EndDate = DateTime.Parse("2025-12-15") },
+            new Absence { Name = "Sarah Vermeulen", Reason = "Training", StartDate = DateTime.Parse("2025-12-20"), EndDate = DateTime.Parse("2025-12-22") },
+            new Absence { Name = "Marc Desmet", Reason = "Family Emergency", StartDate = DateTime.Parse("2025-12-25"), EndDate = DateTime.Parse("2025-12-26") },
+            new Absence { Name = "Lien Decorte", Reason = "Study Leave", StartDate = DateTime.Parse("2025-12-15"), EndDate = DateTime.Parse("2025-12-20") },
+            new Absence { Name = "Bert Van Vreckem", Reason = "Unpaid Leave", StartDate = DateTime.Parse("2025-12-01"), EndDate = DateTime.Parse("2025-12-31") },
+            new Absence { Name = "Thomas Parmentier", Reason = "Team Building Event", StartDate = DateTime.Parse("2025-12-30"), EndDate = DateTime.Parse("2025-12-30") },
+            new Absence { Name = "Chloé De Leenheer", Reason = "Relocation", StartDate = DateTime.Parse("2025-12-28"), EndDate = DateTime.Parse("2025-12-30") },
+            new Absence { Name = "Sarah Vermeulen", Reason = "Sick Leave", StartDate = DateTime.Parse("2025-10-29"), EndDate = DateTime.Parse("2025-10-29") }
+        );
+
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task CampusesAsync()
+    {
+        if (dbContext.Campuses.Any())
+            return;
+
+        var campuses = new List<Campus>
+        {
+            new Campus
+            {
+                Name = "Campus Aalst",
+                Street = "Arbeidstraat",
+                HouseNumber = "14",
+                City = "Aalst",
+                PostalCode = "9300",
+                Latitude = 50.937566452189515,
+                Longitude = 4.033365889741001
+            },
+            new Campus
+            {
+                Name = "Campus Bijloke",
+                Street = "Godshuizenlaan",
+                HouseNumber = "4",
+                City = "Gent",
+                PostalCode = "9000",
+                Latitude = 51.045049214656395,
+                Longitude = 3.7146069594104048
+            },
+            new Campus
+            {
+                Name = "Campus Grote Sikkel",
+                Street = "Grote Sikkel",
+                HouseNumber = "1",
+                City = "Gent",
+                PostalCode = "9000",
+                Latitude = 51.05376586462268,
+                Longitude = 3.7265563026441186
+            },
+            new Campus
+            {
+                Name = "Campus Ledeganck",
+                Street = "K.L. Ledeganckstraat",
+                HouseNumber = "35",
+                City = "Gent",
+                PostalCode = "9000",
+                Latitude = 51.0365068204106,
+                Longitude = 3.724652944967813
+            },
+            new Campus
+            {
+                Name = "Campus Lokeren",
+                Street = "Groendreef",
+                HouseNumber = "31",
+                City = "Lokeren",
+                PostalCode = "9160",
+                Latitude = 51.10908490773775,
+                Longitude = 3.9861375735619933
+            },
+            new Campus
+            {
+                Name = "Campus Melle",
+                Street = "Brusselsesteenweg",
+                HouseNumber = "161",
+                City = "Melle",
+                PostalCode = "9090",
+                Latitude = 51.01430882035527,
+                Longitude = 3.7861257779015367
+            },
+            new Campus
+            {
+                Name = "Campus Mercator",
+                Street = "Wasstraat",
+                HouseNumber = "1",
+                City = "Gent",
+                PostalCode = "9000",
+                MapImageUrl = "/images/mercator.jpg",
+                ImageWidth = 750,
+                ImageHeight = 472,
+                Latitude = 51.04246772832513,
+                Longitude = 3.715410727376597
+            },
+            new Campus
+            {
+                Name = "Campus Schoonmeersen",
+                Street = "Valentin Vaerwyckweg",
+                HouseNumber = "1",
+                City = "Gent",
+                PostalCode = "9000",
+                MapImageUrl = "/images/schoonmeersen.jpg",
+                ImageWidth = 2860,
+                ImageHeight = 3809,
+                Latitude = 51.033100067702385,
+                Longitude = 3.7030483298315624
+            },
+            new Campus
+            {
+                Name = "Campus Vesalius",
+                Street = "Keramiekstraat",
+                HouseNumber = "80",
+                City = "Gent",
+                PostalCode = "9000",
+                Latitude = 51.0198962680327,
+                Longitude = 3.727240076846467
+            },
+            new Campus
+            {
+                Name = "Proefhoeve Bottelare",
+                Street = "Diepestraat",
+                HouseNumber = "1",
+                City = "Bottelare",
+                PostalCode = "9820",
+                Latitude = 50.961813660026195,
+                Longitude = 3.7600818324091763
+            },
+            new Campus
+            {
+                Name = "Site Buchtenstraat (FTI Lab)",
+                Street = "Buchtenstraat",
+                HouseNumber = "9",
+                City = "Gent",
+                PostalCode = "9000",
+                Latitude = 51.0289436405976,
+                Longitude = 3.6854235892972094
+            },
+            new Campus
+            {
+                Name = "Site Geraard de Duivelstraat",
+                Street = "Geraard de Duivelstraat",
+                HouseNumber = "5",
+                City = "Gent",
+                PostalCode = "9000",
+                Latitude = 51.052512156439,
+                Longitude = 3.728061840428318
+            }
+        };
+
+        dbContext.Campuses.AddRange(campuses);
+        await dbContext.SaveChangesAsync();
+
+        // Add buildings after campuses are saved
+        var schoonmeersen = campuses.FirstOrDefault(c => c.Name == "Campus Schoonmeersen");
+        var mercator = campuses.FirstOrDefault(c => c.Name == "Campus Mercator");
+        var bijloke = campuses.FirstOrDefault(c => c.Name == "Campus Bijloke");
+
+        var allBuildings = new List<(Building building, string campusId)>();
+
+        if (schoonmeersen != null)
+        {
+            allBuildings.AddRange(new[]
+            {
+                (new Building { Name = "Gebouw B", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03138465268992, Longitude = 3.701414635630698 }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw C", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03195215277462, Longitude = 3.704568306783877 }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw D", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.031511099994304, Longitude = 3.702789535635411 }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw E", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.0310611550396, Longitude = 3.7045170251451722 }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw P", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03423555310173, Longitude = 3.7019467933058716 }, schoonmeersen.Id),
+                (new Building { Name = "Sporthal", Address = "Sint-Denijslaan 251, 9000 Gent", Type = "sport", Latitude = 51.03493515601912, Longitude = 3.704163329549105 }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw T", Address = "Voskenslaan 364A, 9000 Gent", Type = "building", Latitude = 51.028515604065866, Longitude = 3.70666265806964 }, schoonmeersen.Id)
+            });
+        }
+
+        if (mercator != null)
+        {
+            allBuildings.AddRange(new[]
+            {
+                (new Building { Name = "Gebouw C", Address = "Nonnemeersstraat 19-21, 9000 Gent", Type = "building", Latitude = 51.04365987772189, Longitude = 3.7133038554040447 }, mercator.Id),
+                (new Building { Name = "Gebouw D", Address = "Nonnemeersstraat 15-17, 9000 Gent", Type = "building", Latitude = 51.04409655468585, Longitude = 3.7139953687425247 }, mercator.Id),
+                (new Building { Name = "Gebouw E", Address = "Nonnemeersstraat 24, 9000 Gent", Type = "building", Latitude = 51.044138254547896, Longitude = 3.7140100810412755 }, mercator.Id),
+                (new Building { Name = "Gebouw G", Address = "Henleykaai 84, 9000 Gent", Type = "building", Latitude = 51.04198292611773, Longitude = 3.715517179744473 }, mercator.Id)
+            });
+        }
+
+        if (bijloke != null)
+        {
+            allBuildings.AddRange(new[]
+            {
+                (new Building { Name = "Pauli", Address = "J. Kluyskensstraat 2, 9000 Gent", Type = "building", Latitude = 51.04559751827652, Longitude = 3.7185065415747798 }, bijloke.Id),
+                (new Building { Name = "Cloquet", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497 }, bijloke.Id),
+                (new Building { Name = "Marissal", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497 }, bijloke.Id),
+                (new Building { Name = "Bijlokekaai", Address = "Bijlokekaai 5, 9000 Gent", Type = "building", Latitude = 51.04371555532695, Longitude = 3.7193240387340807 }, bijloke.Id),
+                (new Building { Name = "Kunstenbibliotheek Huis van de Abdis", Address = "Godshuizenlaan 2, 9000 Gent", Type = "library", Latitude = 51.04393486454849, Longitude = 3.717493005440041 }, bijloke.Id)
+            });
+        }
+
+        foreach (var (building, campusId) in allBuildings)
+        {
+            dbContext.Buildings.Add(building);
+            dbContext.Entry(building).Property("CampusId").CurrentValue = campusId;
+        }
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task CampusInfoAsync()
+    {
+        if (dbContext.CampusInfos.Any())
+            return;
+
+        dbContext.CampusInfos.AddRange(
+            new CampusInfo
+            {
+                Name = "Campus Aalst",
+                Location = "Arbeidstraat 14, 9300 Aalst",
+                Faculties = new List<string> { "bachelor bedrijfsmanagement", "bachelor toegepaste informatica", "graduaat accounting administration", "graduaat basisverpleegkunde", "graduaat programmeren", "graduaat systeem- en netwerkbeheer", "postgraduaat ondernemen" },
+                ContactPhone = "09 243 20 15",
+                Description = "Campus Aalst is vlot bereikbaar en centraal gelegen op wandelafstand van station Aalst (850 m), bushalte 'Vredeplein' (200 m), parking Hopmarkt (350 m) en parking Keizershallen (350 m)."
+            },
+            new CampusInfo
+            {
+                Name = "Campus Bijloke",
+                Location = "Louis Pasteurlaan 2, 9000 Gent",
+                Faculties = new List<string> { "audiovisuele kunsten", "beeldende kunsten", "drama", "interieurvormgeving", "landschaps- en tuinarchitectuur", "landschapsontwikkeling", "hedendaagse muziek", "educatieve master audiovisuele en beeldende kunsten", "educatieve master muziek- en podiumkunsten" },
+                ContactPhone = "09 243 20 13",
+                Description = "Campus Bijloke bevindt zich ideaal gelegen aan de kleine ring van Gent (R40), op 6 minuutjes fietsen of 15 minuten wandelen van het station Gent Sint-Pieters (1,5 km)."
+            },
+            new CampusInfo
+            {
+                Name = "Campus Schoonmeersen",
+                Location = "V. Vaerwyckweg 1, 9000 Gent",
+                Faculties = new List<string> { "bachelor bedrijfsmanagement", "bachelor chemie", "bachelor elektromechanica", "bachelor houttechnologie", "bachelor organisatie & management", "bachelor orthopedagogie", "bachelor retailmanagement", "bachelor secundair onderwijs", "bachelor sociaal werk", "bachelor toegepaste informatica", "bachelor vastgoed" },
+                ContactPhone = "09 243 20 04",
+                Description = "Campus Schoonmeersen is vlot bereikbaar en goed gelegen aan de ring rond Gent (R4) en op wandelafstand van station Gent Sint-Pieters (600 m)."
+            }
+        );
+
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task ContactsAsync()
+    {
+        if (dbContext.Contacts.Any())
+            return;
+
+        dbContext.Contacts.AddRange(
+            new Contact { Type = "organisatie", Name = "HOGENT", PhoneNumber = "09 243 33 33", Email = "info@hogent.be" },
+            new Contact { Type = "departement", Name = "Bedrijf en Organisatie", ContactPerson = "Rudi Madalijns", Email = "Rudi.Madalijns@hogent.be" },
+            new Contact { Type = "departement", Name = "IT en Digitale Innovatie", ContactPerson = "Chantal Teerlinck", Email = "Chantal.Teerlinck@hogent.be" },
+            new Contact { Type = "campus", Name = "Campus Schoonmeersen", PhoneNumber = "09 243 20 04" },
+            new Contact { Type = "campus", Name = "Campus Mercator", PhoneNumber = "09 243 20 16" },
+            new Contact { Type = "directie", Name = "Algemene directie", ContactPerson = "Koen Goethals", Email = "koen.goethals@hogent.be" }
+        );
+
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task GradesAsync()
+    {
+        if (dbContext.Grades.Any())
+            return;
+
+        dbContext.Grades.AddRange(
+            new Grade
+            {
+                CourseId = "C10101",
+                CourseName = "Web Development 3",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "Project 1 - Portfolio Website",
+                ActivityType = "Assignment",
+                MaxPoints = 20,
+                Score = 17,
+                Feedback = "Excellent structure and clean styling. Minor accessibility issues with ARIA labels.",
+                SubmissionDate = DateTime.Parse("2025-03-18T10:25:00Z"),
+                Date = DateTime.Parse("2025-03-17T23:59:00Z")
+            },
+            new Grade
+            {
+                CourseId = "C10101",
+                CourseName = "Web Development 3",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "Quiz 2 - JavaScript Concepts",
+                ActivityType = "Quiz",
+                MaxPoints = 10,
+                Score = 8,
+                Feedback = "Solid understanding of closures; review promises syntax.",
+                SubmissionDate = DateTime.Parse("2025-04-02T09:40:00Z"),
+                Date = DateTime.Parse("2025-04-01T23:59:00Z")
+            },
+            new Grade
+            {
+                CourseId = "C10202",
+                CourseName = "Databases 2",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "Normalization Assignment",
+                ActivityType = "Assignment",
+                MaxPoints = 20,
+                Score = 14,
+                Feedback = "Good normalization work, but ensure all tables have proper keys.",
+                SubmissionDate = DateTime.Parse("2025-02-12T15:10:00Z"),
+                Date = DateTime.Parse("2025-02-11T23:59:00Z")
+            }
+        );
+
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task RestosAndMenusAsync()
+    {
+        if (dbContext.Restos.Any())
+            return;
+
+        // First, get buildings
+        var buildingD = await dbContext.Buildings.FirstOrDefaultAsync(b => b.Name == "Gebouw D");
+        var buildingB = await dbContext.Buildings.FirstOrDefaultAsync(b => b.Name == "Gebouw B" && b.Address.Contains("Valentin"));
+        var buildingP = await dbContext.Buildings.FirstOrDefaultAsync(b => b.Name == "Gebouw P");
+
+        if (buildingD == null || buildingB == null || buildingP == null)
+            return;
+
+        var resto1 = new Resto
+        {
+            Name = "Resto Schoonmeersen D",
+            Description = "Studentenrestaurant in gebouw D, campus Schoonmeersen. Dagschotels, broodjes, warme dranken.",
+            BuildingId = buildingD.Id,
+            OpeningHours = new Dictionary<DayOfWeek, string>
+            {
+                { DayOfWeek.Monday, "08:00-17:00" },
+                { DayOfWeek.Tuesday, "08:00-17:00" },
+                { DayOfWeek.Wednesday, "08:00-17:00" },
+                { DayOfWeek.Thursday, "08:00-17:00" },
+                { DayOfWeek.Friday, "08:00-15:00" }
+            },
+            IsCurrentlyOpen = false,
+            KitchenType = new List<string> { "Hot", "Cold" },
+            PhoneNumber = "+32 9 123 45 67",
+            Email = "resto.schoonmeersen.d@hogent.be",
+            ImageUrl = "https://images.hln.be/ZmQ4ZDdhNGZkMjYxMmM1Yzg0NDgvZGlvLzE3NjQ5NTMzOS9maXQtd2lkdGgvMTIwMA/in-het-studentenrestaurant-van-hogent-mag-je-maar-met-2-aan-een-tafel-van-6-zitten"
+        };
+
+        var resto2 = new Resto
+        {
+            Name = "Resto Schoonmeersen B",
+            Description = "Studentenrestaurant in gebouw B, campus Schoonmeersen. Dagschotels, broodjes, warme dranken.",
+            BuildingId = buildingB.Id,
+            OpeningHours = new Dictionary<DayOfWeek, string>
+            {
+                { DayOfWeek.Monday, "08:00-17:00" },
+                { DayOfWeek.Tuesday, "08:00-17:00" },
+                { DayOfWeek.Wednesday, "08:00-17:00" },
+                { DayOfWeek.Thursday, "08:00-17:00" },
+                { DayOfWeek.Friday, "08:00-15:00" }
+            },
+            IsCurrentlyOpen = false,
+            KitchenType = new List<string> { "Hot", "Cold" },
+            PhoneNumber = "+32 9 123 45 68",
+            Email = "resto.schoonmeersen.b@hogent.be",
+            ImageUrl = "https://images.hln.be/ZmQ4ZDdhNGZkMjYxMmM1Yzg0NDgvZGlvLzE3NjQ5NTMzOS9maXQtd2lkdGgvMTIwMA/in-het-studentenrestaurant-van-hogent-mag-je-maar-met-2-aan-een-tafel-van-6-zitten"
+        };
+
+        dbContext.Restos.AddRange(resto1, resto2);
+        await dbContext.SaveChangesAsync();
+
+        // Add menus and menu items
+        var menu1 = new Rise.Domain.Menu.Menu
+        {
+            RestoId = resto1.Id,
+            Date = DateTime.Parse("2025-10-20T11:30:00"),
+            MenuItems = new List<MenuItem>
+            {
+                new MenuItem
+                {
+                    Name = "Tomatensoep met balletjes",
+                    Description = "Dagverse soep",
+                    Type = FoodType.Soep,
+                    PriceStudent = 1.0,
+                    PriceExtern = 2.15,
+                    IsVeggie = true,
+                    IsVegan = true
+                },
+                new MenuItem
+                {
+                    Name = "Varkensgebraad met mosterdsaus",
+                    Description = "Vers bereid hoofdgerecht",
+                    Type = FoodType.WarmeMaaltijd,
+                    PriceStudent = 5.3,
+                    PriceExtern = 11.7,
+                    IsVeggie = false,
+                    IsVegan = false
+                }
+            }
+        };
+
+        dbContext.Menus.Add(menu1);
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task ReservationsAsync()
+    {
+        if (dbContext.Reservations.Any())
+            return;
+
+        dbContext.Reservations.AddRange(
+            new Reservation
+            {
+                StartDateTime = DateTime.Parse("2025-09-01T08:30:00"),
+                EndDateTime = DateTime.Parse("2025-09-01T10:30:00"),
+                Course = "PBA-TIN/Web Ontwikkeling 2",
+                WorkForm = "Hoorcollege",
+                Environment = "Digitaal (laptop/PC)",
+                Room = "GSCHB.2.009",
+                Teacher = "Bert Van Vreckem",
+                IsAbsent = false
+            },
+            new Reservation
+            {
+                StartDateTime = DateTime.Parse("2025-09-01T11:00:00"),
+                EndDateTime = DateTime.Parse("2025-09-01T13:00:00"),
+                Course = "PBA-TIN/Databanken II",
+                WorkForm = "Activerend hoorcollege",
+                Environment = "Digitaal (laptop/PC)",
+                Room = "GSCHB.3.012",
+                Teacher = "Thomas Parmentier",
+                IsAbsent = false
+            },
+            new Reservation
+            {
+                StartDateTime = DateTime.Parse("2025-09-01T14:00:00"),
+                EndDateTime = DateTime.Parse("2025-09-01T17:00:00"),
+                Course = "PBA-TIN/Software Engineering",
+                WorkForm = "Practicum",
+                Environment = "Digitaal (laptop/PC)",
+                Room = "GSCHB.3.026",
+                Teacher = "Chloé De Leenheer",
+                IsAbsent = false
+            }
+        );
+
         await dbContext.SaveChangesAsync();
     }
 }

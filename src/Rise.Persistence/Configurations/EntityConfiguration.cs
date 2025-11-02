@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Rise.Domain.Common;
+using Rise.Persistence.ValueGenerators;
 
 namespace Rise.Persistence.Configurations;
 
@@ -14,6 +15,12 @@ internal class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> 
     {
         // All tables are singlular named and have the name of the class e.g. Product instead of Products.
         builder.ToTable(typeof(TEntity).Name);
+
+        // Configure Id as UUIDv7 (stored as CHAR(36) for MySQL/MariaDB compatibility)
+        builder.Property(e => e.Id)
+            .HasMaxLength(36)
+            .ValueGeneratedOnAdd()
+            .HasValueGenerator<UuidV7ValueGenerator>();
 
         // CreatedAt should be filled in by the database when using raw SQL.
         builder.Property(e => e.CreatedAt)

@@ -22,10 +22,10 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         //
         // // Deserialize the JSON data into a list of NewsDto.Index
         // var query = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-        
+
         var query = dbContext.NewsArticles.AsQueryable();
-        
-        
+
+
 
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
@@ -60,8 +60,8 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
                 Author = n.Author
             })
             .ToListAsync(ctx);
-        
-        
+
+
 
         return Result.Success(new NewsResponse.Index
         {
@@ -71,7 +71,7 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         );
     }
 
-    public async Task<Result<NewsResponse.Get>> GetByIdAsync(int id, CancellationToken ctx = default)
+    public async Task<Result<NewsResponse.Get>> GetByIdAsync(string id, CancellationToken ctx = default)
     {
         // if (!File.Exists(_mockFilePath))
         //     return Result<NewsResponse.Get>.NotFound($"Mock data file not found at: {_mockFilePath}");

@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using Rise.Shared.Common;
 using Rise.Shared.News;
 
 namespace Rise.Client.News;
@@ -7,7 +6,7 @@ namespace Rise.Client.News;
 public partial class NewsArticle : ComponentBase
 {
     [Inject] public required INewsService NewsService { get; set; }
-    [Parameter] public int Id { get; set; }
+    [Parameter] public Guid Id { get; set; }
     private NewsDto.Index? newsArticle;
     private string? errorMessage;
 
@@ -19,7 +18,7 @@ public partial class NewsArticle : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await NewsService.GetByIdAsync(Id);
+        var result = await NewsService.GetByIdAsync(Id.ToString());
 
         if (result.IsSuccess)
         {

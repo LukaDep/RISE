@@ -1,9 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Rise.Domain.Absences;
+using Rise.Domain.Campus;
+using Rise.Domain.CampusInfo;
+using Rise.Domain.Contact;
+using Rise.Domain.Grades;
+using Rise.Domain.Menu;
 using Rise.Domain.News;
 using Rise.Domain.Products;
 using Rise.Domain.Projects;
+using Rise.Domain.Restos;
+using Rise.Domain.Schedule;
 
 namespace Rise.Persistence;
 
@@ -22,6 +30,16 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<Project> Projects => Set<Project>();
     public DbSet<Technician> Technicians => Set<Technician>();
     public DbSet<NewsArticle> NewsArticles => Set<NewsArticle>();
+    public DbSet<Absence> Absences => Set<Absence>();
+    public DbSet<Campus> Campuses => Set<Campus>();
+    public DbSet<Building> Buildings => Set<Building>();
+    public DbSet<CampusInfo> CampusInfos => Set<CampusInfo>();
+    public DbSet<Contact> Contacts => Set<Contact>();
+    public DbSet<Grade> Grades => Set<Grade>();
+    public DbSet<Menu> Menus => Set<Menu>();
+    public DbSet<MenuItem> MenuItems => Set<MenuItem>();
+    public DbSet<Resto> Restos => Set<Resto>();
+    public DbSet<Reservation> Reservations => Set<Reservation>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
