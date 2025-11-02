@@ -1,7 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Timers;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Rise.Shared.Schedule;
@@ -18,6 +15,8 @@ namespace Rise.Client.Schedule
         private DotNetObjectReference<DayView>? dotNetRef;
 
         private string swipeClass = string.Empty;
+        private System.Timers.Timer? currentTimeTimer;
+        private DateTime currentTime = DateTime.Now;
 
         [Inject] public required IScheduleService ScheduleService { get; set; }
         [Inject] public required IJSRuntime JSRuntime { get; set; }
@@ -41,7 +40,23 @@ namespace Rise.Client.Schedule
             {
                 dotNetRef = DotNetObjectReference.Create(this);
                 await JSRuntime.InvokeVoidAsync("initSwipe", "dayViewContainer", dotNetRef);
+                
+                StartCurrentTimeTimer();
             }
+        }
+
+        private void StartCurrentTimeTimer()
+        {
+            currentTimeTimer = new System.Timers.Timer(60000); // Update elke minuut
+            currentTimeTimer.Elapsed += OnTimerElapsed;
+            currentTimeTimer.AutoReset = true;
+            currentTimeTimer.Start();
+        }
+
+        private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+        {
+            currentTime = DateTime.Now;
+            InvokeAsync(StateHasChanged);
         }
 
         public List<ScheduleDto.Reservation> DayReservations =>
@@ -104,6 +119,24 @@ namespace Rise.Client.Schedule
             StateHasChanged();
         }
 
+        private double GetCurrentTimePosition()
+        {
+            var now = currentTime;
+            var hour = now.Hour;
+            var minute = now.Minute;
+            
+            // Bereken positie in pixels (64px per uur, vanaf 8:00)
+            if (hour < 8 || hour > 20)
+                return -1; // Buiten zichtbaar bereik
+                
+            return ((hour - 8) * 64) + ((minute * 64) / 60.0);
+        }
+
+        private bool IsToday()
+        {
+            return SelectedDate.Date == DateTime.Today;
+        }
+
         [JSInvokable]
         public async Task SwipeNext()
         {
@@ -139,6 +172,12 @@ namespace Rise.Client.Schedule
 
         public async ValueTask DisposeAsync()
         {
+            if (currentTimeTimer != null)
+            {
+                currentTimeTimer.Stop();
+                currentTimeTimer.Elapsed -= OnTimerElapsed;
+                currentTimeTimer.Dispose();
+            }
             dotNetRef?.Dispose();
         }
     }
