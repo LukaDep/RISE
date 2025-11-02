@@ -40,14 +40,14 @@ namespace Rise.Client.Schedule
             {
                 dotNetRef = DotNetObjectReference.Create(this);
                 await JSRuntime.InvokeVoidAsync("initSwipe", "dayViewContainer", dotNetRef);
-                
+
                 StartCurrentTimeTimer();
             }
         }
 
         private void StartCurrentTimeTimer()
         {
-            currentTimeTimer = new System.Timers.Timer(60000); // Update elke minuut
+            currentTimeTimer = new System.Timers.Timer(60000); 
             currentTimeTimer.Elapsed += OnTimerElapsed;
             currentTimeTimer.AutoReset = true;
             currentTimeTimer.Start();
@@ -74,7 +74,6 @@ namespace Rise.Client.Schedule
             swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
             StateHasChanged();
 
-            // Wait for the CSS animation to finish
             await Task.Delay(250);
 
             swipeClass = string.Empty;
@@ -124,11 +123,11 @@ namespace Rise.Client.Schedule
             var now = currentTime;
             var hour = now.Hour;
             var minute = now.Minute;
-            
+
             // Bereken positie in pixels (64px per uur, vanaf 8:00)
             if (hour < 8 || hour > 20)
                 return -1; // Buiten zichtbaar bereik
-                
+
             return ((hour - 8) * 64) + ((minute * 64) / 60.0);
         }
 

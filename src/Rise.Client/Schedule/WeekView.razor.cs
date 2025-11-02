@@ -41,15 +41,14 @@ public partial class WeekView : IAsyncDisposable
         {
             dotNetRef = DotNetObjectReference.Create(this);
             await JSRuntime.InvokeVoidAsync("initSwipe", "weekViewContainer", dotNetRef);
-            
-            // Start timer voor huidige tijd indicator
+
             StartCurrentTimeTimer();
         }
     }
 
     private void StartCurrentTimeTimer()
     {
-        currentTimeTimer = new System.Timers.Timer(60000); // Update elke minuut
+        currentTimeTimer = new System.Timers.Timer(60000);
         currentTimeTimer.Elapsed += OnTimerElapsed;
         currentTimeTimer.AutoReset = true;
         currentTimeTimer.Start();
@@ -162,11 +161,11 @@ public partial class WeekView : IAsyncDisposable
         var now = currentTime;
         var hour = now.Hour;
         var minute = now.Minute;
-        
+
         // Bereken positie in pixels (64px per uur, vanaf 8:00)
         if (hour < 8 || hour > 20)
             return -1; // Buiten zichtbaar bereik
-            
+
         return ((hour - 8) * 64) + ((minute * 64) / 60.0);
     }
 
@@ -174,13 +173,13 @@ public partial class WeekView : IAsyncDisposable
     {
         var today = DateTime.Today;
         var weekStart = WeekStartDate;
-        
+
         for (int i = 0; i < 5; i++)
         {
             if (weekStart.AddDays(i).Date == today)
                 return i;
         }
-        
+
         return -1; // Niet in deze week
     }
 
