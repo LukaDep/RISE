@@ -643,7 +643,7 @@
     <comment/>
   </data>
   <data name="Campus.BackToCampuses" xml:space="preserve">
-    <value>Terug naar campussen</value>
+    <value>Terug</value>
     <comment/>
   </data>
   <data name="Common.NotFoundTitle" xml:space="preserve">
