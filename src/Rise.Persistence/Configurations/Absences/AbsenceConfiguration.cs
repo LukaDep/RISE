@@ -8,22 +8,22 @@ namespace Rise.Persistence.Configurations.Absences;
 /// </summary>
 internal class AbsenceConfiguration : EntityConfiguration<Absence>
 {
-  public override void Configure(EntityTypeBuilder<Absence> builder)
-  {
-    base.Configure(builder);
+    public override void Configure(EntityTypeBuilder<Absence> builder)
+    {
+        base.Configure(builder);
 
-    builder.Property(x => x.Name)
-        .IsRequired()
-        .HasMaxLength(250);
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(250);
 
-    builder.Property(x => x.StartDate)
-        .IsRequired();
+        builder.Property(x => x.StartDate)
+            .IsRequired();
 
-    builder.Property(x => x.EndDate)
-        .IsRequired();
+        builder.Property(x => x.EndDate)
+            .IsRequired();
 
-    builder.Property(x => x.Reason)
-        .IsRequired()
-        .HasMaxLength(1000);
-  }
+        builder.Property(x => x.Reason)
+            .IsRequired()
+            .HasMaxLength(1000);
+    }
 }

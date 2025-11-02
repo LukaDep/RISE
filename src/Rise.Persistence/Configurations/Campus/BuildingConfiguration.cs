@@ -9,25 +9,25 @@ namespace Rise.Persistence.Configurations.Campus;
 /// </summary>
 internal class BuildingConfiguration : EntityConfiguration<Building>
 {
-  public override void Configure(EntityTypeBuilder<Building> builder)
-  {
-    base.Configure(builder);
+    public override void Configure(EntityTypeBuilder<Building> builder)
+    {
+        base.Configure(builder);
 
-    builder.Property(x => x.Name)
-        .IsRequired()
-        .HasMaxLength(250);
+        builder.Property(x => x.Name)
+            .IsRequired()
+            .HasMaxLength(250);
 
-    builder.Property(x => x.Address)
-        .IsRequired()
-        .HasMaxLength(500);
+        builder.Property(x => x.Address)
+            .IsRequired()
+            .HasMaxLength(500);
 
-    builder.Property(x => x.Type)
-        .IsRequired()
-        .HasMaxLength(100);
+        builder.Property(x => x.Type)
+            .IsRequired()
+            .HasMaxLength(100);
 
-    // Configure the shadow foreign key property
-    builder.Property<string>("CampusId")
-        .IsRequired()
-        .HasMaxLength(36);
-  }
+        // Configure the shadow foreign key property
+        builder.Property<string>("CampusId")
+            .IsRequired()
+            .HasMaxLength(36);
+    }
 }
