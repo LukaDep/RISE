@@ -25,7 +25,7 @@ pipeline {
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
                       -c Release \
                       -o publish \
-                      --self-contained false \
+                      --self-contained true \
                       -r linux-x64
                 '''
             }
