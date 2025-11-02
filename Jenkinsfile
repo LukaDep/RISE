@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // === Cloud configuratie ===
-        APP_SERVER  = "10.11.2.31"
+        APP_SERVER  = "10.11.2.31"   
         DEPLOY_PATH = "/var/www/dotnetapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
     }
@@ -25,7 +25,7 @@ pipeline {
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
                       -c Release \
                       -o publish \
-                      --no-self-contained \
+                      --self-contained true \
                       -r linux-x64
                 '''
             }
@@ -37,7 +37,7 @@ pipeline {
 
                     echo "--- Stop service & Clean deploy folder ---"
                     sh '''
-                        ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
                             sudo systemctl stop rise || true;
                             sudo rm -rf ${DEPLOY_PATH}/*;
                             sudo mkdir -p ${DEPLOY_PATH};
@@ -47,13 +47,13 @@ pipeline {
 
                     echo "--- Copy new publish files ---"
                     sh '''
-                        rsync -avz -e "ssh -i '$SSH_KEY' -o StrictHostKeyChecking=no" \
+                        rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
                         ./publish/ vicuser@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
                     echo "--- Restart Rise service ---"
                     sh '''
-                        ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
+                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
                             sudo systemctl daemon-reload;
                             sudo systemctl restart rise;
                         "
@@ -78,9 +78,9 @@ pipeline {
         failure {
             echo '❌ Deployment mislukt — logs ophalen ↓'
             sh '''
-                ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
-                vicuser@$APP_SERVER "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log || true"
-            '''
+                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no \
+                vicuser@${APP_SERVER} "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log"
+            ''' || true
         }
     }
 }
