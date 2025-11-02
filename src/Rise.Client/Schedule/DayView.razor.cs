@@ -47,7 +47,7 @@ namespace Rise.Client.Schedule
 
         private void StartCurrentTimeTimer()
         {
-            currentTimeTimer = new System.Timers.Timer(60000); 
+            currentTimeTimer = new System.Timers.Timer(60000);
             currentTimeTimer.Elapsed += OnTimerElapsed;
             currentTimeTimer.AutoReset = true;
             currentTimeTimer.Start();
