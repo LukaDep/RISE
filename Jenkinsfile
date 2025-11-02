@@ -2,19 +2,13 @@ pipeline {
     agent any
 
     environment {
-        APP_SERVER  = "10.11.2.31"
+        // === Cloud configuratie ===
+        APP_SERVER  = "10.11.2.31"   
         DEPLOY_PATH = "/var/www/dotnetapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
     }
 
     stages {
-
-        stage('Cleanup Workspace') {
-            steps {
-                echo "🧹 Cleaning workspace..."
-                cleanWs(deleteDirs: true, disableDeferredWipeout: true)
-            }
-        }
 
         stage('Restore & Build') {
             steps {
@@ -26,7 +20,8 @@ pipeline {
 
         stage('Publish Linux') {
             steps {
-                echo "=== Publishing (Linux-x64, non-self-contained) ==="
+                echo "=== Publishing (Linux-x64, framework-dependent) ==="
+                // Let op: gebruik --no-self-contained i.p.v. false
                 sh '''
                     dotnet publish src/Rise.Server/Rise.Server.csproj \
                       -c Release \
@@ -40,26 +35,28 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
-                    echo "--- Clean deploy folder ---"
+
+                    echo "--- Stop service & Clean deploy folder ---"
                     sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
-                            pkill -f 'dotnet Rise.Server.dll' || true;
-                            rm -rf ${DEPLOY_PATH}/*;
-                            mkdir -p ${DEPLOY_PATH};
+                        ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
+                            sudo systemctl stop rise || true;
+                            sudo rm -rf ${DEPLOY_PATH}/*;
+                            sudo mkdir -p ${DEPLOY_PATH};
+                            sudo chown -R vicuser:vicuser ${DEPLOY_PATH};
                         "
                     '''
 
-                    echo "--- Copy published files ---"
+                    echo "--- Copy new publish files ---"
                     sh '''
-                        rsync -avz -e "ssh -i $SSH_KEY -o StrictHostKeyChecking=no" \
+                        rsync -avz -e "ssh -i '$SSH_KEY' -o StrictHostKeyChecking=no" \
                         ./publish/ vicuser@$APP_SERVER:${DEPLOY_PATH}/
                     '''
 
-                    echo "--- Start app manually ---"
+                    echo "--- Restart Rise service ---"
                     sh '''
-                        ssh -i $SSH_KEY -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
-                            cd ${DEPLOY_PATH} && \
-                            nohup dotnet Rise.Server.dll > app.log 2>&1 &
+                        ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
+                            sudo systemctl daemon-reload;
+                            sudo systemctl restart rise;
                         "
                     '''
                 }
@@ -70,21 +67,21 @@ pipeline {
             steps {
                 echo "--- Smoke Test: HTTP check ---"
                 sh "sleep 5"
-                sh "curl -f http://${APP_SERVER}:80 || exit 1"
+                sh "curl -f http://${APP_SERVER} || exit 1"
             }
         }
     }
 
     post {
         success {
-            echo '✅ Deployment succesvol!'
+            echo '✅ Deployment succesvol (cloud)!'
         }
         failure {
             echo '❌ Deployment mislukt — logs ophalen ↓'
+            // fix: alles tussen quotes zetten zodat shell het als string ziet
             sh '''
-                ssh -i ${SSH_KEY} -o StrictHostKeyChecking=no vicuser@${APP_SERVER} "
-                    tail -n 100 ${DEPLOY_PATH}/app.log || true
-                "
+                ssh -i "$SSH_KEY" -o StrictHostKeyChecking=no \
+                vicuser@$APP_SERVER "sudo systemctl status rise --no-pager; tail -n 200 ${DEPLOY_PATH}/app.log || true"
             '''
         }
     }
