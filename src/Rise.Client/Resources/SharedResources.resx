@@ -650,4 +650,32 @@
     <value>Not found</value>
     <comment/>
   </data>
+  <data name="Navigation.Home" xml:space="preserve">
+    <value>Home</value>
+    <comment/>
+  </data>
+  <data name="Navigation.News" xml:space="preserve">
+    <value>News</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Campus" xml:space="preserve">
+    <value>Campus</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Schedule" xml:space="preserve">
+    <value>Schedule</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Account" xml:space="preserve">
+    <value>Account</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Resto" xml:space="preserve">
+    <value>Resto</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Login" xml:space="preserve">
+    <value>Login</value>
+    <comment/>
+  </data>
 </root>
