@@ -2,30 +2,19 @@ pipeline {
     agent any
 
     environment {
-        APP_SERVER  = "10.11.2.31"
+        // === Cloud configuratie ===
+        APP_SERVER  = "10.11.2.31"   
         DEPLOY_PATH = "/var/www/dotnetapp"
         SSH_KEY     = "/var/lib/jenkins/.ssh/appserver_key"
     }
 
     stages {
 
-        stage('Restore & Build Backend') {
+        stage('Restore & Build') {
             steps {
-                echo "=== Restore & Build Backend ==="
+                echo "=== Restore & Build ==="
                 sh 'dotnet restore'
                 sh 'dotnet build --configuration Release --no-restore'
-            }
-        }
-
-        stage('Build Frontend (Tailwind & JS)') {
-            steps {
-                echo "=== Building Frontend (npm) ==="
-                dir('src/Rise.Client') {
-                    sh '''
-                        npm ci || npm install
-                        npm run build
-                    '''
-                }
             }
         }
 
@@ -45,6 +34,7 @@ pipeline {
         stage('Deploy to App Server') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'appserver-ssh', keyFileVariable: 'SSH_KEY')]) {
+
                     echo "--- Stop service & Clean deploy folder ---"
                     sh '''
                         ssh -i $SSH_KEY -o StrictHostKeyChecking=no vicuser@$APP_SERVER "
