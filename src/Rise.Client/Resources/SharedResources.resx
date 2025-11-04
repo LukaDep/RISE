@@ -650,4 +650,16 @@
     <value>Not found</value>
     <comment/>
   </data>
+  <data name="News.Filter.All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="News.Filter.Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="News.Filter.Week" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="News.Filter.Month" xml:space="preserve">
+    <value>This month</value>
+  </data>
 </root>

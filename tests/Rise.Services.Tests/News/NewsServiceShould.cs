@@ -52,7 +52,7 @@ public class NewsServiceShould
         
         var service = new NewsService(dbContext);
 
-        var request = new QueryRequest.SkipTake()
+        var request = new QueryRequest.DateRange()
         {
             Skip = 0,
             Take = 10,
@@ -116,7 +116,7 @@ public class NewsServiceShould
         
         var service = new NewsService(dbContext);
 
-        var request = new QueryRequest.SkipTake()
+        var request = new QueryRequest.DateRange()
         {
             Skip = 0,
             Take = 10,

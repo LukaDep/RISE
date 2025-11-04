@@ -650,4 +650,16 @@
     <value>Niet gevonden</value>
     <comment/>
   </data>
+  <data name="News.Filter.Today" xml:space="preserve">
+    <value>Vandaag</value>
+  </data>
+  <data name="News.Filter.All" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="News.Filter.Month" xml:space="preserve">
+    <value>Deze maand</value>
+  </data>
+  <data name="News.Filter.Week" xml:space="preserve">
+    <value>Deze week</value>
+  </data>
 </root>
