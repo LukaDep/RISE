@@ -155,7 +155,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             new NewsItem { Title = "Marketplace Vendor Program", PublishDate = DateTime.Parse("2025-11-08T13:00:00Z"), Description = "Become a vendor in the Rise marketplace.", Type = "Marketplace", Content = "Full article: Vendor onboarding steps, fees and promotional opportunities.", Author = "Vanessa Lee" },
             new NewsItem { Title = "Rise API Changelog", PublishDate = DateTime.Parse("2025-11-09T15:00:00Z"), Description = "View the latest changes in the Rise API changelog.", Type = "Changelog", Content = "Full article: A summary of bug fixes, enhancements and breaking changes in recent releases.", Author = "Samuel Clark" },
             new NewsItem { Title = "Rise Community Awards", PublishDate = DateTime.Parse("2025-11-10T17:00:00Z"), Description = "Nominate your peers for the Rise community awards.", Type = "Community", Content = "Full article: Categories, nomination process and judging criteria for the community awards.", Author = "Tina Brooks" }
-        
+
         );
         await dbContext.SaveChangesAsync();
     }

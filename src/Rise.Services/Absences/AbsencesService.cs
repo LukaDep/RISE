@@ -38,9 +38,9 @@ public class AbsencesService : IAbsencesService
             .Take(request.Take);
 
         return Result.Success(new AbsencesResponse.Index
-            {
-                Absences = absences,
-            }
+        {
+            Absences = absences,
+        }
         );
     }
 }
