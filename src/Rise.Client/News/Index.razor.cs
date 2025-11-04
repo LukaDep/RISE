@@ -150,7 +150,7 @@ public partial class Index
         StateHasChanged();
     }
 
-    private async Task OnDateRangeChanged(string? value)
+    private void OnDateRangeChanged(string? value)
     {
         _selectedDateRange = value;
         switch (value)
