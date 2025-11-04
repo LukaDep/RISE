@@ -22,10 +22,10 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         //
         // // Deserialize the JSON data into a list of NewsDto.Index
         // var query = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-        
+
         var query = dbContext.NewsItems.AsQueryable();
-        
-        
+
+
 
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
@@ -88,8 +88,8 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
                 Author = n.Author
             })
             .ToListAsync(ctx);
-        
-        
+
+
 
         return Result.Success(new NewsResponse.Index
         {
