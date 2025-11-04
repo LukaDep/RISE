@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.Schedule;
+using System.Timers;
 
 namespace Rise.Client.Schedule;
 
@@ -18,6 +19,8 @@ public partial class WeekView : IAsyncDisposable
 
     private DotNetObjectReference<WeekView>? dotNetRef;
     private string swipeClass = string.Empty;
+    private System.Timers.Timer? currentTimeTimer;
+    private DateTime currentTime = DateTime.Now;
 
     protected override async Task OnInitializedAsync()
     {
@@ -38,7 +41,23 @@ public partial class WeekView : IAsyncDisposable
         {
             dotNetRef = DotNetObjectReference.Create(this);
             await JSRuntime.InvokeVoidAsync("initSwipe", "weekViewContainer", dotNetRef);
+
+            StartCurrentTimeTimer();
         }
+    }
+
+    private void StartCurrentTimeTimer()
+    {
+        currentTimeTimer = new System.Timers.Timer(60000);
+        currentTimeTimer.Elapsed += OnTimerElapsed;
+        currentTimeTimer.AutoReset = true;
+        currentTimeTimer.Start();
+    }
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        currentTime = DateTime.Now;
+        InvokeAsync(StateHasChanged);
     }
 
     private async Task AnimateSwipe(string direction)
@@ -137,15 +156,33 @@ public partial class WeekView : IAsyncDisposable
         schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList()
         ?? new List<ScheduleDto.Reservation>();
 
-    private string GetEventTypeBgColor(string type) => type.ToLower() switch
+    private double GetCurrentTimePosition()
     {
-        "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
-        "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
-        "practicum" => "bg-hogent-green-15 text-hogent-green",
-        "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
-        "seminarie" => "bg-hogent-business-15 text-hogent-business",
-        _ => "bg-hogent-black-15 text-hogent-black"
-    };
+        var now = currentTime;
+        var hour = now.Hour;
+        var minute = now.Minute;
+
+        // Bereken positie in pixels (64px per uur, vanaf 8:00)
+        if (hour < 8 || hour > 20)
+            return -1; // Buiten zichtbaar bereik
+
+        return ((hour - 8) * 64) + ((minute * 64) / 60.0);
+    }
+
+    private int GetCurrentDayIndex()
+    {
+        var today = DateTime.Today;
+        var weekStart = WeekStartDate;
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (weekStart.AddDays(i).Date == today)
+                return i;
+        }
+
+        return -1; // Niet in deze week
+    }
+
 
     private string GetLocalizedDayName(DateTime day)
     {
@@ -164,6 +201,12 @@ public partial class WeekView : IAsyncDisposable
 
     public async ValueTask DisposeAsync()
     {
+        if (currentTimeTimer != null)
+        {
+            currentTimeTimer.Stop();
+            currentTimeTimer.Elapsed -= OnTimerElapsed;
+            currentTimeTimer.Dispose();
+        }
         dotNetRef?.Dispose();
     }
 }
