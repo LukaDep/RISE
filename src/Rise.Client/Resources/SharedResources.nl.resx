@@ -465,7 +465,7 @@
   <data name="Grades.Title" xml:space="preserve">
     <value>Mijn punten</value>
   </data>
- <data name="Grades.YearFilterPlaceholder" xml:space="preserve">
+  <data name="Grades.YearFilterPlaceholder" xml:space="preserve">
     <value>Jaar</value>
   </data>
   <data name="Grades.SemesterFilterPlaceholder" xml:space="preserve">
@@ -661,6 +661,7 @@
   </data>
   <data name="News.Filter.Week" xml:space="preserve">
     <value>Deze week</value>
+      </data>
   <data name="Navigation.Home" xml:space="preserve">
     <value>Startpagina</value>
     <comment/>
