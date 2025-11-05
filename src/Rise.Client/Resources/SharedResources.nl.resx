@@ -406,6 +406,12 @@
     <value>Gesloten</value>
     <comment/>
   </data>
+   <data name="Resto.OpensAt" xml:space="preserve">
+    <value>Opent om</value>
+  </data>
+  <data name="Resto.ClosesAt" xml:space="preserve">
+    <value>Sluit om</value>
+  </data>
   <data name="Resto.KitchenType.Hot" xml:space="preserve">
     <value>Warm</value>
     <comment>Keukentype label voor warme gerechten</comment>

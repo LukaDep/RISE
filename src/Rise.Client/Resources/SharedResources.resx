@@ -406,6 +406,12 @@
     <value>Closed</value>
     <comment/>
   </data>
+   <data name="Resto.OpensAt" xml:space="preserve">
+    <value>Opens at</value>
+  </data>
+  <data name="Resto.ClosesAt" xml:space="preserve">
+    <value>Closes at</value>
+  </data>
   <data name="Resto.KitchenType.Hot" xml:space="preserve">
     <value>Hot</value>
     <comment>Kitchen type label for hot food</comment>
