@@ -47,13 +47,13 @@ public partial class Index
     private int _totalCount;
     private int _currentCount;
 
-    
+
     // Date range filter items
     private IEnumerable<KeyValuePair<string, string>> DateRangeItems =>
     [
         new(string.Empty, L["News.Filter.All"]),
-        new ("today", L["News.Filter.Today"]), 
-        new ("week", L["News.Filter.Week"]), 
+        new ("today", L["News.Filter.Today"]),
+        new ("week", L["News.Filter.Week"]),
         new ("month", L["News.Filter.Month"])
     ];
 

@@ -51,7 +51,7 @@ public static partial class QueryRequest
         /// </summary>
         public Dictionary<string, object?> Filters { get; set; } = new();
     }
-    
+
     public class DateRange : SkipTake
     {
         public DateTime? StartDate { get; set; }
