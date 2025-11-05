@@ -51,6 +51,12 @@ public static partial class QueryRequest
         /// </summary>
         public Dictionary<string, object?> Filters { get; set; } = new();
     }
+    
+    public class DateRange : SkipTake
+    {
+        public DateTime? StartDate { get; set; }
+        public DateTime? EndDate { get; set; }
+    }
 
     /// <summary>
     /// Represents a query request using a cursor-based pagination strategy,

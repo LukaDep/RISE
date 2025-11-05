@@ -13,7 +13,7 @@ namespace Rise.Services.News;
 public class NewsService(ApplicationDbContext dbContext) : INewsService
 {
     private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "News", "MockData", "news.json");
-    public async Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
+    public async Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
         // //read from mock json file
         // if (!File.Exists(_mockFilePath))
@@ -43,6 +43,34 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         {
             // Default order
             query = query.OrderBy(p => p.Title);
+        }
+        // --- Robust date handling: treat default(DateTime) as "not provided" ---
+        DateTime? start = request.StartDate;
+        DateTime? end = request.EndDate;
+
+        if (start.HasValue && start.Value == default(DateTime))
+            start = null;
+        if (end.HasValue && end.Value == default(DateTime))
+            end = null;
+
+        if (start.HasValue && end.HasValue)
+        {
+            var s = start.Value.Date;
+            var e = end.Value.Date;
+            if (s > e)
+                (s, e) = (e, s);
+
+            query = query.Where(n => n.PublishDate.Date >= s && n.PublishDate.Date <= e);
+        }
+        else if (start.HasValue)
+        {
+            var s = start.Value.Date;
+            query = query.Where(n => n.PublishDate.Date >= s);
+        }
+        else if (end.HasValue)
+        {
+            var e = end.Value.Date;
+            query = query.Where(n => n.PublishDate.Date <= e);
         }
         var totalCount = await query.CountAsync(ctx);
 
