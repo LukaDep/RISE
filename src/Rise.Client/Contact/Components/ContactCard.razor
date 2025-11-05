@@ -2,18 +2,27 @@
     class="flex items-center min-h-40 border-4 border-hogent-black-15 rounded-xl p-4 m-4 bg-hogent-white shadow transition  cursor-pointer"
     href=@($"/news/") Match="NavLinkMatch.Prefix" data-news-id="Id">
     <!-- Icon (by type) -->
-    <div class="w-12 h-12 bg-hogent-black-15 rounded-lg mr-4 flex-shrink-0">
-        @switch(Type)
-                    {
-                        case "organisatie": <i class="fa fa-building" aria-hidden="true"></i> break;
-                        case "departement":<i class="fa fa-users" aria-hidden="true"></i> break;
-                        case "campus": <i class="fa fa-school" aria-hidden="true"></i> break;
-                        case "directie": <i class="fa fa-black-tie" aria-hidden="true"></i> break;
-                        default: <i class="fa fa-question-circle-o" aria-hidden="true"></i> break;
-                    }
-            
+        <div class="w-12 h-12 bg-hogent-black-15 p-2 rounded-lg mr-4 flex items-center justify-center flex-shrink-0">
+            @switch(Type)
+            {
+                case "organisatie":
+                    <i class="fa fa-building text-xl text-hogent-black"></i>
+                    break;
+                case "departement":
+                    <i class="fa fa-users text-xl text-hogent-black"></i>
+                    break;
+                case "campus":
+                    <i class="fa fa-school text-xl text-hogent-black"></i>
+                    break;
+                case "directie":
+                    <i class="fa fa-user-tie text-xl text-hogent-black"></i>
+                    break;
+                default:
+                    <i class="fa fa-question text-xl text-hogent-black"></i>
+                    break;
+            }
+        </div>
 
-    </div>
     <!-- Content -->
     <div class="flex-1 flex flex-col justify-center">
         <h3 class="text-lg font-bold text-hogent-black">@Name</h3>
