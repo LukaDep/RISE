@@ -29,9 +29,9 @@ else
     private bool mapInitialized = false;
     [Inject] public required ICampusService CampusClientService { get; set; }
 
-    private void GoBack()
+    private async Task GoBack()
     {
-        Navigation.NavigateTo("/campus");
+        await JS.InvokeVoidAsync("history.back");
     }
 
     protected override async Task OnInitializedAsync()

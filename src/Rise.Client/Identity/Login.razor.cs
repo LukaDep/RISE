@@ -5,8 +5,6 @@ namespace Rise.Client.Identity;
 
 public partial class Login
 {
-    [SupplyParameterFromQuery] private string? ReturnUrl { get; set; }
-
     private AccountRequest.Login Model = new();
     private Result _result = new();
     [Inject] public required IAccountManager AccountManager { get; set; }
@@ -15,9 +13,9 @@ public partial class Login
     {
         _result = await AccountManager.LoginAsync(Model.Email!, Model.Password!);
 
-        if (_result.IsSuccess && !string.IsNullOrEmpty(ReturnUrl))
+        if (_result.IsSuccess)
         {
-            Navigation.NavigateTo(ReturnUrl);
+            Navigation.NavigateTo("/");
         }
     }
 }

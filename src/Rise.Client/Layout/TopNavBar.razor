@@ -1,0 +1,62 @@
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Routing
+@inject IStringLocalizer<SharedResources> L
+
+<nav class="hidden lg:flex navbar flex-row h-16 items-center bg-hogent-black shadow-lg shadow-hogent-black-50 px-6 gap-4"
+  aria-label="main navigation">
+
+  <NavLink href="/" Match="NavLinkMatch.All" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Home"]">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-house fa-lg text-hogent-white"></i>
+      <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Home"]</span>
+    </div>
+  </NavLink>
+
+  <NavLink href="/news" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.News"]">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-newspaper fa-lg text-hogent-white"></i>
+      <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.News"]</span>
+    </div>
+  </NavLink>
+
+  <NavLink href="/campus" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Campus"]">
+    <div class="flex items-center gap-2">
+      <i class="fa-solid fa-school fa-lg text-hogent-white"></i>
+      <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Campus"]</span>
+    </div>
+  </NavLink>
+
+  <AuthorizeView>
+    <Authorized>
+      <NavLink href="/schedule" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Schedule"]">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-calendar-days fa-lg text-hogent-white"></i>
+          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Schedule"]</span>
+        </div>
+      </NavLink>
+
+      <NavLink href="/account" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50 ml-auto" title="@L["Navigation.Account"]">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-user fa-lg text-hogent-white"></i>
+          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Account"]</span>
+        </div>
+      </NavLink>
+    </Authorized>
+
+    <NotAuthorized>
+      <NavLink href="/resto" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Resto"]">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-utensils fa-lg text-hogent-white"></i>
+          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Resto"]</span>
+        </div>
+      </NavLink>
+
+      <NavLink href="/login" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50 ml-auto" title="@L["Navigation.Login"]">
+        <div class="flex items-center gap-2">
+          <i class="fa-solid fa-right-to-bracket fa-lg text-hogent-white"></i>
+          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Login"]</span>
+        </div>
+      </NavLink>
+    </NotAuthorized>
+  </AuthorizeView>
+</nav>

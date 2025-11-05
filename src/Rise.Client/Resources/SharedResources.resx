@@ -643,7 +643,7 @@
     <comment/>
   </data>
   <data name="Campus.BackToCampuses" xml:space="preserve">
-    <value>Back to campuses</value>
+    <value>Back</value>
     <comment/>
   </data>
   <data name="Common.NotFoundTitle" xml:space="preserve">
@@ -661,5 +661,32 @@
   </data>
   <data name="News.Filter.Month" xml:space="preserve">
     <value>This month</value>
+  <data name="Navigation.Home" xml:space="preserve">
+    <value>Home</value>
+    <comment/>
+  </data>
+  <data name="Navigation.News" xml:space="preserve">
+    <value>News</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Campus" xml:space="preserve">
+    <value>Campus</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Schedule" xml:space="preserve">
+    <value>Schedule</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Account" xml:space="preserve">
+    <value>Account</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Resto" xml:space="preserve">
+    <value>Resto</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Login" xml:space="preserve">
+    <value>Login</value>
+    <comment/>
   </data>
 </root>
