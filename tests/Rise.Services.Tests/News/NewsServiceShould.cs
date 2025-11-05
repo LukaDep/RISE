@@ -16,9 +16,9 @@ public class NewsServiceShould
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: nameof(GetIndexAsyncShouldReturnSuccessWithValidData)) // Do NOT use InMemoryDatabase... it's not reliable. Use a real database and come up with a strategy to clean up the database between tests.
             .Options;
-        
+
         using var dbContext = new ApplicationDbContext(options);
-        
+
         dbContext.NewsItems.AddRange(
             new NewsItem
             {
@@ -49,10 +49,10 @@ public class NewsServiceShould
             }
         );
         await dbContext.SaveChangesAsync();
-        
+
         var service = new NewsService(dbContext);
 
-        var request = new QueryRequest.SkipTake()
+        var request = new QueryRequest.DateRange()
         {
             Skip = 0,
             Take = 10,
@@ -72,7 +72,7 @@ public class NewsServiceShould
             result.Status.ShouldBe(ResultStatus.NotFound);
         }
     }
-    
+
     [Fact]
     public async Task GetIndexAsyncWithSearchShouldReturnSuccessWithValidData()
     {
@@ -80,9 +80,9 @@ public class NewsServiceShould
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: nameof(GetIndexAsyncWithSearchShouldReturnSuccessWithValidData)) // Do NOT use InMemoryDatabase... it's not reliable. Use a real database and come up with a strategy to clean up the database between tests.
             .Options;
-        
+
         using var dbContext = new ApplicationDbContext(options);
-        
+
         dbContext.NewsItems.AddRange(
             new NewsItem
             {
@@ -113,10 +113,10 @@ public class NewsServiceShould
             }
         );
         await dbContext.SaveChangesAsync();
-        
+
         var service = new NewsService(dbContext);
 
-        var request = new QueryRequest.SkipTake()
+        var request = new QueryRequest.DateRange()
         {
             Skip = 0,
             Take = 10,
@@ -138,7 +138,7 @@ public class NewsServiceShould
             result.Status.ShouldBe(ResultStatus.NotFound);
         }
     }
-    
+
     [Fact]
     public async Task GetByIdAsyncWithSearchShouldReturnSuccessWithValidData()
     {
@@ -146,9 +146,9 @@ public class NewsServiceShould
         var options = new DbContextOptionsBuilder<ApplicationDbContext>()
             .UseInMemoryDatabase(databaseName: nameof(GetByIdAsyncWithSearchShouldReturnSuccessWithValidData)) // Do NOT use InMemoryDatabase... it's not reliable. Use a real database and come up with a strategy to clean up the database between tests.
             .Options;
-        
+
         using var dbContext = new ApplicationDbContext(options);
-        
+
         var newsItem = new NewsItem
         {
             Title = "Test News 1",
@@ -158,14 +158,14 @@ public class NewsServiceShould
             Content = "Test content 1",
             Author = "Test Author 1"
         };
-        
+
         dbContext.NewsItems.Add(newsItem);
-    
+
         await dbContext.SaveChangesAsync();
-        
+
         var service = new NewsService(dbContext);
 
-        
+
 
         // Act
         var result = await service.GetByIdAsync(newsItem.Id);

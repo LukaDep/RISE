@@ -480,7 +480,7 @@
   <data name="Grades.SemesterFilterOption1" xml:space="preserve">
     <value>Semester 1</value>
   </data>
-  <data  name="Grades.SemesterFilterOption2" xml:space="preserve">
+  <data name="Grades.SemesterFilterOption2" xml:space="preserve">
     <value>Semester 2</value>
   </data>
   <data name="Grades.SearchTermPlaceholder" xml:space="preserve">
@@ -649,11 +649,50 @@
     <comment/>
   </data>
   <data name="Campus.BackToCampuses" xml:space="preserve">
-    <value>Back to campuses</value>
+    <value>Back</value>
     <comment/>
   </data>
   <data name="Common.NotFoundTitle" xml:space="preserve">
     <value>Not found</value>
+    <comment/>
+  </data>
+  <data name="News.Filter.All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="News.Filter.Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="News.Filter.Week" xml:space="preserve">
+    <value>This week</value>
+  </data>
+  <data name="News.Filter.Month" xml:space="preserve">
+    <value>This month</value>  </data>
+  <data name="Navigation.Home" xml:space="preserve">
+    <value>Home</value>
+    <comment/>
+  </data>
+  <data name="Navigation.News" xml:space="preserve">
+    <value>News</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Campus" xml:space="preserve">
+    <value>Campus</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Schedule" xml:space="preserve">
+    <value>Schedule</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Account" xml:space="preserve">
+    <value>Account</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Resto" xml:space="preserve">
+    <value>Resto</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Login" xml:space="preserve">
+    <value>Login</value>
     <comment/>
   </data>
 </root>

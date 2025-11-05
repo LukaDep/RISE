@@ -2,7 +2,6 @@
 
 <div id="dayViewContainer" class="day-view min-h-screen flex flex-col @swipeClass">
     <div class="mb-4 flex items-center justify-between">
-        <!-- Previous Day -->
         <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md flex items-center justify-center"
                 @onclick="PreviousDayAnimated">
             <span class="hidden sm:inline">@L["Schedule.Previous"]</span>
@@ -13,7 +12,6 @@
             </span>
         </button>
 
-        <!-- Selected Date / Today -->
         <div class="flex-1 text-center">
             @if (SelectedDate.Date == DateTime.Today)
             {
@@ -27,7 +25,6 @@
             }
         </div>
 
-        <!-- Next Day -->
         <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md flex items-center justify-center"
                 @onclick="NextDayAnimated">
             <span class="hidden sm:inline">@L["Schedule.Next"]</span>
@@ -54,53 +51,90 @@
         </div>
     }
 
-    @if (DayReservations.Any())
-    {
-        <div class="space-y-3">
-            @foreach (var reservation in DayReservations.OrderBy(r => r.StartDateTime))
-            {
-                var startTime = reservation.StartDateTime;
-                var endTime = reservation.EndDateTime;
-                var borderColor = reservation.IsAbsent ? "border-hogent-it" : GetEventTypeBorderColor(reservation.WorkForm);
-                var bgColor = GetEventTypeBgColor(reservation.WorkForm);
+    <div class="bg-hogent-white rounded-lg border border-hogent-black-30 overflow-visible">
+        <div class="grid border-b border-hogent-black-30" style="grid-template-columns: 64px 1fr;">
+            <div class="flex justify-center items-center border-r border-hogent-black-30 text-hogent-black-50 p-3 text-sm font-medium">
+                @SelectedDate.ToString("ddd", System.Globalization.CultureInfo.CurrentCulture)
+            </div>
+            <div class="p-3 text-center font-medium text-hogent-black-50">
+                <div class="text-sm">@SelectedDate.ToString("d MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture)</div>
+            </div>
+        </div>
 
-                <div class="@(reservation.IsAbsent ? "bg-hogent-it-15" : "bg-white") rounded-lg p-4 border-l-4 @borderColor shadow-sm border border-gray-100 hover:shadow-md cursor-pointer transition-all"
-                    @onclick="@(() => OpenDetails(reservation))">
-                    <div class="flex justify-between items-start mb-3">
-                        <div class="text-sm font-medium text-hogent-black-50">
-                            @startTime.ToString("HH:mm") - @endTime.ToString("HH:mm")
+        <div class="relative" style="min-height: 780px;">
+            <div class="grid" style="grid-template-columns: 64px 1fr;">
+                <div class="border-r border-hogent-black-15">
+                    @for (int hour = 8; hour <= 20; hour++)
+                    {
+                        <div class="h-16 border-b border-hogent-black-15 p-1 text-center text-sm text-hogent-black-50 flex items-center justify-center">
+                            @hour:00
                         </div>
-                        <span class="px-2 py-1 text-xs rounded-full @bgColor">
-                            @reservation.WorkForm
-                        </span>
-                    </div>
-                    <div class="text-base font-semibold text-hogent-black mb-2">@reservation.Course</div>
-                    <div class="flex flex-wrap gap-4 text-sm text-hogent-black-50">
-                        <span class="flex items-center gap-1">📍 @reservation.Room</span>
-                        <span class="flex items-center gap-1">👨‍🏫 @reservation.Teacher</span>
-                        @if (!string.IsNullOrEmpty(reservation.Environment))
-                        {
-                            <span class="flex items-center gap-1">💻 @reservation.Environment</span>
-                        }
-                        @if (reservation.IsAbsent)
-                        {
-                            <div class="flex items-center gap-1 ">
-                                <i class="fa-solid fa-user-slash "></i>
-                                <span class="text-hogent-it">@L["Schedule.Absent"]</span>
-                            </div>
-                        }
-                    </div>
+                    }
+                </div>
+
+                <div>
+                    @for (int hour = 8; hour <= 20; hour++)
+                    {
+                        <div class="h-16 border-b border-hogent-black-15"></div>
+                    }
+                </div>
+            </div>
+
+            @foreach (var evt in DayReservations)
+            {
+                var startHour = evt.StartDateTime.Hour;
+                var startMinute = evt.StartDateTime.Minute;
+                var endHour = evt.EndDateTime.Hour;
+                var endMinute = evt.EndDateTime.Minute;
+
+                var topPosition = ((startHour - 8) * 64) + ((startMinute * 64) / 60);
+                var durationMinutes = (endHour - startHour) * 60 + (endMinute - startMinute);
+                var height = (durationMinutes * 64) / 60;
+
+                var leftPosition = "calc(64px + 8px)";
+                var widthCalc = "calc(100% - 64px - 16px)";
+
+                var bgColor = GetEventTypeBgColor(evt.WorkForm);
+
+                <div class="absolute @bgColor rounded-lg p-3 shadow-md border border-white/20 overflow-hidden cursor-pointer hover:opacity-90 transition"
+                     style="top: @(topPosition + 4)px; left: @leftPosition; height: @(height - 8)px; width: @widthCalc;"
+                     @onclick="() => OpenDetails(evt)">
+                    <div class="font-semibold text-sm leading-tight mb-1">@evt.Course</div>
+                    <div class="text-xs opacity-90 mb-1">@evt.Room</div>
+                    @if (durationMinutes >= 60)
+                    {
+                        <div class="text-xs opacity-75">@evt.Teacher</div>
+                    }
+                    @if (!string.IsNullOrEmpty(evt.Environment) && durationMinutes >= 90)
+                    {
+                        <div class="text-xs opacity-75 mt-1">@evt.Environment</div>
+                    }
+                    @if (evt.IsAbsent)
+                    {
+                        <div class="absolute inset-0 z-10 pointer-events-none rounded-lg bg-[repeating-linear-gradient(135deg,rgba(220,38,38,0.08)_0_12px,transparent_12px_24px)]">
+                        </div>
+                    }
                 </div>
             }
+
+            @{
+                var timePosition = GetCurrentTimePosition();
+                
+                if (timePosition >= 0 && IsToday())
+                {
+                    <div class="absolute z-50 pointer-events-none" style="top: @(timePosition)px; left: 64px; width: calc(100% - 64px);">
+                        <div class="relative h-0.5 bg-red-500 shadow-lg">
+                            <div class="absolute -left-1 -top-1 w-2.5 h-2.5 bg-red-500 rounded-full"></div>
+                            <div class="absolute -left-16 -top-2.5 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded shadow-md whitespace-nowrap">
+                                @currentTime.ToString("HH:mm")
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
         </div>
-    }
-    else
-    {
-        <div class="text-center py-12 text-hogent-black-50">
-            <div class="text-lg mb-2">🎉</div>
-            <p>@L["Schedule.NoClassesToday"]</p>
-        </div>
-    }
+
+    </div>
 </div>
 
 @if (SelectedReservation is not null)

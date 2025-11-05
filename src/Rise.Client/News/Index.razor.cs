@@ -1,162 +1,181 @@
-using System.Collections.Generic;
-using System.Linq;
-using FuzzySharp;
-using FuzzySharp.SimilarityRatio;
-using FuzzySharp.SimilarityRatio.Scorer.StrategySensitive;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.News;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Primitives;
 
 namespace Rise.Client.News;
 
-public partial class Index : IAsyncDisposable
+public partial class Index
 {
-    ElementReference filterInput;
-    private bool isFilterOpen = false;
+    ElementReference _filterInput;
+    private bool _isFilterOpen = false;
+
     private async Task ToggleFilter()
     {
-        isFilterOpen = !isFilterOpen;
-        if (isFilterOpen)
+        _isFilterOpen = !_isFilterOpen;
+        if (_isFilterOpen)
         {
-            await filterInput.FocusAsync();
+            await _filterInput.FocusAsync();
+        }
+        else
+        {
+            _searchTerm = null;
+            FilterNews();
         }
     }
 
-    private IEnumerable<NewsDto.Index>? news;
-
+    private IEnumerable<NewsDto.Index>? _news;
 
     [Inject] public required INewsService NewsService { get; set; }
-    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] public NavigationManager NavigationManager { get; set; } = null!;
+    // [Inject] public IStringLocalizer<Index> L { get; set; } = null!;
+
 
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
     public string? SearchTerm { get; set; }
 
-    private int skip = 0;
-    private int take = 10;
-    private int totalCount;
-    private int currentCount;
-    
-    //js scroll to top 
-    private bool _initialized;
-    
+    [Parameter, SupplyParameterFromQuery]
+    public DateTime? StartDate { get; set; }
+    [Parameter, SupplyParameterFromQuery]
+    public DateTime? EndDate { get; set; }
 
-    private string? searchTerm;
-    private const int FuzzyScoreThreshold = 60; // Minimum score for a match (0-100)
+    private int _skip = 0;
+    private int _take = 10;
+    private int _totalCount;
+    private int _currentCount;
+
+
+    // Date range filter items
+    private IEnumerable<KeyValuePair<string, string>> DateRangeItems =>
+    [
+        new(string.Empty, L["News.Filter.All"]),
+        new ("today", L["News.Filter.Today"]),
+        new ("week", L["News.Filter.Week"]),
+        new ("month", L["News.Filter.Month"])
+    ];
+
+    private string? _searchTerm;
+
+    private string? _selectedDateRange = string.Empty;
+    private DateTime? _startDate;
+    private DateTime? _endDate;
 
     protected override async Task OnParametersSetAsync()
     {
-        QueryRequest.SkipTake request = new()
+        // copy nullable query params locally
+        _startDate = StartDate;
+        _endDate = EndDate;
+
+        // pass nullable StartDate/EndDate directly (QueryRequest.DateRange uses DateTime?)
+        QueryRequest.DateRange request = new()
         {
             Skip = 0,
             Take = 10,
             SearchTerm = SearchTerm,
+            StartDate = _startDate,
+            EndDate = _endDate,
         };
 
         var result = await NewsService.GetIndexAsync(request);
-        news = result.Value.News;
-        totalCount = result.Value.TotalCount;
-        currentCount = news.Count();
-        skip = 0;
-
+        _news = result.Value.News;
+        _totalCount = result.Value.TotalCount;
+        _currentCount = _news?.Count() ?? 0;
+        _skip = 0;
     }
 
     protected override void OnParametersSet()
     {
-        searchTerm = SearchTerm;
+        _searchTerm = string.IsNullOrWhiteSpace(SearchTerm) ? null : SearchTerm?.Trim();
+        _startDate = StartDate;
+        _endDate = EndDate;
+
     }
 
     private void SearchTermChanged(ChangeEventArgs args)
     {
-        // When the inputfield changes...
-        searchTerm = args.Value?.ToString();
-        FilterProducts();
+        var value = args.Value?.ToString();
+        _searchTerm = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
+        FilterNews();
     }
 
-    private void FilterProducts()
-    { // Navigate to the current page with the new SearchTerm parameter.
-        Dictionary<string, object?> parameters = new();
-        parameters.Add(nameof(searchTerm), searchTerm);
-        var uri = NavigationManager.GetUriWithQueryParameters(parameters);
+    private void FilterNews()
+    {
+        var parameters = new Dictionary<string, string?>();
+        if (!string.IsNullOrWhiteSpace(_searchTerm))
+            parameters.Add(nameof(SearchTerm), _searchTerm);
+
+        if (_startDate.HasValue)
+            parameters.Add(nameof(StartDate), _startDate.Value.ToString("O"));
+        if (_endDate.HasValue)
+            parameters.Add(nameof(EndDate), _endDate.Value.ToString("O"));
+
+        var baseUri = NavigationManager.Uri.Split('?', '#')[0];
+
+        string uri;
+        if (parameters.Count == 0)
+        {
+            _startDate = null;
+            _endDate = null;
+            _selectedDateRange = string.Empty;
+            uri = baseUri;
+        }
+        else
+        {
+            uri = QueryHelpers.AddQueryString(baseUri, parameters);
+        }
+
         NavigationManager.NavigateTo(uri);
     }
 
-    // private void SearchTermChanged(ChangeEventArgs e)
-    // {
-    //     searchTerm = e.Value?.ToString();
-    //
-    //     if (string.IsNullOrWhiteSpace(searchTerm))
-    //     {
-    //         filteredNews = news;
-    //         return;
-    //     }
-    //
-    //     filteredNews = news?.Where(n =>
-    //         // Exact match still gets priority
-    //         n.Title.Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
-    //         // Fuzzy search
-    //         Fuzz.PartialRatio(n.Title, searchTerm) >= FuzzyScoreThreshold ||
-    //         Fuzz.PartialRatio(n.Content, searchTerm) >= FuzzyScoreThreshold
-    //     ).OrderByDescending(n =>
-    //         Math.Max(
-    //             Fuzz.PartialRatio(n.Title, searchTerm),
-    //             Fuzz.PartialRatio(n.Content, searchTerm)
-    //         )
-    //     );
-    // }
-
     private async Task LoadMoreNews()
     {
-        skip += take;
-        QueryRequest.SkipTake request = new()
+        _skip += _take;
+        QueryRequest.DateRange request = new()
         {
-            Skip = skip,
-            Take = take,
+            Skip = _skip,
+            Take = _take,
             SearchTerm = SearchTerm,
+            StartDate = _startDate,
+            EndDate = _endDate,
         };
 
         var result = await NewsService.GetIndexAsync(request);
 
-        // Append new items to the existing list
-        news = news?.Concat(result.Value.News) ?? result.Value.News;
-        currentCount = news.Count();
+        _news = _news?.Concat(result.Value.News) ?? result.Value.News;
+        _currentCount = _news?.Count() ?? 0;
 
         StateHasChanged();
     }
-    
-    
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    private void OnDateRangeChanged(string? value)
     {
-        if (firstRender && !_initialized)
+        _selectedDateRange = value;
+        switch (value)
         {
-            _initialized = true;
-            try
-            {
-                // Call the global wrapper defined in wwwroot/scrollTop.js
-                await JS.InvokeVoidAsync("initScrollTop", "scrollToTopBtn");
-            }
-            catch
-            {
-                // swallow JS errors — avoids breaking rendering if script not present
-            }
+            case "today":
+                _startDate = DateTime.Today;
+                _endDate = DateTime.Today;
+                break;
+            case "week":
+                int diff = (DateTime.Today.DayOfWeek - DayOfWeek.Monday + 7) % 7;
+                var monday = DateTime.Today.AddDays(-diff);
+                _startDate = monday;
+                _endDate = monday.AddDays(6);
+                break;
+            case "month":
+                var first = new DateTime(DateTime.Today.Year, DateTime.Today.Month, 1);
+                var last = first.AddMonths(1).AddDays(-1);
+                _startDate = first;
+                _endDate = last;
+                break;
+            default:
+                _startDate = null;
+                _endDate = null;
+                break;
         }
-    }
-
-    public async ValueTask DisposeAsync()
-    {
-        if (_initialized)
-        {
-            try
-            {
-                await JS.InvokeVoidAsync("disposeScrollTop", "scrollToTopBtn");
-            }
-            catch
-            {
-                // ignore disposal errors
-            }
-            _initialized = false;
-        }
+        FilterNews();
     }
 }
