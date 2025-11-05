@@ -37,19 +37,48 @@ public partial class MenuPage : ComponentBase
             {
                 menus = result.Value.Menus
                     .Where(m => m.RestoId == RestoId)
+                    // Enkel werkdagen (ma–vr)
+                    .Where(m => m.Date.DayOfWeek is >= DayOfWeek.Monday and <= DayOfWeek.Friday)
+                    // Geen verleden, enkel vandaag en toekomst
+                    .Where(m => IsTodayOrFuture(m.Date.DayOfWeek))
                     .OrderBy(m => m.Date)
                     .ToList();
+
+                // ✅ Huidige dag automatisch openklappen
+                var today = DateTime.Now.DayOfWeek;
+
+                // Als het weekend is, toon maandag
+                if (today == DayOfWeek.Saturday || today == DayOfWeek.Sunday)
+                    today = DayOfWeek.Monday;
+
+                var todayMenu = menus.FirstOrDefault(m => m.Date.DayOfWeek == today);
+                if (todayMenu != null)
+                {
+                    expandedDays.Clear();
+                    expandedDays.Add(todayMenu.Date.Date);
+                }
             }
         }
         catch (Exception ex)
         {
-            // eventueel logging toevoegen
             Console.Error.WriteLine($"[MenuPage] Error loading menus: {ex.Message}");
         }
         finally
         {
             isLoading = false;
+            // 🚀 Forceer render-update zodat expandedDays direct zichtbaar wordt
+            StateHasChanged();
         }
+    }
+
+    private bool IsTodayOrFuture(DayOfWeek menuDay)
+    {
+        var today = DateTime.Now.DayOfWeek;
+
+        if (today == DayOfWeek.Saturday || today == DayOfWeek.Sunday)
+            today = DayOfWeek.Monday;
+
+        return menuDay >= today;
     }
 
     protected void ToggleDay(DateTime day)
