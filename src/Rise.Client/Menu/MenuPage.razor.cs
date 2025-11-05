@@ -66,7 +66,6 @@ public partial class MenuPage : ComponentBase
         finally
         {
             isLoading = false;
-            // 🚀 Forceer render-update zodat expandedDays direct zichtbaar wordt
             StateHasChanged();
         }
     }

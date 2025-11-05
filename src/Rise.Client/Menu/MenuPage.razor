@@ -97,14 +97,11 @@
                                     if (visibleItems.Count == 0)
                                         continue;
 
-                                    <!-- ✨ Gecentreerd design zonder border -->
                                     <div class="mb-10 text-center flex flex-col items-center">
-                                        <!-- Zwarte balk over volledige breedte, gecentreerd -->
                                         <div class="w-full sm:max-w-xl bg-hogent-black/90 text-white/95 text-lg sm:text-xl font-semibold px-5 py-3 mb-2">
                                             @group.Key
                                         </div>
 
-                                        <!-- Items gecentreerd -->
                                         <ul class="w-full sm:max-w-xl space-y-4 text-left">
                                             @foreach (var item in visibleItems)
                                             {
@@ -150,7 +147,6 @@
             }
         }
 
-        <!-- 🌿 Legende -->
         <div class="mt-12 border-t border-hogent-black-15 pt-6 text-sm text-hogent-black-70">
             <p class="font-semibold mb-3">@L["Resto.Legende"]</p>
             <div class="flex flex-wrap items-center gap-6 sm:gap-8">
