@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.News;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Primitives;
 
 namespace Rise.Client.News;
 
@@ -30,8 +29,6 @@ public partial class Index
 
     [Inject] public required INewsService NewsService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
-    // [Inject] public IStringLocalizer<Index> L { get; set; } = null!;
-
 
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
@@ -41,7 +38,7 @@ public partial class Index
     public DateTime? StartDate { get; set; }
     [Parameter, SupplyParameterFromQuery]
     public DateTime? EndDate { get; set; }
-
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
     private int _skip = 0;
     private int _take = 10;
     private int _totalCount;
@@ -161,7 +158,7 @@ public partial class Index
             try
             {
                 // Call the global wrapper defined in wwwroot/scrollTop.js
-                await JS.InvokeVoidAsync("initScrollTop", "scrollToTopBtn");
+                await JSRuntime.InvokeVoidAsync("initScrollTop", "scrollToTopBtn");
             }
             catch
             {
