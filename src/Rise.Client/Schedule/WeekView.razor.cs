@@ -166,7 +166,7 @@ public partial class WeekView : IAsyncDisposable
         if (hour < 8 || hour > 20)
             return -1; // Buiten zichtbaar bereik
 
-        return ((hour - 8) * 64) + ((minute * 64) / 60.0);
+        return ((hour - 8) * 64) + (minute * 64 / 60.0);
     }
 
     private int GetCurrentDayIndex()
