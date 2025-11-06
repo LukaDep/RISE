@@ -2,23 +2,21 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Rise.Client;
-using Rise.Client.Identity;
-using Rise.Client.News;
-using Rise.Client.Products;
 using Rise.Client.Campus;
-using Rise.Client.Resto;
 using Rise.Client.CampusInfo;
-using Rise.Client.Schedule;
-using Rise.Shared.CampusInfo;
-using Rise.Shared.News;
-using Rise.Shared.Campus;
-using Rise.Shared.Products;
-using Rise.Shared.Schedule;
-using Rise.Client.Menu;
-using Rise.Shared.Menu;
-using Rise.Shared.Resto;
 using Rise.Client.Grades;
+using Rise.Client.Identity;
+using Rise.Client.Menu;
+using Rise.Client.News;
+using Rise.Client.Resto;
+using Rise.Client.Schedule;
+using Rise.Shared.Campus;
+using Rise.Shared.CampusInfo;
 using Rise.Shared.Grades;
+using Rise.Shared.Menu;
+using Rise.Shared.News;
+using Rise.Shared.Resto;
+using Rise.Shared.Schedule;
 
 try
 {
@@ -56,10 +54,6 @@ try
     builder.Services.AddHttpClient("SecureApi", opt => opt.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001"))
         .AddHttpMessageHandler<CookieHandler>();
 
-    builder.Services.AddHttpClient<IProductService, ProductService>(client =>
-    {
-        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
-    });
     builder.Services.AddHttpClient<ICampusService, CampusClientService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");

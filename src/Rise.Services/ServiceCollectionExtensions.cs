@@ -1,16 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using Rise.Persistence;
 using Rise.Services.Absences;
-using Rise.Services.Products;
-using Rise.Services.Projects;
 using Rise.Services.Schedule;
 using Rise.Services.News;
 using Rise.Services.Campus;
 using Rise.Services.CampusInfo;
 using Rise.Services.Grades;
 using Rise.Shared.News;
-using Rise.Shared.Products;
-using Rise.Shared.Projects;
 using Rise.Shared.Campus;
 using Rise.Services.Resto;
 using Rise.Shared.Resto;
@@ -29,8 +25,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddApplicationServices(this IServiceCollection services)
     {
-        services.AddScoped<IProductService, ProductService>();
-        services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<ICampusService, CampusService>();
         services.AddScoped<IMenuService, MockMenuService>();
         services.AddScoped<IScheduleService, MockScheduleService>();
