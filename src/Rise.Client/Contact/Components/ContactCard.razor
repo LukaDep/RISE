@@ -1,31 +1,62 @@
+﻿@using System.Collections.Generic
+@inject IStringLocalizer<SharedResources> L
 <NavLink
-    class="flex items-center min-h-40 border-4 border-hogent-black-15 rounded-xl p-4 m-4 bg-hogent-white shadow transition  cursor-pointer"
+    class="border-hogent-black-15 bg-hogent-white z-1 m-4 flex min-h-40 cursor-pointer items-center rounded-xl border-4 p-4 shadow transition"
     href=@($"/news/") Match="NavLinkMatch.Prefix" data-news-id="Id">
-    <!-- Icon (by type) -->
-        <div class="w-12 h-12 bg-hogent-black-15 p-2 rounded-lg mr-4 flex items-center justify-center flex-shrink-0">
-            @switch(Type)
-            {
-                case "organisatie":
-                    <i class="fa fa-building text-xl text-hogent-black"></i>
-                    break;
-                case "departement":
-                    <i class="fa fa-users text-xl text-hogent-black"></i>
-                    break;
-                case "campus":
-                    <i class="fa fa-school text-xl text-hogent-black"></i>
-                    break;
-                case "directie":
-                    <i class="fa fa-user-tie text-xl text-hogent-black"></i>
-                    break;
-                default:
-                    <i class="fa fa-question text-xl text-hogent-black"></i>
-                    break;
-            }
+    <div class="z-2 flex flex-col gap-2">
+        <div class="flex flex-row gap-3">
+            <!-- Icon (by type) -->
+            <div class="bg-hogent-black-15 mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg p-2">
+                @switch(Type)
+                {
+                    case "organisatie":
+                        <i class="fa fa-building text-hogent-black text-xl"></i>
+                        break;
+                    case "departement":
+                        <i class="fa fa-users text-hogent-black text-xl"></i>
+                        break;
+                    case "campus":
+                        <i class="fa fa-school text-hogent-black text-xl"></i>
+                        break;
+                    case "directie":
+                        <i class="fa fa-user-tie text-hogent-black text-xl"></i>
+                        break;
+                    default:
+                        <i class="fa fa-question text-hogent-black text-xl"></i>
+                        break;
+                }
+            </div>
+
+            <!-- Content -->
+            <div class="flex flex-1 flex-col justify-center">
+                <h3 class="text-hogent-black text-lg font-bold">@Name</h3>
+                <p class="text-hogent-black-50 text-sm">@Type</p>
+            </div>
         </div>
 
-    <!-- Content -->
-    <div class="flex-1 flex flex-col justify-center">
-        <h3 class="text-lg font-bold text-hogent-black">@Name</h3>
-        <p class="text-hogent-black-50 text-sm">@Type</p>
+
+        <!-- Toon contact knoppen -->
+        <span class="flex gap-2">
+            @if(@PhoneNumber != null){
+                <a href="tel:@PhoneNumber"
+                   class="bg-hogent-education-100 inline-flex items-center rounded px-3 py-1 text-white transition hover:opacity-90"
+                   @onclick:stopPropagation="true">
+                    <i class="fa fa-phone mr-1" aria-hidden="true"></i>
+                    @L["Call"]
+                </a>
+            }
+
+            @if(@Email != null){
+                <a href="mailto:@Email"
+                   class="bg-hogent-education-100 inline-flex items-center rounded px-3 py-1 text-white transition hover:opacity-90"
+                   @onclick:stopPropagation="true">
+                    <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
+                    @L["Mail"]
+                </a>
+            }
+
+        </span>
+
     </div>
+
 </NavLink>

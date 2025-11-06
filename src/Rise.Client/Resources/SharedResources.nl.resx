@@ -397,9 +397,15 @@
     <value>Terug</value>
   </data>
   <data name="Contact.Title" xml:space="preserve">
-    <value>Contact</value>
+    <value>Contacten</value>
   </data>
   <data name="Contact.Loading" xml:space="preserve">
     <value>Contactgegevens zijn aan het laden...</value>
+  </data>
+  <data name="Contact.Call" xml:space="preserve">
+    <value>Bellen</value>
+  </data>
+  <data name="Contact.Mail" xml:space="preserve">
+    <value>Mailen</value>
   </data>
 </root>

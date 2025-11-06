@@ -52,7 +52,6 @@ namespace Rise.Client.CampusInfo.Components
         {
             CheckIfVisible();
             StateHasChanged();
-
         }
     }
 }
