@@ -18,7 +18,7 @@ public partial class NewsArticle : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        var result = await NewsService.GetByIdAsync(Id.ToString());
+        var result = await NewsService.GetByIdAsync(Id);
 
         if (result.IsSuccess)
         {

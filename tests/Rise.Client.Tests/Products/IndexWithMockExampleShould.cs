@@ -28,7 +28,7 @@ public class IndexWithMockExampleShould : TestContext
 
         // Mock
         var products = Enumerable.Range(1, 5)
-                         .Select(i => new ProductDto.Index() { Id = i.ToString(), Name = $"Product {i}", Description = $"Description {i}" });
+                         .Select(i => new ProductDto.Index() { Id = Guid.Parse(i.ToString()), Name = $"Product {i}", Description = $"Description {i}" });
 
         var wrapper = new ProductResponse.Index
         {

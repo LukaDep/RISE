@@ -14,7 +14,7 @@ public class Get(INewsService newsService) : EndpointWithoutRequest<Result<NewsR
 
     public override async Task<Result<NewsResponse.Get>> ExecuteAsync(CancellationToken ct)
     {
-        var id = Route<string>("id");
+        var id = Route<Guid>("id");
         return await newsService.GetByIdAsync(id, ct);
     }
 }

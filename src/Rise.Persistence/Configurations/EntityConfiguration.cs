@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Rise.Domain.Common;
-using Rise.Persistence.ValueGenerators;
 
 namespace Rise.Persistence.Configurations;
 
@@ -18,9 +17,7 @@ internal class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> 
 
         // Configure Id as UUIDv7 (stored as CHAR(36) for MySQL/MariaDB compatibility)
         builder.Property(e => e.Id)
-            .HasMaxLength(36)
-            .ValueGeneratedOnAdd()
-            .HasValueGenerator<UuidV7ValueGenerator>();
+            .HasMaxLength(36);
 
         // CreatedAt should be filled in by the database when using raw SQL.
         builder.Property(e => e.CreatedAt)

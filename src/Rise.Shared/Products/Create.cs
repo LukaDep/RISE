@@ -31,6 +31,6 @@ public static partial class ProductResponse
 {
     public class Create
     {
-        public string ProductId { get; set; } = string.Empty;
+        public Guid ProductId { get; set; } = Guid.Empty;
     }
 }

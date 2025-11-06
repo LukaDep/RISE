@@ -243,10 +243,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Absences.Absence", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -286,20 +286,19 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Campus.Building", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Address")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
-                    b.Property<string>("CampusId")
-                        .IsRequired()
+                    b.Property<Guid>("CampusId")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -347,10 +346,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Campus.Campus", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -415,10 +414,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.CampusInfo.CampusInfo", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("ContactPhone")
                         .HasMaxLength(50)
@@ -465,10 +464,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Contact.Contact", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Campusses")
                         .HasColumnType("json");
@@ -517,10 +516,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Grades.Grade", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("ActivityType")
                         .IsRequired()
@@ -585,10 +584,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Menu.Menu", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -603,10 +602,9 @@ namespace Rise.Persistence.Migrations
                         .HasColumnType("tinyint(1)")
                         .HasDefaultValue(false);
 
-                    b.Property<string>("RestoId")
-                        .IsRequired()
+                    b.Property<Guid>("RestoId")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
@@ -620,10 +618,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Menu.MenuItem", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -646,10 +644,9 @@ namespace Rise.Persistence.Migrations
                     b.Property<bool>("IsVeggie")
                         .HasColumnType("tinyint(1)");
 
-                    b.Property<string>("MenuId")
-                        .IsRequired()
+                    b.Property<Guid>("MenuId")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -679,10 +676,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.News.NewsArticle", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Author")
                         .IsRequired()
@@ -734,10 +731,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Products.Product", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -771,10 +768,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Projects.Project", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -791,10 +788,8 @@ namespace Rise.Persistence.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("varchar(250)");
 
-                    b.Property<string>("TechnicianId")
-                        .IsRequired()
-                        .HasMaxLength(255)
-                        .HasColumnType("varchar(255)");
+                    b.Property<Guid>("TechnicianId")
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("UpdatedAt")
                         .ValueGeneratedOnAdd()
@@ -810,10 +805,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Projects.Technician", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("AccountId")
                         .IsRequired()
@@ -855,15 +850,14 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Restos.Resto", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
-                    b.Property<string>("BuildingId")
-                        .IsRequired()
+                    b.Property<Guid>("BuildingId")
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
@@ -917,10 +911,10 @@ namespace Rise.Persistence.Migrations
 
             modelBuilder.Entity("Rise.Domain.Schedule.Reservation", b =>
                 {
-                    b.Property<string>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasMaxLength(36)
-                        .HasColumnType("varchar(36)");
+                        .HasColumnType("char(36)");
 
                     b.Property<string>("Course")
                         .IsRequired()
@@ -1055,9 +1049,8 @@ namespace Rise.Persistence.Migrations
 
                     b.OwnsOne("Rise.Domain.Projects.Address", "Location", b1 =>
                         {
-                            b1.Property<string>("ProjectId")
-                                .HasMaxLength(36)
-                                .HasColumnType("varchar(36)");
+                            b1.Property<Guid>("ProjectId1")
+                                .HasColumnType("char(36)");
 
                             b1.Property<string>("Addressline1")
                                 .IsRequired()
@@ -1083,12 +1076,16 @@ namespace Rise.Persistence.Migrations
                                 .HasColumnType("varchar(20)")
                                 .HasColumnName("PostalCode");
 
-                            b1.HasKey("ProjectId");
+                            b1.Property<string>("ProjectId")
+                                .HasMaxLength(36)
+                                .HasColumnType("varchar(36)");
+
+                            b1.HasKey("ProjectId1");
 
                             b1.ToTable("Project");
 
                             b1.WithOwner()
-                                .HasForeignKey("ProjectId");
+                                .HasForeignKey("ProjectId1");
                         });
 
                     b.Navigation("Location")

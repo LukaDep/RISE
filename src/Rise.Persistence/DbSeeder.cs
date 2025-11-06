@@ -374,7 +374,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         var mercator = campuses.FirstOrDefault(c => c.Name == "Campus Mercator");
         var bijloke = campuses.FirstOrDefault(c => c.Name == "Campus Bijloke");
 
-        var allBuildings = new List<(Building building, string campusId)>();
+        var allBuildings = new List<(Building building, Guid campusId)>();
 
         if (schoonmeersen != null)
         {
@@ -583,7 +583,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
 
         // Add menus and menu items
-        var menu1 = new Rise.Domain.Menu.Menu
+        var menu1 = new Menu
         {
             RestoId = resto1.Id,
             Date = DateTime.Parse("2025-10-20T11:30:00"),

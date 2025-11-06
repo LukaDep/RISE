@@ -25,7 +25,7 @@ internal class MenuItemConfiguration : EntityConfiguration<MenuItem>
             .IsRequired();
 
         // Configure the shadow foreign key property
-        builder.Property<string>("MenuId")
+        builder.Property<Guid>("MenuId")
             .IsRequired()
             .HasMaxLength(36);
     }

@@ -8,7 +8,7 @@ public abstract class Entity
     /// <summary>
     /// Primary Key of the <see cref="Entity"/> using UUIDv7
     /// </summary>
-    public string Id { get; protected set; } = Guid.NewGuid().ToString();
+    public Guid Id { get; protected set; } = Guid.CreateVersion7();
     /// <summary>
     /// Date of the initial creation.
     /// </summary>
@@ -24,7 +24,7 @@ public abstract class Entity
 
     protected Entity() { }
 
-    protected Entity(string id)
+    protected Entity(Guid id)
     {
         Id = id;
     }
@@ -40,7 +40,7 @@ public abstract class Entity
         if (GetType() != other.GetType())
             return false;
 
-        if (string.IsNullOrEmpty(Id) || string.IsNullOrEmpty(other.Id))
+        if (Guid.Empty.Equals(Id) || Guid.Empty.Equals(other.Id))
             return false;
 
         return Id.Equals(other.Id);

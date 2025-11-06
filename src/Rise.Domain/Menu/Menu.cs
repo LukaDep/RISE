@@ -2,11 +2,11 @@ namespace Rise.Domain.Menu;
 
 public class Menu : Entity
 {
-    private string _restoId = string.Empty;
-    public required string RestoId
+    private Guid _restoId = Guid.Empty;
+    public required Guid RestoId
     {
         get => _restoId;
-        set => _restoId = Guard.Against.NullOrWhiteSpace(value);
+        set => _restoId = Guard.Against.Default(value);
     }
 
     private DateTime _date;

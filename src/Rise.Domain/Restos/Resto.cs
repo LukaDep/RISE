@@ -16,11 +16,11 @@ public class Resto : Entity
         set => _description = value != null ? Guard.Against.NullOrWhiteSpace(value) : string.Empty;
     }
 
-    private string _buildingId = string.Empty;
-    public required string BuildingId
+    private Guid _buildingId = Guid.Empty;
+    public required Guid BuildingId
     {
         get => _buildingId;
-        set => _buildingId = Guard.Against.NullOrWhiteSpace(value);
+        set => _buildingId = Guard.Against.Default(value);
     }
 
     private Dictionary<DayOfWeek, string>? _openingHours;

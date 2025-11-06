@@ -71,7 +71,7 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         );
     }
 
-    public async Task<Result<NewsResponse.Get>> GetByIdAsync(string id, CancellationToken ctx = default)
+    public async Task<Result<NewsResponse.Get>> GetByIdAsync(Guid id, CancellationToken ctx = default)
     {
         // if (!File.Exists(_mockFilePath))
         //     return Result<NewsResponse.Get>.NotFound($"Mock data file not found at: {_mockFilePath}");
