@@ -32,9 +32,9 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IProductService, ProductService>();
         services.AddScoped<IProjectService, ProjectService>();
         services.AddScoped<ICampusService, CampusService>();
-        services.AddScoped<IMenuService, MockMenuService>();
-        services.AddScoped<IScheduleService, MockScheduleService>();
-        services.AddScoped<IRestoService, MockRestoService>();
+        services.AddScoped<IMenuService, MenuService>();
+        services.AddScoped<IScheduleService, ScheduleService>();
+        services.AddScoped<IRestoService, RestoService>();
         services.AddScoped<INewsService, NewsService>();
         services.AddScoped<ICampusInfoService, CampusInfoService>();
         services.AddScoped<IContactService, ContactService>();

@@ -26,7 +26,7 @@ public static class ScheduleApiResponse
     // Reservation object
     public class Reservation
     {
-        public string Id { get; set; } = default!;
+        public Guid Id { get; set; } = default!;
         public string StartDate { get; set; } = default!;
         public string StartTime { get; set; } = default!;
         public string EndDate { get; set; } = default!;

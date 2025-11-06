@@ -57,8 +57,8 @@ public class Grade : Entity
         }
     }
 
-    private string? _courseId;
-    public string? CourseId
+    private Guid _courseId;
+    public Guid CourseId
     {
         get => _courseId;
         set => _courseId = value;

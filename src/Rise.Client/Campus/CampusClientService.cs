@@ -13,13 +13,7 @@ public class CampusClientService(HttpClient httpClient) : ICampusService
         return result!;
     }
 
-    public async Task<Result<CampusDto.Index>> GetCampusByIdAsync(string id, CancellationToken ct = default)
-    {
-        var result = await httpClient.GetFromJsonAsync<Result<CampusDto.Index>>($"/api/campuses/{id}", cancellationToken: ct);
-        Console.WriteLine($"Fetching campus data for ID {id} from API...");
-        return result!;
-    }
-    public async Task<Result<BuildingDto.Index>> GetBuildingByIdAsync(string buildingId, CancellationToken ct = default)
+    public async Task<Result<CampusDto.Index>> GetCampusByIdAsync(Guid buildingId, CancellationToken ct = default)
     {
         var result = await httpClient.GetFromJsonAsync<Result<BuildingDto.Index>>($"/api/buildings/{buildingId}", cancellationToken: ct);
         Console.WriteLine($"Fetching building data for ID {buildingId} from API...");

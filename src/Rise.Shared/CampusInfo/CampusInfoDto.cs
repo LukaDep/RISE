@@ -10,12 +10,12 @@ namespace Rise.Shared.CampusInfo
     {
         public class Index
         {
-            public required string Id { get; set; }
-            public required string Name { get; set; }
-            public required string Location { get; set; }
-            public required List<string> Faculties { get; set; }
-            public string ContactPhone { get; set; }
-            public required string Description { get; set; }
+            public required Guid Id { get; set; }
+            public required string Name { get; set; } //niet
+            public required string Location { get; set; }//niey
+            public required List<string> Faciliteiten { get; set; }//mqg weg
+            public string ContactPhone { get; set; }//mee
+            public required string Description { get; set; }//mee
         }
     }
 }

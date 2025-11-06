@@ -14,7 +14,7 @@ public static class GradesDto
     public class Grade
     {
         // grade
-        public required string Id { get; set; }
+        public required Guid Id { get; set; }
         public required string Name { get; set; }
         public required string ActivityType { get; set; }
         public double? MaxPoints { get; set; }
@@ -24,7 +24,7 @@ public static class GradesDto
         public DateTime Date { get; set; }
 
         // course
-        public string? CourseId { get; set; }
+        public Guid? CourseId { get; set; }
         public string? CourseName { get; set; }
         public string? Year { get; set; }
         public int? Semester { get; set; }

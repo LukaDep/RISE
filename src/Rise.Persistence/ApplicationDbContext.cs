@@ -33,7 +33,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<Absence> Absences => Set<Absence>();
     public DbSet<Campus> Campuses => Set<Campus>();
     public DbSet<Building> Buildings => Set<Building>();
-    public DbSet<CampusInfo> CampusInfos => Set<CampusInfo>();
+
     public DbSet<Contact> Contacts => Set<Contact>();
     public DbSet<Grade> Grades => Set<Grade>();
     public DbSet<Menu> Menus => Set<Menu>();

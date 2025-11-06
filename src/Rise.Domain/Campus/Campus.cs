@@ -36,27 +36,27 @@ public class Campus : Entity
         get => _postalCode;
         set => _postalCode = Guard.Against.NullOrWhiteSpace(value);
     }
+    private string _contactPhone = string.Empty;
 
-    private string? _mapImageUrl;
-    public string? MapImageUrl
+    public required string ContactPhone
     {
-        get => _mapImageUrl;
-        set => _mapImageUrl = value;
+        get => _contactPhone;
+        set => _contactPhone = Guard.Against.NullOrWhiteSpace(value);
     }
-
-    private int? _imageWidth;
-    public int? ImageWidth
+    private IEnumerable<string> _facilities = [];
+    public required IEnumerable<string> Facilities
     {
-        get => _imageWidth;
-        set => _imageWidth = value;
+        get => _facilities;
+        set => _facilities = value;
     }
-
-    private int? _imageHeight;
-    public int? ImageHeight
+    
+    private string _description = string.Empty;
+    public required string Description
     {
-        get => _imageHeight;
-        set => _imageHeight = value;
+        get => _description;
+        set => _description = Guard.Against.NullOrWhiteSpace(value);
     }
+    
 
     private double? _latitude;
     public double? Latitude
@@ -72,8 +72,8 @@ public class Campus : Entity
         set => _longitude = value;
     }
 
-    private List<Building>? _buildings;
-    public List<Building>? Buildings
+    private IEnumerable<Building>? _buildings;
+    public IEnumerable<Building>? Buildings
     {
         get => _buildings;
         set => _buildings = value;

@@ -35,7 +35,7 @@ internal class ContactConfiguration : EntityConfiguration<Domain.Contact.Contact
         builder.Property(x => x.Campusses)
             .HasConversion(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
-                v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null))
+                v => JsonSerializer.Deserialize<IEnumerable<string>>(v, (JsonSerializerOptions?)null))
             .HasColumnType("json");
     }
 }

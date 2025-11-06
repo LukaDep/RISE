@@ -37,8 +37,8 @@ public class Contact : Entity
         set => _contactPerson = value;
     }
 
-    private List<string>? _campusses;
-    public List<string>? Campusses
+    private IEnumerable<string>? _campusses;
+    public IEnumerable<string>? Campusses
     {
         get => _campusses;
         set => _campusses = value;

@@ -4,12 +4,12 @@ public static class ContactDto
 {
     public class Index
     {
-        public required string Id { get; set; }
+        public required Guid Id { get; set; }
         public required string Type { get; set; }
         public required string Name { get; set; }
         public string? Email { get; set; }
         public string? phoneNumber { get; set; }
         public string? ContactPerson { get; set; }
-        public List<string>? Campusses { get; set; }
+        public IEnumerable<string>? Campusses { get; set; }
     }
 }

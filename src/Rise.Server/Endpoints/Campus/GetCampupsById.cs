@@ -6,7 +6,7 @@ namespace Rise.Server.Endpoints.Campus;
 // <summary>
 // Get a campus plan by ID.
 // </summary>
-public class GetCampusById(ICampusService campusService) : EndpointWithoutRequest<Result<CampusDto.Index>>
+public class GetCampusById(ICampusService campusService) : EndpointWithoutRequest<Result<CampusResponse.Get>>
 {
     public override void Configure()
     {
@@ -14,9 +14,9 @@ public class GetCampusById(ICampusService campusService) : EndpointWithoutReques
         AllowAnonymous();
     }
 
-    public override async Task<Result<CampusDto.Index>> ExecuteAsync(CancellationToken ct)
+    public override async Task<Result<CampusResponse.Get>> ExecuteAsync(CancellationToken ct)
     {
-        var id = Route<string>("id");
+        var id = Route<Guid>("id");
         return await campusService.GetCampusByIdAsync(id, ct);
     }
 }

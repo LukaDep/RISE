@@ -12,6 +12,7 @@ using Rise.Domain.Products;
 using Rise.Domain.Projects;
 using Rise.Domain.Restos;
 using Rise.Domain.Schedule;
+using Rise.Shared.Common;
 
 namespace Rise.Persistence;
 /// <summary>
@@ -32,7 +33,6 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await ProjectsAsync();
         await AbsencesAsync();
         await CampusesAsync();
-        await CampusInfoAsync();
         await ContactsAsync();
         await GradesAsync();
         await RestosAndMenusAsync();
@@ -245,6 +245,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "14",
                 City = "Aalst",
                 PostalCode = "9300",
+                ContactPhone = "09 243 20 15",
+                Description = "Campus Aalst is vlot bereikbaar en centraal gelegen op wandelafstand van station Aalst (850 m), bushalte 'Vredeplein' (200 m), parking Hopmarkt (350 m) en parking Keizershallen (350 m).",
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 50.937566452189515,
                 Longitude = 4.033365889741001
             },
@@ -255,6 +258,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "4",
                 City = "Gent",
                 PostalCode = "9000",
+                ContactPhone = "09 243 20 13",
+                Description = "Campus Bijloke bevindt zich ideaal gelegen aan de kleine ring van Gent (R40), op 6 minuutjes fietsen of 15 minuten wandelen van het station Gent Sint-Pieters (1,5 km).",
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 51.045049214656395,
                 Longitude = 3.7146069594104048
             },
@@ -265,6 +271,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "1",
                 City = "Gent",
                 PostalCode = "9000",
+                ContactPhone = "09 243 20 14",
+                Description = "Campus Grote Sikkel is gelegen in het hart van Gent, op wandelafstand van het station Gent-Sint-Pieters (1,2 km) en het centrum (750 m).",
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 51.05376586462268,
                 Longitude = 3.7265563026441186
             },
@@ -275,6 +284,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "35",
                 City = "Gent",
                 PostalCode = "9000",
+                ContactPhone = "09 243 20 16",
+                Description = "Campus Ledeganck is gelegen nabij het centrum van Gent, op 10 minuutjes wandelen van het station Gent-Sint-Pieters (1,3 km) en op 5 minuutjes van het centrum (500 m).",
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 51.0365068204106,
                 Longitude = 3.724652944967813
             },
@@ -285,6 +297,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "31",
                 City = "Lokeren",
                 PostalCode = "9160",
+                ContactPhone = "09 243 20 17",
+                Description = "Campus Lokeren is gelegen op wandelafstand van het station Lokeren (850 m) en beschikt over een ruime parking.",
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 51.10908490773775,
                 Longitude = 3.9861375735619933
             },
@@ -295,6 +310,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "161",
                 City = "Melle",
                 PostalCode = "9090",
+                ContactPhone = "09 243 20 18",
+                Description = "Campus Melle is gelegen langs de Brusselsesteenweg (N9), op 10 minuutjes wandelen van het station Melle (800 m) en beschikt over een ruime parking.",
+                Facilities = ["Cafetaria", "Parking", "Library"], 
                 Latitude = 51.01430882035527,
                 Longitude = 3.7861257779015367
             },
@@ -305,9 +323,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "1",
                 City = "Gent",
                 PostalCode = "9000",
-                MapImageUrl = "/images/mercator.jpg",
-                ImageWidth = 750,
-                ImageHeight = 472,
+                ContactPhone = "09 243 20 19",
+                Description = "Campus Mercator is gelegen nabij het centrum van Gent, op 15 minuutjes wandelen van het station Gent-Sint-Pieters (1,5 km) en op 10 minuutjes van het centrum (800 m).",
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 51.04246772832513,
                 Longitude = 3.715410727376597
             },
@@ -318,9 +336,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "1",
                 City = "Gent",
                 PostalCode = "9000",
-                MapImageUrl = "/images/schoonmeersen.jpg",
-                ImageWidth = 2860,
-                ImageHeight = 3809,
+                ContactPhone = "09 243 20 20",
+                Description = "Campus Schoonmeersen is gelegen aan de rand van Gent, op 10 minuutjes fietsen of 20 minuten wandelen van het station Gent-Sint-Pieters (3 km).",
+                Facilities = ["Cafetaria", "Parking", "Library", "Sports Center"],
                 Latitude = 51.033100067702385,
                 Longitude = 3.7030483298315624
             },
@@ -331,6 +349,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "80",
                 City = "Gent",
                 PostalCode = "9000",
+                ContactPhone = "09 243 20 21",
+                Description = "Campus Vesalius is gelegen nabij het centrum van Gent, op 12 minuutjes wandelen van het station Gent-Sint-Pieters (1,4 km) en op 7 minuutjes van het centrum (600 m).",
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 51.0198962680327,
                 Longitude = 3.727240076846467
             },
@@ -341,6 +362,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "1",
                 City = "Bottelare",
                 PostalCode = "9820",
+                ContactPhone = "09 243 20 22",
+                Description = "De Proefhoeve Bottelare is gelegen in het landelijke Bottelare, op 15 minuutjes rijden van Gent centrum.",
+                Facilities = ["Parking", "Gardens"],
                 Latitude = 50.961813660026195,
                 Longitude = 3.7600818324091763
             },
@@ -351,6 +375,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "9",
                 City = "Gent",
                 PostalCode = "9000",
+                ContactPhone = "09 243 20 23",
+                Description = "De FTI Lab locatie in de Buchtenstraat is gelegen nabij het centrum van Gent, op 10 minuutjes wandelen van het station Gent-Sint-Pieters (1,2 km) en op 5 minuutjes van het centrum (500 m).",
+                Facilities = ["Lab Facilities", "Parking"],
                 Latitude = 51.0289436405976,
                 Longitude = 3.6854235892972094
             },
@@ -361,6 +388,9 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 HouseNumber = "5",
                 City = "Gent",
                 PostalCode = "9000",
+                ContactPhone = "09 243 20 24",
+                Description = "De locatie in de Geraard de Duivelstraat is gelegen nabij het centrum van Gent, op 12 minuutjes wandelen van het station Gent-Sint-Pieters (1,3 km) en op 7 minuutjes van het centrum (600 m).",
+                Facilities = ["Office Facilities", "Parking"],
                 Latitude = 51.052512156439,
                 Longitude = 3.728061840428318
             }
@@ -380,13 +410,13 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         {
             allBuildings.AddRange(new[]
             {
-                (new Building { Name = "Gebouw B", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03138465268992, Longitude = 3.701414635630698 }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw C", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03195215277462, Longitude = 3.704568306783877 }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw D", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.031511099994304, Longitude = 3.702789535635411 }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw E", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.0310611550396, Longitude = 3.7045170251451722 }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw P", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03423555310173, Longitude = 3.7019467933058716 }, schoonmeersen.Id),
-                (new Building { Name = "Sporthal", Address = "Sint-Denijslaan 251, 9000 Gent", Type = "sport", Latitude = 51.03493515601912, Longitude = 3.704163329549105 }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw T", Address = "Voskenslaan 364A, 9000 Gent", Type = "building", Latitude = 51.028515604065866, Longitude = 3.70666265806964 }, schoonmeersen.Id)
+                (new Building { Name = "Gebouw B", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03138465268992, Longitude = 3.701414635630698, CampusId = schoonmeersen.Id}, schoonmeersen.Id),
+                (new Building { Name = "Gebouw C", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03195215277462, Longitude = 3.704568306783877, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw D", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.031511099994304, Longitude = 3.702789535635411, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw E", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.0310611550396, Longitude = 3.7045170251451722, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw P", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03423555310173, Longitude = 3.7019467933058716, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Sporthal", Address = "Sint-Denijslaan 251, 9000 Gent", Type = "sport", Latitude = 51.03493515601912, Longitude = 3.704163329549105, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw T", Address = "Voskenslaan 364A, 9000 Gent", Type = "building", Latitude = 51.028515604065866, Longitude = 3.70666265806964, CampusId = schoonmeersen.Id }, schoonmeersen.Id)
             });
         }
 
@@ -394,10 +424,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         {
             allBuildings.AddRange(new[]
             {
-                (new Building { Name = "Gebouw C", Address = "Nonnemeersstraat 19-21, 9000 Gent", Type = "building", Latitude = 51.04365987772189, Longitude = 3.7133038554040447 }, mercator.Id),
-                (new Building { Name = "Gebouw D", Address = "Nonnemeersstraat 15-17, 9000 Gent", Type = "building", Latitude = 51.04409655468585, Longitude = 3.7139953687425247 }, mercator.Id),
-                (new Building { Name = "Gebouw E", Address = "Nonnemeersstraat 24, 9000 Gent", Type = "building", Latitude = 51.044138254547896, Longitude = 3.7140100810412755 }, mercator.Id),
-                (new Building { Name = "Gebouw G", Address = "Henleykaai 84, 9000 Gent", Type = "building", Latitude = 51.04198292611773, Longitude = 3.715517179744473 }, mercator.Id)
+                (new Building { Name = "Gebouw C", Address = "Nonnemeersstraat 19-21, 9000 Gent", Type = "building", Latitude = 51.04365987772189, Longitude = 3.7133038554040447, CampusId = mercator.Id }, mercator.Id),
+                (new Building { Name = "Gebouw D", Address = "Nonnemeersstraat 15-17, 9000 Gent", Type = "building", Latitude = 51.04409655468585, Longitude = 3.7139953687425247, CampusId = mercator.Id }, mercator.Id),
+                (new Building { Name = "Gebouw E", Address = "Nonnemeersstraat 24, 9000 Gent", Type = "building", Latitude = 51.044138254547896, Longitude = 3.7140100810412755, CampusId = mercator.Id }, mercator.Id),
+                (new Building { Name = "Gebouw G", Address = "Henleykaai 84, 9000 Gent", Type = "building", Latitude = 51.04198292611773, Longitude = 3.715517179744473, CampusId = mercator.Id }, mercator.Id)
             });
         }
 
@@ -405,11 +435,11 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         {
             allBuildings.AddRange(new[]
             {
-                (new Building { Name = "Pauli", Address = "J. Kluyskensstraat 2, 9000 Gent", Type = "building", Latitude = 51.04559751827652, Longitude = 3.7185065415747798 }, bijloke.Id),
-                (new Building { Name = "Cloquet", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497 }, bijloke.Id),
-                (new Building { Name = "Marissal", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497 }, bijloke.Id),
-                (new Building { Name = "Bijlokekaai", Address = "Bijlokekaai 5, 9000 Gent", Type = "building", Latitude = 51.04371555532695, Longitude = 3.7193240387340807 }, bijloke.Id),
-                (new Building { Name = "Kunstenbibliotheek Huis van de Abdis", Address = "Godshuizenlaan 2, 9000 Gent", Type = "library", Latitude = 51.04393486454849, Longitude = 3.717493005440041 }, bijloke.Id)
+                (new Building { Name = "Pauli", Address = "J. Kluyskensstraat 2, 9000 Gent", Type = "building", Latitude = 51.04559751827652, Longitude = 3.7185065415747798, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Cloquet", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Marissal", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Bijlokekaai", Address = "Bijlokekaai 5, 9000 Gent", Type = "building", Latitude = 51.04371555532695, Longitude = 3.7193240387340807, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Kunstenbibliotheek Huis van de Abdis", Address = "Godshuizenlaan 2, 9000 Gent", Type = "library", Latitude = 51.04393486454849, Longitude = 3.717493005440041, CampusId = bijloke.Id }, bijloke.Id)
             });
         }
 
@@ -420,42 +450,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         }
         await dbContext.SaveChangesAsync();
     }
-
-    private async Task CampusInfoAsync()
-    {
-        if (dbContext.CampusInfos.Any())
-            return;
-
-        dbContext.CampusInfos.AddRange(
-            new CampusInfo
-            {
-                Name = "Campus Aalst",
-                Location = "Arbeidstraat 14, 9300 Aalst",
-                Faculties = new List<string> { "bachelor bedrijfsmanagement", "bachelor toegepaste informatica", "graduaat accounting administration", "graduaat basisverpleegkunde", "graduaat programmeren", "graduaat systeem- en netwerkbeheer", "postgraduaat ondernemen" },
-                ContactPhone = "09 243 20 15",
-                Description = "Campus Aalst is vlot bereikbaar en centraal gelegen op wandelafstand van station Aalst (850 m), bushalte 'Vredeplein' (200 m), parking Hopmarkt (350 m) en parking Keizershallen (350 m)."
-            },
-            new CampusInfo
-            {
-                Name = "Campus Bijloke",
-                Location = "Louis Pasteurlaan 2, 9000 Gent",
-                Faculties = new List<string> { "audiovisuele kunsten", "beeldende kunsten", "drama", "interieurvormgeving", "landschaps- en tuinarchitectuur", "landschapsontwikkeling", "hedendaagse muziek", "educatieve master audiovisuele en beeldende kunsten", "educatieve master muziek- en podiumkunsten" },
-                ContactPhone = "09 243 20 13",
-                Description = "Campus Bijloke bevindt zich ideaal gelegen aan de kleine ring van Gent (R40), op 6 minuutjes fietsen of 15 minuten wandelen van het station Gent Sint-Pieters (1,5 km)."
-            },
-            new CampusInfo
-            {
-                Name = "Campus Schoonmeersen",
-                Location = "V. Vaerwyckweg 1, 9000 Gent",
-                Faculties = new List<string> { "bachelor bedrijfsmanagement", "bachelor chemie", "bachelor elektromechanica", "bachelor houttechnologie", "bachelor organisatie & management", "bachelor orthopedagogie", "bachelor retailmanagement", "bachelor secundair onderwijs", "bachelor sociaal werk", "bachelor toegepaste informatica", "bachelor vastgoed" },
-                ContactPhone = "09 243 20 04",
-                Description = "Campus Schoonmeersen is vlot bereikbaar en goed gelegen aan de ring rond Gent (R4) en op wandelafstand van station Gent Sint-Pieters (600 m)."
-            }
-        );
-
-        await dbContext.SaveChangesAsync();
-    }
-
+    
     private async Task ContactsAsync()
     {
         if (dbContext.Contacts.Any())

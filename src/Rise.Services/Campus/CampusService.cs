@@ -4,6 +4,8 @@ using Rise.Persistence;
 using Rise.Shared.Campus;
 using Rise.Shared.Common;
 using System.Text.Json.Serialization;
+using Microsoft.EntityFrameworkCore;
+using Rise.Domain.Campus;
 
 namespace Rise.Services.Campus;
 
@@ -11,53 +13,104 @@ namespace Rise.Services.Campus;
 // Service for campus.
 // </summary>
 // <param name="dbContext"></param>
-public class CampusService() : ICampusService
+public class CampusService(ApplicationDbContext dbContext) : ICampusService
 {
 
     private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "Campus", "MockData", "campus.json");
     public async Task<Result<CampusResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
-        if (!File.Exists(_mockFilePath))
-            return Result<CampusResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
+        var query = dbContext.Campuses.AsQueryable();
 
-        var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-        var items = JsonSerializer.Deserialize<List<CampusDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-        var response = new CampusResponse.Index { Campuses = items };
+        var campuses = await query.AsNoTracking()
+            .Skip(request.Skip)
+            .Take(request.Take)
+            .Select(c => new CampusDto.Index
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Street = c.Street,
+                HouseNumber = c.HouseNumber,
+                City = c.City,
+                PostalCode = c.PostalCode,
+                ContactPhone = c.ContactPhone,
+                Description = c.Description,
+                Facilities = c.Facilities,
+                Latitude = c.Latitude,
+                Longitude = c.Longitude,
+                Buildings = (c.Buildings ?? Array.Empty<Building>()).Select(b => new BuildingDto.Index
+                    {
+                        Id = b.Id,
+                        CampusId = c.Id,
+                        Name = b.Name,
+                        Address = b.Address,
+                        Type = b.Type,
+                        Latitude = b.Latitude,
+                        Longitude = b.Longitude
+                    }).ToList()
+                }).ToListAsync(ctx);
+
+        return Result.Success(new CampusResponse.Index
+            {
+                Campuses = campuses
+            }
+        );
+    }
+
+    public async Task<Result<CampusResponse.Get>> GetCampusByIdAsync(Guid id, CancellationToken ct = default)
+    {
+        var query = dbContext.Campuses.AsQueryable();
+        var campus = await query.AsNoTracking()
+            .Where(c => c.Id.Equals(id))
+            .Select(c => new CampusDto.Index
+            {
+                Id = c.Id,
+                Name = c.Name,
+                Street = c.Street,
+                HouseNumber = c.HouseNumber,
+                City = c.City,
+                PostalCode = c.PostalCode,
+                ContactPhone = c.ContactPhone,
+                Description = c.Description,
+                Facilities = c.Facilities,
+                Latitude = c.Latitude,
+                Longitude = c.Longitude,
+                Buildings = (c.Buildings ?? Array.Empty<Building>()).Select(b => new BuildingDto.Index
+                {
+                    Id = b.Id,
+                    CampusId = c.Id,
+                    Name = b.Name,
+                    Address = b.Address,
+                    Type = b.Type,
+                    Latitude = b.Latitude,
+                    Longitude = b.Longitude
+                }).ToList()
+            }).FirstOrDefaultAsync(ct);
+        
+        if (campus == null)
+            return Result<CampusResponse.Get>.NotFound($"No Campus found with id {id}");
+        var response = new CampusResponse.Get { Campus = campus };
         return Result.Success(response);
     }
-
-    public async Task<Result<CampusDto.Index>> GetCampusByIdAsync(string id, CancellationToken ct = default)
+    public async Task<Result<BuildingResponse.Get>> GetBuildingByIdAsync(Guid buildingId, CancellationToken ct = default)
     {
-        if (!File.Exists(_mockFilePath))
-            return Result<CampusDto.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-
-        var json = await File.ReadAllTextAsync(_mockFilePath, ct);
-        var items = JsonSerializer.Deserialize<List<CampusDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-
-        var campus = items.FirstOrDefault(c => string.Equals(c.Id?.ToString(), id, StringComparison.OrdinalIgnoreCase));
-        if (campus == null)
-            return Result<CampusDto.Index>.NotFound($"Campus not found. Id: {id}");
-
-        return Result.Success(campus);
-    }
-    public async Task<Result<BuildingDto.Index>> GetBuildingByIdAsync(string buildingId, CancellationToken ct = default)
-    {
-        if (!File.Exists(_mockFilePath))
-            return Result<BuildingDto.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-
-        var json = await File.ReadAllTextAsync(_mockFilePath, ct);
-        var items = JsonSerializer.Deserialize<List<CampusDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-
-        foreach (var campus in items)
-        {
-            var building = campus.Buildings?.FirstOrDefault(b => string.Equals(b.Id?.ToString(), buildingId, StringComparison.OrdinalIgnoreCase));
-            if (building != null)
+        var query = dbContext.Buildings.AsQueryable();
+        var building = await query.AsNoTracking()
+            .Where(b => b.Id.Equals(buildingId))
+            .Select(b => new BuildingDto.Index
             {
-                return Result.Success(building);
-            }
-        }
-
-        return Result<BuildingDto.Index>.NotFound($"Building not found. Id: {buildingId}");
+                Id = b.Id,
+                Name = b.Name,
+                Type = b.Type,
+                Address = b.Address,
+                Latitude = b.Latitude,
+                Longitude = b.Longitude,
+                CampusId = b.CampusId
+            }).FirstOrDefaultAsync(ct);
+        
+        if (building == null)
+            return Result<BuildingResponse.Get>.NotFound($"No Building found with id {buildingId}");
+        var response = new BuildingResponse.Get { Building = building };
+        return Result.Success(response);
     }
 
 }

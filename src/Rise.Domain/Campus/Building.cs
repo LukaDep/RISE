@@ -36,18 +36,12 @@ public class Building : Entity
         get => _longitude;
         set => _longitude = value;
     }
+    
+    private Guid _campusId;
 
-    private int? _x;
-    public int? X
+    public required Guid CampusId
     {
-        get => _x;
-        set => _x = value;
-    }
-
-    private int? _y;
-    public int? Y
-    {
-        get => _y;
-        set => _y = value;
+        get => _campusId;
+        set => _campusId = Guard.Against.Default(value);
     }
 }

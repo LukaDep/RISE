@@ -1,3 +1,5 @@
+using Rise.Shared.Common;
+
 namespace Rise.Domain.Menu;
 
 public class MenuItem : Entity
@@ -52,18 +54,4 @@ public class MenuItem : Entity
     }
 }
 
-public enum FoodType
-{
-    WarmeMaaltijd,
-    KoudeMaaltijd,
-    Belegdbroodje,
-    Koffiebar,
-    Soep,
-    Groente,
-    Saus,
-    Zetmeel,
-    Dessert,
-    Drank,
-    Snack,
-    Pasta
-}
+

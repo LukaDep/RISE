@@ -1,6 +1,7 @@
+using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Rise.Domain.Campus;
+
 
 namespace Rise.Persistence.Configurations.Campus;
 
@@ -33,8 +34,20 @@ internal class CampusConfiguration : EntityConfiguration<Domain.Campus.Campus>
             .IsRequired()
             .HasMaxLength(20);
 
-        builder.Property(x => x.MapImageUrl)
-            .HasMaxLength(500);
+        
+        builder.Property(x => x.ContactPhone)
+            .IsRequired()
+            .HasMaxLength(20);
+        
+        builder.Property(x => x.Description)
+            .IsRequired()
+            .HasMaxLength(2000);
+        
+        builder.Property(x => x.Facilities)
+            .HasConversion(
+                v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
+                v => JsonSerializer.Deserialize<IEnumerable<string>>(v, (JsonSerializerOptions?)null) ?? Array.Empty<string>())
+            .HasColumnType("json");
 
         // Configure one-to-many relationship with Building
         builder.HasMany(x => x.Buildings)

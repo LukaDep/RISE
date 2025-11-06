@@ -1,3 +1,5 @@
+using Rise.Persistence;
+
 namespace Rise.Services.Grades;
 
 using System.Text.Json;
@@ -9,39 +11,49 @@ using Rise.Shared.Grades;
 /// Service for grades.
 /// </summary>
 
-public class GradesService() : IGradesService
+public class GradesService(ApplicationDbContext dbContext) : IGradesService
 {
     private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "Grades", "MockData", "grades.json");
     public async Task<Result<GradesResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
-        // mockdata
-        if (!File.Exists(_mockFilePath))
-            return Result<GradesResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-        // deserialize
-        var query = JsonSerializer.Deserialize<List<GradesDto.Grade>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+        // // mockdata
+        // if (!File.Exists(_mockFilePath))
+        //     return Result<GradesResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
+        // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
+        // // deserialize
+        // var query = JsonSerializer.Deserialize<List<GradesDto.Grade>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
+        var query = dbContext.Grades.AsQueryable();
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
-            query = query.Where(g => (g.CourseName ?? string.Empty).Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)
-                                     || (g.Name ?? string.Empty).Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
+            query = query.Where(g => (g.CourseName ?? string.Empty).Contains(request.SearchTerm)
+                                     || (g.Name ?? string.Empty).Contains(request.SearchTerm));
         }
         if (!string.IsNullOrWhiteSpace(request.OrderBy))
         {
             query = request.OrderDescending
-                ? query.OrderByDescending(e => EF.Property<object>(e, request.OrderBy)).ToList()
-                : query.OrderBy(e => EF.Property<object>(e, request.OrderBy)).ToList();
+                ? query.OrderByDescending(e => EF.Property<object>(e, request.OrderBy))
+                : query.OrderBy(e => EF.Property<object>(e, request.OrderBy));
         }
         else
         {
-            query = query.OrderByDescending(g => g.Date).ToList();
+            query = query.OrderByDescending(g => g.Date);
         }
 
-        var grades = query.Skip(request.Skip).Take(request.Take).ToList();
+        var grades = query
+            .Skip(request.Skip)
+            .Take(request.Take)
+            .Select(g => new GradesDto.Grade
+            {
+                CourseId = g.CourseId,
+                CourseName = g.CourseName,
+                Date = g.Date,
+                Id = g.Id
+            });
         var response = new GradesResponse.Index { Grades = grades };
         return Result.Success(response);
     }
 
-    public async Task<Result<GradesResponse.GradeById>> GetGradeByIdAsync(string id, CancellationToken ctx)
+    public async Task<Result<GradesResponse.GradeById>> GetGradeByIdAsync(Guid id, CancellationToken ctx)
     {
         if (!File.Exists(_mockFilePath))
             return Result<GradesResponse.GradeById>.NotFound($"Mock data file not found at: {_mockFilePath}");

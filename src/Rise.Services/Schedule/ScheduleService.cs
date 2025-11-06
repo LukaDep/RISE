@@ -1,4 +1,5 @@
 using System.Text.Json;
+using Rise.Persistence;
 using Rise.Services.Absences;
 using Rise.Shared.Absences;
 using Rise.Shared.Common;
@@ -7,24 +8,24 @@ using Serilog;
 
 namespace Rise.Services.Schedule;
 
-public class MockScheduleService : IScheduleService
+public class ScheduleService(ApplicationDbContext dbContext) : IScheduleService
 {
     private readonly string _mockFilePath;
 
-    private AbsencesService _absencesService;
+    private AbsencesService _absencesService = new AbsencesService(dbContext);
 
-    public MockScheduleService()
-    {
-        // Pad naar het JSON-bestand in de source code directory
-        var currentDirectory = Directory.GetCurrentDirectory();
-        // CurrentDirectory is Rise.Server, dus we gaan een level omhoog en dan naar Rise.Services
-        _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");
-        Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
-        Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
-        Log.Information("File exists: {FileExists}", File.Exists(_mockFilePath));
-        //AbsencesService aanmaken
-        _absencesService = new AbsencesService();
-    }
+    // public MockScheduleService()
+    // {
+    //     // Pad naar het JSON-bestand in de source code directory
+    //     var currentDirectory = Directory.GetCurrentDirectory();
+    //     // CurrentDirectory is Rise.Server, dus we gaan een level omhoog en dan naar Rise.Services
+    //     _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");
+    //     Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
+    //     Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
+    //     Log.Information("File exists: {FileExists}", File.Exists(_mockFilePath));
+    //     //AbsencesService aanmaken
+    //     _absencesService = new AbsencesService();
+    // }
 
     public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)
     {

@@ -9,9 +9,5 @@ public static partial class CampusResponse
     {
         public IEnumerable<CampusDto.Index> Campuses { get; set; } = [];
     }
-    public class GetById<T>
-    {
-        public T Value { get; set; } = default!;
-    }
 
 }
