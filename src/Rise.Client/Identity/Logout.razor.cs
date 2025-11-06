@@ -13,6 +13,6 @@ public partial class Logout
         {
             await AccountManager.LogoutAsync();
         }
-        NavigationManager.NavigateTo("/login", true);
+        NavigationManager.NavigateTo("/", true);
     }
 }

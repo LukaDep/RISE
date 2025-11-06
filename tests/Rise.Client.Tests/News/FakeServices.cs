@@ -7,7 +7,7 @@ namespace Rise.Client.News;
 
 public class NullNewsService : INewsService
 {
-    public Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
+    public Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
         // Intentionally set News to null (use null-forgiving to bypass nullable warning)
         var wrapper = new NewsResponse.Index
@@ -34,7 +34,7 @@ public class FakeNewsService : INewsService
             new NewsDto.Index { Id = Guid.Parse("4"), Title = "Guest lecture series", PublishDate = DateTime.UtcNow,Type="test4", Description = "tester4", Content = "A new guest lecture series will start next week.", Author = "Events" },
         };
 
-    public Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
+    public Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
         // simple search: title or content contains SearchTerm (case-insensitive)
         var query = _items.AsEnumerable();

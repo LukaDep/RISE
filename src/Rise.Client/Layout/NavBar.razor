@@ -1,19 +1,22 @@
-<nav class="navbar flex flex-row h-16 items-center bg-hogent-black shadow-[0px_-0.3rem_1rem] shadow-hogent-black-50"
-  aria-label="main navigation">
+@using Microsoft.AspNetCore.Components.Authorization
+@inject IStringLocalizer<SharedResources> L
 
-  <NavLink href="/" Match="NavLinkMatch.All" class="relative flex-1 flex items-center justify-center h-full">
+<nav class="lg:hidden navbar flex flex-row h-16 items-center bg-hogent-black shadow-[0px_-0.3rem_1rem] shadow-hogent-black-50"
+  aria-label="main navigation mobile">
+
+  <NavLink href="/" Match="NavLinkMatch.All" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Home"]">
     <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
       <i class="fa-solid fa-house fa-lg text-hogent-white"></i>
     </div>
   </NavLink>
 
-  <NavLink href="/news" class="relative flex-1 flex items-center justify-center h-full">
+  <NavLink href="/news" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.News"]">
     <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
       <i class="fa-solid fa-newspaper fa-lg text-hogent-white"></i>
     </div>
   </NavLink>
 
-  <NavLink href="/campus" class="relative flex-1 flex items-center justify-center h-full">
+  <NavLink href="/campus" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Campus"]">
     <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
       <i class="fa-solid fa-school fa-lg text-hogent-white"></i>
     </div>
@@ -22,13 +25,13 @@
 
   <AuthorizeView>
     <Authorized>
-      <NavLink href="/schedule" class="relative flex-1 flex items-center justify-center h-full">
+      <NavLink href="/schedule" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Schedule"]">
         <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
           <i class="fa-solid fa-calendar-days fa-lg text-hogent-white"></i>
         </div>
       </NavLink>
 
-      <NavLink href="/account" class="relative flex-1 flex items-center justify-center h-full">
+      <NavLink href="/account" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Account"]">
         <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
           <i class="fa-solid fa-user fa-lg text-hogent-white"></i>
         </div>
@@ -36,13 +39,13 @@
     </Authorized>
 
     <NotAuthorized>
-      <NavLink href="/resto" class="relative flex-1 flex items-center justify-center h-full">
+      <NavLink href="/resto" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Resto"]">
         <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
           <i class="fa-solid fa-utensils fa-lg text-hogent-white"></i>
         </div>
       </NavLink>
 
-      <NavLink href="/login?returnUrl=/account" class="relative flex-1 flex items-center justify-center h-full">
+      <NavLink href="/login" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Login"]">
         <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
           <i class="fa-solid fa-right-to-bracket fa-lg text-hogent-white"></i>
         </div>

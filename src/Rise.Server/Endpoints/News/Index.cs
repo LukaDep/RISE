@@ -8,7 +8,7 @@ namespace Rise.Server.Endpoints.News;
 /// See https://fast-endpoints.com/
 /// </summary>
 /// <param name="newsService"></param>
-public class Index(INewsService newsService) : Endpoint<QueryRequest.SkipTake, Result<NewsResponse.Index>>
+public class Index(INewsService newsService) : Endpoint<QueryRequest.DateRange, Result<NewsResponse.Index>>
 {
     public override void Configure()
     {
@@ -16,7 +16,7 @@ public class Index(INewsService newsService) : Endpoint<QueryRequest.SkipTake, R
         AllowAnonymous();
     }
 
-    public override Task<Result<NewsResponse.Index>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
+    public override Task<Result<NewsResponse.Index>> ExecuteAsync(QueryRequest.DateRange req, CancellationToken ct)
     {
         return newsService.GetIndexAsync(req, ct);
     }
