@@ -47,6 +47,9 @@ public partial class Index
     private int _totalCount;
     private int _currentCount;
 
+    //js scroll to top 
+    private bool _initialized;
+
 
     // Date range filter items
     private IEnumerable<KeyValuePair<string, string>> DateRangeItems =>
@@ -148,6 +151,23 @@ public partial class Index
         _currentCount = _news?.Count() ?? 0;
 
         StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_initialized)
+        {
+            _initialized = true;
+            try
+            {
+                // Call the global wrapper defined in wwwroot/scrollTop.js
+                await JS.InvokeVoidAsync("initScrollTop", "scrollToTopBtn");
+            }
+            catch
+            {
+                // swallow JS errors — avoids breaking rendering if script not present
+            }
+        }
     }
 
     private void OnDateRangeChanged(string? value)

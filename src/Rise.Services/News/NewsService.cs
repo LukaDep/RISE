@@ -23,7 +23,7 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         // // Deserialize the JSON data into a list of NewsDto.Index
         // var query = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
 
-        var query = dbContext.NewsItems.AsQueryable();
+        var query = dbContext.NewsArticles.AsQueryable();
 
 
 
@@ -99,15 +99,15 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         );
     }
 
-    public async Task<Result<NewsResponse.Get>> GetByIdAsync(int id, CancellationToken ctx = default)
+    public async Task<Result<NewsResponse.Get>> GetByIdAsync(Guid id, CancellationToken ctx = default)
     {
         // if (!File.Exists(_mockFilePath))
         //     return Result<NewsResponse.Get>.NotFound($"Mock data file not found at: {_mockFilePath}");
         //
         // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
         // var items = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-        var query = dbContext.NewsItems.AsQueryable();
-        var newsItem = await query.AsNoTracking()
+        var query = dbContext.NewsArticles.AsQueryable();
+        var newsArticle = await query.AsNoTracking()
             .Where(n => n.Id == id)
             .Select(n => new NewsDto.Index
             {
@@ -120,10 +120,10 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
                 Author = n.Author
             })
             .FirstOrDefaultAsync(ctx);
-        if (newsItem == null)
+        if (newsArticle == null)
             return Result<NewsResponse.Get>.NotFound($"News item with id {id} not found.");
 
-        var response = new NewsResponse.Get { NewsItem = newsItem };
+        var response = new NewsResponse.Get { NewsArticle = newsArticle };
         return Result.Success(response);
     }
 }

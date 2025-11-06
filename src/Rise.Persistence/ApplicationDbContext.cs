@@ -1,9 +1,17 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Rise.Domain.Absences;
+using Rise.Domain.Campus;
+using Rise.Domain.CampusInfo;
+using Rise.Domain.Contact;
+using Rise.Domain.Grades;
+using Rise.Domain.Menu;
 using Rise.Domain.News;
 using Rise.Domain.Products;
 using Rise.Domain.Projects;
+using Rise.Domain.Restos;
+using Rise.Domain.Schedule;
 
 namespace Rise.Persistence;
 
@@ -21,14 +29,24 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<Product> Products => Set<Product>();
     public DbSet<Project> Projects => Set<Project>();
     public DbSet<Technician> Technicians => Set<Technician>();
-    public DbSet<NewsItem> NewsItems => Set<NewsItem>();
+    public DbSet<NewsArticle> NewsArticles => Set<NewsArticle>();
+    public DbSet<Absence> Absences => Set<Absence>();
+    public DbSet<Campus> Campuses => Set<Campus>();
+    public DbSet<Building> Buildings => Set<Building>();
+    public DbSet<CampusInfo> CampusInfos => Set<CampusInfo>();
+    public DbSet<Contact> Contacts => Set<Contact>();
+    public DbSet<Grade> Grades => Set<Grade>();
+    public DbSet<Menu> Menus => Set<Menu>();
+    public DbSet<MenuItem> MenuItems => Set<MenuItem>();
+    public DbSet<Resto> Restos => Set<Resto>();
+    public DbSet<Reservation> Reservations => Set<Reservation>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
-        // All columns in the database have a maxlength of 4000.
-        // in NVARACHAR 4000 is the maximum length that can be indexed by a database.
+        // All columns in the database have a maxlength of 255.
+        // in VARCHAR 255 is the maximum length that can be indexed efficiently in MariaDB/MySQL.
         // Some columns need more length, but these can be set on the configuration level for that Entity in particular.
-        configurationBuilder.Properties<string>().HaveMaxLength(4_000);
+        configurationBuilder.Properties<string>().HaveMaxLength(255);
         // All decimals columns should have 2 digits after the comma
         configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
     }

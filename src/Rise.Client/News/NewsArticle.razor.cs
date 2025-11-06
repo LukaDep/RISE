@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Components;
-using Rise.Shared.Common;
 using Rise.Shared.News;
 
 namespace Rise.Client.News;
@@ -7,8 +6,8 @@ namespace Rise.Client.News;
 public partial class NewsArticle : ComponentBase
 {
     [Inject] public required INewsService NewsService { get; set; }
-    [Parameter] public int Id { get; set; }
-    private NewsDto.Index? newsItem;
+    [Parameter] public Guid Id { get; set; }
+    private NewsDto.Index? newsArticle;
     private string? errorMessage;
 
     private string GetThumbnailUrl()
@@ -23,7 +22,7 @@ public partial class NewsArticle : ComponentBase
 
         if (result.IsSuccess)
         {
-            newsItem = result.Value.NewsItem;
+            newsArticle = result.Value.NewsArticle;
         }
         else
         {

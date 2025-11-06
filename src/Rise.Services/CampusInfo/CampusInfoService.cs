@@ -1,15 +1,14 @@
 ﻿using System.Text.Json;
 using Rise.Persistence;
-using Rise.Shared.Common;
 using Rise.Shared.CampusInfo;
+using Rise.Shared.Common;
 
 namespace Rise.Services.CampusInfo;
 
 /// <summary>
 /// Service for campusInfo.
 /// </summary>
-/// <param name="dbContext"></param>
-public class CampusInfoService(ApplicationDbContext dbContext) : ICampusInfoService
+public class CampusInfoService(ApplicationDbContext _) : ICampusInfoService
 {
     private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "CampusInfo", "MockData", "campusInfo.json");
     public async Task<Result<CampusInfoResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)

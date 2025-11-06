@@ -6,9 +6,9 @@ namespace Rise.Domain.Common;
 public abstract class Entity
 {
     /// <summary>
-    /// Primary Key of the <see cref="Entity"/>
+    /// Primary Key of the <see cref="Entity"/> using UUIDv7
     /// </summary>
-    public int Id { get; protected set; }
+    public Guid Id { get; protected set; } = Guid.CreateVersion7();
     /// <summary>
     /// Date of the initial creation.
     /// </summary>
@@ -24,7 +24,7 @@ public abstract class Entity
 
     protected Entity() { }
 
-    protected Entity(int id)
+    protected Entity(Guid id)
     {
         Id = id;
     }
@@ -40,13 +40,13 @@ public abstract class Entity
         if (GetType() != other.GetType())
             return false;
 
-        if (Id.Equals(default) || other.Id.Equals(default))
+        if (Guid.Empty.Equals(Id) || Guid.Empty.Equals(other.Id))
             return false;
 
         return Id.Equals(other.Id);
     }
 
-    public static bool operator ==(Entity a, Entity b)
+    public static bool operator ==(Entity? a, Entity? b)
     {
         if (a is null && b is null)
             return true;
@@ -57,7 +57,7 @@ public abstract class Entity
         return a.Equals(b);
     }
 
-    public static bool operator !=(Entity a, Entity b)
+    public static bool operator !=(Entity? a, Entity? b)
     {
         return !(a == b);
     }

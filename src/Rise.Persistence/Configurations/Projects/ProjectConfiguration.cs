@@ -27,6 +27,9 @@ internal class ProjectConfiguration : EntityConfiguration<Project>
             loc.Property(x => x.Addressline2).IsRequired().HasMaxLength(250).HasColumnName(nameof(Address.Addressline2));
             loc.Property(x => x.City).IsRequired().HasMaxLength(50).HasColumnName(nameof(Address.City));
             loc.Property(x => x.PostalCode).IsRequired().HasMaxLength(20).HasColumnName(nameof(Address.PostalCode));
+
+            // Configure the shadow foreign key property for the owned entity
+            loc.Property<string>("ProjectId").HasMaxLength(36);
         }).Navigation(x => x.Location).IsRequired();
 
         // See /// See https://hogent-web.github.io/csharp/chapters/09/slides/index.html#1 for more information.

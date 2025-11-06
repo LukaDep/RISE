@@ -1,11 +1,11 @@
-﻿using Rise.Shared.Products;
-using Xunit.Abstractions;
-using Shouldly;
-using NSubstitute;
+﻿using System.Linq;
 using System.Threading.Tasks;
-using System.Linq;
 using Ardalis.Result;
+using NSubstitute;
 using Rise.Shared.Common;
+using Rise.Shared.Products;
+using Shouldly;
+using Xunit.Abstractions;
 
 namespace Rise.Client.Products;
 
@@ -28,7 +28,7 @@ public class IndexWithMockExampleShould : TestContext
 
         // Mock
         var products = Enumerable.Range(1, 5)
-                         .Select(i => new ProductDto.Index() { Id = i, Name = $"Product {i}", Description = $"Description {i}" });
+                         .Select(i => new ProductDto.Index() { Id = Guid.Parse(i.ToString()), Name = $"Product {i}", Description = $"Description {i}" });
 
         var wrapper = new ProductResponse.Index
         {

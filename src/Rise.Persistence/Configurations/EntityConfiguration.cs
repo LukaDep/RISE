@@ -15,13 +15,17 @@ internal class EntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> 
         // All tables are singlular named and have the name of the class e.g. Product instead of Products.
         builder.ToTable(typeof(TEntity).Name);
 
+        // Configure Id as UUIDv7 (stored as CHAR(36) for MySQL/MariaDB compatibility)
+        builder.Property(e => e.Id)
+            .HasMaxLength(36);
+
         // CreatedAt should be filled in by the database when using raw SQL.
         builder.Property(e => e.CreatedAt)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP"); // SQLite specific, so change this when moving to another database provider.
+            .HasDefaultValueSql("CURRENT_TIMESTAMP(6)"); // MariaDB/MySQL specific
 
         // UpdatedAt should be filled in by the database when using raw SQL.
         builder.Property(e => e.UpdatedAt)
-            .HasDefaultValueSql("CURRENT_TIMESTAMP"); // SQLite specific, so change this when moving to another database provider.
+            .HasDefaultValueSql("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"); // MariaDB/MySQL specific
 
         // IsDeleted should be false by default, used for softdelete.
         builder.Property(e => e.IsDeleted)

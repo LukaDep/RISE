@@ -1,6 +1,6 @@
 namespace Rise.Domain.News;
 
-public class NewsItem : Entity
+public class NewsArticle : Entity
 {
     private string _title = string.Empty;
 

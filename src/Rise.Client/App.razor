@@ -1,10 +1,11 @@
-﻿<CascadingAuthenticationState>
+﻿@using Rise.Client.Pages
+<CascadingAuthenticationState>
     <Router AppAssembly="typeof(App).Assembly">
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="routeData" DefaultLayout="typeof(MainLayout)">
                 <NotAuthorized>
                     <LayoutView Layout="typeof(MainLayout)">
-                        <Rise.Client.Pages.NotAuthorized />
+                        <NotAuthorized />
                     </LayoutView>
                 </NotAuthorized>
             </AuthorizeRouteView>
@@ -13,7 +14,7 @@
         <NotFound>
             <PageTitle>@L["Common.NotFoundTitle"]</PageTitle>
             <LayoutView Layout="typeof(MainLayout)">
-                <Rise.Client.Pages.NotFound />
+                <NotFound />
             </LayoutView>
         </NotFound>
     </Router>
