@@ -9,7 +9,28 @@ pipeline {
     }
 
     stages {
+         stage('Install Node & Tailwind Dependencies') {
+            steps {
+                echo "=== Install Node Dependencies for Tailwind ==="
+                // Als package.json aanwezig is, installeer Node modules
+                sh '''
+                    if [ -f package.json ]; then
+                        npm ci || npm install
+                    fi
+                '''
+            }
+        }
 
+        stage('Build TailwindCSS') {
+            steps {
+                echo "=== Building Tailwind CSS ==="
+                sh '''
+                    npx tailwindcss -i ./src/Rise.Client/wwwroot/css/tailwind.css \
+                                    -o ./src/Rise.Client/wwwroot/css/output.css \
+                                    --minify
+                '''
+            }
+        }
         stage('Restore & Build') {
             steps {
                 echo "=== Restore & Build ==="
