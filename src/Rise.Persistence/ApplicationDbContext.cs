@@ -8,8 +8,6 @@ using Rise.Domain.Contact;
 using Rise.Domain.Grades;
 using Rise.Domain.Menu;
 using Rise.Domain.News;
-using Rise.Domain.Products;
-using Rise.Domain.Projects;
 using Rise.Domain.Restos;
 using Rise.Domain.Schedule;
 
@@ -26,9 +24,6 @@ namespace Rise.Persistence;
 /// <param name="opts"></param>
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) : IdentityDbContext<IdentityUser>(opts)
 {
-    public DbSet<Product> Products => Set<Product>();
-    public DbSet<Project> Projects => Set<Project>();
-    public DbSet<Technician> Technicians => Set<Technician>();
     public DbSet<NewsArticle> NewsArticles => Set<NewsArticle>();
     public DbSet<Absence> Absences => Set<Absence>();
     public DbSet<Campus> Campuses => Set<Campus>();

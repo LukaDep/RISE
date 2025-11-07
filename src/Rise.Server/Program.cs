@@ -48,7 +48,6 @@ try
         .AddFastEndpoints(o =>
         {
             o.IncludeAbstractValidators = true; // Include validators from abstract classes (see https://docs.fluentvalidation.net/en/latest/).
-            o.Assemblies = [typeof(Rise.Shared.Products.ProductRequest).Assembly]; // Adds the validators from other assemblies
         })
         .SwaggerDocument(o =>
         {
@@ -100,7 +99,7 @@ try
         {
             var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             var dbSeeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
-            
+
             await dbContext.Database.MigrateAsync(); // Creates the database if it doesn't exist and applies all migrations. See Readme.md for more info.
             await dbSeeder.SeedAsync(); // Seeds the database with some test data.
         }
