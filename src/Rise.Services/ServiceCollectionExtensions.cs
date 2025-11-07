@@ -27,7 +27,7 @@ public static class ServiceCollectionExtensions
     {
         services.AddScoped<ICampusService, CampusService>();
         services.AddScoped<IMenuService, MenuService>();
-        services.AddScoped<IScheduleService, ScheduleService>();
+        services.AddScoped<IScheduleService, MockScheduleService>();
         services.AddScoped<IRestoService, RestoService>();
         services.AddScoped<INewsService, NewsService>();
         services.AddScoped<ICampusInfoService, CampusInfoService>();

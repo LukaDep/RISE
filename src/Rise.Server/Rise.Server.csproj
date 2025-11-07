@@ -32,7 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Rise.Client\Rise.Client.csproj" />
+<!--    <ProjectReference Include="..\Rise.Client\Rise.Client.csproj" />-->
     <ProjectReference Include="..\Rise.Persistence\Rise.Persistence.csproj" />
     <ProjectReference Include="..\Rise.Services\Rise.Services.csproj" />
     <ProjectReference Include="..\Rise.Shared\Rise.Shared.csproj" />

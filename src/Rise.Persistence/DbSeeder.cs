@@ -392,7 +392,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         dbContext.Grades.AddRange(
             new Grade
             {
-                CourseId = "C10101",
+                
                 CourseName = "Web Development 3",
                 Year = "2024-2025",
                 Semester = 1,
@@ -406,7 +406,6 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             },
             new Grade
             {
-                CourseId = "C10101",
                 CourseName = "Web Development 3",
                 Year = "2024-2025",
                 Semester = 1,
@@ -420,7 +419,6 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             },
             new Grade
             {
-                CourseId = "C10202",
                 CourseName = "Databases 2",
                 Year = "2024-2025",
                 Semester = 1,

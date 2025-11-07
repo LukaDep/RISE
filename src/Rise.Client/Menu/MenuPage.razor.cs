@@ -6,7 +6,7 @@ namespace Rise.Client.Menu;
 
 public partial class MenuPage : ComponentBase
 {
-    [Parameter] public string RestoId { get; set; } = default!;
+    [Parameter] public Guid RestoId { get; set; } = default!;
 
     [Inject] private IMenuService MenuService { get; set; } = default!;
     [Inject] private NavigationManager NavigationManager { get; set; } = default!;

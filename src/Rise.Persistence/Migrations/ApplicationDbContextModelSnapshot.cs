@@ -331,12 +331,6 @@ namespace Rise.Persistence.Migrations
                         .HasColumnType("datetime(6)")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)");
 
-                    b.Property<int?>("X")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("Y")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CampusId");
@@ -356,21 +350,29 @@ namespace Rise.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("ContactPhone")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
+
                     b.Property<DateTime>("CreatedAt")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("datetime(6)")
                         .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(2000)
+                        .HasColumnType("varchar(2000)");
+
+                    b.Property<string>("Facilities")
+                        .IsRequired()
+                        .HasColumnType("json");
+
                     b.Property<string>("HouseNumber")
                         .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
-
-                    b.Property<int?>("ImageHeight")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ImageWidth")
-                        .HasColumnType("int");
 
                     b.Property<bool>("IsDeleted")
                         .ValueGeneratedOnAdd()
@@ -382,10 +384,6 @@ namespace Rise.Persistence.Migrations
 
                     b.Property<double?>("Longitude")
                         .HasColumnType("double");
-
-                    b.Property<string>("MapImageUrl")
-                        .HasMaxLength(500)
-                        .HasColumnType("varchar(500)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -526,9 +524,9 @@ namespace Rise.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<string>("CourseId")
+                    b.Property<Guid>("CourseId")
                         .HasMaxLength(250)
-                        .HasColumnType("varchar(250)");
+                        .HasColumnType("char(250)");
 
                     b.Property<string>("CourseName")
                         .HasMaxLength(250)
