@@ -9,11 +9,11 @@ namespace Rise.Client.CampusInfo.Components
 
         [Parameter] public string Name { get; set; }
         [Parameter] public string Location { get; set; }
-        [Parameter] public List<string> Faculties { get; set; } = new();
+        [Parameter] public List<string> Facilities { get; set; } = new();
         [Parameter] public string ContactPhone { get; set; }
         [Parameter] public string Website { get; set; }
         [Parameter] public string Description { get; set; }
-        [Parameter] public string Id { get; set; }
+        [Parameter] public Guid Id { get; set; }
 
         [Parameter] public string SearchTerm { get; set; }
         private bool IsOpen { get; set; } = false;

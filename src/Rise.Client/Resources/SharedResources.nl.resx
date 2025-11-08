@@ -690,4 +690,7 @@
     <value>Inloggen</value>
     <comment/>
   </data>
+  <data name="Campus.FacilitiesLabel" xml:space="preserve">
+    <value>Faciliteiten:</value>
+  </data>
 </root>

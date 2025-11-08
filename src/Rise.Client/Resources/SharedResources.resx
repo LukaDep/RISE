@@ -606,8 +606,8 @@
     <value>Description:</value>
     <comment/>
   </data>
-  <data name="Campus.FacultiesLabel" xml:space="preserve">
-    <value>Faculties:</value>
+  <data name="Campus.FacilitiesLabel" xml:space="preserve">
+    <value>Facilities:</value>
     <comment/>
   </data>
   <data name="Schedule.Room" xml:space="preserve">

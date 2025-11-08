@@ -23,7 +23,7 @@ else
 
 @code {
     [Parameter] public required Guid campusId { get; set; }
-    [Parameter] public Guid? buildingId { get; set; }
+    [Parameter] public string buildingId { get; set; }
     private CampusDto.Index? campus;
     private BuildingDto.Index? building;
     private bool mapInitialized = false;
@@ -36,15 +36,15 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrEmpty(campusId) && string.IsNullOrEmpty(buildingId))
+        if (string.IsNullOrEmpty(campusId.ToString()) && string.IsNullOrEmpty(buildingId.ToString()))
         {
             Navigation.NavigateTo("/campus");
             return;
         }
-        else if (!string.IsNullOrEmpty(buildingId))
+        else if (!string.IsNullOrEmpty(buildingId.ToString()))
         {
-            var buildingResponse = await CampusClientService.GetBuildingByIdAsync(buildingId);
-            building = buildingResponse?.Value;
+            var buildingResponse = await CampusClientService.GetBuildingByIdAsync(new Guid(buildingId));
+            building = buildingResponse.Value.Building;
             if (building != null)
             {
                 campusId = building.CampusId;
@@ -57,7 +57,7 @@ else
         }
 
         var response = await CampusClientService.GetCampusByIdAsync(campusId);
-        campus = response?.Value;
+        campus = response?.Value.Campus;
 
     }
 
@@ -104,8 +104,7 @@ else
 
             if (buildingId != null)
             {
-                building = campus.Buildings?.FirstOrDefault(b => b.Id.Equals(buildingId,
-                StringComparison.OrdinalIgnoreCase));
+                building = campus.Buildings?.FirstOrDefault(b => buildingId.Equals(b.Id));
                 if (building != null)
                 {
                     await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", building.Latitude, building.Longitude, building.Name,

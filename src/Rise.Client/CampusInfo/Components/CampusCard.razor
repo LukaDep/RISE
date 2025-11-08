@@ -46,12 +46,12 @@
                     <p><span class="font-medium text-hogent-black">@L["Campus.DescriptionLabel"]</span> @Description</p>
                 }
 
-                @if (Faculties != null && Faculties.Count > 0)
+                @if (Facilities != null && Facilities.Count > 0)
                 {
                     <div>
-                        <p class="font-medium text-hogent-black">@L["Campus.FacultiesLabel"]</p>
+                        <p class="font-medium text-hogent-black">@L["Campus.FacilitiesLabel"]</p>
                         <ul class="list-disc list-inside ml-4">
-                            @foreach (var faculty in Faculties)
+                            @foreach (var faculty in Facilities)
                             {
                                 <li>@faculty</li>
                             }
