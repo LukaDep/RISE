@@ -11,7 +11,7 @@ namespace Rise.Services.CampusInfo;
 /// <param name="dbContext"></param>
 public class CampusInfoService(ApplicationDbContext dbContext) : ICampusInfoService
 {
-    private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "CampusInfo", "MockData", "campusInfo.json");
+    private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "CampusInfo", "MockData", "campusInfo.json");
     public async Task<Result<CampusInfoResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
         if (!File.Exists(_mockFilePath))

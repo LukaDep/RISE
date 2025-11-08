@@ -56,7 +56,7 @@ namespace Rise.Client.Schedule
         private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
         {
             currentTime = DateTime.Now;
-            InvokeAsync(StateHasChanged);
+            StateHasChanged();
         }
 
         public List<ScheduleDto.Reservation> DayReservations =>
@@ -128,7 +128,7 @@ namespace Rise.Client.Schedule
             if (hour < 8 || hour > 20)
                 return -1; // Buiten zichtbaar bereik
 
-            return ((hour - 8) * 64) + ((minute * 64) / 60.0);
+            return ((hour - 8) * 64) + (minute * 64 / 60.0);
         }
 
         private bool IsToday()
