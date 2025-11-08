@@ -13,8 +13,7 @@ public partial class NewsArticle : ComponentBase
 
     private string GetThumbnailUrl()
     {
-        // Return a placeholder image URL - you can customize this
-        // to use actual image URLs from your news items when available
+        // Return a placeholder image URL for now
         return "https://www.bureaupartners.be/images/projecten-detail/hogent-sporthal/hogent-sporthal-01.jpg";
     }
 

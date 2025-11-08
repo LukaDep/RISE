@@ -1,50 +1,78 @@
 @using Microsoft.AspNetCore.Components
-@inject IStringLocalizer<SharedResources> L
 
-<div class="week-view">
-    <div class="mb-4 flex justify-between items-center">
-        <h3 class="text-lg font-semibold text-hogent-black">@WeekStartDate.ToString("d MMM") @L["Schedule.To"]</h3>
-        <div class="flex gap-2">
-            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
-                @onclick="PreviousWeek">@L["Schedule.Previous"]</button>
-            <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md"
-                @onclick="NextWeek">@L["Schedule.Next"]</button>
+<div id="weekViewContainer" class="week-view min-h-screen flex flex-col @swipeClass">
+    <div class="mb-4 flex items-center justify-between">
+        <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md flex items-center justify-center"
+                @onclick="PreviousWeekAnimated">
+            <span class="hidden sm:inline">@L["Schedule.Previous"]</span>
+            <span class="sm:hidden w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 288 480 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-370.7 0 105.4-105.4c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z" />
+                </svg>
+            </span>
+        </button>
+
+        <div class="text-center flex-1">
+            <span class="text-lg font-semibold text-hogent-black">
+                @WeekStartDate.ToString("d MMM", System.Globalization.CultureInfo.CurrentCulture)
+                –
+                @WeekStartDate.AddDays(6).ToString("d MMM", System.Globalization.CultureInfo.CurrentCulture)
+            </span>
         </div>
+
+        <button class="px-3 py-1 text-sm bg-hogent-black-15 hover:bg-hogent-black-30 rounded-md flex items-center justify-center"
+                @onclick="NextWeekAnimated">
+            <span class="hidden sm:inline">@L["Schedule.Next"]</span>
+            <span class="sm:hidden w-4 h-4">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                    <path d="M502.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L402.7 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l370.7 0-105.4 105.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z" />
+                </svg>
+            </span>
+        </button>
+    </div>
+
+    <div class="flex justify-center mb-4">
+        <button class="flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-hogent-black bg-white/60 backdrop-blur-sm
+                       hover:bg-white hover:shadow-md active:scale-95 border border-hogent-black-20 rounded-full transition-all"
+                @onclick="GoToToday">
+            <svg class="w-4 h-4 opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 4h-1V2a1 1 0 0 0-2 0v2H8V2a1 1 0 0 0-2 0v2H5a2 2 0 0 0-2 2v14a2 
+                         2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z" />
+            </svg>
+            <span>@L["Schedule.ToToday"]</span>
+        </button>
     </div>
 
     <div class="bg-hogent-white rounded-lg border border-hogent-black-30 overflow-visible">
-        <!-- Header met dagen -->
         <div class="grid border-b border-hogent-black-30" style="grid-template-columns: 48px repeat(5, 1fr);">
             <div class="flex justify-center items-center border-r border-hogent-black-30 text-hogent-black-50 p-2 text-sm font-medium">@WeekNumber</div>
             @for (int i = 0; i < WeekDays.Count; i++)
             {
                 var day = WeekDays[i];
-                <div
-                    class="p-3 text-center font-medium text-hogent-black-50 @(i < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
+                var isToday = day.Date == DateTime.Today.Date;
+                <div class="p-3 text-center font-medium text-hogent-black-50 @(i < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "") @(isToday ? "bg-blue-50" : "")">
                     <div class="text-sm">@GetLocalizedDayName(day)</div>
                     <div class="text-xs">@day.ToString("d/M")</div>
                 </div>
             }
         </div>
 
-        <!-- Grid container met relative positioning -->
         <div class="relative" style="min-height: 780px;">
             <div class="grid" style="grid-template-columns: 48px repeat(5, 1fr);">
-                <!-- Tijd kolom -->
                 <div class="border-r border-hogent-black-15">
                     @for (int hour = 8; hour <= 20; hour++)
                     {
-                        <div
-                            class="h-16 border-b border-hogent-black-15 p-1 text-center text-sm text-hogent-black-50 flex items-center justify-center">
+                        <div class="h-16 border-b border-hogent-black-15 p-1 text-center text-sm text-hogent-black-50 flex items-center justify-center">
                             @hour
                         </div>
                     }
                 </div>
 
-                <!-- Dag kolommen (lege cellen voor grid structuur) -->
                 @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
                 {
-                    <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "")">
+                    var currentDay = WeekDays[dayIndex];
+                    var isTodayCol = currentDay.Date == DateTime.Today.Date;
+                    <div class="@(dayIndex < WeekDays.Count - 1 ? "border-r border-hogent-black-30" : "") @(isTodayCol ? "bg-blue-50" : "")">
                         @for (int hour = 8; hour <= 20; hour++)
                         {
                             <div class="h-16 border-b border-hogent-black-15"></div>
@@ -52,9 +80,6 @@
                     </div>
                 }
             </div>
-
-            <!-- Slanted repeated red-bar background (non-interactive, behind events) -->
-            
 
             @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
             {
@@ -68,13 +93,10 @@
                     var endHour = evt.EndDateTime.Hour;
                     var endMinute = evt.EndDateTime.Minute;
 
-                    // Bereken positie en hoogte in pixels (64px per uur)
                     var topPosition = ((startHour - 8) * 64) + ((startMinute * 64) / 60);
                     var durationMinutes = (endHour - startHour) * 60 + (endMinute - startMinute);
                     var height = (durationMinutes * 64) / 60;
 
-                    // Bereken horizontale positie
-                    // Time column is 48px, each day column is (100% - 48px) / 5
                     var leftPosition = $"calc(48px + {dayIndex} * ((100% - 48px) / 5) + 6px)";
                     var widthCalc = "calc(((100% - 48px) / 5) - 12px)";
 
@@ -97,8 +119,29 @@
                     </div>
                 }
             }
+            
+            @{
+                var timePosition = GetCurrentTimePosition();
+                var currentDayIdx = GetCurrentDayIndex();
+                
+                if (timePosition >= 0 && currentDayIdx >= 0)
+                {
+                    var leftPosition = $"calc(48px + {currentDayIdx} * ((100% - 48px) / 5))";
+                    var widthCalc = "calc((100% - 48px) / 5)";
+                    
+                    <div class="absolute z-50 pointer-events-none" style="top: @(timePosition)px; left: @leftPosition; width: @widthCalc;">
+                        <div class="relative h-0.5 bg-red-500 shadow-lg">
+                            <div class="absolute -left-1 -top-1 w-2.5 h-2.5 bg-red-500 rounded-full"></div>
+                            <div class="absolute -left-14 -top-2.5 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded shadow-md whitespace-nowrap">
+                                @currentTime.ToString("HH:mm")
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
         </div>
     </div>
+
     @if (SelectedReservation is not null)
     {
         <ScheduleItem Reservation="SelectedReservation" OnClose="CloseDetails" />

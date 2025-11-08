@@ -2,12 +2,12 @@
 @attribute [Authorize]
 @using System.Security.Claims
 
-<PageTitle>Private Page</PageTitle>
+<PageTitle>@L["Home.PrivatePage"]</PageTitle>
 
-<h1>Private Page</h1>
+<h1>@L["Home.PrivatePage"]</h1>
 
 <AuthorizeView>
-    <p>Hello, @context.User.Identity?.Name! You're authenticated, so you can see this page that shows your claims.</p>
+    <p>@L["Home.AuthenticatedMessage", context.User.Identity?.Name ?? string.Empty]</p>
 </AuthorizeView>
 
 <h2>Claims</h2>

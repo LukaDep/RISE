@@ -3,12 +3,14 @@
 @using System.Security.Claims
 @using Rise.Shared.Identity
 
-<PageTitle>Private Manager Page</PageTitle>
+<PageTitle>@L["Home.PrivateAdministratorPage"]</PageTitle>
 
-<h1>Private Administrator Page</h1>
+<h1>@L["Home.PrivateAdministratorPage"]</h1>
 
 <AuthorizeView>
-    <p>Hello, @context.User.Identity?.Name! You're authenticated and you have a <b>Administrator</b> role claim, so you can see this page.</p>
+    <p>@L["Home.AuthenticatedMessage", context.User.Identity?.Name ?? string.Empty] @(" ")
+        <b>@L["Roles.Administrator"]</b>
+    </p>
 </AuthorizeView>
 
 <h2>Claims</h2>

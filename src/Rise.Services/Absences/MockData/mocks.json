@@ -1,9 +1,79 @@
 [
     {
-      "id": 1,
-      "name": "Lien Decorte",
-      "reason": "Sick Leave",
-      "startDate": "2025-10-23",
-      "endDate": "2025-10-23"
+        "id": 1,
+        "name": "Bert Van Vreckem",
+        "reason": "Sick Leave",
+        "startDate": "2025-12-23",
+        "endDate": "2025-12-24"
+    },
+    {
+        "id": 2,
+        "name": "Thomas Parmentier",
+        "reason": "Conference",
+        "startDate": "2025-12-27",
+        "endDate": "2025-12-29"
+    },
+    {
+        "id": 3,
+        "name": "Chloé De Leenheer",
+        "reason": "Parental Leave",
+        "startDate": "2025-11-01",
+        "endDate": "2025-12-31"
+    },
+    {
+        "id": 4,
+        "name": "Jan Decorte",
+        "reason": "Volunteer Work",
+        "startDate": "2025-12-10",
+        "endDate": "2025-12-15"
+    },
+    {
+        "id": 5,
+        "name": "Sarah Vermeulen",
+        "reason": "Training",
+        "startDate": "2025-12-20",
+        "endDate": "2025-12-22"
+    },
+    {
+        "id": 6,
+        "name": "Marc Desmet",
+        "reason": "Family Emergency",
+        "startDate": "2025-12-25",
+        "endDate": "2025-12-26"
+    },
+    {
+        "id": 7,
+        "name": "Lien Decorte",
+        "reason": "Study Leave",
+        "startDate": "2025-12-15",
+        "endDate": "2025-12-20"
+    },
+    {
+        "id": 8,
+        "name": "Bert Van Vreckem",
+        "reason": "Unpaid Leave",
+        "startDate": "2025-12-01",
+        "endDate": "2025-12-31"
+    },
+    {
+        "id": 9,
+        "name": "Thomas Parmentier",
+        "reason": "Team Building Event",
+        "startDate": "2025-12-30",
+        "endDate": "2025-12-30"
+    },
+    {
+        "id": 10,
+        "name": "Chloé De Leenheer",
+        "reason": "Relocation",
+        "startDate": "2025-12-28",
+        "endDate": "2025-12-30"
+    },
+    {
+        "id": 11,
+        "name": "Sarah Vermeulen",
+        "reason": "Sick Leave",
+        "startDate": "2025-10-29",
+        "endDate": "2025-10-29"
     }
 ]

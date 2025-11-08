@@ -41,7 +41,7 @@ window.leafletMap = {
             L.marker([lat, lng]).addTo(this.map).bindPopup(name)
         }
     },
-    addMarkerWithGoogleLink: function (lat, lng, name) {
+    addMarkerWithGoogleLink: function (lat, lng, name, open) {
         if (!this.map) return
         var marker = L.marker([lat, lng]).addTo(this.map)
         var gmaps =
@@ -54,6 +54,13 @@ window.leafletMap = {
             gmaps +
             '" target="_blank" rel="noopener">Open in Google Maps</a></div>'
         marker.bindPopup(html)
+        try {
+            if (open) {
+                marker.openPopup()
+            }
+        } catch (e) {
+            console.error('Error opening marker popup', e)
+        }
     },
     setView: function (lat, lng, zoom) {
         if (!this.map) return

@@ -1,14 +1,12 @@
 @page "/resto/{RestoId}/menu"
 @using Rise.Shared.Resto
 @using Rise.Shared.Menu
-@inject IStringLocalizer<SharedResources> L
 
-<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 text-hogent-black relative">
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 text-hogent-black relative">
 
     <!-- 🔙 Terugknop -->
-    <div class="mb-4 sm:mb-0 sm:absolute sm:top-5 sm:left-5 sm:z-[1000]">
-        <button @onclick="GoBack"
-            class="flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-hogent-black-15 
+    <div class="mb-4 top-5 sm:left-5 sm:z-[1000]">
+        <button @onclick="GoBack" class="flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-hogent-black-15 
                    rounded-full shadow-md px-4 py-2 text-hogent-black font-medium 
                    hover:bg-white hover:shadow-lg transition text-sm sm:text-base">
             <i class="fa-solid fa-arrow-left"></i>
@@ -18,26 +16,27 @@
     </div>
 
     <!-- Titel -->
-    <h2 class="text-3xl sm:text-4xl font-extrabold mb-6 sm:mb-8 tracking-tight text-hogent-black text-center sm:text-left">
+    <h2
+        class="text-3xl sm:text-4xl font-extrabold mb-6 sm:mb-8 tracking-tight text-hogent-black text-center sm:text-left">
         @L["Resto.MenuTitle"]
     </h2>
 
     <!-- Filterchips -->
     <div class="flex flex-wrap justify-center sm:justify-start gap-2 mb-10">
         <button @onclick="() => SetFilter(MenuFilter.All)"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
                        @(currentFilter == MenuFilter.All ? "bg-hogent-education text-white border-hogent-education shadow-sm" : "bg-white text-hogent-black border-hogent-black-10 hover:bg-hogent-black-5")">
             <i class="fa-solid fa-list"></i> @L["Resto.Filter.All"]
         </button>
 
         <button @onclick="() => SetFilter(MenuFilter.Veggie)"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
                        @(currentFilter == MenuFilter.Veggie ? "bg-green-600 text-white border-green-600 shadow-sm" : "bg-white text-green-700 border-green-600 hover:bg-green-50")">
             <i class="fa-solid fa-leaf text-green-600"></i> @L["Resto.Vegetarisch"]
         </button>
 
         <button @onclick="() => SetFilter(MenuFilter.Vegan)"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
                        @(currentFilter == MenuFilter.Vegan ? "bg-emerald-500 text-white border-emerald-500 shadow-sm" : "bg-white text-emerald-600 border-emerald-500 hover:bg-emerald-50")">
             <i class="fa-solid fa-seedling text-emerald-500"></i> @L["Resto.Vegan"]
         </button>
@@ -60,10 +59,10 @@
     else
     {
         var filteredDays = menus
-            .OrderBy(m => m.Date)
-            .GroupBy(m => m.Date.Date)
-            .Where(group => group.SelectMany(m => m.MenuItems).Any(ShouldShowItem))
-            .ToList();
+        .OrderBy(m => m.Date)
+        .GroupBy(m => m.Date.Date)
+        .Where(group => group.SelectMany(m => m.MenuItems).Any(ShouldShowItem))
+        .ToList();
 
         if (!filteredDays.Any())
         {
@@ -79,11 +78,12 @@
 
                 <section class="mb-6 rounded-2xl shadow-md border border-hogent-black-10 bg-white transition hover:shadow-lg">
                     <button @onclick="() => ToggleDay(dayGroup.Key)"
-                            class="w-full flex justify-between items-center px-5 sm:px-6 py-4 sm:py-5 bg-hogent-black-5 hover:bg-hogent-black-10 transition rounded-2xl">
+                        class="w-full flex justify-between items-center px-5 sm:px-6 py-4 sm:py-5 bg-hogent-black-5 hover:bg-hogent-black-10 transition rounded-2xl">
                         <h3 class="text-xl sm:text-2xl font-semibold text-hogent-black capitalize tracking-tight">
                             @dayGroup.Key.ToString("dddd")
                         </h3>
-                        <i class="fa-solid @(isExpanded ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-70 text-lg transition-transform duration-300 @(isExpanded ? "rotate-180" : "")"></i>
+                        <i
+                            class="fa-solid @(isExpanded ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-70 text-lg transition-transform duration-300 @(isExpanded ? "rotate-180" : "")"></i>
                     </button>
 
                     @if (isExpanded)
@@ -106,7 +106,8 @@
                                             @foreach (var item in visibleItems)
                                             {
                                                 <!-- 🧾 Menu item -->
-                                                <li class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 px-5 py-3 bg-white hover:bg-hogent-black-5 transition rounded-lg">
+                                                <li
+                                                    class="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 px-5 py-3 bg-white hover:bg-hogent-black-5 transition rounded-lg">
                                                     <!-- Linkerkant -->
                                                     <div class="flex flex-col gap-1 flex-1">
                                                         <div class="flex items-center gap-2 flex-wrap">
@@ -127,7 +128,8 @@
                                                     </div>
 
                                                     <!-- Rechterkant (prijzen) -->
-                                                    <div class="flex flex-col text-sm sm:text-right text-hogent-black font-semibold whitespace-nowrap sm:pl-4">
+                                                    <div
+                                                        class="flex flex-col text-sm sm:text-right text-hogent-black font-semibold whitespace-nowrap sm:pl-4">
                                                         <div>
                                                             € @item.PriceStudent.ToString("0.00")
                                                             <span class="text-hogent-black-50 font-normal">(@L["Resto.Student"])</span>

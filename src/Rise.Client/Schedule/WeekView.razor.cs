@@ -1,12 +1,73 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.Schedule;
+using System.Timers;
 
 namespace Rise.Client.Schedule;
 
-public partial class WeekView
+public partial class WeekView : IAsyncDisposable
 {
+    [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
+    [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
+
     private ScheduleDto.Reservation? SelectedReservation;
+    private List<ScheduleDto.Reservation>? schedule;
+
+    [Inject] public required IScheduleService ScheduleService { get; set; }
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
+
+    private DotNetObjectReference<WeekView>? dotNetRef;
+    private string swipeClass = string.Empty;
+    private System.Timers.Timer? currentTimeTimer;
+    private DateTime currentTime = DateTime.Now;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var request = new QueryRequest.SkipTake
+        {
+            Skip = 0,
+            Take = 100,
+            OrderBy = "Id",
+        };
+
+        var result = await ScheduleService.GetIndexAsync(request);
+        schedule = result.Value?.Reservations;
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetRef = DotNetObjectReference.Create(this);
+            await JSRuntime.InvokeVoidAsync("initSwipe", "weekViewContainer", dotNetRef);
+
+            StartCurrentTimeTimer();
+        }
+    }
+
+    private void StartCurrentTimeTimer()
+    {
+        currentTimeTimer = new System.Timers.Timer(60000);
+        currentTimeTimer.Elapsed += OnTimerElapsed;
+        currentTimeTimer.AutoReset = true;
+        currentTimeTimer.Start();
+    }
+
+    private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
+    {
+        currentTime = DateTime.Now;
+        InvokeAsync(StateHasChanged);
+    }
+
+    private async Task AnimateSwipe(string direction)
+    {
+        swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
+        StateHasChanged();
+        await Task.Delay(250);
+        swipeClass = string.Empty;
+        StateHasChanged();
+    }
 
     private void OpenDetails(ScheduleDto.Reservation reservation)
     {
@@ -20,33 +81,11 @@ public partial class WeekView
         StateHasChanged();
     }
 
-    [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
-
-    // Schedule data from service
-    private List<ScheduleDto.Reservation>? schedule;
-
-    [Inject] public required IScheduleService ScheduleService { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        var request = new QueryRequest.SkipTake
-        {
-            Skip = 0,
-            Take = 100, // Enough items for week view
-            OrderBy = "Id",
-        };
-
-        var result = await ScheduleService.GetIndexAsync(request);
-        schedule = result.Value?.Reservations;
-    }
-
-    // Calculate week start (Monday)
     private DateTime WeekStartDate
     {
         get
         {
             var dayOfWeek = (int)SelectedDate.DayOfWeek;
-            // If Sunday (0), go back 6 days, otherwise go back to Monday
             var daysToSubtract = dayOfWeek == 0 ? 6 : dayOfWeek - 1;
             return SelectedDate.AddDays(-daysToSubtract);
         }
@@ -56,47 +95,94 @@ public partial class WeekView
     private int WeekNumber => System.Globalization.ISOWeek.GetWeekOfYear(WeekStartDate);
 
     private List<DateTime> WeekDays =>
-        Enumerable.Range(0, 5) // Only Mon-Fri
+        Enumerable.Range(0, 5)
                   .Select(i => WeekStartDate.AddDays(i))
                   .ToList();
 
-    private void PreviousWeek()
+    private async Task GoToToday()
     {
-        SelectedDate = SelectedDate.AddDays(-7);
+        SelectedDate = DateTime.Today;
+        if (OnDayClick.HasDelegate)
+        {
+            await OnDayClick.InvokeAsync(DateTime.Today);
+        }
+        StateHasChanged();
     }
 
-    private void NextWeek()
+    public async Task PreviousWeekAnimated()
     {
-        SelectedDate = SelectedDate.AddDays(7);
+        await AnimateSwipe("right");
+        PreviousWeek();
+    }
+
+    public async Task NextWeekAnimated()
+    {
+        await AnimateSwipe("left");
+        NextWeek();
+    }
+
+    private void PreviousWeek() => SelectedDate = SelectedDate.AddDays(-7);
+    private void NextWeek() => SelectedDate = SelectedDate.AddDays(7);
+
+    [JSInvokable]
+    public async Task SwipeNext()
+    {
+        await NextWeekAnimated();
+    }
+
+    [JSInvokable]
+    public async Task SwipePrevious()
+    {
+        await PreviousWeekAnimated();
     }
 
     private bool HasEventAtTime(DateTime day, int hour)
     {
         return schedule?.Any(r =>
-        {
-            return r.StartDateTime.Date == day.Date &&
-               r.StartDateTime.Hour <= hour &&
-               r.EndDateTime.Hour > hour;
-        }) ?? false;
+            r.StartDateTime.Date == day.Date &&
+            r.StartDateTime.Hour <= hour &&
+            r.EndDateTime.Hour > hour) ?? false;
     }
 
     private ScheduleDto.Reservation? GetEventAtTime(DateTime day, int hour)
     {
         return schedule?.FirstOrDefault(r =>
-        {
-            return r.StartDateTime.Date == day.Date &&
-               r.StartDateTime.Hour <= hour &&
-               r.EndDateTime.Hour > hour;
-        });
+            r.StartDateTime.Date == day.Date &&
+            r.StartDateTime.Hour <= hour &&
+            r.EndDateTime.Hour > hour);
     }
 
     private List<ScheduleDto.Reservation> GetReservationsForDate(DateTime date) =>
-        schedule?
-            .Where(r => r.StartDateTime.Date == date.Date)
-            .ToList()
+        schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList()
         ?? new List<ScheduleDto.Reservation>();
 
-    
+    private double GetCurrentTimePosition()
+    {
+        var now = currentTime;
+        var hour = now.Hour;
+        var minute = now.Minute;
+
+        // Bereken positie in pixels (64px per uur, vanaf 8:00)
+        if (hour < 8 || hour > 20)
+            return -1; // Buiten zichtbaar bereik
+
+        return ((hour - 8) * 64) + ((minute * 64) / 60.0);
+    }
+
+    private int GetCurrentDayIndex()
+    {
+        var today = DateTime.Today;
+        var weekStart = WeekStartDate;
+
+        for (int i = 0; i < 5; i++)
+        {
+            if (weekStart.AddDays(i).Date == today)
+                return i;
+        }
+
+        return -1; // Niet in deze week
+    }
+
 
     private string GetLocalizedDayName(DateTime day)
     {
@@ -111,5 +197,16 @@ public partial class WeekView
             DayOfWeek.Sunday => L["Schedule.Sunday"],
             _ => day.ToString("ddd")
         };
+    }
+
+    public async ValueTask DisposeAsync()
+    {
+        if (currentTimeTimer != null)
+        {
+            currentTimeTimer.Stop();
+            currentTimeTimer.Elapsed -= OnTimerElapsed;
+            currentTimeTimer.Dispose();
+        }
+        dotNetRef?.Dispose();
     }
 }

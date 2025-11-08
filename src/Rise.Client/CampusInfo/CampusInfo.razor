@@ -4,7 +4,7 @@
 <div class="flex justify-between items-center p-6">
     
     <!-- Title -->
-    <h3 class="text-4xl font-bold">Campussen</h3>
+    <h3 class="text-4xl font-bold">@L["Campus.Title"]</h3>
 
     <!-- Search Bar Container -->
     <div class="relative w-72 flex items-center justify-end">
@@ -22,7 +22,7 @@
 <div>
 @if (campusInfo == null || !campusInfo.Any())
 {
-    <p>Campussen worden geladen...</p>
+    <p>@L["Campus.Loading"]</p>
 }
 else
 {
