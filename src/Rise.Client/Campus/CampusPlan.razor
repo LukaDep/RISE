@@ -22,8 +22,8 @@ else
 }
 
 @code {
-    [Parameter] public required string campusId { get; set; }
-    [Parameter] public string? buildingId { get; set; }
+    [Parameter] public required Guid campusId { get; set; }
+    [Parameter] public Guid? buildingId { get; set; }
     private CampusDto.Index? campus;
     private BuildingDto.Index? building;
     private bool mapInitialized = false;

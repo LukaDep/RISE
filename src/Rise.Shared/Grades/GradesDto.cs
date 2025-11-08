@@ -24,7 +24,7 @@ public static class GradesDto
         public DateTime Date { get; set; }
 
         // course
-        public Guid? CourseId { get; set; }
+        public string? CourseId { get; set; }
         public string? CourseName { get; set; }
         public string? Year { get; set; }
         public int? Semester { get; set; }

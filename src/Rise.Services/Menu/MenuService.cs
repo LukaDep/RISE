@@ -48,11 +48,14 @@ public class MenuService(ApplicationDbContext dbContext) : IMenuService
         // };
         //
         // return Result.Success(response);
-        var query = dbContext.Menus.AsQueryable();
-
-        var menus = await query.AsNoTracking()
+        var query = await dbContext.Menus
+            .AsNoTracking()
+            .Include(c => c.MenuItems)
             .Skip(request.Skip)
             .Take(request.Take)
+            .ToListAsync(ct);
+
+        var menus = query
             .Select(menu => new MenuDto.Index
             {
                 Id = menu.Id,
@@ -70,7 +73,7 @@ public class MenuService(ApplicationDbContext dbContext) : IMenuService
                     IsVegan = item.IsVegan,
                     IsVeggie = item.IsVeggie
                 }).ToList()
-            }).ToListAsync(ct);
+            }).ToList();
         
         return Result.Success(new MenuResponse.Index
             {

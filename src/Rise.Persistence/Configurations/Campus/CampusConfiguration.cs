@@ -46,7 +46,9 @@ internal class CampusConfiguration : EntityConfiguration<Domain.Campus.Campus>
         builder.Property(x => x.Facilities)
             .HasConversion(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
-                v => JsonSerializer.Deserialize<IEnumerable<string>>(v, (JsonSerializerOptions?)null) ?? Array.Empty<string>())
+                v => string.IsNullOrWhiteSpace(v)
+                    ? new List<string>()
+                    : JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null) ?? new List<string>())
             .HasColumnType("json");
 
         // Configure one-to-many relationship with Building

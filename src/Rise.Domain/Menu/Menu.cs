@@ -20,8 +20,8 @@ public class Menu : Entity
         }
     }
 
-    private IEnumerable<MenuItem> _menuItems = [];
-    public required IEnumerable<MenuItem> MenuItems
+    private List<MenuItem> _menuItems;
+    public required List<MenuItem> MenuItems
     {
         get => _menuItems;
         set => _menuItems = value;

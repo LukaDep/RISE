@@ -13,13 +13,13 @@ public class CourseById(IGradesService gradesService) : EndpointWithoutRequest<R
 {
     public override void Configure()
     {
-        Get("/api/grades/{courseId}");
+        Get("/api/grades/{id}");
         AllowAnonymous();
     }
 
     public override Task<Result<GradesResponse.Get>> ExecuteAsync(CancellationToken ct)
     {
-        var gradeId = Route<Guid>("gradeId");
+        var gradeId = Route<Guid>("id");
         return gradesService.GetGradeByIdAsync(gradeId, ct);
     }
 }

@@ -70,7 +70,7 @@ public class GradesService(ApplicationDbContext dbContext) : IGradesService
         // var grade = items.FirstOrDefault(c => c.Id == id);
         var query = dbContext.Grades.AsQueryable();
         var grade = await query.AsNoTracking()
-            .Where(g => g.Id == id)
+            .Where(g => g.Id.Equals(id))
             .Select(g => new GradesDto.Grade
             {
                 Id = g.Id,

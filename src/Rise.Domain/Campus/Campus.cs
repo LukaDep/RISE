@@ -43,8 +43,8 @@ public class Campus : Entity
         get => _contactPhone;
         set => _contactPhone = Guard.Against.NullOrWhiteSpace(value);
     }
-    private IEnumerable<string> _facilities = [];
-    public required IEnumerable<string> Facilities
+    private List<string> _facilities;
+    public required List<string> Facilities
     {
         get => _facilities;
         set => _facilities = value;
@@ -72,8 +72,8 @@ public class Campus : Entity
         set => _longitude = value;
     }
 
-    private IEnumerable<Building>? _buildings;
-    public IEnumerable<Building>? Buildings
+    private List<Building>? _buildings;
+    public List<Building>? Buildings
     {
         get => _buildings;
         set => _buildings = value;

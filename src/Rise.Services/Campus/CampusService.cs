@@ -19,75 +19,76 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
     private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "Campus", "MockData", "campus.json");
     public async Task<Result<CampusResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
-        var query = dbContext.Campuses.AsQueryable();
-
-        var campuses = await query.AsNoTracking()
+        var entities = await dbContext.Campuses
+            .AsNoTracking()
+            .Include(c => c.Buildings)
             .Skip(request.Skip)
             .Take(request.Take)
-            .Select(c => new CampusDto.Index
-            {
-                Id = c.Id,
-                Name = c.Name,
-                Street = c.Street,
-                HouseNumber = c.HouseNumber,
-                City = c.City,
-                PostalCode = c.PostalCode,
-                ContactPhone = c.ContactPhone,
-                Description = c.Description,
-                Facilities = c.Facilities,
-                Latitude = c.Latitude,
-                Longitude = c.Longitude,
-                Buildings = (c.Buildings ?? Array.Empty<Building>()).Select(b => new BuildingDto.Index
-                    {
-                        Id = b.Id,
-                        CampusId = c.Id,
-                        Name = b.Name,
-                        Address = b.Address,
-                        Type = b.Type,
-                        Latitude = b.Latitude,
-                        Longitude = b.Longitude
-                    }).ToList()
-                }).ToListAsync(ctx);
+            .ToListAsync(ctx); 
 
-        return Result.Success(new CampusResponse.Index
+        var campuses = entities.Select(c => new CampusDto.Index
+        {
+            Id = c.Id,
+            Name = c.Name,
+            Street = c.Street,
+            HouseNumber = c.HouseNumber,
+            City = c.City,
+            PostalCode = c.PostalCode,
+            ContactPhone = c.ContactPhone,
+            Description = c.Description,
+            Facilities = c.Facilities,
+            Latitude = c.Latitude,
+            Longitude = c.Longitude,
+            Buildings = c.Buildings.Select(b => new BuildingDto.Index
             {
-                Campuses = campuses
-            }
-        );
+                Id = b.Id,
+                CampusId = b.CampusId,
+                Name = b.Name,
+                Address = b.Address,
+                Type = b.Type,
+                Latitude = b.Latitude,
+                Longitude = b.Longitude
+            }).ToList()
+        }).ToList();
+
+        return Result.Success(new CampusResponse.Index { Campuses = campuses });
     }
 
     public async Task<Result<CampusResponse.Get>> GetCampusByIdAsync(Guid id, CancellationToken ct = default)
     {
-        var query = dbContext.Campuses.AsQueryable();
-        var campus = await query.AsNoTracking()
+        var entitie = await dbContext.Campuses
+            .AsNoTracking()
+            .Include(c => c.Buildings)
             .Where(c => c.Id.Equals(id))
-            .Select(c => new CampusDto.Index
+            .FirstOrDefaultAsync(ct);
+        if (entitie == null)
+            return Result<CampusResponse.Get>.NotFound($"No Campus found with id {id}");
+        var campus =new CampusDto.Index
             {
-                Id = c.Id,
-                Name = c.Name,
-                Street = c.Street,
-                HouseNumber = c.HouseNumber,
-                City = c.City,
-                PostalCode = c.PostalCode,
-                ContactPhone = c.ContactPhone,
-                Description = c.Description,
-                Facilities = c.Facilities,
-                Latitude = c.Latitude,
-                Longitude = c.Longitude,
-                Buildings = (c.Buildings ?? Array.Empty<Building>()).Select(b => new BuildingDto.Index
+                Id = entitie.Id,
+                Name = entitie.Name,
+                Street = entitie.Street,
+                HouseNumber = entitie.HouseNumber,
+                City = entitie.City,
+                PostalCode = entitie.PostalCode,
+                ContactPhone = entitie.ContactPhone,
+                Description = entitie.Description,
+                Facilities = entitie.Facilities,
+                Latitude = entitie.Latitude,
+                Longitude = entitie.Longitude,
+                Buildings = entitie.Buildings.Select(b => new BuildingDto.Index
                 {
                     Id = b.Id,
-                    CampusId = c.Id,
+                    CampusId = entitie.Id,
                     Name = b.Name,
                     Address = b.Address,
                     Type = b.Type,
                     Latitude = b.Latitude,
                     Longitude = b.Longitude
                 }).ToList()
-            }).FirstOrDefaultAsync(ct);
+            };
         
-        if (campus == null)
-            return Result<CampusResponse.Get>.NotFound($"No Campus found with id {id}");
+        
         var response = new CampusResponse.Get { Campus = campus };
         return Result.Success(response);
     }
