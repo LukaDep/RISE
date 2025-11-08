@@ -1,0 +1,44 @@
+﻿@using System.Collections.Generic
+@using Rise.Client.Contact.Components.Common
+@inject IStringLocalizer<SharedResources> L   
+
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div class="animate-fade-in-up relative max-h-[90vh] w-11/12 max-w-lg rounded-2xl bg-white p-6 shadow-2xl" @onclick:stopPropagation>
+        <!-- Close Button -->
+        <button class="absolute top-3 right-4 text-xl text-gray-500 hover:text-gray-800" @onclick="OnClose">
+            X
+        </button>
+
+        <!-- Profile -->
+        <div class="mb-4 flex flex-col items-center justify-center text-center">
+            <Icon Type="@Type" />
+            <h3 class="text-lg font-semibold text-gray-800">@Name</h3>
+            <p class="text-sm text-gray-500">@Type</p>
+        </div>
+
+        <!-- Contact Section -->
+        <div class="space-y-2 border-t border-gray-200 pt-3">
+            @if (@ContactPerson != null)
+            {
+                <div class="flex items-center gap-2 font-medium text-gray-700">
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    <span>@ContactPerson</span>
+                </div>
+            }
+            @if (@PhoneNumber != null)
+            {
+                <div class="flex items-center gap-2 font-medium text-gray-700">
+                    <i class="fa fa-phone mr-1" aria-hidden="true"></i>
+                    <span>@PhoneNumber</span>
+                </div>
+            }
+            @if (@Email != null)
+            {
+                <div class="flex items-center gap-2 font-medium text-gray-700">
+                    <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
+                    <span>@Email</span>
+                </div>
+            }
+        </div>
+    </div>
+</div>

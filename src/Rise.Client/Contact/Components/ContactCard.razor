@@ -1,31 +1,16 @@
 ﻿@using System.Collections.Generic
+@using Rise.Client.Contact.Components.Common
 @inject IStringLocalizer<SharedResources> L
-<NavLink
+<div
     class="border-hogent-black-15 bg-hogent-white z-1 m-4 flex min-h-40 cursor-pointer items-center rounded-xl border-4 p-4 shadow transition"
-    href=@($"/news/") Match="NavLinkMatch.Prefix" data-news-id="Id">
+    @onclick="OnClick"
+    >
     <div class="z-2 flex flex-col gap-2">
         <div class="flex flex-row gap-3">
             <!-- Icon (by type) -->
-            <div class="bg-hogent-black-15 mr-4 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg p-2">
-                @switch(Type)
-                {
-                    case "organisatie":
-                        <i class="fa fa-building text-hogent-black text-xl"></i>
-                        break;
-                    case "departement":
-                        <i class="fa fa-users text-hogent-black text-xl"></i>
-                        break;
-                    case "campus":
-                        <i class="fa fa-school text-hogent-black text-xl"></i>
-                        break;
-                    case "directie":
-                        <i class="fa fa-user-tie text-hogent-black text-xl"></i>
-                        break;
-                    default:
-                        <i class="fa fa-question text-hogent-black text-xl"></i>
-                        break;
-                }
-            </div>
+            <Icon
+                Type=@Type
+            />
 
             <!-- Content -->
             <div class="flex flex-1 flex-col justify-center">
@@ -59,4 +44,4 @@
 
     </div>
 
-</NavLink>
+</div>

@@ -27,8 +27,19 @@ else
             Type="@contact.Type"
             Email="@contact.Email" 
             PhoneNumber="@contact.PhoneNumber" 
-           
+            OnClick="() => ShowDetails(contact)"
         />
+    }
+
+    @if (SelectedContact != null)
+    {
+        <ContactCardDetails
+            Name="@SelectedContact.Name" 
+            Type="@SelectedContact.Type"
+            Email="@SelectedContact.Email" 
+            PhoneNumber="@SelectedContact.PhoneNumber" 
+            ContactPerson="@SelectedContact.ContactPerson"
+            OnClose="CloseDetails" />
     }
     
 }

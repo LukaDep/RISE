@@ -9,6 +9,8 @@ public partial class ContactOverview : ComponentBase
     [Inject] public required IContactService ContactService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
 
+    public ContactDto.Index SelectedContact = null;
+
     private IEnumerable<ContactDto.Index>? contacts;
 
     public string? SearchTerm { get; set; }
@@ -64,5 +66,15 @@ public partial class ContactOverview : ComponentBase
         var currentQueryParams = HttpUtility.ParseQueryString(uri.Query);
         Filter = currentQueryParams.Get("filter") ?? "";
         refreshData();
+    }
+
+    private void ShowDetails(ContactDto.Index contact)
+    {
+        SelectedContact = contact;
+    }
+
+    private void CloseDetails()
+    {
+        SelectedContact = null;
     }
 }
