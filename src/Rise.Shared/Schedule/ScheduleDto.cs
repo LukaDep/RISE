@@ -17,7 +17,7 @@ public static class ScheduleDto
     // Reservation object
     public class Reservation
     {
-        public Guid Id { get; set; } = default!;
+        public string Id { get; set; } = default!;
         public DateTime StartDateTime { get; set; }
         public DateTime EndDateTime { get; set; }
         public string Course { get; set; } = default!;

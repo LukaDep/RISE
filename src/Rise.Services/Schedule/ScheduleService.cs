@@ -10,7 +10,7 @@ namespace Rise.Services.Schedule;
 
 public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleService
 {
-    private string _mockFilePath;
+    private string? _mockFilePath;
 
     private AbsencesService _absencesService = new AbsencesService(dbContext);
 
