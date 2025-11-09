@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 
 
-namespace Rise.Client.CampusInfo.Components
+namespace Rise.Client.Campus.Components
 {
     public partial class CampusCard : ComponentBase
     {
@@ -9,7 +9,7 @@ namespace Rise.Client.CampusInfo.Components
 
         [Parameter] public string Name { get; set; }
         [Parameter] public string Location { get; set; }
-        [Parameter] public List<string> Facilities { get; set; } = new();
+        [Parameter] public IEnumerable<string> Facilities { get; set; } = Enumerable.Empty<string>();
         [Parameter] public string ContactPhone { get; set; }
         [Parameter] public string Website { get; set; }
         [Parameter] public string Description { get; set; }
@@ -38,7 +38,6 @@ namespace Rise.Client.CampusInfo.Components
 
         private void GoToPlan()
         {
-            // Implement navigation to the campus plan
             Navigation.NavigateTo($"/campus-plan/{Id}");
         }
 

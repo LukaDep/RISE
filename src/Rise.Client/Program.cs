@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Rise.Client;
 using Rise.Client.Campus;
-using Rise.Client.CampusInfo;
 using Rise.Client.Grades;
 using Rise.Client.Identity;
 using Rise.Client.Menu;
@@ -11,7 +10,6 @@ using Rise.Client.News;
 using Rise.Client.Resto;
 using Rise.Client.Schedule;
 using Rise.Shared.Campus;
-using Rise.Shared.CampusInfo;
 using Rise.Shared.Grades;
 using Rise.Shared.Menu;
 using Rise.Shared.News;
@@ -66,11 +64,6 @@ try
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });
-
-    builder.Services.AddHttpClient<ICampusInfoService, CampusInfoService>(client =>
-        {
-            client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
-        });
 
     builder.Services.AddHttpClient<IScheduleService, ScheduleClientService>(client =>
     {

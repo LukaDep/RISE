@@ -1,5 +1,5 @@
 ﻿@page "/campus"
-@using Rise.Client.CampusInfo.Components
+@using Rise.Client.Campus.Components
 
 <div class="flex justify-between items-center p-6">
     
@@ -28,11 +28,12 @@ else
 {
     @foreach (var campus in campusInfo)
     {
+        var location = $"{campus.Street} {campus.HouseNumber}, {campus.PostalCode} {campus.City}";
         <CampusCard 
             Id="@campus.Id"
             Name="@campus.Name" 
-            Location="@campus.Location" 
-            Facilities="@campus.Faciliteiten" 
+            Location="@location" 
+            Facilities="@campus.Facilities" 
             ContactPhone="@campus.ContactPhone"
             Description="@campus.Description"
             SearchTerm="@SearchTerm"

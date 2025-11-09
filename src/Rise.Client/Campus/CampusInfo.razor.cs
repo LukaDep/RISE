@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Components;
 using Rise.Shared.Common;
-using Rise.Shared.CampusInfo;
+using Rise.Shared.Campus;
 
-namespace Rise.Client.CampusInfo;
+namespace Rise.Client.Campus;
 
 public partial class CampusInfo : ComponentBase
 {
-    private IEnumerable<CampusInfoDto.Index>? campusInfo;
+    private IEnumerable<CampusDto.Index>? campusInfo;
 
     private ElementReference filterInput;
     private bool isFilterOpen = false;
@@ -24,7 +24,7 @@ public partial class CampusInfo : ComponentBase
 
     private string? searchTerm;
 
-    [Inject] public required ICampusInfoService CampusInfoService { get; set; }
+    [Inject] public required ICampusService CampusService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
 
     protected override async Task OnParametersSetAsync()
@@ -36,8 +36,8 @@ public partial class CampusInfo : ComponentBase
             SearchTerm = SearchTerm?.Length > 0 ? SearchTerm : "",
         };
 
-        var result = await CampusInfoService.GetIndexAsync(request);
-        campusInfo = result.Value.CampusInfo;
+        var result = await CampusService.GetIndexAsync(request);
+        campusInfo = result.Value.Campuses;
 
     }
 
