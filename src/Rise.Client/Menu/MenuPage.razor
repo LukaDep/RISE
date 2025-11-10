@@ -5,7 +5,6 @@
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 text-hogent-black relative">
 
-    <!-- 🔙 Terugknop -->
     <div class="mb-4 top-5 sm:left-5 sm:z-[1000]">
         <button @onclick="GoBack" class="flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-hogent-black-15 
                    rounded-full shadow-md px-4 py-2 text-hogent-black font-medium 
@@ -16,12 +15,10 @@
         </button>
     </div>
 
-    <!-- Titel -->
     <h2 class="text-3xl sm:text-4xl font-extrabold mb-6 sm:mb-8 tracking-tight text-hogent-black text-center sm:text-left">
         @L["Resto.MenuTitle"]
     </h2>
 
-    <!-- Filterchips -->
     <div class="flex flex-wrap justify-center sm:justify-start gap-2 mb-10">
         <button @onclick="() => SetFilter(MenuFilter.All)"
                 class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
@@ -42,7 +39,6 @@
         </button>
     </div>
 
-    <!-- 📦 Loading state -->
     @if (isLoading)
     {
         <div class="flex justify-center items-center h-32">
