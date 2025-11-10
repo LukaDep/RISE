@@ -689,4 +689,68 @@
     <value>Login</value>
     <comment/>
   </data>
+  <data name="Account_NotificationSettings" xml:space="preserve">
+    <value>Account | Notification Settings</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Title" xml:space="preserve">
+    <value>Notifications</value>
+    <comment/>
+  </data>
+  <data name="Notifications.PushSection" xml:space="preserve">
+    <value>Push notifications</value>
+    <comment/>
+  </data>
+  <data name="Notifications.PushDescription" xml:space="preserve">
+    <value>Messages on your device</value>
+    <comment/>
+  </data>
+  <data name="Notifications.AllNotifications" xml:space="preserve">
+    <value>All notifications</value>
+    <comment/>
+  </data>
+  <data name="Notifications.AllNotificationsDescription" xml:space="preserve">
+    <value>Enable all notifications</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Grades" xml:space="preserve">
+    <value>Grades and results</value>
+    <comment/>
+  </data>
+  <data name="Notifications.GradesDescription" xml:space="preserve">
+    <value>New grades available</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Schedule" xml:space="preserve">
+    <value>Schedule changes</value>
+    <comment/>
+  </data>
+  <data name="Notifications.ScheduleDescription" xml:space="preserve">
+    <value>Changes to your schedule</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Campus" xml:space="preserve">
+    <value>Campus events</value>
+    <comment/>
+  </data>
+  <data name="Notifications.CampusDescription" xml:space="preserve">
+    <value>Campus updates</value>
+    <comment/>
+  </data>
+  <data name="Notifications.News" xml:space="preserve">
+    <value>News and announcements</value>
+    <comment/>
+  </data>
+  <data name="Notifications.NewsDescription" xml:space="preserve">
+    <value>Messages from the school</value>
+    <comment/>
+  </data>
+  <data name="Notifications.InformationSection" xml:space="preserve">
+    <value>Information</value>
+    <comment/>
+  </data>
+  <data name="Notifications.InformationText" xml:space="preserve">
+    <value>You must allow push notifications for these settings to work. Change your settings to enable notifications.</value>
+    <comment/>
+  </data>
 </root>

@@ -149,13 +149,13 @@ public partial class Index : ComponentBase
     }
 
     // Handlers for SimpleSelect
-    protected async Task OnYearSelected(string? value)
+    protected void OnYearSelected(string? value)
     {
         selectedYear = value;
         ApplyFilters();
     }
 
-    protected async Task OnSemesterSelected(string? value)
+    protected void OnSemesterSelected(string? value)
     {
         if (int.TryParse(value, out int sem))
             selectedSemester = sem;
