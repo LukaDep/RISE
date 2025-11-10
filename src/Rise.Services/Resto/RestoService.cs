@@ -14,9 +14,9 @@ public class MockRestoService : IRestoService
     {
         var currentDirectory = Directory.GetCurrentDirectory();
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Resto", "MockData", "RestoMockdata.json");
-        
-        
-        
+
+
+
     }
 
     public async Task<Result<RestoResponse.Index>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)

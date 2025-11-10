@@ -17,9 +17,9 @@ public class MockMenuService : IMenuService
         var currentDirectory = Directory.GetCurrentDirectory();
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Menu", "MockData", "MenuItemMockData.json");
 
-        
-        
-        
+
+
+
     }
 
     public async Task<Result<MenuResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ct = default)

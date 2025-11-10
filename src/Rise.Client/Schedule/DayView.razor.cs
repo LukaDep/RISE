@@ -124,9 +124,8 @@ namespace Rise.Client.Schedule
             var hour = now.Hour;
             var minute = now.Minute;
 
-            // Bereken positie in pixels (64px per uur, vanaf 8:00)
             if (hour < 8 || hour > 20)
-                return -1; // Buiten zichtbaar bereik
+                return -1;
 
             return ((hour - 8) * 64) + ((minute * 64) / 60.0);
         }
@@ -146,6 +145,17 @@ namespace Rise.Client.Schedule
         public async Task SwipePrevious()
         {
             await PreviousDayAnimated();
+        }
+
+        public static string TruncateTitle(string title, int maxLength = 40)
+        {
+            if (string.IsNullOrEmpty(title))
+                return title;
+
+            if (title.Length <= maxLength)
+                return title;
+
+            return title.Substring(0, maxLength) + "...";
         }
 
         public static string GetEventTypeBgColor(string type) => type.ToLower() switch

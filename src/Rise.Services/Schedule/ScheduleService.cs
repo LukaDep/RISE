@@ -19,9 +19,9 @@ public class MockScheduleService : IScheduleService
         var currentDirectory = Directory.GetCurrentDirectory();
         // CurrentDirectory is Rise.Server, dus we gaan een level omhoog en dan naar Rise.Services
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");
-        
-        
-        
+
+
+
         //AbsencesService aanmaken
         _absencesService = new AbsencesService();
     }
