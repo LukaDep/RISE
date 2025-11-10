@@ -51,15 +51,9 @@ public partial class RestoCard
         return string.IsNullOrWhiteSpace(hours) ? L["Resto.Closed"] : hours;
     }
 
-    // 🌿 -------------------------------
-    //  Nieuwe logica: openings- en sluitmoment berekenen
-    // 🌿 -------------------------------
-
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
-
-        // Bereken openingsstatus en volgende open/sluitmoment
         UpdateRestoStatus();
     }
 
@@ -76,7 +70,6 @@ public partial class RestoCard
         var now = DateTime.Now;
         var today = now.DayOfWeek;
 
-        // Huidige dag openingen ophalen (vb. "11:30 - 14:00, 17:00 - 20:00")
         if (Resto.OpeningHours.TryGetValue(today, out var todayHours) && !string.IsNullOrWhiteSpace(todayHours))
         {
             var timeRanges = todayHours.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
@@ -111,8 +104,7 @@ public partial class RestoCard
                 }
             }
         }
-
-        // ❌ Gesloten vandaag — zoek volgende openingsmoment
+        
         Resto.IsCurrentlyOpen = false;
         Resto.NextClosingTime = null;
         Resto.NextOpeningTime = GetNextOpeningTime(now);
