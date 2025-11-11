@@ -13,7 +13,7 @@ namespace Rise.Services.News;
 public class NewsService(ApplicationDbContext dbContext) : INewsService
 {
     private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "News", "MockData", "news.json");
-    public async Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
+    public async Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
         // //read from mock json file
         // if (!File.Exists(_mockFilePath))

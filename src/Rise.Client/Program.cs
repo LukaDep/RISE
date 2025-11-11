@@ -10,6 +10,7 @@ using Rise.Client.News;
 using Rise.Client.Resto;
 using Rise.Client.Schedule;
 using Rise.Shared.Campus;
+using Rise.Shared.Contact;
 using Rise.Shared.Grades;
 using Rise.Shared.Menu;
 using Rise.Shared.News;

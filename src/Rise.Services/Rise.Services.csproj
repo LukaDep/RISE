@@ -18,10 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="CampusInfo\MockData\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <Content Include="**/*/MockData/**/*.*">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

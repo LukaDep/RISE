@@ -22,7 +22,7 @@ else
     @foreach (var contact in contacts)
     {
         <ContactCard 
-            Id="@contact.Id"
+            Id="@contact.Id.ToString()"
             Name="@contact.Name" 
             Type="@contact.Type"
             Email="@contact.Email" 

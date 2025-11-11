@@ -1,4 +1,4 @@
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,7 +38,7 @@ namespace Rise.Services.Contact
             }
             if (!string.IsNullOrWhiteSpace(typeFilter))
             {
-                query = query.Where(n => n.Type.Equals(typeFilter, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                query = query.Where(n => n.Type.Equals(typeFilter, StringComparison.CurrentCultureIgnoreCase));
             }
             else
             {
@@ -55,7 +55,7 @@ namespace Rise.Services.Contact
                     Name = c.Name,
                     Email = c.Email,
                     ContactPerson = c.ContactPerson,
-                    phoneNumber = c.PhoneNumber,
+                    PhoneNumber = c.PhoneNumber,
                     Campusses = c.Campusses,
                 }).ToListAsync(ctx);
                 
