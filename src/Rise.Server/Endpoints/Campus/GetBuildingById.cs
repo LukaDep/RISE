@@ -10,13 +10,13 @@ public class GetBuildingById(ICampusService buildingService) : EndpointWithoutRe
 {
     public override void Configure()
     {
-        Get("/api/buildings/{id}");
+        Get("/api/buildings/{code}");
         AllowAnonymous();
     }
 
     public override async Task<Result<BuildingResponse.Get>> ExecuteAsync(CancellationToken ct)
     {
-        var id = Route<Guid>("id");
-        return await buildingService.GetBuildingByIdAsync(id, ct);
+        var code = Route<string>("code");
+        return await buildingService.GetBuildingByBuildingCodeAsync(code, ct);
     }
 }

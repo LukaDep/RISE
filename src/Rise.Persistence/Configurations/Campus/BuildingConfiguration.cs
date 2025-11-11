@@ -25,6 +25,10 @@ internal class BuildingConfiguration : EntityConfiguration<Building>
             .IsRequired()
             .HasMaxLength(100);
 
+        builder.Property(x => x.BuildingCode)
+            .IsRequired()
+            .HasMaxLength(5);
+
         // Configure the shadow foreign key property
         builder.Property<Guid>("CampusId")
             .IsRequired()

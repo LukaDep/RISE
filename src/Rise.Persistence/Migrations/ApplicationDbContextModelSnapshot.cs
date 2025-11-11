@@ -296,6 +296,11 @@ namespace Rise.Persistence.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
+                    b.Property<string>("BuildingCode")
+                        .IsRequired()
+                        .HasMaxLength(5)
+                        .HasColumnType("varchar(5)");
+
                     b.Property<Guid>("CampusId")
                         .HasMaxLength(36)
                         .HasColumnType("char(36)");
@@ -524,9 +529,9 @@ namespace Rise.Persistence.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
-                    b.Property<Guid>("CourseId")
+                    b.Property<string>("CourseId")
                         .HasMaxLength(250)
-                        .HasColumnType("char(250)");
+                        .HasColumnType("varchar(250)");
 
                     b.Property<string>("CourseName")
                         .HasMaxLength(250)

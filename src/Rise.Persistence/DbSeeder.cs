@@ -146,7 +146,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
 
         await dbContext.SaveChangesAsync();
     }
-
+    
     private async Task CampusesAsync()
     {
         if (dbContext.Campuses.Any())
@@ -326,13 +326,13 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         {
             allBuildings.AddRange(new[]
             {
-                (new Building { Name = "Gebouw B", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03138465268992, Longitude = 3.701414635630698, CampusId = schoonmeersen.Id}, schoonmeersen.Id),
-                (new Building { Name = "Gebouw C", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03195215277462, Longitude = 3.704568306783877, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw D", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.031511099994304, Longitude = 3.702789535635411, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw E", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.0310611550396, Longitude = 3.7045170251451722, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw P", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03423555310173, Longitude = 3.7019467933058716, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
-                (new Building { Name = "Sporthal", Address = "Sint-Denijslaan 251, 9000 Gent", Type = "sport", Latitude = 51.03493515601912, Longitude = 3.704163329549105, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
-                (new Building { Name = "Gebouw T", Address = "Voskenslaan 364A, 9000 Gent", Type = "building", Latitude = 51.028515604065866, Longitude = 3.70666265806964, CampusId = schoonmeersen.Id }, schoonmeersen.Id)
+                (new Building { Name = "Gebouw B", BuildingCode = "GSCHB", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03138465268992, Longitude = 3.701414635630698, CampusId = schoonmeersen.Id}, schoonmeersen.Id),
+                (new Building { Name = "Gebouw C", BuildingCode = "GSCHC", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03195215277462, Longitude = 3.704568306783877, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw D", BuildingCode = "GSCHD", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.031511099994304, Longitude = 3.702789535635411, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw E", BuildingCode = "GSCHE", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.0310611550396, Longitude = 3.7045170251451722, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw P", BuildingCode = "GSCHP", Address = "Valentin Vaerwyckweg 1, 9000 Gent", Type = "building", Latitude = 51.03423555310173, Longitude = 3.7019467933058716, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Sporthal", BuildingCode = "GSCHS", Address = "Sint-Denijslaan 251, 9000 Gent", Type = "sport", Latitude = 51.03493515601912, Longitude = 3.704163329549105, CampusId = schoonmeersen.Id }, schoonmeersen.Id),
+                (new Building { Name = "Gebouw T", BuildingCode = "GSCHT", Address = "Voskenslaan 364A, 9000 Gent", Type = "building", Latitude = 51.028515604065866, Longitude = 3.70666265806964, CampusId = schoonmeersen.Id }, schoonmeersen.Id)
             });
         }
 
@@ -340,10 +340,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         {
             allBuildings.AddRange(new[]
             {
-                (new Building { Name = "Gebouw C", Address = "Nonnemeersstraat 19-21, 9000 Gent", Type = "building", Latitude = 51.04365987772189, Longitude = 3.7133038554040447, CampusId = mercator.Id }, mercator.Id),
-                (new Building { Name = "Gebouw D", Address = "Nonnemeersstraat 15-17, 9000 Gent", Type = "building", Latitude = 51.04409655468585, Longitude = 3.7139953687425247, CampusId = mercator.Id }, mercator.Id),
-                (new Building { Name = "Gebouw E", Address = "Nonnemeersstraat 24, 9000 Gent", Type = "building", Latitude = 51.044138254547896, Longitude = 3.7140100810412755, CampusId = mercator.Id }, mercator.Id),
-                (new Building { Name = "Gebouw G", Address = "Henleykaai 84, 9000 Gent", Type = "building", Latitude = 51.04198292611773, Longitude = 3.715517179744473, CampusId = mercator.Id }, mercator.Id)
+                (new Building { Name = "Gebouw C", BuildingCode = "GMRCC",Address = "Nonnemeersstraat 19-21, 9000 Gent", Type = "building", Latitude = 51.04365987772189, Longitude = 3.7133038554040447, CampusId = mercator.Id}, mercator.Id),
+                (new Building { Name = "Gebouw D", BuildingCode = "GMRCD", Address = "Nonnemeersstraat 15-17, 9000 Gent", Type = "building", Latitude = 51.04409655468585, Longitude = 3.7139953687425247, CampusId = mercator.Id }, mercator.Id),
+                (new Building { Name = "Gebouw E", BuildingCode = "GMRCE", Address = "Nonnemeersstraat 24, 9000 Gent", Type = "building", Latitude = 51.044138254547896, Longitude = 3.7140100810412755, CampusId = mercator.Id }, mercator.Id),
+                (new Building { Name = "Gebouw G", BuildingCode = "GMRCG", Address = "Henleykaai 84, 9000 Gent", Type = "building", Latitude = 51.04198292611773, Longitude = 3.715517179744473, CampusId = mercator.Id }, mercator.Id)
             });
         }
 
@@ -351,11 +351,11 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         {
             allBuildings.AddRange(new[]
             {
-                (new Building { Name = "Pauli", Address = "J. Kluyskensstraat 2, 9000 Gent", Type = "building", Latitude = 51.04559751827652, Longitude = 3.7185065415747798, CampusId = bijloke.Id }, bijloke.Id),
-                (new Building { Name = "Cloquet", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497, CampusId = bijloke.Id }, bijloke.Id),
-                (new Building { Name = "Marissal", Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497, CampusId = bijloke.Id }, bijloke.Id),
-                (new Building { Name = "Bijlokekaai", Address = "Bijlokekaai 5, 9000 Gent", Type = "building", Latitude = 51.04371555532695, Longitude = 3.7193240387340807, CampusId = bijloke.Id }, bijloke.Id),
-                (new Building { Name = "Kunstenbibliotheek Huis van de Abdis", Address = "Godshuizenlaan 2, 9000 Gent", Type = "library", Latitude = 51.04393486454849, Longitude = 3.717493005440041, CampusId = bijloke.Id }, bijloke.Id)
+                (new Building { Name = "Pauli", BuildingCode = "GBPAU",Address = "J. Kluyskensstraat 2, 9000 Gent", Type = "building", Latitude = 51.04559751827652, Longitude = 3.7185065415747798, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Cloquet",BuildingCode = "GBCLO",Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Marissal",BuildingCode = "GBMAR",Address = "Pasteurlaan 2, 9000 Gent", Type = "building", Latitude = 51.0452537498002, Longitude = 3.715110343694497, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Bijlokekaai",BuildingCode = "GBKAA",Address = "Bijlokekaai 5, 9000 Gent", Type = "building", Latitude = 51.04371555532695, Longitude = 3.7193240387340807, CampusId = bijloke.Id }, bijloke.Id),
+                (new Building { Name = "Kunstenbibliotheek Huis van de Abdis",BuildingCode = "GBKUB",Address = "Godshuizenlaan 2, 9000 Gent", Type = "library", Latitude = 51.04393486454849, Longitude = 3.717493005440041, CampusId = bijloke.Id }, bijloke.Id)
             });
         }
 

@@ -44,4 +44,11 @@ public class Building : Entity
         get => _campusId;
         set => _campusId = Guard.Against.Default(value);
     }
+
+    private string _buildingCode = string.Empty;
+    public required string BuildingCode
+    {
+        get => _buildingCode;
+        set => _buildingCode = Guard.Against.NullOrWhiteSpace(value);
+    }
 }

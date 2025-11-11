@@ -75,9 +75,9 @@
 
     private async Task NavigateToRoom()
     {
-        var buildingId = Reservation?.Room?.Substring(0, Reservation?.Room?.IndexOf('.') ?? 0) ?? "";
-        var response = await CampusClientService.GetBuildingByIdAsync(new Guid(buildingId));
+        var buildingCode = Reservation?.Room?.Substring(0, Reservation?.Room?.IndexOf('.') ?? 0) ?? "";
+        var response = await CampusClientService.GetBuildingByBuildingCodeAsync(buildingCode);
         var campusId = response.Value?.Building.CampusId.ToString() ?? "";
-        Navigation.NavigateTo($"/campus-plan/{campusId}#building-{buildingId}");
+        Navigation.NavigateTo($"/campus-plan/{campusId}#building-{buildingCode}");
     }
 }

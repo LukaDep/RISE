@@ -47,6 +47,7 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
                 Address = b.Address,
                 Type = b.Type,
                 Latitude = b.Latitude,
+                BuildingCode = b.BuildingCode,
                 Longitude = b.Longitude
             }).ToList()
         }).ToList();
@@ -84,6 +85,7 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
                     Address = b.Address,
                     Type = b.Type,
                     Latitude = b.Latitude,
+                    BuildingCode = b.BuildingCode,
                     Longitude = b.Longitude
                 }).ToList()
             };
@@ -92,11 +94,11 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
         var response = new CampusResponse.Get { Campus = campus };
         return Result.Success(response);
     }
-    public async Task<Result<BuildingResponse.Get>> GetBuildingByIdAsync(Guid buildingId, CancellationToken ct = default)
+    public async Task<Result<BuildingResponse.Get>> GetBuildingByBuildingCodeAsync(string code, CancellationToken ct = default)
     {
         var query = dbContext.Buildings.AsQueryable();
         var building = await query.AsNoTracking()
-            .Where(b => b.Id.Equals(buildingId))
+            .Where(b => b.BuildingCode.Equals(code))
             .Select(b => new BuildingDto.Index
             {
                 Id = b.Id,
@@ -105,11 +107,12 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
                 Address = b.Address,
                 Latitude = b.Latitude,
                 Longitude = b.Longitude,
+                BuildingCode = b.BuildingCode,
                 CampusId = b.CampusId
             }).FirstOrDefaultAsync(ct);
         
         if (building == null)
-            return Result<BuildingResponse.Get>.NotFound($"No Building found with id {buildingId}");
+            return Result<BuildingResponse.Get>.NotFound($"No Building found with buildingcode {code}");
         var response = new BuildingResponse.Get { Building = building };
         return Result.Success(response);
     }

@@ -23,6 +23,7 @@ public partial class MenuPage : ComponentBase
 
     private async Task LoadMenusAsync()
     {
+        Console.WriteLine(RestoId);
         try
         {
             isLoading = true;

@@ -9,6 +9,7 @@ public class BuildingDto
         public required string Name { get; set; }
         public required string Address { get; set; }
         public required string Type { get; set; }
+        public required string BuildingCode { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
 

@@ -41,7 +41,7 @@ else
         }
         else if (!string.IsNullOrEmpty(buildingCode))
         {
-            var buildingResponse = await CampusClientService.GetBuildingByIdAsync(new Guid(buildingCode));
+            var buildingResponse = await CampusClientService.GetBuildingByBuildingCodeAsync(buildingCode);
             building = buildingResponse.Value.Building;
             if (building != null)
             {
