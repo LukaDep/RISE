@@ -13,14 +13,8 @@ namespace Rise.Services.Contact
 {
     internal class ContactService(ApplicationDbContext dbContext) : IContactService
     {
-        private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "Contact", "MockData", "contact.json");
         public async Task<Result<ContactResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
         {
-            // if (!File.Exists(_mockFilePath))
-            //     return Result<ContactResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-            // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-            //
-            // var query = JsonSerializer.Deserialize<List<ContactDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
 
             var query = dbContext.Contacts.AsQueryable();
 

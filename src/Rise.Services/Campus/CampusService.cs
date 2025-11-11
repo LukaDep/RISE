@@ -16,7 +16,6 @@ namespace Rise.Services.Campus;
 public class CampusService(ApplicationDbContext dbContext) : ICampusService
 {
 
-    private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "Campus", "MockData", "campus.json");
     public async Task<Result<CampusResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
         var entities = await dbContext.Campuses

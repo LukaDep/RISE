@@ -9,18 +9,9 @@ namespace Rise.Services.Absences;
 
 public class AbsencesService(ApplicationDbContext dbContext) : IAbsencesService
 {
-    private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "Absences", "MockData", "mocks.json");
 
     public async Task<Result<AbsencesResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
-        // //read from mock json file
-        // if (!File.Exists(_mockFilePath))
-        //     return Result<AbsencesResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-
-        // Deserialize the JSON data into a list of NewsDto.Index
-        // var query = JsonSerializer.Deserialize<List<AbsenceDto.Index>>(json,
-        //     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
 
         var query = dbContext.Absences.AsQueryable();
 

@@ -13,15 +13,8 @@ using Rise.Shared.Grades;
 
 public class GradesService(ApplicationDbContext dbContext) : IGradesService
 {
-    private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "..", "Rise.Services", "Grades", "MockData", "grades.json");
     public async Task<Result<GradesResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
-        // // mockdata
-        // if (!File.Exists(_mockFilePath))
-        //     return Result<GradesResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-        // // deserialize
-        // var query = JsonSerializer.Deserialize<List<GradesDto.Grade>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
         var query = dbContext.Grades.AsQueryable();
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
@@ -62,12 +55,6 @@ public class GradesService(ApplicationDbContext dbContext) : IGradesService
 
     public async Task<Result<GradesResponse.Get>> GetGradeByIdAsync(Guid id, CancellationToken ctx)
     {
-        // if (!File.Exists(_mockFilePath))
-        //     return Result<GradesResponse.Get>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        //
-        // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-        // var items = JsonSerializer.Deserialize<List<GradesDto.Grade>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-        // var grade = items.FirstOrDefault(c => c.Id == id);
         var query = dbContext.Grades.AsQueryable();
         var grade = await query.AsNoTracking()
             .Where(g => g.Id.Equals(id))
@@ -86,6 +73,6 @@ public class GradesService(ApplicationDbContext dbContext) : IGradesService
                 Year = g.Year,
                 Semester = g.Semester
             }).FirstOrDefaultAsync(ctx);
-        return grade == null ? Result<GradesResponse.Get>.NotFound($"Mock data file not found at: {_mockFilePath}") : Result.Success(new GradesResponse.Get { Grade = grade });
+        return grade == null ? Result<GradesResponse.Get>.NotFound($"Grade with id {id} not found") : Result.Success(new GradesResponse.Get { Grade = grade });
     }
 }

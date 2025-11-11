@@ -12,20 +12,9 @@ namespace Rise.Services.News;
 /// <param name="dbContext"></param>
 public class NewsService(ApplicationDbContext dbContext) : INewsService
 {
-    private readonly string _mockFilePath = Path.Combine(Directory.GetCurrentDirectory(), "News", "MockData", "news.json");
     public async Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
-        // //read from mock json file
-        // if (!File.Exists(_mockFilePath))
-        //     return Result<NewsResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-        //
-        // // Deserialize the JSON data into a list of NewsDto.Index
-        // var query = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-
         var query = dbContext.NewsArticles.AsQueryable();
-
-
 
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
@@ -101,11 +90,6 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
 
     public async Task<Result<NewsResponse.Get>> GetByIdAsync(Guid id, CancellationToken ctx = default)
     {
-        // if (!File.Exists(_mockFilePath))
-        //     return Result<NewsResponse.Get>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        //
-        // var json = await File.ReadAllTextAsync(_mockFilePath, ctx);
-        // var items = JsonSerializer.Deserialize<List<NewsDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
         var query = dbContext.NewsArticles.AsQueryable();
         var newsArticle = await query.AsNoTracking()
             .Where(n => n.Id == id)

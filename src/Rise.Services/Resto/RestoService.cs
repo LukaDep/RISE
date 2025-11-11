@@ -10,27 +10,9 @@ namespace Rise.Services.Resto;
 
 public class RestoService(ApplicationDbContext dbContext) : IRestoService
 {
-    private readonly string _mockFilePath;
-
-    // public MockRestoService()
-    // {
-    //     var currentDirectory = Directory.GetCurrentDirectory();
-    //     _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Resto", "MockData", "RestoMockdata.json");
-    //     Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
-    //     Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
-    //     Log.Information("File exists: {FileExists}", File.Exists(_mockFilePath));
-    // }
 
     public async Task<Result<RestoResponse.Index>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)
     {
-        // if (!File.Exists(_mockFilePath))
-        // {
-        //     Log.Warning("Mock data file not found at: {MockFilePath}", _mockFilePath);
-        //     return Result<RestoResponse.Index>.NotFound($"Mock data file not found at: {_mockFilePath}");
-        // }
-        //
-        // var json = await File.ReadAllTextAsync(_mockFilePath, ct);
-        // IEnumerable<RestoDto.Index> items = JsonSerializer.Deserialize<List<RestoDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
         var query = dbContext.Restos.AsQueryable();
 
 
@@ -65,22 +47,6 @@ public class RestoService(ApplicationDbContext dbContext) : IRestoService
         return Result.Success(new RestoResponse.Index { Restos = restos });
 
 
-        // var now = DateTimeOffset.Now;
-        // foreach (var resto in paged)
-        // {
-        //     try
-        //     {
-        //         resto.IsCurrentlyOpen = IsCurrentlyOpen(resto.OpeningHours, now);
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         Log.Warning(ex, "Failed to compute IsCurrentlyOpen for resto {RestoId}", resto.Id);
-        //         resto.IsCurrentlyOpen = false;
-        //     }
-        // }
-        //
-        // var response = new RestoResponse.Index { Restos = paged };
-        // return Result.Success(response);
     }
 
     private static bool IsCurrentlyOpen(Dictionary<DayOfWeek, string>? openingHours, DateTimeOffset now)
