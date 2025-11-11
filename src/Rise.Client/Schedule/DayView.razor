@@ -122,7 +122,7 @@
                 
                 if (timePosition >= 0 && IsToday())
                 {
-                    <div class="absolute z-50 pointer-events-none" style="top: @(timePosition)px; left: 64px; width: calc(100% - 64px);">
+                    <div class="absolute z-50 pointer-events-none" style="top: @(timePosition.ToString().Replace(',', '.'))px; left: 64px; width: calc(100% - 64px);">
                         <div class="relative h-0.5 bg-red-500 shadow-lg">
                             <div class="absolute -left-1 -top-1 w-2.5 h-2.5 bg-red-500 rounded-full"></div>
                             <div class="absolute -left-16 -top-2.5 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded shadow-md whitespace-nowrap">
