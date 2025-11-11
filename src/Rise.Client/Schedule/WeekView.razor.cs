@@ -91,7 +91,6 @@ public partial class WeekView : IAsyncDisposable
         }
     }
 
-    private DateTime WeekEndDate => WeekStartDate.AddDays(6);
     private int WeekNumber => System.Globalization.ISOWeek.GetWeekOfYear(WeekStartDate);
 
     private List<DateTime> WeekDays =>
@@ -136,22 +135,6 @@ public partial class WeekView : IAsyncDisposable
         await PreviousWeekAnimated();
     }
 
-    private bool HasEventAtTime(DateTime day, int hour)
-    {
-        return schedule?.Any(r =>
-            r.StartDateTime.Date == day.Date &&
-            r.StartDateTime.Hour <= hour &&
-            r.EndDateTime.Hour > hour) ?? false;
-    }
-
-    private ScheduleDto.Reservation? GetEventAtTime(DateTime day, int hour)
-    {
-        return schedule?.FirstOrDefault(r =>
-            r.StartDateTime.Date == day.Date &&
-            r.StartDateTime.Hour <= hour &&
-            r.EndDateTime.Hour > hour);
-    }
-
     private List<ScheduleDto.Reservation> GetReservationsForDate(DateTime date) =>
         schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList()
         ?? new List<ScheduleDto.Reservation>();
@@ -162,9 +145,8 @@ public partial class WeekView : IAsyncDisposable
         var hour = now.Hour;
         var minute = now.Minute;
 
-        // Bereken positie in pixels (64px per uur, vanaf 8:00)
         if (hour < 8 || hour > 20)
-            return -1; // Buiten zichtbaar bereik
+            return -1;
 
         return ((hour - 8) * 64) + (minute * 64 / 60.0);
     }
@@ -180,7 +162,7 @@ public partial class WeekView : IAsyncDisposable
                 return i;
         }
 
-        return -1; // Niet in deze week
+        return -1;
     }
 
 
@@ -197,6 +179,17 @@ public partial class WeekView : IAsyncDisposable
             DayOfWeek.Sunday => L["Schedule.Sunday"],
             _ => day.ToString("ddd")
         };
+    }
+
+    private static string TruncateTitle(string title, int maxLength = 40)
+    {
+        if (string.IsNullOrEmpty(title))
+            return title;
+
+        if (title.Length <= maxLength)
+            return title;
+
+        return title.Substring(0, maxLength) + "...";
     }
 
     public async ValueTask DisposeAsync()

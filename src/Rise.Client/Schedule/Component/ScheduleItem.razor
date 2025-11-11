@@ -1,8 +1,6 @@
 @using Rise.Shared.Campus
 @using Rise.Shared.Schedule
 @namespace Rise.Client.Schedule
-@inject NavigationManager Navigation
-@inject ICampusService CampusClientService
 
 @if (Reservation is not null)
 {
@@ -19,7 +17,7 @@
                 </div>
 
                 <div class="flex flex-col space-y-2 flex-1">
-                    <h2 class="text-xl font-semibold text-hogent-black">@Reservation.Course</h2>
+                    <h2 class="text-xl font-semibold text-hogent-black">@TruncateTitle(Reservation.Course)</h2>
                     <p class="text-hogent-black-50 text-sm">
                         @(Reservation.StartDateTime.ToString("HH:mm")) – @(Reservation.EndDateTime.ToString("HH:mm"))
                     </p>
@@ -61,23 +59,4 @@
             </div>
         </div>
     </div>
-}
-
-@code {
-    [Parameter] public ScheduleDto.Reservation? Reservation { get; set; }
-    [Parameter] public EventCallback OnClose { get; set; }
-
-    private async Task CloseDetails()
-    {
-        await OnClose.InvokeAsync();
-    }
-
-
-    private async Task NavigateToRoom()
-    {
-        var buildingId = Reservation?.Room?.Substring(0, Reservation?.Room?.IndexOf('.') ?? 0) ?? "";
-        var response = await CampusClientService.GetBuildingByIdAsync(buildingId);
-        var campusId = response?.Value?.CampusId ?? "";
-        Navigation.NavigateTo($"/campus-plan/{campusId}#building-{buildingId}");
-    }
 }

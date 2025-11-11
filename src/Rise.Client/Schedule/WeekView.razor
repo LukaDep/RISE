@@ -103,20 +103,29 @@
                     var bgColor = DayView.GetEventTypeBgColor(evt.WorkForm);
 
                     <div class="absolute @bgColor rounded-lg p-2.5 shadow-md border border-white/20 overflow-hidden cursor-pointer hover:opacity-90 transition"
-                         style="top: @(topPosition + 4)px; left: @leftPosition; height: @(height - 8)px; width: @widthCalc;"
-                         @onclick="() => OpenDetails(evt)">
-                        <div class="font-semibold text-xs leading-tight mb-0.5">@evt.Course</div>
-                        <div class="text-xs opacity-90">@evt.Room</div>
-                        @if (durationMinutes >= 90)
-                        {
-                            <div class="text-xs opacity-75 mt-1">@evt.Teacher</div>
-                        }
-                        @if (evt.IsAbsent)
-                        {
-                            <div class="absolute inset-0 z-10 pointer-events-none rounded-lg bg-[repeating-linear-gradient(135deg,rgba(220,38,38,0.08)_0_12px,transparent_12px_24px)]">
-                            </div>
-                        }
-                    </div>
+     style="top: @(topPosition + 4)px; left: @leftPosition; height: @(height - 8)px; width: @widthCalc;"
+     @onclick="() => OpenDetails(evt)">
+    
+    <!-- De tekst mag nu afbreken naar de volgende lijn -->
+    <div class="font-semibold text-xs leading-tight mb-0.5 break-words whitespace-normal">
+        @TruncateTitle(evt.Course, durationMinutes > 120 ? 40 : 20)
+    </div>
+
+    @if (durationMinutes >= 400)
+    {
+        <div class="text-xs opacity-90 break-words whitespace-normal">@evt.Room</div>
+    }
+    @if (durationMinutes >= 400)
+    {
+        <div class="text-xs opacity-75 mt-1 break-words whitespace-normal">@evt.Teacher</div>
+    }
+    @if (evt.IsAbsent)
+    {
+        <div class="absolute inset-0 z-10 pointer-events-none rounded-lg bg-[repeating-linear-gradient(135deg,rgba(220,38,38,0.08)_0_12px,transparent_12px_24px)]">
+        </div>
+    }
+</div>
+
                 }
             }
             
@@ -133,7 +142,7 @@
                         <div class="relative h-0.5 bg-red-500 shadow-lg">
                             <div class="absolute -left-1 -top-1 w-2.5 h-2.5 bg-red-500 rounded-full"></div>
                             <div class="absolute -left-14 -top-2.5 bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded shadow-md whitespace-nowrap">
-                                @currentTime.ToString("HH:mm")
+                    @currentTime.ToString("HH:mm")
                             </div>
                         </div>
                     </div>

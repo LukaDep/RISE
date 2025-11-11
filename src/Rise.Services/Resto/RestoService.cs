@@ -14,9 +14,9 @@ public class MockRestoService : IRestoService
     {
         var currentDirectory = Directory.GetCurrentDirectory();
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Resto", "MockData", "RestoMockdata.json");
-        Log.Information("Current directory: {CurrentDirectory}", currentDirectory);
-        Log.Information("Looking for mock file at: {MockFilePath}", _mockFilePath);
-        Log.Information("File exists: {FileExists}", File.Exists(_mockFilePath));
+
+
+
     }
 
     public async Task<Result<RestoResponse.Index>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)

@@ -629,4 +629,68 @@
     <value>Inloggen</value>
     <comment/>
   </data>
+  <data name="Account_NotificationSettings" xml:space="preserve">
+    <value>Account | Notificatie-instellingen</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Title" xml:space="preserve">
+    <value>Notificaties</value>
+    <comment/>
+  </data>
+  <data name="Notifications.PushSection" xml:space="preserve">
+    <value>Push notificaties</value>
+    <comment/>
+  </data>
+  <data name="Notifications.PushDescription" xml:space="preserve">
+    <value>Meldingen op je apparaat</value>
+    <comment/>
+  </data>
+  <data name="Notifications.AllNotifications" xml:space="preserve">
+    <value>Alle notificaties</value>
+    <comment/>
+  </data>
+  <data name="Notifications.AllNotificationsDescription" xml:space="preserve">
+    <value>Schakel alle meldingen in</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Grades" xml:space="preserve">
+    <value>Cijfers en resultaten</value>
+    <comment/>
+  </data>
+  <data name="Notifications.GradesDescription" xml:space="preserve">
+    <value>Nieuwe cijfers beschikbaar</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Schedule" xml:space="preserve">
+    <value>Roosterwijzigingen</value>
+    <comment/>
+  </data>
+  <data name="Notifications.ScheduleDescription" xml:space="preserve">
+    <value>Veranderingen in je rooster</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Campus" xml:space="preserve">
+    <value>Campus evenementen</value>
+    <comment/>
+  </data>
+  <data name="Notifications.CampusDescription" xml:space="preserve">
+    <value>Updates over campus</value>
+    <comment/>
+  </data>
+  <data name="Notifications.News" xml:space="preserve">
+    <value>Nieuws en aankondigingen</value>
+    <comment/>
+  </data>
+  <data name="Notifications.NewsDescription" xml:space="preserve">
+    <value>Berichten van de school</value>
+    <comment/>
+  </data>
+  <data name="Notifications.InformationSection" xml:space="preserve">
+    <value>Informatie</value>
+    <comment/>
+  </data>
+  <data name="Notifications.InformationText" xml:space="preserve">
+    <value>Je moet push-notificaties toestaan om deze instellingen in werking te laten treden. Wijzig je instellingen om meldingen in te schakelen.</value>
+    <comment/>
+  </data>
 </root>
