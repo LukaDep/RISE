@@ -12,29 +12,48 @@
                 <i class="fa-solid fa-triangle-exclamation fa-5x"></i>
             </div>
         }
-        
-        <div class="absolute top-4 right-4">
-            @if (Resto.IsCurrentlyOpen)
+
+       <div class="absolute top-4 right-4 text-right">
+    @if (Resto.IsCurrentlyOpen)
+    {
+        <div class="inline-flex flex-col items-end gap-1">
+            <span class="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1">
+                <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
+                @L["Resto.Open"]
+            </span>
+
+            @if (Resto.NextClosingTime.HasValue)
             {
-                <span class="px-3 py-1 bg-green-500 text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1">
-                    <span class="w-2 h-2 bg-white rounded-full animate-pulse"></span>
-                    @L["Resto.Open"]
-                </span>
-            }
-            else
-            {
-                <span class="px-3 py-1 bg-red-500 text-white text-xs font-semibold rounded-full shadow-lg">
-                    @L["Resto.Closed"]
+                <span class="text-[0.7rem] text-white bg-green-500 px-2 py-0.5 rounded-full shadow-sm">
+                    @L["Resto.ClosesAt"] @Resto.NextClosingTime.Value.ToString("HH:mm")
                 </span>
             }
         </div>
+    }
+    else
+    {
+        <div class="inline-flex flex-col items-end gap-1">
+            <span class="px-3 py-1 bg-red-500 text-white text-xs font-semibold rounded-full shadow-lg flex items-center gap-1">
+                @L["Resto.Closed"]
+            </span>
+
+            @if (Resto.NextOpeningTime.HasValue)
+            {
+                <span class="text-[0.7rem] text-white bg-red-500 px-2 py-0.5 rounded-full shadow-sm">
+                    @L["Resto.OpensAt"] @Resto.NextOpeningTime.Value.ToString("HH:mm")
+                </span>
+            }
+        </div>
+    }
+</div>
     </div>
 
     <div class="p-6">
         <div class="mb-4">
-            <h3 class="text-2xl font-bold text-hogent-black mb-2 group-hover:text-hogent-education ">
+            <h3 class="text-2xl font-bold text-hogent-black mb-2 group-hover:text-hogent-education">
                 @Resto.Name
             </h3>
+
             @if (Resto.KitchenType != null && Resto.KitchenType.Any())
             {
                 <div class="flex flex-wrap gap-2 mb-2">
@@ -63,6 +82,7 @@
                     <span>@Resto.PhoneNumber</span>
                 </div>
             }
+
             @if (!string.IsNullOrEmpty(Resto.Email))
             {
                 <div class="flex items-center gap-2 text-sm text-hogent-black-70">
@@ -81,10 +101,10 @@
 
         @if (Resto.OpeningHours != null && Resto.OpeningHours.Any())
         {
-            <button @onclick="ToggleOpeningHours" 
+            <button @onclick="ToggleOpeningHours"
                     class="w-full mt-4 px-4 py-2 bg-hogent-black text-white rounded-lg hover:bg-hogent-black/90 flex items-center justify-between group/btn">
                 <span class="font-semibold">@L["Resto.OpeningHours"]</span>
-<i class="fa-solid fa-chevron-down  @(showOpeningHours ? "rotate-180" : "")"></i>
+                <i class="fa-solid fa-chevron-down @(showOpeningHours ? "rotate-180" : "")"></i>
             </button>
 
             @if (showOpeningHours)

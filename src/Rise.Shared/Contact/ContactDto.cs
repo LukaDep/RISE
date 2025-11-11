@@ -8,7 +8,7 @@ public static class ContactDto
         public required string Type { get; set; }
         public required string Name { get; set; }
         public string? Email { get; set; }
-        public string? phoneNumber { get; set; }
+        public string? PhoneNumber { get; set; }
         public string? ContactPerson { get; set; }
         public IEnumerable<string>? Campusses { get; set; }
     }

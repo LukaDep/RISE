@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
-    Microsoft ResX Schema
-
+  <!-- 
+    Microsoft ResX Schema 
+    
     Version 2.0
-
-    The primary goals of this format is to allow a simple XML format
-    that is mostly human readable. The generation and parsing of the
-    various data types are done through the TypeConverter classes
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
     associated with the data types.
-
+    
     Example:
-
+    
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -22,47 +22,44 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
-  mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
-  object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
-
-    There are any number of "resheader" rows that contain simple
+                
+    There are any number of "resheader" rows that contain simple 
     name/value pairs.
-
-    Each data row contains a name, and value. The row also contains a
-    type or mimetype. Type corresponds to a .NET class that support
-    text/value conversion through the TypeConverter architecture.
-    Classes that don't support this are serialized and stored with the
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
     mimetype set.
-
-    The mimetype is used for serialized objects, and tells the
-    ResXResourceReader how to depersist the object. This is currently not
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
     extensible. For a given mimetype the value must be set accordingly:
-
-    Note - application/x-microsoft.net.object.binary.base64 is the format
-    that the ResXResourceWriter will generate, however the reader can
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
     read any of the formats listed below.
-
+    
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-
+    
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with
+    value   : The object must be serialized with 
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array
+    value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -115,28 +112,22 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
-      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
-      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home.AuthMessage" xml:space="preserve">
     <value>After a user authenticates, the navigation menu shows a link to the</value>
-    <comment/>
   </data>
   <data name="Home.HelloWorld" xml:space="preserve">
     <value>Hello, world!</value>
-    <comment/>
   </data>
   <data name="Home.PrivatePage" xml:space="preserve">
     <value>Private Page</value>
-    <comment/>
   </data>
   <data name="Home.WelcomeMessage" xml:space="preserve">
     <value>Welcome to your new app.</value>
-    <comment/>
   </data>
   <data name="Schedule.Title" xml:space="preserve">
     <value>Schedule</value>
@@ -144,11 +135,9 @@
   </data>
   <data name="Schedule.Week" xml:space="preserve">
     <value>Week</value>
-    <comment/>
   </data>
   <data name="Schedule.To" xml:space="preserve">
     <value>to</value>
-    <comment/>
   </data>
   <data name="Schedule.ToToday" xml:space="preserve">
     <value>Go to today </value>
@@ -160,43 +149,33 @@
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Previous</value>
-    <comment/>
   </data>
   <data name="Schedule.Next" xml:space="preserve">
     <value>Next</value>
-    <comment/>
   </data>
   <data name="Schedule.Time" xml:space="preserve">
     <value>Time</value>
-    <comment/>
   </data>
   <data name="Schedule.Day" xml:space="preserve">
     <value>Day</value>
-    <comment/>
   </data>
   <data name="Schedule.Month" xml:space="preserve">
     <value>Month</value>
-    <comment/>
   </data>
   <data name="Schedule.More" xml:space="preserve">
     <value>more</value>
-    <comment/>
   </data>
   <data name="Schedule.NoClassesToday" xml:space="preserve">
     <value>No classes today!</value>
-    <comment/>
   </data>
   <data name="Schedule.ActiveLecture" xml:space="preserve">
     <value>Active Lecture</value>
-    <comment/>
   </data>
   <data name="Schedule.Practicum" xml:space="preserve">
     <value>Practicum</value>
-    <comment/>
   </data>
   <data name="Schedule.Seminar" xml:space="preserve">
     <value>Seminar</value>
-    <comment/>
   </data>
   <data name="Schedule.Test" xml:space="preserve">
     <value>Test</value>
@@ -252,135 +231,102 @@
   </data>
   <data name="News.Title" xml:space="preserve">
     <value>News</value>
-    <comment/>
   </data>
   <data name="News.FilterPlaceholder" xml:space="preserve">
     <value>Filter news...</value>
-    <comment/>
   </data>
   <data name="News.Loading" xml:space="preserve">
     <value>Loading...</value>
-    <comment/>
   </data>
   <data name="News.By" xml:space="preserve">
     <value>By</value>
-    <comment/>
   </data>
   <data name="Auth.LoggedInAs" xml:space="preserve">
     <value>You're logged in as</value>
-    <comment/>
   </data>
   <data name="Auth.WithClaims" xml:space="preserve">
     <value>With the following claims:</value>
-    <comment/>
   </data>
   <data name="Auth.Type" xml:space="preserve">
     <value>Type</value>
-    <comment/>
   </data>
   <data name="Auth.Value" xml:space="preserve">
     <value>Value</value>
-    <comment/>
   </data>
   <data name="Auth.EmailPlaceholder" xml:space="preserve">
     <value>Email</value>
-    <comment/>
   </data>
   <data name="Auth.PasswordPlaceholder" xml:space="preserve">
     <value>Password</value>
-    <comment/>
   </data>
   <data name="Auth.Login" xml:space="preserve">
     <value>Login</value>
-    <comment/>
   </data>
   <data name="Auth.Register" xml:space="preserve">
     <value>Register</value>
-    <comment/>
   </data>
   <data name="Auth.AlreadyLoggedIn" xml:space="preserve">
     <value>You're already logged in as</value>
-    <comment/>
   </data>
   <data name="Auth.RegisterNewUser" xml:space="preserve">
     <value>Register as a new user.</value>
-    <comment/>
   </data>
   <data name="Auth.RegisterSuccess" xml:space="preserve">
     <value>You successfully registered. Now you can</value>
-    <comment/>
   </data>
   <data name="Auth.LoginLink" xml:space="preserve">
     <value>login</value>
-    <comment/>
   </data>
   <data name="Auth.ConfirmPasswordPlaceholder" xml:space="preserve">
     <value>Confirm Password</value>
-    <comment/>
   </data>
   <data name="Products.Title" xml:space="preserve">
     <value>Products</value>
-    <comment/>
   </data>
   <data name="Products.FetchingData" xml:space="preserve">
     <value>This component demonstrates fetching data from the server.</value>
-    <comment/>
   </data>
   <data name="Products.Create" xml:space="preserve">
     <value>Create</value>
-    <comment/>
   </data>
   <data name="Products.Id" xml:space="preserve">
     <value>Id</value>
-    <comment/>
   </data>
   <data name="Products.Name" xml:space="preserve">
     <value>Name</value>
-    <comment/>
   </data>
   <data name="Products.Description" xml:space="preserve">
     <value>Description</value>
-    <comment/>
   </data>
   <data name="Common.Loading" xml:space="preserve">
     <value>Loading...</value>
-    <comment/>
   </data>
   <data name="Common.ComingSoon" xml:space="preserve">
     <value>Coming soon...</value>
-    <comment/>
   </data>
   <data name="Common.NotFound" xml:space="preserve">
     <value>This page could not be found.</value>
-    <comment/>
   </data>
   <data name="Common.NotAuthorized" xml:space="preserve">
     <value>Not Authorized</value>
-    <comment/>
   </data>
   <data name="Common.NotAuthorizedMessage" xml:space="preserve">
     <value>You don't have permission to access this page. Please log in to continue.</value>
-    <comment/>
   </data>
   <data name="Common.BackToHome" xml:space="preserve">
     <value>Back to Home</value>
-    <comment/>
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Sign In</value>
-    <comment/>
   </data>
   <data name="Account.Title" xml:space="preserve">
     <value>Account</value>
-    <comment/>
   </data>
   <data name="Account.SelectOption" xml:space="preserve">
     <value>Select an option from the menu.</value>
-    <comment/>
   </data>
   <data name="Account.Logout" xml:space="preserve">
     <value>Logout</value>
-    <comment/>
   </data>
   <data name="Schedule.Absent" xml:space="preserve">
     <value>Absent</value>
@@ -388,23 +334,24 @@
   </data>
   <data name="Resto.Title" xml:space="preserve">
     <value>Restaurants</value>
-    <comment/>
   </data>
   <data name="Resto.FilterPlaceholder" xml:space="preserve">
     <value>Search restaurants...</value>
-    <comment/>
   </data>
   <data name="Resto.NoResults" xml:space="preserve">
     <value>No restaurants found</value>
-    <comment/>
   </data>
   <data name="Resto.Open" xml:space="preserve">
     <value>Open</value>
-    <comment/>
   </data>
   <data name="Resto.Closed" xml:space="preserve">
     <value>Closed</value>
-    <comment/>
+  </data>
+   <data name="Resto.OpensAt" xml:space="preserve">
+    <value>Opens at</value>
+  </data>
+  <data name="Resto.ClosesAt" xml:space="preserve">
+    <value>Closes at</value>
   </data>
   <data name="Resto.KitchenType.Hot" xml:space="preserve">
     <value>Hot</value>
@@ -420,35 +367,27 @@
   </data>
   <data name="Resto.OpeningHours" xml:space="preserve">
     <value>Opening Hours</value>
-    <comment/>
   </data>
   <data name="Resto.ViewMenu" xml:space="preserve">
     <value>View menu</value>
-    <comment/>
   </data>
   <data name="Day.Monday" xml:space="preserve">
     <value>Monday</value>
-    <comment/>
   </data>
   <data name="Day.Tuesday" xml:space="preserve">
     <value>Tuesday</value>
-    <comment/>
   </data>
   <data name="Day.Wednesday" xml:space="preserve">
     <value>Wednesday</value>
-    <comment/>
   </data>
   <data name="Day.Thursday" xml:space="preserve">
     <value>Thursday</value>
-    <comment/>
   </data>
   <data name="Day.Friday" xml:space="preserve">
     <value>Friday</value>
-    <comment/>
   </data>
   <data name="Day.Saturday" xml:space="preserve">
     <value>Saturday</value>
-    <comment/>
   </data>
   <data name="Day.Sunday" xml:space="preserve">
     <value>Sunday</value>
@@ -524,6 +463,21 @@
   </data>
   <data name="Resto.Return" xml:space="preserve">
     <value>Return to overview</value>
+  </data>
+  <data name="Resto.BackShort" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="Contact.Title" xml:space="preserve">
+    <value>Contacts</value>
+  </data>
+  <data name="Contact.Loading" xml:space="preserve">
+    <value>Contact details are loading...</value>
+  </data>
+  <data name="Contact.Call" xml:space="preserve">
+    <value>Call</value>
+  </data>
+  <data name="Contact.Mail" xml:space="preserve">
+    <value>Mail</value>
     <comment/>
   </data>
   <data name="Resto.BackShort" xml:space="preserve">
