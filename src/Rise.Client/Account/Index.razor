@@ -5,7 +5,6 @@
 <PageTitle>Account</PageTitle>
 
 <div class="flex h-full">
-  <!-- Verticale tab lijst -->
   <div class="w-full bg-white border-r border-gray-200 p-4">
     <nav class="w-full flex flex-col space-y-2">
       <a href="/calendar"
@@ -16,6 +15,11 @@
             d="M120 0c13.3 0 24 10.7 24 24l0 40 160 0 0-40c0-13.3 10.7-24 24-24s24 10.7 24 24l0 40 32 0c35.3 0 64 28.7 64 64l0 288c0 35.3-28.7 64-64 64L64 480c-35.3 0-64-28.7-64-64L0 128C0 92.7 28.7 64 64 64l32 0 0-40c0-13.3 10.7-24 24-24zm0 112l-56 0c-8.8 0-16 7.2-16 16l0 48 352 0 0-48c0-8.8-7.2-16-16-16l-264 0zM48 224l0 192c0 8.8 7.2 16 16 16l320 0c8.8 0 16-7.2 16-16l0-192-352 0z" />
         </svg>
         <span>@L["Account.Calendar"]</span>
+      </a>
+      <a href="/account/notificationsettings"
+        class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+        <i class="fa-solid fa-bell fa-lg mr-3 text-current"></i>
+        <span>@L["Account.Grades"]</span>
       </a>
       <a href="/grades"
         class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">

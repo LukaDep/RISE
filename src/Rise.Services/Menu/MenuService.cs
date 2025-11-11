@@ -13,9 +13,6 @@ namespace Rise.Services.Menu;
 public class MenuService(ApplicationDbContext dbContext) : IMenuService
 {
 
-
-
-
     public async Task<Result<MenuResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ct = default)
     {
         // if (!File.Exists(_mockFilePath))

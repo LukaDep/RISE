@@ -1,0 +1,146 @@
+@page "/account/notificationsettings"
+@attribute [Authorize]
+@inject NavigationManager NavigationManager
+@using Rise.Client.Components
+
+<PageTitle>@L["Account_NotificationSettings"]</PageTitle>
+
+<div class="min-h-screen bg-gray-50 pb-8">
+  <!-- Header -->
+  <div class="sticky top-0 z-40 bg-white border-b border-gray-200">
+    <div class="flex items-center gap-3 px-4 py-4">
+      <button @onclick="GoBack" class="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          class="w-6 h-6 text-gray-800">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+      <h1 class="text-xl font-semibold text-gray-900">@L["Notifications.Title"]</h1>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="max-w-2xl mx-auto px-4 pt-6 pb-24 space-y-4">
+
+    <!-- Push Notifications Section Header -->
+    <div class="pt-4 pb-2 px-1">
+      <h2 class="text-xs font-bold text-gray-500 uppercase tracking-wide">@L["Notifications.PushSection"]</h2>
+      <p class="text-xs text-gray-400 mt-1">@L["Notifications.PushDescription"]</p>
+    </div>
+
+    <!-- Main Toggle -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+      <div class="p-4 hover:bg-gray-50 transition-colors">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-gray-700 to-gray-800 rounded-lg flex items-center justify-center shadow-sm">
+              <i class="fa-solid fa-bell text-white text-base"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-semibold text-gray-900 text-sm">@L["Notifications.AllNotifications"]</h3>
+              <p class="text-xs text-gray-500 mt-0.5">@L["Notifications.AllNotificationsDescription"]</p>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <Toggle @bind-Value="allNotifications" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 divide-y divide-gray-100 overflow-hidden">
+      <div class="p-4 hover:bg-gray-50 transition-colors">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div class="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-emerald-400 to-emerald-500 rounded-lg flex items-center justify-center shadow-sm">
+              <i class="fa-solid fa-graduation-cap text-white text-base"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-semibold text-gray-900 text-sm">@L["Notifications.Grades"]</h3>
+              <p class="text-xs text-gray-500 mt-0.5">@L["Notifications.GradesDescription"]</p>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <Toggle @bind-Value="gradesNotifications" Disabled="@(!allNotifications)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 hover:bg-gray-50 transition-colors">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div
+              class="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-blue-400 to-blue-500 rounded-lg flex items-center justify-center shadow-sm">
+              <i class="fa-solid fa-calendar-days text-white text-base"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-semibold text-gray-900 text-sm">@L["Notifications.Schedule"]</h3>
+              <p class="text-xs text-gray-500 mt-0.5">@L["Notifications.ScheduleDescription"]</p>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <Toggle @bind-Value="scheduleNotifications" Disabled="@(!allNotifications)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 hover:bg-gray-50 transition-colors">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div
+              class="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-purple-400 to-purple-500 rounded-lg flex items-center justify-center shadow-sm">
+              <i class="fa-solid fa-school text-white text-base"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-semibold text-gray-900 text-sm">@L["Notifications.Campus"]</h3>
+              <p class="text-xs text-gray-500 mt-0.5">@L["Notifications.CampusDescription"]</p>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <Toggle @bind-Value="campusNotifications" Disabled="@(!allNotifications)" />
+          </div>
+        </div>
+      </div>
+
+      <div class="p-4 hover:bg-gray-50 transition-colors">
+        <div class="flex items-center justify-between gap-4">
+          <div class="flex items-center gap-3 flex-1 min-w-0">
+            <div
+              class="flex-shrink-0 w-9 h-9 bg-gradient-to-br from-orange-400 to-orange-500 rounded-lg flex items-center justify-center shadow-sm">
+              <i class="fa-solid fa-newspaper text-white text-base"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <h3 class="font-semibold text-gray-900 text-sm">@L["Notifications.News"]</h3>
+              <p class="text-xs text-gray-500 mt-0.5">@L["Notifications.NewsDescription"]</p>
+            </div>
+          </div>
+          <div class="flex-shrink-0">
+            <Toggle @bind-Value="newsNotifications" Disabled="@(!allNotifications)" />
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Info Section -->
+    <div class="pt-6 pb-2 px-1">
+      <h2 class="text-xs font-bold text-gray-500 uppercase tracking-wide">@L["Notifications.InformationSection"]</h2>
+    </div>
+
+    <div class="bg-blue-50 rounded-xl border border-blue-100 p-4">
+      <div class="flex gap-3">
+        <div class="flex-shrink-0">
+          <div class="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center">
+            <i class="fa-solid fa-circle-info text-blue-600 text-sm"></i>
+          </div>
+        </div>
+        <div class="flex-1">
+          <p class="text-sm text-gray-700 leading-relaxed">
+            @L["Notifications.InformationText"]
+          </p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

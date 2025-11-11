@@ -9,7 +9,6 @@ public partial class MonthView : IAsyncDisposable
 {
     [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
-    // Callback to parent when a day is clicked
     [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
 
     private List<ScheduleDto.Reservation>? schedule;
@@ -85,6 +84,21 @@ public partial class MonthView : IAsyncDisposable
     private bool HasEventsOnDay(DateTime day) =>
         schedule?.Any(r => r.StartDateTime.Date == day.Date) ?? false;
 
+    private List<string> GetWorkFormsInMonth()
+    {
+        var currentMonthStart = FirstDayOfMonth;
+        var currentMonthEnd = currentMonthStart.AddMonths(1).AddDays(-1);
+
+        var workForms = schedule?
+            .Where(r => r.StartDateTime.Date >= currentMonthStart && r.StartDateTime.Date <= currentMonthEnd)
+            .Select(r => r.WorkForm)
+            .Distinct()
+            .OrderBy(w => w)
+            .ToList() ?? new List<string>();
+
+        return workForms;
+    }
+
     public async Task PreviousMonthAnimated()
     {
         await AnimateSwipe("right");
@@ -111,16 +125,6 @@ public partial class MonthView : IAsyncDisposable
     {
         await PreviousMonthAnimated();
     }
-
-    private string GetEventTypeBgColor(string type) => type.ToLower() switch
-    {
-        "hoorcollege" => "bg-hogent-education-15 text-hogent-education",
-        "activerend hoorcollege" => "bg-hogent-it-15 text-hogent-it",
-        "practicum" => "bg-hogent-green-15 text-hogent-green",
-        "werkcollege" => "bg-hogent-orange-15 text-hogent-orange",
-        "seminarie" => "bg-hogent-business-15 text-hogent-business",
-        _ => "bg-hogent-black-15 text-hogent-black"
-    };
 
     private async Task GoToDayView(DateTime date)
     {

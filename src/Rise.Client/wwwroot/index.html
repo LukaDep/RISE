@@ -7,12 +7,30 @@
         <base href="/" />
         <link rel="stylesheet" href="css/app.css" />
         <link rel="stylesheet" href="css/output.css" />
-        <link rel="icon" type="image/png" href="favicon.png" />
+        <link rel="icon" type="image/png" href="HOGENT-Logo-192.png" />
         <link href="Rise.Client.styles.css" rel="stylesheet" />
         <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
         />
+        <link rel="manifest" href="manifest.webmanifest" />
+        <link
+            rel="apple-touch-icon"
+            sizes="192x192"
+            href="HOGENT-Logo-192.png"
+        />
+        <link
+            rel="apple-touch-icon"
+            sizes="512x512"
+            href="HOGENT-Logo-512.png"
+        />
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('service-worker.js')
+                    .then(() => console.log('Service Worker Registered'))
+            }
+        </script>
     </head>
 
     <body>
