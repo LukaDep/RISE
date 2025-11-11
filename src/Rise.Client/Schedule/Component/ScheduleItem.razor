@@ -2,7 +2,7 @@
 @using Rise.Shared.Schedule
 @namespace Rise.Client.Schedule
 
-@if (Reservation is not null)
+@if (Schedule is not null)
 {
     <div class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" @onclick="CloseDetails">
         <div class="relative bg-hogent-white border border-hogent-black-30 rounded-lg w-[90%] sm:w-[32rem] p-6 font-montserrat text-hogent-black shadow-lg animate-fadeIn"
@@ -11,15 +11,15 @@
             <div class="flex items-start gap-4">
                 <div
                     class="w-20 h-20 flex flex-col items-center justify-center bg-hogent-black-15 border border-hogent-black-30 rounded-lg text-center flex-shrink-0">
-                    <p class="text-3xl font-extrabold text-hogent-black leading-none">@Reservation.StartDateTime.Day</p>
+                    <p class="text-3xl font-extrabold text-hogent-black leading-none">@Schedule.StartDateTime.Day</p>
                     <p class="text-xs text-hogent-black-50 font-semibold uppercase">
-                        @Reservation.StartDateTime.ToString("MMM")</p>
+                        @Schedule.StartDateTime.ToString("MMM")</p>
                 </div>
 
                 <div class="flex flex-col space-y-2 flex-1">
-                    <h2 class="text-xl font-semibold text-hogent-black">@TruncateTitle(Reservation.Course)</h2>
+                    <h2 class="text-xl font-semibold text-hogent-black">@TruncateTitle(Schedule.Course)</h2>
                     <p class="text-hogent-black-50 text-sm">
-                        @(Reservation.StartDateTime.ToString("HH:mm")) – @(Reservation.EndDateTime.ToString("HH:mm"))
+                        @(Schedule.StartDateTime.ToString("HH:mm")) – @(Schedule.EndDateTime.ToString("HH:mm"))
                     </p>
 
                     <div class="text-sm text-hogent-black-70 space-y-1">
@@ -27,19 +27,19 @@
                             <span class="font-semibold text-hogent-black">@L["Schedule.Room"]</span>
                             <a href="javascript:void(0)" class="underline text-hogent-blue hover:text-hogent-blue-50"
                                 @onclick="NavigateToRoom">
-                                @Reservation.Room
+                                @Schedule.Room
                             </a>
                         </p>
-                        <p><span class="font-semibold text-hogent-black">@L["Schedule.Teacher"]</span> @Reservation.Teacher
+                        <p><span class="font-semibold text-hogent-black">@L["Schedule.Teacher"]</span> @Schedule.Teacher
                         </p>
                     </div>
 
                     <div class="mt-2 space-y-1 text-sm text-hogent-black-70">
-                        <p><span class="font-semibold text-hogent-black">@L["Schedule.Type"]</span> @Reservation.WorkForm
+                        <p><span class="font-semibold text-hogent-black">@L["Schedule.Type"]</span> @Schedule.WorkForm
                         </p>
                         <p><span class="font-semibold text-hogent-black">@L["Schedule.Environment"]</span>
-                            @Reservation.Environment</p>
-                        @if (Reservation.IsAbsent)
+                            @Schedule.Environment</p>
+                        @if (Schedule.IsAbsent)
                         {
                             <p class="text-hogent-it font-semibold">
                                 @L["Schedule.Absent"]

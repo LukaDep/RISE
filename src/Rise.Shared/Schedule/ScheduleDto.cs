@@ -7,15 +7,15 @@ public static class ScheduleDto
 {
 
     /// <summary>
-    /// Represents the API response containing a list of reservations.
+    /// Represents the API response containing a list of schedules.
     /// </summary>
     public class Data
     {
-        public List<Reservation> Reservations { get; set; } = new List<Reservation>();
+        public List<Schedule> Schedules { get; set; } = new List<Schedule>();
     }
 
-    // Reservation object
-    public class Reservation
+    // Schedule object
+    public class Schedule
     {
         public string Id { get; set; } = default!;
         public DateTime StartDateTime { get; set; }

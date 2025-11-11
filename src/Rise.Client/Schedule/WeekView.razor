@@ -84,7 +84,7 @@
             @for (int dayIndex = 0; dayIndex < WeekDays.Count; dayIndex++)
             {
                 var currentDay = WeekDays[dayIndex];
-                var dayEvents = GetReservationsForDate(currentDay);
+                var dayEvents = GetSchedulesForDate(currentDay);
 
                 @foreach (var evt in dayEvents)
                 {
@@ -151,8 +151,8 @@
         </div>
     </div>
 
-    @if (SelectedReservation is not null)
+    @if (SelectedSchedule is not null)
     {
-        <ScheduleItem Reservation="SelectedReservation" OnClose="CloseDetails" />
+        <ScheduleItem Schedule="SelectedSchedule" OnClose="CloseDetails" />
     }
 </div>

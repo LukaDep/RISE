@@ -10,8 +10,8 @@ namespace Rise.Client.Schedule
     {
         [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
-        private ScheduleDto.Reservation? SelectedReservation;
-        private List<ScheduleDto.Reservation>? schedule;
+        private ScheduleDto.Schedule? SelectedSchedule;
+        private List<ScheduleDto.Schedule>? schedule;
         private DotNetObjectReference<DayView>? dotNetRef;
 
         private string swipeClass = string.Empty;
@@ -31,7 +31,7 @@ namespace Rise.Client.Schedule
             };
 
             var result = await ScheduleService.GetIndexAsync(request);
-            schedule = result.Value?.Reservations;
+            schedule = result.Value?.Schedules;
         }
 
         protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -59,9 +59,9 @@ namespace Rise.Client.Schedule
             StateHasChanged();
         }
 
-        public List<ScheduleDto.Reservation> DayReservations =>
+        public List<ScheduleDto.Schedule> DaySchedules =>
             schedule?.Where(r => r.StartDateTime.Date == SelectedDate.Date).ToList()
-            ?? new List<ScheduleDto.Reservation>();
+            ?? new List<ScheduleDto.Schedule>();
 
         public void GoToToday()
         {
@@ -106,15 +106,15 @@ namespace Rise.Client.Schedule
             StateHasChanged();
         }
 
-        public void OpenDetails(ScheduleDto.Reservation reservation)
+        public void OpenDetails(ScheduleDto.Schedule schedule)
         {
-            SelectedReservation = reservation;
+            SelectedSchedule = schedule;
             StateHasChanged();
         }
 
         public void CloseDetails()
         {
-            SelectedReservation = null;
+            SelectedSchedule = null;
             StateHasChanged();
         }
 

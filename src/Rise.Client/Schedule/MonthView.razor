@@ -62,17 +62,17 @@
 
                 @if (hasEvents && isCurrentMonth)
                 {
-                    var dayReservations = GetReservationsForDate(day);
+                    var daySchedules = GetSchedulesForDate(day);
                     <div class="space-y-1">
-                        @foreach (var reservation in dayReservations.Take(3))
+                        @foreach (var schedule in daySchedules.Take(3))
                         {
-                            var bgColor = DayView.GetEventTypeBgColor(reservation.WorkForm);
+                            var bgColor = DayView.GetEventTypeBgColor(schedule.WorkForm);
                             <div class="w-full h-1 @bgColor rounded"></div>
                         }
-                        @if (dayReservations.Count > 3)
+                        @if (daySchedules.Count > 3)
                         {
                             <div class="text-[10px] text-hogent-black-50">
-                                +@(dayReservations.Count - 3) @L["Schedule.More"]
+                                +@(daySchedules.Count - 3) @L["Schedule.More"]
                             </div>
                         }
                     </div>

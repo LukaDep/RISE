@@ -45,7 +45,7 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
         var absences = absencesResult?.Value?.Absences ?? Enumerable.Empty<AbsenceDto.Index>();
 
-        data.Reservations.ForEach(r =>
+        data.Schedules.ForEach(r =>
         {
             r.IsAbsent = absences.Any(a =>
                 string.Equals(a.Name, r.Teacher, StringComparison.OrdinalIgnoreCase)
@@ -71,8 +71,8 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
         if (rawData == null)
             throw new InvalidOperationException("Deserialization of ScheduleApiResponse.ScheduleData returned null.");
 
-        // Convert raw reservations with Columns array to DTO with named properties
-        var convertedReservations = rawData.Reservations.Select(r => new ScheduleDto.Reservation
+        // Convert raw schedules with Columns array to DTO with named properties
+        var convertedSchedules = rawData.Schedules.Select(r => new ScheduleDto.Schedule
         {
             Id = r.Id,
             StartDateTime = ParseDateTime(r.StartDate, r.StartTime),
@@ -88,7 +88,7 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
         return new ScheduleDto.Data
         {
-            Reservations = convertedReservations
+            Schedules = convertedSchedules
         };
     }
 

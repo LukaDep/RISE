@@ -6,7 +6,7 @@ namespace Rise.Client.Schedule;
 
 public partial class ScheduleItem : ComponentBase
 {
-    [Parameter] public ScheduleDto.Reservation? Reservation { get; set; }
+    [Parameter] public ScheduleDto.Schedule? Schedule { get; set; }
     [Parameter] public EventCallback OnClose { get; set; }
 
     [Inject] public required ICampusService CampusClientService { get; set; }
@@ -19,9 +19,9 @@ public partial class ScheduleItem : ComponentBase
 
     private async Task NavigateToRoom()
     {
-        var buildingId = Reservation?.Room?.Substring(0, Reservation?.Room?.IndexOf('.') ?? 0) ?? "";
-        var response = await CampusClientService.GetBuildingByIdAsync(buildingId);
-        var campusId = response?.Value?.CampusId ?? "";
+        var buildingId = Schedule?.Room?.Substring(0, Schedule?.Room?.IndexOf('.') ?? 0) ?? "";
+        var response = await CampusClientService.GetBuildingByBuildingCodeAsync(buildingId);
+        var campusId = response?.Value?.Building.CampusId;
         Navigation.NavigateTo($"/campus-plan/{campusId}#building-{buildingId}");
     }
 

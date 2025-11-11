@@ -11,7 +11,7 @@ public partial class MonthView : IAsyncDisposable
 
     [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
 
-    private List<ScheduleDto.Reservation>? schedule;
+    private List<ScheduleDto.Schedule>? schedule;
 
     [Inject] public required IScheduleService ScheduleService { get; set; }
     [Inject] public required IJSRuntime JSRuntime { get; set; }
@@ -31,7 +31,7 @@ public partial class MonthView : IAsyncDisposable
         };
 
         var result = await ScheduleService.GetIndexAsync(request);
-        schedule = result.Value?.Reservations;
+        schedule = result.Value?.Schedules;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -78,8 +78,8 @@ public partial class MonthView : IAsyncDisposable
         }
     }
 
-    private List<ScheduleDto.Reservation> GetReservationsForDate(DateTime date) =>
-        schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList() ?? new List<ScheduleDto.Reservation>();
+    private List<ScheduleDto.Schedule> GetSchedulesForDate(DateTime date) =>
+        schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList() ?? new List<ScheduleDto.Schedule>();
 
     private bool HasEventsOnDay(DateTime day) =>
         schedule?.Any(r => r.StartDateTime.Date == day.Date) ?? false;

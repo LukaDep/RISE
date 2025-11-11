@@ -11,8 +11,8 @@ public partial class WeekView : IAsyncDisposable
     [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
     [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
 
-    private ScheduleDto.Reservation? SelectedReservation;
-    private List<ScheduleDto.Reservation>? schedule;
+    private ScheduleDto.Schedule? SelectedSchedule;
+    private List<ScheduleDto.Schedule>? schedule;
 
     [Inject] public required IScheduleService ScheduleService { get; set; }
     [Inject] public required IJSRuntime JSRuntime { get; set; }
@@ -32,7 +32,7 @@ public partial class WeekView : IAsyncDisposable
         };
 
         var result = await ScheduleService.GetIndexAsync(request);
-        schedule = result.Value?.Reservations;
+        schedule = result.Value?.Schedules;
     }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
@@ -69,15 +69,15 @@ public partial class WeekView : IAsyncDisposable
         StateHasChanged();
     }
 
-    private void OpenDetails(ScheduleDto.Reservation reservation)
+    private void OpenDetails(ScheduleDto.Schedule schedule)
     {
-        SelectedReservation = reservation;
+        SelectedSchedule = schedule;
         StateHasChanged();
     }
 
     private void CloseDetails()
     {
-        SelectedReservation = null;
+        SelectedSchedule = null;
         StateHasChanged();
     }
 
@@ -135,9 +135,9 @@ public partial class WeekView : IAsyncDisposable
         await PreviousWeekAnimated();
     }
 
-    private List<ScheduleDto.Reservation> GetReservationsForDate(DateTime date) =>
+    private List<ScheduleDto.Schedule> GetSchedulesForDate(DateTime date) =>
         schedule?.Where(r => r.StartDateTime.Date == date.Date).ToList()
-        ?? new List<ScheduleDto.Reservation>();
+        ?? new List<ScheduleDto.Schedule>();
 
     private double GetCurrentTimePosition()
     {

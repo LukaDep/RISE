@@ -13,18 +13,18 @@ public static class ScheduleApiResponse
     {
         public List<string> ColumnHeaders { get; set; } = new();
         public Info Info { get; set; } = new();
-        public List<Reservation> Reservations { get; set; } = new();
+        public List<Schedule> Schedules { get; set; } = new();
     }
 
     // Info object
     public class Info
     {
-        public int ReservationLimit { get; set; }
-        public int ReservationCount { get; set; }
+        public int ScheduleLimit { get; set; }
+        public int ScheduleCount { get; set; }
     }
 
-    // Reservation object
-    public class Reservation
+    // Schedule object
+    public class Schedule
     {
         public string Id { get; set; } = default!;
         public string StartDate { get; set; } = default!;
