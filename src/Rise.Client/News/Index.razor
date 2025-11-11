@@ -1,7 +1,7 @@
 @page "/news"
+@using Rise.Client.Components
 @using Rise.Client.News.Components
-@inject IJSRuntime JS
-@implements IAsyncDisposable
+
 
 
 <PageTitle>@L["News.Title"]</PageTitle>
@@ -9,19 +9,30 @@
 <div id="top" class="flex justify-between items-center mx-4 mt-10">
     <h3 class="text-4xl font-bold">@L["News.Title"]</h3>
     <div class="relative w-72 flex items-center justify-end">
-        <input @ref="filterInput" type="text" placeholder="@L["News.FilterPlaceholder"]"
-            class="absolute right-0 h-10 transition-all duration-300 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
-            style="width:@(isFilterOpen ? "94%" : "0px"); opacity:@(isFilterOpen ? '1' : '0'); pointer-events:@(isFilterOpen ? "auto" : "none");"
-            value="@searchTerm" @oninput="SearchTermChanged" />
+        <input @ref="_filterInput" type="text" placeholder="@L["News.FilterPlaceholder"]"
+               class="absolute right-0 h-10 transition-all duration-300 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
+               style="width:@(_isFilterOpen ? "94%" : "0px"); opacity:@(_isFilterOpen ? '1' : '0'); pointer-events:@(_isFilterOpen ? "auto" : "none");"
+               value="@_searchTerm" @oninput="SearchTermChanged" />
         <button type="button"
                 class="absolute right-0 z-10 p-2 rounded-full hover:bg-hogent-black-15 transition cursor-pointer"
                 @onclick="ToggleFilter">
-            <i class="fa-solid fa-magnifying-glass text-hogent-black-50"></i>
+            @if (_isFilterOpen)
+            {
+                <i class="fa-solid fa-xmark text-hogent-black-50"></i>
+            }
+            else
+            {
+                <i class="fa-solid fa-magnifying-glass text-hogent-black-50"></i>
+            }
         </button>
     </div>
+    
 </div>
 <div>
-    @if (news == null)
+    <div class="mx-4 mt-3">
+        <SimpleSelect Items="@DateRangeItems" SelectedValue="@_selectedDateRange" SelectedValueChanged="@OnDateRangeChanged"/>
+    </div>
+    @if (_news == null)
     {
         <div class="flex justify-center items-center h-16 mt-16">
             <div class="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-b-hogent-education"></div>
@@ -29,34 +40,31 @@
     }
     else
     {
-        @foreach (var newsItem in news)
+        @foreach (var newsItem in _news)
         {
-            <NewsItem newsItem="@newsItem" />
+            <NewsItem newsItem="@newsItem"/>
         }
+
         <div class="flex flex-col items-center justify-center">
-            @if (totalCount == 0)
+            @if (_totalCount == 0)
             {
                 <p class="mt-10 text-2xl">@L["News.NotFound"]</p>
-            } else if (totalCount != currentCount)
+            }
+            else if (_totalCount != _currentCount)
             {
                 <button class="flex items-center justify-center gap-2 w-32 h-10 mb-2 border-2 border-hogent-black text-hogent-black rounded-2xl shadow hover:bg-hogent-blue transition disabled:opacity-50" @onclick="LoadMoreNews">
                     @L["News.LoadMore"]
                     <i class="fa-solid fa-arrow-down"></i>
                 </button>
             }
-            @if (totalCount != 0)
+            @if (_totalCount != 0)
             {
-                <p class="text-hogent-black-15 mb-3">@currentCount @L["News.Count"] @totalCount</p>
+                <p class="text-hogent-black-15 mb-3">@_currentCount @L["News.Count"] @_totalCount</p>
 
             }
         </div>
     }
     <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
-    <button id="scrollToTopBtn"
-            aria-label="Scroll to top"
-            class="fixed right-6 w-12 h-12 flex items-center justify-center rounded-full border-2 border-b-hogent-black bg-hogent-white text-hogent-black shadow-lg opacity-0 pointer-events-none transform translate-y-4 transition-all duration-300"
-            style="bottom:6rem; z-index:1000;">
-        <i class="fa-solid fa-chevron-up"></i>
-    </button>
+    <ScrollToTop/>
 
 </div>
