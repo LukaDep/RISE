@@ -1,6 +1,6 @@
-namespace Rise.Domain.Schedule;
+namespace Rise.Domain.Schedules;
 
-public class Reservation : Entity
+public class Schedule : Entity
 {
     private DateTime _startDateTime;
     public DateTime StartDateTime
@@ -35,28 +35,28 @@ public class Reservation : Entity
     public required string WorkForm
     {
         get => _workForm;
-        set => _workForm = Guard.Against.NullOrWhiteSpace(value);
+        set => _workForm = value;
     }
 
     private string _environment = string.Empty;
     public required string Environment
     {
         get => _environment;
-        set => _environment = Guard.Against.NullOrWhiteSpace(value);
+        set => _environment = value;
     }
 
     private string _room = string.Empty;
     public required string Room
     {
         get => _room;
-        set => _room = Guard.Against.NullOrWhiteSpace(value);
+        set => _room = value;
     }
 
     private string _teacher = string.Empty;
     public required string Teacher
     {
         get => _teacher;
-        set => _teacher = Guard.Against.NullOrWhiteSpace(value);
+        set => _teacher = value;
     }
 
     private bool _isAbsent = false;

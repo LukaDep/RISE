@@ -9,7 +9,7 @@ using Rise.Domain.Grades;
 using Rise.Domain.Menu;
 using Rise.Domain.News;
 using Rise.Domain.Restos;
-using Rise.Domain.Schedule;
+using Rise.Domain.Schedules;
 
 namespace Rise.Persistence;
 
@@ -34,7 +34,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<Menu> Menus => Set<Menu>();
     public DbSet<MenuItem> MenuItems => Set<MenuItem>();
     public DbSet<Resto> Restos => Set<Resto>();
-    public DbSet<Reservation> Reservations => Set<Reservation>();
+    public DbSet<Schedule> Schedules => Set<Schedule>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {

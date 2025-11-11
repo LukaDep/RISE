@@ -1,14 +1,14 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Rise.Domain.Schedule;
+using Rise.Domain.Schedules;
 
-namespace Rise.Persistence.Configurations.Schedule;
+namespace Rise.Persistence.Configurations.Schedules;
 
 /// <summary>
-/// Specific configuration for <see cref="Reservation"/>.
+/// Specific configuration for <see cref="Schedule"/>.
 /// </summary>
-internal class ReservationConfiguration : EntityConfiguration<Reservation>
+internal class ScheduleConfiguration : EntityConfiguration<Schedule>
 {
-    public override void Configure(EntityTypeBuilder<Reservation> builder)
+    public override void Configure(EntityTypeBuilder<Schedule> builder)
     {
         base.Configure(builder);
 
@@ -20,22 +20,22 @@ internal class ReservationConfiguration : EntityConfiguration<Reservation>
 
         builder.Property(x => x.Course)
             .IsRequired()
-            .HasMaxLength(250);
+            .HasMaxLength(511);
 
         builder.Property(x => x.WorkForm)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(255);
 
         builder.Property(x => x.Environment)
             .IsRequired()
-            .HasMaxLength(250);
+            .HasMaxLength(255);
 
         builder.Property(x => x.Room)
             .IsRequired()
-            .HasMaxLength(100);
+            .HasMaxLength(255);
 
         builder.Property(x => x.Teacher)
             .IsRequired()
-            .HasMaxLength(250);
+            .HasMaxLength(255);
     }
 }

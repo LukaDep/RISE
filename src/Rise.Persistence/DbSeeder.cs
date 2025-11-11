@@ -1,15 +1,13 @@
-using System;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Rise.Domain.Absences;
 using Rise.Domain.Campus;
-using Rise.Domain.CampusInfo;
 using Rise.Domain.Contact;
 using Rise.Domain.Grades;
 using Rise.Domain.Menu;
 using Rise.Domain.News;
 using Rise.Domain.Restos;
-using Rise.Domain.Schedule;
+using Rise.Domain.Schedules;
 using Rise.Shared.Common;
 
 namespace Rise.Persistence;
@@ -32,7 +30,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await ContactsAsync();
         await GradesAsync();
         await RestosAndMenusAsync();
-        await ReservationsAsync();
+        await SchedulesAsync();
     }
 
     private async Task RolesAsync()
@@ -527,45 +525,46 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
-    private async Task ReservationsAsync()
+    private async Task SchedulesAsync()
     {
-        if (dbContext.Reservations.Any())
+        if (dbContext.Schedules.Any())
             return;
 
-        dbContext.Reservations.AddRange(
-            new Reservation
-            {
-                StartDateTime = DateTime.Parse("2025-09-01T08:30:00"),
-                EndDateTime = DateTime.Parse("2025-09-01T10:30:00"),
-                Course = "PBA-TIN/Web Ontwikkeling 2",
-                WorkForm = "Hoorcollege",
-                Environment = "Digitaal (laptop/PC)",
-                Room = "GSCHB.2.009",
-                Teacher = "Bert Van Vreckem",
-                IsAbsent = false
-            },
-            new Reservation
-            {
-                StartDateTime = DateTime.Parse("2025-09-01T11:00:00"),
-                EndDateTime = DateTime.Parse("2025-09-01T13:00:00"),
-                Course = "PBA-TIN/Databanken II",
-                WorkForm = "Activerend hoorcollege",
-                Environment = "Digitaal (laptop/PC)",
-                Room = "GSCHB.3.012",
-                Teacher = "Thomas Parmentier",
-                IsAbsent = false
-            },
-            new Reservation
-            {
-                StartDateTime = DateTime.Parse("2025-09-01T14:00:00"),
-                EndDateTime = DateTime.Parse("2025-09-01T17:00:00"),
-                Course = "PBA-TIN/Software Engineering",
-                WorkForm = "Practicum",
-                Environment = "Digitaal (laptop/PC)",
-                Room = "GSCHB.3.026",
-                Teacher = "Chloé De Leenheer",
-                IsAbsent = false
-            }
+        dbContext.Schedules.AddRange(
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-22T10:30:00"), EndDateTime = DateTime.Parse("2025-09-22T12:30:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.4.029", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-23T09:15:00"), EndDateTime = DateTime.Parse("2025-09-23T10:15:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHP.1.056 Laptoplokaal", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-23T10:30:00"), EndDateTime = DateTime.Parse("2025-09-23T12:30:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHP.1.056 Laptoplokaal", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-24T08:15:00"), EndDateTime = DateTime.Parse("2025-09-24T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011, GSCHB.2.030 Laptoplokaal UGent, GSCHB.2.031 Laptoplokaal UGent", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-24T15:30:00"), EndDateTime = DateTime.Parse("2025-09-24T22:00:00"), Course = "Student kick-off", WorkForm = "", Environment = "", Room = "", Teacher = "", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-25T08:15:00"), EndDateTime = DateTime.Parse("2025-09-25T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011, GSCHB.2.030 Laptoplokaal UGent, GSCHB.2.033 Laptoplokaal UGent", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Peter Beke, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-25T13:30:00"), EndDateTime = DateTime.Parse("2025-09-25T17:45:00"), Course = "PBA-TIN/Advanced Software Development I (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.3.027", Teacher = "Irina Malfait", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-26T08:15:00"), EndDateTime = DateTime.Parse("2025-09-26T12:30:00"), Course = "PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst, Tom Antjon", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-29T10:30:00"), EndDateTime = DateTime.Parse("2025-09-29T12:30:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.3.036", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-30T09:15:00"), EndDateTime = DateTime.Parse("2025-09-30T10:15:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.1.014", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-09-30T10:30:00"), EndDateTime = DateTime.Parse("2025-09-30T12:30:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.1.014", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-01T08:15:00"), EndDateTime = DateTime.Parse("2025-10-01T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-02T08:15:00"), EndDateTime = DateTime.Parse("2025-10-02T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Peter Beke, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-02T13:30:00"), EndDateTime = DateTime.Parse("2025-10-02T17:45:00"), Course = "PBA-TIN/Advanced Software Development I (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.3.027", Teacher = "Irina Malfait", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-03T08:15:00"), EndDateTime = DateTime.Parse("2025-10-03T12:30:00"), Course = "PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst, Tom Antjon", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-06T10:30:00"), EndDateTime = DateTime.Parse("2025-10-06T12:30:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.3.036", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-07T09:15:00"), EndDateTime = DateTime.Parse("2025-10-07T10:15:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-07T10:30:00"), EndDateTime = DateTime.Parse("2025-10-07T12:30:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-07T15:45:00"), EndDateTime = DateTime.Parse("2025-10-07T17:45:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHC.2.008 Laptoplokaal UGent", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-08T08:15:00"), EndDateTime = DateTime.Parse("2025-10-08T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-08T13:30:00"), EndDateTime = DateTime.Parse("2025-10-08T15:30:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.1.014", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-09T08:15:00"), EndDateTime = DateTime.Parse("2025-10-09T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Peter Beke, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-09T13:30:00"), EndDateTime = DateTime.Parse("2025-10-09T17:45:00"), Course = "PBA-TIN/Advanced Software Development I (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.3.027", Teacher = "Irina Malfait", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-10T08:15:00"), EndDateTime = DateTime.Parse("2025-10-10T12:30:00"), Course = "PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst, Tom Antjon", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-13T10:30:00"), EndDateTime = DateTime.Parse("2025-10-13T12:30:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.4.029", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-14T09:15:00"), EndDateTime = DateTime.Parse("2025-10-14T10:15:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-14T10:30:00"), EndDateTime = DateTime.Parse("2025-10-14T12:30:00"), Course = "PBA-TIN/Business analysis (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009", Teacher = "Sebastiaan Labijn", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-14T15:45:00"), EndDateTime = DateTime.Parse("2025-10-14T17:45:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHC.2.008 Laptoplokaal UGent", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-15T08:15:00"), EndDateTime = DateTime.Parse("2025-10-15T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-15T13:30:00"), EndDateTime = DateTime.Parse("2025-10-15T15:30:00"), Course = "PBA-TIN/Relational Databases & Datawarehousing (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.1.014", Teacher = "Johan Decorte", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-16T08:15:00"), EndDateTime = DateTime.Parse("2025-10-16T12:30:00"), Course = "INT-IT/Real-life Integrated Software Engineering (IC), PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Chloë De Leenheer, Gertjan Bosteels, Jan Willem, Peter Beke, Pieter Van Der Helst", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-16T13:30:00"), EndDateTime = DateTime.Parse("2025-10-16T17:45:00"), Course = "PBA-TIN/Advanced Software Development I (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.3.027", Teacher = "Irina Malfait", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-10-17T08:15:00"), EndDateTime = DateTime.Parse("2025-10-17T12:30:00"), Course = "PBA-TIN/DevOps Project: Development (TI), PBA-TIN/Real-life Integrated Software Engineering (TI), PBA-TIN/Real-life Integrated Software Engineering (TIAO), PBA-TIN/Real-life Integrated Software Engineering (VC), PBA-TIN/Real-life Integrated Software Engineering (English taught) (TI), PBA-TIN/Real-life Integrated Software Engineering (VT), PBA-TIN2/Real-life Integrated Software Engineering (TI)", WorkForm = "Activerend hoorcollege", Environment = "Digitaal (laptop/PC)", Room = "GSCHB.2.009, GSCHB.2.010, GSCHB.2.011", Teacher = "Benjamin Vertonghen, Gertjan Bosteels, Jan Willem, Pieter Van Der Helst, Tom Antjon", IsAbsent = false },
+            new Schedule { StartDateTime = DateTime.Parse("2025-12-18T13:00:00"), EndDateTime = DateTime.Parse("2025-12-18T18:00:00"), Course = "Strategiedag personeel", WorkForm = "", Environment = "", Room = "", Teacher = "", IsAbsent = false }
         );
 
         await dbContext.SaveChangesAsync();
