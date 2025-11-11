@@ -14,7 +14,7 @@ public static class GradesDto
     public class Grade
     {
         // grade
-        public required string Id { get; set; }
+        public required Guid Id { get; set; }
         public required string Name { get; set; }
         public required string ActivityType { get; set; }
         public double? MaxPoints { get; set; }

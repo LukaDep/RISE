@@ -13,10 +13,10 @@ public class GradesClientService(HttpClient httpClient) : IGradesService
         var result = await httpClient.GetFromJsonAsync<Result<GradesResponse.Index>>($"/api/grades?searchterm={request.SearchTerm}&skip={request.Skip}&take={request.Take}", cancellationToken: ctx);
         return result!;
     }
-    public async Task<Result<GradesResponse.GradeById>> GetGradeByIdAsync(string gradeId, CancellationToken ctx = default)
+    public async Task<Result<GradesResponse.Get>> GetGradeByIdAsync(Guid gradeId, CancellationToken ctx = default)
     {
         var response = await httpClient.GetAsync($"/api/grades/{gradeId}", cancellationToken: ctx);
-        var result = await response.Content.ReadFromJsonAsync<Result<GradesResponse.GradeById>>(cancellationToken: ctx);
+        var result = await response.Content.ReadFromJsonAsync<Result<GradesResponse.Get>>(cancellationToken: ctx);
         return result!;
     }
 }

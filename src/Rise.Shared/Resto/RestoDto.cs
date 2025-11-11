@@ -4,10 +4,10 @@ public static class RestoDto
 {
     public class Index
     {
-        public required string Id { get; set; }
+        public required Guid Id { get; set; }
         public required string Name { get; set; }
         public string? Description { get; set; }
-        public required string BuildingId { get; set; }
+        public required Guid BuildingId { get; set; }
         public Dictionary<DayOfWeek, string>? OpeningHours { get; set; }
         public bool IsCurrentlyOpen { get; set; }
 

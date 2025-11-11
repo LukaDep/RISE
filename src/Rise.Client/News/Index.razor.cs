@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.WebUtilities;
+using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.News;
-using Microsoft.AspNetCore.WebUtilities;
-using Microsoft.Extensions.Localization;
-using Microsoft.Extensions.Primitives;
 
 namespace Rise.Client.News;
 
@@ -30,8 +29,6 @@ public partial class Index
 
     [Inject] public required INewsService NewsService { get; set; }
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
-    // [Inject] public IStringLocalizer<Index> L { get; set; } = null!;
-
 
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
@@ -41,11 +38,14 @@ public partial class Index
     public DateTime? StartDate { get; set; }
     [Parameter, SupplyParameterFromQuery]
     public DateTime? EndDate { get; set; }
-
+    [Inject] public required IJSRuntime JSRuntime { get; set; }
     private int _skip = 0;
     private int _take = 10;
     private int _totalCount;
     private int _currentCount;
+
+    //js scroll to top 
+    private bool _initialized;
 
 
     // Date range filter items
@@ -148,6 +148,23 @@ public partial class Index
         _currentCount = _news?.Count() ?? 0;
 
         StateHasChanged();
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender && !_initialized)
+        {
+            _initialized = true;
+            try
+            {
+                // Call the global wrapper defined in wwwroot/scrollTop.js
+                await JSRuntime.InvokeVoidAsync("initScrollTop", "scrollToTopBtn");
+            }
+            catch
+            {
+                // swallow JS errors — avoids breaking rendering if script not present
+            }
+        }
     }
 
     private void OnDateRangeChanged(string? value)

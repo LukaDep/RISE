@@ -1,6 +1,4 @@
-using Microsoft.AspNetCore.Components;
 using Rise.Shared.News;
-using Xunit.Abstractions;
 
 namespace Rise.Client.News;
 
@@ -16,7 +14,7 @@ public class NewsArticleShould : TestContext
     public void RendersNewsArticleDetails()
     {
         // Arrange & Act: render the article for Id=1 (exists in FakeNewsService)
-        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, 1));
+        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, Guid.Parse("1")));
 
         // Assert title and content are present
         Assert.Contains("Campus reopens", cut.Markup);
@@ -38,7 +36,7 @@ public class NewsArticleShould : TestContext
     public void NonExistentIdShowsErrorMessage()
     {
         // Arrange & Act: render the article for a non-existent Id (999)
-        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, 999));
+        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, Guid.Parse("999")));
 
         // Assert that an error message is displayed
         Assert.Contains("News item with id 999 not found.", cut.Markup);

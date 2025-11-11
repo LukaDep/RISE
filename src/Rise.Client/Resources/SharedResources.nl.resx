@@ -629,6 +629,10 @@
     <value>Inloggen</value>
     <comment/>
   </data>
+  <data name="Campus.FacilitiesLabel" xml:space="preserve">
+    <value>Faciliteiten:</value>
+    <comment/>
+  </data>
   <data name="Account_NotificationSettings" xml:space="preserve">
     <value>Account | Notificatie-instellingen</value>
     <comment/>

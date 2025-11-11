@@ -11,5 +11,5 @@ public interface IGradesService
 
 {
     Task<Result<GradesResponse.Index>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default);
-    Task<Result<GradesResponse.GradeById>> GetGradeByIdAsync(string id, CancellationToken ctx = default);
+    Task<Result<GradesResponse.Get>> GetGradeByIdAsync(Guid id, CancellationToken ctx = default);
 }

@@ -1,6 +1,6 @@
-﻿@page "/news/{Id:int}"
+﻿@page "/news/{Id:guid}"
 
-<PageTitle>@newsItem?.Title</PageTitle>
+<PageTitle>@newsArticle?.Title</PageTitle>
 
 @if (errorMessage != null)
 {
@@ -8,13 +8,13 @@
     <p class="text-lg text-red-500">@errorMessage</p>
   </div>
 }
-else if (newsItem == null)
+else if (newsArticle == null)
 {
   <div class="flex justify-center items-center min-h-screen">
     <p class="text-lg">@L["Common.Loading"]</p>
   </div>
 }
-else if (newsItem != null)
+else if (newsArticle != null)
 {
   <div>
     <div class="relative w-full h-96 mb-8">
@@ -22,21 +22,21 @@ else if (newsItem != null)
         class="absolute top-4 left-4 bg-hogent-black-30 hover:scale-105 duration-200 text-hogent-white px-4 py-2 rounded-full z-10">
         <i class="fa-solid fa-chevron-left"></i>
       </NavLink>
-      <img src="@GetThumbnailUrl()" alt="@newsItem.Title" class="w-full h-full object-cover" />
+      <img src="@GetThumbnailUrl()" alt="@newsArticle.Title" class="w-full h-full object-cover" />
 
       <div class="absolute inset-0 flex flex-col justify-end p-8 text-hogent-white">
         <h1 class="text-4xl md:text-5xl font-bold mb-3 leading-tight text-shadow-sm text-shadow-hogent-black">
-          @newsItem.Title
+          @newsArticle.Title
         </h1>
         <p class="text-lg md:text-xl text-shadow-sm text-shadow-hogent-black">
-          @L["News.By"] @newsItem.Author | @newsItem.PublishDate.ToString("MMMM dd, yyyy")
+          @L["News.By"] @newsArticle.Author | @newsArticle.PublishDate.ToString("MMMM dd, yyyy")
         </p>
       </div>
     </div>
 
     <div class="max-w-4xl mx-auto px-6 md:px-8 lg:px-12 pb-12">
       <div class="prose prose-lg max-w-none">
-        @newsItem.Content
+        @newsArticle.Content
       </div>
     </div>
   </div>

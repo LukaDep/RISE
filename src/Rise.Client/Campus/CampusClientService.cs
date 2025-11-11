@@ -10,19 +10,22 @@ public class CampusClientService(HttpClient httpClient) : ICampusService
     {
         var result = await httpClient.GetFromJsonAsync<Result<CampusResponse.Index>>($"/api/campuses", cancellationToken: ctx);
         Console.WriteLine("Fetching campus data from API...");
+        Console.WriteLine(result);
+        return result?.Value!;
+    }
+
+    public async Task<Result<CampusResponse.Get>> GetCampusByIdAsync(Guid buildingId, CancellationToken ct = default)
+    {
+        var result = await httpClient.GetFromJsonAsync<Result<CampusResponse.Get>>($"/api/campuses/{buildingId}", cancellationToken: ct);
         return result!;
     }
 
-    public async Task<Result<CampusDto.Index>> GetCampusByIdAsync(string id, CancellationToken ct = default)
+    public async Task<Result<BuildingResponse.Get>> GetBuildingByBuildingCodeAsync(string code, CancellationToken ct = default)
     {
-        var result = await httpClient.GetFromJsonAsync<Result<CampusDto.Index>>($"/api/campuses/{id}", cancellationToken: ct);
-        Console.WriteLine($"Fetching campus data for ID {id} from API...");
+
+        var result = await httpClient.GetFromJsonAsync<Result<BuildingResponse.Get>>($"/api/buildings/{code}", cancellationToken: ct);
+        Console.WriteLine($"Fetching building data for ID {code} from API...");
         return result!;
     }
-    public async Task<Result<BuildingDto.Index>> GetBuildingByIdAsync(string buildingId, CancellationToken ct = default)
-    {
-        var result = await httpClient.GetFromJsonAsync<Result<BuildingDto.Index>>($"/api/buildings/{buildingId}", cancellationToken: ct);
-        Console.WriteLine($"Fetching building data for ID {buildingId} from API...");
-        return result!;
-    }
+
 }

@@ -22,6 +22,8 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="9.0.0" />
+    <PackageReference Include="SSH.NET" Version="2024.2.0" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="9.0.0" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="9.0.0" />
     <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
@@ -35,6 +37,10 @@
     <ProjectReference Include="..\Rise.Persistence\Rise.Persistence.csproj" />
     <ProjectReference Include="..\Rise.Services\Rise.Services.csproj" />
     <ProjectReference Include="..\Rise.Shared\Rise.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Keys\" />
   </ItemGroup>
 
 </Project>

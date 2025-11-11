@@ -6,6 +6,7 @@ using Rise.Persistence;
 using Rise.Persistence.Triggers;
 using Rise.Server.Identity;
 using Rise.Server.Processors;
+using Rise.Server.Services;
 using Rise.Services;
 using Rise.Services.Identity;
 using Serilog.Events;
@@ -24,13 +25,15 @@ try
     builder.Services
         .AddSerilog((_, lc) => lc.ReadFrom.Configuration(builder.Configuration) // Configuration in AppSettings.json
             .Destructure.UsingAttributes()) // Sensitive data logging
+        .AddHostedService<SshTunnelService>()
         .AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .Services.AddDbContext<ApplicationDbContext>(o =>
         {
             var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection") ??
                                    throw new InvalidOperationException("Connection string 'DatabaseConnection' not found.");
-            o.UseSqlite(connectionString); // Swap Sqlite for your database provider (e.g. Sql Server, MySQL, PostgreSQL, etc.).
+            // o.UseSqlite(connectionString); // Swap Sqlite for your database provider (e.g. Sql Server, MySQL, PostgreSQL, etc.).
+            o.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 21))); // Use specific version instead of AutoDetect to avoid early connection
             o.EnableDetailedErrors();
             if (builder.Environment.IsDevelopment())
             {
@@ -45,7 +48,6 @@ try
         .AddFastEndpoints(o =>
         {
             o.IncludeAbstractValidators = true; // Include validators from abstract classes (see https://docs.fluentvalidation.net/en/latest/).
-            o.Assemblies = [typeof(Rise.Shared.Products.ProductRequest).Assembly]; // Adds the validators from other assemblies
         })
         .SwaggerDocument(o =>
         {
@@ -56,20 +58,7 @@ try
         });
 
     var app = builder.Build();
-    // apply Database migraticons on startup, not so wise in production (Use Generated SQL Scripts) 
-    // See: https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli
-    if (app.Environment.IsDevelopment())
-    {
-        using (var scope = app.Services.CreateScope())
-        {
-            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            var dbSeeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
-            // dbContext.Database.EnsureDeleted(); // Delete the database if it exists to clean it up if needed.
 
-            dbContext.Database.Migrate(); // Creates the database if it doesn't exist and applies all migrations. See Readme.md for more info.
-            await dbSeeder.SeedAsync(); // Seeds the database with some test data.
-        }
-    }
     // Theses middlewares are strict in order of calling!
     app.UseHttpsRedirection()
         .UseBlazorFrameworkFiles() // Blazor is also served from the API. 
@@ -89,7 +78,33 @@ try
         })
         .UseSwaggerGen();
     app.MapFallbackToFile("index.html"); // Serves the Blazor app from the API, when no routes match.
-    app.Run();
+
+    await app.StartAsync();
+    // apply Database migraticons on startup, not so wise in production (Use Generated SQL Scripts) 
+    // See: https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli
+    if (app.Environment.IsDevelopment())
+    {
+        // Wait for SSH tunnel to be established
+        var sshTunnelService = app.Services.GetServices<IHostedService>()
+            .OfType<SshTunnelService>()
+            .First();
+        if (sshTunnelService != null)
+        {
+            await sshTunnelService.ReadyTask;
+        }
+
+
+
+        using (var scope = app.Services.CreateScope())
+        {
+            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+            var dbSeeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
+
+            await dbContext.Database.MigrateAsync(); // Creates the database if it doesn't exist and applies all migrations. See Readme.md for more info.
+            await dbSeeder.SeedAsync(); // Seeds the database with some test data.
+        }
+    }
+    app.WaitForShutdown();
 }
 catch (Exception ex)
 {

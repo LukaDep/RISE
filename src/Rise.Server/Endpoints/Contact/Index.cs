@@ -6,7 +6,7 @@ namespace Rise.Server.Endpoints.Contact
     {
         public override void Configure()
         {
-            Get("/api/contact");
+            Get("/api/contacts");
             AllowAnonymous();
         }
         public override Task<Result<ContactResponse.Index>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)

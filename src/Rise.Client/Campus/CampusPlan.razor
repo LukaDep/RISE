@@ -1,4 +1,4 @@
-@page "/campus-plan/{campusId}"
+@page "/campus-plan/{campusId:guid}"
 @inject HttpClient Http
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
@@ -22,11 +22,10 @@ else
 }
 
 @code {
-    [Parameter] public required string campusId { get; set; }
-    [Parameter] public string? buildingId { get; set; }
+    [Parameter] public required Guid campusId { get; set; }
+    [Parameter] public string buildingCode { get; set; }
     private CampusDto.Index? campus;
     private BuildingDto.Index? building;
-    private bool mapInitialized = false;
     [Inject] public required ICampusService CampusClientService { get; set; }
 
     private async Task GoBack()
@@ -36,28 +35,26 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrEmpty(campusId) && string.IsNullOrEmpty(buildingId))
+        if (string.IsNullOrEmpty(campusId.ToString()) && string.IsNullOrEmpty(buildingCode.ToString()))
         {
-            Navigation.NavigateTo("/campus");
-            return;
+            await this.GoBack();
         }
-        else if (!string.IsNullOrEmpty(buildingId))
+        else if (!string.IsNullOrEmpty(buildingCode))
         {
-            var buildingResponse = await CampusClientService.GetBuildingByIdAsync(buildingId);
-            building = buildingResponse?.Value;
+            var buildingResponse = await CampusClientService.GetBuildingByBuildingCodeAsync(buildingCode);
+            building = buildingResponse.Value.Building;
             if (building != null)
             {
                 campusId = building.CampusId;
             }
             else
             {
-                Navigation.NavigateTo("/campus");
-                return;
+                await this.GoBack();
             }
         }
 
         var response = await CampusClientService.GetCampusByIdAsync(campusId);
-        campus = response?.Value;
+        campus = response?.Value.Campus;
 
     }
 
@@ -68,44 +65,18 @@ else
         var fragment = uri.Fragment; // "#building-GSCHB"
         if (fragment.StartsWith("#building-"))
         {
-            buildingId = fragment.Substring("#building-".Length);
+            buildingCode = fragment.Substring("#building-".Length);
         }
 
-        if (!mapInitialized && campus != null)
+        if (campus != null)
         {
-            // mapInitialized = true;
-            // if campus has its own plan image
-            // if (campus.MapImageUrl != null && campus.ImageWidth.HasValue && campus.ImageHeight.HasValue)
-            // {
-            // var bounds = new object[] { new[] { 0, 0 }, new[] { campus.ImageHeight, campus.ImageWidth } };
-            // await JS.InvokeVoidAsync("leafletMap.initImage", "map", campus.MapImageUrl, bounds);
-            // foreach (var b in campus.Buildings ?? Enumerable.Empty<BuildingDto>())
-            // {
-            // await JS.InvokeVoidAsync("leafletMap.addMarker", b.Y, b.X, b.Name);
-            // }
 
-            // building marker
-            // if (buildingId != null)
-            // {
-            // var building = campus.Buildings?.FirstOrDefault(b => b.Id.Equals(buildingId, StringComparison.OrdinalIgnoreCase));
-            // if (building != null)
-            // {
-            // await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", building.Y, building.X, building.Name);
-            // await JS.InvokeVoidAsync("leafletMap.setView", building.Y, building.X, 18);
-            // }
-            // }
-            // }
-
-            // map as campus plan if no plan image
-            // else if (campus.Latitude.HasValue && campus.Longitude.HasValue)
-            // {
             await JS.InvokeVoidAsync("leafletMap.initTileMap", "map", campus.Latitude, campus.Longitude, 17);
             //await JS.InvokeVoidAsync("leafletMap.addLatLngMarker", campus.Latitude, campus.Longitude, campus.Name);
 
-            if (buildingId != null)
+            if (buildingCode != null)
             {
-                building = campus.Buildings?.FirstOrDefault(b => b.Id.Equals(buildingId,
-                StringComparison.OrdinalIgnoreCase));
+                building = campus.Buildings?.FirstOrDefault(b => buildingCode.Equals(b.Id));
                 if (building != null)
                 {
                     await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", building.Latitude, building.Longitude, building.Name,
@@ -118,7 +89,6 @@ else
                 await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", campus.Latitude, campus.Longitude, campus.Name, true);
 
             }
-            // }
         }
     }
 }

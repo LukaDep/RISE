@@ -1,0 +1,64 @@
+﻿@using System.Collections.Generic
+
+@if (isVisible)
+{
+    <div class="flex flex-col border-4 border-hogent-black-15 rounded-xl p-4 m-4 bg-hogent-white shadow transition cursor-pointer hover:shadow-lg"
+        @onclick="ToggleOpen">
+
+        <div class="flex justify-between items-center">
+            <span>
+                <h2 class="text-lg font-bold text-hogent-black">@Name</h2>
+                @if (!IsOpen)
+                {
+                    <h1 text-hogent-black-50> @Location </h1>
+                }
+
+            </span>
+
+
+            <i class="fa-solid @(IsOpen ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-50"></i>
+        </div>
+
+        @if (IsOpen)
+        {
+            <div class="mt-3 text-sm text-hogent-black-50 space-y-2">
+
+                <button class="px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+                    @onclick="GoToPlan">@L["Campus.MapButton"]</button>
+
+                <p><span class="font-medium text-hogent-black">@L["Campus.LocationLabel"]</span> @Location</p>
+
+                @if (!string.IsNullOrWhiteSpace(ContactPhone))
+                {
+                    <p><span class="font-medium text-hogent-black">@L["Campus.ContactPhoneLabel"]</span> @ContactPhone</p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Website))
+                {
+                    <p>
+                        <span class="font-medium text-hogent-black">@L["Campus.WebsiteLabel"]</span>
+                        <a href="@Website" class="text-hogent-blue hover:underline" target="_blank">@Website</a>
+                    </p>
+                }
+
+                @if (!string.IsNullOrWhiteSpace(Description))
+                {
+                    <p><span class="font-medium text-hogent-black">@L["Campus.DescriptionLabel"]</span> @Description</p>
+                }
+
+                @if (Facilities != null && Facilities.Any())
+                {
+                    <div>
+                        <p class="font-medium text-hogent-black">@L["Campus.FacilitiesLabel"]</p>
+                        <ul class="list-disc list-inside ml-4">
+                            @foreach (var faculty in Facilities)
+                            {
+                                <li>@faculty</li>
+                            }
+                        </ul>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+}

@@ -6,7 +6,7 @@ public static partial class GradesResponse
     {
         public IEnumerable<GradesDto.Grade> Grades { get; set; } = [];
     }
-    public class GradeById
+    public class Get
     {
         public GradesDto.Grade Grade { get; set; } = default!;
     }

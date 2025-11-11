@@ -6,8 +6,10 @@
     "scripts": {
         "tailwind": "tailwindcss -i ./src/Rise.Client/wwwroot/css/tailwind.css -o ./src/Rise.Client/wwwroot/css/output.css --watch",
         "client": "dotnet watch run --project ./src/Rise.Client/Rise.Client.csproj",
-        "server": "dotnet watch run --project ./src/Rise.Server/Rise.Server.csproj",
-        "dev": "concurrently \"npm run tailwind\" \"npm run server\"",
+        "server-dev": "dotnet watch run --project ./src/Rise.Server/Rise.Server.csproj --launch-profile Development",
+        "server-prod": "dotnet run --project ./src/Rise.Server/Rise.Server.csproj --launch-profile Production",
+        "dev": "concurrently \"npm run tailwind\" \"npm run server-dev\"",
+        "prod": "concurrently \"npm run tailwind\" \"npm run server-prod\"",
         "prepare": "husky",
         "format:dotnet": "dotnet format",
         "format:prettier": "prettier --write ."

@@ -6,6 +6,6 @@ public static partial class NewsResponse
 {
     public class Get
     {
-        public required NewsDto.Index NewsItem { get; set; }
+        public required NewsDto.Index NewsArticle { get; set; }
     }
 }
