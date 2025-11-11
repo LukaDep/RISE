@@ -22,10 +22,10 @@ public class CampusClientService(HttpClient httpClient) : ICampusService
 
     public async Task<Result<BuildingResponse.Get>> GetBuildingByBuildingCodeAsync(string code, CancellationToken ct = default)
     {
-        
+
         var result = await httpClient.GetFromJsonAsync<Result<BuildingResponse.Get>>($"/api/buildings/{code}", cancellationToken: ct);
         Console.WriteLine($"Fetching building data for ID {code} from API...");
         return result!;
     }
-    
+
 }

@@ -34,15 +34,15 @@ internal class CampusConfiguration : EntityConfiguration<Domain.Campus.Campus>
             .IsRequired()
             .HasMaxLength(20);
 
-        
+
         builder.Property(x => x.ContactPhone)
             .IsRequired()
             .HasMaxLength(20);
-        
+
         builder.Property(x => x.Description)
             .IsRequired()
             .HasMaxLength(2000);
-        
+
         builder.Property(x => x.Facilities)
             .HasConversion(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),

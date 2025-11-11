@@ -146,7 +146,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
 
         await dbContext.SaveChangesAsync();
     }
-    
+
     private async Task CampusesAsync()
     {
         if (dbContext.Campuses.Any())
@@ -228,7 +228,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 PostalCode = "9090",
                 ContactPhone = "09 243 20 18",
                 Description = "Campus Melle is gelegen langs de Brusselsesteenweg (N9), op 10 minuutjes wandelen van het station Melle (800 m) en beschikt over een ruime parking.",
-                Facilities = ["Cafetaria", "Parking", "Library"], 
+                Facilities = ["Cafetaria", "Parking", "Library"],
                 Latitude = 51.01430882035527,
                 Longitude = 3.7861257779015367
             },
@@ -366,7 +366,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         }
         await dbContext.SaveChangesAsync();
     }
-    
+
     private async Task ContactsAsync()
     {
         if (dbContext.Contacts.Any())

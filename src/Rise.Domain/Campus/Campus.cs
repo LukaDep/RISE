@@ -49,14 +49,14 @@ public class Campus : Entity
         get => _facilities;
         set => _facilities = value;
     }
-    
+
     private string _description = string.Empty;
     public required string Description
     {
         get => _description;
         set => _description = Guard.Against.NullOrWhiteSpace(value);
     }
-    
+
 
     private double? _latitude;
     public double? Latitude

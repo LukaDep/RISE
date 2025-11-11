@@ -14,7 +14,7 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
     private AbsencesService _absencesService = new AbsencesService(dbContext);
 
-    
+
 
     public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)
     {

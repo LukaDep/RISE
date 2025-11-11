@@ -36,7 +36,7 @@ public class Building : Entity
         get => _longitude;
         set => _longitude = value;
     }
-    
+
     private Guid _campusId;
 
     public required Guid CampusId

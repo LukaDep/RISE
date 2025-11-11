@@ -21,9 +21,9 @@ public class AbsencesService(ApplicationDbContext dbContext) : IAbsencesService
         // Deserialize the JSON data into a list of NewsDto.Index
         // var query = JsonSerializer.Deserialize<List<AbsenceDto.Index>>(json,
         //     new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
-        
+
         var query = dbContext.Absences.AsQueryable();
-        
+
         // Apply ordering
         if (!string.IsNullOrWhiteSpace(request.OrderBy))
         {
@@ -47,7 +47,7 @@ public class AbsencesService(ApplicationDbContext dbContext) : IAbsencesService
                 Reason = a.Reason,
                 StartDate = a.StartDate,
                 EndDate = a.EndDate,
-            } ).ToListAsync(ctx);
+            }).ToListAsync(ctx);
 
         return Result.Success(new AbsencesResponse.Index
         {

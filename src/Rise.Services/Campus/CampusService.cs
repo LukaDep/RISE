@@ -24,7 +24,7 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
             .Include(c => c.Buildings)
             .Skip(request.Skip)
             .Take(request.Take)
-            .ToListAsync(ctx); 
+            .ToListAsync(ctx);
 
         var campuses = entities.Select(c => new CampusDto.Index
         {
@@ -64,33 +64,33 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
             .FirstOrDefaultAsync(ct);
         if (entitie == null)
             return Result<CampusResponse.Get>.NotFound($"No Campus found with id {id}");
-        var campus =new CampusDto.Index
+        var campus = new CampusDto.Index
+        {
+            Id = entitie.Id,
+            Name = entitie.Name,
+            Street = entitie.Street,
+            HouseNumber = entitie.HouseNumber,
+            City = entitie.City,
+            PostalCode = entitie.PostalCode,
+            ContactPhone = entitie.ContactPhone,
+            Description = entitie.Description,
+            Facilities = entitie.Facilities,
+            Latitude = entitie.Latitude,
+            Longitude = entitie.Longitude,
+            Buildings = entitie.Buildings.Select(b => new BuildingDto.Index
             {
-                Id = entitie.Id,
-                Name = entitie.Name,
-                Street = entitie.Street,
-                HouseNumber = entitie.HouseNumber,
-                City = entitie.City,
-                PostalCode = entitie.PostalCode,
-                ContactPhone = entitie.ContactPhone,
-                Description = entitie.Description,
-                Facilities = entitie.Facilities,
-                Latitude = entitie.Latitude,
-                Longitude = entitie.Longitude,
-                Buildings = entitie.Buildings.Select(b => new BuildingDto.Index
-                {
-                    Id = b.Id,
-                    CampusId = entitie.Id,
-                    Name = b.Name,
-                    Address = b.Address,
-                    Type = b.Type,
-                    Latitude = b.Latitude,
-                    BuildingCode = b.BuildingCode,
-                    Longitude = b.Longitude
-                }).ToList()
-            };
-        
-        
+                Id = b.Id,
+                CampusId = entitie.Id,
+                Name = b.Name,
+                Address = b.Address,
+                Type = b.Type,
+                Latitude = b.Latitude,
+                BuildingCode = b.BuildingCode,
+                Longitude = b.Longitude
+            }).ToList()
+        };
+
+
         var response = new CampusResponse.Get { Campus = campus };
         return Result.Success(response);
     }
@@ -110,7 +110,7 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
                 BuildingCode = b.BuildingCode,
                 CampusId = b.CampusId
             }).FirstOrDefaultAsync(ct);
-        
+
         if (building == null)
             return Result<BuildingResponse.Get>.NotFound($"No Building found with buildingcode {code}");
         var response = new BuildingResponse.Get { Building = building };

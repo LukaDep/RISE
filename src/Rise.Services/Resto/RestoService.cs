@@ -32,7 +32,7 @@ public class RestoService(ApplicationDbContext dbContext) : IRestoService
         // var json = await File.ReadAllTextAsync(_mockFilePath, ct);
         // IEnumerable<RestoDto.Index> items = JsonSerializer.Deserialize<List<RestoDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
         var query = dbContext.Restos.AsQueryable();
-        
+
 
         // Basic search
         if (!string.IsNullOrWhiteSpace(req.SearchTerm))
@@ -61,10 +61,10 @@ public class RestoService(ApplicationDbContext dbContext) : IRestoService
                 Email = r.Email,
                 ImageUrl = r.ImageUrl,
             }).ToListAsync(ct);
-        
+
         return Result.Success(new RestoResponse.Index { Restos = restos });
 
-        
+
         // var now = DateTimeOffset.Now;
         // foreach (var resto in paged)
         // {

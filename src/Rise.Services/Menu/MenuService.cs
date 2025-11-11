@@ -12,9 +12,9 @@ namespace Rise.Services.Menu;
 /// </summary>
 public class MenuService(ApplicationDbContext dbContext) : IMenuService
 {
-    
 
-    
+
+
 
     public async Task<Result<MenuResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ct = default)
     {
@@ -74,11 +74,11 @@ public class MenuService(ApplicationDbContext dbContext) : IMenuService
                     IsVeggie = item.IsVeggie
                 }).ToList()
             }).ToList();
-        
+
         return Result.Success(new MenuResponse.Index
-            {
-                Menus = menus
-            }
+        {
+            Menus = menus
+        }
         );
     }
 }

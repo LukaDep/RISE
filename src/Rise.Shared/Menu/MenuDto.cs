@@ -11,5 +11,5 @@ namespace Rise.Shared.Menu
         }
     }
 
-    
+
 }

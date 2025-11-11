@@ -23,7 +23,7 @@ namespace Rise.Services.Contact
             // var query = JsonSerializer.Deserialize<List<ContactDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
 
             var query = dbContext.Contacts.AsQueryable();
-            
+
             var typeFilter = request.Filters["Type"]?.ToString() ?? "";
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
@@ -58,7 +58,7 @@ namespace Rise.Services.Contact
                     PhoneNumber = c.PhoneNumber,
                     Campusses = c.Campusses,
                 }).ToListAsync(ctx);
-                
+
 
 
             return Result.Success(new ContactResponse.Index

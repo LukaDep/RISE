@@ -14,7 +14,7 @@ public static class CampusDto
         public required string ContactPhone { get; set; }
         public required string Description { get; set; }
         public required IEnumerable<string> Facilities { get; set; }
-        
+
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
         public IEnumerable<BuildingDto.Index>? Buildings { get; set; }
