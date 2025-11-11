@@ -22,16 +22,21 @@ namespace Rise.Services.Contact
 
             var query = JsonSerializer.Deserialize<List<ContactDto.Index>>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true }) ?? new();
 
+            var typeFilter = request.Filters["Type"]?.ToString() ?? "";
+
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
-                query = query.Where(n => n.Type.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)
-                                         || n.Name.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
+                query = query.Where(n => n.Name.Contains(request.SearchTerm, StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
             if (!string.IsNullOrWhiteSpace(request.OrderBy))
             {
                 query = request.OrderDescending
                     ? query.OrderByDescending(e => EF.Property<object>(e, request.OrderBy)).ToList()
                     : query.OrderBy(e => EF.Property<object>(e, request.OrderBy)).ToList();
+            }
+            if (!string.IsNullOrWhiteSpace(typeFilter))
+            {
+                query = query.Where(n => n.Type.Equals(typeFilter, StringComparison.CurrentCultureIgnoreCase)).ToList();
             }
             else
             {

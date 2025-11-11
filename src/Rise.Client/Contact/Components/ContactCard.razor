@@ -1,0 +1,47 @@
+﻿@using System.Collections.Generic
+@using Rise.Client.Contact.Components.Common
+@inject IStringLocalizer<SharedResources> L
+<div
+    class="border-hogent-black-15 bg-hogent-white z-1 m-4 flex min-h-40 cursor-pointer items-center rounded-xl border-4 p-4 shadow transition"
+    @onclick="OnClick"
+    >
+    <div class="z-2 flex flex-col gap-2">
+        <div class="flex flex-row gap-3">
+            <!-- Icon (by type) -->
+            <Icon
+                Type=@Type
+            />
+
+            <!-- Content -->
+            <div class="flex flex-1 flex-col justify-center">
+                <h3 class="text-hogent-black text-lg font-bold">@Name</h3>
+                <p class="text-hogent-black-50 text-sm">@Type</p>
+            </div>
+        </div>
+
+
+        <!-- Toon contact knoppen -->
+        <span class="flex gap-2">
+            @if(@PhoneNumber != null){
+                <a href="tel:@PhoneNumber"
+                   class="bg-hogent-education-100 inline-flex items-center rounded px-3 py-1 text-white transition hover:opacity-90"
+                   @onclick:stopPropagation="true">
+                    <i class="fa fa-phone mr-1" aria-hidden="true"></i>
+                    @L["Call"]
+                </a>
+            }
+
+            @if(@Email != null){
+                <a href="mailto:@Email"
+                   class="bg-hogent-education-100 inline-flex items-center rounded px-3 py-1 text-white transition hover:opacity-90"
+                   @onclick:stopPropagation="true">
+                    <i class="fa fa-envelope mr-1" aria-hidden="true"></i>
+                    @L["Mail"]
+                </a>
+            }
+
+        </span>
+
+    </div>
+
+</div>
