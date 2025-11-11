@@ -50,4 +50,88 @@ public partial class RestoCard
     {
         return string.IsNullOrWhiteSpace(hours) ? L["Resto.Closed"] : hours;
     }
+
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        UpdateRestoStatus();
+    }
+
+    private void UpdateRestoStatus()
+    {
+        if (Resto.OpeningHours == null || Resto.OpeningHours.Count == 0)
+        {
+            Resto.IsCurrentlyOpen = false;
+            Resto.NextOpeningTime = null;
+            Resto.NextClosingTime = null;
+            return;
+        }
+
+        var now = DateTime.Now;
+        var today = now.DayOfWeek;
+
+        if (Resto.OpeningHours.TryGetValue(today, out var todayHours) && !string.IsNullOrWhiteSpace(todayHours))
+        {
+            var timeRanges = todayHours.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+
+            foreach (var range in timeRanges)
+            {
+                var parts = range.Split('-', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                if (parts.Length != 2) continue;
+
+                if (TimeSpan.TryParse(parts[0], out var openTime) && TimeSpan.TryParse(parts[1], out var closeTime))
+                {
+                    var openDateTime = now.Date.Add(openTime);
+                    var closeDateTime = now.Date.Add(closeTime);
+
+                    if (now >= openDateTime && now <= closeDateTime)
+                    {
+                        // Resto is nu open
+                        Resto.IsCurrentlyOpen = true;
+                        Resto.NextClosingTime = closeDateTime;
+                        Resto.NextOpeningTime = null;
+                        return;
+                    }
+
+                    // Als hij nog niet open is vandaag
+                    if (now < openDateTime)
+                    {
+                        Resto.IsCurrentlyOpen = false;
+                        Resto.NextOpeningTime = openDateTime;
+                        Resto.NextClosingTime = null;
+                        return;
+                    }
+                }
+            }
+        }
+        
+        Resto.IsCurrentlyOpen = false;
+        Resto.NextClosingTime = null;
+        Resto.NextOpeningTime = GetNextOpeningTime(now);
+    }
+
+    private DateTime? GetNextOpeningTime(DateTime now)
+    {
+        // Loop maximaal 7 dagen vooruit
+        for (int i = 1; i <= 7; i++)
+        {
+            var nextDay = now.AddDays(i);
+            var nextDayOfWeek = nextDay.DayOfWeek;
+
+            if (Resto.OpeningHours.TryGetValue(nextDayOfWeek, out var hours) && !string.IsNullOrWhiteSpace(hours))
+            {
+                var firstRange = hours.Split(',', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries).FirstOrDefault();
+                if (firstRange != null)
+                {
+                    var parts = firstRange.Split('-', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+                    if (parts.Length == 2 && TimeSpan.TryParse(parts[0], out var openTime))
+                    {
+                        return nextDay.Date.Add(openTime);
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
 }
