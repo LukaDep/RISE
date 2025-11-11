@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace Rise.Client.Contact.Components
 {
-        public partial class ContactCard : ComponentBase
+    public partial class ContactCard : ComponentBase
     {
         [Inject] private NavigationManager Navigation { get; set; }
         [Parameter, EditorRequired] public string Id { get; set; }

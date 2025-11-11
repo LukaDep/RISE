@@ -104,7 +104,7 @@ public partial class RestoCard
                 }
             }
         }
-        
+
         Resto.IsCurrentlyOpen = false;
         Resto.NextClosingTime = null;
         Resto.NextOpeningTime = GetNextOpeningTime(now);
