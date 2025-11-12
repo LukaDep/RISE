@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
-using Rise.Shared.Schedule;
 using Rise.Shared.Common;
+using Rise.Shared.Schedule;
 
 namespace Rise.Client.Schedule;
 
@@ -103,12 +103,14 @@ public partial class MonthView : IAsyncDisposable
     {
         await AnimateSwipe("right");
         PreviousMonth();
+        StateHasChanged();
     }
 
     public async Task NextMonthAnimated()
     {
         await AnimateSwipe("left");
         NextMonth();
+        StateHasChanged();
     }
 
     private void PreviousMonth() => SelectedDate = SelectedDate.AddMonths(-1);

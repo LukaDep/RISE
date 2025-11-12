@@ -112,12 +112,14 @@ public partial class WeekView : IAsyncDisposable
     {
         await AnimateSwipe("right");
         PreviousWeek();
+        StateHasChanged();
     }
 
     public async Task NextWeekAnimated()
     {
         await AnimateSwipe("left");
         NextWeek();
+        StateHasChanged();
     }
 
     private void PreviousWeek() => SelectedDate = SelectedDate.AddDays(-7);
