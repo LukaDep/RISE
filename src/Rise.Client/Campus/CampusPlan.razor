@@ -23,7 +23,7 @@ else
 
 @code {
     [Parameter] public required Guid campusId { get; set; }
-    [Parameter] public string buildingCode { get; set; }
+    [Parameter] public string? buildingCode { get; set; }
     private CampusDto.Index? campus;
     private BuildingDto.Index? building;
     [Inject] public required ICampusService CampusClientService { get; set; }
@@ -74,9 +74,9 @@ else
             await JS.InvokeVoidAsync("leafletMap.initTileMap", "map", campus.Latitude, campus.Longitude, 17);
             //await JS.InvokeVoidAsync("leafletMap.addLatLngMarker", campus.Latitude, campus.Longitude, campus.Name);
 
-            if (buildingCode != null)
+            if (!string.IsNullOrEmpty(buildingCode))
             {
-                building = campus.Buildings?.FirstOrDefault(b => buildingCode.Equals(b.Id));
+                building = campus.Buildings?.FirstOrDefault(b => buildingCode.Equals(b.BuildingCode));
                 if (building != null)
                 {
                     await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", building.Latitude, building.Longitude, building.Name,

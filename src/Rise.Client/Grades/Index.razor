@@ -5,23 +5,23 @@
 
 <h3 class="text-4xl font-bold flex-shrink-0 mx-4 mt-10">@L["Grades.Title"]</h3>
 
-<div class="flex flex-wrap justify-between items-center mx-4 mt-5 gap-3">
-  <div class="flex items-center gap-3 w-full">
-    <div class="flex items-center gap-3">
-      <!-- jaar -->
-      <div class="relative flex-shrink-0">
+<div class="flex flex-wrap items-end mx-4 mt-5 gap-3">
+  <div class="flex items-end gap-3 w-full justify-between">
+    <div class="flex flex-row items-end md:ml-auto w-full md:w-auto flex-wrap gap-2 md:gap-0 md:space-x-3">
+      <!-- year -->
+      <div class="relative flex-1 md:w-auto min-w-0 md:min-w-[140px] lg:min-w-[200px] pr-1">
         <SimpleSelect Items="@YearItems" SelectedValue="@selectedYear" SelectedValueChanged="@OnYearSelected"
-           />
+          Placeholder=@L["Grades.YearFilterPlaceholder"] />
       </div>
 
       <!-- semester -->
-      <div class="relative flex-shrink-0">
+      <div class="relative flex-1 md:w-auto min-w-0 md:min-w-[140px] lg:min-w-[200px]">
         <SimpleSelect Items="@SemesterItems" SelectedValue="@(selectedSemester?.ToString())"
           SelectedValueChanged="@OnSemesterSelected" Placeholder=@L["Grades.SemesterFilterPlaceholder"] />
       </div>
     </div>
 
-    <div class="ml-auto">
+    <div class="items-end">
       <button type="button" class="p-2 rounded-full hover:bg-hogent-black-15 transition" @onclick="ToggleFilter"
         aria-expanded="@isFilterOpen" aria-controls="gradeSearch" aria-label="Toggle search">
         @if (!isFilterOpen)

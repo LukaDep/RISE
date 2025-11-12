@@ -18,9 +18,11 @@ public partial class SimpleSelect : ComponentBase
 
     protected override void OnParametersSet()
     {
-        ItemsList = Items.ToList();
+        ItemsList = (Items ?? Enumerable.Empty<KeyValuePair<string, string>>()).ToList();
         if (HighlightedIndex < 0 && ItemsList.Count > 0)
+        {
             HighlightedIndex = ItemsList.FindIndex(i => i.Key == SelectedValue);
+        }
     }
 
     private string? GetLabel(string? key) => ItemsList.FirstOrDefault(kv => kv.Key == key).Value;
