@@ -4,5 +4,8 @@
             "Default": "Information",
             "Microsoft.AspNetCore": "Warning"
         }
+    },
+    "ConnectionStrings": {
+        "DatabaseConnection": "Server=127.0.0.1;Port=3306;Database=devops_db;User=root;Password=root;"
     }
 }

@@ -16,6 +16,8 @@ using Rise.Shared.Contact;
 using Rise.Shared.Grades;
 using Rise.Shared.Menu;
 using Rise.Services.Menu;
+using Rise.Services.Notifications;
+using Rise.Shared.Notifications;
 
 namespace Rise.Services;
 
@@ -31,8 +33,8 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IContactService, ContactService>();
         services.AddScoped<IAbsencesService, AbsencesService>();
         services.AddScoped<IGradesService, GradesService>();
+        services.AddScoped<INotificationPreferencesService, NotificationPreferencesService>();
         services.AddTransient<DbSeeder>();
-
         return services;
     }
 }

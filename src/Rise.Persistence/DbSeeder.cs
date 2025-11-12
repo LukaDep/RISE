@@ -6,6 +6,7 @@ using Rise.Domain.Contact;
 using Rise.Domain.Grades;
 using Rise.Domain.Menu;
 using Rise.Domain.News;
+using Rise.Domain.Notifications;
 using Rise.Domain.Restos;
 using Rise.Domain.Schedules;
 using Rise.Shared.Common;
@@ -24,13 +25,14 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
     {
         await RolesAsync();
         await UsersAsync();
-        await NewsAsync();
-        await AbsencesAsync();
-        await CampusesAsync();
-        await ContactsAsync();
-        await GradesAsync();
-        await RestosAndMenusAsync();
-        await SchedulesAsync();
+        // await NewsAsync();
+        // await AbsencesAsync();
+        // await CampusesAsync();
+        // await ContactsAsync();
+        // await GradesAsync();
+        // await RestosAndMenusAsync();
+        // await SchedulesAsync();
+        // await NotificationPreferencesAsync();
     }
 
     private async Task RolesAsync()
@@ -78,7 +80,6 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await userManager.AddToRoleAsync(secretary, "Secretary");
         await dbContext.SaveChangesAsync();
     }
-
 
     private async Task NewsAsync()
     {
@@ -1065,6 +1066,23 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             dbContext.Menus.AddRange(menus);
             await dbContext.SaveChangesAsync();
         }
+    }
+
+
+    private async Task NotificationPreferencesAsync()
+    {
+        if (dbContext.NotificationPreferences.Any())
+            return;
+        dbContext.NotificationPreferences.AddRange(
+            new NotificationPreferences(Guid.Parse("282eb1c5-d4aa-41dd-b190-70ef3f257c4c"))
+            {
+                GradesNotifications = true,
+                ScheduleNotifications = true,
+                CampusNotifications = true,
+                NewsNotifications = true
+            }
+        );
+        await dbContext.SaveChangesAsync();
     }
 
     private async Task SchedulesAsync()

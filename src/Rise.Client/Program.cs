@@ -7,6 +7,7 @@ using Rise.Client.Grades;
 using Rise.Client.Identity;
 using Rise.Client.Menu;
 using Rise.Client.News;
+using Rise.Client.Notifications;
 using Rise.Client.Resto;
 using Rise.Client.Schedule;
 using Rise.Shared.Campus;
@@ -14,6 +15,7 @@ using Rise.Shared.Contact;
 using Rise.Shared.Grades;
 using Rise.Shared.Menu;
 using Rise.Shared.News;
+using Rise.Shared.Notifications;
 using Rise.Shared.Resto;
 using Rise.Shared.Schedule;
 
@@ -90,6 +92,11 @@ try
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });
+
+    builder.Services.AddHttpClient<INotificationPreferencesService, NotificationPreferencesClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    }).AddHttpMessageHandler<CookieHandler>();
 
     await builder.Build().RunAsync();
 }

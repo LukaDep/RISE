@@ -12,8 +12,13 @@ public static class ClaimsPrincipalExtentions
     /// </summary>
     /// <param name="user">The <see cref="ClaimsPrincipal"/> representing the current user.</param>
     /// <returns>The user ID as a string if found; otherwise, null.</returns>
-    public static string? GetUserId(this ClaimsPrincipal user) =>
-        user?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+    public static Guid? GetUserId(this ClaimsPrincipal user)
+    {
+        var value = user?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (string.IsNullOrEmpty(value))
+            return null;
+        return Guid.TryParse(value, out var guid) ? guid : null;
+    }
 
     /// <summary>
     /// Retrieves the user name from the given <see cref="ClaimsPrincipal"/> instance.

@@ -477,6 +477,10 @@
     <value>Cijfers</value>
     <comment/>
   </data>
+  <data name="Account.Notifications" xml:space="preserve">
+    <value>Notificaties</value>
+    <comment/>
+  </data>
   <data name="Auth.LogoutTitle" xml:space="preserve">
     <value>Uitloggen</value>
     <comment/>
@@ -649,11 +653,11 @@
     <value>Meldingen op je apparaat</value>
     <comment/>
   </data>
-  <data name="Notifications.AllNotifications" xml:space="preserve">
+  <data name="Notifications.IsEnabled" xml:space="preserve">
     <value>Alle notificaties</value>
     <comment/>
   </data>
-  <data name="Notifications.AllNotificationsDescription" xml:space="preserve">
+  <data name="Notifications.IsEnabledDescription" xml:space="preserve">
     <value>Schakel alle meldingen in</value>
     <comment/>
   </data>
