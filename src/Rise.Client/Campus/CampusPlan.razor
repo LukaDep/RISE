@@ -1,4 +1,4 @@
-@page "/campus-plan/{campusId:guid}"
+﻿@page "/campus-plan/{campusId:guid}"
 @inject HttpClient Http
 @inject IJSRuntime JS
 @inject NavigationManager Navigation
@@ -11,14 +11,13 @@
 }
 else
 {
-    <div class="absolute top-5 left-5 z-[1000]">
+    <div id="map" class="relative h-[calc(100vh-60px)] w-screen">
         <button @onclick="GoBack"
-            class="flex items-center bg-white border-0 rounded-full shadow-md px-5 py-2 text-base font-medium cursor-pointer">
-            <span class="text-lg mr-2">&#8592;</span>
+            class="absolute top-5 left-5 z-[1000] flex cursor-pointer items-center rounded-full border-0 bg-white px-5 py-2 text-base font-medium shadow-md">
+            <span class="mr-2 text-lg">&#8592;</span>
             @L["Campus.BackToCampuses"]
         </button>
     </div>
-    <div id="map" class="h-[calc(100vh-60px)] w-screen"></div>
 }
 
 @code {
