@@ -1,0 +1,187 @@
+@namespace Rise.Client.Home.Widgets
+@using Rise.Shared.Menu
+@using Rise.Shared.Resto
+@using Rise.Client.Components
+@using System.Collections.Immutable
+@inject NavigationManager NavigationManager
+
+<div class="grid-stack-item" gs-x="0" gs-y="5" gs-w="12" gs-h="8">
+    <div class="grid-stack-item-content bg-white rounded-2xl shadow-md p-4">
+        <div class="flex flex-col h-full">
+            <!-- Header -->
+            <div class="flex justify-between items-center">
+                <div class="text-sm font-semibold text-hogent-black-50 mb-1">Menu</div>
+                <button class="text-sm text-blue-600 hover:underline" @onclick="More">more</button>
+            </div>
+
+            <!-- Resto carousel (no select) -->
+            <div class="flex rounded-xl bg-hogent-black text-hogent-white items-center mb-3"> <button
+                    class="p-1 ml-2 rounded-full" @onclick="Prev" aria-label="Previous" disabled="@(!_canNavigate)"> <i
+                        class="fa-solid fa-chevron-left"></i> </button>
+                <div class="flex-1 text-center font-medium"> @if (CurrentResto is not null) {
+                    @CurrentResto.Name
+                                        } else
+                    {
+
+                        <span class="text-gray-400 italic">No restaurants</span>
+                    }
+                </div> <button class="p-1 mr-2 rounded-full" @onclick="Next" aria-label="Next"
+                    disabled="@(!_canNavigate)"> <i class="fa-solid fa-chevron-right"></i> </button>
+            </div>
+
+            <div class="flex justify-end mb-2">
+                @if (CurrentResto is not null && CurrentResto.IsCurrentlyOpen)
+                {
+                    <span
+                        class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full border border-hogent-education text-hogent-education">
+                        <span class="w-2 h-2 bg-hogent-education-50 rounded-full"></span> @L["Resto.Open"]
+                    </span>
+                }
+                else
+                {
+                    <span
+                        class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full border border-hogent-black text-hogent-black">
+                        <span class="w-2 h-2 bg-hogent-black-50 rounded-full"></span> @L["Resto.Closed"]
+                    </span>
+                }
+            </div>
+
+            <div class="flex-1 overflow-auto">
+                @if (_restoList.Count == 0)
+                {
+                    <div class="text-sm text-hogent-black-50">No restaurants available</div>
+                }
+                else if (_currentMenu is null || _currentMenu.MenuItems is null || !_currentMenu.MenuItems.Any())
+                {
+                    <div class="text-sm text-hogent-black-50">No menu available today</div>
+                }
+                else
+                {
+                    <!-- Show max 3 dishes in tidy cards -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                        @foreach (var item in _currentMenu.MenuItems)
+                        {
+                            <div class="rounded-xl border border-hogent-black-15 p-3">
+                                <div class="flex justify-between">
+                                    <span class="text-sm font-medium text-hogent-black truncate">@item.Name</span>
+                                    @if (Math.Abs(item.PriceStudent) > 1e-6)
+                                    {
+                                        <span class="text-sm font-semibold">
+                                            @item.PriceStudent.ToString("0.00") €
+                                        </span>
+                                    }
+                                </div>
+                                @if (!string.IsNullOrWhiteSpace(item.Description))
+                                {
+                                    <div class="text-xs text-hogent-black-50 line-clamp-3">@item.Description</div>
+                                }
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public IEnumerable<MenuDto.Index>? TodaysMenus { get; set; }
+    [Parameter] public IEnumerable<RestoDto.Index>? Restos { get; set; }
+
+    [Parameter] public Guid? SelectedResto { get; set; }
+    [Parameter] public EventCallback<Guid?> SelectedRestoChanged { get; set; }
+
+    private MenuDto.Index? _currentMenu;
+    private List<RestoDto.Index> _restoList = new();
+    private int _currentIndex = 0;
+    private bool _canNavigate => _restoList.Count > 1;
+
+    // Fast lookups
+    private IImmutableDictionary<Guid, MenuDto.Index> _menuByRestoId =
+    ImmutableDictionary<Guid, MenuDto.Index>.Empty;
+
+    private RestoDto.Index? CurrentResto =>
+    (_restoList.Count > 0 && _currentIndex >= 0 && _currentIndex < _restoList.Count)
+    ? _restoList[_currentIndex]
+    : null;
+
+    protected override void OnParametersSet()
+    {
+        var newList = (Restos ?? Enumerable.Empty<RestoDto.Index>()).ToList();
+        if (!Enumerable.SequenceEqual(_restoList.Select(r => r.Id), newList.Select(r => r.Id)))
+        {
+            _restoList = newList;
+
+            if (SelectedResto.HasValue)
+            {
+                var idx = _restoList.FindIndex(r => r.Id == SelectedResto.Value);
+                _currentIndex = idx >= 0 ? idx : 0;
+            }
+            else
+            {
+                _currentIndex = 0;
+            }
+        }
+
+        _menuByRestoId = (TodaysMenus ?? Enumerable.Empty<MenuDto.Index>())
+        .GroupBy(m => m.RestoId)
+        .ToImmutableDictionary(g => g.Key, g => g.First());
+
+        if (!SelectedResto.HasValue && _restoList.Any())
+            SelectedResto = _restoList[_currentIndex].Id;
+
+        SetCurrentMenu();
+    }
+
+    private void SetCurrentMenu()
+    {
+        _currentMenu = null;
+
+        if (!SelectedResto.HasValue)
+        {
+            _currentMenu = (TodaysMenus ?? Enumerable.Empty<MenuDto.Index>()).FirstOrDefault();
+            return;
+        }
+
+        if (_menuByRestoId.TryGetValue(SelectedResto.Value, out var menu))
+        {
+            _currentMenu = menu;
+            return;
+        }
+
+        _currentMenu = (TodaysMenus ?? Enumerable.Empty<MenuDto.Index>()).FirstOrDefault();
+    }
+
+    private async Task Prev()
+    {
+        if (!_canNavigate) return;
+        _currentIndex = (_currentIndex - 1 + _restoList.Count) % _restoList.Count;
+        var id = CurrentResto?.Id;
+        if (id != SelectedResto)
+        {
+            SelectedResto = id;
+            if (SelectedRestoChanged.HasDelegate)
+                await SelectedRestoChanged.InvokeAsync(SelectedResto);
+        }
+        SetCurrentMenu();
+    }
+
+    private async Task Next()
+    {
+        if (!_canNavigate) return;
+        _currentIndex = (_currentIndex + 1) % _restoList.Count;
+        var id = CurrentResto?.Id;
+        if (id != SelectedResto)
+        {
+            SelectedResto = id;
+            if (SelectedRestoChanged.HasDelegate)
+                await SelectedRestoChanged.InvokeAsync(SelectedResto);
+        }
+        SetCurrentMenu();
+    }
+    private void More()
+    {
+        NavigationManager.NavigateTo("/resto");
+    }
+}

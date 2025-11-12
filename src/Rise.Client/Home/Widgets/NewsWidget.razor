@@ -1,0 +1,49 @@
+@namespace Rise.Client.Home.Widgets
+@using Rise.Shared.News
+@inject NavigationManager NavigationManager
+
+<div class="grid-stack-item" gs-x="0" gs-y="4" gs-w="12" gs-h="5">
+    <div class="grid-stack-item-content bg-white rounded-2xl shadow-md p-4">
+        <div class="flex flex-col h-full">
+            <div class="flex justify-between">
+                <div class="text-sm font-semibold text-hogent-black-50 mb-1">Latest News</div>
+                <span class="text-sm text-blue-600 cursor-pointer" @onclick="More">more</span>
+            </div>
+
+            <div class="flex-1 overflow-auto">
+                @if (Latest == null)
+                {
+                    <div class="text-sm text-hogent-black-50">No news available</div>
+                }
+                else
+                {
+                    <span class="text-lg font-medium text-hogent-black text-medium">@Latest.Title</span>
+                    <div class="text-xs text-hogent-black-30 mt-1">@Latest.PublishDate.ToString("dd MMM yyyy")</div>
+                    <div class="text-sm text-hogent-black-30 mt-2">@Latest.Description <span
+                            class="text-blue-600 cursor-pointer underline" @onclick="ReadMore">read more</span></div>
+
+
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public IEnumerable<NewsDto.Index>? News { get; set; }
+
+    private NewsDto.Index? Latest => News?.FirstOrDefault();
+
+    private void More()
+    {
+        NavigationManager.NavigateTo("/news");
+    }
+    private void ReadMore()
+    {
+        if (Latest != null)
+        {
+            NavigationManager.NavigateTo($"/news/{Latest.Id}");
+        }
+    }
+}

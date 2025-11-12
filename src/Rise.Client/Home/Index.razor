@@ -1,0 +1,36 @@
+@page "/home/{mode?}"
+
+@using Rise.Client.Home.Components
+@using Rise.Client.Home
+
+<PageTitle>@(IsEditMode ? "Edit" : "Home")</PageTitle>
+
+<div class="flex flex-col px-4 py-3 max-w-md mx-auto">
+    <div class="flex items-center justify-between mb-3">
+        <h3 class="text-2xl font-bold">@(IsEditMode ? "EDIT" : "HOME")</h3>
+        <div class="flex items-center space-x-2">
+            @if (!IsEditMode)
+            {
+                <!-- pen button -> go to edit route -->
+                <button type="button" class="p-2 rounded-full  hover:bg-gray-200" @onclick="EnterEdit">
+                    <i class="fa-solid fa-pencil"></i>
+                </button>
+            }
+            else
+            {
+                <!-- in edit mode show add and done buttons -->
+                <button type="button" class="p-2 rounded-full bg-gray-100 hover:bg-gray-200" @onclick="AddItem">＋</button>
+                <button type="button" class="p-2 rounded-full bg-green-500 text-white hover:opacity-95"
+                    @onclick="SaveAndExit">
+                    <i class="fa-solid fa-check"></i>
+                </button>
+            }
+        </div>
+    </div>
+
+
+    <!-- middle content is delegated to a component so you can replace it later -->
+    <MiddleElements EditMode="IsEditMode" OnRemove="RemoveItem" UpcomingClasses="UpcomingClasses"
+        TodaysMenus="TodaysMenus" Restos="Restos" News="News" Grade="LastGrade" />
+
+</div>

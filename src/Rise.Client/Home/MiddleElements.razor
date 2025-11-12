@@ -1,0 +1,75 @@
+@namespace Rise.Client.Home
+@using Microsoft.AspNetCore.Components
+@using Rise.Client.Home.Components
+@using Rise.Shared.Schedule
+@using Rise.Client.Home.Widgets
+@using Rise.Shared.Menu
+@using Rise.Shared.Resto
+@using Rise.Shared.News
+@using Rise.Shared.Grades
+@implements IAsyncDisposable
+
+<div>
+    <div id="@_gridId" class="grid-stack">
+        <ScheduleWidget UpcomingClasses="UpcomingClasses" />
+        <RestoMenuWidget TodaysMenus="TodaysMenus" Restos="Restos" />
+        <NewsWidget News="News" />
+        <GradesWidget Grade="Grade" />
+    </div>
+</div>
+
+@code {
+    [Parameter] public bool EditMode { get; set; }
+    [Parameter] public EventCallback<int> OnRemove { get; set; }
+    [Parameter]
+    public List<ScheduleDto.Schedule> UpcomingClasses { get; set; } = new
+    List<ScheduleDto.Schedule>();
+
+    [Parameter] public IEnumerable<MenuDto.Index>? TodaysMenus { get; set; }
+    [Parameter] public IEnumerable<RestoDto.Index>? Restos { get; set; }
+    [Parameter] public IEnumerable<NewsDto.Index>? News { get; set; }
+    [Parameter] public GradesDto.Grade? Grade { get; set; }
+
+    [Inject] IJSRuntime JS { get; set; } = default!;
+
+    private readonly string _gridId = $"grid-home";
+    private DotNetObjectReference<MiddleElements>? _dotRef;
+    private bool _gridInitialized;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            _dotRef = DotNetObjectReference.Create(this);
+
+            await JS.InvokeVoidAsync("gridstackInterop.initGrid", _gridId, new
+            {
+                column = 12,
+                @float = false,
+                staticGrid = !EditMode
+            }, _dotRef);
+            await JS.InvokeVoidAsync("gridstackInterop.setEditMode", _gridId, EditMode);
+
+            _gridInitialized = true;
+        }
+
+        if (_gridInitialized)
+        {
+            await Task.Yield();
+            await JS.InvokeVoidAsync("gridstackInterop.setEditMode", _gridId, EditMode);
+        }
+    }
+
+    [JSInvokable]
+    public Task OnJsLayoutChanged(object items)
+    => Task.CompletedTask;
+
+    public async ValueTask DisposeAsync()
+    {
+        _dotRef?.Dispose();
+        if (_gridInitialized)
+        {
+            await JS.InvokeVoidAsync("gridstackInterop.destroy", _gridId);
+        }
+    }
+}

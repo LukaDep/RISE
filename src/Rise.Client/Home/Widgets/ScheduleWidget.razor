@@ -1,0 +1,37 @@
+@namespace Rise.Client.Home.Widgets
+@using Rise.Shared.Schedule
+@using Rise.Client.Home.Components
+@inject NavigationManager NavigationManager
+
+<div class="grid-stack-item" gs-x="0" gs-y="6" gs-w="12" gs-h="6">
+    <div class="grid-stack-item-content bg-white rounded-2xl shadow-md p-4">
+        <div class="flex flex-col h-full ">
+            <div class="flex justify-between">
+                <div class="text-sm font-semibold text-hogent-black-50 mb-1">Today</div>
+                <span class="text-sm text-blue-600 cursor-pointer" @onclick="More">more</span>
+            </div>
+            <div class="flex-1 overflow-auto">
+                @if (UpcomingClasses != null && UpcomingClasses.Any())
+                {
+                    @foreach (var reservation in UpcomingClasses)
+                    {
+                        <UpcomingClassCard Reservation="reservation" />
+                    }
+                }
+                else
+                {
+                    <div class="text-sm text-hogent-black-50">No upcoming classes</div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@code {
+    [Parameter] public List<ScheduleDto.Schedule> UpcomingClasses { get; set; } = default!;
+    private void More()
+    {
+        NavigationManager.NavigateTo("/schedule");
+    }
+}
