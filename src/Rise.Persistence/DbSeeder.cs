@@ -440,15 +440,24 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         if (dbContext.Restos.Any())
             return;
 
-        // First, get buildings
-        var buildingD = await dbContext.Buildings.FirstOrDefaultAsync(b => b.Name == "Gebouw D");
-        var buildingB = await dbContext.Buildings.FirstOrDefaultAsync(b => b.Name == "Gebouw B" && b.Address.Contains("Valentin"));
-        var buildingP = await dbContext.Buildings.FirstOrDefaultAsync(b => b.Name == "Gebouw P");
+        // Get buildings from Campus Schoonmeersen
+        var buildingD = await dbContext.Buildings.FirstOrDefaultAsync(b => b.BuildingCode == "GSCHD");
+        var buildingB = await dbContext.Buildings.FirstOrDefaultAsync(b => b.BuildingCode == "GSCHB");
+        var buildingP = await dbContext.Buildings.FirstOrDefaultAsync(b => b.BuildingCode == "GSCHP");
+
+        // Get buildings from other campuses
+        var buildingMercator = await dbContext.Buildings.FirstOrDefaultAsync(b => b.BuildingCode == "GMRCG");
+        var buildingBijlokePauli = await dbContext.Buildings.FirstOrDefaultAsync(b => b.BuildingCode == "GBPAU");
+        var buildingBijlokeCloquet = await dbContext.Buildings.FirstOrDefaultAsync(b => b.BuildingCode == "GBCLO");
+        var buildingBijlokeMarissal = await dbContext.Buildings.FirstOrDefaultAsync(b => b.BuildingCode == "GBMAR");
 
         if (buildingD == null || buildingB == null || buildingP == null)
             return;
 
-        var resto1 = new Resto
+        var restos = new List<Resto>();
+
+        // R1 - Resto Schoonmeersen D
+        restos.Add(new Resto
         {
             Name = "Resto Schoonmeersen D",
             Description = "Studentenrestaurant in gebouw D, campus Schoonmeersen. Dagschotels, broodjes, warme dranken.",
@@ -466,9 +475,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             PhoneNumber = "+32 9 123 45 67",
             Email = "resto.schoonmeersen.d@hogent.be",
             ImageUrl = "https://images.hln.be/ZmQ4ZDdhNGZkMjYxMmM1Yzg0NDgvZGlvLzE3NjQ5NTMzOS9maXQtd2lkdGgvMTIwMA/in-het-studentenrestaurant-van-hogent-mag-je-maar-met-2-aan-een-tafel-van-6-zitten"
-        };
+        });
 
-        var resto2 = new Resto
+        // R2 - Resto Schoonmeersen B
+        restos.Add(new Resto
         {
             Name = "Resto Schoonmeersen B",
             Description = "Studentenrestaurant in gebouw B, campus Schoonmeersen. Dagschotels, broodjes, warme dranken.",
@@ -486,43 +496,575 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             PhoneNumber = "+32 9 123 45 68",
             Email = "resto.schoonmeersen.b@hogent.be",
             ImageUrl = "https://images.hln.be/ZmQ4ZDdhNGZkMjYxMmM1Yzg0NDgvZGlvLzE3NjQ5NTMzOS9maXQtd2lkdGgvMTIwMA/in-het-studentenrestaurant-van-hogent-mag-je-maar-met-2-aan-een-tafel-van-6-zitten"
-        };
+        });
 
-        dbContext.Restos.AddRange(resto1, resto2);
+        // R3 - Resto Schoonmeersen P
+        restos.Add(new Resto
+        {
+            Name = "Resto Schoonmeersen P",
+            Description = "Studentenrestaurant in gebouw P, campus Schoonmeersen. Dagschotels, broodjes, warme dranken.",
+            BuildingId = buildingP.Id,
+            OpeningHours = new Dictionary<DayOfWeek, string>
+            {
+                { DayOfWeek.Monday, "08:00-17:00" },
+                { DayOfWeek.Tuesday, "08:00-17:00" },
+                { DayOfWeek.Wednesday, "08:00-17:00" },
+                { DayOfWeek.Thursday, "08:00-17:00" },
+                { DayOfWeek.Friday, "08:00-15:00" }
+            },
+            IsCurrentlyOpen = false,
+            KitchenType = new List<string> { "Hot", "Cold" },
+            PhoneNumber = "+32 9 123 45 69",
+            Email = "resto.schoonmeersen.p@hogent.be",
+            ImageUrl = "https://images.hln.be/ZmQ4ZDdhNGZkMjYxMmM1Yzg0NDgvZGlvLzE3NjQ5NTMzOS9maXQtd2lkdGgvMTIwMA/in-het-studentenrestaurant-van-hogent-mag-je-maar-met-2-aan-een-tafel-van-6-zitten"
+        });
+
+        // R4 - Resto Mercator (only if building exists)
+        if (buildingMercator != null)
+        {
+            restos.Add(new Resto
+            {
+                Name = "Resto Mercator",
+                Description = "Bistro bij de faculteit, warme maaltijden en salades.",
+                BuildingId = buildingMercator.Id,
+                OpeningHours = new Dictionary<DayOfWeek, string>
+                {
+                    { DayOfWeek.Monday, "09:00-16:00" },
+                    { DayOfWeek.Tuesday, "09:00-16:00" },
+                    { DayOfWeek.Wednesday, "09:00-16:00" },
+                    { DayOfWeek.Thursday, "09:00-16:00" },
+                    { DayOfWeek.Friday, "09:00-14:00" }
+                },
+                IsCurrentlyOpen = false,
+                KitchenType = new List<string> { "Hot" },
+                PhoneNumber = "+32 9 76 54 321",
+                Email = "resto.mercator@hogent.be",
+                ImageUrl = "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
+            });
+        }
+
+        // R5 - Resto Ledeganck (using Bijloke Pauli as placeholder)
+        if (buildingBijlokePauli != null)
+        {
+            restos.Add(new Resto
+            {
+                Name = "Resto Ledeganck",
+                Description = "Snackcorner met broodjes, panini's, koffie en snelle hapjes.",
+                BuildingId = buildingBijlokePauli.Id,
+                OpeningHours = new Dictionary<DayOfWeek, string>
+                {
+                    { DayOfWeek.Monday, "08:00-19:00" },
+                    { DayOfWeek.Tuesday, "08:00-19:00" },
+                    { DayOfWeek.Wednesday, "08:00-19:00" },
+                    { DayOfWeek.Thursday, "08:00-19:00" },
+                    { DayOfWeek.Friday, "08:00-17:00" }
+                },
+                IsCurrentlyOpen = false,
+                KitchenType = new List<string> { "FastFood" },
+                PhoneNumber = "+32 9 123 45 70",
+                Email = "resto.ledeganck@hogent.be",
+                ImageUrl = "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
+            });
+        }
+
+        // R6 - Campus Resto Vesalius (using Bijloke Cloquet as placeholder)
+        if (buildingBijlokeCloquet != null)
+        {
+            restos.Add(new Resto
+            {
+                Name = "Campus Resto Vesalius",
+                Description = "Kantine met buffet, vegetarische en internationale gerechten.",
+                BuildingId = buildingBijlokeCloquet.Id,
+                OpeningHours = new Dictionary<DayOfWeek, string>
+                {
+                    { DayOfWeek.Monday, "07:30-18:00" },
+                    { DayOfWeek.Tuesday, "07:30-18:00" },
+                    { DayOfWeek.Wednesday, "07:30-18:00" },
+                    { DayOfWeek.Thursday, "07:30-18:00" },
+                    { DayOfWeek.Friday, "07:30-16:00" }
+                },
+                IsCurrentlyOpen = false,
+                KitchenType = new List<string> { "Hot" },
+                PhoneNumber = "+32 9 111 22 33",
+                Email = "resto.vesalius@hogent.be",
+                ImageUrl = "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
+            });
+        }
+
+        // R7 - Resto Sampori (using Bijloke Marissal as placeholder)
+        if (buildingBijlokeMarissal != null)
+        {
+            restos.Add(new Resto
+            {
+                Name = "Resto Sampori",
+                Description = "Gelegen naast lab/praktijklokalen; warme maaltijden en soep van de dag.",
+                BuildingId = buildingBijlokeMarissal.Id,
+                OpeningHours = new Dictionary<DayOfWeek, string>
+                {
+                    { DayOfWeek.Monday, "08:30-16:30" },
+                    { DayOfWeek.Tuesday, "08:30-16:30" },
+                    { DayOfWeek.Wednesday, "08:30-16:30" },
+                    { DayOfWeek.Thursday, "08:30-16:30" },
+                    { DayOfWeek.Friday, "08:30-15:00" }
+                },
+                IsCurrentlyOpen = false,
+                KitchenType = new List<string> { "Hot", "Cold" },
+                PhoneNumber = "+32 9 222 33 44",
+                Email = "resto.sampori@hogent.be",
+                ImageUrl = "https://www.aldesign.be/wp-content/uploads/2016/12/browse.jpg"
+            });
+        }
+
+        dbContext.Restos.AddRange(restos);
         await dbContext.SaveChangesAsync();
 
         // Add menus and menu items
-        var menu1 = new Menu
+        if (restos.Count >= 3)
         {
-            RestoId = resto1.Id,
-            Date = DateTime.Parse("2025-10-20T11:30:00"),
-            MenuItems = new List<MenuItem>
-            {
-                new MenuItem
-                {
-                    Name = "Tomatensoep met balletjes",
-                    Description = "Dagverse soep",
-                    Type = FoodType.Soep,
-                    PriceStudent = 1.0,
-                    PriceExtern = 2.15,
-                    IsVeggie = true,
-                    IsVegan = true
-                },
-                new MenuItem
-                {
-                    Name = "Varkensgebraad met mosterdsaus",
-                    Description = "Vers bereid hoofdgerecht",
-                    Type = FoodType.WarmeMaaltijd,
-                    PriceStudent = 5.3,
-                    PriceExtern = 11.7,
-                    IsVeggie = false,
-                    IsVegan = false
-                }
-            }
-        };
+            var menus = new List<Menu>();
 
-        dbContext.Menus.Add(menu1);
-        await dbContext.SaveChangesAsync();
+            // Menus for R1 (Resto Schoonmeersen D) - restos[0]
+            menus.Add(new Menu
+            {
+                RestoId = restos[0].Id,
+                Date = DateTime.Parse("2025-10-20T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Varkensgebraad met mosterdsaus", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[0].Id,
+                Date = DateTime.Parse("2025-10-21T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Champignonsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Stoofvlees met frieten", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[0].Id,
+                Date = DateTime.Parse("2025-10-22T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Kervelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Kabeljauw met puree", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[0].Id,
+                Date = DateTime.Parse("2025-10-23T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Groentesoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Stoofvlees met frieten", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Vegan muffin", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[0].Id,
+                Date = DateTime.Parse("2025-10-24T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Wortelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Groenteburger met quinoa", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            // Menus for R2 (Resto Schoonmeersen B) - restos[1]
+            menus.Add(new Menu
+            {
+                RestoId = restos[1].Id,
+                Date = DateTime.Parse("2025-10-20T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Champignonsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Lasagne", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Rijstpap", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[1].Id,
+                Date = DateTime.Parse("2025-10-21T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Kervelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Vegan curry met kikkererwten", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[1].Id,
+                Date = DateTime.Parse("2025-10-22T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Paprikasoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Spaghetti bolognese", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[1].Id,
+                Date = DateTime.Parse("2025-10-23T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Wortelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Vegan curry met kikkererwten", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[1].Id,
+                Date = DateTime.Parse("2025-10-24T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Kipfilet met pepersaus", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                }
+            });
+
+            // Menus for R3 (Resto Schoonmeersen P) - restos[2]
+            menus.Add(new Menu
+            {
+                RestoId = restos[2].Id,
+                Date = DateTime.Parse("2025-10-20T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Pompoensoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Falafel met couscous", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[2].Id,
+                Date = DateTime.Parse("2025-10-21T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Champignonsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                    new MenuItem { Name = "Stoofvlees met frieten", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[2].Id,
+                Date = DateTime.Parse("2025-10-22T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Vegetarische chili sin carne", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[2].Id,
+                Date = DateTime.Parse("2025-10-23T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Vegan curry met kikkererwten", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            menus.Add(new Menu
+            {
+                RestoId = restos[2].Id,
+                Date = DateTime.Parse("2025-10-24T11:30:00"),
+                MenuItems = new List<MenuItem>
+                {
+                    new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                    new MenuItem { Name = "Kipfilet met pepersaus", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                    new MenuItem { Name = "Vegan muffin", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                }
+            });
+
+            // Menus for R4 (Resto Mercator) - restos[3] if exists
+            if (restos.Count > 3)
+            {
+                menus.Add(new Menu
+                {
+                    RestoId = restos[3].Id,
+                    Date = DateTime.Parse("2025-10-20T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Groentesoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                        new MenuItem { Name = "Kip tikka masala", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Vegan muffin", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[3].Id,
+                    Date = DateTime.Parse("2025-10-21T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Pompoensoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                        new MenuItem { Name = "Varkensgebraad met mosterdsaus", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[3].Id,
+                    Date = DateTime.Parse("2025-10-22T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Kervelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Groenteburger met quinoa", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[3].Id,
+                    Date = DateTime.Parse("2025-10-23T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Wortelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Kabeljauw met puree", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[3].Id,
+                    Date = DateTime.Parse("2025-10-24T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Lasagne", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+            }
+
+            // Menus for R5 (Resto Ledeganck) - restos[4] if exists
+            if (restos.Count > 4)
+            {
+                menus.Add(new Menu
+                {
+                    RestoId = restos[4].Id,
+                    Date = DateTime.Parse("2025-10-20T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Groenteburger met quinoa", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[4].Id,
+                    Date = DateTime.Parse("2025-10-21T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Wortelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Groenteburger met quinoa", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[4].Id,
+                    Date = DateTime.Parse("2025-10-22T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Varkensgebraad met mosterdsaus", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Vegan muffin", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[4].Id,
+                    Date = DateTime.Parse("2025-10-23T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Kervelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Vegetarische chili sin carne", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[4].Id,
+                    Date = DateTime.Parse("2025-10-24T11:30:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Wortelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Vegetarische chili sin carne", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+            }
+
+            // Menus for R6 (Campus Resto Vesalius) - restos[5] if exists
+            if (restos.Count > 5)
+            {
+                menus.Add(new Menu
+                {
+                    RestoId = restos[5].Id,
+                    Date = DateTime.Parse("2025-10-20T17:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Champignonsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Kabeljauw met puree", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[5].Id,
+                    Date = DateTime.Parse("2025-10-21T17:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Champignonsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Groenteburger met quinoa", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[5].Id,
+                    Date = DateTime.Parse("2025-10-22T17:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Groentesoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Kipfilet met pepersaus", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[5].Id,
+                    Date = DateTime.Parse("2025-10-23T17:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Kervelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                        new MenuItem { Name = "Vegan curry met kikkererwten", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[5].Id,
+                    Date = DateTime.Parse("2025-10-24T17:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Kervelsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                        new MenuItem { Name = "Lasagne", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+            }
+
+            // Menus for R7 (Resto Sampori) - restos[6] if exists
+            if (restos.Count > 6)
+            {
+                menus.Add(new Menu
+                {
+                    RestoId = restos[6].Id,
+                    Date = DateTime.Parse("2025-10-20T09:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Courgettesoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                        new MenuItem { Name = "Kabeljauw met puree", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[6].Id,
+                    Date = DateTime.Parse("2025-10-21T09:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Champignonsoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Kip tikka masala", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[6].Id,
+                    Date = DateTime.Parse("2025-10-22T09:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Tomatensoep met balletjes", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                        new MenuItem { Name = "Spaghetti bolognese", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Fruitkom", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[6].Id,
+                    Date = DateTime.Parse("2025-10-23T09:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Paprikasoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Vegetarische chili sin carne", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = true, IsVegan = true },
+                        new MenuItem { Name = "Pudding vanille", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+
+                menus.Add(new Menu
+                {
+                    RestoId = restos[6].Id,
+                    Date = DateTime.Parse("2025-10-24T09:00:00"),
+                    MenuItems = new List<MenuItem>
+                    {
+                        new MenuItem { Name = "Groentesoep", Description = "Dagverse soep", Type = FoodType.Soep, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false },
+                        new MenuItem { Name = "Kipfilet met pepersaus", Description = "Vers bereid hoofdgerecht", Type = FoodType.WarmeMaaltijd, PriceStudent = 5.3, PriceExtern = 11.7, IsVeggie = false, IsVegan = false },
+                        new MenuItem { Name = "Chocomousse", Description = "Dessert van de dag", Type = FoodType.Dessert, PriceStudent = 1.0, PriceExtern = 2.15, IsVeggie = true, IsVegan = false }
+                    }
+                });
+            }
+
+            dbContext.Menus.AddRange(menus);
+            await dbContext.SaveChangesAsync();
+        }
     }
 
     private async Task SchedulesAsync()
