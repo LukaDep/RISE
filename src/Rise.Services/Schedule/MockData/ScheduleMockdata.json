@@ -8,8 +8,8 @@
         "Lokaal",
         "Lesgever"
     ],
-    "info": { "reservationlimit": 1000, "reservationcount": 115 },
-    "reservations": [
+    "info": { "schedulelimit": 1000, "schedulecount": 115 },
+    "schedules": [
         {
             "id": "394473",
             "startdate": "22-09-2025",

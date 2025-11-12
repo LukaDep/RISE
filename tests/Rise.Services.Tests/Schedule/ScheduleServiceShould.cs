@@ -21,7 +21,7 @@ public class ScheduleServiceShould
         if (result.IsSuccess)
         {
             result.Value.ShouldNotBeNull();
-            result.Value.Reservations.ShouldNotBeNull();
+            result.Value.Schedules.ShouldNotBeNull();
         }
         else
         {
@@ -37,8 +37,8 @@ public class ScheduleServiceShould
         var mockData = new
         {
             columnheaders = new[] { "Olod", "Werkvorm", "Onderwerp", "Info werkvorm", "Leer- of toetsomgeving", "Lokaal", "Lesgever" },
-            info = new { reservationlimit = 1000, reservationcount = 2 },
-            reservations = new[]
+            info = new { schedulelimit = 1000, schedulecount = 2 },
+            schedules = new[]
             {
                 new
                 {
@@ -68,36 +68,36 @@ public class ScheduleServiceShould
 
         // Assert
         result.ShouldNotBeNull();
-        result.Reservations.Count.ShouldBe(2);
+        result.Schedules.Count.ShouldBe(2);
 
-        var firstReservation = result.Reservations[0];
-        firstReservation.Id.ShouldBe("test-001");
-        firstReservation.Course.ShouldBe("Web Ontwikkeling 2");
-        firstReservation.WorkForm.ShouldBe("Hoorcollege");
-        firstReservation.Environment.ShouldBe("Digitaal (laptop/PC)");
-        firstReservation.Room.ShouldBe("GSCHB.2.009");
-        firstReservation.Teacher.ShouldBe("Bert Van Vreckem");
-        firstReservation.StartDateTime.ShouldBe(new DateTime(2025, 9, 1, 8, 30, 0));
-        firstReservation.EndDateTime.ShouldBe(new DateTime(2025, 9, 1, 10, 30, 0));
+        var firstSchedule = result.Schedules[0];
+        firstSchedule.Id.ShouldBe("test-001");
+        firstSchedule.Course.ShouldBe("Web Ontwikkeling 2");
+        firstSchedule.WorkForm.ShouldBe("Hoorcollege");
+        firstSchedule.Environment.ShouldBe("Digitaal (laptop/PC)");
+        firstSchedule.Room.ShouldBe("GSCHB.2.009");
+        firstSchedule.Teacher.ShouldBe("Bert Van Vreckem");
+        firstSchedule.StartDateTime.ShouldBe(new DateTime(2025, 9, 1, 8, 30, 0));
+        firstSchedule.EndDateTime.ShouldBe(new DateTime(2025, 9, 1, 10, 30, 0));
 
-        var secondReservation = result.Reservations[1];
-        secondReservation.Id.ShouldBe("test-002");
-        secondReservation.Course.ShouldBe("Databanken II");
-        secondReservation.WorkForm.ShouldBe("Activerend hoorcollege");
-        secondReservation.Teacher.ShouldBe("Thomas Parmentier");
-        secondReservation.StartDateTime.ShouldBe(new DateTime(2025, 9, 2, 11, 0, 0));
-        secondReservation.EndDateTime.ShouldBe(new DateTime(2025, 9, 2, 13, 0, 0));
+        var secondSchedule = result.Schedules[1];
+        secondSchedule.Id.ShouldBe("test-002");
+        secondSchedule.Course.ShouldBe("Databanken II");
+        secondSchedule.WorkForm.ShouldBe("Activerend hoorcollege");
+        secondSchedule.Teacher.ShouldBe("Thomas Parmentier");
+        secondSchedule.StartDateTime.ShouldBe(new DateTime(2025, 9, 2, 11, 0, 0));
+        secondSchedule.EndDateTime.ShouldBe(new DateTime(2025, 9, 2, 13, 0, 0));
     }
 
     [Fact]
-    public void EmptyColumnsShouldReturnEmptyReservation()
+    public void EmptyColumnsShouldReturnEmptySchedule()
     {
         // Arrange
         var mockData = new
         {
             columnheaders = new[] { "Olod", "Werkvorm" },
-            info = new { reservationlimit = 1000, reservationcount = 1 },
-            reservations = new[]
+            info = new { schedulelimit = 1000, schedulecount = 1 },
+            schedules = new[]
             {
                 new
                 {
@@ -118,26 +118,26 @@ public class ScheduleServiceShould
 
         // Assert
         result.ShouldNotBeNull();
-        result.Reservations.Count.ShouldBe(1);
+        result.Schedules.Count.ShouldBe(1);
 
-        var reservation = result.Reservations[0];
-        reservation.Id.ShouldBe("test-003");
-        reservation.Course.ShouldBe(string.Empty);
-        reservation.WorkForm.ShouldBe(string.Empty);
-        reservation.Environment.ShouldBe(string.Empty);
-        reservation.Room.ShouldBe(string.Empty);
-        reservation.Teacher.ShouldBe(string.Empty);
+        var schedule = result.Schedules[0];
+        schedule.Id.ShouldBe("test-003");
+        schedule.Course.ShouldBe(string.Empty);
+        schedule.WorkForm.ShouldBe(string.Empty);
+        schedule.Environment.ShouldBe(string.Empty);
+        schedule.Room.ShouldBe(string.Empty);
+        schedule.Teacher.ShouldBe(string.Empty);
     }
 
     [Fact]
-    public void HandleMultipleReservationsCorrectly()
+    public void HandleMultipleSchedulesCorrectly()
     {
         // Arrange
         var mockData = new
         {
             columnheaders = new[] { "Olod", "Werkvorm", "Onderwerp", "Info werkvorm", "Leer- of toetsomgeving", "Lokaal", "Lesgever" },
-            info = new { reservationlimit = 1000, reservationcount = 3 },
-            reservations = new[]
+            info = new { schedulelimit = 1000, schedulecount = 3 },
+            schedules = new[]
             {
                 new
                 {
@@ -176,10 +176,10 @@ public class ScheduleServiceShould
 
         // Assert
         result.ShouldNotBeNull();
-        result.Reservations.Count.ShouldBe(3);
-        result.Reservations[0].Id.ShouldBe("test-005");
-        result.Reservations[1].Id.ShouldBe("test-006");
-        result.Reservations[2].Id.ShouldBe("test-007");
+        result.Schedules.Count.ShouldBe(3);
+        result.Schedules[0].Id.ShouldBe("test-005");
+        result.Schedules[1].Id.ShouldBe("test-006");
+        result.Schedules[2].Id.ShouldBe("test-007");
     }
 
     [Fact]
@@ -189,8 +189,8 @@ public class ScheduleServiceShould
         var mockData = new
         {
             columnheaders = new[] { "Olod" },
-            info = new { reservationlimit = 1000, reservationcount = 1 },
-            reservations = new[]
+            info = new { schedulelimit = 1000, schedulecount = 1 },
+            schedules = new[]
             {
                 new
                 {
@@ -210,8 +210,8 @@ public class ScheduleServiceShould
         var result = MockScheduleService.ConvertToDto(json);
 
         // Assert
-        var reservation = result.Reservations[0];
-        reservation.StartDateTime.ShouldBe(new DateTime(2025, 12, 15, 23, 59, 0));
-        reservation.EndDateTime.ShouldBe(new DateTime(2025, 12, 16, 1, 30, 0));
+        var schedule = result.Schedules[0];
+        schedule.StartDateTime.ShouldBe(new DateTime(2025, 12, 15, 23, 59, 0));
+        schedule.EndDateTime.ShouldBe(new DateTime(2025, 12, 16, 1, 30, 0));
     }
 }
