@@ -33,7 +33,7 @@ try
             var connectionString = builder.Configuration.GetConnectionString("DatabaseConnection") ??
                                    throw new InvalidOperationException("Connection string 'DatabaseConnection' not found.");
             // o.UseSqlite(connectionString); // Swap Sqlite for your database provider (e.g. Sql Server, MySQL, PostgreSQL, etc.).
-            o.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 21))); // Use specific version instead of AutoDetect to avoid early connection
+            o.UseMySql(connectionString, new MySqlServerVersion(new Version(8, 0, 21)), mySqlOptions => mySqlOptions.EnableStringComparisonTranslations()); // Use specific version instead of AutoDetect to avoid early connection
             o.EnableDetailedErrors();
             if (builder.Environment.IsDevelopment())
             {
