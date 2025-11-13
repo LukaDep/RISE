@@ -25,14 +25,12 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await RolesAsync();
         await UsersAsync();
         // await StudentCardsAsync();
-        // await NewsAsync();
-        // await AbsencesAsync();
-        // await CampusesAsync();
-        // await ContactsAsync();
-        // await GradesAsync();
-        // await RestosAndMenusAsync();
-        // await SchedulesAsync();
-        // await NotificationPreferencesAsync();
+        await NewsAsync();
+        await AbsencesAsync();
+        await CampusesAsync();
+        await ContactsAsync();
+        await GradesAsync();
+        await RestosAndMenusAsync();
     }
 
     private async Task RolesAsync()
