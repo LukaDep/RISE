@@ -9,7 +9,7 @@ using Rise.Domain.Menu;
 using Rise.Domain.News;
 using Rise.Domain.Notifications;
 using Rise.Domain.Restos;
-using Rise.Domain.Schedules;
+using Rise.Domain.StudentCards;
 
 namespace Rise.Persistence;
 
@@ -33,8 +33,9 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<Menu> Menus => Set<Menu>();
     public DbSet<MenuItem> MenuItems => Set<MenuItem>();
     public DbSet<Resto> Restos => Set<Resto>();
-    public DbSet<Schedule> Schedules => Set<Schedule>();
     public DbSet<NotificationPreferences> NotificationPreferences => Set<NotificationPreferences>();
+    public DbSet<StudentCard> StudentCards => Set<StudentCard>();
+
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
         // All columns in the database have a maxlength of 255.

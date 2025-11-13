@@ -7,7 +7,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Rise.Persistence.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialWithUuidV7 : Migration
+    public partial class fullresetmigrationstofixbug : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -19,8 +19,7 @@ namespace Rise.Persistence.Migrations
                 name: "Absence",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     StartDate = table.Column<DateTime>(type: "datetime(6)", nullable: false),
@@ -41,8 +40,7 @@ namespace Rise.Persistence.Migrations
                 name: "Campus",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Street = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
@@ -53,12 +51,14 @@ namespace Rise.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     PostalCode = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    MapImageUrl = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: true)
+                    Facilities = table.Column<string>(type: "json", nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    ImageWidth = table.Column<int>(type: "int", nullable: true),
-                    ImageHeight = table.Column<int>(type: "int", nullable: true),
+                    Description = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     Latitude = table.Column<double>(type: "double", nullable: true),
                     Longitude = table.Column<double>(type: "double", nullable: true),
+                    ContactPhone = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
+                        .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
@@ -70,37 +70,10 @@ namespace Rise.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "CampusInfo",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Location = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Faculties = table.Column<string>(type: "json", nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    ContactPhone = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: true)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
-                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_CampusInfo", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
                 name: "Contact",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Type = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
@@ -127,8 +100,7 @@ namespace Rise.Persistence.Migrations
                 name: "Grade",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     ActivityType = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
@@ -160,10 +132,8 @@ namespace Rise.Persistence.Migrations
                 name: "Menu",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    RestoId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
+                    RestoId = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Date = table.Column<DateTime>(type: "datetime(6)", nullable: false),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
@@ -179,8 +149,7 @@ namespace Rise.Persistence.Migrations
                 name: "NewsArticle",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Title = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: false)
@@ -203,51 +172,21 @@ namespace Rise.Persistence.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "Product",
+                name: "NotificationPreferences",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Description = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
-                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
+                    Id = table.Column<Guid>(type: "char(36)", nullable: false, collation: "ascii_general_ci"),
+                    GradesNotifications = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    ScheduleNotifications = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CampusNotifications = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    NewsNotifications = table.Column<bool>(type: "tinyint(1)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false),
+                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Product", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Reservation",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    StartDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    EndDateTime = table.Column<DateTime>(type: "datetime(6)", nullable: false),
-                    Course = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    WorkForm = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Environment = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Room = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Teacher = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    IsAbsent = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
-                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Reservation", x => x.Id);
+                    table.PrimaryKey("PK_NotificationPreferences", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -255,14 +194,12 @@ namespace Rise.Persistence.Migrations
                 name: "Resto",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "varchar(2000)", maxLength: 2000, nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    BuildingId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    BuildingId = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     OpeningHours = table.Column<string>(type: "json", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     IsCurrentlyOpen = table.Column<bool>(type: "tinyint(1)", nullable: false),
@@ -300,28 +237,6 @@ namespace Rise.Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Roles", x => x.Id);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Technician",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    FirstName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    LastName = table.Column<string>(type: "varchar(100)", maxLength: 100, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    AccountId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
-                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Technician", x => x.Id);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -364,8 +279,7 @@ namespace Rise.Persistence.Migrations
                 name: "Building",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Address = table.Column<string>(type: "varchar(500)", maxLength: 500, nullable: false)
@@ -374,9 +288,8 @@ namespace Rise.Persistence.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Latitude = table.Column<double>(type: "double", nullable: true),
                     Longitude = table.Column<double>(type: "double", nullable: true),
-                    X = table.Column<int>(type: "int", nullable: true),
-                    Y = table.Column<int>(type: "int", nullable: true),
-                    CampusId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
+                    CampusId = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
+                    BuildingCode = table.Column<string>(type: "varchar(5)", maxLength: 5, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
@@ -398,8 +311,7 @@ namespace Rise.Persistence.Migrations
                 name: "MenuItem",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    Id = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Description = table.Column<string>(type: "varchar(1000)", maxLength: 1000, nullable: false)
@@ -409,8 +321,7 @@ namespace Rise.Persistence.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     IsVegan = table.Column<bool>(type: "tinyint(1)", nullable: false),
                     IsVeggie = table.Column<bool>(type: "tinyint(1)", nullable: false),
-                    MenuId = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
+                    MenuId = table.Column<Guid>(type: "char(36)", maxLength: 36, nullable: false, collation: "ascii_general_ci"),
                     CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
                     UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
                     IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
@@ -449,40 +360,6 @@ namespace Rise.Persistence.Migrations
                         principalTable: "Roles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                })
-                .Annotation("MySql:CharSet", "utf8mb4");
-
-            migrationBuilder.CreateTable(
-                name: "Project",
-                columns: table => new
-                {
-                    Id = table.Column<string>(type: "varchar(36)", maxLength: 36, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Name = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    TechnicianId = table.Column<string>(type: "varchar(255)", maxLength: 255, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Addressline1 = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    Addressline2 = table.Column<string>(type: "varchar(250)", maxLength: 250, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    City = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    PostalCode = table.Column<string>(type: "varchar(20)", maxLength: 20, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4"),
-                    CreatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6)"),
-                    UpdatedAt = table.Column<DateTime>(type: "datetime(6)", nullable: false, defaultValueSql: "CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)"),
-                    IsDeleted = table.Column<bool>(type: "tinyint(1)", nullable: false, defaultValue: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Project", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Project_Technician_TechnicianId",
-                        column: x => x.TechnicianId,
-                        principalTable: "Technician",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
                 })
                 .Annotation("MySql:CharSet", "utf8mb4");
 
@@ -599,11 +476,6 @@ namespace Rise.Persistence.Migrations
                 column: "MenuId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Project_TechnicianId",
-                table: "Project",
-                column: "TechnicianId");
-
-            migrationBuilder.CreateIndex(
                 name: "IX_RoleClaims_RoleId",
                 table: "RoleClaims",
                 column: "RoleId");
@@ -612,12 +484,6 @@ namespace Rise.Persistence.Migrations
                 name: "RoleNameIndex",
                 table: "Roles",
                 column: "NormalizedName",
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Technician_AccountId",
-                table: "Technician",
-                column: "AccountId",
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -657,9 +523,6 @@ namespace Rise.Persistence.Migrations
                 name: "Building");
 
             migrationBuilder.DropTable(
-                name: "CampusInfo");
-
-            migrationBuilder.DropTable(
                 name: "Contact");
 
             migrationBuilder.DropTable(
@@ -672,13 +535,7 @@ namespace Rise.Persistence.Migrations
                 name: "NewsArticle");
 
             migrationBuilder.DropTable(
-                name: "Product");
-
-            migrationBuilder.DropTable(
-                name: "Project");
-
-            migrationBuilder.DropTable(
-                name: "Reservation");
+                name: "NotificationPreferences");
 
             migrationBuilder.DropTable(
                 name: "Resto");
@@ -703,9 +560,6 @@ namespace Rise.Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "Menu");
-
-            migrationBuilder.DropTable(
-                name: "Technician");
 
             migrationBuilder.DropTable(
                 name: "Roles");

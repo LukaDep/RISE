@@ -36,13 +36,6 @@ public class Campus : Entity
         get => _postalCode;
         set => _postalCode = Guard.Against.NullOrWhiteSpace(value);
     }
-    private string _contactPhone = string.Empty;
-
-    public required string ContactPhone
-    {
-        get => _contactPhone;
-        set => _contactPhone = Guard.Against.NullOrWhiteSpace(value);
-    }
     private List<string> _facilities;
     public required List<string> Facilities
     {
@@ -56,7 +49,6 @@ public class Campus : Entity
         get => _description;
         set => _description = Guard.Against.NullOrWhiteSpace(value);
     }
-
 
     private double? _latitude;
     public double? Latitude
@@ -78,4 +70,12 @@ public class Campus : Entity
         get => _buildings;
         set => _buildings = value;
     }
+    private string _contactPhone = string.Empty;
+
+    public required string ContactPhone
+    {
+        get => _contactPhone;
+        set => _contactPhone = Guard.Against.NullOrWhiteSpace(value);
+    }
+
 }

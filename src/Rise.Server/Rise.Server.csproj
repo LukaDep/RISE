@@ -8,6 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="FastEndpoints" />
     <Using Include="Ardalis.Result" />
     <Using Include="Serilog" />
@@ -41,6 +45,10 @@
 
   <ItemGroup>
     <Folder Include="Keys\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.Development.json" />
   </ItemGroup>
 
 </Project>

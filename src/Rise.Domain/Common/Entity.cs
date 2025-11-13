@@ -3,7 +3,7 @@ namespace Rise.Domain.Common;
 /// <summary>
 /// Entity Base Class, all entities should inherit from this. (read: Entity = Row in SQL terms)
 /// </summary>
-public abstract class Entity
+public abstract class Entity : IEntity
 {
     /// <summary>
     /// Primary Key of the <see cref="Entity"/> using UUIDv7

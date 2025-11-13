@@ -1,23 +1,26 @@
 using Microsoft.Extensions.DependencyInjection;
 using Rise.Persistence;
 using Rise.Services.Absences;
-using Rise.Services.Schedule;
-using Rise.Services.News;
 using Rise.Services.Campus;
-using Rise.Services.Grades;
-using Rise.Shared.News;
-using Rise.Shared.Campus;
-using Rise.Services.Resto;
-using Rise.Shared.Resto;
-using Rise.Shared.Absences;
-using Rise.Shared.Schedule;
 using Rise.Services.Contact;
+using Rise.Services.Grades;
+using Rise.Services.Menu;
+using Rise.Services.News;
+using Rise.Services.Resto;
+using Rise.Services.Schedule;
+using Rise.Services.StudentCards;
+using Rise.Shared.Absences;
+using Rise.Shared.Campus;
 using Rise.Shared.Contact;
 using Rise.Shared.Grades;
 using Rise.Shared.Menu;
 using Rise.Services.Menu;
 using Rise.Services.Notifications;
 using Rise.Shared.Notifications;
+using Rise.Shared.News;
+using Rise.Shared.Resto;
+using Rise.Shared.Schedule;
+using Rise.Shared.StudentCards;
 
 namespace Rise.Services;
 
@@ -34,6 +37,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IAbsencesService, AbsencesService>();
         services.AddScoped<IGradesService, GradesService>();
         services.AddScoped<INotificationPreferencesService, NotificationPreferencesService>();
+        services.AddScoped<IStudentCardService, StudentCardService>();
         services.AddTransient<DbSeeder>();
         return services;
     }
