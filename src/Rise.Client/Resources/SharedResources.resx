@@ -488,6 +488,10 @@
     <value>Calendar</value>
     <comment/>
   </data>
+   <data name="Account.Absences" xml:space="preserve">
+    <value>Submit your absence</value>
+    <comment/>
+  </data>
   <data name="Account.Grades" xml:space="preserve">
     <value>Grades</value>
     <comment/> 

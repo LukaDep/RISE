@@ -481,6 +481,10 @@
     <value>Notificaties</value>
     <comment/>
   </data>
+  <data name="Account.Absences" xml:space="preserve">
+    <value>Dien afwezigheid in</value>
+    <comment/>
+  </data>
   <data name="Auth.LogoutTitle" xml:space="preserve">
     <value>Uitloggen</value>
     <comment/>
