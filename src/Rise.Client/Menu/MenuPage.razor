@@ -1,4 +1,5 @@
 @page "/resto/{RestoId:guid}/menu"
+@layout MinimalLayout
 @using Rise.Shared.Resto
 @using Rise.Shared.Menu
 @inject IStringLocalizer<SharedResources> L
@@ -15,25 +16,26 @@
         </button>
     </div>
 
-    <h2 class="text-3xl sm:text-4xl font-extrabold mb-6 sm:mb-8 tracking-tight text-hogent-black text-center sm:text-left">
+    <h2
+        class="text-3xl sm:text-4xl font-extrabold mb-6 sm:mb-8 tracking-tight text-hogent-black text-center sm:text-left">
         @L["Resto.MenuTitle"]
     </h2>
 
     <div class="flex flex-wrap justify-center sm:justify-start gap-2 mb-10">
         <button @onclick="() => SetFilter(MenuFilter.All)"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
                        @(currentFilter == MenuFilter.All ? "bg-hogent-education text-white border-hogent-education shadow-sm" : "bg-white text-hogent-black border-hogent-black-10 hover:bg-hogent-black-5")">
             <i class="fa-solid fa-list"></i> @L["Resto.Filter.All"]
         </button>
 
         <button @onclick="() => SetFilter(MenuFilter.Veggie)"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
                        @(currentFilter == MenuFilter.Veggie ? "bg-green-600 text-white border-green-600 shadow-sm" : "bg-white text-green-700 border-green-600 hover:bg-green-50")">
             <i class="fa-solid fa-leaf text-green-600"></i> @L["Resto.Vegetarisch"]
         </button>
 
         <button @onclick="() => SetFilter(MenuFilter.Vegan)"
-                class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
+            class="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium border transition select-none
                        @(currentFilter == MenuFilter.Vegan ? "bg-emerald-500 text-white border-emerald-500 shadow-sm" : "bg-white text-emerald-600 border-emerald-500 hover:bg-emerald-50")">
             <i class="fa-solid fa-seedling text-emerald-500"></i> @L["Resto.Vegan"]
         </button>
@@ -55,10 +57,10 @@
     else
     {
         var filteredDays = menus
-            .OrderBy(m => m.Date)
-            .GroupBy(m => m.Date.Date)
-            .Where(group => group.SelectMany(m => m.MenuItems).Any(ShouldShowItem))
-            .ToList();
+        .OrderBy(m => m.Date)
+        .GroupBy(m => m.Date.Date)
+        .Where(group => group.SelectMany(m => m.MenuItems).Any(ShouldShowItem))
+        .ToList();
 
         if (!filteredDays.Any())
         {
@@ -72,14 +74,15 @@
             {
                 var isExpanded = expandedDays.Contains(dayGroup.Key);
 
-                <section class="mb-6 rounded-2xl shadow-md border border-hogent-black-10 bg-white transition hover:shadow-lg overflow-hidden">
-                    <button @onclick="() => ToggleDay(dayGroup.Key)"
-                            class="w-full flex justify-between items-center px-5 sm:px-6 py-4 sm:py-5 bg-hogent-black-5 hover:bg-hogent-black-10 transition 
-                                   @(isExpanded ? "rounded-t-2xl" : "rounded-2xl")">
+                <section
+                    class="mb-6 rounded-2xl shadow-md border border-hogent-black-10 bg-white transition hover:shadow-lg overflow-hidden">
+                    <button @onclick="() => ToggleDay(dayGroup.Key)" class="w-full flex justify-between items-center px-5 sm:px-6 py-4 sm:py-5 bg-hogent-black-5 hover:bg-hogent-black-10 transition 
+                                               @(isExpanded ? "rounded-t-2xl" : "rounded-2xl")">
                         <h3 class="text-xl sm:text-2xl font-semibold text-hogent-black capitalize tracking-tight">
                             @dayGroup.Key.ToString("dddd")
                         </h3>
-                        <i class="fa-solid @(isExpanded ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-70 text-lg transition-transform duration-300 @(isExpanded ? "rotate-180" : "")"></i>
+                        <i
+                            class="fa-solid @(isExpanded ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-70 text-lg transition-transform duration-300 @(isExpanded ? "rotate-180" : "")"></i>
                     </button>
 
                     @if (isExpanded)
@@ -94,7 +97,8 @@
                                         continue;
 
                                     <div class="mb-10 text-center flex flex-col items-center">
-                                        <div class="w-full sm:max-w-xl bg-hogent-black/90 text-white/95 text-lg sm:text-xl font-semibold px-5 py-3 mb-2">
+                                        <div
+                                            class="w-full sm:max-w-xl bg-hogent-black/90 text-white/95 text-lg sm:text-xl font-semibold px-5 py-3 mb-2">
                                             @group.Key
                                         </div>
 
