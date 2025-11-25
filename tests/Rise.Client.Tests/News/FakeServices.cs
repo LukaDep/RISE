@@ -28,11 +28,12 @@ public class FakeNewsService : INewsService
 {
     private readonly List<NewsDto.Index> _items = new()
         {
-            new NewsDto.Index { Id = Guid.Parse("1"), Title = "Campus reopens", PublishDate = DateTime.UtcNow.AddDays(-3),Type="test1", Description = "tester1", Content = "We are happy to announce the campus reopens.", Author = "Admin" },
-            new NewsDto.Index { Id = Guid.Parse("2"), Title = "New library hours", PublishDate = DateTime.UtcNow.AddDays(-2),Type="test2", Description = "tester2", Content = "Library hours have changed for the exam period.", Author = "Library" },
-            new NewsDto.Index { Id = Guid.Parse("3"), Title = "Cafeteria menu updated", PublishDate = DateTime.UtcNow.AddDays(-1),Type="test3", Description = "tester3", Content = "Try the new vegetarian options at the cafeteria.", Author = "Catering" },
-            new NewsDto.Index { Id = Guid.Parse("4"), Title = "Guest lecture series", PublishDate = DateTime.UtcNow,Type="test4", Description = "tester4", Content = "A new guest lecture series will start next week.", Author = "Events" },
+            new NewsDto.Index { Id = Guid.CreateVersion7(), Title = "Campus reopens", PublishDate = DateTime.UtcNow.AddDays(-3),Type="test1", Description = "tester1", Content = "We are happy to announce the campus reopens.", Author = "Admin" },
+            new NewsDto.Index { Id = Guid.CreateVersion7(), Title = "New library hours", PublishDate = DateTime.UtcNow.AddDays(-2),Type="test2", Description = "tester2", Content = "Library hours have changed for the exam period.", Author = "Library" },
+            new NewsDto.Index { Id = Guid.CreateVersion7(), Title = "Cafeteria menu updated", PublishDate = DateTime.UtcNow.AddDays(-1),Type="test3", Description = "tester3", Content = "Try the new vegetarian options at the cafeteria.", Author = "Catering" },
+            new NewsDto.Index { Id = Guid.CreateVersion7(), Title = "Guest lecture series", PublishDate = DateTime.UtcNow,Type="test4", Description = "tester4", Content = "A new guest lecture series will start next week.", Author = "Events" },
         };
+    public Guid GetFirstNewsItemId() => _items.First().Id;
 
     public Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {

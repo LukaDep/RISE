@@ -1,4 +1,5 @@
-﻿using Xunit.Abstractions;
+﻿using Microsoft.Extensions.Localization;
+using Xunit.Abstractions;
 
 namespace Rise.Client.Pages;
 
@@ -11,15 +12,17 @@ public class IndexShould : TestContext
     public IndexShould(ITestOutputHelper outputHelper)
     {
         Services.AddXunitLogger(outputHelper);
+        Services.AddLocalization();
     }
 
     [Fact]
-    public void ShowHelloWorld()
+    public void RendersLocalizedComingSoonHeader()
     {
-        // Arrange
+        // Arrange & Act
         var cut = RenderComponent<Index>();
 
-        // Assert that content of the paragraph shows counter at zero
-        cut.Find("h1").MarkupMatches("<h1>Hello, world!</h1>");
+        // Assert: header uses localized value for Common.ComingSoon
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
+        Assert.Contains($"<h1>{localizer["Common.ComingSoon"]}</h1>", cut.Markup);
     }
 }

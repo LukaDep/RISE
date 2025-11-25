@@ -1,7 +1,9 @@
 using System.Text.Json;
 using Ardalis.Result;
+using Microsoft.EntityFrameworkCore;
 using Rise.Services.Schedule;
 using Rise.Shared.Common;
+using Rise.Persistence;
 
 namespace Rise.Services.Tests.Schedule;
 
@@ -10,14 +12,16 @@ public class ScheduleServiceShould
     [Fact]
     public async Task GetIndexAsyncShouldReturnSuccessWithValidData()
     {
-        // Arrange
-        var service = new MockScheduleService();
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: nameof(GetIndexAsyncShouldReturnSuccessWithValidData))
+            .Options;
+        using var dbContext = new ApplicationDbContext(options);
+
+        var service = new MockScheduleService(dbContext);
         var request = new QueryRequest.SkipTake { Skip = 0, Take = 10 };
 
-        // Act
         var result = await service.GetIndexAsync(request, CancellationToken.None);
 
-        // Assert
         if (result.IsSuccess)
         {
             result.Value.ShouldNotBeNull();
@@ -25,7 +29,6 @@ public class ScheduleServiceShould
         }
         else
         {
-            // Als het mockbestand niet werkt zou het not found moeten teruggeven
             result.Status.ShouldBe(ResultStatus.NotFound);
         }
     }
@@ -33,7 +36,6 @@ public class ScheduleServiceShould
     [Fact]
     public void ConvertToDtoCorrectly()
     {
-        // Arrange
         var mockData = new
         {
             columnheaders = new[] { "Olod", "Werkvorm", "Onderwerp", "Info werkvorm", "Leer- of toetsomgeving", "Lokaal", "Lesgever" },
@@ -63,10 +65,8 @@ public class ScheduleServiceShould
 
         var json = JsonSerializer.Serialize(mockData);
 
-        // Act
         var result = MockScheduleService.ConvertToDto(json);
 
-        // Assert
         result.ShouldNotBeNull();
         result.Schedules.Count.ShouldBe(2);
 
@@ -92,7 +92,6 @@ public class ScheduleServiceShould
     [Fact]
     public void EmptyColumnsShouldReturnEmptySchedule()
     {
-        // Arrange
         var mockData = new
         {
             columnheaders = new[] { "Olod", "Werkvorm" },
@@ -113,10 +112,8 @@ public class ScheduleServiceShould
 
         var json = JsonSerializer.Serialize(mockData);
 
-        // Act
         var result = MockScheduleService.ConvertToDto(json);
 
-        // Assert
         result.ShouldNotBeNull();
         result.Schedules.Count.ShouldBe(1);
 
@@ -132,7 +129,6 @@ public class ScheduleServiceShould
     [Fact]
     public void HandleMultipleSchedulesCorrectly()
     {
-        // Arrange
         var mockData = new
         {
             columnheaders = new[] { "Olod", "Werkvorm", "Onderwerp", "Info werkvorm", "Leer- of toetsomgeving", "Lokaal", "Lesgever" },
@@ -171,10 +167,8 @@ public class ScheduleServiceShould
 
         var json = JsonSerializer.Serialize(mockData);
 
-        // Act
         var result = MockScheduleService.ConvertToDto(json);
 
-        // Assert
         result.ShouldNotBeNull();
         result.Schedules.Count.ShouldBe(3);
         result.Schedules[0].Id.ShouldBe("test-005");
@@ -185,7 +179,6 @@ public class ScheduleServiceShould
     [Fact]
     public void ParseDateTimeCorrectly()
     {
-        // Arrange
         var mockData = new
         {
             columnheaders = new[] { "Olod" },
@@ -206,10 +199,8 @@ public class ScheduleServiceShould
 
         var json = JsonSerializer.Serialize(mockData);
 
-        // Act
         var result = MockScheduleService.ConvertToDto(json);
 
-        // Assert
         var schedule = result.Schedules[0];
         schedule.StartDateTime.ShouldBe(new DateTime(2025, 12, 15, 23, 59, 0));
         schedule.EndDateTime.ShouldBe(new DateTime(2025, 12, 16, 1, 30, 0));

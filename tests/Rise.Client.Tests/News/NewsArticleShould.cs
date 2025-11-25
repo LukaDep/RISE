@@ -4,17 +4,22 @@ namespace Rise.Client.News;
 
 public class NewsArticleShould : TestContext
 {
+    private readonly FakeNewsService _fakeNewsService = new();
+
     public NewsArticleShould()
     {
         Services.AddLocalization();
-        Services.AddScoped<INewsService, FakeNewsService>();
+        Services.AddScoped<INewsService>(_ => _fakeNewsService);
     }
 
     [Fact]
     public void RendersNewsArticleDetails()
     {
-        // Arrange & Act: render the article for Id=1 (exists in FakeNewsService)
-        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, Guid.Parse("1")));
+        // Arrange: get the first news item's ID from the fake service
+        var newsId = _fakeNewsService.GetFirstNewsItemId();
+
+        // Act: render the article for the existing ID
+        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, newsId));
 
         // Assert title and content are present
         Assert.Contains("Campus reopens", cut.Markup);
@@ -35,11 +40,14 @@ public class NewsArticleShould : TestContext
     [Fact]
     public void NonExistentIdShowsErrorMessage()
     {
-        // Arrange & Act: render the article for a non-existent Id (999)
-        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, Guid.Parse("999")));
+        // Arrange: use a random non-existent GUID
+        var nonExistentId = Guid.CreateVersion7();
+
+        // Act: render the article for a non-existent Id
+        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, nonExistentId));
 
         // Assert that an error message is displayed
-        Assert.Contains("News item with id 999 not found.", cut.Markup);
+        Assert.Contains($"News item with id {nonExistentId} not found.", cut.Markup);
         // And that it's styled as an error (red text)
         Assert.Contains("text-red-500", cut.Markup);
     }
