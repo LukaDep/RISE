@@ -17,6 +17,6 @@ public class Index(INotificationPreferencesService notificationPreferencesServic
 
     public override async Task<Result<NotificationPreferencesResponse.Index>> ExecuteAsync(CancellationToken ct)
     {
-        return await notificationPreferencesService.GetByUserIdAsync(ct);
+        return await notificationPreferencesService.GetUserPreferencesByIdAsync(ct);
     }
 }

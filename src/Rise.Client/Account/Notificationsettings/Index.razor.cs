@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Components;
 using Rise.Shared.Notifications;
 using Serilog;
+using WebPush;
 
 namespace Rise.Client.Account.Notificationsettings;
 
@@ -11,26 +12,6 @@ public partial class Index : ComponentBase
     private NotificationPreferencesDTO.Index? notificationPreferences;
     private bool isLoading = true;
     private string? errorMessage;
-
-    /// <summary>
-    /// Local property voor two-way binding van de IsEnabled toggle.
-    /// Zet alle notification preferences tegelijk aan of uit.
-    /// </summary>
-    private bool IsEnabled
-    {
-        get => notificationPreferences?.IsEnabled ?? false;
-        set
-        {
-            if (notificationPreferences != null)
-            {
-                notificationPreferences.GradesNotifications = value;
-                notificationPreferences.ScheduleNotifications = value;
-                notificationPreferences.CampusNotifications = value;
-                notificationPreferences.NewsNotifications = value;
-            }
-        }
-    }
-
     protected override async Task OnInitializedAsync()
     {
         try
@@ -50,21 +31,12 @@ public partial class Index : ComponentBase
         isLoading = true;
         errorMessage = null;
 
-        Log.Information("LoadNotificationPreferencesAsync gestart");
+        var result = await NotificationPreferencesService.GetUserPreferencesByIdAsync();
 
-        var result = await NotificationPreferencesService.GetByUserIdAsync();
-
-        Log.Information("Result ontvangen: IsSuccess={IsSuccess}, Result={HasValue}",
-            result.IsSuccess, result.Value != null);
 
         if (result.IsSuccess && result.Value?.NotificationPreference != null)
         {
             notificationPreferences = result.Value.NotificationPreference;
-            Log.Information("NotificationPreferences geladen: Grades={Grades}, Schedule={Schedule}, Campus={Campus}, News={News}",
-                notificationPreferences.GradesNotifications,
-                notificationPreferences.ScheduleNotifications,
-                notificationPreferences.CampusNotifications,
-                notificationPreferences.NewsNotifications);
         }
         else
         {
@@ -74,8 +46,6 @@ public partial class Index : ComponentBase
         }
 
         isLoading = false;
-        Log.Information("Loading afgerond: isLoading={IsLoading}, hasPreferences={HasPreferences}",
-            isLoading, notificationPreferences != null);
     }
 
     /// <summary>
@@ -88,6 +58,43 @@ public partial class Index : ComponentBase
 
         switch (fieldName)
         {
+            case nameof(notificationPreferences.IsEnabled):
+                notificationPreferences.IsEnabled = value;
+                if (value)
+                {
+                    var subscribeResult = await NotificationPreferencesService.Subscribe(new PushSubscriptionRequest.Create //Tijdelijk een lege toegevoegd tot er een betere en propere manier word gevonden
+                    {
+                        Endpoint = string.Empty,
+                        Keys = new PushSubscriptionRequest.Keys
+                        {
+                            P256dh = string.Empty,
+                            Auth = string.Empty
+                        }
+                    });
+
+                    if (!subscribeResult.IsSuccess)
+                    {
+                        var error = subscribeResult.Errors.FirstOrDefault() ?? "Onbekende fout";
+                        Log.Warning("Fout bij aanmelden voor push-meldingen: {Error}", error);
+                        errorMessage = error;
+                        notificationPreferences.IsEnabled = false;
+                        return;
+                    }
+                }
+                else
+                {
+                    var unsubscribeResult = await NotificationPreferencesService.Unsubscribe();
+
+                    if (!unsubscribeResult.IsSuccess)
+                    {
+                        var error = unsubscribeResult.Errors.FirstOrDefault() ?? "Onbekende fout";
+                        Log.Warning("Fout bij afmelden voor push-meldingen: {Error}", error);
+                        errorMessage = error;
+                        notificationPreferences.IsEnabled = true;
+                        return;
+                    }
+                }
+                break;
             case nameof(notificationPreferences.GradesNotifications):
                 notificationPreferences.GradesNotifications = value;
                 break;
@@ -139,4 +146,12 @@ public partial class Index : ComponentBase
     {
         NavigationManager.NavigateTo("/account");
     }
+
+    // private void GenerateVapidKey()
+    // {
+    //     var keys = VapidHelper.GenerateVapidKeys();
+    //     Console.WriteLine("Public: " + keys.PublicKey);
+    //     Console.WriteLine("Private: " + keys.PrivateKey);
+
+    // }
 }

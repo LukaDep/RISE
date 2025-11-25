@@ -27,3 +27,5 @@ src/Rise.Server/Rise.db-wal
 output.css
 
 appsettings.Development.json
+
+.env

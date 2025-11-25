@@ -9,10 +9,6 @@
         <link rel="stylesheet" href="css/output.css" />
         <link rel="icon" type="image/png" href="HOGENT-Logo-192.png" />
         <link href="Rise.Client.styles.css" rel="stylesheet" />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        />
         <link rel="manifest" href="manifest.webmanifest" />
         <link
             rel="apple-touch-icon"
@@ -24,24 +20,6 @@
             sizes="512x512"
             href="HOGENT-Logo-512.png"
         />
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker
-                    .register('service-worker.js')
-                    .then(() => console.log('Service Worker Registered'))
-            }
-        </script>
-    </head>
-
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>HOGENT Campus App</title>
-        <base href="/" />
-        <link rel="stylesheet" href="css/app.css" />
-        <link rel="stylesheet" href="css/output.css" />
-        <link rel="icon" type="image/png" href="favicon.png" />
-        <link href="Rise.Client.styles.css" rel="stylesheet" />
         <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
@@ -62,6 +40,7 @@
             <a class="dismiss">🗙</a>
         </div>
         <script src="js/swipeInterop.js"></script>
+        <script src="js/push.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
         <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
         <script src="leafletInterop.js"></script>
@@ -69,5 +48,12 @@
         <script src="https://unpkg.com/gridstack/dist/gridstack-all.js"></script>
         <script src="gridstackInterop.js"></script>
         <script src="_framework/blazor.webassembly.js"></script>
+        <script>
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker
+                    .register('service-worker.js')
+                    .then(() => console.log('Service Worker Registered'))
+            }
+        </script>
     </body>
 </html>

@@ -35,6 +35,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<Resto> Restos => Set<Resto>();
     public DbSet<NotificationPreferences> NotificationPreferences => Set<NotificationPreferences>();
     public DbSet<StudentCard> StudentCards => Set<StudentCard>();
+    public DbSet<PushSubscriptions> PushSubscriptions => Set<PushSubscriptions>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {

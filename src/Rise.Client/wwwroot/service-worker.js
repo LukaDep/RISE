@@ -8,6 +8,16 @@ self.addEventListener('activate', (event) => {
 })
 
 self.addEventListener('fetch', (event) => {
+    // Only cache http/https requests
+    if (!event.request.url.startsWith('http')) {
+        return
+    }
+
+    // Only cache GET requests (Cache API doesn't support POST, PUT, etc.)
+    if (event.request.method !== 'GET') {
+        return
+    }
+
     event.respondWith(
         fetch(event.request)
             .then((networkResponse) => {
@@ -25,5 +35,12 @@ self.addEventListener('fetch', (event) => {
                     }
                 })
             })
+    )
+})
+
+self.addEventListener('push', (event) => {
+    const data = event.data?.json() || {}
+    event.waitUntil(
+        self.registration.showNotification(data.title, { body: data.body })
     )
 })

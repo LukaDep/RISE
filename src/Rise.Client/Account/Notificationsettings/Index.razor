@@ -6,6 +6,10 @@
 <PageTitle>@L["Account_NotificationSettings"]</PageTitle>
 
 <div class="min-h-screen bg-gray-50 pb-8">
+
+
+
+
   <div class="sticky top-0 z-40 bg-white border-b border-gray-200">
     <div class="flex items-center gap-3 px-4 py-4">
       <button @onclick="GoBack" class="p-2 -ml-2 hover:bg-gray-100 rounded-lg transition-colors">
@@ -17,7 +21,9 @@
       <h1 class="text-xl font-semibold text-gray-900">@L["Notifications.Title"]</h1>
     </div>
   </div>
-
+  @* <button @onclick="GenerateVapidKey" class="border-2">
+    Genereer een vapidkey pair
+  </button> *@
   <div class="max-w-2xl mx-auto px-4 pt-6 pb-24 space-y-4">
 
     @if (isLoading)
@@ -62,7 +68,8 @@
               </div>
             </div>
             <div class="flex-shrink-0">
-              <Toggle @bind-Value="IsEnabled" />
+              <Toggle Value="notificationPreferences.IsEnabled"
+                ValueChanged="@(v => OnNotificationChanged(nameof(notificationPreferences.IsEnabled), v))" />
             </div>
           </div>
         </div>
