@@ -49,7 +49,7 @@ internal class CampusConfiguration : EntityConfiguration<Domain.Campus.Campus>
                 v => string.IsNullOrWhiteSpace(v)
                     ? new List<string>()
                     : JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null) ?? new List<string>())
-            .HasColumnType("json");
+            .HasColumnType("TEXT");
 
         // Configure one-to-many relationship with Building
         builder.HasMany(x => x.Buildings)

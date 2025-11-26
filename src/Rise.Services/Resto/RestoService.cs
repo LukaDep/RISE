@@ -15,21 +15,8 @@ public class RestoService(ApplicationDbContext dbContext) : IRestoService
     {
         var query = dbContext.Restos.AsQueryable();
 
-
-        // Basic search
-        if (!string.IsNullOrWhiteSpace(req.SearchTerm))
-        {
-            var term = req.SearchTerm.Trim();
-            query = query.Where(i => (i.Name ?? string.Empty).Contains(term)
-                                  || (i.Description ?? string.Empty).Contains(term)
-                                  || (i.KitchenType != null && i.KitchenType.Any(type => type.Contains(term))));
-        }
-
-        // Paging
-        // var paged = items.Skip(Math.Max(0, req.Skip)).Take(req.Take <= 0 ? 20 : req.Take).ToList();
-        var restos = await query.AsNoTracking()
-            .Skip(req.Skip)
-            .Take(req.Take)
+        // Get all restos (we'll filter client-side to support KitchenType search)
+        var allRestos = await query.AsNoTracking()
             .Select(r => new RestoDto.Index
             {
                 Id = r.Id,
@@ -43,6 +30,20 @@ public class RestoService(ApplicationDbContext dbContext) : IRestoService
                 Email = r.Email,
                 ImageUrl = r.ImageUrl,
             }).ToListAsync(ct);
+
+        // Apply search filter client-side (supports KitchenType JSON array search for SQLite compatibility)
+        if (!string.IsNullOrWhiteSpace(req.SearchTerm))
+        {
+            var term = req.SearchTerm.Trim();
+            allRestos = allRestos.Where(r => 
+                (r.Name ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
+                || (r.Description ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
+                || (r.KitchenType != null && r.KitchenType.Any(type => type.Contains(term, StringComparison.OrdinalIgnoreCase)))
+            ).ToList();
+        }
+
+        // Apply paging after filtering
+        var restos = allRestos.Skip(req.Skip).Take(req.Take).ToList();
 
         return Result.Success(new RestoResponse.Index { Restos = restos });
 

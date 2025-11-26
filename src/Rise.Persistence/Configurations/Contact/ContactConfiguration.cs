@@ -31,11 +31,11 @@ internal class ContactConfiguration : EntityConfiguration<Domain.Contact.Contact
         builder.Property(x => x.ContactPerson)
             .HasMaxLength(250);
 
-        // Configure Campusses as JSON column
+        // Configure Campusses as JSON column (TEXT for SQLite compatibility)
         builder.Property(x => x.Campusses)
             .HasConversion(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
                 v => JsonSerializer.Deserialize<IEnumerable<string>>(v, (JsonSerializerOptions?)null))
-            .HasColumnType("json");
+            .HasColumnType("TEXT");
     }
 }

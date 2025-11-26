@@ -1,3 +1,4 @@
+
 /*
 using Rise.Domain.Products;
 
@@ -55,5 +56,4 @@ public class ProductShould
         act.ShouldThrow<ArgumentException>();
     }
 }
-
 */

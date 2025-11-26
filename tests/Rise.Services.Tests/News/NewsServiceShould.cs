@@ -4,6 +4,7 @@ using Rise.Domain.News;
 using Rise.Persistence;
 using Rise.Services.News;
 using Rise.Shared.Common;
+using Rise.Services.Tests.TestInfrastructure;
 
 namespace Rise.Services.Tests.News;
 
@@ -12,12 +13,9 @@ public class NewsServiceShould
     [Fact]
     public async Task GetIndexAsyncShouldReturnSuccessWithValidData()
     {
-        // Arrange
-        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: nameof(GetIndexAsyncShouldReturnSuccessWithValidData)) // Do NOT use InMemoryDatabase... it's not reliable. Use a real database and come up with a strategy to clean up the database between tests.
-            .Options;
-
-        using var dbContext = new ApplicationDbContext(options);
+        // Arrange - each test gets its own fixture for isolation
+        using var fixture = new SqliteTestFixture();
+        using var dbContext = fixture.CreateContext();
 
         dbContext.NewsArticles.AddRange(
             new NewsArticle
@@ -76,12 +74,9 @@ public class NewsServiceShould
     [Fact]
     public async Task GetIndexAsyncWithSearchShouldReturnSuccessWithValidData()
     {
-        // Arrange
-        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: nameof(GetIndexAsyncWithSearchShouldReturnSuccessWithValidData)) // Do NOT use InMemoryDatabase... it's not reliable. Use a real database and come up with a strategy to clean up the database between tests.
-            .Options;
-
-        using var dbContext = new ApplicationDbContext(options);
+        // Arrange - each test gets its own fixture for isolation
+        using var fixture = new SqliteTestFixture();
+        using var dbContext = fixture.CreateContext();
 
         dbContext.NewsArticles.AddRange(
             new NewsArticle
@@ -142,12 +137,9 @@ public class NewsServiceShould
     [Fact]
     public async Task GetByIdAsyncWithSearchShouldReturnSuccessWithValidData()
     {
-        // Arrange
-        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: nameof(GetByIdAsyncWithSearchShouldReturnSuccessWithValidData)) // Do NOT use InMemoryDatabase... it's not reliable. Use a real database and come up with a strategy to clean up the database between tests.
-            .Options;
-
-        using var dbContext = new ApplicationDbContext(options);
+        // Arrange - each test gets its own fixture for isolation
+        using var fixture = new SqliteTestFixture();
+        using var dbContext = fixture.CreateContext();
 
         var newsArticle = new NewsArticle
         {

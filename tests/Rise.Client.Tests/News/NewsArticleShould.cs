@@ -13,42 +13,40 @@ public class NewsArticleShould : TestContext
     }
 
     [Fact]
-    public void RendersNewsArticleDetails()
-    {
-        // Arrange: get the first news item's ID from the fake service
-        var newsId = _fakeNewsService.GetFirstNewsItemId();
+public void RendersNewsArticleDetails()
+{
+    var existingId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
 
-        // Act: render the article for the existing ID
-        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, newsId));
+    var cut = RenderComponent<NewsArticle>(parameters =>
+        parameters.Add(p => p.Id, existingId));
 
-        // Assert title and content are present
-        Assert.Contains("Campus reopens", cut.Markup);
-        Assert.Contains("We are happy to announce the campus reopens.", cut.Markup);
+    Assert.Contains("Campus reopens", cut.Markup);
+    Assert.Contains("We are happy to announce the campus reopens.", cut.Markup);
+    Assert.Contains("Admin", cut.Markup);
 
-        // Assert author is present
-        Assert.Contains("Admin", cut.Markup);
+    var img = cut.Find("img");
+    Assert.Equal("Campus reopens", img.GetAttribute("alt"));
 
-        // Assert image alt uses the title
-        var img = cut.Find("img");
-        Assert.Equal("Campus reopens", img.GetAttribute("alt"));
+    var backLink = cut.FindAll("a[href='/news']");
+    Assert.NotEmpty(backLink);
+}
 
-        // Assert there's a back link to the news overview
-        var backLink = cut.FindAll("a[href='/news']");
-        Assert.NotEmpty(backLink);
-    }
 
     [Fact]
-    public void NonExistentIdShowsErrorMessage()
-    {
-        // Arrange: use a random non-existent GUID
-        var nonExistentId = Guid.CreateVersion7();
+public void NonExistentIdShowsErrorMessage()
+{
+    // A GUID guaranteed not to exist in FakeNewsService
+    var nonExistingId = new Guid("99999999-9999-9999-9999-999999999999");
 
-        // Act: render the article for a non-existent Id
-        var cut = RenderComponent<NewsArticle>(parameters => parameters.Add(p => p.Id, nonExistentId));
+    // Render the component
+    var cut = RenderComponent<NewsArticle>(parameters =>
+        parameters.Add(p => p.Id, nonExistingId));
 
-        // Assert that an error message is displayed
-        Assert.Contains($"News item with id {nonExistentId} not found.", cut.Markup);
-        // And that it's styled as an error (red text)
-        Assert.Contains("text-red-500", cut.Markup);
-    }
+    // Verify the error message
+    Assert.Contains($"News item with id {nonExistingId} not found.", cut.Markup);
+
+    // Verify error styling
+    Assert.Contains("text-red-500", cut.Markup);
+}
+
 }

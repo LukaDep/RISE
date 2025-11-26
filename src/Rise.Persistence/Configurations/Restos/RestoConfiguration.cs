@@ -32,19 +32,19 @@ internal class RestoConfiguration : EntityConfiguration<Resto>
         builder.Property(x => x.ImageUrl)
             .HasMaxLength(500);
 
-        // Configure OpeningHours as JSON column
+        // Configure OpeningHours as JSON column (TEXT for SQLite compatibility)
         builder.Property(x => x.OpeningHours)
             .HasConversion(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
                 v => JsonSerializer.Deserialize<Dictionary<DayOfWeek, string>>(v, (JsonSerializerOptions?)null))
-            .HasColumnType("json");
+            .HasColumnType("TEXT");
 
-        // Configure KitchenType as JSON column
+        // Configure KitchenType as JSON column (TEXT for SQLite compatibility)
         builder.Property(x => x.KitchenType)
             .HasConversion(
                 v => JsonSerializer.Serialize(v, (JsonSerializerOptions?)null),
                 v => JsonSerializer.Deserialize<List<string>>(v, (JsonSerializerOptions?)null))
-            .HasColumnType("json");
+            .HasColumnType("TEXT");
     }
 
 }

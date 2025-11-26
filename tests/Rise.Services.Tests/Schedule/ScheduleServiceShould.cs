@@ -3,33 +3,81 @@ using Ardalis.Result;
 using Microsoft.EntityFrameworkCore;
 using Rise.Services.Schedule;
 using Rise.Shared.Common;
-using Rise.Persistence;
+using Rise.Services.Tests.TestInfrastructure;
 
 namespace Rise.Services.Tests.Schedule;
 
 public class ScheduleServiceShould
 {
+    private static IDisposable UseWorkingDirectory(string path)
+    {
+        var prev = Directory.GetCurrentDirectory();
+        Directory.SetCurrentDirectory(path);
+        return new ResetDir(prev);
+    }
+
+    private sealed class ResetDir(string prev) : IDisposable
+    {
+        public void Dispose() => Directory.SetCurrentDirectory(prev);
+    }
+
     [Fact]
     public async Task GetIndexAsyncShouldReturnSuccessWithValidData()
     {
-        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
-            .UseInMemoryDatabase(databaseName: nameof(GetIndexAsyncShouldReturnSuccessWithValidData))
-            .Options;
-        using var dbContext = new ApplicationDbContext(options);
-
-        var service = new MockScheduleService(dbContext);
-        var request = new QueryRequest.SkipTake { Skip = 0, Take = 10 };
-
-        var result = await service.GetIndexAsync(request, CancellationToken.None);
-
-        if (result.IsSuccess)
+        // Arrange: create temp mock data file at ..\Rise.Services\Schedule\MockData\ScheduleMockdata.json
+        var tempRoot = Directory.CreateTempSubdirectory();
+        try
         {
-            result.Value.ShouldNotBeNull();
-            result.Value.Schedules.ShouldNotBeNull();
+            var cwd = Path.Combine(tempRoot.FullName, "cwd");
+            Directory.CreateDirectory(cwd);
+            var mockDir = Path.Combine(tempRoot.FullName, "Rise.Services", "Schedule", "MockData");
+            Directory.CreateDirectory(mockDir);
+
+            var mockData = new
+            {
+                columnheaders = new[] { "Olod", "Werkvorm", "Onderwerp", "Info werkvorm", "Leer- of toetsomgeving", "Lokaal", "Lesgever" },
+                info = new { schedulelimit = 1000, schedulecount = 1 },
+                schedules = new[]
+                {
+                    new
+                    {
+                        id = "sched-001",
+                        startdate = "01-09-2025",
+                        starttime = "08:30",
+                        enddate = "01-09-2025",
+                        endtime = "10:30",
+                        columns = new[] { "Web Ontwikkeling 2", "Hoorcollege", "", "", "Digitaal (laptop/PC)", "GSCHB.2.009", "Bert Van Vreckem" }
+                    }
+                }
+            };
+            var json = JsonSerializer.Serialize(mockData);
+            var filePath = Path.Combine(mockDir, "ScheduleMockdata.json");
+            await File.WriteAllTextAsync(filePath, json);
+
+            using var _ = UseWorkingDirectory(cwd); // so ..\Rise.Services\Schedule\MockData resolves into tempRoot
+            using var fixture = new SqliteTestFixture();
+            using var dbContext = fixture.CreateContext();
+            var service = new MockScheduleService(dbContext);
+            var request = new QueryRequest.SkipTake { Skip = 0, Take = 10 };
+
+            // Act
+            var result = await service.GetIndexAsync(request, CancellationToken.None);
+
+            // Assert
+            if (result.IsSuccess)
+            {
+                result.Value.ShouldNotBeNull();
+                result.Value.Schedules.ShouldNotBeNull();
+                result.Value.Schedules.Count.ShouldBeGreaterThan(0);
+            }
+            else
+            {
+                result.Status.ShouldBe(ResultStatus.NotFound);
+            }
         }
-        else
+        finally
         {
-            result.Status.ShouldBe(ResultStatus.NotFound);
+            tempRoot.Delete(recursive: true);
         }
     }
 
