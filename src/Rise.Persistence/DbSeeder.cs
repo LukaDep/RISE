@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Rise.Domain.Absences;
 using Rise.Domain.Campus;
 using Rise.Domain.Contact;
+using Rise.Domain.Events;
 using Rise.Domain.Grades;
 using Rise.Domain.Menu;
 using Rise.Domain.News;
@@ -28,6 +29,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await AbsencesAsync();
         await CampusesAsync();
         await ContactsAsync();
+        await EventsAsync();
         await GradesAsync();
         await RestosAndMenusAsync();
     }
@@ -478,6 +480,147 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
+
+    private async Task EventsAsync()
+    {
+        if (dbContext.Events.Any())
+            return;
+
+        dbContext.Events.AddRange(
+            new Event
+            {
+                Title = "Social Run & Brunch",
+                StartDateTime = DateTime.Parse("2025-11-19 09:30"),
+                EndDateTime = DateTime.Parse("2025-11-19 11:30"),
+                Location = "Campus Schoonmeersen, Valentin Vaerwyckweg 1, 9000 Gent",
+                RegistrationLink = "https://events.hogent.be/social-run-brunch",
+                Type = "Andere",
+                Description = "Sluit je aan voor een gezellige social run. Na de run genieten we van een heerlijke brunch. Iedereen welkom. (EN: Join our social run — run at your pace and enjoy brunch afterwards.)"
+            },
+            new Event
+            {
+                Title = "Training Omstaander Grensoverschrijdend Gedrag",
+                StartDateTime = DateTime.Parse("2025-11-19 18:00"),
+                EndDateTime = DateTime.Parse("2025-11-19 20:00"),
+                Location = "Campus St.-Niklaas, Grote Markt 1, 9100 Sint-Niklaas",
+                RegistrationLink = "https://events.hogent.be/omstaander-gg",
+                Type = "Andere",
+                Description = "Een interactieve training waarin studenten leren hoe ze grensoverschrijdend gedrag herkennen en hoe ze als omstaander veilig kunnen ingrijpen."
+            },
+            new Event
+            {
+                Title = "Workshop Salsa Cubana",
+                StartDateTime = DateTime.Parse("2025-11-20 14:30"),
+                EndDateTime = DateTime.Parse("2025-11-20 16:00"),
+                Location = "Danszaal 2, sporthal HOGENT, Valentin Vaerwyckweg 1, 9000 Gent, België",
+                RegistrationLink = "https://events.hogent.be/salsa-cubana",
+                Type = "Welzijn",
+                Description = "Onderdeel van 'Goed in je vel'. Een energieke en ontspannende workshop. Iedereen welkom."
+            },
+            new Event
+            {
+                Title = "Workshop Bachata Moderna",
+                StartDateTime = DateTime.Parse("2025-11-20 16:00"),
+                EndDateTime = DateTime.Parse("2025-11-20 17:30"),
+                Location = "Danszaal 2, sporthal HOGENT, Valentin Vaerwyckweg 1, 9000 Gent, België",
+                RegistrationLink = "https://events.hogent.be/bachata-moderna",
+                Type = "Welzijn",
+                Description = "Onderdeel van 'Goed in je vel'. Leer moderne bachata-moves in een warme sfeer."
+            },
+            new Event
+            {
+                Title = "Workshop Zelfverdediging",
+                StartDateTime = DateTime.Parse("2025-11-20 19:00"),
+                EndDateTime = DateTime.Parse("2025-11-20 21:00"),
+                Location = "Sporthal, Watersportlaan 4, 9000 Gent, België",
+                RegistrationLink = "https://events.hogent.be/zelfverdediging",
+                Type = "Welzijn",
+                Description = "Praktische training waarin je technieken leert om je zelfvertrouwen en fysieke weerbaarheid te versterken."
+            },
+            new Event
+            {
+                Title = "Live met Doorbreekbaar: stress, zelfzorg, moodboosters",
+                StartDateTime = DateTime.Parse("2025-11-21 12:00"),
+                EndDateTime = DateTime.Parse("2025-11-21 13:00"),
+                Location = "ONLINE",
+                RegistrationLink = "https://events.hogent.be/doorbreekbaar-live-online",
+                Type = "Welzijn",
+                Description = "Inspirerende live sessie rond mentaal welzijn met praktische tips en tools."
+            },
+            new Event
+            {
+                Title = "Sportquiz",
+                StartDateTime = DateTime.Parse("2026-02-23 19:00"),
+                EndDateTime = DateTime.Parse("2026-02-23 21:00"),
+                Location = "Campus Aalst, Arbeidstraat 14, 9300 Aalst",
+                RegistrationLink = "https://events.hogent.be/sportquiz",
+                Type = "Andere",
+                Description = "Een leuke en competitieve sportquiz voor teams van studenten."
+            },
+            new Event
+            {
+                Title = "Dodgeball Tornooi",
+                StartDateTime = DateTime.Parse("2026-03-23 15:00"),
+                EndDateTime = DateTime.Parse("2026-03-23 17:00"),
+                Location = "Campus Schoonmeersen, Sporthal, Valentin Vaerwyckweg 1, 9000 Gent",
+                RegistrationLink = "https://events.hogent.be/dodgeball-tornooi",
+                Type = "Andere",
+                Description = "Een actief en spannend dodgeballtoernooi voor alle studenten."
+            },
+            new Event
+            {
+                Title = "Introvert in een extraverte wereld",
+                StartDateTime = DateTime.Parse("2025-11-24 15:30"),
+                EndDateTime = DateTime.Parse("2025-11-24 17:00"),
+                Location = "Lange Steenstraat 16-18, 9000 Gent, België",
+                RegistrationLink = "https://events.hogent.be/introvert-extraverte-wereld",
+                Type = "Welzijn",
+                Description = "Workshop die introverte studenten ondersteunt in het omgaan met sociale verwachtingen."
+            },
+            new Event
+            {
+                Title = "Zelfliefde",
+                StartDateTime = DateTime.Parse("2025-12-15 09:30"),
+                EndDateTime = DateTime.Parse("2025-12-15 11:00"),
+                Location = "Lange Steenstraat 16-18, 9000 Gent, Belgium",
+                RegistrationLink = "https://events.hogent.be/zelfliefde",
+                Type = "Welzijn",
+                Description = "Een warme sessie die focust op zelfwaarde, mildheid en persoonlijke groei."
+            },
+            new Event
+            {
+                Title = "Hoe weet ik wat ik écht wil?",
+                StartDateTime = DateTime.Parse("2025-12-15 12:30"),
+                EndDateTime = DateTime.Parse("2025-12-15 14:00"),
+                Location = "Lange Steenstraat 16-18, 9000 Gent, Belgium",
+                RegistrationLink = "https://events.hogent.be/wat-ik-echt-wil",
+                Type = "Welzijn",
+                Description = "Workshop die inzicht biedt in motivatie, keuzes en richting vinden."
+            },
+            new Event
+            {
+                Title = "Zelfzorg tijdens de examens",
+                StartDateTime = DateTime.Parse("2025-12-15 19:00"),
+                EndDateTime = DateTime.Parse("2025-12-15 20:30"),
+                Location = "Lange Steenstraat 16-18, 9000 Gent, Belgium",
+                RegistrationLink = "https://events.hogent.be/zelfzorg-examens",
+                Type = "Welzijn",
+                Description = "Praktische begeleiding voor gezonde stressreductie tijdens de examenperiode."
+            },
+            new Event
+            {
+                Title = "Wake-upcall: verhoog je efficiëntie, je levensenthousiasme en je kracht!",
+                StartDateTime = DateTime.Parse("2025-12-18 10:30"),
+                EndDateTime = DateTime.Parse("2025-12-18 11:30"),
+                Location = "ONLINE",
+                RegistrationLink = "https://events.hogent.be/wake-upcall-online",
+                Type = "Welzijn",
+                Description = "Online sessie die je helpt je energie, motivatie en efficiëntie te verhogen."
+            }
+        );
+
+        await dbContext.SaveChangesAsync();
+    }
     private async Task GradesAsync()
     {
         if (dbContext.Grades.Any())
@@ -1160,6 +1303,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
 
             dbContext.Menus.AddRange(menus);
             await dbContext.SaveChangesAsync();
+
+
         }
+
+
     }
 }

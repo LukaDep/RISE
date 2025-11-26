@@ -20,6 +20,9 @@ using Rise.Services.Notifications;
 using Rise.Shared.Notifications;
 using Rise.Shared.Schedule;
 using Rise.Shared.StudentCards;
+using System.ComponentModel.Design;
+using Rise.Shared.Events;
+using Rise.Services.Events;
 
 namespace Rise.Services;
 
@@ -37,6 +40,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IGradesService, GradesService>();
         services.AddScoped<INotificationPreferencesService, NotificationPreferencesService>();
         services.AddScoped<IStudentCardService, StudentCardService>();
+        services.AddScoped<IEventService, EventService>();
         services.AddTransient<DbSeeder>();
         return services;
     }

@@ -1,0 +1,38 @@
+﻿@page "/events"
+@using Rise.Client.EventCalendar.Components
+@using Rise.Client.Components
+@inject IStringLocalizer<SharedResources> L
+
+<div>
+	<div class="flex items-center justify-between p-6">
+    
+        <!-- Title -->
+        <h3 class="text-4xl font-bold">@L["EventCalendar.Title"]</h3>
+
+    </div>
+
+    <EventMonthView Events=events?.ToList()
+					SelectedDate="DateTime.Today" />
+
+    <FilterLabels 
+        Filters=types />
+
+    @if (events != null)
+    {
+        foreach (var specificEvent in events)
+        {
+            <EventCard 
+                specificEvent=specificEvent
+                OnClick="() => ShowDetails(specificEvent)" />
+        }
+    }
+    
+    @if (SelectedEvent != null)
+    {
+        <EventCardDetails
+            specificEvent=SelectedEvent
+            OnClose="CloseDetails" />
+    }
+
+</div>
+

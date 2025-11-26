@@ -10,6 +10,7 @@ using Rise.Domain.News;
 using Rise.Domain.Notifications;
 using Rise.Domain.Restos;
 using Rise.Domain.StudentCards;
+using Rise.Domain.Events;
 
 namespace Rise.Persistence;
 
@@ -35,6 +36,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<Resto> Restos => Set<Resto>();
     public DbSet<NotificationPreferences> NotificationPreferences => Set<NotificationPreferences>();
     public DbSet<StudentCard> StudentCards => Set<StudentCard>();
+    public DbSet<Event> Events => Set<Event>();
     public DbSet<PushSubscriptions> PushSubscriptions => Set<PushSubscriptions>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)

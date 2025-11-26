@@ -1,0 +1,37 @@
+﻿@using System.Collections.Generic
+@inject IStringLocalizer<SharedResources> L
+<div
+    class="border-hogent-black-15 bg-hogent-white z-1 m-4 flex min-h-40 cursor-pointer items-center rounded-xl border-4 p-4 shadow transition"
+    @onclick="OnClick"
+    >
+    <div class="z-2 flex flex-col gap-2">
+        <div class="flex flex-row gap-3">
+            <!-- Content -->
+            <div class="flex flex-1 flex-col justify-center">
+                <h3 class="text-hogent-black text-lg font-bold">@specificEvent.Name</h3>
+                <p class="text-hogent-black-50 text-sm">@(
+                    specificEvent.Description.Length > 50
+                        ? specificEvent.Description.Substring(0, 50) + "..."
+                        : specificEvent.Description
+                )</p>
+            </div>
+        </div>
+
+
+        <!-- Toon contact knoppen -->
+        <span class="flex gap-2">
+            @if(specificEvent.RegistrationLink != null){
+                <a href="@specificEvent.RegistrationLink"
+                   class="bg-hogent-education-100 inline-flex items-center rounded px-3 py-1 text-white transition hover:opacity-90"
+                   @onclick:stopPropagation="true">
+                    <i class="fa fa-external-link mr-1" aria-hidden="true"></i>
+                    @L["EventCard.register"]
+                </a>
+            }
+
+
+        </span>
+
+    </div>
+
+</div>

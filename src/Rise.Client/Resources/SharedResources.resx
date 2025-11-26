@@ -131,7 +131,6 @@
   </data>
   <data name="Schedule.Title" xml:space="preserve">
     <value>Schedule</value>
-    <comment/>
   </data>
   <data name="Schedule.Week" xml:space="preserve">
     <value>Week</value>
@@ -141,11 +140,9 @@
   </data>
   <data name="Schedule.ToToday" xml:space="preserve">
     <value>Go to today </value>
-    <comment/>
   </data>
   <data name="Schedule.Today" xml:space="preserve">
     <value>Today </value>
-    <comment/>
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Previous</value>
@@ -179,55 +176,42 @@
   </data>
   <data name="Schedule.Test" xml:space="preserve">
     <value>Test</value>
-    <comment/>
   </data>
   <data name="Schedule.Close" xml:space="preserve">
     <value>Close</value>
-    <comment/>
   </data>
   <data name="Schedule.Type" xml:space="preserve">
     <value>Type</value>
-    <comment/>
   </data>
   <data name="Schedule.Course" xml:space="preserve">
     <value>Course</value>
-    <comment/>
   </data>
   <data name="Schedule.Note" xml:space="preserve">
     <value>Note</value>
-    <comment/>
   </data>
   <data name="Schedule.Campus" xml:space="preserve">
     <value>Campus</value>
-    <comment/>
   </data>
   <data name="Schedule.Monday" xml:space="preserve">
     <value>Mon</value>
-    <comment/>
   </data>
   <data name="Schedule.Tuesday" xml:space="preserve">
     <value>Tue</value>
-    <comment/>
   </data>
   <data name="Schedule.Wednesday" xml:space="preserve">
     <value>Wed</value>
-    <comment/>
   </data>
   <data name="Schedule.Thursday" xml:space="preserve">
     <value>Thu</value>
-    <comment/>
   </data>
   <data name="Schedule.Friday" xml:space="preserve">
     <value>Fri</value>
-    <comment/>
   </data>
   <data name="Schedule.Saturday" xml:space="preserve">
     <value>Sat</value>
-    <comment/>
   </data>
   <data name="Schedule.Sunday" xml:space="preserve">
     <value>Sun</value>
-    <comment/>
   </data>
   <data name="News.Title" xml:space="preserve">
     <value>News</value>
@@ -330,7 +314,6 @@
   </data>
   <data name="Schedule.Absent" xml:space="preserve">
     <value>Absent</value>
-    <comment/>
   </data>
   <data name="Resto.Title" xml:space="preserve">
     <value>Restaurants</value>
@@ -347,7 +330,7 @@
   <data name="Resto.Closed" xml:space="preserve">
     <value>Closed</value>
   </data>
-   <data name="Resto.OpensAt" xml:space="preserve">
+  <data name="Resto.OpensAt" xml:space="preserve">
     <value>Opens at</value>
   </data>
   <data name="Resto.ClosesAt" xml:space="preserve">
@@ -391,15 +374,12 @@
   </data>
   <data name="Day.Sunday" xml:space="preserve">
     <value>Sunday</value>
-    <comment/>
   </data>
   <data name="News.LoadMore" xml:space="preserve">
     <value>Read more</value>
-    <comment/>
   </data>
   <data name="News.Count" xml:space="preserve">
     <value>of</value>
-    <comment/>
   </data>
   <data name="Grades.Title" xml:space="preserve">
     <value>My Grades</value>
@@ -478,139 +458,102 @@
   </data>
   <data name="Contact.Mail" xml:space="preserve">
     <value>Mail</value>
-    <comment/>
-  </data>
-  <data name="Resto.BackShort" xml:space="preserve">
-    <value>Back</value>
-    <comment/>
   </data>
   <data name="Account.Calendar" xml:space="preserve">
     <value>Calendar</value>
-    <comment/>
   </data>
-   <data name="Account.Absences" xml:space="preserve">
+  <data name="Account.Absences" xml:space="preserve">
     <value>Submit your absence</value>
-    <comment/>
   </data>
   <data name="Account.Grades" xml:space="preserve">
     <value>Grades</value>
-    <comment/> 
   </data>
-    <data name="Account.Notifications" xml:space="preserve">
+  <data name="Account.Notifications" xml:space="preserve">
     <value>Notifications</value>
-    <comment/>
   </data>
   <data name="Auth.LogoutTitle" xml:space="preserve">
     <value>Logout</value>
-    <comment/>
   </data>
   <data name="Auth.LoggingOut" xml:space="preserve">
     <value>Logging you out...</value>
-    <comment/>
   </data>
   <data name="Auth.Redirecting" xml:space="preserve">
     <value>You are being redirected...</value>
-    <comment/>
   </data>
   <data name="Counter.Title" xml:space="preserve">
     <value>Counter</value>
-    <comment/>
   </data>
   <data name="Counter.CurrentCount" xml:space="preserve">
     <value>Current count: {0}</value>
-    <comment/>
   </data>
   <data name="Counter.ClickMe" xml:space="preserve">
     <value>Click me</value>
-    <comment/>
   </data>
   <data name="Home.AuthenticatedMessage" xml:space="preserve">
     <value>Hello, {0}! You're authenticated, so you can see this page that shows your claims.</value>
-    <comment/>
   </data>
   <data name="Home.PrivateAdministratorPage" xml:space="preserve">
     <value>Private Administrator Page</value>
-    <comment/>
   </data>
   <data name="Roles.Administrator" xml:space="preserve">
     <value>Administrator</value>
-    <comment/>
   </data>
   <data name="Campus.Title" xml:space="preserve">
     <value>Campuses</value>
-    <comment/>
   </data>
   <data name="Campus.Loading" xml:space="preserve">
     <value>Campuses are loading...</value>
-    <comment/>
   </data>
   <data name="Campus.SearchPlaceholder" xml:space="preserve">
     <value>Search term</value>
-    <comment/>
   </data>
   <data name="Campus.MapButton" xml:space="preserve">
     <value>Campus map</value>
-    <comment/>
   </data>
   <data name="Campus.LocationLabel" xml:space="preserve">
     <value>Location:</value>
-    <comment/>
   </data>
   <data name="Campus.ContactPhoneLabel" xml:space="preserve">
     <value>Phone:</value>
-    <comment/>
   </data>
   <data name="Campus.WebsiteLabel" xml:space="preserve">
     <value>Website:</value>
-    <comment/>
   </data>
   <data name="Campus.DescriptionLabel" xml:space="preserve">
     <value>Description:</value>
-    <comment/>
   </data>
   <data name="Campus.FacilitiesLabel" xml:space="preserve">
     <value>Facilities:</value>
-    <comment/>
   </data>
   <data name="Schedule.Room" xml:space="preserve">
     <value>Room:</value>
-    <comment/>
   </data>
   <data name="Schedule.Teacher" xml:space="preserve">
     <value>Teacher:</value>
-    <comment/>
   </data>
   <data name="Schedule.Environment" xml:space="preserve">
     <value>Environment:</value>
-    <comment/>
   </data>
   <data name="Products.CreateNew" xml:space="preserve">
     <value>Create a new product</value>
-    <comment/>
   </data>
   <data name="Products.NamePlaceholder" xml:space="preserve">
     <value>Name</value>
-    <comment/>
   </data>
   <data name="Products.DescriptionPlaceholder" xml:space="preserve">
     <value>Description</value>
-    <comment/>
   </data>
   <data name="Common.Reset" xml:space="preserve">
     <value>Reset</value>
-    <comment/>
   </data>
   <data name="Campus.PlanLoading" xml:space="preserve">
     <value>Campus loading...</value>
-    <comment/>
   </data>
   <data name="Campus.BackToCampuses" xml:space="preserve">
     <value>Back</value>
-    <comment/>
   </data>
   <data name="Common.NotFoundTitle" xml:space="preserve">
     <value>Not found</value>
-    <comment/>
   </data>
   <data name="News.Filter.All" xml:space="preserve">
     <value>All</value>
@@ -622,97 +565,84 @@
     <value>This week</value>
   </data>
   <data name="News.Filter.Month" xml:space="preserve">
-    <value>This month</value>  </data>
+    <value>This month</value>
+  </data>
   <data name="Navigation.Home" xml:space="preserve">
     <value>Home</value>
-    <comment/>
   </data>
   <data name="Navigation.News" xml:space="preserve">
     <value>News</value>
-    <comment/>
   </data>
   <data name="Navigation.Campus" xml:space="preserve">
     <value>Campus</value>
-    <comment/>
   </data>
   <data name="Navigation.Schedule" xml:space="preserve">
     <value>Schedule</value>
-    <comment/>
   </data>
   <data name="Navigation.Account" xml:space="preserve">
     <value>Account</value>
-    <comment/>
   </data>
   <data name="Navigation.Resto" xml:space="preserve">
     <value>Resto</value>
-    <comment/>
   </data>
   <data name="Navigation.Login" xml:space="preserve">
     <value>Login</value>
-    <comment/>
   </data>
   <data name="Account_NotificationSettings" xml:space="preserve">
     <value>Account | Notification Settings</value>
-    <comment/>
   </data>
   <data name="Notifications.Title" xml:space="preserve">
     <value>Notifications</value>
-    <comment/>
   </data>
   <data name="Notifications.PushSection" xml:space="preserve">
     <value>Push notifications</value>
-    <comment/>
   </data>
   <data name="Notifications.PushDescription" xml:space="preserve">
     <value>Messages on your device</value>
-    <comment/>
   </data>
   <data name="Notifications.IsEnabled" xml:space="preserve">
     <value>All notifications</value>
-    <comment/>
   </data>
   <data name="Notifications.IsEnabledDescription" xml:space="preserve">
     <value>Enable all notifications</value>
-    <comment/>
   </data>
   <data name="Notifications.Grades" xml:space="preserve">
     <value>Grades and results</value>
-    <comment/>
   </data>
   <data name="Notifications.GradesDescription" xml:space="preserve">
     <value>New grades available</value>
-    <comment/>
   </data>
   <data name="Notifications.Schedule" xml:space="preserve">
     <value>Schedule changes</value>
-    <comment/>
   </data>
   <data name="Notifications.ScheduleDescription" xml:space="preserve">
     <value>Changes to your schedule</value>
-    <comment/>
   </data>
   <data name="Notifications.Campus" xml:space="preserve">
     <value>Campus events</value>
-    <comment/>
   </data>
   <data name="Notifications.CampusDescription" xml:space="preserve">
     <value>Campus updates</value>
-    <comment/>
   </data>
   <data name="Notifications.News" xml:space="preserve">
     <value>News and announcements</value>
-    <comment/>
   </data>
   <data name="Notifications.NewsDescription" xml:space="preserve">
     <value>Messages from the school</value>
-    <comment/>
   </data>
   <data name="Notifications.InformationSection" xml:space="preserve">
     <value>Information</value>
-    <comment/>
   </data>
   <data name="Notifications.InformationText" xml:space="preserve">
     <value>You must allow push notifications for these settings to work. Change your settings to enable notifications.</value>
-    <comment/>
+  </data>
+  <data name="EventCalendar.Title" xml:space="preserve">
+    <value>Events</value>
+  </data>
+  <data name="EventCard.register" xml:space="preserve">
+    <value>Register</value>
+  </data>
+  <data name="EventCardDetails.register" xml:space="preserve">
+    <value>Register</value>
   </data>
 </root>

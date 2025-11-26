@@ -11,6 +11,7 @@ using Rise.Client.News;
 using Rise.Client.Notifications;
 using Rise.Client.Resto;
 using Rise.Client.Schedule;
+using Rise.Client.EventCalendar;
 using Rise.Shared.Campus;
 using Rise.Shared.Contact;
 using Rise.Shared.Grades;
@@ -19,6 +20,7 @@ using Rise.Shared.News;
 using Rise.Shared.Notifications;
 using Rise.Shared.Resto;
 using Rise.Shared.Schedule;
+using Rise.Shared.Events;
 using Rise.Shared.StudentCards;
 
 try
@@ -100,6 +102,10 @@ try
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     }).AddHttpMessageHandler<CookieHandler>();
 
+    builder.Services.AddHttpClient<IEventService, EventService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
     builder.Services.AddHttpClient<IStudentCardService, StudentCardService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
