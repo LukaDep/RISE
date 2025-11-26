@@ -2,11 +2,11 @@
 @using Rise.Shared.Schedule
 @using Rise.Shared.Common
 @using Rise.Client.Schedule
+@using Rise.Client.Components
 
 <PageTitle>@L["Schedule.Title"]</PageTitle>
-<div class="p-6">
-    <h2 class="text-2xl font-semibold text-hogent-black mb-4">@L["Schedule.Title"]</h2>
 
+<BasePage Title="@L["Schedule.Title"]">
     <Tabs @ref="TabsRef">
         <!-- Dagweergave -->
         <Tab Title="@L["Schedule.Day"]">
@@ -23,7 +23,7 @@
             <MonthView SelectedDate="@SelectedDay" OnDayClick="GoToDay" />
         </Tab>
     </Tabs>
-</div>
+</BasePage>
 
 @code {
     private DayView? DayViewRef;

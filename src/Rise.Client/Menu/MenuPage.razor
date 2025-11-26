@@ -2,18 +2,13 @@
 @layout MinimalLayout
 @using Rise.Shared.Resto
 @using Rise.Shared.Menu
+@using Rise.Client.Components
 @inject IStringLocalizer<SharedResources> L
 
 <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 mt-6 sm:mt-10 text-hogent-black relative">
 
     <div class="mb-4 top-5 sm:left-5 sm:z-[1000]">
-        <button @onclick="GoBack" class="flex items-center gap-2 bg-white/90 backdrop-blur-sm border border-hogent-black-15 
-                   rounded-full shadow-md px-4 py-2 text-hogent-black font-medium 
-                   hover:bg-white hover:shadow-lg transition text-sm sm:text-base">
-            <i class="fa-solid fa-arrow-left"></i>
-            <span class="hidden sm:inline">@L["Resto.Return"]</span>
-            <span class="inline sm:hidden">@L["Resto.BackShort"]</span>
-        </button>
+        <BackButton NavigateTo="/resto" Text="@L["Resto.Back"]" />
     </div>
 
     <h2
@@ -44,14 +39,14 @@
     @if (isLoading)
     {
         <div class="flex justify-center items-center h-32">
-            <div class="animate-spin rounded-full h-10 w-10 border-t-4 border-b-4 border-hogent-education"></div>
-        </div>
-    }
-    else if (menus == null || !menus.Any())
-    {
-        <div class="text-center text-hogent-black-50 mt-12">
-            <i class="fa-solid fa-utensils fa-3x mb-4 text-hogent-education"></i>
-            <p class="text-lg">@L["Resto.NoMenu"]</p>
+            <LoadingComponent Item="@L["Menu.Loading"]" />
+            </div>
+        }
+        else if (menus == null || !menus.Any())
+        {
+            <div class=" text-center text-hogent-black-50 mt-12">
+                <i class="fa-solid fa-utensils fa-3x mb-4 text-hogent-education"></i>
+                <p class="text-lg">@L["Resto.NoMenu"]</p>
         </div>
     }
     else
@@ -76,8 +71,9 @@
 
                 <section
                     class="mb-6 rounded-2xl shadow-md border border-hogent-black-10 bg-white transition hover:shadow-lg overflow-hidden">
-                    <button @onclick="() => ToggleDay(dayGroup.Key)" class="w-full flex justify-between items-center px-5 sm:px-6 py-4 sm:py-5 bg-hogent-black-5 hover:bg-hogent-black-10 transition 
-                                               @(isExpanded ? "rounded-t-2xl" : "rounded-2xl")">
+                    <button @onclick="() => ToggleDay(dayGroup.Key)"
+                        class="w-full flex justify-between items-center px-5 sm:px-6 py-4 sm:py-5 bg-hogent-black-5 hover:bg-hogent-black-10 transition 
+                                                                                   @(isExpanded ? "rounded-t-2xl" : "rounded-2xl")">
                         <h3 class="text-xl sm:text-2xl font-semibold text-hogent-black capitalize tracking-tight">
                             @dayGroup.Key.ToString("dddd")
                         </h3>

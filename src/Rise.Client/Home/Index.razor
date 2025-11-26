@@ -3,12 +3,12 @@
 
 @using Rise.Client.Home.Components
 @using Rise.Client.Home
+@using Rise.Client.Components
 
 <PageTitle>@(IsEditMode ? "Edit" : "Home")</PageTitle>
 
-<div class="flex flex-col px-4 py-3 max-w-md mx-auto">
-    <div class="flex items-center justify-between mb-3">
-        <h3 class="text-2xl font-bold">@(IsEditMode ? "EDIT" : "HOME")</h3>
+<BasePage Title="@(IsEditMode ? "Edit" : "Home")">
+    <HeaderContent>
         <div class="flex items-center space-x-2">
             @if (!IsEditMode)
             {
@@ -27,11 +27,10 @@
                 </button>
             }
         </div>
-    </div>
-
-
-    <!-- middle content is delegated to a component so you can replace it later -->
-    <MiddleElements EditMode="IsEditMode" OnRemove="RemoveItem" UpcomingClasses="UpcomingClasses"
-        TodaysMenus="TodaysMenus" Restos="Restos" News="News" Grade="LastGrade" />
-
-</div>
+    </HeaderContent>
+    <ChildContent>
+        <!-- middle content is delegated to a component so you can replace it later -->
+        <MiddleElements EditMode="IsEditMode" OnRemove="RemoveItem" UpcomingClasses="UpcomingClasses"
+            TodaysMenus="TodaysMenus" Restos="Restos" News="News" Grade="LastGrade" />
+    </ChildContent>
+</BasePage>

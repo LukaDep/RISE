@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
-using Rise.Shared.Menu;
 using Rise.Shared.Common;
+using Rise.Shared.Menu;
 
 namespace Rise.Client.Menu;
 
@@ -99,11 +99,6 @@ public partial class MenuPage : ComponentBase
             MenuFilter.Vegan => item.IsVegan,
             _ => true
         };
-
-    protected void GoBack()
-    {
-        NavigationManager.NavigateTo("/resto");
-    }
 
     protected enum MenuFilter
     {

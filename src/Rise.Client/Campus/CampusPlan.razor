@@ -5,19 +5,18 @@
 @inject NavigationManager Navigation
 @using Rise.Shared.Campus
 @using Rise.Shared.Common
+@using Rise.Client.Components
 
 @if (campus is null)
 {
-    <p>@L["Campus.PlanLoading"]</p>
-}
-else
-{
-    <div id="map" class="relative h-[100vh] w-screen">
-        <button @onclick="GoBack"
-            class="absolute top-5 left-5 z-[1000] flex cursor-pointer items-center rounded-full border-0 bg-white px-5 py-2 text-base font-medium shadow-md">
-            <span class="mr-2 text-lg">&#8592;</span>
-            @L["Campus.BackToCampuses"]
-        </button>
+    <div class="flex justify-center items-center min-h-screen">
+        <LoadingComponent Item="@L["Campus.Loading"]" />
+            </div>
+        }
+        else
+        {
+            <div id=" map" class="relative h-[100vh] w-screen">
+            <BackButton NavigateTo="/campus" Text="@L["Campus.Back"]" />
     </div>
 }
 
@@ -28,16 +27,11 @@ else
     private BuildingDto.Index? building;
     [Inject] public required ICampusService CampusClientService { get; set; }
 
-    private async Task GoBack()
-    {
-        await JS.InvokeVoidAsync("history.back");
-    }
-
     protected override async Task OnInitializedAsync()
     {
-        if (string.IsNullOrEmpty(campusId.ToString()) && string.IsNullOrEmpty(buildingCode.ToString()))
+        if (string.IsNullOrEmpty(campusId.ToString()) && string.IsNullOrEmpty(buildingCode?.ToString()))
         {
-            await this.GoBack();
+            return;
         }
         else if (!string.IsNullOrEmpty(buildingCode))
         {
@@ -49,7 +43,7 @@ else
             }
             else
             {
-                await this.GoBack();
+                return;
             }
         }
 

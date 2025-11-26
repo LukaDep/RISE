@@ -7,42 +7,44 @@ public partial class SimpleSelect : ComponentBase
 {
     [Parameter]
     public IEnumerable<KeyValuePair<string, string>> Items { get; set; } =
-    Enumerable.Empty<KeyValuePair<string, string>>();
+        Enumerable.Empty<KeyValuePair<string, string>>();
     [Parameter] public string? SelectedValue { get; set; }
     [Parameter] public EventCallback<string?> SelectedValueChanged { get; set; }
     [Parameter] public string? Placeholder { get; set; }
 
     private List<KeyValuePair<string, string>> ItemsList = new();
     private bool IsOpen { get; set; }
-    private int HighlightedIndex { get; set; } = -1;
 
     protected override void OnParametersSet()
     {
         ItemsList = (Items ?? Enumerable.Empty<KeyValuePair<string, string>>()).ToList();
-        if (HighlightedIndex < 0 && ItemsList.Count > 0)
-        {
-            HighlightedIndex = ItemsList.FindIndex(i => i.Key == SelectedValue);
-        }
     }
-
-    private string? GetLabel(string? key) => ItemsList.FirstOrDefault(kv => kv.Key == key).Value;
 
     private void Toggle()
     {
         IsOpen = !IsOpen;
-        if (IsOpen)
-        {
-            HighlightedIndex = ItemsList.FindIndex(i => i.Key == SelectedValue);
-            if (HighlightedIndex < 0) HighlightedIndex = 0;
-        }
+        Console.WriteLine(IsOpen);
     }
 
-    private async Task Select(string key)
+    private async Task Select(string? value)
     {
-        SelectedValue = key;
+        SelectedValue = value;
         IsOpen = false;
         await SelectedValueChanged.InvokeAsync(SelectedValue);
     }
 
-    private void Highlight(int index) => HighlightedIndex = index;
+    private string? GetLabel(string? value)
+    {
+        var item = ItemsList.FirstOrDefault(x => x.Key == value);
+        if (!string.IsNullOrEmpty(item.Value))
+            return item.Value;
+        return Placeholder;
+    }
+
+    private async Task OnChange(ChangeEventArgs e)
+    {
+        var value = e.Value?.ToString();
+        SelectedValue = value;
+        await SelectedValueChanged.InvokeAsync(SelectedValue);
+    }
 }

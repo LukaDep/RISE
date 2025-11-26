@@ -1,0 +1,16 @@
+<div class="flex justify-end items-center relative">
+  <input @ref="inputElement" type="text" name="search" placeholder="@L["Common.SearchPlaceholder"]"
+    class="@(IsOpen ? "" : "hidden") absolute text-sm w-40 sm:w-auto right-0 duration-200 bg-hogent-white shadow rounded-full border border-hogent-black-15 focus:outline-none focus:ring-0 px-4 py-2 pr-10"
+    value="@Value" @oninput="OnInputChanged" />
+  <button type="button" class="flex justify-center items-center relative aspect-square w-8 z-10 px-4 py-2 rounded-full hover:bg-hogent-black-15 transition cursor-pointer"
+    @onclick="ToggleSearch">
+    @if (IsOpen)
+    {
+      <i class="fa-solid fa-xmark text-hogent-black-50"></i>
+    }
+    else
+    {
+      <i class="fa-solid fa-magnifying-glass text-hogent-black-50"></i>
+    }
+  </button>
+</div>

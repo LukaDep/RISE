@@ -58,10 +58,9 @@ public partial class Index : ComponentBase
 
         searchTerm = SearchTerm;
     }
-
-    private async Task SearchTermChanged(ChangeEventArgs e)
+    private async Task SearchTermChanged(string value)
     {
-        searchTerm = e.Value?.ToString();
+        searchTerm = value;
 
         if (string.IsNullOrWhiteSpace(searchTerm))
         {

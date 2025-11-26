@@ -1,43 +1,29 @@
 ﻿@page "/campus"
 @using Rise.Client.Campus.Components
+@using Rise.Client.Components
 
-<div class="flex justify-between items-center p-6">
-    
-    <!-- Title -->
-    <h3 class="text-4xl font-bold">@L["Campus.Title"]</h3>
-
-    <!-- Search Bar Container -->
-    <div class="relative w-72 flex items-center justify-end">
-        <input @ref="filterInput" type="text" placeholder="Zoekterm"
-            class="absolute right-0 h-10 transition-all duration-300 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
-            style="width:@(isFilterOpen ? "94%" : "0px"); opacity:@(isFilterOpen ? '1' : '0'); pointer-events:@(isFilterOpen ? "auto" : "none");"
-            value="@SearchTerm" @oninput="SearchTermChanged" />
-        <button type="button"
-            class="absolute right-0 z-10 p-2 rounded-full hover:bg-hogent-black-15 transition cursor-pointer"
-            @onclick="ToggleFilter">
-            <i class="fa-solid fa-search"></i>
-        </button>
-    </div>
-</div>
-<div>
-@if (campusInfo == null || !campusInfo.Any())
-{
-    <p>@L["Campus.Loading"]</p>
-}
-else
-{
-    @foreach (var campus in campusInfo)
-    {
-        var location = $"{campus.Street} {campus.HouseNumber}, {campus.PostalCode} {campus.City}";
-        <CampusCard 
-            Id="@campus.Id"
-            Name="@campus.Name" 
-            Location="@location" 
-            Facilities="@campus.Facilities" 
-            ContactPhone="@campus.ContactPhone"
-            Description="@campus.Description"
-            SearchTerm="@SearchTerm"
-        />
-    }
-}
-</div>
+<BasePage Title="@L["Campus.Title"]">
+    <HeaderContent>
+        <SearchBar Value="@SearchTerm" ValueChanged="@SearchTermChanged" IsOpen="@isFilterOpen"
+            IsOpenChanged="@((bool value) => isFilterOpen = value)" />
+    </HeaderContent>
+    <ChildContent>
+        <div>
+            @if (campusInfo == null || !campusInfo.Any())
+            {
+                <div class="flex justify-center items-center h-64">
+                    <LoadingComponent Item='@L["Campus.Loading"]' />
+                </div>
+            }
+            else
+            {
+                @foreach (var campus in campusInfo)
+                {
+                    var location = $"{campus.Street} {campus.HouseNumber}, {campus.PostalCode} {campus.City}";
+                    <CampusCard Id="@campus.Id" Name="@campus.Name" Location="@location" Facilities="@campus.Facilities"
+                        ContactPhone="@campus.ContactPhone" Description="@campus.Description" SearchTerm="@SearchTerm" />
+                }
+            }
+        </div>
+    </ChildContent>
+</BasePage>

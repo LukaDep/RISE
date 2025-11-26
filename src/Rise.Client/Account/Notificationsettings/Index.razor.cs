@@ -142,11 +142,6 @@ public partial class Index : ComponentBase
         }
     }
 
-    private void GoBack()
-    {
-        NavigationManager.NavigateTo("/account");
-    }
-
     // private void GenerateVapidKey()
     // {
     //     var keys = VapidHelper.GenerateVapidKeys();

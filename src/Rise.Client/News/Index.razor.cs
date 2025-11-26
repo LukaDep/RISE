@@ -11,20 +11,6 @@ public partial class Index
     ElementReference _filterInput;
     private bool _isFilterOpen = false;
 
-    private async Task ToggleFilter()
-    {
-        _isFilterOpen = !_isFilterOpen;
-        if (_isFilterOpen)
-        {
-            await _filterInput.FocusAsync();
-        }
-        else
-        {
-            _searchTerm = null;
-            FilterNews();
-        }
-    }
-
     private IEnumerable<NewsDto.Index>? _news;
 
     [Inject] public required INewsService NewsService { get; set; }
@@ -94,9 +80,8 @@ public partial class Index
 
     }
 
-    private void SearchTermChanged(ChangeEventArgs args)
+    private void SearchTermChanged(string value)
     {
-        var value = args.Value?.ToString();
         _searchTerm = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         FilterNews();
     }

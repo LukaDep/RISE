@@ -1,44 +1,37 @@
 @page "/resto"
 @using Rise.Client.Resto.Components
+@using Rise.Client.Components
 
 <PageTitle>@L["Resto.Title"]</PageTitle>
 
-<div class="mx-4 mt-10">
-    <div class="flex justify-between items-center mb-8">
-        <h3 class="text-4xl font-bold">@L["Resto.Title"]</h3>
-        <div class="relative w-72 flex items-center justify-end">
-            <input @ref="filterInput" type="text" placeholder="@L["Resto.FilterPlaceholder"]"
-                class="absolute right-0 h-10 transition-all duration-300 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
-                style="width:@(isFilterOpen ? "94%" : "0px"); opacity:@(isFilterOpen ? '1' : '0'); pointer-events:@(isFilterOpen ? "auto" : "none");"
-                value="@searchTerm" @oninput="SearchTermChanged" />
-            <button type="button"
-                class="absolute right-0 z-10 p-2 rounded-full hover:bg-hogent-black-15 transition cursor-pointer"
-                @onclick="ToggleFilter">
-                <i class="fa-solid fa-magnifying-glass fa-lg text-hogent-black-100"></i>
-            </button>
-        </div>
-    </div>
+<BasePage Title="@L["Resto.Title"]">
+    <HeaderContent>
+        <SearchBar Value="@searchTerm" ValueChanged="@SearchTermChanged" IsOpen="@isFilterOpen"
+            IsOpenChanged="@((bool value) => isFilterOpen = value)" />
+    </HeaderContent>
+    <ChildContent>
 
-    @if (restos == null)
-    {
-        <div class="flex justify-center items-center h-64">
-            <div class="animate-spin rounded-full h-12 w-12 border-t-4 border-b-4 border-b-hogent-education"></div>
-        </div>
-    }
-    else if (!restos.Any())
-    {
-        <div class="flex flex-col items-center justify-center h-64 text-hogent-black-50">
-            <i class="fa-solid fa-triangle-exclamation fa-3x mb-4"></i>
-            <p class="text-xl">@L["Resto.NoResults"]</p>
-        </div>
-    }
-    else
-    {
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
-            @foreach (var resto in restos)
-            {
-                <RestoCard Resto="@resto" />
+        @if (restos == null)
+        {
+            <div class="flex justify-center items-center h-64">
+                <LoadingComponent Item="@L["Resto.Loading"]" />
+                </div>
             }
-        </div>
-    }
-</div>
+            else if (!restos.Any())
+            {
+                <div class=" flex flex-col items-center justify-center h-64 text-hogent-black-50">
+                    <i class="fa-solid fa-triangle-exclamation fa-3x mb-4"></i>
+                    <p class="text-xl">@L["Resto.NoResults"]</p>
+            </div>
+        }
+        else
+        {
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pb-8">
+                @foreach (var resto in restos)
+                {
+                    <RestoCard Resto="@resto" />
+                }
+            </div>
+        }
+    </ChildContent>
+</BasePage>

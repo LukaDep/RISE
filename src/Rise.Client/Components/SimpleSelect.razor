@@ -1,113 +1,48 @@
 @using Microsoft.AspNetCore.Components.Web
 
-<div class="relative w-full block">
-    <button type="button" class="
-            group w-full rounded-full px-4 py-2 pr-9 text-sm text-left
+<div class="flex w-min">
+    <div class="relative w-max">
+        <button type="button" class="
+            w-max rounded-full px-4 py-2 pr-9 text-sm text-left
             border bg-white/90 backdrop-blur
             border-hogent-black-15 hover:border-hogent-education
             shadow-sm hover:shadow
             transition-all duration-200
             focus:outline-none focus:ring-4 focus:ring-hogent-education/20
           " @onclick="Toggle" aria-haspopup="listbox" aria-expanded="@IsOpen">
-        <span class="truncate text-hogent-black-90">
-            @(GetLabel(SelectedValue) ?? Placeholder)
-        </span>
+            <span class="truncate text-hogent-black-90 min-w-max">
+                @GetLabel(SelectedValue)
+            </span>
 
-        <!-- chevron -->
-        <svg class="
+            <!-- chevron -->
+            <svg class="
            pointer-events-none absolute right-3 top-1/2 -translate-y-1/2
            h-4 w-4 text-hogent-black-50 transition-transform duration-200
            @(IsOpen ? "rotate-180" : "")
          " viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                stroke-linejoin="round" />
-        </svg>
-    </button>
+                <path d="M6 9l6 6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+        </button>
 
-    @if (IsOpen)
-    {
-        <div class="
-                                                                          absolute z-50 mt-2 w-full origin-top
-                                                                          rounded-2xl border border-hogent-black-10
-                                                                          bg-white/80 backdrop-blur-md
-                                                                          shadow-lg ring-1 ring-black/5
-                                                                          animate-in fade-in zoom-in-95 duration-150
-                                                                        ">
-            <div class="max-h-60 overflow-auto py-1 pr-1 simple-select-scroll">
-                @for (int i = 0; i < ItemsList.Count; i++)
-                {
-                    var item = ItemsList[i];
-                    var selected = item.Key == SelectedValue;
+        @if (IsOpen)
+        {
+            <div
+                class="group absolute right-0 z-50 mt-2 w-max origin-top rounded-2xl border border-hogent-black-10 bg-white/80 backdrop-blur-md shadow-lg ring-1 ring-black/5 animate-in fade-in zoom-in-95 duration-150">
+                <div class="max-h-60 overflow-auto">
+                    @for (int i = 0; i < ItemsList.Count; i++)
+                    {
+                        var item = ItemsList[i];
+                        var selected = item.Key == SelectedValue;
 
-                    <div class="flex items-center px-4 py-2.5 cursor-pointer select-none text-[15px] leading-5 rounded-xl transition-colors 
-                                                    @(selected ? "bg-hogent-education-15 text-hogent-education font-semibold" : "text-hogent-black-90 hover:bg-hogent-education-10 hover:text-hogent-education")"
-                        role="option" aria-selected="@selected" @onclick="(() => Select(item.Key))">
-                        <div class="truncate">@item.Value</div>
-                    </div>
-                }
+                        <div class="flex items-center px-4 py-2.5 cursor-pointer select-none text-[15px] leading-5 rounded-2xl transition-colors 
+                                                                                                    @(selected ? "bg-hogent-education-15 text-hogent-education font-semibold" : "text-hogent-black-90 hover:bg-hogent-education-10 hover:text-hogent-education")"
+                            role="option" aria-selected="@selected" @onclick="(() => Select(item.Key))">
+                            <div class="truncate">@item.Value</div>
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
-    }
+        }
+    </div>
 </div>
-
-<style>
-    /* simple smooth scrollbar */
-    .simple-select-scroll::-webkit-scrollbar {
-        width: 10px;
-    }
-
-    .simple-select-scroll::-webkit-scrollbar-track {
-        background: transparent;
-        border-radius: 9999px;
-        margin: 6px 0;
-    }
-
-    .simple-select-scroll::-webkit-scrollbar-thumb {
-        background-color: rgba(76, 162, 213, .25);
-        border-radius: 9999px;
-        border: 3px solid transparent;
-        background-clip: padding-box;
-    }
-
-    .simple-select-scroll {
-        scrollbar-width: thin;
-        scrollbar-color: rgba(76, 162, 213, .25) transparent;
-        scrollbar-gutter: stable;
-    }
-
-    @@keyframes fade-in {
-        from {
-            opacity: 0;
-        }
-
-        to {
-            opacity: 1;
-        }
-    }
-
-    @@keyframes zoom-in-95 {
-        from {
-            transform: scale(.95);
-        }
-
-        to {
-            transform: scale(1);
-        }
-    }
-
-    .animate-in {
-        animation-fill-mode: both;
-    }
-
-    .fade-in {
-        animation-name: fade-in;
-    }
-
-    .zoom-in-95 {
-        animation-name: zoom-in-95;
-    }
-
-    .duration-150 {
-        animation-duration: 150ms;
-    }
-</style>

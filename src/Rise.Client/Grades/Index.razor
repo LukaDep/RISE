@@ -3,25 +3,17 @@
 @using Rise.Client.Grades.Components
 @using Rise.Client.Components
 
-<h3 class="text-4xl font-bold flex-shrink-0 mx-4 mt-10">@L["Grades.Title"]</h3>
+<PageTitle>@L["Grades.Title"]</PageTitle>
 
-<div class="flex flex-wrap items-end mx-4 mt-5 gap-3">
-  <div class="flex items-end gap-3 w-full justify-between">
-    <div class="flex flex-row items-end md:ml-auto w-full md:w-auto flex-wrap gap-2 md:gap-0 md:space-x-3">
-      <!-- year -->
-      <div class="relative flex-1 md:w-auto min-w-0 md:min-w-[140px] lg:min-w-[200px] pr-1">
+<BasePage Title="@L["Grades.Title"]">
+  <HeaderContent>
+    <div class="flex flex-row gap-2">
+      <div class="flex flex-row gap-2">
         <SimpleSelect Items="@YearItems" SelectedValue="@selectedYear" SelectedValueChanged="@OnYearSelected"
           Placeholder=@L["Grades.YearFilterPlaceholder"] />
-      </div>
-
-      <!-- semester -->
-      <div class="relative flex-1 md:w-auto min-w-0 md:min-w-[140px] lg:min-w-[200px]">
         <SimpleSelect Items="@SemesterItems" SelectedValue="@(selectedSemester?.ToString())"
           SelectedValueChanged="@OnSemesterSelected" Placeholder=@L["Grades.SemesterFilterPlaceholder"] />
       </div>
-    </div>
-
-    <div class="items-end">
       <button type="button" class="p-2 rounded-full hover:bg-hogent-black-15 transition" @onclick="ToggleFilter"
         aria-expanded="@isFilterOpen" aria-controls="gradeSearch" aria-label="Toggle search">
         @if (!isFilterOpen)
@@ -34,35 +26,36 @@
         }
       </button>
     </div>
-  </div>
+  </HeaderContent>
+  <ChildContent>
+    <div id="gradeSearch" class="w-full overflow-hidden transition-all duration-300"
+      style="max-height:@(isFilterOpen ? "160px" : "0px");">
+      <div class="mb-3">
+        <input @ref="filterInput" type="text" placeholder=@L["Grades.SearchTermPlaceholder"]
+          class="w-full h-10 transition-all duration-200 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
+          value="@searchTerm" @oninput="SearchTermChanged" />
+      </div>
+    </div>
 
-  <div id="gradeSearch" class="w-full overflow-hidden transition-all duration-300"
-    style="max-height:@(isFilterOpen ? "160px" : "0px");">
-    <div class="mt-3">
-      <input @ref="filterInput" type="text" placeholder=@L["Grades.SearchTermPlaceholder"]
-        class="w-full h-10 transition-all duration-200 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
-        value="@searchTerm" @oninput="SearchTermChanged" />
-    </div>
-  </div>
-</div>
-<div>
-  @if (!Grades.Any())
-  {
-    <div class="flex justify-center items-center h-16 mt-16">
-      <div class="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-b-hogent-education"></div>
-    </div>
-  }
-  else if (!FilteredGrades.Any())
-  {
-    <div class="text-sm text-gray-500 mt-6 mx-4">@L["Grades.NoGradesFound"]</div>
-  }
-  else
-  {
-    @foreach (var grade in FilteredGrades)
+    @if (!Grades.Any())
     {
-      <GradeItem Grade="grade" />
+      <div class="flex justify-center items-center h-16 mt-16">
+        <LoadingComponent Item="@L["Grades.Loading"]" />
+          </div>
+        }
+        else if (!FilteredGrades.Any())
+        {
+          <div class=" text-sm text-gray-500 mt-6">@L["Grades.NoGradesFound"]
+      </div>
     }
-  }
-  <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
-  <ScrollToTop />
-</div>
+    else
+    {
+      @foreach (var grade in FilteredGrades)
+      {
+        <GradeItem Grade="grade" />
+      }
+    }
+    <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
+    <ScrollToTop />
+  </ChildContent>
+</BasePage>

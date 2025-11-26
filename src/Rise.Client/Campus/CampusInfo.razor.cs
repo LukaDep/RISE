@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Components;
-using Rise.Shared.Common;
 using Rise.Shared.Campus;
+using Rise.Shared.Common;
 
 namespace Rise.Client.Campus;
 
@@ -41,9 +41,9 @@ public partial class CampusInfo : ComponentBase
 
     }
 
-    private void SearchTermChanged(ChangeEventArgs args)
+    private void SearchTermChanged(string value)
     {
-        searchTerm = args.Value?.ToString();
+        searchTerm = value;
         FilterProducts();
     }
 

@@ -4,74 +4,53 @@
 
 <PageTitle>@L["News.Title"]</PageTitle>
 
-<div id="top" class="mx-4 mt-10">
-    <h3 class="text-4xl font-bold mx-4">@L["News.Title"]</h3>
-
-    <div class="flex flex-row-reverse mx-4">
-        <div>
-            <button type="button" class="p-2 rounded-full hover:bg-hogent-black-15 transition" @onclick="ToggleFilter"
-                aria-expanded="@_isFilterOpen" aria-controls="newsSearch" aria-label="Toggle search">
-                @if (_isFilterOpen)
-                {
-                    <i class="fa-solid fa-xmark text-hogent-black-50"></i>
-                }
-                else
-                {
-                    <i class="fa-solid fa-magnifying-glass text-hogent-black-50"></i>
-                }
-            </button>
-        </div>
-        <div class="w-1/2 mx-4 mt-0 md:min-w-[200px] lg:min-w-[200px] md:max-w-[240px] lg:max-w-[260px]">
+<BasePage Title="@L["News.Title"]">
+    <HeaderContent>
+        <div class="flex flex-row gap-2">
+            <SearchBar Value="@_searchTerm" ValueChanged="@SearchTermChanged" IsOpen="@_isFilterOpen"
+                IsOpenChanged="@((bool value) => _isFilterOpen = value)" />
             <SimpleSelect Items="@DateRangeItems" SelectedValue="@_selectedDateRange"
                 SelectedValueChanged="@OnDateRangeChanged" />
         </div>
-    </div>
+    </HeaderContent>
+    <ChildContent>
+        <div id="top"></div>
 
-    <div class="overflow-hidden transition-all duration-300 mt-4 mx-4"
-        style="max-height:@(_isFilterOpen ? "160px" : "0px");">
-        <div>
-            <input @ref="_filterInput" type="text" placeholder=@L["News.FilterPlaceholder"]
-                class="w-full h-10 transition-all duration-200 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
-                value="@_searchTerm" @oninput="SearchTermChanged" />
-        </div>
-    </div>
-
-</div>
-
-<div class="mx-4 mt-4">
-    @if (_news == null)
-    {
-        <LoadingComponent Item="@L["Common.Loading"]" />
-    }
-    else
-    {
-        @foreach (var newsItem in _news)
-        {
-            <NewsItem newsItem="@newsItem" />
-        }
-
-        <div class="flex flex-col items-center justify-center">
-            @if (_totalCount == 0)
+        <div class="mt-4">
+            @if (_news == null)
             {
-                <p class="mt-10 text-2xl">@L["News.NotFound"]</p>
-            }
-            else if (_totalCount != _currentCount)
-            {
-                <button
-                    class="flex items-center justify-center gap-2 w-32 h-10 mb-2 border-2 border-hogent-black text-hogent-black rounded-2xl shadow hover:bg-hogent-blue transition disabled:opacity-50"
-                    @onclick="LoadMoreNews">
-                    @L["News.LoadMore"]
-                    <i class="fa-solid fa-arrow-down"></i>
-                </button>
-            }
+                <LoadingComponent Item="@L["News.Loading"]" />
+                                          }
+                              else
+                              {
+                                  @foreach(var newsItem in _news)
+                                              {
+                            <NewsItem newsItem="@newsItem" />
+                }
 
-            @if (_totalCount != 0)
-            {
-                <p class="text-hogent-black-15 mb-3">@_currentCount @L["News.Count"] @_totalCount</p>
-            }
-        </div>
-    }
+                <div class="flex flex-col items-center justify-center">
+                    @if (_totalCount == 0)
+                    {
+                        <p class="mt-10 text-2xl">@L["News.NotFound"]</p>
+                    }
+                    else if (_totalCount != _currentCount)
+                    {
+                        <button
+                            class="flex items-center justify-center gap-2 w-32 h-10 mb-2 border-2 border-hogent-black text-hogent-black rounded-2xl shadow hover:bg-hogent-blue transition disabled:opacity-50"
+                            @onclick="LoadMoreNews">
+                            @L["News.LoadMore"]
+                            <i class="fa-solid fa-arrow-down"></i>
+                        </button>
+                    }
 
-    <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
-    <ScrollToTop />
-</div>
+                    @if (_totalCount != 0)
+                    {
+                        <p class="text-hogent-black-15 mb-3">@_currentCount @L["News.Count"] @_totalCount</p>
+                    }
+                </div>
+                }
+            </div>
+            <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
+            <ScrollToTop />
+        </ChildContent>
+    </BasePage>
