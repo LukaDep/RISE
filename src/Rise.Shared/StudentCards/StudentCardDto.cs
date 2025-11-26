@@ -6,16 +6,6 @@ namespace Rise.Shared.StudentCards;
 public class StudentCardDto
 {
     /// <summary>
-    /// Unique identifier for the student card.
-    /// </summary>
-    public Guid Id { get; set; }
-
-    /// <summary>
-    /// The associated user's unique identifier.
-    /// </summary>
-    public string UserId { get; set; } = default!;
-
-    /// <summary>
     /// Personal number - a 9-digit identification number.
     /// </summary>
     public string PersonalNumber { get; set; } = default!;

@@ -32,31 +32,30 @@ public class StudentCardService : IStudentCardService
         return userId;
     }
 
-    public async Task<Result<StudentCardDto>> GetStudentCardByIdAsync(Guid id, CancellationToken ct = default)
+    public async Task<Result<StudentCardDto>> GetByUserIdAsync(string id, CancellationToken ct = default)
     {
         var currentUserId = GetCurrentUserId();
 
         // Verify that the requested ID matches the current user's ID
-        if (id.ToString() != currentUserId)
+        if (id != currentUserId)
         {
             return Result.Forbidden("You can only access your own student card");
         }
 
-        var user = await _dbContext.Users
+        var user = await _dbContext.StudentCards
             .AsNoTracking()
-            .Where(u => u.Id == currentUserId)
+            .Where(u => u.UserId == currentUserId)
             .Select(u => new
             {
                 u.Id,
-                PersonalNumber = EF.Property<string>(u, "PersonalNumber"),
-                FirstName = EF.Property<string>(u, "FirstName"),
-                LastName = EF.Property<string>(u, "LastName"),
-                BirthDate = EF.Property<DateTime?>(u, "BirthDate"),
-                ExpirationDate = EF.Property<DateTime?>(u, "ExpirationDate"),
-                ProfilePicture = EF.Property<string>(u, "ProfilePicture"),
-                BarcodeData = EF.Property<string>(u, "BarcodeData")
+                u.PersonalNumber,
+                u.FirstName,
+                u.LastName,
+                u.BirthDate,
+                u.ExpirationDate,
+                u.ProfilePicture
             })
-            .FirstOrDefaultAsync();
+            .FirstOrDefaultAsync(ct);
 
         if (user == null || string.IsNullOrEmpty(user.PersonalNumber))
         {
@@ -68,9 +67,9 @@ public class StudentCardService : IStudentCardService
             PersonalNumber = user.PersonalNumber,
             FirstName = user.FirstName ?? string.Empty,
             LastName = user.LastName ?? string.Empty,
-            ExpirationDate = user.ExpirationDate ?? default,
+            ExpirationDate = user.ExpirationDate,
             ProfilePicture = user.ProfilePicture,
-            IsValid = user.ExpirationDate.HasValue && DateTime.UtcNow <= user.ExpirationDate.Value,
+            IsValid = DateTime.UtcNow <= user.ExpirationDate,
         });
     }
 

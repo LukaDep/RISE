@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Rise.Shared.Identity.Accounts;
+using Rise.Shared.StudentCards;
 
 namespace Rise.Server.Endpoints.Identity.Accounts;
 
@@ -9,7 +10,7 @@ namespace Rise.Server.Endpoints.Identity.Accounts;
 /// See https://fast-endpoints.com/
 /// </summary>
 /// <param name="userManager"></param>
-public class Info(UserManager<IdentityUser> userManager) : EndpointWithoutRequest<Result<AccountResponse.Info>>
+public class Info(UserManager<IdentityUser> userManager, IStudentCardService studentCardService) : EndpointWithoutRequest<Result<AccountResponse.Info>>
 {
     public override void Configure()
     {
@@ -28,12 +29,14 @@ public class Info(UserManager<IdentityUser> userManager) : EndpointWithoutReques
 
     private async Task<AccountResponse.Info> CreateInfoResponseAsync(IdentityUser user, ClaimsPrincipal claimsPrincipal)
     {
+        var studentCard = await studentCardService.GetByUserIdAsync(user.Id, CancellationToken.None);
         return new()
         {
             Email = user.Email!,
             IsEmailConfirmed = await userManager.IsEmailConfirmedAsync(user),
             Claims = claimsPrincipal.Claims.ToDictionary(c => c.Type, c => c.Value),
-            Roles = claimsPrincipal.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList()
+            Roles = claimsPrincipal.Claims.Where(c => c.Type == ClaimTypes.Role).Select(c => c.Value).ToList(),
+            StudentCard = studentCard.IsSuccess ? studentCard.Value : null
         };
     }
 }

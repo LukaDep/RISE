@@ -24,7 +24,6 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
     {
         await RolesAsync();
         await UsersAsync();
-        // await StudentCardsAsync();
         await NewsAsync();
         await AbsencesAsync();
         await CampusesAsync();
@@ -125,23 +124,6 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await userManager.AddToRoleAsync(student5, "Student");
 
         await dbContext.SaveChangesAsync();
-    }
-
-    private async Task StudentCardsAsync()
-    {
-        if (dbContext.StudentCards.Any())
-            return;
-
-        // Get the users by email to link to student cards
-        var student1 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "jan.vermeulen@student.hogent.be");
-        var student2 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "marie.dubois@student.hogent.be");
-        var student3 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "pieter.janssens@student.hogent.be");
-        var student4 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "sophie.nguyen@student.hogent.be");
-        var student5 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "thomas.maes@student.hogent.be");
-
-        if (student1 == null || student2 == null || student3 == null || student4 == null || student5 == null)
-            return;
-
         dbContext.StudentCards.AddRange(
             new StudentCard(
                 userId: student1.Id,

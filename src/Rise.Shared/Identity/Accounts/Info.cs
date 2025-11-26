@@ -1,4 +1,6 @@
-﻿namespace Rise.Shared.Identity.Accounts;
+﻿using Rise.Shared.StudentCards;
+
+namespace Rise.Shared.Identity.Accounts;
 
 /// <summary>
 /// Represents the response object for account-related information.
@@ -18,5 +20,7 @@ public static partial class AccountResponse
         public required bool IsEmailConfirmed { get; set; }
         public required Dictionary<string, string> Claims { get; set; } = [];
         public List<string> Roles { get; set; } = [];
+
+        public StudentCardDto? StudentCard { get; set; }
     }
 }
