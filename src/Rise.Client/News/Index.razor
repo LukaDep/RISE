@@ -41,9 +41,7 @@
 <div class="mx-4 mt-4">
     @if (_news == null)
     {
-        <div class="flex justify-center items-center h-16 mt-16">
-            <div class="animate-spin rounded-full h-8 w-8 border-t-4 border-b-4 border-b-hogent-education"></div>
-        </div>
+        <LoadComponent Item="@L["Common.Loading"]" />
     }
     else
     {

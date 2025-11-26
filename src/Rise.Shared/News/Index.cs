@@ -1,7 +1,6 @@
 namespace Rise.Shared.News;
 
 
-
 public static partial class NewsResponse
 {
     public class Index
