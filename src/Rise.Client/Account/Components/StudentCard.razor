@@ -1,0 +1,53 @@
+﻿@if (StudentCardDto != null)
+{
+  <div class="w-full h-fit max-w-md aspect-[52/29] rounded-md shadow overflow-hidden flex">
+    <div id="student-card"
+      class="w-[123px] h-[69px] aspect-[52/29] origin-top-left text-[4px] flex font-[Tahoma,Verdana,Geneva,sans-serif] font-semibold tracking-wider">
+
+      @* Left section *@
+      <div
+        class="w-[82px] p-[10px] bg-gradient-to-br from-[#0066cc] to-[#003d7a] text-white flex flex-col justify-between">
+        @* Profile section *@
+        <div class="flex items-start gap-[7%] h-[50%]">
+          @* Profile picture placeholder *@
+          <img class="h-full aspect-[19/23] object-cover bg-white" src="@StudentCardDto.ProfilePicture" />
+
+          @* Campus icon and title *@
+          <div class="h-full flex flex-col justify-between">
+            @* Campus/Building icon *@
+            <i class="text-[6px] fa-solid fa-graduation-cap"></i>
+            <div>
+              <p>Student</p>
+              <p class="font-medium">identity card</p>
+            </div>
+          </div>
+        </div>
+
+        @* Student number *@
+        <div>
+          <p class="font-light tracking-widest">@StudentCardDto.PersonalNumber</p>
+          <p class="font-light">@StudentCardDto.FirstName @StudentCardDto.LastName</p>
+        </div>
+      </div>
+
+      @* Right section *@
+      <div class="w-[41px] bg-[#003d7a] flex flex-col items-center justify-end text-[2px]/none">
+        @* White section *@
+        <div class="w-[41px] h-[51px] bg-white flex flex-col p-[4px]">
+          @* European flag and text *@
+          <div class="h-[6px] flex justify-between w-full mb-[4px]">
+            <img class="h-full w-[9px] mr-[4px] object-contain" src="img/Flag_of_Europe.png" alt="Flag of Europe">
+            <p class="text-[#003399] text-[2.5px]/[3px]">European Student Card</p>
+          </div>
+
+          @* QR Code *@
+          <img src="@($"data:image/png;base64,{Convert.ToBase64String(GetQRCode())}")" alt="Student QR Code" />
+        </div>
+      </div>
+    </div>
+  </div>
+}
+else
+{
+  <LoadingLabel Item="student card"></LoadingLabel>
+}

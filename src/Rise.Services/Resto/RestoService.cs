@@ -35,7 +35,7 @@ public class RestoService(ApplicationDbContext dbContext) : IRestoService
         if (!string.IsNullOrWhiteSpace(req.SearchTerm))
         {
             var term = req.SearchTerm.Trim();
-            allRestos = allRestos.Where(r => 
+            allRestos = allRestos.Where(r =>
                 (r.Name ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
                 || (r.Description ?? string.Empty).Contains(term, StringComparison.OrdinalIgnoreCase)
                 || (r.KitchenType != null && r.KitchenType.Any(type => type.Contains(term, StringComparison.OrdinalIgnoreCase)))

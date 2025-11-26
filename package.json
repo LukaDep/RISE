@@ -6,7 +6,7 @@
     "scripts": {
         "tailwind": "tailwindcss -i ./src/Rise.Client/wwwroot/css/tailwind.css -o ./src/Rise.Client/wwwroot/css/output.css --watch",
         "client": "dotnet watch run --project ./src/Rise.Client/Rise.Client.csproj",
-        "server-dev": "dotnet watch run --project ./src/Rise.Server/Rise.Server.csproj --launch-profile Development",
+        "server-dev": "dotnet watch --project ./src/Rise.Server/Rise.Server.csproj --launch-profile Development",
         "server-prod": "dotnet run --project ./src/Rise.Server/Rise.Server.csproj --launch-profile Production",
         "dev": "concurrently \"npm run tailwind\" \"npm run server-dev\"",
         "prod": "concurrently \"npm run tailwind\" \"npm run server-prod\"",

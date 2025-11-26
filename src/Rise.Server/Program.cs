@@ -6,7 +6,6 @@ using Rise.Persistence;
 using Rise.Persistence.Triggers;
 using Rise.Server.Identity;
 using Rise.Server.Processors;
-using Rise.Server.Services;
 using Rise.Services;
 using Rise.Services.Identity;
 using Serilog.Events;
@@ -25,7 +24,6 @@ try
     builder.Services
         .AddSerilog((_, lc) => lc.ReadFrom.Configuration(builder.Configuration) // Configuration in AppSettings.json
             .Destructure.UsingAttributes()) // Sensitive data logging
-        .AddHostedService<SshTunnelService>()
         .AddIdentity<IdentityUser, IdentityRole>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .Services.AddDbContext<ApplicationDbContext>(o =>
@@ -79,31 +77,16 @@ try
         .UseSwaggerGen();
     app.MapFallbackToFile("index.html"); // Serves the Blazor app from the API, when no routes match.
 
-    await app.StartAsync();
-    // apply Database migraticons on startup, not so wise in production (Use Generated SQL Scripts) 
-    // See: https://learn.microsoft.com/en-us/ef/core/managing-schemas/migrations/applying?tabs=dotnet-core-cli
-    if (app.Environment.IsDevelopment())
+    using (var scope = app.Services.CreateScope())
     {
-        // Wait for SSH tunnel to be established
-        var sshTunnelService = app.Services.GetServices<IHostedService>()
-            .OfType<SshTunnelService>()
-            .First();
-        if (sshTunnelService != null)
-        {
-            await sshTunnelService.ReadyTask;
-        }
+        var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
+        var dbSeeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
 
-
-
-        using (var scope = app.Services.CreateScope())
-        {
-            var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-            var dbSeeder = scope.ServiceProvider.GetRequiredService<DbSeeder>();
-
-            await dbContext.Database.MigrateAsync(); // Creates the database if it doesn't exist and applies all migrations. See Readme.md for more info.
-            await dbSeeder.SeedAsync(); // Seeds the database with some test data.
-        }
+        await dbContext.Database.MigrateAsync(); // Creates the database if it doesn't exist and applies all migrations. See Readme.md for more info.
+        await dbSeeder.SeedAsync(); // Seeds the database with some test data.
     }
+
+    await app.StartAsync();
     app.WaitForShutdown();
 }
 catch (Exception ex)

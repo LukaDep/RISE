@@ -122,10 +122,10 @@ public class RestoCardShould : TestContext
         // Act
         var cut = RenderComponent<RestoCard>(parameters => parameters
             .Add(p => p.Resto, resto));
-        
+
         // Initially hidden
         Assert.DoesNotContain("09:00-17:00", cut.Markup);
-        
+
         // Click button to show
         var button = cut.Find("button");
         button.Click();

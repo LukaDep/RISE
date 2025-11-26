@@ -6,7 +6,7 @@ namespace Rise.Shared.StudentCards;
 public interface IStudentCardService
 {
     /// <summary>
-    /// Gets a student card by ID.
+    /// Gets the student card for the currently authenticated user.
     /// </summary>
-    Task<Result<StudentCardDto>> GetByUserIdAsync(string id, CancellationToken ct = default);
+    Task<Result<StudentCardDto>> GetByUserIdAsync(CancellationToken ct = default);
 }

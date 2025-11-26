@@ -13,40 +13,40 @@ public class NewsArticleShould : TestContext
     }
 
     [Fact]
-public void RendersNewsArticleDetails()
-{
-    var existingId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
+    public void RendersNewsArticleDetails()
+    {
+        var existingId = new Guid("aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa");
 
-    var cut = RenderComponent<NewsArticle>(parameters =>
-        parameters.Add(p => p.Id, existingId));
+        var cut = RenderComponent<NewsArticle>(parameters =>
+            parameters.Add(p => p.Id, existingId));
 
-    Assert.Contains("Campus reopens", cut.Markup);
-    Assert.Contains("We are happy to announce the campus reopens.", cut.Markup);
-    Assert.Contains("Admin", cut.Markup);
+        Assert.Contains("Campus reopens", cut.Markup);
+        Assert.Contains("We are happy to announce the campus reopens.", cut.Markup);
+        Assert.Contains("Admin", cut.Markup);
 
-    var img = cut.Find("img");
-    Assert.Equal("Campus reopens", img.GetAttribute("alt"));
+        var img = cut.Find("img");
+        Assert.Equal("Campus reopens", img.GetAttribute("alt"));
 
-    var backLink = cut.FindAll("a[href='/news']");
-    Assert.NotEmpty(backLink);
-}
+        var backLink = cut.FindAll("a[href='/news']");
+        Assert.NotEmpty(backLink);
+    }
 
 
     [Fact]
-public void NonExistentIdShowsErrorMessage()
-{
-    // A GUID guaranteed not to exist in FakeNewsService
-    var nonExistingId = new Guid("99999999-9999-9999-9999-999999999999");
+    public void NonExistentIdShowsErrorMessage()
+    {
+        // A GUID guaranteed not to exist in FakeNewsService
+        var nonExistingId = new Guid("99999999-9999-9999-9999-999999999999");
 
-    // Render the component
-    var cut = RenderComponent<NewsArticle>(parameters =>
-        parameters.Add(p => p.Id, nonExistingId));
+        // Render the component
+        var cut = RenderComponent<NewsArticle>(parameters =>
+            parameters.Add(p => p.Id, nonExistingId));
 
-    // Verify the error message
-    Assert.Contains($"News item with id {nonExistingId} not found.", cut.Markup);
+        // Verify the error message
+        Assert.Contains($"News item with id {nonExistingId} not found.", cut.Markup);
 
-    // Verify error styling
-    Assert.Contains("text-red-500", cut.Markup);
-}
+        // Verify error styling
+        Assert.Contains("text-red-500", cut.Markup);
+    }
 
 }

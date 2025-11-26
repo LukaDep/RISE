@@ -29,7 +29,7 @@ public class Info(UserManager<IdentityUser> userManager, IStudentCardService stu
 
     private async Task<AccountResponse.Info> CreateInfoResponseAsync(IdentityUser user, ClaimsPrincipal claimsPrincipal)
     {
-        var studentCard = await studentCardService.GetByUserIdAsync(user.Id, CancellationToken.None);
+        var studentCard = await studentCardService.GetByUserIdAsync(CancellationToken.None);
         return new()
         {
             Email = user.Email!,

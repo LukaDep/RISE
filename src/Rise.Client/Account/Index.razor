@@ -1,12 +1,13 @@
 ﻿@page "/account"
 @attribute [Authorize]
 @inject NavigationManager NavigationManager
+@using Rise.Client.Account.Components
 
 <PageTitle>Account</PageTitle>
 
-<div class="flex h-full">
-  <div class="w-full bg-white border-r border-gray-200 p-4">
-    <nav class="w-full flex flex-col space-y-2">
+<div class="flex">
+  <div class="w-full bg-white p-4 flex flex-col lg:flex-row gap-4 justify-between">
+    <nav class="w-full lg:w-1/2 flex flex-col space-y-2">
       <a href="/calendar"
         class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" stroke-width="1.5"
@@ -42,5 +43,6 @@
         <span>@L["Account.Logout"]</span>
       </a>
     </nav>
+    <StudentCard></StudentCard>
   </div>
 </div>

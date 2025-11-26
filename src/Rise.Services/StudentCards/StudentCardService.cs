@@ -7,24 +7,14 @@ using Rise.Shared.StudentCards;
 namespace Rise.Services.StudentCards;
 
 /// <summary>
-/// Service for managing Student Cards stored in the User table.
+/// Service for managing Student Cards stored in the StudentCards table.
 /// </summary>
-public class StudentCardService : IStudentCardService
+public class StudentCardService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : IStudentCardService
 {
-    private readonly ApplicationDbContext _dbContext;
-    private readonly ISessionContextProvider _sessionContextProvider;
-
-    public StudentCardService(
-        ApplicationDbContext dbContext,
-        ISessionContextProvider sessionContextProvider)
-    {
-        _dbContext = dbContext;
-        _sessionContextProvider = sessionContextProvider;
-    }
 
     private string GetCurrentUserId()
     {
-        var userId = _sessionContextProvider.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        var userId = sessionContextProvider.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
         if (string.IsNullOrEmpty(userId))
         {
             throw new UnauthorizedAccessException("User is not authenticated");
@@ -32,17 +22,11 @@ public class StudentCardService : IStudentCardService
         return userId;
     }
 
-    public async Task<Result<StudentCardDto>> GetByUserIdAsync(string id, CancellationToken ct = default)
+    public async Task<Result<StudentCardDto>> GetByUserIdAsync(CancellationToken ct = default)
     {
         var currentUserId = GetCurrentUserId();
 
-        // Verify that the requested ID matches the current user's ID
-        if (id != currentUserId)
-        {
-            return Result.Forbidden("You can only access your own student card");
-        }
-
-        var user = await _dbContext.StudentCards
+        var user = await dbContext.StudentCards
             .AsNoTracking()
             .Where(u => u.UserId == currentUserId)
             .Select(u => new

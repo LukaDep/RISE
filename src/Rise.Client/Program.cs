@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Rise.Client;
+using Rise.Client.Account;
 using Rise.Client.Campus;
 using Rise.Client.Grades;
 using Rise.Client.Identity;
@@ -18,6 +19,7 @@ using Rise.Shared.News;
 using Rise.Shared.Notifications;
 using Rise.Shared.Resto;
 using Rise.Shared.Schedule;
+using Rise.Shared.StudentCards;
 
 try
 {
@@ -94,6 +96,11 @@ try
     });
 
     builder.Services.AddHttpClient<INotificationPreferencesService, NotificationPreferencesClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    }).AddHttpMessageHandler<CookieHandler>();
+
+    builder.Services.AddHttpClient<IStudentCardService, StudentCardService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     }).AddHttpMessageHandler<CookieHandler>();

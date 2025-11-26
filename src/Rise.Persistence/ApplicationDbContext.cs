@@ -47,31 +47,31 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
         configurationBuilder.Properties<decimal>().HavePrecision(18, 2);
     }
 
-   protected override void OnModelCreating(ModelBuilder modelBuilder)
-{
-    base.OnModelCreating(modelBuilder);
-
-    // Apply all configurations first
-    modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-
-    // When using SQLite (tests), strip MySQL-specific default SQL
-    if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        foreach (var entityType in modelBuilder.Model.GetEntityTypes())
-        {
-            var createdAt = entityType.FindProperty("CreatedAt");
-            if (createdAt != null)
-            {
-                createdAt.SetDefaultValueSql(null);
-            }
+        base.OnModelCreating(modelBuilder);
 
-            var updatedAt = entityType.FindProperty("UpdatedAt");
-            if (updatedAt != null)
+        // Apply all configurations first
+        modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
+
+        // When using SQLite (tests), strip MySQL-specific default SQL
+        if (Database.ProviderName == "Microsoft.EntityFrameworkCore.Sqlite")
+        {
+            foreach (var entityType in modelBuilder.Model.GetEntityTypes())
             {
-                updatedAt.SetDefaultValueSql(null);
+                var createdAt = entityType.FindProperty("CreatedAt");
+                if (createdAt != null)
+                {
+                    createdAt.SetDefaultValueSql(null);
+                }
+
+                var updatedAt = entityType.FindProperty("UpdatedAt");
+                if (updatedAt != null)
+                {
+                    updatedAt.SetDefaultValueSql(null);
+                }
             }
         }
     }
-}
 
 }
