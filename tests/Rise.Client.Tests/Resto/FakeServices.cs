@@ -11,7 +11,6 @@ public class NullRestoService : IRestoService
     {
         var wrapper = new RestoResponse.Index
         {
-            // Intentionally make it null to trigger spinner in the component
             Restos = null!
         };
 

@@ -12,7 +12,6 @@ public class RestoServiceShould
     [Fact]
     public async Task GetIndexAsync_Should_Return_Data()
     {
-        // Each test gets its own fixture for isolation
         using var fixture = new SqliteTestFixture();
         using var db = fixture.CreateContext();
 

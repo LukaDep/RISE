@@ -3,13 +3,6 @@
 using Rise.Domain.Products;
 
 namespace Rise.Domain.Tests.Products;
-
-/// <summary>
-/// Example Domain Tests using xUnit and Shouldly
-/// https://xunit.net
-/// <see cref="https://docs.shouldly.org"/>
-///<see cref="https://xunit.net/?tabs=cs"/>
-/// </summary>
 public class ProductShould
 {
     [Fact]

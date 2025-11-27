@@ -13,7 +13,6 @@ public class NewsServiceShould
     [Fact]
     public async Task GetIndexAsyncShouldReturnSuccessWithValidData()
     {
-        // Arrange - each test gets its own fixture for isolation
         using var fixture = new SqliteTestFixture();
         using var dbContext = fixture.CreateContext();
 
@@ -55,11 +54,7 @@ public class NewsServiceShould
             Skip = 0,
             Take = 10,
         };
-
-        // Act
         var result = await service.GetIndexAsync(request, CancellationToken.None);
-
-        // Assert
         if (result.IsSuccess)
         {
             result.Value.ShouldNotBeNull();
@@ -74,7 +69,6 @@ public class NewsServiceShould
     [Fact]
     public async Task GetIndexAsyncWithSearchShouldReturnSuccessWithValidData()
     {
-        // Arrange - each test gets its own fixture for isolation
         using var fixture = new SqliteTestFixture();
         using var dbContext = fixture.CreateContext();
 
@@ -117,11 +111,7 @@ public class NewsServiceShould
             Take = 10,
             SearchTerm = "Test News 1"
         };
-
-        // Act
         var result = await service.GetIndexAsync(request, CancellationToken.None);
-
-        // Assert
         if (result.IsSuccess)
         {
             result.Value.ShouldNotBeNull();
@@ -137,7 +127,6 @@ public class NewsServiceShould
     [Fact]
     public async Task GetByIdAsyncWithSearchShouldReturnSuccessWithValidData()
     {
-        // Arrange - each test gets its own fixture for isolation
         using var fixture = new SqliteTestFixture();
         using var dbContext = fixture.CreateContext();
 
@@ -156,13 +145,7 @@ public class NewsServiceShould
         await dbContext.SaveChangesAsync();
 
         var service = new NewsService(dbContext);
-
-
-
-        // Act
         var result = await service.GetByIdAsync(newsArticle.Id);
-
-        // Assert
         if (result.IsSuccess)
         {
             result.Value.ShouldNotBeNull();

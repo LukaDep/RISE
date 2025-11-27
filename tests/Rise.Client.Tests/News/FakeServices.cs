@@ -9,7 +9,6 @@ public class NullNewsService : INewsService
 {
     public Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
-        // Intentionally set News to null (use null-forgiving to bypass nullable warning)
         var wrapper = new NewsResponse.Index
         {
             News = null!
@@ -36,7 +35,6 @@ public class FakeNewsService : INewsService
 
     public Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
-        // simple search: title or content contains SearchTerm (case-insensitive)
         var query = _items.AsEnumerable();
 
         if (!string.IsNullOrWhiteSpace(request?.SearchTerm))
@@ -45,11 +43,7 @@ public class FakeNewsService : INewsService
             query = query.Where(n => n.Title.Contains(term, StringComparison.OrdinalIgnoreCase)
                          || n.Content.Contains(term, StringComparison.OrdinalIgnoreCase));
         }
-
-        // apply ordering: by PublishDate desc by default
         query = query.OrderByDescending(n => n.PublishDate);
-
-        // paging
         var skip = Math.Max(0, request?.Skip ?? 0);
         var take = Math.Max(0, request?.Take ?? 20);
 

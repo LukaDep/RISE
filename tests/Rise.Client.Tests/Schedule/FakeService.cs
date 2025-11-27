@@ -33,8 +33,6 @@ public class FakeScheduleService : IScheduleService
     public Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default)
     {
         var query = _items.AsEnumerable();
-
-        // Apply search filter if SearchTerm is provided
         if (!string.IsNullOrWhiteSpace(req?.SearchTerm))
         {
             var term = req.SearchTerm.Trim();
@@ -43,8 +41,6 @@ public class FakeScheduleService : IScheduleService
                 (s.Teacher?.Contains(term, StringComparison.OrdinalIgnoreCase) ?? false) ||
                 (s.Room?.Contains(term, StringComparison.OrdinalIgnoreCase) ?? false));
         }
-
-        // Apply ordering
         query = !string.IsNullOrWhiteSpace(req?.OrderBy)
             ? req.OrderBy.ToLower() switch
             {
@@ -62,8 +58,6 @@ public class FakeScheduleService : IScheduleService
                     : query.OrderBy(s => s.Id)
             }
             : query.OrderBy(s => s.StartDateTime);
-
-        // Apply pagination
         if (req != null)
         {
             query = query.Skip(req.Skip).Take(req.Take);

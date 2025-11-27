@@ -42,8 +42,6 @@ public class IndexSearchShould : TestContext
         var cut = RenderComponent<Index>();
         var input = cut.Find("input");
         input.Input("Campus");
-
-        // After typing, fuzzy filtering logic should leave Campus Cafe visible
         Assert.Contains("Campus Cafe", cut.Markup);
         Assert.DoesNotContain("Tech Lounge", cut.Markup);
     }

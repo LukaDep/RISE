@@ -26,25 +26,16 @@ public class ScheduleItemShould : TestContext
     [Fact]
     public void OpenOnEventClickAndClose()
     {
-        // Arrange: render DayView for today so the first fake item appears
         var cut = RenderComponent<DayView>(p => p.Add(x => x.SelectedDate, DateTime.Today));
-
-        // Act: click the event containing the known course title from FakeScheduleService
         var eventDiv = cut.FindAll("div").First(e =>
             e.TextContent.Contains("Web Ontwikkeling 2") &&
             (e.GetAttribute("class")?.Contains("cursor-pointer") ?? false));
         eventDiv.Click();
-
-        // Assert: modal appears and contains expected details
         var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
         Assert.Contains("Web Ontwikkeling 2", cut.Markup);
         Assert.Contains(localizer["Schedule.Close"], cut.Markup);
-
-        // Act: close via the close button
         var closeBtn = cut.FindAll("button").First(b => b.TextContent.Contains(localizer["Schedule.Close"]));
         closeBtn.Click();
-
-        // Assert: modal closed (no Close button text anymore)
         Assert.DoesNotContain(localizer["Schedule.Close"], cut.Markup);
     }
 
@@ -162,8 +153,6 @@ public class ScheduleItemShould : TestContext
         var cut = RenderComponent<ScheduleItem>(parameters => parameters
             .Add(p => p.Schedule, schedule)
             .Add(p => p.OnClose, EventCallback.Factory.Create(this, () => closeCalled = true)));
-
-        // Click the background overlay (has bg-black/50 class)
         var overlay = cut.Find("div.bg-black\\/50");
         overlay.Click();
 
@@ -227,9 +216,6 @@ public class ScheduleItemShould : TestContext
         var cut = RenderComponent<ScheduleItem>(parameters => parameters
             .Add(p => p.Schedule, schedule)
             .Add(p => p.OnClose, EventCallback.Factory.Create(this, () => { })));
-
-        // Should be truncated to 40 chars + "..."
-        // The exact truncation includes "This is a very long course title that sh..."
         Assert.Contains("This is a very long course title that", cut.Markup);
         Assert.Contains("...", cut.Markup);
     }

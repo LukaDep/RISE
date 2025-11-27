@@ -33,20 +33,13 @@ public class NewsArticleShould : TestContext
 
 
     [Fact]
-    public void NonExistentIdShowsErrorMessage()
-    {
-        // A GUID guaranteed not to exist in FakeNewsService
-        var nonExistingId = new Guid("99999999-9999-9999-9999-999999999999");
-
-        // Render the component
-        var cut = RenderComponent<NewsArticle>(parameters =>
-            parameters.Add(p => p.Id, nonExistingId));
-
-        // Verify the error message
-        Assert.Contains($"News item with id {nonExistingId} not found.", cut.Markup);
-
-        // Verify error styling
-        Assert.Contains("text-red-500", cut.Markup);
-    }
+public void NonExistentIdShowsErrorMessage()
+{
+    var nonExistingId = new Guid("99999999-9999-9999-9999-999999999999");
+    var cut = RenderComponent<NewsArticle>(parameters =>
+        parameters.Add(p => p.Id, nonExistingId));
+    Assert.Contains($"News item with id {nonExistingId} not found.", cut.Markup);
+    Assert.Contains("text-red-500", cut.Markup);
+}
 
 }

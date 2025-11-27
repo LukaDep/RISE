@@ -24,7 +24,6 @@ public class ScheduleServiceShould
     [Fact]
     public async Task GetIndexAsyncShouldReturnSuccessWithValidData()
     {
-        // Arrange: create temp mock data file at ..\Rise.Services\Schedule\MockData\ScheduleMockdata.json
         var tempRoot = Directory.CreateTempSubdirectory();
         try
         {
@@ -59,11 +58,7 @@ public class ScheduleServiceShould
             using var dbContext = fixture.CreateContext();
             var service = new MockScheduleService(dbContext);
             var request = new QueryRequest.SkipTake { Skip = 0, Take = 10 };
-
-            // Act
             var result = await service.GetIndexAsync(request, CancellationToken.None);
-
-            // Assert
             if (result.IsSuccess)
             {
                 result.Value.ShouldNotBeNull();

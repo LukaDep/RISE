@@ -4,10 +4,6 @@ using Serilog.Templates;
 using Xunit.Abstractions;
 
 namespace Xunit;
-
-/// <summary>
-/// Logging for xUnit helper class, taken from: https://bunit.dev/docs/misc-test-tips.html
-/// </summary>
 public static class ServiceCollectionLoggingExtensions
 {
     public static IServiceCollection AddXunitLogger(this IServiceCollection services, ITestOutputHelper outputHelper)

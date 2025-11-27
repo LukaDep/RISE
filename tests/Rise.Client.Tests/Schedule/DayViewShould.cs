@@ -17,13 +17,8 @@ public class DayViewShould : TestContext
     [Fact]
     public void ShowsScheduleItemForToday()
     {
-        // Arrange
         var cut = RenderComponent<DayView>(parameters => parameters.Add(p => p.SelectedDate, DateTime.Today));
-
-        // Act
         var markup = cut.Markup;
-
-        // Assert that the fake schedule item's course for today is visible
         Assert.Contains("Web Ontwikkeling 2", markup);
         Assert.Contains("GSCHB.2.009", markup);
     }
@@ -31,14 +26,11 @@ public class DayViewShould : TestContext
     [Fact]
     public void NavigateToPreviousDay_SkippingWeekend()
     {
-        // Start on a Monday
         var monday = new DateTime(2024, 1, 8);
         var cut = RenderComponent<DayView>(parameters => parameters
             .Add(p => p.SelectedDate, monday));
 
         cut.InvokeAsync(() => cut.Instance.PreviousDay());
-
-        // Should skip Saturday and Sunday, landing on Friday
         var expectedDate = new DateTime(2024, 1, 5);
         Assert.Equal(expectedDate, cut.Instance.SelectedDate);
     }
@@ -46,14 +38,11 @@ public class DayViewShould : TestContext
     [Fact]
     public void NavigateToNextDay_SkippingWeekend()
     {
-        // Start on a Friday
         var friday = new DateTime(2024, 1, 5);
         var cut = RenderComponent<DayView>(parameters => parameters
             .Add(p => p.SelectedDate, friday));
 
         cut.InvokeAsync(() => cut.Instance.NextDay());
-
-        // Should skip Saturday and Sunday, landing on Monday
         var expectedDate = new DateTime(2024, 1, 8);
         Assert.Equal(expectedDate, cut.Instance.SelectedDate);
     }
@@ -64,8 +53,6 @@ public class DayViewShould : TestContext
         var tuesday = new DateTime(2024, 1, 9);
         var cut = RenderComponent<DayView>(parameters => parameters
             .Add(p => p.SelectedDate, tuesday));
-
-        // Navigate forward 3 days
         cut.InvokeAsync(() =>
         {
             cut.Instance.NextDay();
@@ -113,8 +100,6 @@ public class DayViewShould : TestContext
         var firstSchedule = schedules!.First(s => s.StartDateTime.Date == DateTime.Today);
 
         await cut.InvokeAsync(() => cut.Instance.OpenDetails(firstSchedule));
-
-        // Verify modal is rendered in markup
         Assert.Contains(firstSchedule.Course, cut.Markup);
     }
 
@@ -130,15 +115,11 @@ public class DayViewShould : TestContext
         var firstSchedule = schedules!.First(s => s.StartDateTime.Date == DateTime.Today);
 
         await cut.InvokeAsync(() => cut.Instance.OpenDetails(firstSchedule));
-
-        // Check if modal is opened - SelectedSchedule should be set
         var selectedScheduleField = typeof(DayView).GetField("SelectedSchedule", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
         var selectedSchedule = selectedScheduleField?.GetValue(cut.Instance);
         Assert.NotNull(selectedSchedule);
 
         await cut.InvokeAsync(() => cut.Instance.CloseDetails());
-
-        // Check if modal is closed - SelectedSchedule should be null
         selectedSchedule = selectedScheduleField?.GetValue(cut.Instance);
         Assert.Null(selectedSchedule);
     }
@@ -208,8 +189,6 @@ public class DayViewShould : TestContext
             .Add(p => p.SelectedDate, friday));
 
         await cut.InvokeAsync(() => cut.Instance.SwipeNext());
-
-        // Should skip to Monday
         Assert.Equal(new DateTime(2024, 1, 8), cut.Instance.SelectedDate);
     }
 
@@ -221,8 +200,6 @@ public class DayViewShould : TestContext
             .Add(p => p.SelectedDate, monday));
 
         await cut.InvokeAsync(() => cut.Instance.SwipePrevious());
-
-        // Should skip to Friday
         Assert.Equal(new DateTime(2024, 1, 5), cut.Instance.SelectedDate);
     }
 }
