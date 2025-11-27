@@ -17,12 +17,14 @@ using Rise.Shared.Contact;
 using Rise.Shared.Grades;
 using Rise.Shared.Menu;
 using Rise.Services.Notifications;
+using Rise.Services.Widgets;
 using Rise.Shared.Notifications;
 using Rise.Shared.Schedule;
 using Rise.Shared.StudentCards;
-using System.ComponentModel.Design;
+using Rise.Shared.Widgets;
 using Rise.Shared.Events;
 using Rise.Services.Events;
+using System.ComponentModel.Design;
 
 namespace Rise.Services;
 
@@ -40,6 +42,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IGradesService, GradesService>();
         services.AddScoped<INotificationPreferencesService, NotificationPreferencesService>();
         services.AddScoped<IStudentCardService, StudentCardService>();
+        services.AddScoped<IWidgetService, WidgetService>();
         services.AddScoped<IEventService, EventService>();
         services.AddTransient<DbSeeder>();
         return services;

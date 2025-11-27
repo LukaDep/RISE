@@ -5,6 +5,7 @@ using Rise.Client;
 using Rise.Client.Account;
 using Rise.Client.Campus;
 using Rise.Client.Grades;
+using Rise.Client.Home;
 using Rise.Client.Identity;
 using Rise.Client.Menu;
 using Rise.Client.News;
@@ -22,6 +23,7 @@ using Rise.Shared.Resto;
 using Rise.Shared.Schedule;
 using Rise.Shared.Events;
 using Rise.Shared.StudentCards;
+using Rise.Shared.Widgets;
 
 try
 {
@@ -93,6 +95,11 @@ try
     });
 
     builder.Services.AddHttpClient<IContactService, ContactService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    });
+
+    builder.Services.AddHttpClient<IWidgetService, WidgetService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });

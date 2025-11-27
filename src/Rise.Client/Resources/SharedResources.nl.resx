@@ -749,6 +749,30 @@
   <data name="EventCardDetails.register" xml:space="preserve">
     <value>Registreren</value>
   </data>
+  <data name="Home.Today" xml:space="preserve">
+    <value>Vandaag</value>
+  </data>
+  <data name="Home.More" xml:space="preserve">
+    <value>meer</value>
+  </data>
+  <data name="Home.LatestNews" xml:space="preserve">
+    <value>Laatste Nieuws</value>
+  </data>
+  <data name="Home.LatestGrades" xml:space="preserve">
+    <value>Laatste Punten</value>
+  </data>
+  <data name="Home.NoNews" xml:space="preserve">
+    <value>geen nieuws verkrijgbaar</value>
+  </data>
+  <data name="Home.NoGrades" xml:space="preserve">
+    <value>geen punten verkrijgbaar</value>
+  </data>
+  <data name="Home.NoRestos" xml:space="preserve">
+    <value>geen restaurents</value>
+  </data>
+  <data name="Home.NoMenus" xml:space="preserve">
+    <value>geen menus vandaag</value>
+  </data>
   <data name="News.Back" xml:space="preserve">
     <value>Terug naar nieuws</value>
     <comment/>

@@ -1,75 +1,97 @@
 @namespace Rise.Client.Home
 @using Microsoft.AspNetCore.Components
+@using Microsoft.AspNetCore.Components.Rendering
 @using Rise.Client.Home.Components
-@using Rise.Shared.Schedule
 @using Rise.Client.Home.Widgets
-@using Rise.Shared.Menu
-@using Rise.Shared.Resto
-@using Rise.Shared.News
-@using Rise.Shared.Grades
-@implements IAsyncDisposable
+@using System.Linq
+@using Rise.Shared.Widgets
 
 <div>
-    <div id="@_gridId" class="grid-stack">
-        <ScheduleWidget UpcomingClasses="UpcomingClasses" />
-        <RestoMenuWidget TodaysMenus="TodaysMenus" Restos="Restos" />
-        <NewsWidget News="News" />
-        <GradesWidget Grade="Grade" />
+    <div id="@_gridId" class="grid-stack p-0">
+        @for (int i = 0; i < Widgets.Count; i++)
+        {
+            var entry = Widgets[i];
+
+            <div @key="entry.Id" class="grid-stack-item m-0" id="@entry.Id" gs-x="@entry.X" gs-y="@entry.Y"
+                gs-w="@entry.Width" gs-h="@entry.Height" gs-min-w="@entry.MinWidth" gs-min-h="4">
+                <div class="grid-stack-item-content bg-white rounded-2xl shadow-md p-4 my-4">
+                    <DynamicComponent Type="@entry.Type" Parameters="@GetWidgetParameters(i, entry.Id)" />
+                </div>
+            </div>
+        }
     </div>
 </div>
 
 @code {
     [Parameter] public bool EditMode { get; set; }
-    [Parameter] public EventCallback<int> OnRemove { get; set; }
-    [Parameter]
-    public List<ScheduleDto.Schedule> UpcomingClasses { get; set; } = new
-    List<ScheduleDto.Schedule>();
+    [Parameter] public EventCallback<Guid> OnRemove { get; set; }
+    [Parameter] public List<WidgetEntry> Widgets { get; set; } = new();
 
-    [Parameter] public IEnumerable<MenuDto.Index>? TodaysMenus { get; set; }
-    [Parameter] public IEnumerable<RestoDto.Index>? Restos { get; set; }
-    [Parameter] public IEnumerable<NewsDto.Index>? News { get; set; }
-    [Parameter] public GradesDto.Grade? Grade { get; set; }
+    [Inject] public IJSRuntime Js { get; set; } = default!;
 
-    [Inject] IJSRuntime JS { get; set; } = default!;
-
-    private readonly string _gridId = $"grid-home";
+    private readonly string _gridId = "grid-home";
     private DotNetObjectReference<MiddleElements>? _dotRef;
     private bool _gridInitialized;
+    private List<Guid> _lastWidgets = new();
+
+    private IDictionary<string, object> GetWidgetParameters(int index, Guid widgetId)
+    => new Dictionary<string, object>
+    {
+{ "Index", index },
+{ "WidgetId", widgetId },
+{ "OnRemove", EventCallback.Factory.Create<Guid>(this, async (id) => await OnRemove.InvokeAsync(id)) },
+{ "EditMode", EditMode }
+    };
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             _dotRef = DotNetObjectReference.Create(this);
-
-            await JS.InvokeVoidAsync("gridstackInterop.initGrid", _gridId, new
+            Console.WriteLine("Initializing gridstack...");
+            await Js.InvokeVoidAsync("gridstackInterop.initGrid", _gridId, new
             {
                 column = 12,
                 @float = false,
+                disableOneColumnMode = true,
                 staticGrid = !EditMode
             }, _dotRef);
-            await JS.InvokeVoidAsync("gridstackInterop.setEditMode", _gridId, EditMode);
+            await Js.InvokeVoidAsync("gridstackInterop.setEditMode", _gridId, EditMode);
 
             _gridInitialized = true;
+            _lastWidgets = Widgets.Select(w => w.Id).ToList();
         }
 
         if (_gridInitialized)
         {
             await Task.Yield();
-            await JS.InvokeVoidAsync("gridstackInterop.setEditMode", _gridId, EditMode);
-        }
-    }
+            await Js.InvokeVoidAsync("gridstackInterop.setEditMode", _gridId, EditMode);
 
-    [JSInvokable]
-    public Task OnJsLayoutChanged(object items)
-    => Task.CompletedTask;
+            var current = Widgets.Select(w => w.Id).ToList();
+            var changed = !_lastWidgets.SequenceEqual(current);
+            if (changed)
+            {
+                try
+                {
+                    await Js.InvokeVoidAsync("gridstackInterop.destroy", _gridId);
+                }
+                catch
+                {
+                    // ignore
+                }
 
-    public async ValueTask DisposeAsync()
-    {
-        _dotRef?.Dispose();
-        if (_gridInitialized)
-        {
-            await JS.InvokeVoidAsync("gridstackInterop.destroy", _gridId);
+                await Js.InvokeVoidAsync("gridstackInterop.initGrid", _gridId, new
+                {
+                    column = 12,
+                    @float = false,
+                    disableOneColumnMode = true,
+                    staticGrid = !EditMode
+                }, _dotRef);
+
+                _lastWidgets = current;
+                _gridInitialized = true;
+            }
+
         }
     }
 }

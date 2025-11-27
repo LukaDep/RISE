@@ -39,11 +39,11 @@ public class MenuPageShould : TestContext
 
         // Assert filter buttons exist
         var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
-        
+
         Assert.Contains(localizer["Resto.Filter.All"], cut.Markup);
         Assert.Contains(localizer["Resto.Vegetarisch"], cut.Markup);
         Assert.Contains(localizer["Resto.Vegan"], cut.Markup);
-        
+
         // Check for filter icons
         Assert.Contains("fa-list", cut.Markup);
         Assert.Contains("fa-leaf", cut.Markup);
@@ -63,7 +63,7 @@ public class MenuPageShould : TestContext
         {
             // Check for legend section
             Assert.Contains(localizer["Resto.Legende"], cut.Markup);
-            
+
             // Verify legend contains icon explanations
             var legendSection = cut.Markup.Substring(cut.Markup.IndexOf(localizer["Resto.Legende"]));
             Assert.Contains(localizer["Resto.Vegetarisch"], legendSection);
@@ -84,18 +84,18 @@ public class MenuPageShould : TestContext
         {
             // Wait for filter buttons to be rendered and click veggie filter
             var buttons = cut.FindAll("button");
-            var veggieButton = buttons.FirstOrDefault(b => 
-                b.TextContent.Contains(localizer["Resto.Vegetarisch"]) && 
+            var veggieButton = buttons.FirstOrDefault(b =>
+                b.TextContent.Contains(localizer["Resto.Vegetarisch"]) &&
                 b.ClassList.Contains("px-4"));
             Assert.NotNull(veggieButton);
             veggieButton.Click();
 
             // Assert - Veggie filter button should be active (green)
-            var activeButton = cut.FindAll("button").FirstOrDefault(b => 
+            var activeButton = cut.FindAll("button").FirstOrDefault(b =>
                 b.TextContent.Contains(localizer["Resto.Vegetarisch"]) &&
                 b.ClassList.Contains("bg-green-600"));
             Assert.NotNull(activeButton);
-            
+
             // Veggie items should be visible (in expanded today section)
             var markup = cut.Markup;
             Assert.Contains("Vegetarian Lasagna", markup);
@@ -115,20 +115,20 @@ public class MenuPageShould : TestContext
         {
             // Wait for filter buttons to be rendered and click vegan filter
             var buttons = cut.FindAll("button");
-            var veganButton = buttons.FirstOrDefault(b => 
-                b.TextContent.Contains(localizer["Resto.Vegan"]) && 
+            var veganButton = buttons.FirstOrDefault(b =>
+                b.TextContent.Contains(localizer["Resto.Vegan"]) &&
                 !b.TextContent.Contains(localizer["Resto.Vegetarisch"]) &&
                 b.ClassList.Contains("px-4"));
             Assert.NotNull(veganButton);
             veganButton.Click();
 
             // Assert - Vegan filter button should be active (emerald)
-            var activeButton = cut.FindAll("button").FirstOrDefault(b => 
+            var activeButton = cut.FindAll("button").FirstOrDefault(b =>
                 b.TextContent.Contains(localizer["Resto.Vegan"]) &&
                 !b.TextContent.Contains(localizer["Resto.Vegetarisch"]) &&
                 b.ClassList.Contains("bg-emerald-500"));
             Assert.NotNull(activeButton);
-            
+
             // Vegan items should be visible (in expanded today section)
             var markup = cut.Markup;
             Assert.Contains("Tomato Soup", markup); // Tomato soup is vegan
@@ -146,22 +146,22 @@ public class MenuPageShould : TestContext
         {
             // Assert - Today should be expanded by default (contains menu items)
             var initialMarkup = cut.Markup;
-            var hasExpandedContent = initialMarkup.Contains("Spaghetti") || 
+            var hasExpandedContent = initialMarkup.Contains("Spaghetti") ||
                                      initialMarkup.Contains("Vegetarian") ||
                                      initialMarkup.Contains("Tomato Soup");
 
             Assert.True(hasExpandedContent, "Expected today's menu to be expanded by default");
 
             // Act - Click to collapse/expand days
-            var dayHeaders = cut.FindAll("button").Where(b => 
-                b.ClassList.Contains("w-full") && 
+            var dayHeaders = cut.FindAll("button").Where(b =>
+                b.ClassList.Contains("w-full") &&
                 b.ClassList.Contains("text-left"));
 
             if (dayHeaders.Any())
             {
                 var firstDay = dayHeaders.First();
                 firstDay.Click();
-                
+
                 // The day should toggle (expand or collapse)
                 var afterClickMarkup = cut.Markup;
                 Assert.NotEqual(initialMarkup, afterClickMarkup);
@@ -197,7 +197,7 @@ public class MenuPageShould : TestContext
         {
             // Assert - All displayed days should be weekdays
             var markup = cut.Markup;
-            
+
             // The page should show menus (if today is a weekday or it should show next Monday)
             // FakeMenuService provides menus for weekdays only
             Assert.DoesNotContain("Saturday", markup);
@@ -215,11 +215,11 @@ public class MenuPageShould : TestContext
         cut.WaitForAssertion(() =>
         {
             var markup = cut.Markup;
-            
+
             // Assert - Should display menu items from FakeMenuService
             Assert.Contains("Spaghetti Bolognese", markup);
             Assert.Contains("Vegetarian Lasagna", markup);
-            
+
             // Should show prices
             Assert.Contains("€", markup); // Price symbol should be present
         });

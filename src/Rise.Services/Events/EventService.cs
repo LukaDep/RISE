@@ -23,7 +23,7 @@ namespace Rise.Services.Events
             {
                 typeFilter = request.Filters["Type"]?.ToString();
             }
-                
+
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
                 query = query.Where(n => n.Type.Contains(request.SearchTerm)

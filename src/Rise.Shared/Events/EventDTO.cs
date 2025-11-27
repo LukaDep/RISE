@@ -8,7 +8,7 @@ namespace Rise.Shared.Events
 {
     public static class EventDTO
     {
-    
+
         public class Index
         {
             public required string Type { get; set; } = null!;

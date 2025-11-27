@@ -28,7 +28,7 @@ public partial class MenuPage : ComponentBase
         {
             isLoading = true;
 
-            var result = await MenuService.GetIndexAsync(new QueryRequest.SkipTake
+            var result = await MenuService.GetIndexAsync(new QueryRequest.DateRange()
             {
                 Skip = 0,
                 Take = 100

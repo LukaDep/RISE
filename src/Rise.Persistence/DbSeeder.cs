@@ -5,6 +5,7 @@ using Rise.Domain.Campus;
 using Rise.Domain.Contact;
 using Rise.Domain.Events;
 using Rise.Domain.Grades;
+using Rise.Domain.HomeWidgets;
 using Rise.Domain.Menu;
 using Rise.Domain.News;
 using Rise.Domain.Restos;
@@ -32,6 +33,8 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await EventsAsync();
         await GradesAsync();
         await RestosAndMenusAsync();
+        await WidgetsAsync();
+        await UserWidgetsAsync();
     }
 
     private async Task RolesAsync()
@@ -242,6 +245,82 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
 
         await dbContext.SaveChangesAsync();
     }
+
+    private async Task WidgetsAsync()
+    {
+        if (dbContext.Widgets.Any())
+            return;
+        var widgets = new List<Widget>
+        {
+            new Widget()
+            {
+                TypeName = "news",
+            },
+            new Widget()
+            {
+                TypeName = "menus",
+            },
+            new Widget()
+            {
+                TypeName = "schedule",
+            },
+            new Widget()
+            {
+                TypeName = "grades",
+            },
+            new Widget()
+            {
+                TypeName = "links",
+            }
+        };
+        dbContext.Widgets.AddRange(widgets);
+        await dbContext.SaveChangesAsync();
+    }
+
+    private async Task UserWidgetsAsync()
+    {
+        if (dbContext.UserWidgets.Any())
+            return;
+
+        // find users
+        var student1 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "jan.vermeulen@student.hogent.be");
+        var student2 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "marie.dubois@student.hogent.be");
+        var student3 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "pieter.janssens@student.hogent.be");
+
+        // find widgets by type (created in WidgetsAsync)
+        var newsWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "news");
+        var menusWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "menus");
+        var scheduleWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "schedule");
+        var gradesWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "grades");
+        var linksWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "links");
+
+        if (student1 == null || student2 == null || student3 == null ||
+            newsWidget == null || menusWidget == null || scheduleWidget == null || gradesWidget == null || linksWidget == null)
+        {
+            // missing prerequisites; skip seeding user widgets
+            return;
+        }
+
+        dbContext.UserWidgets.AddRange(
+            // student1: news + grades
+            new UserWidget { Widget = newsWidget, UserId = student1.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student1.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+
+            // student2: menus + schedule
+            new UserWidget { Widget = menusWidget, UserId = student2.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student2.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+
+            // student3: all widgets (example)
+            new UserWidget { Widget = newsWidget, UserId = student3.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student3.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student3.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student3.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 }
+        );
+
+        await dbContext.SaveChangesAsync();
+    }
+
+
 
     private async Task CampusesAsync()
     {

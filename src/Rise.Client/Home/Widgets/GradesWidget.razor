@@ -1,55 +1,61 @@
 @namespace Rise.Client.Home.Widgets
+@using Rise.Shared.Common
 @using Rise.Shared.Grades
 @inject NavigationManager NavigationManager
+@inject IGradesService GradesClientService
 
-<div class="grid-stack-item" gs-x="0" gs-y="7" gs-w="12" gs-h="4">
-    <div class="grid-stack-item-content bg-white rounded-2xl shadow-md p-4">
-        <div class="flex flex-col h-full">
-            <div class="flex justify-between">
-                <div class="text-sm font-semibold text-hogent-black-50 mb-1">Latest Grades</div>
-                <span class="text-sm text-blue-600 cursor-pointer" @onclick="More">more</span>
-            </div>
 
-            <div class="flex-1 overflow-auto">
-                @if (Grade == null)
+<div class="flex flex-col">
+    <div class="flex justify-between">
+        <div class="text-sm font-semibold text-hogent-black-50 mb-1">@L["Home.LatestGrades"]</div>
+        @if (EditMode)
+        {
+            <button class="font-bold" @onclick="async () => await OnRemove.InvokeAsync(WidgetId)"
+                title="Remove widget">×</button>
+        }
+        else
+        {
+            <span class="text-sm text-blue-600 cursor-pointer" @onclick="More">@L["Home.More"]</span>
+
+        }
+    </div>
+
+    <div class="flex-1 overflow-auto">
+        @if (_loading)
+        {
+            <div class="text-sm text-hogent-black-50">Loading…</div>
+        }
+        else if (!string.IsNullOrEmpty(_error))
+        {
+            <div class="text-sm text-red-500">@_error</div>
+        }
+        else if (Grade == null)
+        {
+            <div class="text-sm text-hogent-black-50">@L["Home.NoGrades"]</div>
+        }
+        else
+        {
+            <ul class="space-y-2">
+                @if (Grade != null)
                 {
-                    <div class="text-sm text-hogent-black-50">No grades available</div>
+                    <li class="flex items-center justify-between">
+                        <div class="text-sm text-hogent-black">@Grade.Name</div>
+                        <div class="text-sm text-gray-500">
+                            @if (Grade.Score.HasValue)
+                            {
+                                @String.Format("{0:0.##}", Grade.Score)
+                                @("/")
+                                @((Grade.MaxPoints.HasValue) ? String.Format("{0:0.##}", Grade.MaxPoints) : "-")
+                            }
+                            else
+                            {
+                                <span class="text-xs text-hogent-black-50">—</span>
+                            }
+                        </div>
+                        <div class="text-xs text-gray-400 ml-4">@((Grade.Date).ToString("dd MMM"))</div>
+                    </li>
                 }
-                else
-                {
-                    <ul class="space-y-2">
-                        @if (Grade != null)
-                        {
-                            <li class="flex items-center justify-between">
-                                <div class="text-sm text-hogent-black">@Grade.Name</div>
-                                <div class="text-sm text-gray-500">
-                                    @if (Grade.Score.HasValue)
-                                    {
-                                        @String.Format("{0:0.##}", Grade.Score)
-                                        @("/")
-                                        @((Grade.MaxPoints.HasValue) ?
-                                                                    String.Format("{0:0.##}", Grade.MaxPoints) : "-")
-                                    }
-                                    else
-                                    {
-                                        <span class="text-xs text-hogent-black-50">—</span>
-                                    }
-                                </div>
-                                <div class="text-xs text-gray-400 ml-4">@((Grade.Date).ToString("dd MMM"))</div>
-                            </li>
-                        }
-                    </ul>
-                }
-            </div>
-        </div>
+            </ul>
+        }
     </div>
 </div>
-
-@code {
-    [Parameter] public GradesDto.Grade? Grade { get; set; }
-
-    private void More()
-    {
-        NavigationManager.NavigateTo("/grades");
-    }
-}

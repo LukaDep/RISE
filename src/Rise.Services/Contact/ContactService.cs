@@ -18,7 +18,7 @@ namespace Rise.Services.Contact
 
             var query = dbContext.Contacts.AsQueryable();
 
-            var typeFilter = request.Filters["Type"]?.ToString() ?? "";
+
             if (!string.IsNullOrWhiteSpace(request.SearchTerm))
             {
                 query = query.Where(n => n.Type.Contains(request.SearchTerm)
@@ -30,10 +30,7 @@ namespace Rise.Services.Contact
                     ? query.OrderByDescending(e => EF.Property<object>(e, request.OrderBy))
                     : query.OrderBy(e => EF.Property<object>(e, request.OrderBy));
             }
-            if (!string.IsNullOrWhiteSpace(typeFilter))
-            {
-                query = query.Where(n => n.Type.Equals(typeFilter, StringComparison.CurrentCultureIgnoreCase));
-            }
+
             else
             {
                 query = query.OrderBy(p => p.Type);

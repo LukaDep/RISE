@@ -12,11 +12,11 @@ public class FakeMenuService : IMenuService
     public Task<Result<MenuResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ct = default)
     {
         var today = DateTime.Today;
-        
+
         // Find next Monday (or today if it's Monday)
         var daysUntilMonday = ((int)DayOfWeek.Monday - (int)today.DayOfWeek + 7) % 7;
         var monday = daysUntilMonday == 0 ? today : today.AddDays(daysUntilMonday);
-        
+
         // If today is a weekday, use today; otherwise use next Monday
         var firstDay = today.DayOfWeek >= DayOfWeek.Monday && today.DayOfWeek <= DayOfWeek.Friday ? today : monday;
 

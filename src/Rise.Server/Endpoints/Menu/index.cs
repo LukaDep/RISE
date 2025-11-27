@@ -5,7 +5,7 @@ namespace Rise.Server.Endpoints.Menu;
 
 /// <param name="menuService"></param>
 public class Index(IMenuService menuService)
-    : Endpoint<QueryRequest.SkipTake, Result<MenuResponse.Index>>
+    : Endpoint<QueryRequest.DateRange, Result<MenuResponse.Index>>
 {
     public override void Configure()
     {
@@ -13,7 +13,7 @@ public class Index(IMenuService menuService)
         AllowAnonymous();
     }
 
-    public override Task<Result<MenuResponse.Index>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
+    public override Task<Result<MenuResponse.Index>> ExecuteAsync(QueryRequest.DateRange req, CancellationToken ct)
     {
         return menuService.GetIndexAsync(req, ct);
     }

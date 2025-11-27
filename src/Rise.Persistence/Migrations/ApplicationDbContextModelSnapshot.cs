@@ -372,7 +372,7 @@ namespace Rise.Persistence.Migrations
 
                     b.Property<string>("Facilities")
                         .IsRequired()
-                        .HasColumnType("json");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("HouseNumber")
                         .IsRequired()
@@ -423,7 +423,7 @@ namespace Rise.Persistence.Migrations
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Campusses")
-                        .HasColumnType("json");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("ContactPerson")
                         .HasMaxLength(250)
@@ -589,6 +589,90 @@ namespace Rise.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Grade", (string)null);
+                });
+
+            modelBuilder.Entity("Rise.Domain.HomeWidgets.UserWidget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                    b.Property<int>("Height")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<int>("MinWidth")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("varchar(255)");
+
+                    b.Property<Guid>("WidgetId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("Width")
+                        .HasColumnType("int");
+
+                    b.Property<int>("X")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Y")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("WidgetId");
+
+                    b.ToTable("UserWidget", (string)null);
+                });
+
+            modelBuilder.Entity("Rise.Domain.HomeWidgets.Widget", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(36)
+                        .HasColumnType("char(36)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("tinyint(1)")
+                        .HasDefaultValue(false);
+
+                    b.Property<string>("TypeName")
+                        .IsRequired()
+                        .HasMaxLength(250)
+                        .HasColumnType("varchar(250)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime(6)")
+                        .HasDefaultValueSql("CURRENT_TIMESTAMP(6) ON UPDATE CURRENT_TIMESTAMP(6)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Widget", (string)null);
                 });
 
             modelBuilder.Entity("Rise.Domain.Menu.Menu", b =>
@@ -848,7 +932,7 @@ namespace Rise.Persistence.Migrations
                         .HasDefaultValue(false);
 
                     b.Property<string>("KitchenType")
-                        .HasColumnType("json");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -856,7 +940,7 @@ namespace Rise.Persistence.Migrations
                         .HasColumnType("varchar(250)");
 
                     b.Property<string>("OpeningHours")
-                        .HasColumnType("json");
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("PhoneNumber")
                         .HasMaxLength(50)
@@ -994,6 +1078,17 @@ namespace Rise.Persistence.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("Rise.Domain.HomeWidgets.UserWidget", b =>
+                {
+                    b.HasOne("Rise.Domain.HomeWidgets.Widget", "Widget")
+                        .WithMany("UserWidgets")
+                        .HasForeignKey("WidgetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Widget");
+                });
+
             modelBuilder.Entity("Rise.Domain.Menu.MenuItem", b =>
                 {
                     b.HasOne("Rise.Domain.Menu.Menu", null)
@@ -1015,6 +1110,11 @@ namespace Rise.Persistence.Migrations
             modelBuilder.Entity("Rise.Domain.Campus.Campus", b =>
                 {
                     b.Navigation("Buildings");
+                });
+
+            modelBuilder.Entity("Rise.Domain.HomeWidgets.Widget", b =>
+                {
+                    b.Navigation("UserWidgets");
                 });
 
             modelBuilder.Entity("Rise.Domain.Menu.Menu", b =>

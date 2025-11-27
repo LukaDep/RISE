@@ -734,6 +734,30 @@
   <data name="EventCardDetails.register" xml:space="preserve">
     <value>Register</value>
   </data>
+  <data name="Home.Today" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="Home.More" xml:space="preserve">
+    <value>more</value>
+  </data>
+  <data name="Home.LatestNews" xml:space="preserve">
+    <value>Latest News</value>
+  </data>
+  <data name="Home.LatestGrades" xml:space="preserve">
+    <value>Latest Grades</value>
+  </data>
+  <data name="Home.NoNews" xml:space="preserve">
+    <value>no news available</value>
+  </data>
+  <data name="Home.NoGrades" xml:space="preserve">
+    <value>no grades available</value>
+  </data>
+  <data name="Home.NoRestos" xml:space="preserve">
+    <value>no restaurants</value>
+  </data>
+  <data name="Home.NoMenus" xml:space="preserve">
+    <value>no menus available today</value>
+  </data>
   <data name="News.Back" xml:space="preserve">
     <value>Back to news</value>
     <comment/>

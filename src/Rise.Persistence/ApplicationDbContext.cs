@@ -5,6 +5,7 @@ using Rise.Domain.Absences;
 using Rise.Domain.Campus;
 using Rise.Domain.Contact;
 using Rise.Domain.Grades;
+using Rise.Domain.HomeWidgets;
 using Rise.Domain.Menu;
 using Rise.Domain.News;
 using Rise.Domain.Notifications;
@@ -38,6 +39,8 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<StudentCard> StudentCards => Set<StudentCard>();
     public DbSet<Event> Events => Set<Event>();
     public DbSet<PushSubscriptions> PushSubscriptions => Set<PushSubscriptions>();
+    public DbSet<Widget> Widgets => Set<Widget>();
+    public DbSet<UserWidget> UserWidgets => Set<UserWidget>();
 
     protected override void ConfigureConventions(ModelConfigurationBuilder configurationBuilder)
     {
