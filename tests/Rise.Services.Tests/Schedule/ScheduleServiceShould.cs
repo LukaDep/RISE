@@ -57,7 +57,7 @@ public class ScheduleServiceShould
             using var fixture = new SqliteTestFixture();
             using var dbContext = fixture.CreateContext();
             var service = new MockScheduleService(dbContext);
-            var request = new QueryRequest.SkipTake { Skip = 0, Take = 10 };
+            var request = new QueryRequest.DateRange { Skip = 0, Take = 10 };
             var result = await service.GetIndexAsync(request, CancellationToken.None);
             if (result.IsSuccess)
             {

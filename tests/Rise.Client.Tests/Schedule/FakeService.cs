@@ -11,7 +11,7 @@ namespace Rise.Client.Schedule;
 
 public class NullScheduleService : IScheduleService
 {
-    public Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default)
+    public Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.DateRange req, CancellationToken ctx = default)
     {
         var wrapper = new ScheduleDto.Data
         {
@@ -30,9 +30,14 @@ public class FakeScheduleService : IScheduleService
         new ScheduleDto.Schedule { Id = "s2", Course = "Databanken II", WorkForm = "Activerend hoorcollege", Environment = "Digitaal", Room = "GSCHB.3.012", Teacher = "Thomas Parmentier", StartDateTime = DateTime.Today.AddDays(1).AddHours(11), EndDateTime = DateTime.Today.AddDays(1).AddHours(13) }
     };
 
-    public Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ctx = default)
+    public Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.DateRange req, CancellationToken ctx = default)
     {
         var query = _items.AsEnumerable();
+
+        // Apply date range filtering
+        query = ScheduleDto.ApplyDateRangeFilter(query, req);
+
+        // Apply search filter if SearchTerm is provided
         if (!string.IsNullOrWhiteSpace(req?.SearchTerm))
         {
             var term = req.SearchTerm.Trim();

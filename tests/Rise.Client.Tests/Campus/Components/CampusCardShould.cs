@@ -179,7 +179,7 @@ public class CampusCardShould : TestContext
             .Add(p => p.SearchTerm, ""));
 
         var card = cut.Find("div.flex.flex-col");
-        
+
         card.Click();
         card.Click();
 
@@ -191,7 +191,7 @@ public class CampusCardShould : TestContext
     {
         var campusId = Guid.NewGuid();
         var navManager = Services.GetRequiredService<Microsoft.AspNetCore.Components.NavigationManager>();
-        
+
         var cut = RenderComponent<CampusCard>(parameters => parameters
             .Add(p => p.Name, "Test Campus")
             .Add(p => p.Location, "Test Street 1, 9000 Test City")
@@ -203,7 +203,7 @@ public class CampusCardShould : TestContext
 
         var card = cut.Find("div.flex.flex-col");
         card.Click();
-        
+
         var mapButton = cut.Find("button.px-3");
         mapButton.Click();
 
@@ -214,7 +214,7 @@ public class CampusCardShould : TestContext
     public void UpdateVisibilityOnLocationChanged()
     {
         var navManager = Services.GetRequiredService<Microsoft.AspNetCore.Components.NavigationManager>();
-        
+
         var cut = RenderComponent<CampusCard>(parameters => parameters
             .Add(p => p.Name, "Test Campus")
             .Add(p => p.Location, "Test Street 1, 9000 Test City")

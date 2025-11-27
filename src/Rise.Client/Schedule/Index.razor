@@ -8,19 +8,16 @@
 
 <BasePage Title="@L["Schedule.Title"]">
     <Tabs @ref="TabsRef">
-        <!-- Dagweergave -->
         <Tab Title="@L["Schedule.Day"]">
-            <DayView @ref="DayViewRef" SelectedDate="@SelectedDay" />
+            <DayView @ref="DayViewRef" SelectedDate="@SelectedDay" OnDateChanged="date => SelectedDay = date" />
         </Tab>
 
-        <!-- Weekweergave -->
         <Tab Title="@L["Schedule.Week"]">
-            <WeekView SelectedDate="@SelectedDay" OnDayClick="GoToDay" />
+            <WeekView SelectedDate="@SelectedDay" OnDayClick="GoToDay" OnDateChanged="date => SelectedDay = date" />
         </Tab>
 
-        <!-- Maandweergave -->
         <Tab Title="@L["Schedule.Month"]">
-            <MonthView SelectedDate="@SelectedDay" OnDayClick="GoToDay" />
+            <MonthView SelectedDate="@SelectedDay" OnDayClick="GoToDay" OnDateChanged="date => SelectedDay = date" />
         </Tab>
     </Tabs>
 </BasePage>

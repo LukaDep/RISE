@@ -14,12 +14,10 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
     private AbsencesService _absencesService = new AbsencesService(dbContext);
 
-    public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)
+    public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.DateRange req, CancellationToken ct)
     {
-        // Pad naar het JSON-bestand in de source code directory
         var currentDirectory = Directory.GetCurrentDirectory();
 
-        // CurrentDirectory is Rise.Server, dus we gaan een level omhoog en dan naar Rise.Services
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");
         if (!File.Exists(_mockFilePath))
         {
@@ -29,10 +27,10 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
         var json = await File.ReadAllTextAsync(_mockFilePath, ct);
 
-
         var data = ConvertToDto(json);
 
-        //get absences data
+        data.Schedules = ScheduleDto.ApplyDateRangeFilter(data.Schedules, req).ToList();
+
         var absencesResult = await _absencesService.GetIndexAsync(new QueryRequest.SkipTake
         {
             Skip = 0,
@@ -58,7 +56,6 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
     public static ScheduleDto.Data ConvertToDto(string json)
     {
-        // Deserialize the raw API response
         var rawData = JsonSerializer.Deserialize<ScheduleApiResponse.ScheduleData>(json, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
@@ -67,14 +64,11 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
         if (rawData == null)
             throw new InvalidOperationException("Deserialization of ScheduleApiResponse.ScheduleData returned null.");
 
-        // Convert raw schedules with Columns array to DTO with named properties
         var convertedSchedules = rawData.Schedules.Select(r => new ScheduleDto.Schedule
         {
             Id = r.Id,
             StartDateTime = ParseDateTime(r.StartDate, r.StartTime),
             EndDateTime = ParseDateTime(r.EndDate, r.EndTime),
-            // Map columns array to named properties based on the structure:
-            // [0] = Olod (Course), [1] = Werkvorm, [4] = Leer- of toetsomgeving, [5] = Lokaal, [6] = Lesgever
             Course = r.Columns.Count > 0 ? r.Columns[0] : string.Empty,
             WorkForm = r.Columns.Count > 1 ? r.Columns[1] : string.Empty,
             Environment = r.Columns.Count > 4 ? r.Columns[4] : string.Empty,

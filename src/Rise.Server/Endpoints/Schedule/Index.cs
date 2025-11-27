@@ -8,7 +8,7 @@ namespace Rise.Server.Endpoints.Schedule;
 /// See https://fast-endpoints.com/
 /// </summary>
 /// <param name="ScheduleService"></param>
-public class Index(IScheduleService ScheduleService) : Endpoint<QueryRequest.SkipTake, Result<ScheduleDto.Data>>
+public class Index(IScheduleService ScheduleService) : Endpoint<QueryRequest.DateRange, Result<ScheduleDto.Data>>
 {
     public override void Configure()
     {
@@ -16,7 +16,7 @@ public class Index(IScheduleService ScheduleService) : Endpoint<QueryRequest.Ski
         AllowAnonymous();
     }
 
-    public override Task<Result<ScheduleDto.Data>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
+    public override Task<Result<ScheduleDto.Data>> ExecuteAsync(QueryRequest.DateRange req, CancellationToken ct)
     {
         return ScheduleService.GetIndexAsync(req, ct);
     }

@@ -8,31 +8,39 @@ namespace Rise.Client.Schedule;
 public partial class MonthView : IAsyncDisposable
 {
     [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
-
     [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
-
+    [Parameter] public DateTime? StartDate { get; set; }
+    [Parameter] public DateTime? EndDate { get; set; }
+    [Parameter] public EventCallback<DateTime> OnDateChanged { get; set; }
     private List<ScheduleDto.Schedule>? schedule;
-
     [Inject] public required IScheduleService ScheduleService { get; set; }
     [Inject] public required IJSRuntime JSRuntime { get; set; }
-
     private DotNetObjectReference<MonthView>? dotNetRef;
     private string swipeClass = string.Empty;
-
     private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        var request = new QueryRequest.SkipTake
+        await LoadSchedulesAsync();
+    }
+
+    private async Task LoadSchedulesAsync()
+    {
+        var start = StartDate ?? new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
+        var end = EndDate ?? start.AddMonths(1).AddTicks(-1);
+
+        QueryRequest.DateRange request = new()
         {
             Skip = 0,
             Take = 200,
-            OrderBy = "Id",
+            StartDate = start,
+            EndDate = end
         };
 
         var result = await ScheduleService.GetIndexAsync(request);
         schedule = result.Value?.Schedules;
     }
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -113,8 +121,8 @@ public partial class MonthView : IAsyncDisposable
         StateHasChanged();
     }
 
-    private void PreviousMonth() => SelectedDate = SelectedDate.AddMonths(-1);
-    private void NextMonth() => SelectedDate = SelectedDate.AddMonths(1);
+    private async Task PreviousMonth() => await OnDateChanged.InvokeAsync(SelectedDate.AddMonths(-1));
+    private async Task NextMonth() => await OnDateChanged.InvokeAsync(SelectedDate.AddMonths(1));
 
     [JSInvokable]
     public async Task SwipeNext()

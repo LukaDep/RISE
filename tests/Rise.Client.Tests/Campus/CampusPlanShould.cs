@@ -18,7 +18,7 @@ public class CampusPlanShould : TestContext
     {
         Services.AddScoped<ICampusService>(_ => _fakeCampusService);
         Services.AddLocalization();
-        
+
         JSInterop.Mode = JSRuntimeMode.Loose;
     }
 

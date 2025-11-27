@@ -114,7 +114,7 @@ public class CampusInfoShould : TestContext
     {
         var cut = RenderComponent<CampusInfo>();
         var navManager = Services.GetRequiredService<NavigationManager>();
-        
+
         cut.WaitForAssertion(() =>
         {
             var searchButton = cut.Find("button");

@@ -15,17 +15,23 @@ public partial class ScheduleWidget : ComponentBase
     [Parameter] public int Index { get; set; }
     [Parameter] public Guid WidgetId { get; set; }
     [Inject] public IJSRuntime Js { get; set; } = default!;
+    [Parameter] public DateTime? StartDate { get; set; }
+    [Parameter] public DateTime? EndDate { get; set; }
+
     protected override async Task OnInitializedAsync()
     {
         _loading = true;
         try
         {
-            var resultClasses = await ScheduleClientService.GetIndexAsync(new QueryRequest.SkipTake
+            QueryRequest.DateRange request = new()
             {
                 Skip = 0,
-                Take = 5,
-                OrderBy = "StartDateTime"
-            });
+                Take = 200,
+                StartDate = StartDate,
+                EndDate = EndDate
+            };
+
+            var resultClasses = await ScheduleClientService.GetIndexAsync(request);
             UpcomingClasses = resultClasses
                 .Value?
                 .Schedules

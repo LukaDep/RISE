@@ -3,7 +3,6 @@
 
 @using Rise.Client.Home.Components
 @using Rise.Client.Home
-@inject NavigationManager NavigationManager
 
 <PageTitle>@(IsEditMode ? "Edit" : "Home")</PageTitle>
 
@@ -15,7 +14,6 @@
                 <div class="flex items-center space-x-2">
                     @if (!IsEditMode)
                     {
-                        <!-- pen button -> go to edit route -->
                         <button type="button"
                             class="p-2 rounded-full bg-hogent-black text-hogent-white hover:bg-hogent-black-30 focus:outline-none"
                             @onclick="EnterEdit" aria-label="Edit">
@@ -24,7 +22,6 @@
                     }
                     else
                     {
-                        <!-- in edit mode show add and done buttons -->
                         <div class="toolbar relative flex items-center gap-3" tabindex="0">
                             <button @onclick="() => ToggleAdd()" aria-haspopup="true" aria-expanded="@_isAddOpen"
                                 aria-label="Add widget"

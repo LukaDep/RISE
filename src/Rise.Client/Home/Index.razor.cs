@@ -3,18 +3,24 @@ using Rise.Shared.Widgets;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components.Web;
+using Rise.Shared.Schedule;
+using Rise.Shared.Resto;
+using Rise.Shared.Common;
 
 namespace Rise.Client.Home;
 
 public record WidgetEntry(Type Type, Guid Id, int Width, int Height, int X, int Y, int MinWidth);
 
-
 public partial class Index : ComponentBase
 {
     [Inject] public IJSRuntime Js { get; set; } = default!;
-
     [Inject] public IWidgetService WidgetService { get; set; } = default!;
-    [Parameter]
+    [Inject] public IScheduleService ScheduleClientService { get; set; } = default!;
+    [Inject] public IRestoService RestoClientService { get; set; } = default!;
+    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    [Parameter] public DateTime? StartDate { get; set; }
+    [Parameter] public DateTime? EndDate { get; set; }
+    private List<ScheduleDto.Schedule>? UpcomingClasses { get; set; }
     public string? Mode { get; set; }
     private bool _isAddOpen;
 
@@ -154,6 +160,28 @@ public partial class Index : ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
+        QueryRequest.DateRange request = new()
+        {
+            Skip = 0,
+            Take = 200,
+            StartDate = StartDate,
+            EndDate = EndDate
+        };
+
+        var resultClasses = await ScheduleClientService.GetIndexAsync(request);
+        UpcomingClasses = resultClasses
+            .Value?
+            .Schedules
+            .Where(r => r.StartDateTime.Date == DateTime.Today.Date)
+            .OrderBy(r => r.StartDateTime)
+            .ToList();
+
+        var resultRestos = await RestoClientService.GetIndexAsync(new QueryRequest.SkipTake
+        {
+            Skip = 0,
+            Take = 200
+        });
+
         try
         {
             var isAuthenticated = AuthState?.Result.User?.Identity?.IsAuthenticated == true;

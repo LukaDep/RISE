@@ -10,6 +10,9 @@ public partial class WeekView : IAsyncDisposable
 {
     [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
     [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
+    [Parameter] public DateTime? StartDate { get; set; }
+    [Parameter] public DateTime? EndDate { get; set; }
+    [Parameter] public EventCallback<DateTime> OnDateChanged { get; set; }
 
     private ScheduleDto.Schedule? SelectedSchedule;
     private List<ScheduleDto.Schedule>? schedule;
@@ -22,18 +25,28 @@ public partial class WeekView : IAsyncDisposable
     private System.Timers.Timer? currentTimeTimer;
     private DateTime currentTime = DateTime.Now;
 
-    protected override async Task OnInitializedAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        var request = new QueryRequest.SkipTake
+        await LoadSchedulesAsync();
+    }
+
+    private async Task LoadSchedulesAsync()
+    {
+        var start = StartDate ?? SelectedDate.AddDays(-(int)SelectedDate.DayOfWeek + 1).Date; // Monday
+        var end = EndDate ?? start.AddDays(7).AddTicks(-1);
+
+        QueryRequest.DateRange request = new()
         {
             Skip = 0,
-            Take = 100,
-            OrderBy = "Id",
+            Take = 200,
+            StartDate = start,
+            EndDate = end
         };
 
         var result = await ScheduleService.GetIndexAsync(request);
         schedule = result.Value?.Schedules;
     }
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -122,8 +135,8 @@ public partial class WeekView : IAsyncDisposable
         StateHasChanged();
     }
 
-    private void PreviousWeek() => SelectedDate = SelectedDate.AddDays(-7);
-    private void NextWeek() => SelectedDate = SelectedDate.AddDays(7);
+    private async Task PreviousWeek() => await OnDateChanged.InvokeAsync(SelectedDate.AddDays(-7));
+    private async Task NextWeek() => await OnDateChanged.InvokeAsync(SelectedDate.AddDays(7));
 
     [JSInvokable]
     public async Task SwipeNext()

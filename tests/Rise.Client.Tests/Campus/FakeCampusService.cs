@@ -87,7 +87,7 @@ public class FakeCampusService : ICampusService
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
             var term = request.SearchTerm.Trim();
-            query = query.Where(c => 
+            query = query.Where(c =>
                 c.Name.Contains(term, StringComparison.OrdinalIgnoreCase) ||
                 c.City.Contains(term, StringComparison.OrdinalIgnoreCase) ||
                 c.Description.Contains(term, StringComparison.OrdinalIgnoreCase));

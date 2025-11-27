@@ -9,7 +9,9 @@ namespace Rise.Client.Schedule
     public partial class DayView : ComponentBase, IAsyncDisposable
     {
         [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
-
+        [Parameter] public DateTime? StartDate { get; set; }
+        [Parameter] public DateTime? EndDate { get; set; }
+        [Parameter] public EventCallback<DateTime> OnDateChanged { get; set; }
         private ScheduleDto.Schedule? SelectedSchedule;
         private List<ScheduleDto.Schedule>? schedule;
         private DotNetObjectReference<DayView>? dotNetRef;
@@ -21,19 +23,27 @@ namespace Rise.Client.Schedule
         [Inject] public required IScheduleService ScheduleService { get; set; }
         [Inject] public required IJSRuntime JSRuntime { get; set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override async Task OnParametersSetAsync()
         {
-            var request = new QueryRequest.SkipTake
+            await LoadSchedulesAsync();
+        }
+
+        private async Task LoadSchedulesAsync()
+        {
+            var start = StartDate ?? SelectedDate.Date;
+            var end = EndDate ?? SelectedDate.Date.AddDays(1).AddTicks(-1);
+
+            QueryRequest.DateRange request = new()
             {
                 Skip = 0,
-                Take = 50,
-                OrderBy = "Id"
+                Take = 200,
+                StartDate = start,
+                EndDate = end
             };
 
             var result = await ScheduleService.GetIndexAsync(request);
             schedule = result.Value?.Schedules;
         }
-
         protected override async Task OnAfterRenderAsync(bool firstRender)
         {
             if (firstRender)
@@ -92,18 +102,20 @@ namespace Rise.Client.Schedule
             NextDay();
         }
 
-        public void PreviousDay()
+        public async Task PreviousDay()
         {
-            do { SelectedDate = SelectedDate.AddDays(-1); }
-            while (SelectedDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
-            StateHasChanged();
+            var newDate = SelectedDate;
+            do { newDate = newDate.AddDays(-1); }
+            while (newDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+            await OnDateChanged.InvokeAsync(newDate);
         }
 
-        public void NextDay()
+        public async Task NextDay()
         {
-            do { SelectedDate = SelectedDate.AddDays(1); }
-            while (SelectedDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
-            StateHasChanged();
+            var newDate = SelectedDate;
+            do { newDate = newDate.AddDays(1); }
+            while (newDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+            await OnDateChanged.InvokeAsync(newDate);
         }
 
         public void OpenDetails(ScheduleDto.Schedule schedule)
