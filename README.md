@@ -32,59 +32,51 @@
 
 1. Install [Rider](https://www.jetbrains.com/rider/) or [Visual Studio](https://visualstudio.microsoft.com/)
 2. Make sure you have [ASP.NET 9](https://dotnet.microsoft.com/en-us/download) installed (comes with Rider and Visual Studio)
+3. Install [Docker](https://www.docker.com/products/docker-desktop/)
 
 ## Installation Instructions
 
 1. Clone the repository
 
-2. Open the `Rise.sln` file in [Rider](https://www.jetbrains.com/rider/), [Visual Studio](https://visualstudio.microsoft.com/) or [Visual Studio Code](https://code.visualstudio.com/). (we prefer Rider, but you're free to choose.)
+2. Make sure **docker is running**
 
-3. Run the project using the `Rise.Server` project as the startup project
+3. Inside the root project folder, run following commands in order:
+```
+npm run docker
+``` 
+```
+npm run migrate
+```
+###  NOTE: THIS WILL DELETE THE ***/src/Rise.Persistence/Migrations*** FOLDER! IF YOU HAVE IMPORTANT STUFF SAVED THERE, BE SURE TO BACK IT UP FIRST!
 
-4. The project should open in your default browser on port 5001.
+4. Start the program using following command:
+```
+npm run dev
+``` 
+Your browser *should* automatically open to https://localhost:5001, otherwise you can go to there manually in your browser.
 
-5. The database (SQLite) will be created. However you will have to switch the database provider of your choosing
-    1. **SQL Server**
-
-        Package: Microsoft.EntityFrameworkCore.SqlServer
-
-        🔗 [NuGet Link](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)
-
-    2. **MariaDB**
-
-        Package: Pomelo.EntityFrameworkCore.MySql
-
-        🔗 [NuGet Link](https://www.nuget.org/packages/Pomelo.EntityFrameworkCore.MySql/)
-
-    3. **PostgreSQL**
-
-        Package: Npgsql.EntityFrameworkCore.PostgreSQL
-
-        🔗 [NuGet Link](https://www.nuget.org/packages/Npgsql.EntityFrameworkCore.PostgreSQL/)
-
-    4. Mongo etc...
 
 ## Creation of the database
 
-Is done by the app itself using migrations. To add and remove migrations, install the dotnet ef tool globally by running the following command in your terminal (only do this once)
+This is handled by a custom npm command. 
 
+#### Docker
 ```
-dotnet tool install --global dotnet-ef
+npm run docker
 ```
+This will cleanly reset the docker container so no data is cached and you'll get an empty database every time.
 
 ## Migrations
 
-Adapting the database schema can be done using migrations. To create a new migration, run the following command in the `src` folder
+This is handled by a custom npm command. 
 
 ```
-dotnet ef migrations add YourMigrationName --startup-project Rise.Server --project Rise.Persistence
+npm run migrate
 ```
 
-And then update the database using the following command, or run the `Rise.Server`
+This command will make a migration based on the *src/Rise.Persistance* folder. It generates a migration and pushes it to the database (using docker if the setup was followed correctly).
 
-```
-dotnet ef database update --startup-project Rise.Server --project Rise.Persistence
-```
+###  NOTE: THIS WILL DELETE THE ***/src/Rise.Persistence/Migrations*** FOLDER! IF YOU HAVE IMPORTANT STUFF SAVED THERE, BE SURE TO BACK IT UP FIRST!
 
 ## Usefull Commands
 

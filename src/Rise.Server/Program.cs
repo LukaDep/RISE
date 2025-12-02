@@ -9,6 +9,8 @@ using Rise.Server.Processors;
 using Rise.Services;
 using Rise.Services.Identity;
 using Serilog.Events;
+using Prometheus;
+
 
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Override("Microsoft", LogEventLevel.Information)
@@ -64,6 +66,7 @@ try
         .UseDefaultExceptionHandler()
         .UseAuthentication()
         .UseAuthorization()
+        .UseHttpMetrics()
         .UseFastEndpoints(o =>
         {
             o.Endpoints.Configurator = ep =>
@@ -75,6 +78,7 @@ try
             };
         })
         .UseSwaggerGen();
+    app.MapMetrics();
     app.MapFallbackToFile("index.html"); // Serves the Blazor app from the API, when no routes match.
 
     using (var scope = app.Services.CreateScope())
