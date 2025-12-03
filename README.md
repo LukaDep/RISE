@@ -41,42 +41,48 @@
 2. Make sure **docker is running**
 
 3. Inside the root project folder, run following commands in order:
+
 ```
 npm run docker
-``` 
+```
+
 ```
 npm run migrate
 ```
-###  NOTE: THIS WILL DELETE THE ***/src/Rise.Persistence/Migrations*** FOLDER! IF YOU HAVE IMPORTANT STUFF SAVED THERE, BE SURE TO BACK IT UP FIRST!
+
+### NOTE: THIS WILL DELETE THE **_/src/Rise.Persistence/Migrations_** FOLDER! IF YOU HAVE IMPORTANT STUFF SAVED THERE, BE SURE TO BACK IT UP FIRST!
 
 4. Start the program using following command:
+
 ```
 npm run dev
-``` 
-Your browser *should* automatically open to https://localhost:5001, otherwise you can go to there manually in your browser.
+```
 
+Your browser _should_ automatically open to https://localhost:5001, otherwise you can go to there manually in your browser.
 
 ## Creation of the database
 
-This is handled by a custom npm command. 
+This is handled by a custom npm command.
 
 #### Docker
+
 ```
 npm run docker
 ```
+
 This will cleanly reset the docker container so no data is cached and you'll get an empty database every time.
 
 ## Migrations
 
-This is handled by a custom npm command. 
+This is handled by a custom npm command.
 
 ```
 npm run migrate
 ```
 
-This command will make a migration based on the *src/Rise.Persistance* folder. It generates a migration and pushes it to the database (using docker if the setup was followed correctly).
+This command will make a migration based on the _src/Rise.Persistance_ folder. It generates a migration and pushes it to the database (using docker if the setup was followed correctly).
 
-###  NOTE: THIS WILL DELETE THE ***/src/Rise.Persistence/Migrations*** FOLDER! IF YOU HAVE IMPORTANT STUFF SAVED THERE, BE SURE TO BACK IT UP FIRST!
+### NOTE: THIS WILL DELETE THE **_/src/Rise.Persistence/Migrations_** FOLDER! IF YOU HAVE IMPORTANT STUFF SAVED THERE, BE SURE TO BACK IT UP FIRST!
 
 ## Usefull Commands
 

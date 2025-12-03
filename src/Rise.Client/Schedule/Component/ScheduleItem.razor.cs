@@ -22,7 +22,8 @@ public partial class ScheduleItem : ComponentBase
         var buildingId = Schedule?.Room?.Substring(0, Schedule?.Room?.IndexOf('.') ?? 0) ?? "";
         var response = await CampusClientService.GetBuildingByBuildingCodeAsync(buildingId);
         var campusId = response?.Value?.Building.CampusId;
-        Navigation.NavigateTo($"/campus-plan/{campusId}#building-{buildingId}");
+        var rel = Navigation.ToBaseRelativePath(Navigation.Uri);
+        Navigation.NavigateTo($"/campus-plan/{campusId}?returnUrl={rel}#building-{buildingId}");
     }
 
     private static string TruncateTitle(string title, int maxLength = 40) =>

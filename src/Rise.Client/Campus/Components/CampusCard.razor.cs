@@ -17,40 +17,16 @@ namespace Rise.Client.Campus.Components
 
         [Parameter] public string SearchTerm { get; set; }
         private bool IsOpen { get; set; } = false;
-        private bool isVisible = true;
 
         private void ToggleOpen()
         {
             IsOpen = !IsOpen;
         }
 
-        private void CheckIfVisible()
-        {
-            if (Name.ToLower().Contains(SearchTerm.ToLower()))
-            {
-                isVisible = true;
-            }
-            else
-            {
-                isVisible = false;
-            }
-        }
-
         private void GoToPlan()
         {
-            Navigation.NavigateTo($"/campus-plan/{Id}");
-        }
-
-
-        protected override void OnInitialized()
-        {
-            Navigation.LocationChanged += OnLocationChanged;
-        }
-
-        private void OnLocationChanged(object? sender, Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs e)
-        {
-            CheckIfVisible();
-            StateHasChanged();
+            var rel = Navigation.ToBaseRelativePath(Navigation.Uri);
+            Navigation.NavigateTo($"/campus-plan/{Id}?returnUrl={rel}");
         }
     }
 }

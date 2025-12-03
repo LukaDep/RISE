@@ -22,10 +22,8 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
-  mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
-  object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
         <comment>This is a comment</comment>
     </data>
 
@@ -61,9 +59,8 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace"/>
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
@@ -115,12 +112,10 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
-      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
-      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home.AuthMessage" xml:space="preserve">
     <value>Nadat een gebruiker inlogt, toont het navigatiemenu een link naar de</value>
@@ -551,7 +546,7 @@
     <comment/>
   </data>
   <data name="Contact.Loading" xml:space="preserve">
-    <value>Contactgegevens  laden...</value>
+    <value>Contacten laden...</value>
     <comment/>
   </data>
   <data name="Contact.Call" xml:space="preserve">
@@ -882,7 +877,7 @@
     <value>Terug naar resto's</value>
     <comment/>
   </data>
-  <data name="Home.Today" xml:space="preserve">
+<data name="Home.Today" xml:space="preserve">
     <value>Vandaag</value>
   </data>
   <data name="Home.More" xml:space="preserve">
@@ -944,6 +939,10 @@
   </data>
   <data name="Grades.Loading" xml:space="preserve">
     <value>Punten laden...</value>
+    <comment/>
+  </data>
+  <data name="Schedule.Back" xml:space="preserve">
+    <value>Terug naar agenda</value>
     <comment/>
   </data>
 </root>

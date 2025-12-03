@@ -1,88 +1,18 @@
 ﻿@page "/campus-plan/{campusId:guid}"
 @layout MinimalLayout
-@inject HttpClient Http
-@inject IJSRuntime JS
-@inject NavigationManager Navigation
 @using Rise.Shared.Campus
 @using Rise.Shared.Common
 @using Rise.Client.Components
 
-@if (campus is null)
+@if (@campus is null)
 {
     <div class="flex justify-center items-center min-h-screen">
         <LoadingComponent Item="@L["Campus.Loading"]" />
-            </div>
-        }
-        else
-{
-    <div id="map" class="relative h-[100vh] w-screen">
-        <BackButton NavigateTo="/campus" Text="@L["Campus.Back"]" />
     </div>
 }
-
-@code {
-    [Parameter] public required Guid campusId { get; set; }
-    [Parameter] public string? buildingCode { get; set; }
-    private CampusDto.Index? campus;
-    private BuildingDto.Index? building;
-    [Inject] public required ICampusService CampusClientService { get; set; }
-
-    protected override async Task OnInitializedAsync()
-    {
-        if (string.IsNullOrEmpty(campusId.ToString()) && string.IsNullOrEmpty(buildingCode?.ToString()))
-        {
-            return;
-        }
-        else if (!string.IsNullOrEmpty(buildingCode))
-        {
-            var buildingResponse = await CampusClientService.GetBuildingByBuildingCodeAsync(buildingCode);
-            building = buildingResponse.Value.Building;
-            if (building != null)
-            {
-                campusId = building.CampusId;
-            }
-            else
-            {
-                return;
-            }
-        }
-
-        var response = await CampusClientService.GetCampusByIdAsync(campusId);
-        campus = response?.Value.Campus;
-
-    }
-
-    protected override async Task OnAfterRenderAsync(bool firstRender)
-    {
-        // building id from de url
-        var uri = new Uri(Navigation.Uri);
-        var fragment = uri.Fragment; // "#building-GSCHB"
-        if (fragment.StartsWith("#building-"))
-        {
-            buildingCode = fragment.Substring("#building-".Length);
-        }
-
-        if (campus != null)
-        {
-
-            await JS.InvokeVoidAsync("leafletMap.initTileMap", "map", campus.Latitude, campus.Longitude, 17);
-            //await JS.InvokeVoidAsync("leafletMap.addLatLngMarker", campus.Latitude, campus.Longitude, campus.Name);
-
-            if (!string.IsNullOrEmpty(buildingCode))
-            {
-                building = campus.Buildings?.FirstOrDefault(b => buildingCode.Equals(b.BuildingCode));
-                if (building != null)
-                {
-                    await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", building.Latitude, building.Longitude, building.Name,
-                    true);
-                    await JS.InvokeVoidAsync("leafletMap.setView", building.Latitude, building.Longitude, 18);
-                }
-            }
-            else
-            {
-                await JS.InvokeVoidAsync("leafletMap.addMarkerWithGoogleLink", campus.Latitude, campus.Longitude, campus.Name, true);
-
-            }
-        }
-    }
+else
+{
+    <div id="map" class="relative h-[100vh] w-screen">
+        <BackButton NavigateTo="@returnUrl" Text="@(returnUrlQuery.Contains("campus") ? L["Campus.Back"] : L["Schedule.Back"])" />
+    </div>
 }
