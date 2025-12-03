@@ -11,12 +11,12 @@
         </h2>
 
         <div class="flex gap-2">
-            <button class="px-2 py-1 rounded bg-hogent-black-10 hover:bg-hogent-black-20 transition"
+            <button class="px-3 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 text-lg md:text-2xl lg:text-4xl rounded bg-hogent-black-10 hover:bg-hogent-black-20 transition"
                 @onclick="PreviousMonthAnimated">
                 ‹
             </button>
 
-            <button class="px-2 py-1 rounded bg-hogent-black-10 hover:bg-hogent-black-20 transition"
+            <button class="px-3 py-2 md:px-6 md:py-3 lg:px-8 lg:py-4 text-lg md:text-2xl lg:text-4xl rounded bg-hogent-black-10 hover:bg-hogent-black-20 transition"
                 @onclick="NextMonthAnimated">
                 ›
             </button>
@@ -37,13 +37,8 @@
             var isToday = day.Date == DateTime.Today.Date;
             var hasEvents = HasEventsOnDay(day);
 
-            <div class="border border-hogent-black-30 rounded-lg p-2 min-h-[80px] 
-                                                                                    cursor-pointer transition hover:shadow-md hover:bg-hogent-black-10 
-                                                                                    @(isToday ? "bg-hogent-education-15 border-hogent-education"
-                                                                                                                                                                                                                                                                                                 : isCurrentMonth ? "bg-hogent-white" 
-                                                                                                                                                                                                                                                                                                                  : "bg-hogent-black-15")"
+            <div class="border border-hogent-black-30 rounded-lg p-2 min-h-[80px] cursor-pointer transition hover:shadow-md hover:bg-hogent-black-10 @(isToday ? "bg-hogent-education-15 border-hogent-education" : isCurrentMonth ? "bg-hogent-white" : "bg-hogent-black-15")"
                 @onclick="() => GoToDayView(day)">
-
                 <div class="text-sm @(isCurrentMonth ? "text-hogent-black font-medium" : "text-hogent-black-30") mb-1">
                     @day.Day
                 </div>

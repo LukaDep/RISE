@@ -13,7 +13,8 @@
         "prepare": "husky",
         "format:dotnet": "dotnet format",
         "format:prettier": "prettier --write .",
-        "migrate": "rimraf ./src/Rise.Persistence/Migrations/ && dotnet ef migrations add initialMigration --startup-project ./src/Rise.Server/Rise.Server.csproj --project ./src/Rise.Persistence/Rise.Persistence.csproj && dotnet ef database update --project ./src/Rise.Persistence/Rise.Persistence.csproj --startup-project ./src/Rise.Server/Rise.Server.csproj",
+        "migrate": "rimraf ./src/Rise.Persistence/Migrations/ && dotnet ef migrations add initialMigration --startup-project ./src/Rise.Server/Rise.Server.csproj --project ./src/Rise.Persistence/Rise.Persistence.csproj",
+        "migrate:drop": "dotnet ef database drop --startup-project ./src/Rise.Server/Rise.Server.csproj --project ./src/Rise.Persistence/Rise.Persistence.csproj -f && rimraf ./src/Rise.Persistence/Migrations/ && dotnet ef migrations add initialMigration --startup-project ./src/Rise.Server/Rise.Server.csproj --project ./src/Rise.Persistence/Rise.Persistence.csproj",
         "docker": "docker compose down -v && docker compose up -d"
     },
     "keywords": [],

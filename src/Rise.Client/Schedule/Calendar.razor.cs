@@ -21,7 +21,7 @@ public partial class Calendar : ComponentBase
     }
     private string GetDayAbbreviation(DateTime day)
     {
-        return day.ToString("ddd", System.Globalization.CultureInfo.CurrentCulture).Substring(0, 3).ToUpper();
+        return day.ToString("ddd", System.Globalization.CultureInfo.CurrentCulture).ToUpper();
     }
 
     private async Task LoadSchedulesAsync()
