@@ -1,0 +1,10 @@
+@namespace Rise.Client.Schedule
+
+<div class="absolute z-50 pointer-events-none" style="top: @(Position.ToString().Replace(",", "."))px; left: @LeftPosition; width: @Width;">
+    <div class="relative h-0.5 bg-red-500 shadow-lg">
+        <div class="absolute -left-1 -top-1 w-2.5 h-2.5 bg-red-500 rounded-full"></div>
+        <div class="absolute @TimeLabelClass bg-red-500 text-white text-xs font-semibold px-2 py-0.5 rounded shadow-md whitespace-nowrap">
+            @CurrentTime.ToString("HH:mm")
+        </div>
+    </div>
+</div>

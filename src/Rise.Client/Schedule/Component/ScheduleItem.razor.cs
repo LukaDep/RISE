@@ -25,14 +25,6 @@ public partial class ScheduleItem : ComponentBase
         Navigation.NavigateTo($"/campus-plan/{campusId}#building-{buildingId}");
     }
 
-    private static string TruncateTitle(string title, int maxLength = 40)
-    {
-        if (string.IsNullOrEmpty(title))
-            return title;
-
-        if (title.Length <= maxLength)
-            return title;
-
-        return title.Substring(0, maxLength) + "...";
-    }
+    private static string TruncateTitle(string title, int maxLength = 40) =>
+        ScheduleHelpers.TruncateTitle(title, maxLength);
 }

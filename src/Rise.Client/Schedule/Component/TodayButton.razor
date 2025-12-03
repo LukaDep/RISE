@@ -1,0 +1,16 @@
+@namespace Rise.Client.Schedule
+
+@if (ShowButton)
+{
+    <div class="flex justify-center mb-4">
+        <button class="flex items-center gap-2 px-4 py-1.5 text-sm font-semibold text-hogent-black bg-white/60 backdrop-blur-sm
+                       hover:bg-white hover:shadow-md active:scale-95 border border-hogent-black-20 rounded-full transition-all"
+                @onclick="OnClick">
+            <svg class="w-4 h-4 opacity-80" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M19 4h-1V2a1 1 0 0 0-2 0v2H8V2a1 1 0 0 0-2 0v2H5a2 2 0 0 0-2 2v14a2 
+                         2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11z" />
+            </svg>
+            <span>@ButtonText</span>
+        </button>
+    </div>
+}

@@ -1,0 +1,85 @@
+@page "/schedule/month"
+
+@using Microsoft.AspNetCore.Components
+@using Rise.Client.Schedule
+@inject NavigationManager Navigation
+
+<div id="calendarContainer" class="p-4 min-h-screen flex flex-col overflow-hidden touch-pan-y relative">
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-xl font-semibold text-hogent-black">
+            @SelectedDate.ToString("MMMM yyyy", System.Globalization.CultureInfo.CurrentCulture)
+        </h2>
+
+        <div class="flex gap-2">
+            <button class="px-2 py-1 rounded bg-hogent-black-10 hover:bg-hogent-black-20 transition"
+                @onclick="PreviousMonthAnimated">
+                ‹
+            </button>
+
+            <button class="px-2 py-1 rounded bg-hogent-black-10 hover:bg-hogent-black-20 transition"
+                @onclick="NextMonthAnimated">
+                ›
+            </button>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-7 text-center mb-1 text-xs font-medium text-hogent-black-70">
+        @foreach (var shortDay in WeekDays)
+        {
+            <div>@GetDayAbbreviation(shortDay)</div>
+        }
+    </div>
+
+    <div class="grid grid-cols-7 gap-1 ">
+        @foreach (var day in MonthDays)
+        {
+            var isCurrentMonth = day.Month == SelectedDate.Month;
+            var isToday = day.Date == DateTime.Today.Date;
+            var hasEvents = HasEventsOnDay(day);
+
+            <div class="border border-hogent-black-30 rounded-lg p-2 min-h-[80px] 
+                                                                                    cursor-pointer transition hover:shadow-md hover:bg-hogent-black-10 
+                                                                                    @(isToday ? "bg-hogent-education-15 border-hogent-education"
+                                                                                                                                                                                                                                                                                                 : isCurrentMonth ? "bg-hogent-white" 
+                                                                                                                                                                                                                                                                                                                  : "bg-hogent-black-15")"
+                @onclick="() => GoToDayView(day)">
+
+                <div class="text-sm @(isCurrentMonth ? "text-hogent-black font-medium" : "text-hogent-black-30") mb-1">
+                    @day.Day
+                </div>
+
+                @if (hasEvents && isCurrentMonth)
+                {
+                    var daySchedules = GetSchedulesForDate(day);
+                    <div class="space-y-1 @swipeClass">
+                        @foreach (var schedule in daySchedules.Take(3))
+                        {
+                            var bgColor = ScheduleHelpers.GetEventTypeBgColor(schedule.WorkForm);
+                            <div class="w-full h-1 @bgColor rounded"></div>
+                        }
+                        @if (daySchedules.Count > 3)
+                        {
+                            <div class="text-[10px] text-hogent-black-50">
+                                +@(daySchedules.Count - 3) @L["Schedule.More"]
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+    </div>
+
+    <div class="mt-6 flex flex-wrap gap-4 text-xs text-hogent-black-60">
+        @{
+            var workFormsInMonth = GetWorkFormsInMonth();
+            foreach (var workForm in workFormsInMonth)
+            {
+                var bgColor = ScheduleHelpers.GetEventTypeBgColor(workForm);
+                <div class="flex items-center gap-2">
+                    <div class="w-4 h-1 @bgColor rounded"></div>
+                    <span>@workForm</span>
+                </div>
+            }
+        }
+    </div>
+</div>

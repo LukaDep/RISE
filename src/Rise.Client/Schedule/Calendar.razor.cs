@@ -5,29 +5,29 @@ using Rise.Shared.Schedule;
 
 namespace Rise.Client.Schedule;
 
-public partial class MonthView : IAsyncDisposable
+public partial class Calendar : ComponentBase
 {
-    [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
-    [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
-    [Parameter] public DateTime? StartDate { get; set; }
-    [Parameter] public DateTime? EndDate { get; set; }
-    [Parameter] public EventCallback<DateTime> OnDateChanged { get; set; }
+    private DateTime SelectedDate = DateTime.Today;
     private List<ScheduleDto.Schedule>? schedule;
     [Inject] public required IScheduleService ScheduleService { get; set; }
     [Inject] public required IJSRuntime JSRuntime { get; set; }
-    private DotNetObjectReference<MonthView>? dotNetRef;
+    private DotNetObjectReference<Calendar>? dotNetRef;
     private string swipeClass = string.Empty;
-    private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
-
+    private List<DateTime> WeekDays => ScheduleHelpers.GetWeekDays(SelectedDate, true);
+    [Parameter] public EventCallback<DateTime> SelectedDateChanged { get; set; }
     protected override async Task OnParametersSetAsync()
     {
         await LoadSchedulesAsync();
     }
+    private string GetDayAbbreviation(DateTime day)
+    {
+        return day.ToString("ddd", System.Globalization.CultureInfo.CurrentCulture).Substring(0, 3).ToUpper();
+    }
 
     private async Task LoadSchedulesAsync()
     {
-        var start = StartDate ?? new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
-        var end = EndDate ?? start.AddMonths(1).AddTicks(-1);
+        var start = new DateTime(SelectedDate.Year, SelectedDate.Month, 1);
+        var end = start.AddMonths(1).AddTicks(-1);
 
         QueryRequest.DateRange request = new()
         {
@@ -41,13 +41,12 @@ public partial class MonthView : IAsyncDisposable
         schedule = result.Value?.Schedules;
     }
 
-
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
             dotNetRef = DotNetObjectReference.Create(this);
-            await JSRuntime.InvokeVoidAsync("initSwipe", "monthViewContainer", dotNetRef);
+            await JSRuntime.InvokeVoidAsync("initSwipe", "calendarContainer", dotNetRef);
         }
     }
 
@@ -55,18 +54,8 @@ public partial class MonthView : IAsyncDisposable
     {
         swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
         StateHasChanged();
-        await Task.Delay(250);
+        await Task.Delay(300);
         swipeClass = string.Empty;
-        StateHasChanged();
-    }
-
-    private async Task GoToToday()
-    {
-        SelectedDate = DateTime.Today;
-        if (OnDayClick.HasDelegate)
-        {
-            await OnDayClick.InvokeAsync(DateTime.Today);
-        }
         StateHasChanged();
     }
 
@@ -110,19 +99,34 @@ public partial class MonthView : IAsyncDisposable
     public async Task PreviousMonthAnimated()
     {
         await AnimateSwipe("right");
-        PreviousMonth();
-        StateHasChanged();
+        await PreviousMonth();
     }
 
     public async Task NextMonthAnimated()
     {
         await AnimateSwipe("left");
-        NextMonth();
+        await NextMonth();
+    }
+    private async Task PreviousMonth()
+    {
+        SelectedDate = SelectedDate.AddMonths(-1);
+        await LoadSchedulesAsync();
         StateHasChanged();
     }
 
-    private async Task PreviousMonth() => await OnDateChanged.InvokeAsync(SelectedDate.AddMonths(-1));
-    private async Task NextMonth() => await OnDateChanged.InvokeAsync(SelectedDate.AddMonths(1));
+    private async Task NextMonth()
+    {
+        SelectedDate = SelectedDate.AddMonths(1);
+        await LoadSchedulesAsync();
+        StateHasChanged();
+    }
+
+    private async Task ChangeMonth(int offset)
+    {
+        var newDate = SelectedDate.AddMonths(offset);
+        SelectedDate = newDate;
+        await SelectedDateChanged.InvokeAsync(newDate);
+    }
 
     [JSInvokable]
     public async Task SwipeNext()
@@ -136,12 +140,9 @@ public partial class MonthView : IAsyncDisposable
         await PreviousMonthAnimated();
     }
 
-    private async Task GoToDayView(DateTime date)
+    private void GoToDayView(DateTime day)
     {
-        if (OnDayClick.HasDelegate)
-        {
-            await OnDayClick.InvokeAsync(date);
-        }
+        Navigation.NavigateTo($"/schedule/{day:yyyy-MM-dd}");
     }
 
     public async ValueTask DisposeAsync()

@@ -1,0 +1,51 @@
+@namespace Rise.Client.Schedule.Component
+@inject IStringLocalizer<SharedResources> L
+
+<div class="flex justify-between items-center px-4 py-2">
+  <div class="flex items-center gap-3">
+    <span class="text-lg font-semibold text-hogent-black">@GetWeekRangeTitle()</span>
+    <span class="text-xs font-medium text-hogent-black-50 bg-hogent-black-15 px-2 py-0.5 rounded-full">Week
+      @WeekNumber</span>
+  </div>
+
+  <div class="flex items-center gap-3">
+    <button @onclick="OnTodayButtonClick" class="h-10 flex items-center gap-2 px-4 py-2 rounded-xl bg-hogent-black text-white 
+                   font-medium text-base shadow-sm transition-all duration-150
+                   hover:bg-hogent-black-80 hover:shadow-md active:scale-95">
+      <span>@L["Today"]</span>
+    </button>
+
+    <a href="/schedule/month" class="w-10 h-10 flex items-center justify-center rounded-xl 
+              bg-hogent-black text-white transition-all duration-150 
+              hover:bg-hogent-black-80 active:scale-95 shadow-sm hover:shadow-md">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
+        </path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+<div class="w-full flex items-center justify-around px-4 py-2">
+  @if (WeekDays != null)
+  {
+    @foreach (var day in WeekDays)
+    {
+      var isToday = day.Date == DateTime.Today.Date;
+      var isSelected = day.Date == SelectedDate?.Date;
+      var isPast = day.Date < DateTime.Today.Date;
+
+      <button @onclick="() => SelectDay(day)"
+        class="flex flex-col items-center gap-1 p-1 rounded-xl transition-all duration-150 hover:bg-hogent-black-15 active:scale-95 focus:outline-none">
+        <span
+          class="text-xs font-medium @( isPast ? "text-hogent-black-50" : "text-hogent-black-30")">@GetDayAbbreviation(day)</span>
+        <div
+          class="@(isSelected ? "w-9 h-9 flex items-center justify-center rounded-full bg-hogent-black shadow-md shadow-hogent-black-15" : "w-9 h-9 flex items-center justify-center") transition-all duration-150">
+          <span
+            class="text-sm font-semibold @(isSelected ? "text-hogent-white" : isToday ? "text-red-500 font-bold" : isPast ? "text-hogent-black-50" : "text-hogent-black")">@day.Day</span>
+        </div>
+      </button>
+    }
+  }
+</div>

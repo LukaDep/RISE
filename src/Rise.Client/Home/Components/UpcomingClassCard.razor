@@ -29,5 +29,5 @@ else
 
 @code {
     [Parameter] public ScheduleDto.Schedule? Reservation { get; set; }
-    private string? bgColor => DayView.GetEventTypeBgColor(Reservation?.WorkForm ?? string.Empty);
+    private string? bgColor => ScheduleHelpers.GetEventTypeBgColor(Reservation?.WorkForm ?? string.Empty);
 }

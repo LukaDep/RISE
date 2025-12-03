@@ -21,7 +21,7 @@ public partial class Index : ComponentBase
     [Parameter] public DateTime? StartDate { get; set; }
     [Parameter] public DateTime? EndDate { get; set; }
     private List<ScheduleDto.Schedule>? UpcomingClasses { get; set; }
-    public string? Mode { get; set; }
+    [Parameter] public string? Mode { get; set; }
     private bool _isAddOpen;
 
     [CascadingParameter]

@@ -1,4 +1,6 @@
 @page "/schedule"
+@page "/schedule/{date:datetime}"
+@using Rise.Client.Schedule.Component
 @using Rise.Shared.Schedule
 @using Rise.Shared.Common
 @using Rise.Client.Schedule
@@ -6,30 +8,18 @@
 
 <PageTitle>@L["Schedule.Title"]</PageTitle>
 
-<BasePage Title="@L["Schedule.Title"]">
-    <Tabs @ref="TabsRef">
-        <Tab Title="@L["Schedule.Day"]">
-            <DayView @ref="DayViewRef" SelectedDate="@SelectedDay" OnDateChanged="date => SelectedDay = date" />
-        </Tab>
-
-        <Tab Title="@L["Schedule.Week"]">
-            <WeekView SelectedDate="@SelectedDay" OnDayClick="GoToDay" OnDateChanged="date => SelectedDay = date" />
-        </Tab>
-
-        <Tab Title="@L["Schedule.Month"]">
-            <MonthView SelectedDate="@SelectedDay" OnDayClick="GoToDay" OnDateChanged="date => SelectedDay = date" />
-        </Tab>
-    </Tabs>
-</BasePage>
+<Schedule SelectedDate="@SelectedDay" OnDayClick="GoToDay" OnDateChanged="date => SelectedDay = date" />
 
 @code {
-    private DayView? DayViewRef;
-    private Tabs? TabsRef;
+    [Parameter] public DateTime? date { get; set; }
     private DateTime SelectedDay = DateTime.Today;
-
+    protected override void OnParametersSet()
+    {
+        if (date.HasValue)
+            SelectedDay = date.Value;
+    }
     private void GoToDay(DateTime day)
     {
         SelectedDay = day;
-        TabsRef?.ActivateTab(L["Schedule.Day"]);
     }
 }

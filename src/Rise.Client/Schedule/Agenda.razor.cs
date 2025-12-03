@@ -6,22 +6,23 @@ using Rise.Shared.Common;
 
 namespace Rise.Client.Schedule
 {
-    public partial class DayView : ComponentBase, IAsyncDisposable
+    public partial class Agenda : ComponentBase, IAsyncDisposable
     {
         [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
-        [Parameter] public DateTime? StartDate { get; set; }
-        [Parameter] public DateTime? EndDate { get; set; }
         [Parameter] public EventCallback<DateTime> OnDateChanged { get; set; }
         private ScheduleDto.Schedule? SelectedSchedule;
         private List<ScheduleDto.Schedule>? schedule;
-        private DotNetObjectReference<DayView>? dotNetRef;
-
+        private DotNetObjectReference<Agenda>? dotNetRef;
         private string swipeClass = string.Empty;
         private System.Timers.Timer? currentTimeTimer;
         private DateTime currentTime = DateTime.Now;
 
         [Inject] public required IScheduleService ScheduleService { get; set; }
         [Inject] public required IJSRuntime JSRuntime { get; set; }
+
+        private string GetHeaderTitle() => SelectedDate.Date == DateTime.Today
+            ? L["Schedule.Today"]
+            : SelectedDate.ToString("dddd, d MMM", System.Globalization.CultureInfo.CurrentCulture);
 
         protected override async Task OnParametersSetAsync()
         {
@@ -30,8 +31,8 @@ namespace Rise.Client.Schedule
 
         private async Task LoadSchedulesAsync()
         {
-            var start = StartDate ?? SelectedDate.Date;
-            var end = EndDate ?? SelectedDate.Date.AddDays(1).AddTicks(-1);
+            var start = SelectedDate.Date;
+            var end = SelectedDate.Date.AddDays(1).AddTicks(-1);
 
             QueryRequest.DateRange request = new()
             {
@@ -84,7 +85,7 @@ namespace Rise.Client.Schedule
             swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
             StateHasChanged();
 
-            await Task.Delay(250);
+            await Task.Delay(300);
 
             swipeClass = string.Empty;
             StateHasChanged();
@@ -104,17 +105,13 @@ namespace Rise.Client.Schedule
 
         public async Task PreviousDay()
         {
-            var newDate = SelectedDate;
-            do { newDate = newDate.AddDays(-1); }
-            while (newDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+            var newDate = ScheduleHelpers.PreviousWeekday(SelectedDate);
             await OnDateChanged.InvokeAsync(newDate);
         }
 
         public async Task NextDay()
         {
-            var newDate = SelectedDate;
-            do { newDate = newDate.AddDays(1); }
-            while (newDate.DayOfWeek is DayOfWeek.Saturday or DayOfWeek.Sunday);
+            var newDate = ScheduleHelpers.NextWeekday(SelectedDate);
             await OnDateChanged.InvokeAsync(newDate);
         }
 
@@ -130,22 +127,7 @@ namespace Rise.Client.Schedule
             StateHasChanged();
         }
 
-        private double GetCurrentTimePosition()
-        {
-            var now = currentTime;
-            var hour = now.Hour;
-            var minute = now.Minute;
-
-            if (hour < 8 || hour > 20)
-                return -1;
-
-            return ((hour - 8) * 64) + (minute * 64 / 60.0);
-        }
-
-        private bool IsToday()
-        {
-            return SelectedDate.Date == DateTime.Today;
-        }
+        private bool IsToday() => SelectedDate.Date == DateTime.Today;
 
         [JSInvokable]
         public async Task SwipeNext()
@@ -158,38 +140,6 @@ namespace Rise.Client.Schedule
         {
             await PreviousDayAnimated();
         }
-
-        public static string TruncateTitle(string title, int maxLength = 40)
-        {
-            if (string.IsNullOrEmpty(title))
-                return title;
-
-            if (title.Length <= maxLength)
-                return title;
-
-            return title.Substring(0, maxLength) + "...";
-        }
-
-        public static string GetEventTypeBgColor(string type) => type.ToLower() switch
-        {
-            "hoorcollege" => "bg-hogent-education-30 text-hogent-education",
-            "activerend hoorcollege" => "bg-hogent-it-30 text-hogent-it",
-            "practicum" => "bg-hogent-green-30 text-hogent-green",
-            "werkcollege" => "bg-hogent-orange-30 text-hogent-orange",
-            "seminarie" => "bg-hogent-business-30 text-hogent-business",
-            _ => "bg-hogent-black-30 text-hogent-black"
-        };
-
-
-        public static string GetEventTypeBorderColor(string type) => type.ToLower() switch
-        {
-            "hoorcollege" => "border-hogent-education-30 text-hogent-education",
-            "activerend hoorcollege" => "border-hogent-it-30 text-hogent-it",
-            "practicum" => "border-hogent-green-30 text-hogent-green",
-            "werkcollege" => "border-hogent-orange-30 text-hogent-orange",
-            "seminarie" => "border-hogent-business-30 text-hogent-business",
-            _ => "border-hogent-black-30 text-hogent-black"
-        };
 
         public async ValueTask DisposeAsync()
         {

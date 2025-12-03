@@ -1,0 +1,84 @@
+@using Microsoft.AspNetCore.Components
+
+<div id="dayViewContainer" class="day-view flex flex-col overflow-hidden">
+    <div class="mt-4 bg-hogent-white rounded-lg relative h-screen">
+
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            @for (int hour = 8; hour <= 20; hour++)
+            {
+                <div class="relative" style="height: 64px;">
+
+                    <div class="absolute left-4 top-0 text-xs text-gray-500 font-medium"
+                        style="transform: translateY(-50%);">
+                        @hour:00
+                    </div>
+
+                    <div class="absolute ml-14 inset-x-0 top-0 border-t border-gray-300 mr-2"></div>
+
+                </div>
+            }
+        </div>
+
+        <div class="absolute inset-0 @swipeClass" style="z-index: 2;">
+
+            @foreach (var evt in DaySchedules)
+            {
+                var topPosition = ScheduleHelpers.CalculateEventTopPosition(evt.StartDateTime);
+                var height = ScheduleHelpers.CalculateEventHeight(evt.StartDateTime, evt.EndDateTime);
+                var durationMinutes = ScheduleHelpers.GetDurationMinutes(evt.StartDateTime, evt.EndDateTime);
+
+                var leftPosition = "88px"; /* Tijd-kolom + padding */
+                var widthCalc = "calc(100% - 100px)";
+
+                var bgColor = ScheduleHelpers.GetEventTypeBgColor(evt.WorkForm);
+
+                <div class="absolute @bgColor rounded-xl p-2.5 shadow-sm ring-1 ring-black/5 
+                                                                    hover:ring-black/10 transition overflow-hidden cursor-pointer"
+                    style="top: @(topPosition + 2)px; 
+                                                                left: @leftPosition; 
+                                                                height: @(height - 4)px; 
+                                                                width: @widthCalc;" @onclick="() => OpenDetails(evt)">
+
+                    <div class="font-semibold text-sm leading-tight mb-1">@evt.Course</div>
+                    <div class="text-xs opacity-80">@evt.Room</div>
+
+                    @if (durationMinutes >= 60)
+                    {
+                        <div class="text-xs opacity-75 mt-1">@evt.Teacher</div>
+                    }
+
+                    @if (!string.IsNullOrEmpty(evt.Environment) && durationMinutes >= 90)
+                    {
+                        <div class="text-xs opacity-70 mt-1">@evt.Environment</div>
+                    }
+
+                    @if (evt.IsAbsent)
+                    {
+                        <div
+                            class="absolute inset-0 z-10 pointer-events-none rounded-lg 
+                                                                                                        bg-[repeating-linear-gradient(135deg,rgba(220,38,38,0.08)_0_12px,transparent_12px_24px)]">
+                        </div>
+                    }
+                </div>
+            }
+
+            @if (IsToday())
+            {
+                var timePosition = ScheduleHelpers.GetCurrentTimePosition(currentTime);
+
+                if (timePosition >= 0)
+                {
+                    <CurrentTimeIndicator Position="@timePosition" LeftPosition="64px" Width="calc(100% - 64px)"
+                        CurrentTime="@currentTime" TimeLabelClass="-left-16 -top-2.5" />
+                }
+            }
+
+        </div>
+
+    </div>
+</div>
+
+@if (SelectedSchedule is not null)
+{
+    <ScheduleItem Schedule="SelectedSchedule" OnClose="CloseDetails" />
+}

@@ -1,0 +1,31 @@
+@namespace Rise.Client.Schedule
+
+<div class="mb-4 flex items-center px-4">
+    <button class="px-3 h-9 flex items-center gap-2 rounded-full bg-gray-100
+               hover:bg-gray-200 active:bg-gray-300 transition" @onclick="OnPrevious">
+
+        <span class="hidden sm:inline text-sm font-medium text-gray-700">@PreviousText</span>
+
+        <svg class="w-4 h-4 text-gray-600 sm:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M328.1 64.6c9.3 9.4 9.3 24.6 0 33.9L178.6 248l149.5 149.5c9.3 9.3 9.3 24.5 0 33.9s-24.5 9.3-33.9 0l-166-166c-9.3-9.4-9.3-24.6 0-34l166-166c9.4-9.3 24.6-9.3 34 0z" />
+        </svg>
+    </button>
+
+    <div class="flex-1 text-center">
+        <span class="text-lg font-semibold text-hogent-black select-none">
+            @Title
+        </span>
+    </div>
+
+    <button class="px-3 h-9 flex items-center gap-2 rounded-full bg-gray-100
+               hover:bg-gray-200 active:bg-gray-300 transition" @onclick="OnNext">
+
+        <span class="hidden sm:inline text-sm font-medium text-gray-700">@NextText</span>
+
+        <svg class="w-4 h-4 text-gray-600 sm:hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path fill="currentColor"
+                d="M183.9 447.4c-9.3-9.4-9.3-24.6 0-33.9L333.4 264 183.9 114.5c-9.3-9.3-9.3-24.5 0-33.9s24.5-9.3 33.9 0l166 166c9.3 9.4 9.3 24.6 0 34l-166 166c-9.4 9.3-24.6 9.3-34 0z" />
+        </svg>
+    </button>
+</div>
