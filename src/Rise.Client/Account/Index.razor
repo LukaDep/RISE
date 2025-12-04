@@ -8,31 +8,19 @@
 <div class="flex">
   <div class="w-full bg-white p-4 flex flex-col lg:flex-row gap-4 justify-between">
     <nav class="w-full lg:w-1/2 flex flex-col space-y-2">
-      <a href="/calendar"
-        class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-        <i class="w-5 fa-solid fa-calendar fa-lg mr-5 text-current"></i>
-        <p>@L["Account.Calendar"]</p>
-      </a>
+
       <a href="/account/notificationsettings"
         class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
         <i class="w-5 fa-solid fa-bell fa-lg mr-5 text-current"></i>
         <span>@L["Account.Notifications"]</span>
       </a>
-      <a href="/grades"
-        class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-        <i class="w-5 fa-solid fa-graduation-cap fa-lg mr-5 text-current"></i>
-        <span>@L["Account.Grades"]</span>
-      </a>
-      <a href="https://ibamaflex.hogent.be/" target="_blank" rel="noopener noreferrer"
-        class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
-        <i class="w-5 fa-solid fa-user-clock fa-lg mr-5 text-current"></i>
-        <span>@L["Account.Absences"]</span>
-      </a>
+
       <a href="/logout"
         class="flex items-center px-4 py-3 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
         <i class="w-5 fa-solid fa-arrow-right-from-bracket fa-lg mr-5 text-current"></i>
         <span>@L["Account.Logout"]</span>
       </a>
+
     </nav>
     <StudentCard></StudentCard>
   </div>

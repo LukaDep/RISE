@@ -361,6 +361,10 @@
     <value>Back to Home</value>
     <comment/>
   </data>
+  <data name="Common.LoginToContinue" xml:space="preserve">
+    <value>Log in</value>
+    <comment/>
+  </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Sign In</value>
     <comment/>
@@ -570,7 +574,7 @@
     <comment/>
   </data>
   <data name="Account.Notifications" xml:space="preserve">
-    <value>Notifications</value>
+    <value>Notification settings</value>
     <comment/>
   </data>
   <data name="Auth.LogoutTitle" xml:space="preserve">

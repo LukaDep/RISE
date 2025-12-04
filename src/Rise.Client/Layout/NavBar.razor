@@ -1,55 +1,73 @@
 @using Microsoft.AspNetCore.Components.Authorization
+@using Rise.Client.More
+
 @inject IStringLocalizer<SharedResources> L
 
-<nav class="lg:hidden navbar flex flex-row h-16 items-center bg-hogent-black shadow-[0px_-0.3rem_1rem] shadow-hogent-black-50"
-  aria-label="main navigation mobile">
 
-  <NavLink href="/home" Match="NavLinkMatch.All" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Home"]">
-    <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
-      <i class="fa-solid fa-house fa-lg text-hogent-white"></i>
+<nav class="lg:hidden navbar flex flex-row h-20 items-center bg-hogent-black" aria-label="main navigation mobile">
+
+  <NavLink href="/" Match="NavLinkMatch.All"
+    class="@($"relative flex-1 flex flex-col items-center justify-center h-full {(@_homeRouteActive ? "active" : "")}")"
+    title="@L["Navigation.Home"]">
+    <div class="p-2 rounded-full transition-colors duration-200">
+      <i class="fa-solid fa-house scale-175 text-hogent-black-30 [.active_&]:text-hogent-white"></i>
     </div>
   </NavLink>
-
-  <NavLink href="/news" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.News"]">
-    <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
-      <i class="fa-solid fa-newspaper fa-lg text-hogent-white"></i>
-    </div>
-  </NavLink>
-
-  <NavLink href="/campus" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Campus"]">
-    <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
-      <i class="fa-solid fa-school fa-lg text-hogent-white"></i>
-    </div>
-  </NavLink>
-
 
   <AuthorizeView>
     <Authorized>
-      <NavLink href="/schedule" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Schedule"]">
-        <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
-          <i class="fa-solid fa-calendar-days fa-lg text-hogent-white"></i>
+      <NavLink href="/schedule" class="relative flex-1 flex flex-col items-center justify-center h-full"
+        title="@L["Navigation.Schedule"]">
+        <div class="p-2 rounded-full transition-colors duration-200">
+          <i class="fa-solid fa-clock scale-175 text-hogent-black-30 [.active_&]:text-hogent-white"></i>
         </div>
       </NavLink>
-
-      <NavLink href="/account" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Account"]">
-        <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
-          <i class="fa-solid fa-user fa-lg text-hogent-white"></i>
+      <NavLink href="/account" class="relative flex-1 flex flex-col items-center justify-center h-full"
+        title="@L["Navigation.Account"]">
+        <div class="p-2 rounded-full transition-colors duration-200">
+          <i class="fa-solid fa-user scale-175 text-hogent-black-30 [.active_&]:text-hogent-white"></i>
         </div>
       </NavLink>
     </Authorized>
-
     <NotAuthorized>
-      <NavLink href="/resto" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Resto"]">
-        <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
-          <i class="fa-solid fa-utensils fa-lg text-hogent-white"></i>
+      <NavLink href="/news" class="relative flex-1 flex flex-col items-center justify-center h-full"
+        title="@L["Navigation.News"]">
+        <div class="p-2 rounded-full transition-colors duration-200">
+          <i class="fa-solid fa-newspaper scale-175 text-hogent-black-30 [.active_&]:text-hogent-white"></i>
         </div>
       </NavLink>
-
-      <NavLink href="/login" class="relative flex-1 flex items-center justify-center h-full" title="@L["Navigation.Login"]">
-        <div class="p-3 rounded-full transition-colors duration-200 [.active_&]:bg-hogent-black-50">
-          <i class="fa-solid fa-right-to-bracket fa-lg text-hogent-white"></i>
+      <NavLink href="/login" class="relative flex-1 flex flex-col items-center justify-center h-full"
+        title="@L["Navigation.Account"]">
+        <div class="p-2 rounded-full transition-colors duration-200">
+          <i class="fa-solid fa-user scale-175 text-hogent-black-30 [.active_&]:text-hogent-white"></i>
         </div>
       </NavLink>
     </NotAuthorized>
   </AuthorizeView>
+
+  <button type="button" @onclick="ToggleMore" class="relative flex-1 flex flex-col items-center justify-center h-full"
+    title="Menu">
+    <div class="p-2 rounded-full transition-colors duration-200">
+      <i
+        class="fa-solid fa-bars scale-175 @( (@_showMore || @_moreRouteActive) ? "text-hogent-white" : "text-hogent-black-30")"></i>
+    </div>
+  </button>
 </nav>
+
+@if (@_showMore)
+{
+  <div class="fixed inset-0 z-40 flex items-stretch justify-center">
+    <div class="relative inset-0 h-full w-full">
+
+      <div class="h-full w-full">
+        <MoreMenu CloseMore="CloseMore" />
+      </div>
+      <button class="absolute bottom-5 right-9 z-50 rounded-full bg-black/60 text-white" @onclick="CloseMore"
+        aria-label="Close more menu">
+        <div class="p-2 rounded-full transition-colors duration-200">
+          <i class="fa-solid fa-xmark scale-175 text-hogent-white"></i>
+        </div>
+      </button>
+    </div>
+  </div>
+}
