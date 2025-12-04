@@ -195,7 +195,7 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         try
         {
             if (req.userGuid == null)
-                return await SendTestToAllUsers(req.title, req.body);
+                return await SendTestToAllUsers(req.title, req.body, req.url);
 
             var userData = await dbContext.PushSubscriptions
                 .Where(s => s.UserId == req.userGuid)
@@ -216,7 +216,7 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
                 userData.Subscription.AuthKey
             );
 
-            await SendToSubscription(sub, req.title, req.body);
+            await SendToSubscription(sub, req.title, req.body, req.url);
 
             return Result.Success();
         }
@@ -227,7 +227,7 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
-    public async Task SendToSubscription(PushSubscription sub, string title, string body)
+    public async Task SendToSubscription(PushSubscription sub, string title, string body, string? url = null)
     {
         var client = new WebPushClient();
 
@@ -237,7 +237,16 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
             "9UbL0rmtrGs-uXRiiuXEVWD3MpH-DltRQpu7Yi92gpA"
         );
 
-        var payload = JsonSerializer.Serialize(new { title, body });
+        var payloadObject = new Dictionary<string, object>
+        {
+            ["title"] = title,
+            ["body"] = body
+        };
+
+        if (!string.IsNullOrEmpty(url))
+            payloadObject["url"] = url;
+
+        var payload = JsonSerializer.Serialize(payloadObject);
 
         try
         {
@@ -254,7 +263,7 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
-    public async Task<Result> SendTestToAllUsers(string title, string body)
+    public async Task<Result> SendTestToAllUsers(string title, string body, string? url = null)
     {
         try
         {
@@ -275,7 +284,7 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
                     s.Subscription.AuthKey
                 );
 
-                await SendToSubscription(webPushSub, title, body);
+                await SendToSubscription(webPushSub, title, body, url);
             }
 
             return Result.Success();

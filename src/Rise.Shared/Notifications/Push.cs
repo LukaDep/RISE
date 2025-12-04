@@ -10,6 +10,7 @@ public static partial class Push
         public Guid? userGuid { get; set; }
         public required string title { get; set; }
         public required string body { get; set; }
+        public string? url { get; set; }
 
         public class Validator : AbstractValidator<Send>
         {
