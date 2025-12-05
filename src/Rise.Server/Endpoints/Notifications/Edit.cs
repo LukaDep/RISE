@@ -1,3 +1,4 @@
+using Rise.Shared.Identity;
 using Rise.Shared.Notifications;
 
 namespace Rise.Server.Endpoints.Notifications;
@@ -13,7 +14,7 @@ public class Edit(INotificationPreferencesService NotificationPreferencesService
     {
         Put("/api/notifications/preferences");
         // Ik heb hier allow anonymous gedaan om dat er toch op backend side gecheckt word of iemand is ingelogd of niet
-        AllowAnonymous();
+        Roles(AppRoles.Student);
     }
 
     public override Task<Result> ExecuteAsync(NotificationPreferencesRequest.Edit req, CancellationToken ctx)

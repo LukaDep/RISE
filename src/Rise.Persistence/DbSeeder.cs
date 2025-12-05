@@ -704,12 +704,22 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
     {
         if (dbContext.Grades.Any())
             return;
+        var student1 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "jan.vermeulen@student.hogent.be");
+        var student2 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "marie.dubois@student.hogent.be");
+        var student3 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "pieter.janssens@student.hogent.be");
+
+        if (student1 == null || student2 == null || student3 == null)
+        {
+            // missing prerequisites; skip seeding user widgets
+            return;
+        }
 
         dbContext.Grades.AddRange(
+            // Existing grades with userId added
             new Grade
             {
                 CourseId = "C30542",
-                CourseName = "Web Development 3",
+                CourseName = "Web Development 2",
                 Year = "2024-2025",
                 Semester = 1,
                 Name = "Project 1 - Portfolio Website",
@@ -718,12 +728,13 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 Score = 17,
                 Feedback = "Excellent structure and clean styling. Minor accessibility issues with ARIA labels.",
                 SubmissionDate = DateTime.Parse("2025-03-18T10:25:00Z"),
-                Date = DateTime.Parse("2025-03-17T23:59:00Z")
+                Date = DateTime.Parse("2025-03-17T23:59:00Z"),
+                UserId = student1.Id
             },
             new Grade
             {
                 CourseId = "C30542",
-                CourseName = "Web Development 3",
+                CourseName = "Web Development 1",
                 Year = "2024-2025",
                 Semester = 1,
                 Name = "Quiz 2 - JavaScript Concepts",
@@ -732,12 +743,13 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 Score = 8,
                 Feedback = "Solid understanding of closures; review promises syntax.",
                 SubmissionDate = DateTime.Parse("2025-04-02T09:40:00Z"),
-                Date = DateTime.Parse("2025-04-01T23:59:00Z")
+                Date = DateTime.Parse("2025-04-01T23:59:00Z"),
+                UserId = student1.Id
             },
             new Grade
             {
                 CourseId = "C30549",
-                CourseName = "Databases 2",
+                CourseName = "Databases",
                 Year = "2024-2025",
                 Semester = 1,
                 Name = "Normalization Assignment",
@@ -746,7 +758,251 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 Score = 14,
                 Feedback = "Good normalization work, but ensure all tables have proper keys.",
                 SubmissionDate = DateTime.Parse("2025-02-12T15:10:00Z"),
-                Date = DateTime.Parse("2025-02-11T23:59:00Z")
+                Date = DateTime.Parse("2025-02-11T23:59:00Z"),
+                UserId = student2.Id
+            },
+            
+            new Grade
+            {
+                CourseId = "C30101",
+                CourseName = "Cybersecurity",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "Midterm Exam",
+                ActivityType = "Exam",
+                MaxPoints = 20,
+                Score = 16,
+                Feedback = "Strong understanding of cryptographic principles.",
+                SubmissionDate = DateTime.Parse("2024-11-15T14:30:00Z"),
+                Date = DateTime.Parse("2024-11-15T14:00:00Z"),
+                UserId = student1.Id
+            },
+            new Grade
+            {
+                CourseId = "C30102",
+                CourseName = "Databases",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "SQL Assignment",
+                ActivityType = "Assignment",
+                MaxPoints = 20,
+                Score = 18,
+                Feedback = "Excellent query optimization.",
+                SubmissionDate = DateTime.Parse("2024-10-20T16:00:00Z"),
+                Date = DateTime.Parse("2024-10-20T23:59:00Z"),
+                UserId = student1.Id
+            },
+            new Grade
+            {
+                CourseId = "C30103",
+                CourseName = "IT Fundamentals",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "Hardware Quiz",
+                ActivityType = "Quiz",
+                MaxPoints = 10,
+                Score = 9,
+                Feedback = "Very good understanding of computer architecture.",
+                SubmissionDate = DateTime.Parse("2024-09-25T10:15:00Z"),
+                Date = DateTime.Parse("2024-09-25T10:00:00Z"),
+                UserId = student1.Id
+            },
+            new Grade
+            {
+                CourseId = "C30104",
+                CourseName = "Object-oriented Software Development I",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "OOP Project",
+                ActivityType = "Project",
+                MaxPoints = 20,
+                Score = 17,
+                Feedback = "Good use of inheritance and polymorphism. Consider improving encapsulation.",
+                SubmissionDate = DateTime.Parse("2024-12-01T18:00:00Z"),
+                Date = DateTime.Parse("2024-12-01T23:59:00Z"),
+                UserId = student1.Id
+            },
+            new Grade
+            {
+                CourseId = "C30105",
+                CourseName = "Software Analysis",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "UML Diagrams",
+                ActivityType = "Assignment",
+                MaxPoints = 20,
+                Score = 15,
+                Feedback = "Good class diagrams, but sequence diagrams need more detail.",
+                SubmissionDate = DateTime.Parse("2024-11-10T12:00:00Z"),
+                Date = DateTime.Parse("2024-11-10T23:59:00Z"),
+                UserId = student1.Id
+            },
+            new Grade
+            {
+                CourseId = "C30106",
+                CourseName = "Web Development I",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "HTML/CSS Project",
+                ActivityType = "Project",
+                MaxPoints = 20,
+                Score = 19,
+                Feedback = "Excellent responsive design and clean code.",
+                SubmissionDate = DateTime.Parse("2024-10-15T20:00:00Z"),
+                Date = DateTime.Parse("2024-10-15T23:59:00Z"),
+                UserId = student1.Id
+            },
+            
+            new Grade
+            {
+                CourseId = "C30201",
+                CourseName = "Communication Lab",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "Presentation Skills",
+                ActivityType = "Presentation",
+                MaxPoints = 20,
+                Score = 17,
+                Feedback = "Clear communication and good structure. Work on eye contact.",
+                SubmissionDate = DateTime.Parse("2025-03-10T11:00:00Z"),
+                Date = DateTime.Parse("2025-03-10T11:00:00Z"),
+                UserId = student2.Id
+            },
+            new Grade
+            {
+                CourseId = "C30202",
+                CourseName = "Business & Management",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "Business Plan",
+                ActivityType = "Assignment",
+                MaxPoints = 20,
+                Score = 16,
+                Feedback = "Good market analysis. Financial projections need more detail.",
+                SubmissionDate = DateTime.Parse("2025-04-05T15:00:00Z"),
+                Date = DateTime.Parse("2025-04-05T23:59:00Z"),
+                UserId = student2.Id
+            },
+            new Grade
+            {
+                CourseId = "C30203",
+                CourseName = "Computer Networks I",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "Network Configuration",
+                ActivityType = "Lab",
+                MaxPoints = 20,
+                Score = 18,
+                Feedback = "Excellent subnet configuration and routing setup.",
+                SubmissionDate = DateTime.Parse("2025-03-20T16:30:00Z"),
+                Date = DateTime.Parse("2025-03-20T23:59:00Z"),
+                UserId = student2.Id
+            },
+            new Grade
+            {
+                CourseId = "C30204",
+                CourseName = "Object-oriented Software Development II",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "Design Patterns Project",
+                ActivityType = "Project",
+                MaxPoints = 20,
+                Score = 19,
+                Feedback = "Outstanding implementation of design patterns.",
+                SubmissionDate = DateTime.Parse("2025-05-15T18:00:00Z"),
+                Date = DateTime.Parse("2025-05-15T23:59:00Z"),
+                UserId = student2.Id
+            },
+            new Grade
+            {
+                CourseId = "C30205",
+                CourseName = "Software Development Project I",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "Team Project",
+                ActivityType = "Project",
+                MaxPoints = 20,
+                Score = 18,
+                Feedback = "Great teamwork and solid implementation. Documentation could be improved.",
+                SubmissionDate = DateTime.Parse("2025-05-20T20:00:00Z"),
+                Date = DateTime.Parse("2025-05-20T23:59:00Z"),
+                UserId = student2.Id
+            },
+            new Grade
+            {
+                CourseId = "C30206",
+                CourseName = "Web Development II",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "React Application",
+                ActivityType = "Project",
+                MaxPoints = 20,
+                Score = 17,
+                Feedback = "Good component structure. Consider using more hooks for state management.",
+                SubmissionDate = DateTime.Parse("2025-04-25T19:00:00Z"),
+                Date = DateTime.Parse("2025-04-25T23:59:00Z"),
+                UserId = student2.Id
+            },
+            
+            new Grade
+            {
+                CourseId = "C30207",
+                CourseName = "Operating Systems",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "Process Management",
+                ActivityType = "Exam",
+                MaxPoints = 20,
+                Score = 15,
+                Feedback = "Good understanding of scheduling algorithms. Review deadlock prevention.",
+                SubmissionDate = DateTime.Parse("2025-05-10T09:00:00Z"),
+                Date = DateTime.Parse("2025-05-10T09:00:00Z"),
+                UserId = student3.Id
+            },
+            new Grade
+            {
+                CourseId = "C30208",
+                CourseName = "System Engineering Lab",
+                Year = "2024-2025",
+                Semester = 2,
+                Name = "System Integration",
+                ActivityType = "Lab",
+                MaxPoints = 20,
+                Score = 16,
+                Feedback = "Solid system setup and configuration. Documentation is thorough.",
+                SubmissionDate = DateTime.Parse("2025-04-30T14:00:00Z"),
+                Date = DateTime.Parse("2025-04-30T23:59:00Z"),
+                UserId = student3.Id
+            },
+            new Grade
+            {
+                CourseId = "C30101",
+                CourseName = "Cybersecurity",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "Security Audit",
+                ActivityType = "Assignment",
+                MaxPoints = 20,
+                Score = 14,
+                Feedback = "Good vulnerability assessment. Include more mitigation strategies.",
+                SubmissionDate = DateTime.Parse("2024-11-20T16:00:00Z"),
+                Date = DateTime.Parse("2024-11-20T23:59:00Z"),
+                UserId = student3.Id
+            },
+            new Grade
+            {
+                CourseId = "C30104",
+                CourseName = "Object-oriented Software Development I",
+                Year = "2024-2025",
+                Semester = 1,
+                Name = "Java Fundamentals",
+                ActivityType = "Quiz",
+                MaxPoints = 10,
+                Score = 8,
+                Feedback = "Good grasp of OOP concepts. Practice more with interfaces.",
+                SubmissionDate = DateTime.Parse("2024-10-05T11:00:00Z"),
+                Date = DateTime.Parse("2024-10-05T11:00:00Z"),
+                UserId = student3.Id
             }
         );
 

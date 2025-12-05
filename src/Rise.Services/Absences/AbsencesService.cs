@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Microsoft.EntityFrameworkCore;
 using Rise.Persistence;
+
 using Rise.Shared.Absences;
 using Rise.Shared.Common;
 using Rise.Shared.News;

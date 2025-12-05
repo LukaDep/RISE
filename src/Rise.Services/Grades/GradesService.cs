@@ -1,4 +1,5 @@
 using Rise.Persistence;
+using Rise.Services.Identity;
 
 namespace Rise.Services.Grades;
 
@@ -11,10 +12,23 @@ using Rise.Shared.Grades;
 /// Service for grades.
 /// </summary>
 
-public class GradesService(ApplicationDbContext dbContext) : IGradesService
+public class GradesService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : IGradesService
 {
+    private string GetCurrentUserId()
+    {
+        var userId = sessionContextProvider.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        return userId ?? string.Empty;
+    }
     public async Task<Result<GradesResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
+        var userId = GetCurrentUserId();
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Result.Success(new GradesResponse.Index
+            {
+                Grades = []
+            });
+        }
         var query = dbContext.Grades.AsQueryable();
         if (!string.IsNullOrWhiteSpace(request.SearchTerm))
         {
@@ -33,6 +47,7 @@ public class GradesService(ApplicationDbContext dbContext) : IGradesService
         }
 
         var grades = await query.AsNoTracking()
+            .Where(g => g.UserId == userId)
             .Skip(request.Skip)
             .Take(request.Take)
             .Select(g => new GradesDto.Grade
@@ -55,9 +70,15 @@ public class GradesService(ApplicationDbContext dbContext) : IGradesService
 
     public async Task<Result<GradesResponse.Get>> GetGradeByIdAsync(Guid id, CancellationToken ctx)
     {
+        var userId = GetCurrentUserId();
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Result<GradesResponse.Get>.Unauthorized("User is not authenticated");
+        }
         var query = dbContext.Grades.AsQueryable();
         var grade = await query.AsNoTracking()
             .Where(g => g.Id.Equals(id))
+            .Where(g => g.UserId == userId)
             .Select(g => new GradesDto.Grade
             {
                 Id = g.Id,

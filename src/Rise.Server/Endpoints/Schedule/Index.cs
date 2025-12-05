@@ -1,5 +1,6 @@
 using Rise.Shared.Schedule;
 using Rise.Shared.Common;
+using Rise.Shared.Identity;
 
 namespace Rise.Server.Endpoints.Schedule;
 
@@ -13,7 +14,7 @@ public class Index(IScheduleService ScheduleService) : Endpoint<QueryRequest.Dat
     public override void Configure()
     {
         Get("/api/schedules");
-        AllowAnonymous();
+        Roles(AppRoles.Student);
     }
 
     public override Task<Result<ScheduleDto.Data>> ExecuteAsync(QueryRequest.DateRange req, CancellationToken ct)

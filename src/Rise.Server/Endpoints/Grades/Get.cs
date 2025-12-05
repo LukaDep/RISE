@@ -1,3 +1,5 @@
+using Rise.Shared.Identity;
+
 namespace Rise.Server.Endpoints.Grades;
 
 using Rise.Shared.Common;
@@ -14,7 +16,7 @@ public class CourseById(IGradesService gradesService) : EndpointWithoutRequest<R
     public override void Configure()
     {
         Get("/api/grades/{id}");
-        AllowAnonymous();
+        Roles(AppRoles.Student);
     }
 
     public override Task<Result<GradesResponse.Get>> ExecuteAsync(CancellationToken ct)

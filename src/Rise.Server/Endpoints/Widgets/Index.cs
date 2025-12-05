@@ -1,3 +1,4 @@
+using Rise.Shared.Identity;
 using Rise.Shared.Widgets;
 
 namespace Rise.Server.Endpoints.Widgets;
@@ -7,7 +8,7 @@ public class Index(IWidgetService widgetService) : EndpointWithoutRequest<Result
     public override void Configure()
     {
         Get("/api/widgets");
-        AllowAnonymous();
+        Roles(AppRoles.Student);
     }
 
     public override async Task<Result<WidgetResponse.Index>> ExecuteAsync(CancellationToken ct)

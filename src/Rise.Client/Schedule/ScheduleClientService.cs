@@ -1,3 +1,4 @@
+using System.Net;
 using Rise.Shared.Schedule;
 using System.Net.Http.Json;
 using Rise.Shared.Common;
@@ -27,7 +28,17 @@ public class ScheduleClientService(HttpClient httpClient) : IScheduleService
         var queryString = string.Join("&", queryParams);
         var url = string.IsNullOrEmpty(queryString) ? "/api/schedules" : $"/api/schedules?{queryString}";
 
-        var result = await httpClient.GetFromJsonAsync<Result<ScheduleDto.Data>>(url, cancellationToken: ctx);
+        var response = await httpClient.GetAsync(url, cancellationToken: ctx);
+
+        if (response.StatusCode == HttpStatusCode.Unauthorized)
+        {
+            return Result<ScheduleDto.Data>.Error("Not Authorized");
+        }
+
+        response.EnsureSuccessStatusCode();
+
+        var result = await response.Content.ReadFromJsonAsync<Result<ScheduleDto.Data>>(cancellationToken: ctx);
         return result!;
+
     }
 }

@@ -104,7 +104,7 @@ public class WidgetService(ApplicationDbContext dbContext, ISessionContextProvid
 
         var widgetNames = incomingDict.Values.Select(w => w.WidgetName).Distinct().ToList();
         var widgetMap = await dbContext.Widgets
-            .Where(w => widgetNames.Contains(w.TypeName))
+            .Where(w => widgetNames.Contains(w.TypeName.ToLower()))
             .ToDictionaryAsync(w => w.TypeName, w => w.Id, ctx);
 
         var missingWidgetTypes = widgetNames.Except(widgetMap.Keys).ToList();

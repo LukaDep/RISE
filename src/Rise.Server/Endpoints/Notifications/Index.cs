@@ -1,3 +1,4 @@
+using Rise.Shared.Identity;
 using Rise.Shared.Notifications;
 
 namespace Rise.Server.Endpoints.Notifications;
@@ -12,7 +13,7 @@ public class Index(INotificationPreferencesService notificationPreferencesServic
     {
         Get("/api/notifications/preferences");
         // Ik heb hier allow anonymous gedaan om dat er toch op backend side gecheckt word of iemand is ingelogd of niet
-        AllowAnonymous();
+        Roles(AppRoles.Student);
     }
 
     public override async Task<Result<NotificationPreferencesResponse.Index>> ExecuteAsync(CancellationToken ct)

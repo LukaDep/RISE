@@ -13,6 +13,7 @@ public class Update(IWidgetService widgetService) : Endpoint<WidgetRequest.Updat
     public override void Configure()
     {
         Put("/api/widgets");
+        Roles(AppRoles.Student);
     }
 
     public override Task<Result> ExecuteAsync(WidgetRequest.Update req, CancellationToken ctx)

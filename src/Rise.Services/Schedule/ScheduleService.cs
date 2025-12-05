@@ -1,6 +1,7 @@
 using System.Text.Json;
 using Rise.Persistence;
 using Rise.Services.Absences;
+
 using Rise.Shared.Absences;
 using Rise.Shared.Common;
 using Rise.Shared.Schedule;
@@ -16,6 +17,8 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
     public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.DateRange req, CancellationToken ct)
     {
+
+        // Path to the JSON file in the source code directory
         var currentDirectory = Directory.GetCurrentDirectory();
 
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");

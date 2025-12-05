@@ -1,5 +1,6 @@
 using Rise.Shared.Absences;
 using Rise.Shared.Common;
+using Rise.Shared.Identity;
 
 namespace Rise.Server.Endpoints.Absences;
 
@@ -13,7 +14,7 @@ public class Index(IAbsencesService absencesService) : Endpoint<QueryRequest.Ski
     public override void Configure()
     {
         Get("/api/absences");
-        AllowAnonymous();
+        Roles(AppRoles.Student);
     }
 
     public override Task<Result<AbsencesResponse.Index>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)

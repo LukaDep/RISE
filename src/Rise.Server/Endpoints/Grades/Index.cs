@@ -1,3 +1,5 @@
+using Rise.Shared.Identity;
+
 namespace Rise.Server.Endpoints.Grades;
 
 using Rise.Shared.Common;
@@ -13,7 +15,7 @@ public class Index(IGradesService gradesService) : Endpoint<QueryRequest.SkipTak
     public override void Configure()
     {
         Get("/api/grades");
-        AllowAnonymous();
+        Roles(AppRoles.Student);
     }
 
     public override Task<Result<GradesResponse.Index>> ExecuteAsync(QueryRequest.SkipTake req, CancellationToken ct)
