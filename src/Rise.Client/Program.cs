@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Rise.Client;
 using Rise.Client.Account;
+using Rise.Client.Account.Notifications;
 using Rise.Client.Campus;
 using Rise.Client.Grades;
 using Rise.Client.Home;
@@ -105,6 +106,11 @@ try
     });
 
     builder.Services.AddHttpClient<INotificationPreferencesService, NotificationPreferencesClientService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    }).AddHttpMessageHandler<CookieHandler>();
+
+    builder.Services.AddHttpClient<ISentNotificationService, SentNotificationClientService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     }).AddHttpMessageHandler<CookieHandler>();

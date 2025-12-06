@@ -949,4 +949,52 @@
     <value>Terug naar agenda</value>
     <comment/>
   </data>
+  <data name="Notifications.MyNotifications" xml:space="preserve">
+    <value>Mijn Meldingen</value>
+    <comment/>
+  </data>
+  <data name="Notifications.MarkAllAsRead" xml:space="preserve">
+    <value>Alles als gelezen markeren</value>
+    <comment/>
+  </data>
+  <data name="Notifications.NoNotifications" xml:space="preserve">
+    <value>Geen meldingen</value>
+    <comment/>
+  </data>
+  <data name="Notifications.NoNotificationsDescription" xml:space="preserve">
+    <value>Je hebt nog geen meldingen ontvangen.</value>
+    <comment/>
+  </data>
+  <data name="Notifications.UnreadOf" xml:space="preserve">
+    <value>ongelezen van</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Total" xml:space="preserve">
+    <value>totaal</value>
+    <comment/>
+  </data>
+  <data name="Notifications.New" xml:space="preserve">
+    <value>Nieuw</value>
+    <comment/>
+  </data>
+  <data name="Notifications.LoadMore" xml:space="preserve">
+    <value>Meer laden</value>
+    <comment/>
+  </data>
+  <data name="Time.JustNow" xml:space="preserve">
+    <value>Zojuist</value>
+    <comment>Time indicator for very recent events (less than 1 minute ago)</comment>
+  </data>
+  <data name="Time.MinutesAgo" xml:space="preserve">
+    <value>{0} min geleden</value>
+    <comment>Time indicator with placeholder for number of minutes</comment>
+  </data>
+  <data name="Time.HoursAgo" xml:space="preserve">
+    <value>{0} uur geleden</value>
+    <comment>Time indicator with placeholder for number of hours</comment>
+  </data>
+  <data name="Time.DaysAgo" xml:space="preserve">
+    <value>{0} dagen geleden</value>
+    <comment>Time indicator with placeholder for number of days</comment>
+  </data>
 </root>

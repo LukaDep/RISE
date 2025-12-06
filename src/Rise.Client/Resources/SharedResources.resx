@@ -941,4 +941,52 @@
     <value>Back to schedule</value>
     <comment/>
   </data>
+  <data name="Notifications.MyNotifications" xml:space="preserve">
+    <value>My Notifications</value>
+    <comment/>
+  </data>
+  <data name="Notifications.MarkAllAsRead" xml:space="preserve">
+    <value>Mark all as read</value>
+    <comment/>
+  </data>
+  <data name="Notifications.NoNotifications" xml:space="preserve">
+    <value>No notifications</value>
+    <comment/>
+  </data>
+  <data name="Notifications.NoNotificationsDescription" xml:space="preserve">
+    <value>You don't have any notifications yet.</value>
+    <comment/>
+  </data>
+  <data name="Notifications.UnreadOf" xml:space="preserve">
+    <value>unread of</value>
+    <comment/>
+  </data>
+  <data name="Notifications.Total" xml:space="preserve">
+    <value>total</value>
+    <comment/>
+  </data>
+  <data name="Notifications.New" xml:space="preserve">
+    <value>New</value>
+    <comment/>
+  </data>
+  <data name="Notifications.LoadMore" xml:space="preserve">
+    <value>Load more</value>
+    <comment/>
+  </data>
+  <data name="Time.JustNow" xml:space="preserve">
+    <value>Just now</value>
+    <comment>Time indicator for very recent events (less than 1 minute ago)</comment>
+  </data>
+  <data name="Time.MinutesAgo" xml:space="preserve">
+    <value>{0} min ago</value>
+    <comment>Time indicator with placeholder for number of minutes</comment>
+  </data>
+  <data name="Time.HoursAgo" xml:space="preserve">
+    <value>{0} hours ago</value>
+    <comment>Time indicator with placeholder for number of hours</comment>
+  </data>
+  <data name="Time.DaysAgo" xml:space="preserve">
+    <value>{0} days ago</value>
+    <comment>Time indicator with placeholder for number of days</comment>
+  </data>
 </root>

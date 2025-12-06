@@ -1,0 +1,127 @@
+@page "/account/notifications"
+@attribute [Authorize]
+@inject NavigationManager NavigationManager
+@using Rise.Client.Components
+
+<PageTitle>@L["Notifications.MyNotifications"]</PageTitle>
+
+<div class="min-h-screen bg-gray-50 pb-8">
+
+    <div class="sticky top-0 z-40 bg-white border-b border-gray-200">
+        <div class="flex items-center justify-between gap-3 px-4 py-4">
+            <h1 class="text-xl font-semibold text-gray-900">@L["Notifications.MyNotifications"]</h1>
+            @if (notifications != null && notifications.Any(n => !n.IsRead))
+            {
+                <button @onclick="MarkAllAsRead" 
+                    class="text-sm text-blue-600 hover:text-blue-800 font-medium">
+                    @L["Notifications.MarkAllAsRead"]
+                </button>
+            }
+        </div>
+    </div>
+
+    <div class="max-w-2xl mx-auto px-4 pt-6 pb-24 space-y-4">
+
+        @if (isLoading)
+        {
+            <div class="flex justify-center items-center py-12">
+                <LoadingComponent Item='@L["Notifications.Loading"]' />
+            </div>
+        }
+        else if (!string.IsNullOrEmpty(errorMessage))
+        {
+            <div class="bg-red-50 rounded-xl border border-red-100 p-4">
+                <div class="flex gap-3">
+                    <div class="flex-shrink-0">
+                        <div class="w-8 h-8 bg-red-100 rounded-full flex items-center justify-center">
+                            <i class="fa-solid fa-circle-exclamation text-red-600 text-sm"></i>
+                        </div>
+                    </div>
+                    <div class="flex-1">
+                        <p class="text-sm text-red-700 leading-relaxed">@errorMessage</p>
+                    </div>
+                </div>
+            </div>
+        }
+        else if (notifications == null || !notifications.Any())
+        {
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-8 text-center">
+                <div class="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <i class="fa-solid fa-bell-slash text-gray-400 text-2xl"></i>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">@L["Notifications.NoNotifications"]</h3>
+                <p class="text-sm text-gray-500">@L["Notifications.NoNotificationsDescription"]</p>
+            </div>
+        }
+        else
+        {
+            <div class="pt-2 pb-2 px-1">
+                <p class="text-xs text-gray-500">
+                    @unreadCount @L["Notifications.UnreadOf"] @totalCount @L["Notifications.Total"]
+                </p>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 divide-y divide-gray-100 overflow-hidden">
+                @foreach (var notification in notifications)
+                {
+                    <div @onclick="() => OnNotificationClick(notification)" 
+                         class="@GetNotificationClass(notification) p-4 transition-colors cursor-pointer">
+                        <div class="flex items-start gap-3">
+                            <div class="flex-shrink-0 mt-1">
+                                <div class="@GetIconContainerClass(notification)">
+                                    <i class="@GetNotificationIcon(notification) text-white text-sm"></i>
+                                </div>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-start justify-between gap-2">
+                                    <h3 class="@GetTitleClass(notification) text-sm truncate">
+                                        @notification.Title
+                                    </h3>
+                                    <button @onclick="() => DeleteNotification(notification.Id)" 
+                                            @onclick:stopPropagation="true"
+                                            class="flex-shrink-0 text-gray-400 hover:text-red-500 transition-colors">
+                                        <i class="fa-solid fa-times text-xs"></i>
+                                    </button>
+                                </div>
+                                <p class="text-xs text-gray-600 mt-1 line-clamp-2">@notification.Body</p>
+                                <div class="flex items-center gap-2 mt-2">
+                                    <span class="text-xs text-gray-400">
+                                        @FormatDate(notification.SentAt)
+                                    </span>
+                                    @if (!notification.IsRead)
+                                    {
+                                        <span class="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800">
+                                            @L["Notifications.New"]
+                                        </span>
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+
+            @if (hasMoreNotifications)
+            {
+                <div class="flex justify-center pt-4">
+                    <button @onclick="LoadMore" 
+                            class="px-4 py-2 text-sm font-medium text-blue-600 hover:text-blue-800 hover:bg-blue-50 rounded-lg transition-colors"
+                            disabled="@isLoadingMore">
+                        @if (isLoadingMore)
+                        {
+                            <span class="flex items-center gap-2">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                @L["Notifications.Loading"]
+                            </span>
+                        }
+                        else
+                        {
+                            @L["Notifications.LoadMore"]
+                        }
+                    </button>
+                </div>
+            }
+        }
+
+    </div>
+</div>

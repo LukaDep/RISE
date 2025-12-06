@@ -10,7 +10,7 @@ self.addEventListener('activate', (event) => {
 self.addEventListener('fetch', (event) => {
     if (
         !event.request.url.startsWith('http') ||
-        (event.request.method !== 'GET')
+        event.request.method !== 'GET'
     ) {
         return
     }

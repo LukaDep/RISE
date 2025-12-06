@@ -41,6 +41,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IAbsencesService, AbsencesService>();
         services.AddScoped<IGradesService, GradesService>();
         services.AddScoped<INotificationPreferencesService, NotificationPreferencesService>();
+        services.AddScoped<ISentNotificationService, SentNotificationService>();
         services.AddScoped<IStudentCardService, StudentCardService>();
         services.AddScoped<IWidgetService, WidgetService>();
         services.AddScoped<IEventService, EventService>();

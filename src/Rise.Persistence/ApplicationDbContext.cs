@@ -36,6 +36,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<MenuItem> MenuItems => Set<MenuItem>();
     public DbSet<Resto> Restos => Set<Resto>();
     public DbSet<NotificationPreferences> NotificationPreferences => Set<NotificationPreferences>();
+    public DbSet<SentNotification> SentNotifications => Set<SentNotification>();
     public DbSet<StudentCard> StudentCards => Set<StudentCard>();
     public DbSet<Event> Events => Set<Event>();
     public DbSet<PushSubscriptions> PushSubscriptions => Set<PushSubscriptions>();

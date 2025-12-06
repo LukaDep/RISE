@@ -10,7 +10,7 @@ using WebPush;
 
 namespace Rise.Services.Notifications;
 
-public class NotificationPreferencesService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : INotificationPreferencesService
+public class NotificationPreferencesService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider, ISentNotificationService sentNotificationService) : INotificationPreferencesService
 {
     public async Task<Result<NotificationPreferencesResponse.Index>> GetUserPreferencesByIdAsync(CancellationToken ctx = default)
     {
@@ -195,7 +195,7 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         try
         {
             if (req.userGuid == null)
-                return await SendTestToAllUsers(req.title, req.body, req.url);
+                return await SendTestToAllUsers(req.title, req.body, req.url, req.notificationType);
 
             var userData = await dbContext.PushSubscriptions
                 .Where(s => s.UserId == req.userGuid)
@@ -207,16 +207,35 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
                 )
                 .FirstOrDefaultAsync(ctx);
 
+            DeliveryStatus deliveryStatus;
+
             if (userData == null)
-                return Result.NotFound("Deze gebruiker heeft geen pushmeldingen geactiveerd.");
+            {
+                // No push subscription, but still save the notification for in-app viewing
+                deliveryStatus = DeliveryStatus.NoSubscription;
+            }
+            else
+            {
+                var sub = new PushSubscription(
+                    userData.Subscription.Endpoint,
+                    userData.Subscription.P256dhKey,
+                    userData.Subscription.AuthKey
+                );
 
-            var sub = new PushSubscription(
-                userData.Subscription.Endpoint,
-                userData.Subscription.P256dhKey,
-                userData.Subscription.AuthKey
+                var sendSuccess = await SendToSubscription(sub, req.title, req.body, req.url);
+                deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
+            }
+
+            // Save the sent notification with delivery status
+            await sentNotificationService.SaveSentNotificationAsync(
+                req.userGuid.Value,
+                req.title,
+                req.body,
+                req.url,
+                req.notificationType,
+                deliveryStatus,
+                ctx
             );
-
-            await SendToSubscription(sub, req.title, req.body, req.url);
 
             return Result.Success();
         }
@@ -227,7 +246,15 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
-    public async Task SendToSubscription(PushSubscription sub, string title, string body, string? url = null)
+    /// <summary>
+    /// Sends a push notification to a specific subscription.
+    /// </summary>
+    /// <param name="sub">The push subscription to send to.</param>
+    /// <param name="title">The notification title.</param>
+    /// <param name="body">The notification body.</param>
+    /// <param name="url">Optional URL for the notification.</param>
+    /// <returns>True if the notification was successfully sent, false otherwise.</returns>
+    public async Task<bool> SendToSubscription(PushSubscription sub, string title, string body, string? url = null)
     {
         var client = new WebPushClient();
 
@@ -251,19 +278,22 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         try
         {
             await client.SendNotificationAsync(sub, payload, vapid);
+            return true;
         }
         catch (WebPushException ex)
         {
-            // Niet meer geldig → optioneel unsubscriben of markeren
+            // Subscription no longer valid
             Log.Warning("Push failed voor {Endpoint}. Reden: {Message}", sub.Endpoint, ex.Message);
+            return false;
         }
         catch (Exception ex)
         {
             Log.Error(ex, "Onbekende fout bij versturen van pushbericht");
+            return false;
         }
     }
 
-    public async Task<Result> SendTestToAllUsers(string title, string body, string? url = null)
+    public async Task<Result> SendTestToAllUsers(string title, string body, string? url = null, string? notificationType = null)
     {
         try
         {
@@ -284,7 +314,18 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
                     s.Subscription.AuthKey
                 );
 
-                await SendToSubscription(webPushSub, title, body, url);
+                var sendSuccess = await SendToSubscription(webPushSub, title, body, url);
+                var deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
+
+                // Save the sent notification for each user with delivery status
+                await sentNotificationService.SaveSentNotificationAsync(
+                    s.Subscription.UserId,
+                    title,
+                    body,
+                    url,
+                    notificationType,
+                    deliveryStatus
+                );
             }
 
             return Result.Success();
