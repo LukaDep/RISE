@@ -11,10 +11,9 @@ internal class NewsConfiguration : EntityConfiguration<NewsArticle>
 
         builder.Property(x => x.Title)
             .IsRequired()
-            .HasMaxLength(50);
+            .HasMaxLength(250);
 
         builder.Property(x => x.Description)
-            .IsRequired()
             .HasMaxLength(1000);
 
         builder.Property(x => x.Type)
@@ -31,5 +30,8 @@ internal class NewsConfiguration : EntityConfiguration<NewsArticle>
         builder.Property(x => x.Author)
             .IsRequired()
             .HasMaxLength(100);
+        builder.Property(x => x.ImageUrl)
+            .IsRequired()
+            .HasMaxLength(500);
     }
 }

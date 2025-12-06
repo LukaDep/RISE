@@ -9,11 +9,11 @@ public class NewsArticle : Entity
         get => _title;
         set => _title = Guard.Against.NullOrWhiteSpace(value);
     }
-    private string _description = string.Empty;
-    public required string Description
+    private string? _description = string.Empty;
+    public string? Description
     {
         get => _description;
-        set => _description = Guard.Against.NullOrWhiteSpace(value);
+        set => _description = value != null ? Guard.Against.NullOrWhiteSpace(value) : null;
     }
     private string _type = string.Empty;
     public required string Type
@@ -43,5 +43,13 @@ public class NewsArticle : Entity
     {
         get => _author;
         set => _author = Guard.Against.NullOrWhiteSpace(value);
+    }
+
+    private string _imageUrl = string.Empty;
+
+    public required string ImageUrl
+    {
+        get => _imageUrl;
+        set => _imageUrl = Guard.Against.NullOrWhiteSpace(value);
     }
 }

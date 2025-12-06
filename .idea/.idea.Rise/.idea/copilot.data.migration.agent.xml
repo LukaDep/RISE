@@ -9,17 +9,11 @@
         <entry key="95838b60-5820-4ee9-aca1-040a9068bcb3">
           <value>
             <set>
-              <option value="163ad5a2-fd06-4679-973d-a4bf2ecc59e1" />
-              <option value="33f5355a-83f5-4e52-96c8-b912ad5aa88d" />
-              <option value="3a9b28ab-554f-4977-a612-05b9da4e49af" />
               <option value="49d1d01e-6d56-4cc0-82c2-ff0c1dad5e4d" />
-              <option value="965cf39c-d0c9-4a98-bddf-5ee6db54e4a3" />
-              <option value="9c84ebd7-4a20-48d9-aa32-b7d027455d45" />
               <option value="d2474802-3add-48c1-81e7-f7d518d3982f" />
               <option value="d59b840a-7479-4a16-a5ce-35d30f6c8a0a" />
-              <option value="e2528937-acc8-49d4-a5f2-bace8b3c6bdf" />
-              <option value="eb660647-5015-4e92-82f5-f6f15d43fe84" />
-              <option value="ef761cab-2572-4829-9dc8-f7961f81c403" />
+              <option value="9c84ebd7-4a20-48d9-aa32-b7d027455d45" />
+              <option value="965cf39c-d0c9-4a98-bddf-5ee6db54e4a3" />
             </set>
           </value>
         </entry>

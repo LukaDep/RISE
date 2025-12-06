@@ -31,7 +31,7 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         else
         {
             // Default order
-            query = query.OrderBy(p => p.Title);
+            query = query.OrderByDescending(p => p.PublishDate);
         }
         // --- Robust date handling: treat default(DateTime) as "not provided" ---
         DateTime? start = request.StartDate;
@@ -74,7 +74,8 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
                 Type = n.Type,
                 PublishDate = n.PublishDate,
                 Content = n.Content,
-                Author = n.Author
+                Author = n.Author,
+                ImageUrl = n.ImageUrl
             })
             .ToListAsync(ctx);
 
@@ -101,7 +102,8 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
                 Type = n.Type,
                 PublishDate = n.PublishDate,
                 Content = n.Content,
-                Author = n.Author
+                Author = n.Author,
+                ImageUrl = n.ImageUrl
             })
             .FirstOrDefaultAsync(ctx);
         if (newsArticle == null)

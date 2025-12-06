@@ -1,3 +1,4 @@
+using Markdig;
 using Microsoft.AspNetCore.Components;
 using Rise.Shared.News;
 
@@ -9,12 +10,6 @@ public partial class NewsArticle : ComponentBase
     [Parameter] public Guid Id { get; set; }
     private NewsDto.Index? newsArticle;
     private string? errorMessage;
-
-    private string GetThumbnailUrl()
-    {
-        // Return a placeholder image URL for now
-        return "https://www.bureaupartners.be/images/projecten-detail/hogent-sporthal/hogent-sporthal-01.jpg";
-    }
 
     protected override async Task OnInitializedAsync()
     {
@@ -28,5 +23,14 @@ public partial class NewsArticle : ComponentBase
         {
             errorMessage = result.Errors.FirstOrDefault();
         }
+    }
+
+    private string ConvertMarkdownToHtml(string markdown)
+    {
+        var pipeline = new MarkdownPipelineBuilder()
+            .UseAdvancedExtensions()
+            .Build();
+
+        return Markdown.ToHtml(markdown, pipeline);
     }
 }
