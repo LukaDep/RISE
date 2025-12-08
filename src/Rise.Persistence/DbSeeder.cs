@@ -33,6 +33,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await EventsAsync();
         await GradesAsync();
         await RestosAndMenusAsync();
+        await DeadlinesAsync();
         await WidgetsAsync();
         await UserWidgetsAsync();
     }
@@ -194,6 +195,46 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             new NewsArticle {Title = "Nooit meer honger op de campus.", PublishDate = DateTime.Parse("2025-11-20T09:00:00Z"), Author = "Pol Bracke", Type = "Wallie", Content = "Als student kan je wel wat energie en vitaminen gebruiken want studeren met een knorrende maag lukt echt niet. Op elke campus, of in de nabijheid van jouw campus, vind je een studentenrestaurant of smartfridge terug waar je terecht kan voor een snelle hap, een uitgebreide lunch, een drankje of een heerlijk dessert.\n\nWist je dat STUVO jouw soep, warme maaltijden en salades subsidieert, zodat het allemaal ook financieel behapbaar blijft. Hou je dus van lekkere verzorgde maaltijden tegen studentvriendelijke prijzen? Check dan [hier](https://www.hogent.be/student/catering/) waar je de HOGENT-studentenrestaurants kan vinden.\n\nMet je HOGENT-studentenkaart ben je trouwens ook welkom in de studentenrestaurants van UGent. Handig toch?\n\nLaat het smaken!", ImageUrl = "https://res.cloudinary.com/drqwrfucv/image/upload/v1764754337/content_mtunbt.jpg"}
         );
         await dbContext.SaveChangesAsync();
+    }
+    private async Task DeadlinesAsync()
+    {
+        if (dbContext.Deadlines.Any())
+            return;
+        dbContext.Deadlines.AddRange(
+            new Domain.Deadlines.Deadline
+            {
+                Title = "Project Proposal Submission",
+                Description = "Submit your project proposal for approval.",
+                EndDate = DateTime.Parse("2025-12-15T23:59:59Z"),
+                Lector = "Thomas Parmentier",
+                Course = "Bachelorproef",
+            },
+            new Domain.Deadlines.Deadline
+            {
+                Title = "Exam",
+                Description = "Exam covering chapters 1-5.",
+                EndDate = DateTime.Parse("2026-01-15T10:00:00Z"),
+                Lector = "Sarah Vermeulen",
+                Course = "Business Analysis",
+
+            },
+            new Domain.Deadlines.Deadline
+            {
+                Title = "Final Paper Submission",
+                Description = "Submit your final research paper.",
+                EndDate = DateTime.Parse("2026-02-14T23:59:59Z"),
+                Lector = "Bert Van Vreckem",
+                Course = "Research Methods",
+            },
+            new Domain.Deadlines.Deadline
+            {
+                Title = "Demo RISE",
+                Description = "RISE Application Demo.",
+                EndDate = DateTime.Parse("2025-12-06T23:59:59Z"),
+                Lector = "Chloe De Leenheer",
+                Course = "RISE",
+            }
+        );
     }
 
     private async Task AbsencesAsync()

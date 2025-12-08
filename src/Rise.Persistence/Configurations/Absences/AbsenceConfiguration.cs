@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Rise.Domain.Absences;
+using Microsoft.EntityFrameworkCore;
 
 namespace Rise.Persistence.Configurations.Absences;
 
@@ -11,7 +12,11 @@ internal class AbsenceConfiguration : EntityConfiguration<Absence>
 {
     public override void Configure(EntityTypeBuilder<Absence> builder)
     {
+        
+
         base.Configure(builder);
+
+        builder.ToTable("Absence");
 
         builder.Property(x => x.Name)
             .IsRequired()

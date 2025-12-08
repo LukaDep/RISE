@@ -1,0 +1,36 @@
+﻿@using Microsoft.AspNetCore.Components.Routing
+@using Rise.Shared.Deadlines
+@inject IStringLocalizer<SharedResources> L
+
+<div
+    class="group border-hogent-black-15 bg-hogent-white m-4 flex items-center justify-between rounded-xl border p-4 shadow transition"> 
+    <div class="flex flex-1 flex-col justify-center">
+        <h3 class="text-hogent-black text-lg font-bold">@Deadline.Title</h3>
+        <p class="text-hogent-black-60 text-sm">@Deadline.Description</p>
+        <p class="text-hogent-black-50 mt-1 text-xs">@Deadline.Lector</p>
+    </div>
+    <div class="ml-4 flex flex-col items-end justify-center">
+        <p class="text-hogent-black-50 text-sm">@L["Deadlines.Deadline"]</p>
+        <p class="text-lg font-bold text-hogent-education">
+            @Deadline.EndDate.ToString("dd MMM yyyy")
+        </p> 
+        @if(DaysRemaining <= 3)
+        {
+            <p class="mt-1 text-sm font-semibold text-red-600">
+                @if(DaysRemaining == 1)
+                {
+                    @L["Deadlines.Urgent1Day", DaysRemaining]
+                }
+				else if (DaysRemaining == 0)
+				{
+					@L["Deadlines.UrgentToday"]
+				}
+                else
+                {
+                    @L["Deadlines.Urgent", DaysRemaining]
+                }
+                
+            </p>
+        }
+    </div>
+</div>

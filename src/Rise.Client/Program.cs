@@ -25,6 +25,7 @@ using Rise.Shared.Schedule;
 using Rise.Shared.Events;
 using Rise.Shared.StudentCards;
 using Rise.Shared.Widgets;
+using Rise.Shared.Deadlines;
 
 try
 {
@@ -120,6 +121,10 @@ try
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     });
     builder.Services.AddHttpClient<IStudentCardService, StudentCardService>(client =>
+    {
+        client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
+    }).AddHttpMessageHandler<CookieHandler>();
+    builder.Services.AddHttpClient<IDeadlineService, DeadlinesService>(client =>
     {
         client.BaseAddress = new Uri(builder.Configuration["BackendUrl"] ?? "https://localhost:5001");
     }).AddHttpMessageHandler<CookieHandler>();

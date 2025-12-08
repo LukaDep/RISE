@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Rise.Domain.Absences;
 using Rise.Domain.Campus;
 using Rise.Domain.Contact;
+using Rise.Domain.Deadlines;
 using Rise.Domain.Grades;
 using Rise.Domain.HomeWidgets;
 using Rise.Domain.Menu;
@@ -40,6 +41,7 @@ public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> opts) :
     public DbSet<StudentCard> StudentCards => Set<StudentCard>();
     public DbSet<Event> Events => Set<Event>();
     public DbSet<PushSubscriptions> PushSubscriptions => Set<PushSubscriptions>();
+    public DbSet<Deadline> Deadlines => Set<Deadline>();
     public DbSet<Widget> Widgets => Set<Widget>();
     public DbSet<UserWidget> UserWidgets => Set<UserWidget>();
 
