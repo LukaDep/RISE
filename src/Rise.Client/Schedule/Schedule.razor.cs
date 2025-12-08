@@ -17,6 +17,11 @@ public partial class Schedule : IAsyncDisposable
     private System.Timers.Timer? currentTimeTimer;
     private DateTime currentTime = DateTime.Now;
 
+    protected override void OnParametersSet()
+    {
+        base.OnParametersSet();
+        SelectedDate = GetNextWeekdayIfWeekend(SelectedDate);
+    }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -52,12 +57,6 @@ public partial class Schedule : IAsyncDisposable
         StateHasChanged();
     }
 
-    private string GetWeekRangeTitle()
-    {
-        var weekStart = ScheduleHelpers.GetWeekStart(SelectedDate);
-        return $"{weekStart.ToString("d MMM", System.Globalization.CultureInfo.CurrentCulture)} – {weekStart.AddDays(6).ToString("d MMM", System.Globalization.CultureInfo.CurrentCulture)}";
-    }
-
     private DateTime WeekStartDate => ScheduleHelpers.GetWeekStart(SelectedDate);
 
     private int WeekNumber => ScheduleHelpers.GetWeekNumber(WeekStartDate);
@@ -66,10 +65,11 @@ public partial class Schedule : IAsyncDisposable
 
     public async Task GoToToday()
     {
-        SelectedDate = DateTime.Today;
+        var today = GetNextWeekdayIfWeekend(DateTime.Today);
+        SelectedDate = today;
         if (OnDayClick.HasDelegate)
         {
-            await OnDayClick.InvokeAsync(DateTime.Today);
+            await OnDayClick.InvokeAsync(today);
         }
         await OnDateChanged.InvokeAsync(SelectedDate);
         StateHasChanged();
@@ -77,20 +77,32 @@ public partial class Schedule : IAsyncDisposable
 
     private async Task SelectDay(DateTime day)
     {
-        SelectedDate = day;
+        var selectedDay = GetNextWeekdayIfWeekend(day);
+        SelectedDate = selectedDay;
         if (OnDayClick.HasDelegate)
         {
-            await OnDayClick.InvokeAsync(day);
+            await OnDayClick.InvokeAsync(selectedDay);
         }
-        await OnDateChanged.InvokeAsync(day);
+        await OnDateChanged.InvokeAsync(selectedDay);
         StateHasChanged();
     }
 
     private async Task HandleDateChanged(DateTime newDate)
     {
-        SelectedDate = newDate;
-        await OnDateChanged.InvokeAsync(newDate);
+        var adjustedDate = GetNextWeekdayIfWeekend(newDate);
+        SelectedDate = adjustedDate;
+        await OnDateChanged.InvokeAsync(adjustedDate);
         StateHasChanged();
+    }
+
+    private static DateTime GetNextWeekdayIfWeekend(DateTime date)
+    {
+        return date.DayOfWeek switch
+        {
+            DayOfWeek.Saturday => date.AddDays(2),
+            DayOfWeek.Sunday => date.AddDays(1),
+            _ => date
+        };
     }
 
     public async Task PreviousWeekAnimated()
@@ -121,33 +133,6 @@ public partial class Schedule : IAsyncDisposable
     {
         await PreviousWeekAnimated();
     }
-
-    private int GetCurrentDayIndex()
-    {
-        var today = DateTime.Today;
-        var weekStart = WeekStartDate;
-
-        for (int i = 0; i < 5; i++)
-        {
-            if (weekStart.AddDays(i).Date == today)
-                return i;
-        }
-
-        return -1;
-    }
-
-
-    private string GetLocalizedDayName(DateTime day) => day.DayOfWeek switch
-    {
-        DayOfWeek.Monday => L["Schedule.Monday"],
-        DayOfWeek.Tuesday => L["Schedule.Tuesday"],
-        DayOfWeek.Wednesday => L["Schedule.Wednesday"],
-        DayOfWeek.Thursday => L["Schedule.Thursday"],
-        DayOfWeek.Friday => L["Schedule.Friday"],
-        DayOfWeek.Saturday => L["Schedule.Saturday"],
-        DayOfWeek.Sunday => L["Schedule.Sunday"],
-        _ => day.ToString("ddd")
-    };
 
     public async ValueTask DisposeAsync()
     {

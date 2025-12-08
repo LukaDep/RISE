@@ -11,6 +11,7 @@ public static class ScheduleApiResponse
     // Root object
     public class ScheduleData
     {
+        public string Email { get; set; } = default!;
         public List<string> ColumnHeaders { get; set; } = new();
         public Info Info { get; set; } = new();
         public List<Schedule> Schedules { get; set; } = new();

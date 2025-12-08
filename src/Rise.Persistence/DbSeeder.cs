@@ -520,12 +520,12 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             return;
 
         dbContext.Contacts.AddRange(
-            new Contact { Type = "organisatie", Name = "HOGENT", PhoneNumber = "09 243 33 33", Email = "info@hogent.be" },
-            new Contact { Type = "departement", Name = "Bedrijf en Organisatie", ContactPerson = "Rudi Madalijns", Email = "Rudi.Madalijns@hogent.be" },
-            new Contact { Type = "departement", Name = "IT en Digitale Innovatie", ContactPerson = "Chantal Teerlinck", Email = "Chantal.Teerlinck@hogent.be" },
-            new Contact { Type = "campus", Name = "Campus Schoonmeersen", PhoneNumber = "09 243 20 04" },
-            new Contact { Type = "campus", Name = "Campus Mercator", PhoneNumber = "09 243 20 16" },
-            new Contact { Type = "directie", Name = "Algemene directie", ContactPerson = "Koen Goethals", Email = "koen.goethals@hogent.be" }
+            new Contact { Type = "Organisatie", Name = "HOGENT", PhoneNumber = "09 243 33 33", Email = "info@hogent.be" },
+            new Contact { Type = "Departement", Name = "Bedrijf en Organisatie", ContactPerson = "Rudi Madalijns", Email = "Rudi.Madalijns@hogent.be" },
+            new Contact { Type = "Departement", Name = "IT en Digitale Innovatie", ContactPerson = "Chantal Teerlinck", Email = "Chantal.Teerlinck@hogent.be" },
+            new Contact { Type = "Campus", Name = "Campus Schoonmeersen", PhoneNumber = "09 243 20 04" },
+            new Contact { Type = "Campus", Name = "Campus Mercator", PhoneNumber = "09 243 20 16" },
+            new Contact { Type = "Directie", Name = "Algemene directie", ContactPerson = "Koen Goethals", Email = "koen.goethals@hogent.be" }
         );
 
         await dbContext.SaveChangesAsync();

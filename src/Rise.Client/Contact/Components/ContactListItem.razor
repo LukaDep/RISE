@@ -1,0 +1,138 @@
+@using Rise.Shared.Contact
+@inject IStringLocalizer<SharedResources> L
+
+<div class="group flex flex-col border @(IsExpanded ? "border-hogent-education" : "border-hogent-black-15 hover:border-hogent-education") 
+            rounded-xl bg-hogent-white shadow-sm @(IsExpanded ? "shadow-md" : "hover:shadow-md") transition-all duration-200 cursor-pointer"
+    @onclick="OnToggle">
+
+    <!-- Header row -->
+    <div class="flex justify-between items-center p-4">
+        <div class="flex items-center gap-3 flex-1 min-w-0">
+            <h3 class="font-semibold text-hogent-black group-hover:text-hogent-education truncate">
+                @Contact.Name
+            </h3>
+        </div>
+
+        <div class="flex items-center gap-3">
+            <!-- Quick action buttons (visible when collapsed) -->
+            @if (!IsExpanded)
+            {
+                <div class="flex gap-2" @onclick:stopPropagation>
+                    @if (!string.IsNullOrEmpty(Contact.PhoneNumber))
+                    {
+                        <a href="tel:@Contact.PhoneNumber"
+                            class="w-9 h-9 flex items-center justify-center rounded-full bg-hogent-education-100 text-white 
+                                   hover:bg-hogent-education transition-colors"
+                            title="@L["Call"]">
+                            <i class="fa-solid fa-phone text-sm"></i>
+                        </a>
+                    }
+                    @if (!string.IsNullOrEmpty(Contact.Email))
+                    {
+                        <a href="mailto:@Contact.Email"
+                            class="w-9 h-9 flex items-center justify-center rounded-full bg-hogent-education-100 text-white 
+                                   hover:bg-hogent-education transition-colors"
+                            title="@L["Mail"]">
+                            <i class="fa-solid fa-envelope text-sm"></i>
+                        </a>
+                    }
+                </div>
+            }
+
+            <i class="fa-solid @(IsExpanded ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-50 transition-transform duration-200"></i>
+        </div>
+    </div>
+
+    <!-- Expanded content -->
+    @if (IsExpanded)
+    {
+        <div class="px-4 pb-4 space-y-3 border-t border-hogent-black-15 pt-3">
+            <!-- Contact person -->
+            @if (!string.IsNullOrEmpty(Contact.ContactPerson))
+            {
+                <div class="flex items-center gap-3 text-sm">
+                    <div class="w-8 h-8 flex items-center justify-center rounded-full bg-hogent-black-15">
+                        <i class="fa-solid fa-user text-hogent-black-50"></i>
+                    </div>
+                    <span class="text-hogent-black">@Contact.ContactPerson</span>
+                </div>
+            }
+
+            <!-- Phone -->
+            @if (!string.IsNullOrEmpty(Contact.PhoneNumber))
+            {
+                <div class="flex items-center gap-3 text-sm">
+                    <div class="w-8 h-8 flex items-center justify-center rounded-full bg-hogent-black-15">
+                        <i class="fa-solid fa-phone text-hogent-black-50"></i>
+                    </div>
+                    <a href="tel:@Contact.PhoneNumber" 
+                        class="text-hogent-education-100 hover:underline font-medium"
+                        @onclick:stopPropagation>
+                        @Contact.PhoneNumber
+                    </a>
+                </div>
+            }
+
+            <!-- Email -->
+            @if (!string.IsNullOrEmpty(Contact.Email))
+            {
+                <div class="flex items-center gap-3 text-sm">
+                    <div class="w-8 h-8 flex items-center justify-center rounded-full bg-hogent-black-15">
+                        <i class="fa-solid fa-envelope text-hogent-black-50"></i>
+                    </div>
+                    <a href="mailto:@Contact.Email" 
+                        class="text-hogent-education-100 hover:underline font-medium"
+                        @onclick:stopPropagation>
+                        @Contact.Email
+                    </a>
+                </div>
+            }
+
+            <!-- Campuses -->
+            @if (Contact.Campusses != null && Contact.Campusses.Any())
+            {
+                <div class="flex items-start gap-3 text-sm">
+                    <div class="w-8 h-8 flex items-center justify-center rounded-full bg-hogent-black-15 flex-shrink-0">
+                        <i class="fa-solid fa-location-dot text-hogent-black-50"></i>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach (var campus in Contact.Campusses)
+                        {
+                            <span class="px-2 py-1 bg-hogent-black-15 text-hogent-black-50 rounded-full text-xs">
+                                @campus
+                            </span>
+                        }
+                    </div>
+                </div>
+            }
+
+            <!-- Action buttons -->
+            <div class="flex gap-2 pt-2" @onclick:stopPropagation>
+                @if (!string.IsNullOrEmpty(Contact.PhoneNumber))
+                {
+                    <a href="tel:@Contact.PhoneNumber"
+                        class="flex items-center gap-2 px-4 py-2 rounded-full bg-hogent-education-100 text-white 
+                               hover:bg-hogent-education transition-colors text-sm font-medium">
+                        <i class="fa-solid fa-phone"></i>
+                        @L["Call"]
+                    </a>
+                }
+                @if (!string.IsNullOrEmpty(Contact.Email))
+                {
+                    <a href="mailto:@Contact.Email"
+                        class="flex items-center gap-2 px-4 py-2 rounded-full bg-hogent-education-100 text-white 
+                               hover:bg-hogent-education transition-colors text-sm font-medium">
+                        <i class="fa-solid fa-envelope"></i>
+                        @L["Mail"]
+                    </a>
+                }
+            </div>
+        </div>
+    }
+</div>
+
+@code {
+    [Parameter, EditorRequired] public ContactDto.Index Contact { get; set; } = null!;
+    [Parameter] public bool IsExpanded { get; set; }
+    [Parameter] public EventCallback OnToggle { get; set; }
+}

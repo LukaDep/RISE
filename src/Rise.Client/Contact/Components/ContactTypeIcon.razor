@@ -1,0 +1,16 @@
+@code {
+    [Parameter, EditorRequired] public string Type { get; set; } = "";
+    
+    private string GetIconClass() => Type switch
+    {
+        "Campus" => "fa-school",
+        "Departement" => "fa-users",
+        "Organisatie" => "fa-building",
+        "Directie" => "fa-user-tie",
+        _ => "fa-address-book"
+    };
+}
+
+<div class="w-8 h-8 flex items-center justify-center rounded-lg bg-hogent-black text-white">
+    <i class="fa-solid @GetIconClass() text-sm"></i>
+</div>

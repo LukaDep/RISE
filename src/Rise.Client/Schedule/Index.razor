@@ -14,11 +14,13 @@
 @code {
     [Parameter] public DateTime? date { get; set; }
     private DateTime SelectedDay = DateTime.Today;
+    
     protected override void OnParametersSet()
     {
         if (date.HasValue)
             SelectedDay = date.Value;
     }
+    
     private void GoToDay(DateTime day)
     {
         SelectedDay = day;

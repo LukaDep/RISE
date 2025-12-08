@@ -285,6 +285,10 @@
     <value>Password</value>
     <comment/>
   </data>
+  <data name="Auth.EmailPlaceholderText" xml:space="preserve">
+    <value>naam@student.hogent.be</value>
+    <comment/>
+  </data>
   <data name="Auth.Login" xml:space="preserve">
     <value>Login</value>
     <comment/>
@@ -367,6 +371,10 @@
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Sign In</value>
+    <comment/>
+  </data>
+  <data name="Auth.WelcomeBack" xml:space="preserve">
+    <value>Welcome back! Please sign in to continue.</value>
     <comment/>
   </data>
   <data name="Account.Title" xml:space="preserve">
@@ -559,6 +567,14 @@
   </data>
   <data name="Contact.Mail" xml:space="preserve">
     <value>Mail</value>
+    <comment/>
+  </data>
+  <data name="Contact.AllTypes" xml:space="preserve">
+    <value>All</value>
+    <comment/>
+  </data>
+  <data name="Contact.NotFound" xml:space="preserve">
+    <value>No contacts found</value>
     <comment/>
   </data>
   <data name="Account.Calendar" xml:space="preserve">

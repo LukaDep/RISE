@@ -1,15 +1,16 @@
 using System.Text.Json;
 using Rise.Persistence;
 using Rise.Services.Absences;
-
+using Rise.Services.Identity;
 using Rise.Shared.Absences;
 using Rise.Shared.Common;
+using Rise.Shared.Identity;
 using Rise.Shared.Schedule;
 using Serilog;
 
 namespace Rise.Services.Schedule;
 
-public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleService
+public class MockScheduleService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : IScheduleService
 {
     private string? _mockFilePath;
 
@@ -17,8 +18,10 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
     public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.DateRange req, CancellationToken ct)
     {
+        var userEmail = sessionContextProvider.User?.GetEmail();
+        if (string.IsNullOrEmpty(userEmail))
+            return Result<ScheduleDto.Data>.Unauthorized("Gebruiker niet ingelogd.");
 
-        // Path to the JSON file in the source code directory
         var currentDirectory = Directory.GetCurrentDirectory();
 
         _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");
@@ -30,7 +33,7 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
 
         var json = await File.ReadAllTextAsync(_mockFilePath, ct);
 
-        var data = ConvertToDto(json);
+        var data = ConvertToDto(json, userEmail);
 
         data.Schedules = ScheduleDto.ApplyDateRangeFilter(data.Schedules, req).ToList();
 
@@ -57,15 +60,20 @@ public class MockScheduleService(ApplicationDbContext dbContext) : IScheduleServ
         return Result.Success(data);
     }
 
-    public static ScheduleDto.Data ConvertToDto(string json)
+    public static ScheduleDto.Data ConvertToDto(string json, string userEmail)
     {
-        var rawData = JsonSerializer.Deserialize<ScheduleApiResponse.ScheduleData>(json, new JsonSerializerOptions
+        var allData = JsonSerializer.Deserialize<List<ScheduleApiResponse.ScheduleData>>(json, new JsonSerializerOptions
         {
             PropertyNameCaseInsensitive = true
         });
 
+        if (allData == null || allData.Count == 0)
+            throw new InvalidOperationException("Deserialization of schedule data returned null or empty.");
+
+        var rawData = allData.FirstOrDefault(d => string.Equals(d.Email, userEmail, StringComparison.OrdinalIgnoreCase));
+
         if (rawData == null)
-            throw new InvalidOperationException("Deserialization of ScheduleApiResponse.ScheduleData returned null.");
+            return new ScheduleDto.Data { Schedules = new List<ScheduleDto.Schedule>() };
 
         var convertedSchedules = rawData.Schedules.Select(r => new ScheduleDto.Schedule
         {

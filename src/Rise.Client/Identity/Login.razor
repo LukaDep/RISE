@@ -2,30 +2,68 @@
 
 <PageTitle>@L["Auth.Login"]</PageTitle>
 
-        <div class="min-h-screen flex flex-col items-center mx-4 mt-30 bg-hogent-white">
-            <h2 class="text-3xl font-extrabold text-center text-hogent-black mb-2">@L["Auth.SignIn"]</h2>
+<div class="min-h-[80vh] flex flex-col">
+    <div class="flex items-center justify-between mb-8 mx-4 lg:mt-10 mt-5">
+        <img src="/HOGENT-Logo-Home.png" alt="Hogent Logo" class="h-12 w-auto" />
+    </div>
+
+    <div class="flex-1 flex items-center justify-center px-4">
+        <div class="w-full max-w-md">
+            <div class="text-center mb-8">
+                <h1 class="text-2xl font-bold text-hogent-black mb-2">@L["Auth.SignIn"]</h1>
+                <p class="text-hogent-black-50 text-sm">@L["Auth.WelcomeBack"]</p>
+            </div>
+
             @foreach (var error in _result.Errors)
             {
-                <div class="mb-4 px-4 py-2 rounded-lg bg-hogent-it-50 text-hogent-white border border-hogent-it text-sm text-center w-full max-w-md">@error</div>
+                <div
+                    class="mb-4 p-4 rounded-lg bg-red-50 border border-red-200 text-red-700 text-sm flex items-center gap-2">
+                    <i class="fa-solid fa-circle-exclamation"></i>
+                    <span>@error</span>
+                </div>
             }
-            <EditForm Model="Model" OnValidSubmit="LoginUser" Context="formContext" class="w-full max-w-md">
-                <FluentValidationValidator/>
-                <div class="mb-4">
-                    <label class="block text-hogent-15 font-medium mb-1" for="email">@L["Auth.EmailPlaceholder"]</label>
-                    <InputText @bind-Value="Model.Email" type="email" autocomplete="username" id="email"
-                        class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" placeholder="@L["Auth.EmailPlaceholder"]" />
-                    <ValidationMessage For="() => Model.Email" class="text-xs text-hogent-it mt-1" />
+
+            <div class="bg-white border border-gray-200 rounded-lg shadow-sm p-6">
+                <EditForm Model="Model" OnValidSubmit="LoginUser" Context="formContext">
+                    <FluentValidationValidator />
+
+                    <div class="mb-4">
+                        <label class="block text-sm font-medium text-hogent-black mb-2" for="email">
+                            <i class="fa-solid fa-envelope mr-2 text-hogent-black-50"></i>@L["Auth.EmailPlaceholder"]
+                        </label>
+                        <InputText @bind-Value="Model.Email" type="email" autocomplete="username" id="email"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-black focus:border-hogent-black transition duration-150 bg-gray-50"
+                            placeholder="@L["Auth.EmailPlaceholderText"]" />
+                        <ValidationMessage For="() => Model.Email" class="text-xs text-red-500 mt-1" />
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-sm font-medium text-hogent-black mb-2" for="password">
+                            <i class="fa-solid fa-lock mr-2 text-hogent-black-50"></i>@L["Auth.PasswordPlaceholder"]
+                        </label>
+                        <InputText @bind-Value="Model.Password" type="password" id="password"
+                            class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-black focus:border-hogent-black transition duration-150 bg-gray-50"
+                            placeholder="••••••••" />
+                        <ValidationMessage For="() => Model.Password" class="text-xs text-red-500 mt-1" />
+                    </div>
+
+                    <button type="submit"
+                        class="w-full py-3 px-4 bg-hogent-black hover:bg-hogent-black-50 text-white font-semibold rounded-lg shadow-sm hover:shadow-md transition duration-150 flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-right-to-bracket"></i>
+                        @L["Auth.Login"]
+                    </button>
+                </EditForm>
+            </div>
+
+            @* <!-- Register Link -->
+            <div class="mt-6 text-center">
+                <div class="p-4 bg-gray-50 rounded-lg border border-gray-100">
+                    <span class="text-hogent-black-50 text-sm">@L["Auth.RegisterNewUser"]</span>
+                    <a href="register" class="ml-2 text-hogent-black hover:text-hogent-black-50 font-semibold transition duration-150 underline underline-offset-2">
+                        @L["Auth.Register"]
+                    </a>
                 </div>
-                <div class="mb-6">
-                    <label class="block text-gray-700 font-medium mb-1" for="password">@L["Auth.PasswordPlaceholder"]</label>
-                    <InputText @bind-Value="Model.Password" class="w-full px-4 py-2 border border-hogent-social-work-50 rounded-lg focus:outline-none focus:ring-2 focus:ring-hogent-education focus:border-hogent-education transition duration-150" type="password" id="password" placeholder="@L["Auth.PasswordPlaceholder"]" />
-                    <ValidationMessage For="() => Model.Password" class="text-xs text-hogent-it mt-1" />
-                </div>
-                <button class="w-full py-2 px-4 bg-hogent-education hover:bg-hogent-education-50 text-white font-semibold rounded-lg shadow transition duration-150 mb-4">@L["Auth.Login"]</button>
-                <div class="text-center">
-                    <span class="text-hogent-black-50">@L["Auth.RegisterNewUser"]</span>
-                    <a href="register" class="ml-2 text-hogent-education hover:text-hogent-education-50 font-semibold transition duration-150">@L["Auth.Register"]</a>
-                </div>
-            </EditForm>
+            </div> *@
         </div>
-        
+    </div>
+</div>

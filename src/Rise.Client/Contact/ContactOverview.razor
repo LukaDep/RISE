@@ -3,37 +3,74 @@
 @using Rise.Client.Components
 @inject IStringLocalizer<SharedResources> L
 
-<div class="flex items-center justify-between p-6">
+<PageTitle>@L["Contact.Title"]</PageTitle>
 
-    <!-- Title -->
-    <h3 class="text-4xl font-bold">@L["Contact.Title"]</h3>
-
-</div>
-<div>
-@if (contacts == null || !contacts.Any())
-{
-        <div class="flex justify-center items-center h-64">
-            <LoadingComponent Item="@L["Contact.Loading"]" />
+<BasePage Title="@L["Contact.Title"]">
+    <HeaderContent>
+        <SearchBar Value="@SearchTerm" ValueChanged="@SearchTermChanged" IsOpen="@isSearchOpen"
+            IsOpenChanged="@((bool value) => isSearchOpen = value)" />
+    </HeaderContent>
+    <ChildContent>
+        @if (contacts == null)
+        {
+            <div class="flex justify-center items-center h-64">
+                <LoadingComponent Item="@L["Contact.Loading"]" />
             </div>
         }
         else
         {
-            <FilterLabels 
-                Filters=types
-            />
-            @foreach (var contact in contacts)
-            {
-                        <ContactCard 
-                            Id="@contact.Id.ToString()" Name="@contact.Name" Type="@contact.Type" Email="@contact.Email"
-                    PhoneNumber="@contact.PhoneNumber" OnClick="() => ShowDetails(contact)" />
-            }
+            <!-- Filter chips -->
+            <div class="flex flex-wrap gap-2 mb-4">
+                <button class="@(string.IsNullOrEmpty(Filter) ? "bg-hogent-black text-white" : "bg-hogent-black-15 text-hogent-black hover:bg-hogent-black-30") 
+                        px-4 py-2 rounded-full text-sm font-medium transition-all duration-150"
+                    @onclick="() => SetFilter(null)">
+                    @L["Contact.AllTypes"]
+                </button>
+                @if (types != null)
+                {
+                    @foreach (var type in types)
+                    {
+                        <button class="@(Filter == type ? "bg-hogent-black text-white" : "bg-hogent-black-15 text-hogent-black hover:bg-hogent-black-30") 
+                                px-4 py-2 rounded-full text-sm font-medium transition-all duration-150"
+                            @onclick="() => SetFilter(type)">
+                            @type
+                        </button>
+                    }
+                }
+            </div>
 
-            @if (SelectedContact != null)
+            @if (!filteredContacts.Any())
             {
-                <ContactCardDetails Name="@SelectedContact.Name" Type="@SelectedContact.Type" Email="@SelectedContact.Email"
-                    PhoneNumber="@SelectedContact.PhoneNumber" ContactPerson="@SelectedContact.ContactPerson"
-                    OnClose="CloseDetails" />
+                <div class="flex flex-col items-center justify-center py-16 text-hogent-black-50">
+                    <i class="fa-solid fa-address-book text-5xl mb-4"></i>
+                    <p class="text-lg">@L["Contact.NotFound"]</p>
+                </div>
             }
-
+            else
+            {
+                <!-- Contact list grouped by type -->
+                @foreach (var group in filteredContacts.GroupBy(c => c.Type))
+                {
+                    <div class="mb-6">
+                        <div class="flex items-center gap-2 mb-3">
+                            <ContactTypeIcon Type="@group.Key" />
+                            <h2 class="text-lg font-semibold text-hogent-black">@group.Key</h2>
+                            <span class="text-xs font-medium text-hogent-black-50 bg-hogent-black-15 px-2 py-0.5 rounded-full">
+                                @group.Count()
+                            </span>
+                        </div>
+                        
+                        <div class="space-y-2">
+                            @foreach (var contact in group)
+                            {
+                                <ContactListItem Contact="@contact" 
+                                    IsExpanded="@(expandedContactId == contact.Id)"
+                                    OnToggle="() => ToggleContact(contact.Id)" />
+                            }
+                        </div>
+                    </div>
+                }
             }
-        </div>
+        }
+    </ChildContent>
+</BasePage>
