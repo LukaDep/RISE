@@ -30,7 +30,7 @@ public partial class ScheduleWidget : ComponentBase
                 StartDate = StartDate,
                 EndDate = EndDate
             };
-            
+
 
             var resultClasses = await ScheduleClientService.GetIndexAsync(request);
             UpcomingClasses = resultClasses

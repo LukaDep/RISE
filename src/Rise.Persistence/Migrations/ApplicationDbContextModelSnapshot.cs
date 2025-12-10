@@ -944,7 +944,7 @@ namespace Rise.Persistence.Migrations
                     b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("datetime(6)");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
@@ -988,6 +988,9 @@ namespace Rise.Persistence.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("varchar(50)");
 
+                    b.Property<Guid>("PushSubscriptionId")
+                        .HasColumnType("char(36)");
+
                     b.Property<DateTime?>("ReadAt")
                         .HasColumnType("datetime(6)");
 
@@ -1008,10 +1011,12 @@ namespace Rise.Persistence.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("varchar(500)");
 
-                    b.Property<Guid>("UserId")
+                    b.Property<Guid?>("UserId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("PushSubscriptionId");
 
                     b.HasIndex("UserId", "IsDeleted", "SentAt");
 
@@ -1219,6 +1224,17 @@ namespace Rise.Persistence.Migrations
                         .HasForeignKey("MenuId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("Rise.Domain.Notifications.SentNotification", b =>
+                {
+                    b.HasOne("Rise.Domain.Notifications.PushSubscriptions", "PushSubscription")
+                        .WithMany()
+                        .HasForeignKey("PushSubscriptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("PushSubscription");
                 });
 
             modelBuilder.Entity("Rise.Domain.StudentCards.StudentCard", b =>

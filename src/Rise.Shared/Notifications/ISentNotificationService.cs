@@ -34,14 +34,14 @@ public interface ISentNotificationService
     /// Saves a notification that was sent to a user.
     /// Called internally when a push notification is sent.
     /// </summary>
-    /// <param name="userId">The ID of the user who received the notification.</param>
+    /// <param name="pushSubscriptionId">The ID of the push subscription this notification was sent to.</param>
     /// <param name="title">The notification title.</param>
     /// <param name="body">The notification body.</param>
     /// <param name="url">Optional URL for the notification.</param>
     /// <param name="notificationType">The type/category of the notification.</param>
     /// <param name="deliveryStatus">The delivery status of the push notification.</param>
     /// <param name="ctx">Cancellation token.</param>
-    Task SaveSentNotificationAsync(Guid userId, string title, string body, string? url = null, string? notificationType = null, DeliveryStatus deliveryStatus = DeliveryStatus.Pending, CancellationToken ctx = default);
+    Task SaveSentNotificationAsync(Guid pushSubscriptionId, string title, string body, string? url = null, string? notificationType = null, DeliveryStatus deliveryStatus = DeliveryStatus.Pending, CancellationToken ctx = default);
 }
 
 /// <summary>

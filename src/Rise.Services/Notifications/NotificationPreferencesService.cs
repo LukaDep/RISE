@@ -133,8 +133,6 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         try
         {
             var userGuid = sessionContextProvider.User?.GetUserId();
-            if (userGuid == null)
-                return Result.Unauthorized("Gebruiker niet ingelogd.");
 
             var existing = await dbContext.PushSubscriptions
                 .FirstOrDefaultAsync(x => x.Endpoint == req.Endpoint, ctx);
@@ -143,17 +141,17 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
             {
                 var entity = new PushSubscriptions
                 {
-                    UserId = userGuid.Value,
+                    UserId = userGuid,
                     Endpoint = req.Endpoint,
                     P256dhKey = req.Keys.P256dh,
-                    AuthKey = req.Keys.Auth, // ← hier stond foutief P256dh
+                    AuthKey = req.Keys.Auth,
                 };
 
                 dbContext.PushSubscriptions.Add(entity);
             }
             else
             {
-                existing.UserId = userGuid.Value;
+                existing.UserId = userGuid;
                 existing.P256dhKey = req.Keys.P256dh;
                 existing.AuthKey = req.Keys.Auth;
                 existing.LastUsedAt = DateTime.UtcNow;
@@ -211,24 +209,23 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
 
             if (userData == null)
             {
-                // No push subscription, but still save the notification for in-app viewing
-                deliveryStatus = DeliveryStatus.NoSubscription;
+                // No push subscription found for this user
+                Log.Warning("Geen push subscription gevonden voor gebruiker {UserId}", req.userGuid);
+                return Result.Error("Geen push subscription gevonden voor deze gebruiker.");
             }
-            else
-            {
-                var sub = new PushSubscription(
-                    userData.Subscription.Endpoint,
-                    userData.Subscription.P256dhKey,
-                    userData.Subscription.AuthKey
-                );
 
-                var sendSuccess = await SendToSubscription(sub, req.title, req.body, req.url);
-                deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
-            }
+            var sub = new PushSubscription(
+                userData.Subscription.Endpoint,
+                userData.Subscription.P256dhKey,
+                userData.Subscription.AuthKey
+            );
+
+            var sendSuccess = await SendToSubscription(sub, req.title, req.body, req.url);
+            deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
 
             // Save the sent notification with delivery status
             await sentNotificationService.SaveSentNotificationAsync(
-                req.userGuid.Value,
+                userData.Subscription.Id,
                 req.title,
                 req.body,
                 req.url,
@@ -317,9 +314,9 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
                 var sendSuccess = await SendToSubscription(webPushSub, title, body, url);
                 var deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
 
-                // Save the sent notification for each user with delivery status
+                // Save the sent notification for each subscription with delivery status
                 await sentNotificationService.SaveSentNotificationAsync(
-                    s.Subscription.UserId,
+                    s.Subscription.Id,
                     title,
                     body,
                     url,
@@ -335,5 +332,13 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
             Log.Error(ex, "Fout in SendTestToAllUsers()");
             return Result.Error("Er ging iets mis bij het sturen van meldingen naar alle gebruikers.");
         }
+    }
+
+    /// <summary>
+    /// Not implemented, front end only logic  
+    /// </summary>
+    public Task<Result> SyncSubscriptionAsync(CancellationToken ctx = default)
+    {
+        throw new NotImplementedException();
     }
 }

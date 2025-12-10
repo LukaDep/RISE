@@ -14,8 +14,18 @@ internal class SentNotificationConfiguration : EntityConfiguration<SentNotificat
     {
         base.Configure(builder);
 
-        builder.Property(x => x.UserId)
+        // Foreign key to PushSubscriptions
+        builder.Property(x => x.PushSubscriptionId)
             .IsRequired();
+
+        builder.HasOne(x => x.PushSubscription)
+            .WithMany()
+            .HasForeignKey(x => x.PushSubscriptionId)
+            .OnDelete(DeleteBehavior.Cascade);
+
+        // UserId is nullable (for anonymous users)
+        builder.Property(x => x.UserId)
+            .IsRequired(false);
 
         builder.Property(x => x.Title)
             .IsRequired()
@@ -40,6 +50,10 @@ internal class SentNotificationConfiguration : EntityConfiguration<SentNotificat
         builder.Property(x => x.DeliveryStatus)
             .HasDefaultValue(DeliveryStatus.Pending);
 
+        // Index on PushSubscriptionId for faster lookups
+        builder.HasIndex(x => x.PushSubscriptionId);
+
+        // Index on UserId for queries that still filter by user
         builder.HasIndex(x => new { x.UserId, x.IsDeleted, x.SentAt });
     }
 }

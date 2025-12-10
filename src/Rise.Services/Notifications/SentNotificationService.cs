@@ -159,13 +159,23 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
         }
     }
 
-    public async Task SaveSentNotificationAsync(Guid userId, string title, string body, string? url = null, string? notificationType = null, DeliveryStatus deliveryStatus = DeliveryStatus.Pending, CancellationToken ctx = default)
+    public async Task SaveSentNotificationAsync(Guid pushSubscriptionId, string title, string body, string? url = null, string? notificationType = null, DeliveryStatus deliveryStatus = DeliveryStatus.Pending, CancellationToken ctx = default)
     {
         try
         {
+            var subscription = await dbContext.PushSubscriptions
+                .FirstOrDefaultAsync(ps => ps.Id == pushSubscriptionId, ctx);
+
+            if (subscription == null)
+            {
+                Log.Warning("Push subscription {PushSubscriptionId} niet gevonden bij opslaan notificatie", pushSubscriptionId);
+                return;
+            }
+
             var notification = new SentNotification
             {
-                UserId = userId,
+                PushSubscriptionId = pushSubscriptionId,
+                UserId = subscription.UserId,
                 Title = title,
                 Body = body,
                 Url = url,
@@ -178,7 +188,8 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
             dbContext.SentNotifications.Add(notification);
             await dbContext.SaveChangesAsync(ctx);
 
-            Log.Information("Notificatie opgeslagen voor gebruiker {UserId}: {Title} (DeliveryStatus: {DeliveryStatus})", userId, title, deliveryStatus);
+            Log.Information("Notificatie opgeslagen voor subscription {PushSubscriptionId} (UserId: {UserId}): {Title} (DeliveryStatus: {DeliveryStatus})",
+                pushSubscriptionId, subscription.UserId, title, deliveryStatus);
         }
         catch (Exception ex)
         {

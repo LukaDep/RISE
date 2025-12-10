@@ -247,6 +247,10 @@
     <value>naam@student.hogent.be</value>
     <comment/>
   </data>
+  <data name="Auth.EmailPlaceholderText" xml:space="preserve">
+    <value>name@student.hogent.be</value>
+    <comment/>
+  </data>
   <data name="Auth.Login" xml:space="preserve">
     <value>Login</value>
   </data>
@@ -309,6 +313,10 @@
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Sign In</value>
+  </data>
+  <data name="Auth.WelcomeBack" xml:space="preserve">
+    <value>Welcome back! Please sign in to continue.</value>
+    <comment/>
   </data>
   <data name="Auth.WelcomeBack" xml:space="preserve">
     <value>Welcome back! Please sign in to continue.</value>
@@ -469,6 +477,14 @@
   </data>
   <data name="Contact.Mail" xml:space="preserve">
     <value>Mail</value>
+  </data>
+  <data name="Contact.AllTypes" xml:space="preserve">
+    <value>All</value>
+    <comment/>
+  </data>
+  <data name="Contact.NotFound" xml:space="preserve">
+    <value>No contacts found</value>
+    <comment/>
   </data>
   <data name="Contact.AllTypes" xml:space="preserve">
     <value>All</value>
@@ -777,5 +793,21 @@
   <data name="Time.DaysAgo" xml:space="preserve">
     <value>{0} days ago</value>
     <comment>Time indicator with placeholder for number of days</comment>
+  </data>
+  <data name="Notifications.PromptTitle" xml:space="preserve">
+    <value>Do you want to receive notifications?</value>
+    <comment>Title for the notification permission prompt</comment>
+  </data>
+  <data name="Notifications.PromptDescription" xml:space="preserve">
+    <value>We'll send you relevant updates. You can always disable this later.</value>
+    <comment>Description text for the notification permission prompt</comment>
+  </data>
+  <data name="Notifications.PromptDeny" xml:space="preserve">
+    <value>No</value>
+    <comment>Button to deny notification permissions</comment>
+  </data>
+  <data name="Notifications.PromptAllow" xml:space="preserve">
+    <value>Yes, enable</value>
+    <comment>Button to allow notification permissions</comment>
   </data>
 </root>

@@ -84,6 +84,6 @@ public class Grade : Entity
         get => _semester;
         set => _semester = value;
     }
-    
+
     public string? UserId { get; set; }
 }

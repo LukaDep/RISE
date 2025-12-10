@@ -90,4 +90,48 @@ public class NotificationPreferencesClientService(HttpClient httpClient, IJSRunt
             return Result.Error($"Onverwachte fout bij afmelden voor push-meldingen: {ex.Message}");
         }
     }
+
+    public async Task<Result> SyncSubscriptionAsync(CancellationToken ctx = default)
+    {
+        try
+        {
+            // Get the existing subscription from the browser (or create one if permission is granted)
+            var pubKey = "BCW-qlnpFfIjUDSN5cg0JUah1ktLevpGuU0HgBLvj76rpPinTndjtmEjZriWPsooBzKIJ4oEsTs8c1yAyCHBwGI";
+            var subscribeObject = await JS.InvokeAsync<PushSubscriptionRequest.Create?>("getExistingSubscription", pubKey);
+
+            if (subscribeObject == null)
+            {
+                // No existing subscription found and couldn't create one (permission not granted)
+                Console.WriteLine("SyncSubscriptionAsync: No subscription found or could not create one, nothing to sync");
+                return Result.Success();
+            }
+
+            Console.WriteLine("SyncSubscriptionAsync: Found/created subscription, syncing with server...");
+
+            var response = await httpClient.PostAsJsonAsync("/api/push/subscribe", subscribeObject, ctx);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadFromJsonAsync<Result>(cancellationToken: ctx);
+                Console.WriteLine("SyncSubscriptionAsync: Subscription synced successfully");
+                return result ?? Result.Success();
+            }
+
+            Console.WriteLine($"SyncSubscriptionAsync: Failed to sync subscription: {response.StatusCode}");
+            return Result.Error($"Fout bij het synchroniseren van push-meldingen: {response.StatusCode}");
+        }
+        catch (JSException jsEx)
+        {
+            var errorMsg = string.IsNullOrEmpty(jsEx.Message) ? "Onbekende JavaScript fout" : jsEx.Message;
+            Console.WriteLine($"JavaScript error during subscription sync: {errorMsg}");
+            // Don't return error for sync failures - user already has notifications working
+            return Result.Success();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Unexpected error during subscription sync: {ex.Message}");
+            // Don't return error for sync failures - user already has notifications working
+            return Result.Success();
+        }
+    }
 }

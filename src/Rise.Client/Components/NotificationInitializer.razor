@@ -1,0 +1,30 @@
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.JSInterop
+@using Rise.Shared.Notifications
+
+<div class="fixed inset-0 flex items-end justify-center pointer-events-none z-50 px-4 pb-4 sm:px-0 sm:pb-0">
+  @if (Show)
+  {
+    <div
+      class="pointer-events-auto mb-4 sm:mb-6 px-4 py-4 sm:px-6 bg-hogent-white shadow-xl rounded-xl border border-hogent-black-30 w-full max-w-sm animate-fade-in">
+      <h3 class="text-base sm:text-lg font-semibold text-hogent-black mb-2">
+        @L["Notifications.PromptTitle"]
+      </h3>
+
+      <p class="text-sm text-hogent-black-50 mb-4">
+        @L["Notifications.PromptDescription"]
+      </p>
+
+      <div class="flex flex-col sm:flex-row gap-2 sm:gap-3 sm:justify-end">
+        <button class="px-4 py-2 text-sm font-medium rounded-lg border border-hogent-black-30 text-hogent-black hover:bg-hogent-black-15 transition-colors active:scale-95"
+          @onclick="Deny">
+          @L["Notifications.PromptDeny"]
+        </button>
+
+        <button class="px-4 py-2 text-sm font-medium rounded-lg bg-hogent-black text-hogent-white hover:bg-hogent-black-80 transition-colors active:scale-95 shadow-sm hover:shadow-md" @onclick="Allow">
+          @L["Notifications.PromptAllow"]
+        </button>
+      </div>
+    </div>
+  }
+</div>

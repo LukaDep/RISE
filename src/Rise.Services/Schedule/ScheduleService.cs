@@ -73,7 +73,10 @@ public class MockScheduleService(ApplicationDbContext dbContext, ISessionContext
         var rawData = allData.FirstOrDefault(d => string.Equals(d.Email, userEmail, StringComparison.OrdinalIgnoreCase));
 
         if (rawData == null)
+        {
+            Log.Information("Geen schedule data gevonden voor gebruiker. ");
             return new ScheduleDto.Data { Schedules = new List<ScheduleDto.Schedule>() };
+        }
 
         var convertedSchedules = rawData.Schedules.Select(r => new ScheduleDto.Schedule
         {

@@ -14,72 +14,152 @@ function urlBase64ToUint8Array(base64String) {
     return outputArray
 }
 
-// Make subscribeUser available globally for Blazor JSInterop
+/**
+ * Subscribes the user to push notifications using the provided VAPID public key.
+ * This function checks for service worker and push notification support, requests
+ * notification permission from the user, and creates a push subscription.
+ *
+ * @param {string} publicKey - The base64-encoded VAPID public key for the application server.
+ * @returns {Promise<Object>} A promise that resolves to the push subscription object containing:
+ *   - endpoint: {string} The subscription endpoint URL
+ *   - expirationTime: {number|null} Expiration time of the subscription (null if none)
+ *   - keys: {Object} The encryption keys
+ *     - p256dh: {string} The P-256 Diffie-Hellman key
+ *     - auth: {string} The authentication secret
+ * @throws {Error} Throws an error if:
+ *   - Service workers are not supported
+ *   - Push notifications are not supported
+ *   - Notification permission is denied
+ *   - Notification permission is not granted
+ *   - Service worker registration fails
+ *   - Push subscription fails
+ */
 window.subscribeUser = async function (publicKey) {
+    console.log('subscribeUser called with key:', publicKey)
     try {
-        console.log('subscribeUser called')
-
-        // Check if service worker is supported
+        console.log('Checking service worker support...')
         if (!('serviceWorker' in navigator)) {
             throw new Error('Service workers are not supported in this browser')
         }
 
-        // Check if push notifications are supported
+        console.log('Checking push manager support...')
         if (!('PushManager' in window)) {
             throw new Error(
                 'Push notifications are not supported in this browser'
             )
         }
 
-        // Request notification permission if not already granted
+        console.log('Checking notification permission...')
         if (Notification.permission === 'denied') {
             throw new Error('Notification permission was denied')
         }
 
+        console.log('Requesting permission if needed...')
         if (Notification.permission !== 'granted') {
             const permission = await Notification.requestPermission()
+            console.log('Permission result:', permission)
             if (permission !== 'granted') {
                 throw new Error('Notification permission was not granted')
             }
         }
-        console.log(
-            'subscribeUser passed all checks and will now be called moatjeu'
-        )
 
-        // Wait for service worker to be ready
+        console.log('Waiting for service worker ready...')
         const registration = await navigator.serviceWorker.ready
-        console.log('we hebben goed gewacht op de registration ')
+        console.log('Service worker ready:', !!registration)
         if (!registration) {
-            console.error('Service worker registration not found')
             throw new Error('Service worker registration not found')
         }
 
-        // Convert the public key
+        console.log('Converting VAPID key...')
         const converted = urlBase64ToUint8Array(publicKey)
-        console.log('we hebben goed gewacht op de converted ')
 
-        // Subscribe to push notifications
+        console.log('Subscribing to push...')
         const subscription = await registration.pushManager.subscribe({
             userVisibleOnly: true,
             applicationServerKey: converted,
         })
 
-        console.log('Push subscription successful:', subscription)
+        console.log('Subscription successful:', subscription)
         return subscription
     } catch (error) {
-        console.error('Push subscription error:', error)
-
-        let errorMessage = error.message
-
-        throw new Error(errorMessage)
+        console.error('subscribeUser error:', error.message)
+        throw new Error(error.message)
     }
 }
 
-// Returnt iets in deze aard: {
-//   endpoint: "https://fcm.googleapis.com/fcm/send/e3J9....",
-//   expirationTime: null,
-//   keys: {
-//     p256dh: "BDfQ8vQd8W...",
-//     auth: "fF7e1g..."
-//   }
-// }
+window.checkExistingSubscription = async function () {
+    console.log('checkExistingSubscription called')
+    if (!('serviceWorker' in navigator)) {
+        console.log('Service worker not supported')
+        return false
+    }
+
+    try {
+        console.log('Waiting for service worker ready...')
+        const reg = await navigator.serviceWorker.ready
+        console.log('Service worker ready, getting subscription...')
+        const sub = await reg.pushManager.getSubscription()
+        const exists = sub !== null
+        console.log('Existing subscription:', exists)
+        return exists
+    } catch (error) {
+        console.error('checkExistingSubscription error:', error)
+        return false
+    }
+}
+
+/**
+ * Gets the existing push subscription or creates a new one if permission is granted.
+ * This is used to sync the subscription with the server after login.
+ * If permission is granted but no subscription exists, it will create one.
+ *
+ * @param {string} publicKey - The base64-encoded VAPID public key for the application server.
+ * @returns {Promise<Object|null>} A promise that resolves to the push subscription object or null if not possible.
+ */
+window.getExistingSubscription = async function (publicKey) {
+    console.log('getExistingSubscription called')
+    if (!('serviceWorker' in navigator)) {
+        console.log('Service worker not supported')
+        return null
+    }
+
+    if (!('PushManager' in window)) {
+        console.log('Push manager not supported')
+        return null
+    }
+
+    // Only proceed if permission is already granted
+    if (Notification.permission !== 'granted') {
+        console.log('Notification permission not granted, returning null')
+        return null
+    }
+
+    try {
+        console.log('Waiting for service worker ready...')
+        const reg = await navigator.serviceWorker.ready
+        console.log('Service worker ready, getting subscription...')
+        let sub = await reg.pushManager.getSubscription()
+
+        if (sub === null) {
+            console.log(
+                'No existing subscription found, creating new one since permission is granted...'
+            )
+
+            // Permission is granted but no subscription exists - create one
+            const converted = urlBase64ToUint8Array(publicKey)
+            sub = await reg.pushManager.subscribe({
+                userVisibleOnly: true,
+                applicationServerKey: converted,
+            })
+
+            console.log('New subscription created:', sub)
+        } else {
+            console.log('Existing subscription found:', sub)
+        }
+
+        return sub
+    } catch (error) {
+        console.error('getExistingSubscription error:', error)
+        return null
+    }
+}

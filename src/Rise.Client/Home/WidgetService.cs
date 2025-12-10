@@ -8,7 +8,7 @@ public class WidgetService(HttpClient httpClient) : IWidgetService
 {
     public async Task<Result<WidgetResponse.Index>> GetIndexByUserIdAsync(CancellationToken ctx = default)
     {
-        
+
         var response = await httpClient.GetAsync($"/api/widgets", cancellationToken: ctx);
 
         if (response.StatusCode == HttpStatusCode.Unauthorized)

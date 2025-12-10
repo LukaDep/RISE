@@ -1,6 +1,6 @@
 [
     {
-        "email": "admin@example.com",
+        "email": "jan.vermeulen@student.hogent.be",
         "columnheaders": [
             "Olod",
             "Werkvorm",
@@ -1823,7 +1823,7 @@
         ]
     },
     {
-        "email": "lector@example.com",
+        "email": "marie.dubois@student.hogent.be",
         "columnheaders": [
             "Olod",
             "Werkvorm",

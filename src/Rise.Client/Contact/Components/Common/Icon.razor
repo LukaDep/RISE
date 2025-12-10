@@ -1,20 +1,20 @@
-﻿<div class="bg-hogent-black-15 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg p-2">
-    @switch(Type)
+<div class="bg-hogent-black-15 flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-lg p-2">
+    @switch (Type.ToLower())
     {
-        case "Organisatie":
+        case "organisatie":
             <i class="fa fa-building text-hogent-black text-xl"></i>
-                break;
-            case "Departement":
-                <i class="fa fa-users text-hogent-black text-xl"></i>
-                break;
-                    case "Campus":
-                        <i class="fa fa-school text-hogent-black text-xl"></i>
-                        break;
-                    case "Directie":
-                        <i class="fa fa-user-tie text-hogent-black text-xl"></i>
-                        break;
-                    default:
-                        <i class="fa fa-question text-hogent-black text-xl"></i>
-                        break;
+            break;
+        case "departement":
+            <i class="fa fa-users text-hogent-black text-xl"></i>
+            break;
+        case "campus":
+            <i class="fa fa-school text-hogent-black text-xl"></i>
+            break;
+        case "directie":
+            <i class="fa fa-user-tie text-hogent-black text-xl"></i>
+            break;
+        default:
+            <i class="fa fa-question text-hogent-black text-xl"></i>
+            break;
     }
 </div>

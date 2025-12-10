@@ -34,7 +34,7 @@ internal class GradeConfiguration : EntityConfiguration<Grade>
 
         builder.Property(x => x.Year)
             .HasMaxLength(50);
-        
+
         builder.Property(uw => uw.UserId)
             .IsRequired();
     }

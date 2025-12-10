@@ -247,6 +247,10 @@
     <value>naam@student.hogent.be</value>
     <comment/>
   </data>
+  <data name="Auth.EmailPlaceholderText" xml:space="preserve">
+    <value>naam@student.hogent.be</value>
+    <comment/>
+  </data>
   <data name="Auth.Login" xml:space="preserve">
     <value>Inloggen</value>
   </data>
@@ -309,6 +313,10 @@
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Log In</value>
+  </data>
+  <data name="Auth.WelcomeBack" xml:space="preserve">
+    <value>Welkom terug! Log in om verder te gaan.</value>
+    <comment/>
   </data>
   <data name="Auth.WelcomeBack" xml:space="preserve">
     <value>Welkom terug! Log in om verder te gaan.</value>
@@ -469,6 +477,14 @@
   </data>
   <data name="Contact.Mail" xml:space="preserve">
     <value>Mailen</value>
+  </data>
+  <data name="Contact.AllTypes" xml:space="preserve">
+    <value>Alles</value>
+    <comment/>
+  </data>
+  <data name="Contact.NotFound" xml:space="preserve">
+    <value>Geen contacten gevonden</value>
+    <comment/>
   </data>
   <data name="Contact.AllTypes" xml:space="preserve">
     <value>Alles</value>
@@ -780,5 +796,21 @@
   <data name="Time.DaysAgo" xml:space="preserve">
     <value>{0} dagen geleden</value>
     <comment>Time indicator with placeholder for number of days</comment>
+  </data>
+  <data name="Notifications.PromptTitle" xml:space="preserve">
+    <value>Wil je meldingen ontvangen?</value>
+    <comment>Title for the notification permission prompt</comment>
+  </data>
+  <data name="Notifications.PromptDescription" xml:space="preserve">
+    <value>We sturen je relevante updates. Je kan dit altijd later uitschakelen.</value>
+    <comment>Description text for the notification permission prompt</comment>
+  </data>
+  <data name="Notifications.PromptDeny" xml:space="preserve">
+    <value>Nee</value>
+    <comment>Button to deny notification permissions</comment>
+  </data>
+  <data name="Notifications.PromptAllow" xml:space="preserve">
+    <value>Ja, inschakelen</value>
+    <comment>Button to allow notification permissions</comment>
   </data>
 </root>

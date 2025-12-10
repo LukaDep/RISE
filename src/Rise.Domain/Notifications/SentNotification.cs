@@ -8,9 +8,19 @@ namespace Rise.Domain.Notifications;
 public class SentNotification : Entity
 {
     /// <summary>
-    /// The ID of the user who received the notification.
+    /// The ID of the push subscription this notification was sent to.
     /// </summary>
-    public Guid UserId { get; set; }
+    public Guid PushSubscriptionId { get; set; }
+
+    /// <summary>
+    /// Navigation property to the push subscription.
+    /// </summary>
+    public PushSubscriptions? PushSubscription { get; set; }
+
+    /// <summary>
+    /// The ID of the user who received the notification (nullable for anonymous users).
+    /// </summary>
+    public Guid? UserId { get; set; }
 
     /// <summary>
     /// The title of the notification.

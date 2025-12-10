@@ -102,7 +102,7 @@ public class SentNotificationClientService(HttpClient httpClient) : ISentNotific
         }
     }
 
-    public Task SaveSentNotificationAsync(Guid userId, string title, string body, string? url = null, string? notificationType = null, DeliveryStatus deliveryStatus = DeliveryStatus.Pending, CancellationToken ctx = default)
+    public Task SaveSentNotificationAsync(Guid pushSubscriptionId, string title, string body, string? url = null, string? notificationType = null, DeliveryStatus deliveryStatus = DeliveryStatus.Pending, CancellationToken ctx = default)
     {
         // This is only used server-side, client doesn't need to implement this
         throw new NotImplementedException("SaveSentNotificationAsync is only used server-side.");
