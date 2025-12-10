@@ -10,5 +10,4 @@ public partial class LinksWidget : ComponentBase
     [Parameter] public int Index { get; set; }
     [Parameter] public Guid WidgetId { get; set; }
     [Inject] public IJSRuntime Js { get; set; } = default!;
-
 }

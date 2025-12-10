@@ -1,9 +1,9 @@
+namespace Rise.Client.Home.Widgets;
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.Grades;
-
-namespace Rise.Client.Home.Widgets;
 
 public partial class GradesWidget : ComponentBase
 {
@@ -12,6 +12,9 @@ public partial class GradesWidget : ComponentBase
     [Parameter] public int Index { get; set; }
     [Parameter] public Guid WidgetId { get; set; }
     [Inject] public IJSRuntime Js { get; set; } = default!;
+    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    [Inject]
+    public IGradesService GradesClientService { get; set; } = default!;
     private GradesDto.Grade? Grade { get; set; }
     private bool _loading;
     private string? _error;

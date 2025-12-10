@@ -84,7 +84,7 @@ public partial class Index : ComponentBase
 
     private void EnterEdit()
     {
-        NavigationManager.NavigateTo("/home/edit");
+        NavigationManager.NavigateTo("/edit");
     }
 
     private async Task SaveAndExit()
@@ -109,7 +109,7 @@ public partial class Index : ComponentBase
                  return new UserWidgetDto.Update
                  {
                      Id = w.Id,
-                     WidgetName = mapEntry.Key ?? string.Empty,
+                     WidgetName = mapEntry.Key?.ToLowerInvariant() ?? string.Empty,
                      X = w.X,
                      Y = w.Y,
                      Width = w.Width,
@@ -123,7 +123,7 @@ public partial class Index : ComponentBase
         {
             Console.Error.WriteLine(ex);
         }
-        NavigationManager.NavigateTo("/home");
+        NavigationManager.NavigateTo("/");
     }
 
     private void AddWidget(Type widgetType)
@@ -225,7 +225,7 @@ public partial class Index : ComponentBase
 
     private async Task<IEnumerable<WidgetEntry>> GetCurrentWidgetLayoutAsync()
     {
-        var widgets = await Js.InvokeAsync<List<WidgetEntry>>("GridStackInterop.getWidgets");
+        var widgets = await Js.InvokeAsync<List<WidgetEntry>>("gridstackInterop.getWidgets");
         return widgets;
     }
 

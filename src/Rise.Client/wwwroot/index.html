@@ -1,75 +1,57 @@
 <!doctype html>
 <html lang="nl">
-    <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>HOGENT Campus App</title>
-        <base href="/" />
-        <link rel="stylesheet" href="css/app.css" />
-        <link rel="stylesheet" href="css/output.css" />
-        <link rel="icon" type="image/png" href="HOGENT-Logo-192.png" />
-        <link href="Rise.Client.styles.css" rel="stylesheet" />
-        <link rel="manifest" href="manifest.webmanifest" />
-        <link
-            rel="apple-touch-icon"
-            sizes="192x192"
-            href="HOGENT-Logo-192.png"
-        />
-        <link
-            rel="apple-touch-icon"
-            sizes="512x512"
-            href="HOGENT-Logo-512.png"
-        />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-        />
-        <link
-            rel="stylesheet"
-            href="https://unpkg.com/gridstack/dist/gridstack.min.css"
-        />
-    </head>
 
-    <body>
-        <div id="app">
-            <app>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HOGENT Campus App</title>
+    <base href="/" />
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/output.css" />
+    <link rel="stylesheet" href="css/gridstack-custom.css" />
+    <link rel="icon" type="image/png" href="HOGENT-Logo-192.png" />
+    <link href="Rise.Client.styles.css" rel="stylesheet" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="apple-touch-icon" sizes="192x192" href="HOGENT-Logo-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="HOGENT-Logo-512.png" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/gridstack/dist/gridstack.min.css" />
+</head>
+
+<body>
+    <div id="app">
+        <app>
+            <div class="flex min-h-screen flex-col items-center justify-center">
+                <img src="HOGENT-Logo-512.png" alt="HOGENT Logo" class="mb-8 h-48 w-48 animate-pulse" />
                 <div
-                    class="flex min-h-screen flex-col items-center justify-center"
-                >
-                    <img
-                        src="HOGENT-Logo-512.png"
-                        alt="HOGENT Logo"
-                        class="mb-8 h-48 w-48 animate-pulse"
-                    />
-                    <div
-                        class="h-16 w-16 animate-spin rounded-full bg-gradient-to-tr from-gray-600 via-gray-600 to-transparent p-1"
-                    >
-                        <div class="h-full w-full rounded-full bg-white"></div>
-                    </div>
+                    class="h-16 w-16 animate-spin rounded-full bg-gradient-to-tr from-gray-600 via-gray-600 to-transparent p-1">
+                    <div class="h-full w-full rounded-full bg-white"></div>
                 </div>
-            </app>
-        </div>
-        <div id="blazor-error-ui" data-nosnippet>
-            An unhandled error has occurred.
-            <a href="" class="reload">Reload</a>
-            <a class="dismiss">🗙</a>
-        </div>
-        <script src="js/swipeInterop.js"></script>
-        <script src="js/push.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
-        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-        <script src="leafletInterop.js"></script>
-        <script src="scrollTop.js"></script>
-        <script src="https://unpkg.com/gridstack/dist/gridstack-all.js"></script>
-        <script src="gridstackInterop.js"></script>
-        <script src="js/scaleStudentCard.js"></script>
-        <script src="_framework/blazor.webassembly.js"></script>
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker
-                    .register('service-worker.js')
-                    .then(() => console.log('Service Worker Registered'))
-            }
-        </script>
-    </body>
+            </div>
+        </app>
+    </div>
+    <div id="blazor-error-ui" data-nosnippet>
+        An unhandled error has occurred.
+        <a href="" class="reload">Reload</a>
+        <a class="dismiss">🗙</a>
+    </div>
+    <script src="js/swipeInterop.js"></script>
+    <script src="js/push.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/hammerjs@2.0.8/hammer.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="leafletInterop.js"></script>
+    <script src="scrollTop.js"></script>
+    <script src="https://unpkg.com/gridstack/dist/gridstack-all.js"></script>
+    <script src="gridstackInterop.js"></script>
+    <script src="js/scaleStudentCard.js"></script>
+    <script src="_framework/blazor.webassembly.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker
+                .register('service-worker.js')
+                .then(() => console.log('Service Worker Registered'))
+        }
+    </script>
+</body>
+
 </html>

@@ -1,4 +1,3 @@
-@page "/home/{mode?}"
 @page "/{mode?}"
 
 @using Rise.Client.Home.Components
@@ -6,9 +5,10 @@
 
 <PageTitle>@(IsEditMode ? "Edit" : "Home")</PageTitle>
 
-<div>
-    <div class="flex items-center justify-between mb-5 mx-4 lg:mt-10 mt-5">
-        <img src="/HOGENT-Logo-Home.png" alt="Hogent Logo" class="h-12 w-auto" />
+<div class="min-h-screen bg-gray-50 pb-8">
+    <div
+        class="flex items-center justify-between px-4 py-3 lg:pt-10 bg-white sticky top-0 z-40 border-b border-gray-200">
+        <img src="/HOGENT-Logo-Home.png" alt="Hogent Logo" class="h-10 w-auto" />
         <AuthorizeView>
             <Authorized>
                 <div class="flex items-center space-x-2">
@@ -25,7 +25,7 @@
                         <div class="toolbar relative flex items-center gap-3" tabindex="0">
                             <button @onclick="() => ToggleAdd()" aria-haspopup="true" aria-expanded="@_isAddOpen"
                                 aria-label="Add widget"
-                                class="w-10 h-10 rounded-full bg-white border border-gray-200 shadow-sm flex items-center justify-center text-2xl text-gray-700 hover:shadow-md transition-transform transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-200">
+                                class="w-10 h-10 rounded-full bg-hogent-black-15 border border-gray-200 shadow-sm flex items-center justify-center text-2xl text-gray-700 hover:shadow-md transition-transform transform active:scale-95 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-gray-200">
                                 <i class="fa-solid fa-plus"></i>
                             </button>
 

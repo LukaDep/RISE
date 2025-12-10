@@ -1,11 +1,11 @@
+namespace Rise.Client.Home.Widgets;
+
 using System.Collections.Immutable;
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.Menu;
 using Rise.Shared.Resto;
-
-namespace Rise.Client.Home.Widgets;
 
 public partial class RestoMenuWidget : ComponentBase
 {
@@ -16,7 +16,10 @@ public partial class RestoMenuWidget : ComponentBase
     [Parameter] public int Index { get; set; }
     [Parameter] public Guid WidgetId { get; set; }
     [Inject] public IJSRuntime Js { get; set; } = default!;
-
+    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] public IMenuService MenuClientService { get; set; } = default!;
+    [Inject]
+    public IRestoService RestoClientService { get; set; } = default!;
     private MenuDto.Index? _currentMenu;
     private List<RestoDto.Index> _restoList = new();
     private int _currentIndex = 0;

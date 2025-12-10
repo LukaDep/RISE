@@ -1,44 +1,61 @@
-@namespace Rise.Client.Home.Widgets
-@using Rise.Shared.Schedule
 @using Rise.Client.Home.Components
-@using Rise.Shared.Common
-@inject NavigationManager NavigationManager
-@inject IScheduleService ScheduleClientService
 
-<div class="flex flex-col">
-    <div class="flex justify-between">
-        <div class="text-sm font-semibold text-hogent-black-50 mb-1">@L["Home.Today"]</div>
+<div class="flex">
+    <div>
         @if (EditMode)
         {
-            <button class="font-bold" @onclick="async () => await OnRemove.InvokeAsync(WidgetId)"
-                title="Remove widget">×</button>
-        }
-        else
-        {
-            <span class="text-sm text-blue-600 cursor-pointer" @onclick="More">@L["Home.More"]</span>
-
+            <span class="drag-handle flex items-center justify-center h-7 w-5 text-hogent-black-50" title="Drag widget"
+                aria-label="Drag widget">
+                <i class="fa-solid fa-grip-vertical"></i>
+            </span>
         }
     </div>
-    <div class="flex-1 overflow-auto">
-        @if (_loading)
-        {
-            <div class="text-sm text-hogent-black-50">Loading…</div>
-        }
-        else if (!string.IsNullOrEmpty(_error))
-        {
-            <div class="text-sm text-red-500">@_error</div>
-        }
-        else if (UpcomingClasses == null)
-        {
-            <div class="text-sm text-hogent-black-50">No upcoming classes</div>
-        }
-        @if (UpcomingClasses != null && UpcomingClasses.Any())
-        {
-            @foreach (var reservation in UpcomingClasses)
-            {
-                <UpcomingClassCard Reservation="reservation" />
-            }
-        }
+    <div class="flex flex-col w-full">
+        <div class="flex justify-between items-center">
 
+            @if (UpcomingClasses == null || !UpcomingClasses.Any())
+            {
+                <div class="text-sm font-semibold text-hogent-black-50 mb-1">@L["Home.NoClassesToday"]</div>
+            }
+            else
+            {
+                <div class="text-sm font-semibold text-hogent-black-50 mb-1">@L["Home.Today"]</div>
+            }
+            @if (EditMode)
+            {
+                <button class="font-bold text-hogent-black-50" @onclick="async () => await OnRemove.InvokeAsync(WidgetId)"
+                    title="Remove widget">×</button>
+            }
+            else
+            {
+                <button @onclick="More"
+                    class="flex items-center gap-1 text-xs text-hogent-education opacity-70 hover:opacity-100 transition">
+                    @L["Home.More"]
+                    <span class="text-[10px]">›</span>
+                </button>
+            }
+        </div>
+        <div class="flex-1 overflow-auto">
+            @if (_loading)
+            {
+                <div class="text-sm text-hogent-black-50">Loading…</div>
+            }
+            else if (!string.IsNullOrEmpty(_error))
+            {
+                <div class="text-sm text-red-500">@_error</div>
+            }
+            else if (UpcomingClasses == null)
+            {
+                <div class="text-sm text-hogent-black-50">No upcoming classes</div>
+            }
+            @if (UpcomingClasses != null && UpcomingClasses.Any())
+            {
+                @foreach (var reservation in UpcomingClasses)
+                {
+                    <UpcomingClassCard Reservation="reservation" />
+                }
+            }
+
+        </div>
     </div>
 </div>

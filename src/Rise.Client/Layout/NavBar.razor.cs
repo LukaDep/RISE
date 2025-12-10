@@ -17,7 +17,8 @@ public partial class NavBar : ComponentBase, IDisposable
         "events",
         "campus",
         "contact",
-        "account/notificationsettings"
+        "account/notifications",
+        "deadlines"
     };
 
     void ToggleMore() => _showMore = !_showMore;

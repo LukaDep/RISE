@@ -870,6 +870,9 @@
     <value>no menus available today</value>
     <comment/>
   </data>
+  <data name="Home.NoClassesToday" xml:space="preserve">
+    <value>No classes today</value>
+  </data>
   <data name="News.Back" xml:space="preserve">
     <value>Back to news</value>
     <comment/>

@@ -6,15 +6,16 @@
 @using System.Linq
 @using Rise.Shared.Widgets
 
-<div>
-    <div id="@_gridId" class="grid-stack p-0">
+<div class="px-1">
+    <div id="@_gridId" class="grid-stack py-0">
         @for (int i = 0; i < Widgets.Count; i++)
         {
             var entry = Widgets[i];
 
             <div @key="entry.Id" class="grid-stack-item m-0" id="@entry.Id" gs-x="@entry.X" gs-y="@entry.Y"
-                gs-w="@entry.Width" gs-h="@entry.Height" gs-min-w="@entry.MinWidth" gs-min-h="4">
-                <div class="grid-stack-item-content bg-white rounded-2xl shadow-md p-4 my-4">
+                gs-w="@entry.Width" gs-h="@entry.Height" gs-min-w="@entry.MinWidth" gs-min-h="3"
+                gs-max-h="@(entry.Type == typeof(Widgets.LinksWidget) ? 3 : 10)">
+                <div class="grid-stack-item-content bg-white rounded-xl shadow p-3 my-4 border border-hogent-black-15">
                     <DynamicComponent Type="@entry.Type" Parameters="@GetWidgetParameters(i, entry.Id)" />
                 </div>
             </div>
@@ -33,6 +34,7 @@
     private DotNetObjectReference<MiddleElements>? _dotRef;
     private bool _gridInitialized;
     private List<Guid> _lastWidgets = new();
+    private int _columns = 10;
 
     private IDictionary<string, object> GetWidgetParameters(int index, Guid widgetId)
     => new Dictionary<string, object>
@@ -51,7 +53,7 @@
             Console.WriteLine("Initializing gridstack...");
             await Js.InvokeVoidAsync("gridstackInterop.initGrid", _gridId, new
             {
-                column = 12,
+                column = _columns,
                 @float = false,
                 disableOneColumnMode = true,
                 staticGrid = !EditMode
@@ -82,7 +84,7 @@
 
                 await Js.InvokeVoidAsync("gridstackInterop.initGrid", _gridId, new
                 {
-                    column = 12,
+                    column = _columns,
                     @float = false,
                     disableOneColumnMode = true,
                     staticGrid = !EditMode

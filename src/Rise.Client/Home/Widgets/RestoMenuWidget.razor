@@ -1,115 +1,118 @@
-@namespace Rise.Client.Home.Widgets
-@using Rise.Shared.Menu
-@using Rise.Shared.Resto
-@using Rise.Client.Components
-@using System.Collections.Immutable
-@using System.Runtime.InteropServices.JavaScript
-@using Rise.Shared.Common
-@inject NavigationManager NavigationManager
-@inject IRestoService RestoClientService
-@inject IMenuService MenuClientService
-
-<div class="flex flex-col">
-    <!-- Header -->
-    <div class="flex justify-between items-center">
-        <div class="text-sm font-semibold text-hogent-black-50 mb-1">Menu</div>
+<div class="flex">
+    <div>
         @if (EditMode)
         {
-            <button class="font-bold" @onclick="async () => await OnRemove.InvokeAsync(WidgetId)"
-                title="Remove widget">×</button>
-        }
-        else
-        {
-            <span class="text-sm text-blue-600 cursor-pointer" @onclick="More">@L["Home.More"]</span>
-
+            <span class="drag-handle flex items-center justify-center h-7 w-5 text-hogent-black-50" title="Drag widget"
+                aria-label="Drag widget">
+                <i class="fa-solid fa-grip-vertical"></i>
+            </span>
         }
     </div>
-
-    <!-- Resto carousel (no select) -->
-    <div class="flex rounded-xl bg-hogent-black text-hogent-white items-center mb-3">
-        <button class="p-1 ml-2 rounded-full" @onclick="Prev" aria-label="Previous" disabled="@(!_canNavigate)">
-            <i class="fa-solid fa-chevron-left"></i>
-        </button>
-        <div class="flex-1 text-center font-medium">
-            @if (_loading)
+    <div class="flex flex-col w-full">
+        <div class="flex justify-between items-center">
+            <div class="text-sm font-semibold text-hogent-black-50 leading-tight">Menu</div>
+            <div class="flex items-center"></div>
+            @if (EditMode)
             {
-                <span class="text-gray-300 italic">Loading…</span>
-            }
-            else if (!string.IsNullOrEmpty(_error))
-            {
-                <span class="text-red-400">@_error</span>
-            }
-            else if (CurrentResto is not null)
-            {
-                @CurrentResto.Name
+                <button class="font-bold text-hogent-black-50" @onclick="async () => await OnRemove.InvokeAsync(WidgetId)"
+                    title="Remove widget">×</button>
             }
             else
             {
-                <span class="text-gray-400 italic">No restaurants</span>
+                <button @onclick="More"
+                    class="flex items-center gap-1 text-xs text-hogent-education opacity-70 hover:opacity-100 transition">
+                    @L["Home.More"]
+                    <span class="text-[10px]">›</span>
+                </button>
             }
         </div>
-        <button class="p-1 mr-2 rounded-full" @onclick="Next" aria-label="Next" disabled="@(!_canNavigate)">
-            <i class="fa-solid fa-chevron-right"></i>
-        </button>
-    </div>
 
-    <div class="flex justify-end mb-2">
-        @if (!_loading && CurrentResto is not null && CurrentResto.IsCurrentlyOpen)
-        {
-            <span
-                class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full border border-hogent-education text-hogent-education">
-                <span class="w-2 h-2 bg-hogent-education-50 rounded-full"></span> @L["Resto.Open"]
-            </span>
-        }
-        else if (!_loading && CurrentResto is not null)
-        {
-            <span
-                class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full border border-hogent-black text-hogent-black">
-                <span class="w-2 h-2 bg-hogent-black-50 rounded-full"></span> @L["Resto.Closed"]
-            </span>
-        }
-    </div>
-
-    <div class="flex-1 overflow-auto">
-        @if (_loading)
-        {
-            <div class="text-sm text-hogent-black-50">Loading…</div>
-        }
-        else if (!string.IsNullOrEmpty(_error))
-        {
-            <div class="text-sm text-red-500">@_error</div>
-        }
-        else if (_restoList.Count == 0)
-        {
-            <div class="text-sm text-hogent-black-50">@L["Home.NoRestos"]</div>
-        }
-        else if (_currentMenu is null || _currentMenu.MenuItems is null || !_currentMenu.MenuItems.Any())
-        {
-            <div class="text-sm text-hogent-black-50">@L["Home.NoMenus"]</div>
-        }
-        else
-        {
-            <!-- Show max 3 dishes -->
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
-                @foreach (var item in _currentMenu.MenuItems)
+        <!-- Resto carousel (no select) -->
+        <div class="flex rounded-xl bg-hogent-black text-hogent-white items-center mb-3">
+            <button class="p-1 ml-2 rounded-full" @onclick="Prev" aria-label="Previous" disabled="@(!_canNavigate)">
+                <i class="fa-solid fa-chevron-left"></i>
+            </button>
+            <div class="flex-1 text-center font-medium">
+                @if (_loading)
                 {
-                    <div class="rounded-xl p-1">
-                        <div class="flex justify-between">
-                            <span class="text-sm font-medium text-hogent-black truncate">@item.Name</span>
-                            @if (Math.Abs(item.PriceStudent) > 1e-6)
-                            {
-                                <span class="text-sm font-semibold">
-                                    @item.PriceStudent.ToString("0.00") €
-                                </span>
-                            }
-                        </div>
-                        @if (!string.IsNullOrWhiteSpace(item.Description))
-                        {
-                            <div class="text-xs text-hogent-black-50 line-clamp-3">@item.Description</div>
-                        }
-                    </div>
+                    <span class="text-gray-300 italic">Loading…</span>
+                }
+                else if (!string.IsNullOrEmpty(_error))
+                {
+                    <span class="text-red-400">@_error</span>
+                }
+                else if (CurrentResto is not null)
+                {
+                    @CurrentResto.Name
+                }
+                else
+                {
+                    <span class="text-gray-400 italic">No restaurants</span>
                 }
             </div>
-        }
+            <button class="p-1 mr-2 rounded-full" @onclick="Next" aria-label="Next" disabled="@(!_canNavigate)">
+                <i class="fa-solid fa-chevron-right"></i>
+            </button>
+        </div>
+
+        <div class="flex justify-end mb-2">
+            @if (!_loading && CurrentResto is not null && CurrentResto.IsCurrentlyOpen)
+            {
+                <span
+                    class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full border border-hogent-education text-hogent-education">
+                    <span class="w-2 h-2 bg-hogent-education-50 rounded-full"></span> @L["Resto.Open"]
+                </span>
+            }
+            else if (!_loading && CurrentResto is not null)
+            {
+                <span
+                    class="inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold rounded-full border border-hogent-black text-hogent-black">
+                    <span class="w-2 h-2 bg-hogent-black-50 rounded-full"></span> @L["Resto.Closed"]
+                </span>
+            }
+        </div>
+
+        <div class="flex-1 overflow-auto">
+            @if (_loading)
+            {
+                <div class="text-sm text-hogent-black-50">Loading…</div>
+            }
+            else if (!string.IsNullOrEmpty(_error))
+            {
+                <div class="text-sm text-red-500">@_error</div>
+            }
+            else if (_restoList.Count == 0)
+            {
+                <div class="text-sm text-hogent-black-50">@L["Home.NoRestos"]</div>
+            }
+            else if (_currentMenu is null || _currentMenu.MenuItems is null || !_currentMenu.MenuItems.Any())
+            {
+                <div class="text-sm text-hogent-black-50">@L["Home.NoMenus"]</div>
+            }
+            else
+            {
+                <!-- Show max 3 dishes -->
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+                    @foreach (var item in _currentMenu.MenuItems)
+                    {
+                        <div class="rounded-xl p-1">
+                            <div class="flex justify-between">
+                                <span class="text-sm font-medium text-hogent-black truncate">@item.Name</span>
+                                @if (Math.Abs(item.PriceStudent) > 1e-6)
+                                {
+                                    <span class="text-sm font-semibold">
+                                        @item.PriceStudent.ToString("0.00") €
+                                    </span>
+                                }
+                            </div>
+                            @if (!string.IsNullOrWhiteSpace(item.Description))
+                            {
+                                <div class="text-xs text-hogent-black-50 line-clamp-3">@item.Description</div>
+                            }
+                        </div>
+                    }
+                </div>
+            }
+        </div>
     </div>
 </div>

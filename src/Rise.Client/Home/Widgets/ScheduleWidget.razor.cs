@@ -1,9 +1,9 @@
+namespace Rise.Client.Home.Widgets;
+
 using Microsoft.AspNetCore.Components;
 using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.Schedule;
-
-namespace Rise.Client.Home.Widgets;
 
 public partial class ScheduleWidget : ComponentBase
 {
@@ -14,9 +14,11 @@ public partial class ScheduleWidget : ComponentBase
     [Parameter] public bool EditMode { get; set; }
     [Parameter] public int Index { get; set; }
     [Parameter] public Guid WidgetId { get; set; }
-    [Inject] public IJSRuntime Js { get; set; } = default!;
     [Parameter] public DateTime? StartDate { get; set; }
     [Parameter] public DateTime? EndDate { get; set; }
+    [Inject] public IJSRuntime Js { get; set; } = default!;
+    [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    [Inject] public IScheduleService ScheduleClientService { get; set; } = default!;
 
     protected override async Task OnInitializedAsync()
     {
@@ -39,6 +41,7 @@ public partial class ScheduleWidget : ComponentBase
                 .Where(r => r.StartDateTime.Date.DayOfYear == DateTime.Now.DayOfYear)
                 .OrderBy(r => r.StartDateTime)
                 .ToList();
+
         }
         catch (Exception ex)
         {

@@ -56,15 +56,21 @@
                 grid = window.GridStack.get(el)
             }
             if (!grid && typeof window.GridStack.init === 'function') {
-                grid = window.GridStack.init(
-                    {
-                        column: options?.column || 12,
-                        float: options?.float || false,
-                        disableOneColumnMode:
-                            options?.disableOneColumnMode || false,
-                        staticGrid: options?.staticGrid || true,
-                        ...(options || {}),
+                const defaults = {
+                    column: 12,
+                    float: false,
+                    disableOneColumnMode: false,
+                    staticGrid: true,
+                    handle: '.drag-handle',
+                    draggable: {
+                        distance: 8,
                     },
+                    cellHeight: 40,
+                    margin: 4,
+                }
+
+                grid = window.GridStack.init(
+                    Object.assign({}, defaults, (options || {})),
                     el
                 )
             }
@@ -81,7 +87,6 @@
             return false
         }
 
-        // normalizeer naar één instance
         if (Array.isArray(grid)) {
             const found = grid.find((gItem) => gItem && gItem.el === el)
             grid = found || grid[0]
@@ -93,7 +98,6 @@
     }
 
     g.setEditMode = function (gridId, enabled) {
-        // Guard: if enabled isn't explicitly a boolean, ignore the call (prevents undefined toggles)
         if (typeof enabled !== 'boolean') {
             try {
                 console.warn(

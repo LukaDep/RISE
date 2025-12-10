@@ -1,57 +1,58 @@
-<div class="flex flex-col">
-
-    <!-- Header (edit knop rechtsboven) -->
-    <div class="flex justify-end">
+<div class="flex h-full items-center">
+    <div class="flex">
         @if (EditMode)
         {
-            <button @onclick="async () => await OnRemove.InvokeAsync(WidgetId)" class="font-bold text-sm"
-                title="Remove widget" aria-label="Remove widget">
-                ×
-            </button>
-
+            <span class="drag-handle flex items-center justify-center h-7 w-7 text-hogent-black-50 cursor-grab"
+                title="Drag widget" aria-label="Drag widget">
+                <i class="fa-solid fa-grip-vertical"></i>
+            </span>
         }
     </div>
+    <div class="flex-1 flex items-center min-w-0 scrollbar-hide">
+        <div class="grid grid-flow-col gap-4 grid-rows-1 place-items-center overflow-x-auto"
+            style="scrollbar-width: none; -ms-overflow-style: none; -webkit-overflow-scrolling: auto">
 
-    <div class="grid grid-flow-col gap-4 
-                grid-rows-1 place-items-center overflow-x-auto scrollbar-hide">
-
-        <a href="https://ibamaflex.hogent.be/" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white 
+            <a href="https://ibamaflex.hogent.be/" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white 
                   flex items-center justify-center text-[2rem]
                   shadow hover:shadow-lg transition">
-            <img src="https://chamilo.hogent.be/Hogent/Application/HogeschoolGent/Integration/Chamilo/Core/Home/Resources/Images/Aqua/Icon/logo-ibamaflex.svg"
-                class="w-9 h-9" alt="IbamaFlex" />
-        </a>
+                <img src="https://chamilo.hogent.be/Hogent/Application/HogeschoolGent/Integration/Chamilo/Core/Home/Resources/Images/Aqua/Icon/logo-ibamaflex.svg"
+                    class="w-9 h-9" alt="IbamaFlex" />
+            </a>
 
-        <a href="https://wallie.hogent.be/" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
+            <a href="https://wallie.hogent.be/" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
                   flex items-center justify-center text-[1.7rem]
                   shadow hover:shadow-lg transition">
-            <i class="fa-solid fa-bullhorn"></i>
-        </a>
+                <i class="fa-solid fa-bullhorn"></i>
+            </a>
 
-        <a href="https://outlook.com/owa/hogent.be" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
+            <a href="https://outlook.com/owa/hogent.be" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
                   flex items-center justify-center text-[1.8rem]
                   shadow hover:shadow-lg transition">
-            <i class="fa-regular fa-envelope"></i>
-        </a>
+                <i class="fa-regular fa-envelope"></i>
+            </a>
 
-        <a href="studentenkaart" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
+            <a href="https://epurse.hogent.be/" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
                   flex items-center justify-center text-[1.8rem]
                   shadow hover:shadow-lg transition">
-            <i class="fa-regular fa-address-card"></i>
-        </a>
+                <i class="fa-regular fa-credit-card"></i>
+            </a>
 
-        <a href="https://epurse.hogent.be/" class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
+            <a href="https://hogent.sharepoint.com/sites/Infrastructuur-studenten/SitePages/Reserveren-lokalen-en-materialen.aspx?OR=Teams-HL&CT=1699620741834"
+                class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
                   flex items-center justify-center text-[1.8rem]
                   shadow hover:shadow-lg transition">
-            <i class="fa-regular fa-credit-card"></i>
-        </a>
+                <i class="fa-regular fa-calendar-days"></i>
+            </a>
 
-        <a href="https://hogent.sharepoint.com/sites/Infrastructuur-studenten/SitePages/Reserveren-lokalen-en-materialen.aspx?OR=Teams-HL&CT=1699620741834"
-            class="rounded-2xl w-15 h-15 p-4 bg-hogent-black text-hogent-white
-                  flex items-center justify-center text-[1.8rem]
-                  shadow hover:shadow-lg transition">
-            <i class="fa-regular fa-calendar-days"></i>
-        </a>
-
+        </div>
+        <div class="flex justify-end">
+            @if (EditMode)
+            {
+                <button @onclick="async () => await OnRemove.InvokeAsync(WidgetId)"
+                    class="font-bold text-hogent-black-50 ml-1" title="Remove widget" aria-label="Remove widget">
+                    ×
+                </button>
+            }
+        </div>
     </div>
 </div>

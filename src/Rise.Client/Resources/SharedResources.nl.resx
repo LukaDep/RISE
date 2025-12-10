@@ -713,6 +713,9 @@
   <data name="Home.NoMenus" xml:space="preserve">
     <value>geen menus vandaag</value>
   </data>
+  <data name="Home.NoClassesToday" xml:space="preserve">
+    <value>Geen lessen vandaag</value>
+  </data>
   <data name="News.Back" xml:space="preserve">
     <value>Terug naar nieuws</value>
   </data>
