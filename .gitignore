@@ -25,7 +25,6 @@ src/Rise.Server/Rise.db-shm
 
 src/Rise.Server/Rise.db-wal
 
-src/Rise.Persistence/Migrations/*
 output.css
 
 .env
