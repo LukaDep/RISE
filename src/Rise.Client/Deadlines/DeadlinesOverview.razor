@@ -1,24 +1,83 @@
 ﻿@page "/deadlines"
 @using Rise.Client.Deadlines.Components
+@using Rise.Client.Components
 @inject IStringLocalizer<SharedResources> L
 @attribute [Authorize]
 
 <PageTitle>@L["Deadlines.Title"]</PageTitle>
 
-<div class="flex items-center justify-between p-6">
+<BasePage Title="@L["Deadlines.Title"]">
+	<HeaderContent>
+		<div class="flex items-center gap-2">
+			<span
+				class="inline-flex items-center gap-2 px-3 py-1.5 bg-hogent-education/10 text-hogent-education rounded-full text-sm font-medium">
+				<i class="fa-solid fa-clock"></i>
+				@if (Deadlines != null)
+				{
+					<span>@ActiveDeadlinesCount @L["Deadlines.Active"]</span>
+				}
+			</span>
+		</div>
+	</HeaderContent>
+	<ChildContent>
+		@if (Deadlines == null)
+		{
+			<div class="flex justify-center items-center h-64">
+				<LoadingComponent Item="@L["Deadlines.Loading"]" />
+			</div>
+		}
+		else if (!Deadlines.Any())
+		{
+			<div class="flex flex-col items-center justify-center h-64 text-hogent-black-50">
+				<div class="w-20 h-20 rounded-full bg-green-100 flex items-center justify-center mb-4">
+					<i class="fa-solid fa-check text-green-500 text-3xl"></i>
+				</div>
+				<p class="text-xl font-medium text-hogent-black-70">@L["Deadlines.NoDeadlines"]</p>
+				<p class="text-sm text-hogent-black-50 mt-1">@L["Deadlines.AllCaughtUp"]</p>
+			</div>
+		}
+		else
+		{
+			@if (UpcomingDeadlines.Any())
+			{
+				<div class="mb-6">
+					<div class="flex items-center gap-2 mb-3">
+						<div class="w-8 h-8 rounded-full bg-hogent-education/10 flex items-center justify-center">
+							<i class="fa-solid fa-calendar-days text-hogent-education text-sm"></i>
+						</div>
+						<h2 class="text-lg font-semibold text-hogent-black">@L["Deadlines.UpcomingSection"]</h2>
+						<span
+							class="px-2 py-0.5 bg-hogent-education/10 text-hogent-education text-xs font-medium rounded-full">@UpcomingDeadlines.Count()</span>
+					</div>
+					<div class="space-y-3">
+						@foreach (var deadline in UpcomingDeadlines)
+						{
+							<DeadlineCard Deadline="deadline" />
+						}
+					</div>
+				</div>
+			}
 
-    <!-- Title -->
-    <h3 class="text-4xl font-bold">@L["Deadlines.Title"]</h3>
+			@if (ExpiredDeadlines.Any())
+			{
+				<div class="mb-6">
+					<div class="flex items-center gap-2 mb-3">
+						<div class="w-8 h-8 rounded-full bg-red-100 flex items-center justify-center">
+							<i class="fa-solid fa-clock-rotate-left text-red-500 text-sm"></i>
+						</div>
+						<h2 class="text-lg font-semibold text-red-600">@L["Deadlines.ExpiredSection"]</h2>
+						<span
+							class="px-2 py-0.5 bg-red-100 text-red-600 text-xs font-medium rounded-full">@ExpiredDeadlines.Count()</span>
+					</div>
+					<div class="space-y-3">
+						@foreach (var deadline in ExpiredDeadlines)
+						{
+							<DeadlineCard Deadline="deadline" />
+						}
+					</div>
+				</div>
+			}
 
-</div>
-
-@if(Deadlines != null)
-{
-	@foreach(var deadline in Deadlines)
-	{
-		<DeadlineCard Deadline=deadline></DeadlineCard>
-	}
-}
-
-
-
+		}
+	</ChildContent>
+</BasePage>

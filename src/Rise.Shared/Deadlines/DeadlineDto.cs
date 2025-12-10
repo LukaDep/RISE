@@ -5,6 +5,7 @@ public static class DeadlineDto
     public class Index
     {
         public required Guid Id { get; set; }
+        public required string UserId { get; set; }
         public required DateTime EndDate { get; set; }
         public required string Lector { get; set; }
         public required string Title { get; set; }

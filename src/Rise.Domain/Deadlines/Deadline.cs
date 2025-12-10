@@ -2,6 +2,10 @@ namespace Rise.Domain.Deadlines;
 
 public class Deadline : Entity
 {
+    /// <summary>
+    /// The associated user's unique identifier (references IdentityUser.Id).
+    /// </summary>
+    public string? UserId { get; set; }
     private DateTime _endDate;
 
     public DateTime EndDate
@@ -16,7 +20,7 @@ public class Deadline : Entity
         get => _lector;
         set => _lector = Guard.Against.NullOrWhiteSpace(value);
     }
-    
+
     private string _title;
 
     public string Title
@@ -30,7 +34,7 @@ public class Deadline : Entity
         get => _description;
         set => _description = value;
     }
-    
+
     private string? _course;
 
     public string? Course

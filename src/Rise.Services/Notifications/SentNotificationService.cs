@@ -75,7 +75,7 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
             if (!notification.IsRead)
             {
                 notification.IsRead = true;
-                notification.ReadAt = DateTime.UtcNow;
+                notification.ReadAt = DateTime.Now;
                 await dbContext.SaveChangesAsync(ctx);
             }
 
@@ -96,7 +96,7 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
             if (userGuid == null)
                 return Result.Unauthorized("Gebruiker niet ingelogd.");
 
-            var now = DateTime.UtcNow;
+            var now = DateTime.Now;
             await dbContext.SentNotifications
                 .Where(n => n.UserId == userGuid && !n.IsRead && !n.IsDeleted)
                 .ExecuteUpdateAsync(setters => setters
@@ -180,7 +180,7 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
                 Body = body,
                 Url = url,
                 NotificationType = notificationType,
-                SentAt = DateTime.UtcNow,
+                SentAt = DateTime.Now,
                 IsRead = false,
                 DeliveryStatus = deliveryStatus
             };

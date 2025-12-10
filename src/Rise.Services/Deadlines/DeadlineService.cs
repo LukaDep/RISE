@@ -1,15 +1,37 @@
 using Microsoft.EntityFrameworkCore;
 using Rise.Persistence;
+using Rise.Services.Identity;
 using Rise.Shared.Common;
 using Rise.Shared.Deadlines;
 
 namespace Rise.Services.Deadlines;
 
-public class DeadlineService(ApplicationDbContext dbContext) : IDeadlineService
+public class DeadlineService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : IDeadlineService
 {
+    private string GetCurrentUserId()
+    {
+        var userId = sessionContextProvider.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
+        return string.IsNullOrEmpty(userId) ? string.Empty : userId;
+    }
+
     public async Task<Result<DeadlineResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
-        var query = dbContext.Deadlines.AsQueryable();
+        var userId = GetCurrentUserId();
+        if (string.IsNullOrEmpty(userId))
+        {
+            return Result.Success(new DeadlineResponse.Index
+            {
+                Deadlines = new List<DeadlineDto.Index>()
+            });
+        }
+
+        // Filter out deadlines that expired more than 1 week ago
+        var oneWeekAgo = DateTime.Now.Date.AddDays(-7);
+
+        var query = dbContext.Deadlines
+            .AsQueryable()
+            .Where(d => d.UserId == userId && !d.IsDeleted && d.EndDate.Date >= oneWeekAgo);
+
         DateTime? start = request.StartDate;
         DateTime? end = request.EndDate;
 
@@ -49,11 +71,12 @@ public class DeadlineService(ApplicationDbContext dbContext) : IDeadlineService
             // Default order
             query = query.OrderBy(p => p.EndDate);
         }
-        
+
         var deadlines = await query.AsNoTracking()
             .Select(d => new DeadlineDto.Index
             {
                 Id = d.Id,
+                UserId = d.UserId,
                 Title = d.Title,
                 Lector = d.Lector,
                 EndDate = d.EndDate,

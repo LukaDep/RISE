@@ -137,7 +137,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 firstName: "Jan",
                 lastName: "Vermeulen",
                 birthDate: new DateTime(2002, 5, 15),
-                expirationDate: DateTime.UtcNow.AddYears(1),
+                expirationDate: DateTime.Now.AddYears(1),
                 profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jan_Vermeulen"
             ),
             new StudentCard(
@@ -146,7 +146,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 firstName: "Marie",
                 lastName: "Dubois",
                 birthDate: new DateTime(2003, 8, 22),
-                expirationDate: DateTime.UtcNow.AddYears(1),
+                expirationDate: DateTime.Now.AddYears(1),
                 profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Marie_Dubois"
             ),
             new StudentCard(
@@ -155,7 +155,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 firstName: "Pieter",
                 lastName: "Janssens",
                 birthDate: new DateTime(2001, 11, 30),
-                expirationDate: DateTime.UtcNow.AddYears(1),
+                expirationDate: DateTime.Now.AddYears(1),
                 profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Pieter_Janssens"
             ),
             new StudentCard(
@@ -164,7 +164,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 firstName: "Sophie",
                 lastName: "Nguyen",
                 birthDate: new DateTime(2002, 3, 7),
-                expirationDate: DateTime.UtcNow.AddYears(1),
+                expirationDate: DateTime.Now.AddYears(1),
                 profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sophie_Nguyen"
             ),
             new StudentCard(
@@ -173,7 +173,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 firstName: "Thomas",
                 lastName: "Maes",
                 birthDate: new DateTime(2003, 1, 18),
-                expirationDate: DateTime.UtcNow.AddYears(1),
+                expirationDate: DateTime.Now.AddYears(1),
                 profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Thomas_Maes"
             )
         );
@@ -200,9 +200,22 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
     {
         if (dbContext.Deadlines.Any())
             return;
+
+        // Get student users to assign deadlines to
+        var student1 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "jan.vermeulen@student.hogent.be");
+        var student2 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "marie.dubois@student.hogent.be");
+        var student3 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "pieter.janssens@student.hogent.be");
+        var student4 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "sophie.nguyen@student.hogent.be");
+        var student5 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "thomas.maes@student.hogent.be");
+
+        if (student1 == null || student2 == null || student3 == null || student4 == null || student5 == null)
+            return;
+
         dbContext.Deadlines.AddRange(
+            // Deadlines for student1 (Jan Vermeulen)
             new Domain.Deadlines.Deadline
             {
+                UserId = student1.Id,
                 Title = "Project Proposal Submission",
                 Description = "Submit your project proposal for approval.",
                 EndDate = DateTime.Parse("2025-12-15T23:59:59Z"),
@@ -211,15 +224,26 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             },
             new Domain.Deadlines.Deadline
             {
+                UserId = student1.Id,
                 Title = "Exam",
                 Description = "Exam covering chapters 1-5.",
                 EndDate = DateTime.Parse("2026-01-15T10:00:00Z"),
                 Lector = "Sarah Vermeulen",
                 Course = "Business Analysis",
-
             },
             new Domain.Deadlines.Deadline
             {
+                UserId = student1.Id,
+                Title = "Demo RISE",
+                Description = "RISE Application Demo.",
+                EndDate = DateTime.Parse("2025-12-06T23:59:59Z"),
+                Lector = "Chloe De Leenheer",
+                Course = "RISE",
+            },
+            // Deadlines for student2 (Marie Dubois)
+            new Domain.Deadlines.Deadline
+            {
+                UserId = student2.Id,
                 Title = "Final Paper Submission",
                 Description = "Submit your final research paper.",
                 EndDate = DateTime.Parse("2026-02-14T23:59:59Z"),
@@ -228,6 +252,55 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             },
             new Domain.Deadlines.Deadline
             {
+                UserId = student2.Id,
+                Title = "Exam",
+                Description = "Exam covering chapters 1-5.",
+                EndDate = DateTime.Parse("2026-01-15T10:00:00Z"),
+                Lector = "Sarah Vermeulen",
+                Course = "Business Analysis",
+            },
+            // Deadlines for student3 (Pieter Janssens)
+            new Domain.Deadlines.Deadline
+            {
+                UserId = student3.Id,
+                Title = "Project Proposal Submission",
+                Description = "Submit your project proposal for approval.",
+                EndDate = DateTime.Parse("2025-12-20T23:59:59Z"),
+                Lector = "Thomas Parmentier",
+                Course = "Bachelorproef",
+            },
+            new Domain.Deadlines.Deadline
+            {
+                UserId = student3.Id,
+                Title = "Demo RISE",
+                Description = "RISE Application Demo.",
+                EndDate = DateTime.Parse("2025-12-06T23:59:59Z"),
+                Lector = "Chloe De Leenheer",
+                Course = "RISE",
+            },
+            // Deadlines for student4 (Sophie Nguyen)
+            new Domain.Deadlines.Deadline
+            {
+                UserId = student4.Id,
+                Title = "Final Paper Submission",
+                Description = "Submit your final research paper.",
+                EndDate = DateTime.Parse("2026-02-14T23:59:59Z"),
+                Lector = "Bert Van Vreckem",
+                Course = "Research Methods",
+            },
+            // Deadlines for student5 (Thomas Maes)
+            new Domain.Deadlines.Deadline
+            {
+                UserId = student5.Id,
+                Title = "Exam",
+                Description = "Exam covering chapters 1-5.",
+                EndDate = DateTime.Parse("2026-01-15T10:00:00Z"),
+                Lector = "Sarah Vermeulen",
+                Course = "Business Analysis",
+            },
+            new Domain.Deadlines.Deadline
+            {
+                UserId = student5.Id,
                 Title = "Demo RISE",
                 Description = "RISE Application Demo.",
                 EndDate = DateTime.Parse("2025-12-06T23:59:59Z"),
@@ -235,6 +308,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 Course = "RISE",
             }
         );
+        await dbContext.SaveChangesAsync();
     }
 
     private async Task AbsencesAsync()

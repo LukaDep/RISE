@@ -22,7 +22,7 @@ public class NewsServiceShould
                 Title = "Test News 1",
                 Description = "Test description 1",
                 Type = "Test",
-                PublishDate = DateTime.UtcNow,
+                PublishDate = DateTime.Now,
                 Content = "Test content 1",
                 Author = "Test Author 1"
             },
@@ -31,7 +31,7 @@ public class NewsServiceShould
                 Title = "Test News 2",
                 Description = "Test description 2",
                 Type = "Test",
-                PublishDate = DateTime.UtcNow.AddMinutes(-10),
+                PublishDate = DateTime.Now.AddMinutes(-10),
                 Content = "Test content 2",
                 Author = "Test Author 2"
             },
@@ -40,7 +40,7 @@ public class NewsServiceShould
                 Title = "Test News 3",
                 Description = "Test description 3",
                 Type = "Test",
-                PublishDate = DateTime.UtcNow.AddHours(-1),
+                PublishDate = DateTime.Now.AddHours(-1),
                 Content = "Test content 3",
                 Author = "Test Author 3"
             }
@@ -78,7 +78,7 @@ public class NewsServiceShould
                 Title = "Test News 1",
                 Description = "Test description 1",
                 Type = "Test",
-                PublishDate = DateTime.UtcNow,
+                PublishDate = DateTime.Now,
                 Content = "Test content 1",
                 Author = "Test Author 1"
             },
@@ -87,7 +87,7 @@ public class NewsServiceShould
                 Title = "Test News 2",
                 Description = "Test description 2",
                 Type = "Test",
-                PublishDate = DateTime.UtcNow.AddMinutes(-10),
+                PublishDate = DateTime.Now.AddMinutes(-10),
                 Content = "Test content 2",
                 Author = "Test Author 2"
             },
@@ -96,7 +96,7 @@ public class NewsServiceShould
                 Title = "Test News 3",
                 Description = "Test description 3",
                 Type = "Test",
-                PublishDate = DateTime.UtcNow.AddHours(-1),
+                PublishDate = DateTime.Now.AddHours(-1),
                 Content = "Test content 3",
                 Author = "Test Author 3"
             }
@@ -135,7 +135,7 @@ public class NewsServiceShould
             Title = "Test News 1",
             Description = "Test description 1",
             Type = "Test",
-            PublishDate = DateTime.UtcNow,
+            PublishDate = DateTime.Now,
             Content = "Test content 1",
             Author = "Test Author 1"
         };

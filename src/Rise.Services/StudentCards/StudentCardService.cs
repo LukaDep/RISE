@@ -53,7 +53,7 @@ public class StudentCardService(ApplicationDbContext dbContext, ISessionContextP
             LastName = user.LastName ?? string.Empty,
             ExpirationDate = user.ExpirationDate,
             ProfilePicture = user.ProfilePicture,
-            IsValid = DateTime.UtcNow <= user.ExpirationDate,
+            IsValid = DateTime.Now <= user.ExpirationDate,
         });
     }
 

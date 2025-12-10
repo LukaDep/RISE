@@ -45,7 +45,7 @@ public class SentNotification : Entity
     /// <summary>
     /// The date and time when the notification was sent.
     /// </summary>
-    public DateTime SentAt { get; set; } = DateTime.UtcNow;
+    public DateTime SentAt { get; set; } = DateTime.Now;
 
     /// <summary>
     /// Whether the notification has been read by the user.

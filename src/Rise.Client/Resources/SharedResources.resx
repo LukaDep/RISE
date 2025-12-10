@@ -743,6 +743,39 @@
   <data name="Deadlines.Deadline" xml:space="preserve">
     <value>Deadline</value>
   </data>
+  <data name="Deadlines.Expired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="Deadlines.ExpiredToday" xml:space="preserve">
+    <value>Expired today</value>
+  </data>
+  <data name="Deadlines.Expired1DayAgo" xml:space="preserve">
+    <value>Expired 1 day ago</value>
+  </data>
+  <data name="Deadlines.ExpiredDaysAgo" xml:space="preserve">
+    <value>Expired {0} days ago</value>
+  </data>
+  <data name="Deadlines.Loading" xml:space="preserve">
+    <value>deadlines</value>
+  </data>
+  <data name="Deadlines.NoDeadlines" xml:space="preserve">
+    <value>No deadlines</value>
+  </data>
+  <data name="Deadlines.AllCaughtUp" xml:space="preserve">
+    <value>You're all caught up!</value>
+  </data>
+  <data name="Deadlines.Active" xml:space="preserve">
+    <value>active</value>
+  </data>
+  <data name="Deadlines.ExpiredSection" xml:space="preserve">
+    <value>Recently Expired</value>
+  </data>
+  <data name="Deadlines.UpcomingSection" xml:space="preserve">
+    <value>Upcoming</value>
+  </data>
+  <data name="Deadlines.DaysLeft" xml:space="preserve">
+    <value>{0} days left</value>
+  </data>
   <data name="Schedule.Back" xml:space="preserve">
     <value>Back to schedule</value>
   </data>

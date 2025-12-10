@@ -219,7 +219,7 @@ public partial class Index : ComponentBase
 
     private string FormatDate(DateTime sentAt)
     {
-        var now = DateTime.UtcNow;
+        var now = DateTime.Now;
         var diff = now - sentAt;
 
         if (diff.TotalMinutes < 1)

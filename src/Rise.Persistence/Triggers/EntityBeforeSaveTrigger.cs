@@ -14,7 +14,7 @@ public class EntityBeforeSaveTrigger(ApplicationDbContext dbContext) : IBeforeSa
     public Task BeforeSave(ITriggerContext<Entity> context, CancellationToken cancellationToken)
     {
         var entity = context.Entity;
-        var currentTime = DateTime.UtcNow;
+        var currentTime = DateTime.Now;
 
         switch (context.ChangeType)
         {

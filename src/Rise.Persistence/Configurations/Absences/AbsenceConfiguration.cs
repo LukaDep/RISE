@@ -12,7 +12,7 @@ internal class AbsenceConfiguration : EntityConfiguration<Absence>
 {
     public override void Configure(EntityTypeBuilder<Absence> builder)
     {
-        
+
 
         base.Configure(builder);
 

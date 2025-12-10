@@ -68,5 +68,5 @@ public class StudentCard : Entity
     /// <summary>
     /// Checks if the student card is currently valid (not expired).
     /// </summary>
-    public bool IsValid() => DateTime.UtcNow <= ExpirationDate;
+    public bool IsValid() => DateTime.Now <= ExpirationDate;
 }

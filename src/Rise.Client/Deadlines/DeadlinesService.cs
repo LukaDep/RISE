@@ -6,10 +6,10 @@ using System.Net;
 using System.Net.Http.Json;
 
 
-    public class DeadlinesService(HttpClient httpClient) : IDeadlineService
+public class DeadlinesService(HttpClient httpClient) : IDeadlineService
+{
+    public async Task<Result<DeadlineResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
-        public async Task<Result<DeadlineResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
-        {
         var parameters = new Dictionary<string, string>
         {
             ["skip"] = request.Skip.ToString(),
@@ -39,5 +39,5 @@ using System.Net.Http.Json;
         return result!;
     }
 
-    }
+}
 

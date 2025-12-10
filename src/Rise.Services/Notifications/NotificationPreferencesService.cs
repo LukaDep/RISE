@@ -154,7 +154,7 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
                 existing.UserId = userGuid;
                 existing.P256dhKey = req.Keys.P256dh;
                 existing.AuthKey = req.Keys.Auth;
-                existing.LastUsedAt = DateTime.UtcNow;
+                existing.LastUsedAt = DateTime.Now;
             }
 
             await dbContext.SaveChangesAsync();
