@@ -10,13 +10,12 @@ public partial class StudentCard : ComponentBase
     [Inject] public required IStudentCardService StudentCardService { get; set; }
     [Inject] public required IJSRuntime JSRuntime { get; set; }
     public required StudentCardDto? StudentCardDto { get; set; }
-    public byte[]? GetQRCode()
+    public byte[] GetQRCode()
     {
         if (StudentCardDto == null)
         {
-            return null;
+            return Array.Empty<byte>();
         }
-
         string studentData = StudentCardDto.ToJsonObject().ToJsonString();
         using var qrGenerator = new QRCodeGenerator();
         using var qrCodeData = qrGenerator.CreateQrCode(studentData, QRCodeGenerator.ECCLevel.L);

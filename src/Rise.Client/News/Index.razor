@@ -7,8 +7,7 @@
 <BasePage Title="@L["News.Title"]">
     <HeaderContent>
         <div class="flex flex-row gap-2">
-            <SearchBar Value="@_searchTerm" ValueChanged="@SearchTermChanged" IsOpen="@_isFilterOpen"
-                IsOpenChanged="@((bool value) => _isFilterOpen = value)" />
+            <SearchBar Value="@_searchTerm" ValueChanged="@SearchTermChanged" />
             <SimpleSelect Items="@DateRangeItems" SelectedValue="@_selectedDateRange"
                 SelectedValueChanged="@OnDateRangeChanged" />
         </div>
@@ -20,12 +19,12 @@
             @if (_news == null)
             {
                 <LoadingComponent Item="@L["News.Loading"]" />
-                                          }
-                              else
-                              {
-                                  @foreach(var newsItem in _news)
-                                              {
-                            <NewsItem newsItem="@newsItem" />
+            }
+            else
+            {
+                @foreach (var newsItem in _news)
+                {
+                    <NewsItem newsItem="@newsItem" />
                 }
 
                 <div class="flex flex-col items-center justify-center">
@@ -48,9 +47,9 @@
                         <p class="text-hogent-black-15 mb-3">@_currentCount @L["News.Count"] @_totalCount</p>
                     }
                 </div>
-                }
-            </div>
-            <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
-            <ScrollToTop />
-        </ChildContent>
-    </BasePage>
+            }
+        </div>
+        <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
+        <ScrollToTop />
+    </ChildContent>
+</BasePage>

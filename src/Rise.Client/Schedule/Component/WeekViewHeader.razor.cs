@@ -32,7 +32,7 @@ public partial class WeekViewHeader : ComponentBase
 
     private string GetDayAbbreviation(DateTime day)
     {
-        return day.ToString("ddd", System.Globalization.CultureInfo.CurrentCulture).Substring(0, 1).ToUpper();
+        return day.ToString("ddd", System.Globalization.CultureInfo.CurrentCulture).ToUpper();
     }
 
     private string GetWeekRangeTitle()

@@ -1,12 +1,16 @@
 ﻿@inherits LayoutComponentBase
 <div class="flex flex-col h-screen">
-    <header class="lg:block hidden">
-        <TopNavBar />
+    <header class="hidden lg:block">
+        <TopNavBar OnToggleSidebar="@(() => isSidebarOpen = !isSidebarOpen)" IsSidebarOpen="@isSidebarOpen" />
     </header>
-    
-    <main class="flex-1 overflow-y-auto pb-16 lg:pb-0">
-        @Body
-    </main>
+
+    <div class="relative flex-1 overflow-hidden">
+        <SideNavBar IsOpen="isSidebarOpen" OnNavButtonClick="@(() => isSidebarOpen = false)" />
+
+        <main class="h-full overflow-y-auto pb-16 lg:pb-0">
+            @Body
+        </main>
+    </div>
     
     <footer class="lg:hidden fixed bottom-0 left-0 w-full z-50">
         <NavBar />
@@ -14,3 +18,7 @@
 </div>
 
 <NotificationInitializer />
+
+@code {
+    private bool isSidebarOpen = false;
+}

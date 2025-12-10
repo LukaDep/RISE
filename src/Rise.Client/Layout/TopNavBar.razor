@@ -1,62 +1,85 @@
-@using Microsoft.AspNetCore.Components.Authorization
-@using Microsoft.AspNetCore.Components.Routing
-@inject IStringLocalizer<SharedResources> L
+<div class="flex h-16 items-center bg-hogent-black shadow-lg shadow-hogent-black-50 px-6">
+  <button @onclick="ToggleSidebar"
+    class="text-hogent-white hover:bg-hogent-black-50 p-2 rounded transition-colors duration-200 @(IsSidebarOpen ? "bg-hogent-black-50" : "")"
+    aria-label="Toggle sidebar">
+    <i class="fa-solid fa-bars fa-xl"></i>
+  </button>
 
-<nav class="hidden lg:flex navbar flex-row h-16 items-center bg-hogent-black shadow-lg shadow-hogent-black-50 px-6 gap-4"
-  aria-label="main navigation">
-
-  <NavLink href="/" Match="NavLinkMatch.All" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Home"]">
-    <div class="flex items-center gap-2">
-      <i class="fa-solid fa-house fa-lg text-hogent-white"></i>
-      <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Home"]</span>
-    </div>
-  </NavLink>
-
-  <NavLink href="/news" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.News"]">
-    <div class="flex items-center gap-2">
-      <i class="fa-solid fa-newspaper fa-lg text-hogent-white"></i>
-      <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.News"]</span>
-    </div>
-  </NavLink>
-
-  <NavLink href="/campus" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Campus"]">
-    <div class="flex items-center gap-2">
-      <i class="fa-solid fa-school fa-lg text-hogent-white"></i>
-      <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Campus"]</span>
-    </div>
-  </NavLink>
+  <span class="ml-4 text-hogent-white font-bold text-md lg:text-xl">
+    HOGENT
+  </span>
 
   <AuthorizeView>
     <Authorized>
-      <NavLink href="/schedule" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Schedule"]">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-calendar-days fa-lg text-hogent-white"></i>
-          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Schedule"]</span>
-        </div>
-      </NavLink>
+      <div class="relative ml-auto">
+        <button @onclick="ToggleAccountDropdown"
+          class="flex items-center px-6 py-3 rounded-lg text-hogent-white hover:bg-hogent-black-50 transition-colors duration-200 @(isDropdownOpen ? "bg-hogent-black-50" : "")"
+          title="@L["Navigation.Account"]">
+          <i class="fa-solid fa-user size-5 mr-4 flex items-center justify-center"></i>
+          <span class="font-semibold">@L["Navigation.Account"]</span>
+          <i
+            class="fa-solid fa-chevron-down w-3 h-3 ml-2 transition-transform duration-200 @(isDropdownOpen ? "rotate-180" : "")"></i>
+        </button>
 
-      <NavLink href="/account" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50 ml-auto" title="@L["Navigation.Account"]">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-user fa-lg text-hogent-white"></i>
-          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Account"]</span>
-        </div>
-      </NavLink>
+        @if (isDropdownOpen)
+        {
+          <div
+            class="absolute right-0 mt-2 w-56 bg-white rounded-lg shadow-xl border border-gray-200 overflow-hidden z-50">
+            <NavLink href="/account" @onclick="CloseDropdown"
+              class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+              <i class="fa-solid fa-id-card size-5 mr-3 flex items-center justify-center"></i>
+              <span class="font-medium">@L["Account.StudentCard"]</span>
+            </NavLink>
+
+            <NavLink href="/account/notificationsettings" @onclick="CloseDropdown"
+              class="flex items-center px-4 py-3 text-gray-700 hover:bg-gray-50 transition-colors duration-200">
+              <i class="fa-solid fa-bell size-5 mr-3 flex items-center justify-center"></i>
+              <span class="font-medium">@L["Account.Notifications"]</span>
+            </NavLink>
+
+            <div class="border-t border-gray-200"></div>
+
+            <NavLink href="/logout" @onclick="CloseDropdown"
+              class="flex items-center px-4 py-3 text-red-600 hover:bg-red-50 transition-colors duration-200">
+              <i class="fa-solid fa-right-from-bracket size-5 mr-3 flex items-center justify-center"></i>
+              <span class="font-medium">@L["Account.Logout"]</span>
+            </NavLink>
+          </div>
+        }
+      </div>
     </Authorized>
-
     <NotAuthorized>
-      <NavLink href="/resto" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50" title="@L["Navigation.Resto"]">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-utensils fa-lg text-hogent-white"></i>
-          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Resto"]</span>
-        </div>
-      </NavLink>
-
-      <NavLink href="/login" class="relative flex items-center justify-center h-full px-4 py-2 rounded transition-colors duration-200 [.active_&]:bg-hogent-black-50 ml-auto" title="@L["Navigation.Login"]">
-        <div class="flex items-center gap-2">
-          <i class="fa-solid fa-right-to-bracket fa-lg text-hogent-white"></i>
-          <span class="text-hogent-white font-semibold hidden lg:inline">@L["Navigation.Login"]</span>
-        </div>
-      </NavLink>
+      <div class="ml-auto">
+        <NavLink href="/login"
+          class="flex items-center px-6 py-3 rounded-lg text-hogent-white hover:bg-hogent-black-50 transition-colors duration-200"
+          title="@L["Navigation.Login"]">
+          <i class="fa-solid fa-right-to-bracket size-5 mr-4 flex items-center justify-center"></i>
+          <span class="font-semibold">@L["Navigation.Login"]</span>
+        </NavLink>
+      </div>
     </NotAuthorized>
   </AuthorizeView>
-</nav>
+</div>
+
+@code {
+  [Parameter]
+  public EventCallback OnToggleSidebar { get; set; }
+  [Parameter]
+  public bool IsSidebarOpen { get; set; } = false;
+  private bool isDropdownOpen = false;
+
+  private async Task ToggleSidebar()
+  {
+    await OnToggleSidebar.InvokeAsync();
+  }
+
+  private void ToggleAccountDropdown()
+  {
+    isDropdownOpen = !isDropdownOpen;
+  }
+
+  private void CloseDropdown()
+  {
+    isDropdownOpen = false;
+  }
+}

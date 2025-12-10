@@ -1,0 +1,50 @@
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.Routing
+
+<div class="hidden lg:block absolute left-0 top-0 h-full bg-hogent-black/90 z-50 @(IsOpen ? "w-fit" : "w-0 hidden!")">
+  <nav class="flex flex-col h-full px-2" aria-label="side navigation">
+
+    <NavButton Href="/" Title="@L["Navigation.Home"]" Match="NavLinkMatch.All" OnClick="OnNavButtonClick">
+      <Icon><i class="fa-solid fa-house size-5 mr-4" /></Icon>
+    </NavButton>
+    <NavButton Href="/news" Title="@L["Navigation.News"]" OnClick="OnNavButtonClick">
+      <Icon><i class="fa-solid fa-newspaper size-5 mr-4" /></Icon>
+    </NavButton>
+    <NavButton Href="/campus" Title="@L["Navigation.Campus"]" OnClick="OnNavButtonClick">
+      <Icon><i class="fa-solid fa-school size-5 mr-4" /></Icon>
+    </NavButton>
+    <NavButton Href="/resto" Title="@L["Navigation.Resto"]" OnClick="OnNavButtonClick">
+      <Icon><i class="fa-solid fa-utensils size-5 mr-4" /></Icon>
+    </NavButton>
+
+
+    <AuthorizeView>
+      <Authorized>
+        <hr class="my-2 border-hogent-white/30" />
+        <NavButton Href="/schedule" Title="@L["Navigation.Schedule"]" OnClick="OnNavButtonClick">
+          <Icon><i class="fa-solid fa-clock size-5 mr-4" /></Icon>
+        </NavButton>
+        <NavButton Href="/deadlines" Title="@L["Navigation.Deadlines"]" OnClick="OnNavButtonClick">
+          <Icon><i class="fa-solid fa-hourglass-end size-5 mr-4" /></Icon>
+        </NavButton>
+        <NavButton Href="/events" Title="@L["Account.Calendar"]" OnClick="OnNavButtonClick">
+          <Icon><i class="fa-solid fa-calendar-days size-5 mr-4" /></Icon>
+        </NavButton>
+        <NavButton Href="/grades" Title="@L["Account.Grades"]" OnClick="OnNavButtonClick">
+          <Icon><i class="fa-solid fa-graduation-cap size-5 mr-4" /></Icon>
+        </NavButton>
+        <NavButton Href="https://ibamaflex.hogent.be/" Title="@L["Account.Absences"]" OnClick="OnNavButtonClick">
+          <Icon><i class="fa-solid fa-user-clock size-5 mr-4" /></Icon>
+        </NavButton>
+      </Authorized>
+    </AuthorizeView>
+  </nav>
+</div>
+
+@code {
+  [Parameter]
+  public bool IsOpen { get; set; }
+
+  [Parameter]
+  public EventCallback OnNavButtonClick { get; set; }
+}

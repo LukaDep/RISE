@@ -1,0 +1,27 @@
+<NavLink href="@Href" Match="@Match"
+  class="flex items-center px-6 py-3 rounded-lg text-hogent-white hover:bg-hogent-black-50 transition-colors duration-200 [.active_&]:bg-hogent-black-50 [.active_&]:border-l-4 [.active_&]:border-hogent-blue"
+  title="@Title" @onclick="HandleClick">
+  @Icon
+  <span class="font-semibold">@Title</span>
+</NavLink>
+
+@code {
+  [Parameter]
+  public string Href { get; set; } = "/";
+  [Parameter]
+  public string Title { get; set; } = string.Empty;
+  [Parameter]
+  public NavLinkMatch Match { get; set; } = NavLinkMatch.Prefix;
+  [Parameter]
+  public RenderFragment? Icon { get; set; }
+  [Parameter]
+  public EventCallback OnClick { get; set; }
+
+  private async Task HandleClick()
+  {
+    if (OnClick.HasDelegate)
+    {
+      await OnClick.InvokeAsync();
+    }
+  }
+}

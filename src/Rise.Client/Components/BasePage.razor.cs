@@ -11,6 +11,12 @@ public partial class BasePage : ComponentBase
     public string Title { get; set; } = string.Empty;
 
     /// <summary>
+    /// Optional content to be rendered to the left of the title.
+    /// </summary>
+    [Parameter]
+    public RenderFragment? LeftHeaderContent { get; set; }
+
+    /// <summary>
     /// Optional content to be rendered in the header next to the title.
     /// </summary>
     [Parameter]

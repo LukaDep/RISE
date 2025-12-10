@@ -498,13 +498,18 @@
     <value>Kalender</value>
   </data>
   <data name="Account.Absences" xml:space="preserve">
-    <value>Dien afwezigheid in</value>
+    <value>Afwezigheden</value>
+    <comment/>
   </data>
   <data name="Account.Grades" xml:space="preserve">
     <value>Cijfers</value>
   </data>
   <data name="Account.Notifications" xml:space="preserve">
     <value>Notificatie instellingen</value>
+  </data>
+  <data name="Account.StudentCard" xml:space="preserve">
+    <value>Studentenkaart</value>
+    <comment/>
   </data>
   <data name="Auth.LogoutTitle" xml:space="preserve">
     <value>Uitloggen</value>
@@ -614,6 +619,10 @@
   <data name="Navigation.Schedule" xml:space="preserve">
     <value>Rooster</value>
   </data>
+  <data name="Navigation.Deadlines" xml:space="preserve">
+    <value>Deadlines</value>
+    <comment/>
+  </data>
   <data name="Navigation.Account" xml:space="preserve">
     <value>Account</value>
   </data>
@@ -712,6 +721,10 @@
   </data>
   <data name="Account.Back" xml:space="preserve">
     <value>Terug naar account</value>
+  </data>
+  <data name="StudentCard.Loading" xml:space="preserve">
+    <value>Studentenkaart laden...</value>
+    <comment/>
   </data>
   <data name="Resto.Loading" xml:space="preserve">
     <value>Restaurants laden...</value>
