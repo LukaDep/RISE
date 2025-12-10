@@ -70,7 +70,7 @@
                 }
 
                 grid = window.GridStack.init(
-                    Object.assign({}, defaults, (options || {})),
+                    Object.assign({}, defaults, options || {}),
                     el
                 )
             }

@@ -1,7 +1,6 @@
 
 using FuzzySharp;
 using Microsoft.AspNetCore.Components;
-using Microsoft.JSInterop;
 using Rise.Shared.Common;
 using Rise.Shared.Grades;
 namespace Rise.Client.Grades;
@@ -10,43 +9,20 @@ namespace Rise.Client.Grades;
 
 public partial class Index : ComponentBase
 {
-    // input field reference
-    protected ElementReference filterInput;
     protected bool isFilterOpen = false;
-    protected async Task ToggleFilter()
-    {
-        isFilterOpen = !isFilterOpen;
-        if (isFilterOpen)
-        {
-            await Task.Yield();
-            try
-            {
-                await filterInput.FocusAsync();
-            }
-            catch
-            {
-            }
-        }
-    }
-    // grades data
+
     private IEnumerable<GradesDto.Grade> Grades { get; set; } = Array.Empty<GradesDto.Grade>();
     private IEnumerable<GradesDto.Grade> FilteredGrades { get; set; } = Array.Empty<GradesDto.Grade>();
-    // injections
     [Inject] public required IGradesService GradesClientService { get; set; }
     [Inject] public required NavigationManager Navigation { get; set; }
-    // filter parameters
     [Parameter, SupplyParameterFromQuery] public string? SearchTerm { get; set; }
     [Parameter, SupplyParameterFromQuery] public string? Year { get; set; }
     [Parameter, SupplyParameterFromQuery] public int? Semester { get; set; }
-    // private fields for filters
     private string? searchTerm;
     private string? selectedYear;
     private int? selectedSemester;
-    // fuzzy search threshold
     private const int FuzzyScoreThreshold = 60;
-    // year options for select
     public List<string> YearOptions { get; } = BuildYearOptions();
-    // filter items for SimpleSelects
     protected IEnumerable<KeyValuePair<string, string>> YearItems =>
         new[] { new KeyValuePair<string, string>(string.Empty, L["Grades.YearFilterPlaceholder"]) }
         .Concat(YearOptions.Select(y => new KeyValuePair<string, string>(y, y)));
@@ -91,13 +67,12 @@ public partial class Index : ComponentBase
         searchTerm = SearchTerm;
     }
 
-    private Task SearchTermChanged(ChangeEventArgs e)
+    private void OnSearchTermChanged(string value)
     {
-        searchTerm = e.Value?.ToString() ?? string.Empty;
-        FilterGrades();
-        FilteredGrades = Grades;
-        return Task.CompletedTask;
+        searchTerm = value;
+        ApplyFilters();
     }
+
     private void FilterGrades()
     {
         Dictionary<string, object?> parameters = new();
@@ -148,7 +123,6 @@ public partial class Index : ComponentBase
         StateHasChanged();
     }
 
-    // Handlers for SimpleSelect
     protected void OnYearSelected(string? value)
     {
         selectedYear = value;
@@ -165,5 +139,28 @@ public partial class Index : ComponentBase
         ApplyFilters();
     }
 
+    protected string GetAverageScore()
+    {
+        var gradesWithScores = FilteredGrades
+            .Where(g => g.Score.HasValue && g.MaxPoints.HasValue && g.MaxPoints > 0)
+            .ToList();
+
+        if (!gradesWithScores.Any()) return "-";
+
+        var average = gradesWithScores.Average(g => (g.Score!.Value / g.MaxPoints!.Value) * 100);
+        return $"{average:F1}%";
+    }
+
+    protected int GetPassedCount()
+    {
+        return FilteredGrades
+            .Count(g => g.Score.HasValue && g.MaxPoints.HasValue && g.MaxPoints > 0 && g.Score >= g.MaxPoints * 0.5);
+    }
+
+    protected int GetFailedCount()
+    {
+        return FilteredGrades
+            .Count(g => g.Score.HasValue && g.MaxPoints.HasValue && g.MaxPoints > 0 && g.Score < g.MaxPoints * 0.5);
+    }
 }
 

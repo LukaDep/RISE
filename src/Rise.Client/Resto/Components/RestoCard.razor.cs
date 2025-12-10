@@ -51,6 +51,15 @@ public partial class RestoCard
         return string.IsNullOrWhiteSpace(hours) ? L["Resto.Closed"] : hours;
     }
 
+    private string GetNextOpeningDisplay(DateTime? time)
+    {
+        if (!time.HasValue) return "";
+        if (time.Value.Date == DateTime.Today)
+            return time.Value.ToString("HH:mm");
+        else
+            return $"{GetDayName(time.Value.DayOfWeek)} {time.Value.ToString("HH:mm")}";
+    }
+
     protected override void OnParametersSet()
     {
         base.OnParametersSet();

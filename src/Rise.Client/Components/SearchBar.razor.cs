@@ -18,16 +18,21 @@ public partial class SearchBar : ComponentBase
     [Parameter]
     public EventCallback<string> ValueChanged { get; set; }
 
+    /// <summary>
+    /// Whether the search bar is open.
+    /// </summary>
+    [Parameter]
+    public bool IsOpen { get; set; } = true;
+
+    /// <summary>
+    /// Callback invoked when the open state changes.
+    /// </summary>
+    [Parameter]
+    public EventCallback<bool> IsOpenChanged { get; set; }
+
     private async Task ToggleSearch()
     {
-        if (string.IsNullOrWhiteSpace(Value))
-        {
-            await inputElement.FocusAsync();
-        }
-        else
-        {
-            await ValueChanged.InvokeAsync(string.Empty);
-        }
+        await IsOpenChanged.InvokeAsync(!IsOpen);
     }
 
     private async Task OnInputChanged(ChangeEventArgs e)

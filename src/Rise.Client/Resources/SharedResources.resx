@@ -138,6 +138,50 @@
     <value>Welcome to your new app.</value>
     <comment/>
   </data>
+  <data name="Home.Edit" xml:space="preserve">
+    <value>Edit</value>
+    <comment/>
+  </data>
+  <data name="Home.Home" xml:space="preserve">
+    <value>Home</value>
+    <comment/>
+  </data>
+  <data name="Home.AddWidget" xml:space="preserve">
+    <value>Add widget</value>
+    <comment/>
+  </data>
+  <data name="Home.NoMoreWidgets" xml:space="preserve">
+    <value>No more widgets</value>
+    <comment/>
+  </data>
+  <data name="Home.Save" xml:space="preserve">
+    <value>Save</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Schedule" xml:space="preserve">
+    <value>Schedule</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Menus" xml:space="preserve">
+    <value>Menus</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.News" xml:space="preserve">
+    <value>News</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Grades" xml:space="preserve">
+    <value>Grades</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Links" xml:space="preserve">
+    <value>Links</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Menu" xml:space="preserve">
+    <value>Menu</value>
+    <comment/>
+  </data>
   <data name="Schedule.Title" xml:space="preserve">
     <value>Schedule</value>
     <comment/>
@@ -155,7 +199,7 @@
     <comment/>
   </data>
   <data name="Schedule.Today" xml:space="preserve">
-    <value>Today </value>
+    <value>Today</value>
     <comment/>
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
@@ -354,6 +398,10 @@
     <value>Coming soon...</value>
     <comment/>
   </data>
+  <data name="Common.Claims" xml:space="preserve">
+    <value>Claims</value>
+    <comment/>
+  </data>
   <data name="Common.NotFound" xml:space="preserve">
     <value>This page could not be found.</value>
     <comment/>
@@ -502,12 +550,41 @@
     <value>Semester 2</value>
     <comment/>
   </data>
+  <data name="Grades.Semester" xml:space="preserve">
+    <value>Semester</value>
+    <comment/>
+  </data>
   <data name="Grades.SearchTermPlaceholder" xml:space="preserve">
     <value>Search grades...</value>
     <comment/>
   </data>
   <data name="Grades.NoGradesFound" xml:space="preserve">
-    <value>No grades found.</value>
+    <value>No grades found</value>
+  </data>
+  <data name="Grades.TryDifferentFilters" xml:space="preserve">
+    <value>Try adjusting your filters</value>
+  </data>
+  <data name="Grades.Overview" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Grades.Results" xml:space="preserve">
+    <value>results</value>
+  </data>
+  <data name="Grades.Average" xml:space="preserve">
+    <value>Average</value>
+  </data>
+  <data name="Grades.Passed" xml:space="preserve">
+    <value>Passed</value>
+  </data>
+  <data name="Grades.Failed" xml:space="preserve">
+    <value>Failed</value>
+  </data>
+  <data name="Grades.Feedback" xml:space="preserve">
+    <value>Feedback</value>
+    <comment/>
+  </data>
+  <data name="Grades.Score" xml:space="preserve">
+    <value>Score</value>
     <comment/>
   </data>
   <data name="News.NotFound" xml:space="preserve">
@@ -595,6 +672,10 @@
     <comment/>
   </data>
   <data name="Account.Notifications" xml:space="preserve">
+    <value>Notifications</value>
+    <comment/>
+  </data>
+  <data name="Account.Notificationsettings" xml:space="preserve">
     <value>Notification settings</value>
     <comment/>
   </data>
@@ -672,6 +753,14 @@
   </data>
   <data name="Campus.FacilitiesLabel" xml:space="preserve">
     <value>Facilities:</value>
+    <comment/>
+  </data>
+  <data name="Campus.ReadMore" xml:space="preserve">
+    <value>Read more</value>
+    <comment/>
+  </data>
+  <data name="Campus.ReadLess" xml:space="preserve">
+    <value>Read less</value>
     <comment/>
   </data>
   <data name="Schedule.Room" xml:space="preserve">
@@ -762,6 +851,30 @@
     <value>Login</value>
     <comment/>
   </data>
+  <data name="Navigation.Grades" xml:space="preserve">
+    <value>Grades</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Events" xml:space="preserve">
+    <value>Events</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Contacts" xml:space="preserve">
+    <value>Contacts</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Notifications" xml:space="preserve">
+    <value>Notifications</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+    <comment/>
+  </data>
+  <data name="Account.Student" xml:space="preserve">
+    <value>Student</value>
+    <comment/>
+  </data>
   <data name="Account_NotificationSettings" xml:space="preserve">
     <value>Account | Notification Settings</value>
     <comment/>
@@ -831,10 +944,6 @@
     <comment/>
   </data>
   <data name="EventCard.register" xml:space="preserve">
-    <value>Register</value>
-    <comment/>
-  </data>
-  <data name="EventCardDetails.register" xml:space="preserve">
     <value>Register</value>
     <comment/>
   </data>
@@ -970,6 +1079,10 @@
     <value>My Notifications</value>
     <comment/>
   </data>
+  <data name="Notifications.Settings" xml:space="preserve">
+    <value>Settings</value>
+    <comment/>
+  </data>
   <data name="Notifications.MarkAllAsRead" xml:space="preserve">
     <value>Mark all as read</value>
     <comment/>
@@ -1029,5 +1142,33 @@
   <data name="Notifications.PromptAllow" xml:space="preserve">
     <value>Yes, enable</value>
     <comment>Button to allow notification permissions</comment>
+  </data>
+  <data name="EventCalendar.AllEvents" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="EventCalendar.Loading" xml:space="preserve">
+    <value>Loading events...</value>
+  </data>
+  <data name="EventCalendar.FilterByType" xml:space="preserve">
+    <value>Filter by type</value>
+  </data>
+  <data name="EventCalendar.UpcomingEvents" xml:space="preserve">
+    <value>Upcoming Events</value>
+  </data>
+  <data name="EventCalendar.Events" xml:space="preserve">
+    <value>events</value>
+  </data>
+  <data name="EventCalendar.NoEvents" xml:space="preserve">
+    <value>No events found</value>
+  </data>
+  <data name="EventCalendar.NoEventsDescription" xml:space="preserve">
+    <value>Try adjusting your filters or check back later</value>
+  </data>
+  <data name="EventCard.RegistrationRequired" xml:space="preserve">
+    <value>Registration</value>
+  </data>
+  <data name="More.SubmitAbsence" xml:space="preserve">
+    <value>Submit Absence</value>
+    <comment/>
   </data>
 </root>

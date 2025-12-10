@@ -7,7 +7,7 @@
         <SearchBar Value="@SearchTerm" ValueChanged="@SearchTermChanged" />
     </HeaderContent>
     <ChildContent>
-        <div>
+        <div class="min-h-screen bg-gradient-to-b from-hogent-white to-hogent-black-5">
             @if (campusInfo == null || !campusInfo.Any())
             {
                 <div class="flex justify-center items-center h-64">
@@ -16,12 +16,12 @@
             }
             else
             {
-                @foreach (var campus in campusInfo)
-                {
-                    var location = $"{campus.Street} {campus.HouseNumber}, {campus.PostalCode} {campus.City}";
-                    <CampusCard Id="@campus.Id" Name="@campus.Name" Location="@location" Facilities="@campus.Facilities"
-                        ContactPhone="@campus.ContactPhone" Description="@campus.Description" SearchTerm="@SearchTerm" />
-                }
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 pb-8">
+                    @foreach (var campus in campusInfo)
+                    {
+                        <CampusCard Campus="@campus" />
+                    }
+                </div>
             }
         </div>
     </ChildContent>

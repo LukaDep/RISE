@@ -146,7 +146,6 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
             if (notification == null)
                 return Result.NotFound("Notificatie niet gevonden.");
 
-            // Soft delete
             notification.IsDeleted = true;
             await dbContext.SaveChangesAsync(ctx);
 
@@ -193,8 +192,7 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Fout bij opslaan van verzonden notificatie");
-            // Don't throw - sending the push notification was successful, just logging failed
+            Log.Error(ex, "Fout bij opslaan van verzonden notificatie voor subscription {PushSubscriptionId}", pushSubscriptionId);
         }
     }
 }

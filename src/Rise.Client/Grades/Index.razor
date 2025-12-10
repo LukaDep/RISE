@@ -8,55 +8,68 @@
 
 <BasePage Title="@L["Grades.Title"]">
   <HeaderContent>
-    <div class="flex flex-row gap-2">
-      <div class="flex flex-row gap-2">
-        <SimpleSelect Items="@YearItems" SelectedValue="@selectedYear" SelectedValueChanged="@OnYearSelected"
-          Placeholder=@L["Grades.YearFilterPlaceholder"] />
-        <SimpleSelect Items="@SemesterItems" SelectedValue="@(selectedSemester?.ToString())"
-          SelectedValueChanged="@OnSemesterSelected" Placeholder=@L["Grades.SemesterFilterPlaceholder"] />
-      </div>
-      <button type="button" class="p-2 rounded-full hover:bg-hogent-black-15 transition" @onclick="ToggleFilter"
-        aria-expanded="@isFilterOpen" aria-controls="gradeSearch" aria-label="Toggle search">
-        @if (!isFilterOpen)
-        {
-          <i class="fa-solid fa-magnifying-glass text-hogent-black-50"></i>
-        }
-        else
-        {
-          <i class="fa-solid fa-xmark text-hogent-black-50"></i>
-        }
-      </button>
+    <div class="flex flex-row items-center gap-3">
+      <SimpleSelect Items="@YearItems" SelectedValue="@selectedYear" SelectedValueChanged="@OnYearSelected"
+        Placeholder=@L["Grades.YearFilterPlaceholder"] />
+      <SimpleSelect Items="@SemesterItems" SelectedValue="@(selectedSemester?.ToString())"
+        SelectedValueChanged="@OnSemesterSelected" Placeholder=@L["Grades.SemesterFilterPlaceholder"] />
+      <SearchBar Value="@searchTerm" ValueChanged="@OnSearchTermChanged" IsOpen="@isFilterOpen"
+        IsOpenChanged="@((bool value) => isFilterOpen = value)" />
     </div>
   </HeaderContent>
   <ChildContent>
-    <div id="gradeSearch" class="w-full overflow-hidden transition-all duration-300"
-      style="max-height:@(isFilterOpen ? "160px" : "0px");">
-      <div class="mb-3">
-        <input @ref="filterInput" type="text" placeholder=@L["Grades.SearchTermPlaceholder"]
-          class="w-full h-10 transition-all duration-200 ease-in-out bg-hogent-white shadow-lg rounded-full border border-hogent-black-30 focus:outline-none focus:ring-0 pr-10 pl-3"
-          value="@searchTerm" @oninput="SearchTermChanged" />
-      </div>
-    </div>
+    <div id="top"></div>
 
     @if (!Grades.Any())
     {
-      <div class="flex justify-center items-center h-16 mt-16">
+      <div class="flex flex-col items-center justify-center h-64 text-hogent-black-50">
         <LoadingComponent Item="@L["Grades.Loading"]" />
-          </div>
-        }
-        else if (!FilteredGrades.Any())
-        {
-          <div class=" text-sm text-gray-500 mt-6">@L["Grades.NoGradesFound"]
+      </div>
+    }
+    else if (!FilteredGrades.Any())
+    {
+      <div class="flex flex-col items-center justify-center h-64 text-hogent-black-50">
+        <i class="fa-solid fa-graduation-cap fa-3x mb-4"></i>
+        <p class="text-xl font-medium">@L["Grades.NoGradesFound"]</p>
+        <p class="text-sm mt-2">@L["Grades.TryDifferentFilters"]</p>
       </div>
     }
     else
     {
-      @foreach (var grade in FilteredGrades)
-      {
-        <GradeItem Grade="grade" />
-      }
+      <div class="mb-6 p-5 bg-hogent-black rounded-2xl shadow-lg text-white">
+        <div class="flex items-center justify-between mb-3">
+          <h3 class="text-lg font-bold flex items-center gap-2">
+            <i class="fa-solid fa-chart-simple"></i>
+            @L["Grades.Overview"]
+          </h3>
+          <span class="text-xs bg-white/20 px-3 py-1 rounded-full">
+            @FilteredGrades.Count() @L["Grades.Results"]
+          </span>
+        </div>
+        <div class="grid grid-cols-3 gap-4">
+          <div class="text-center">
+            <div class="text-2xl font-bold">@GetAverageScore()</div>
+            <div class="text-xs text-white/70">@L["Grades.Average"]</div>
+          </div>
+          <div class="text-center border-x border-white/20">
+            <div class="text-2xl font-bold text-green-400">@GetPassedCount()</div>
+            <div class="text-xs text-white/70">@L["Grades.Passed"]</div>
+          </div>
+          <div class="text-center">
+            <div class="text-2xl font-bold text-red-400">@GetFailedCount()</div>
+            <div class="text-xs text-white/70">@L["Grades.Failed"]</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pb-8">
+        @foreach (var grade in FilteredGrades)
+        {
+          <GradeItem Grade="grade" />
+        }
+      </div>
     }
-    <!-- scroll-to-top button: positioned above the fixed footer navbar (navbar height = 4rem) -->
+
     <ScrollToTop />
   </ChildContent>
 </BasePage>

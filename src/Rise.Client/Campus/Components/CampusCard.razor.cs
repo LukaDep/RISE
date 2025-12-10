@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Components;
-
+using Rise.Shared.Campus;
 
 namespace Rise.Client.Campus.Components
 {
@@ -7,29 +7,22 @@ namespace Rise.Client.Campus.Components
     {
         [Inject] private NavigationManager Navigation { get; set; }
 
-        [Parameter] public string Name { get; set; }
-        [Parameter] public string Location { get; set; }
-        [Parameter] public IEnumerable<string> Facilities { get; set; } = Enumerable.Empty<string>();
-        [Parameter] public string ContactPhone { get; set; }
-        [Parameter] public string Website { get; set; }
-        [Parameter] public string Description { get; set; }
-        [Parameter] public Guid Id { get; set; }
+        [Parameter] public required CampusDto.Index Campus { get; set; }
 
-        [Parameter] public string SearchTerm { get; set; }
-        private bool IsOpen { get; set; } = false;
+        private bool isDescriptionExpanded = false;
+        private string location => $"{Campus.Street} {Campus.HouseNumber}, {Campus.PostalCode} {Campus.City}";
 
-        private void ToggleOpen()
+        private void ToggleDescription()
         {
-            IsOpen = !IsOpen;
+            isDescriptionExpanded = !isDescriptionExpanded;
         }
 
         private void GoToPlan()
         {
             var rel = Navigation.ToBaseRelativePath(Navigation.Uri);
-            Navigation.NavigateTo($"/campus-plan/{Id}?returnUrl={rel}");
+            Navigation.NavigateTo($"/campus-plan/{Campus.Id}?returnUrl={rel}");
         }
     }
 }
-
 
 

@@ -19,6 +19,10 @@ namespace Rise.Services.Events
             var query = dbContext.Events.AsQueryable();
             string? typeFilter = "";
 
+            // Filter only future events (starting from today)
+            var today = DateTime.Today;
+            query = query.Where(e => e.StartDateTime.Date >= today);
+
             if (request.Filters.ContainsKey("Type"))
             {
                 typeFilter = request.Filters["Type"]?.ToString();
@@ -39,10 +43,8 @@ namespace Rise.Services.Events
             {
                 query = query.Where(n => n.Type.Equals(typeFilter, StringComparison.CurrentCultureIgnoreCase));
             }
-            else
-            {
-                query = query.OrderBy(p => p.Type);
-            }
+
+            query = query.OrderBy(e => e.StartDateTime).ThenBy(p => p.Type);
 
             var events = await query.AsNoTracking()
                 .Skip(request.Skip)

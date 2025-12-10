@@ -19,7 +19,18 @@ namespace Rise.Client.EventCalendar.Components
         private DotNetObjectReference<EventMonthView>? dotNetRef;
         private string swipeClass = string.Empty;
 
-        private string[] DaysOfWeek = { "Ma", "Di", "Wo", "Do", "Vr", "Za", "Zo" };
+        private List<DateTime> WeekDays => GetWeekDays(SelectedDate);
+
+        private List<DateTime> GetWeekDays(DateTime date)
+        {
+            var firstDayOfWeek = date.AddDays(-(int)date.DayOfWeek + (int)DayOfWeek.Monday);
+            return Enumerable.Range(0, 7).Select(i => firstDayOfWeek.AddDays(i)).ToList();
+        }
+
+        private string GetDayAbbreviation(DateTime day)
+        {
+            return day.ToString("ddd", System.Globalization.CultureInfo.CurrentCulture).ToUpper();
+        }
 
         protected override async Task OnInitializedAsync()
         {

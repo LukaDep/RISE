@@ -6,9 +6,9 @@
     width: 26px;
     height: 26px;
 
-    background-color: #f3f4f6;       
-    border-radius: 50%;              
-    box-shadow: 0 3px 10px rgba(0,0,0,0.12);
+    background-color: #f3f4f6;
+    border-radius: 50%;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.12);
     z-index: 20;
 
     display: flex;
@@ -17,8 +17,7 @@
 
     cursor: se-resize;
 
-    background-repeat: no-repeat;   
+    background-repeat: no-repeat;
     background-position: center;
     background-size: 55%;
 }
-

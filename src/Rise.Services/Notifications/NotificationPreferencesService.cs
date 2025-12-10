@@ -195,50 +195,49 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
             if (req.userGuid == null)
                 return await SendTestToAllUsers(req.title, req.body, req.url, req.notificationType);
 
-            var userData = await dbContext.PushSubscriptions
+            var userSubs = await dbContext.PushSubscriptions
                 .Where(s => s.UserId == req.userGuid)
-                .Join(
+                .GroupJoin(
                     dbContext.NotificationPreferences,
                     s => s.UserId,
                     p => p.Id,
-                    (s, p) => new { Subscription = s, Preferences = p }
+                    (s, prefs) => new { Subscription = s, Preferences = prefs.FirstOrDefault() }
                 )
-                .FirstOrDefaultAsync(ctx);
+                .ToListAsync(ctx);
 
-            DeliveryStatus deliveryStatus;
-
-            if (userData == null)
+            if (!userSubs.Any())
             {
-                // No push subscription found for this user
                 Log.Warning("Geen push subscription gevonden voor gebruiker {UserId}", req.userGuid);
                 return Result.Error("Geen push subscription gevonden voor deze gebruiker.");
             }
 
-            var sub = new PushSubscription(
-                userData.Subscription.Endpoint,
-                userData.Subscription.P256dhKey,
-                userData.Subscription.AuthKey
-            );
+            foreach (var s in userSubs)
+            {
+                var sub = new PushSubscription(
+                    s.Subscription.Endpoint,
+                    s.Subscription.P256dhKey,
+                    s.Subscription.AuthKey
+                );
 
-            var sendSuccess = await SendToSubscription(sub, req.title, req.body, req.url);
-            deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
+                var sendSuccess = await SendToSubscription(sub, req.title, req.body, req.url);
+                var deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
 
-            // Save the sent notification with delivery status
-            await sentNotificationService.SaveSentNotificationAsync(
-                userData.Subscription.Id,
-                req.title,
-                req.body,
-                req.url,
-                req.notificationType,
-                deliveryStatus,
-                ctx
-            );
+                await sentNotificationService.SaveSentNotificationAsync(
+                    s.Subscription.Id,
+                    req.title,
+                    req.body,
+                    req.url,
+                    req.notificationType,
+                    deliveryStatus,
+                    ctx
+                );
+            }
 
             return Result.Success();
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Fout in SendTestToUser()");
+            Log.Error(ex, "Fout in SendTestToUser() voor gebruiker {UserGuid}", req.userGuid);
             return Result.Error("Kon geen testmelding sturen.");
         }
     }
@@ -279,13 +278,12 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
         catch (WebPushException ex)
         {
-            // Subscription no longer valid
-            Log.Warning("Push failed voor {Endpoint}. Reden: {Message}", sub.Endpoint, ex.Message);
+            Log.Warning("Push failed voor {Endpoint}. Reden: {Message}. StatusCode: {StatusCode}", sub.Endpoint, ex.Message, ex.StatusCode);
             return false;
         }
         catch (Exception ex)
         {
-            Log.Error(ex, "Onbekende fout bij versturen van pushbericht");
+            Log.Error(ex, "Onbekende fout bij versturen van pushbericht naar {Endpoint}", sub.Endpoint);
             return false;
         }
     }
@@ -295,11 +293,11 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         try
         {
             var subs = await dbContext.PushSubscriptions
-                .Join(
+                .GroupJoin(
                     dbContext.NotificationPreferences,
                     s => s.UserId,
                     p => p.Id,
-                    (s, p) => new { Subscription = s, Preferences = p }
+                    (s, prefs) => new { Subscription = s, Preferences = prefs.FirstOrDefault() }
                 )
                 .ToListAsync();
 
@@ -314,7 +312,6 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
                 var sendSuccess = await SendToSubscription(webPushSub, title, body, url);
                 var deliveryStatus = sendSuccess ? DeliveryStatus.Delivered : DeliveryStatus.Failed;
 
-                // Save the sent notification for each subscription with delivery status
                 await sentNotificationService.SaveSentNotificationAsync(
                     s.Subscription.Id,
                     title,

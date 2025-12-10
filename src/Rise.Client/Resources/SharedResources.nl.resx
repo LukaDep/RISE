@@ -22,8 +22,10 @@
     <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
         <value>[base64 mime encoded serialized .NET Framework object]</value>
     </data>
-    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing"
+  mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework
+  object]</value>
         <comment>This is a comment</comment>
     </data>
                 
@@ -59,7 +61,8 @@
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
-  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+    xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
@@ -112,10 +115,12 @@
     <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0,
+      Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="Home.AuthMessage" xml:space="preserve">
     <value>Nadat een gebruiker inlogt, toont het navigatiemenu een link naar de</value>
@@ -128,6 +133,45 @@
   </data>
   <data name="Home.WelcomeMessage" xml:space="preserve">
     <value>Welkom bij je nieuwe app.</value>
+  </data>
+  <data name="Home.Edit" xml:space="preserve">
+    <value>Bewerken</value>
+  </data>
+  <data name="Home.Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="Home.AddWidget" xml:space="preserve">
+    <value>Widget toevoegen</value>
+  </data>
+  <data name="Home.NoMoreWidgets" xml:space="preserve">
+    <value>Geen widgets meer</value>
+  </data>
+  <data name="Home.Save" xml:space="preserve">
+    <value>Opslaan</value>
+  </data>
+  <data name="Home.Widget.Schedule" xml:space="preserve">
+    <value>Rooster</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Menus" xml:space="preserve">
+    <value>Menu's</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.News" xml:space="preserve">
+    <value>Nieuws</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Grades" xml:space="preserve">
+    <value>Cijfers</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Links" xml:space="preserve">
+    <value>Links</value>
+    <comment/>
+  </data>
+  <data name="Home.Widget.Menu" xml:space="preserve">
+    <value>Menu</value>
+    <comment/>
   </data>
   <data name="Schedule.Title" xml:space="preserve">
     <value>Agenda</value>
@@ -142,7 +186,7 @@
     <value>Naar vandaag </value>
   </data>
   <data name="Schedule.Today" xml:space="preserve">
-    <value>Vandaag </value>
+    <value>Vandaag</value>
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Vorige</value>
@@ -296,6 +340,9 @@
   <data name="Common.ComingSoon" xml:space="preserve">
     <value>Binnenkort beschikbaar...</value>
   </data>
+  <data name="Common.Claims" xml:space="preserve">
+    <value>Claims</value>
+  </data>
   <data name="Common.NotFound" xml:space="preserve">
     <value>Deze pagina kon niet worden gevonden.</value>
   </data>
@@ -415,11 +462,41 @@
   <data name="Grades.SemesterFilterOption2" xml:space="preserve">
     <value>Semester 2</value>
   </data>
+  <data name="Grades.Semester" xml:space="preserve">
+    <value>Semester</value>
+    <comment/>
+  </data>
   <data name="Grades.SearchTermPlaceholder" xml:space="preserve">
     <value>Zoek punten...</value>
   </data>
   <data name="Grades.NoGradesFound" xml:space="preserve">
-    <value>Geen punten gevonden.</value>
+    <value>Geen punten gevonden</value>
+  </data>
+  <data name="Grades.TryDifferentFilters" xml:space="preserve">
+    <value>Probeer andere filters</value>
+  </data>
+  <data name="Grades.Overview" xml:space="preserve">
+    <value>Overzicht</value>
+  </data>
+  <data name="Grades.Results" xml:space="preserve">
+    <value>resultaten</value>
+  </data>
+  <data name="Grades.Average" xml:space="preserve">
+    <value>Gemiddelde</value>
+  </data>
+  <data name="Grades.Passed" xml:space="preserve">
+    <value>Geslaagd</value>
+  </data>
+  <data name="Grades.Failed" xml:space="preserve">
+    <value>Niet geslaagd</value>
+  </data>
+  <data name="Grades.Feedback" xml:space="preserve">
+    <value>Feedback</value>
+    <comment/>
+  </data>
+  <data name="Grades.Score" xml:space="preserve">
+    <value>Score</value>
+    <comment/>
   </data>
   <data name="News.NotFound" xml:space="preserve">
     <value>Geen Nieuws Gevonden</value>
@@ -505,6 +582,9 @@
     <value>Cijfers</value>
   </data>
   <data name="Account.Notifications" xml:space="preserve">
+    <value>Notificaties</value>
+  </data>
+  <data name="Account.Notificationsettings" xml:space="preserve">
     <value>Notificatie instellingen</value>
   </data>
   <data name="Account.StudentCard" xml:space="preserve">
@@ -564,6 +644,14 @@
   </data>
   <data name="Campus.FacilitiesLabel" xml:space="preserve">
     <value>Faciliteiten:</value>
+  </data>
+  <data name="Campus.ReadMore" xml:space="preserve">
+    <value>Lees meer</value>
+    <comment/>
+  </data>
+  <data name="Campus.ReadLess" xml:space="preserve">
+    <value>Lees minder</value>
+    <comment/>
   </data>
   <data name="Schedule.Room" xml:space="preserve">
     <value>Lokaal:</value>
@@ -632,6 +720,24 @@
   <data name="Navigation.Login" xml:space="preserve">
     <value>Inloggen</value>
   </data>
+  <data name="Navigation.Grades" xml:space="preserve">
+    <value>Cijfers</value>
+  </data>
+  <data name="Navigation.Events" xml:space="preserve">
+    <value>Evenementen</value>
+  </data>
+  <data name="Navigation.Contacts" xml:space="preserve">
+    <value>Contacten</value>
+  </data>
+  <data name="Navigation.Notifications" xml:space="preserve">
+    <value>Notificaties</value>
+  </data>
+  <data name="Navigation.Restaurants" xml:space="preserve">
+    <value>Restaurants</value>
+  </data>
+  <data name="Account.Student" xml:space="preserve">
+    <value>Student</value>
+  </data>
   <data name="Account_NotificationSettings" xml:space="preserve">
     <value>Account | Notificatie-instellingen</value>
   </data>
@@ -684,9 +790,6 @@
     <value>Evenementen</value>
   </data>
   <data name="EventCard.register" xml:space="preserve">
-    <value>Registreren</value>
-  </data>
-  <data name="EventCardDetails.register" xml:space="preserve">
     <value>Registreren</value>
   </data>
   <data name="Home.Today" xml:space="preserve">
@@ -802,6 +905,10 @@
     <value>Mijn Meldingen</value>
     <comment/>
   </data>
+  <data name="Notifications.Settings" xml:space="preserve">
+    <value>Instellingen</value>
+    <comment/>
+  </data>
   <data name="Notifications.MarkAllAsRead" xml:space="preserve">
     <value>Alles als gelezen markeren</value>
     <comment/>
@@ -861,5 +968,33 @@
   <data name="Notifications.PromptAllow" xml:space="preserve">
     <value>Ja, inschakelen</value>
     <comment>Button to allow notification permissions</comment>
+  </data>
+  <data name="EventCalendar.AllEvents" xml:space="preserve">
+    <value>Alle</value>
+  </data>
+  <data name="EventCalendar.Loading" xml:space="preserve">
+    <value>Evenementen laden...</value>
+  </data>
+  <data name="EventCalendar.FilterByType" xml:space="preserve">
+    <value>Filter op type</value>
+  </data>
+  <data name="EventCalendar.UpcomingEvents" xml:space="preserve">
+    <value>Aankomende Evenementen</value>
+  </data>
+  <data name="EventCalendar.Events" xml:space="preserve">
+    <value>evenementen</value>
+  </data>
+  <data name="EventCalendar.NoEvents" xml:space="preserve">
+    <value>Geen evenementen gevonden</value>
+  </data>
+  <data name="EventCalendar.NoEventsDescription" xml:space="preserve">
+    <value>Probeer je filters aan te passen of kom later terug</value>
+  </data>
+  <data name="EventCard.RegistrationRequired" xml:space="preserve">
+    <value>Registratie</value>
+  </data>
+  <data name="More.SubmitAbsence" xml:space="preserve">
+    <value>Afwezigheid indienen</value>
+    <comment/>
   </data>
 </root>

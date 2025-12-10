@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Rise.Shared.Schedule;
 using Rise.Shared.Resto;
 using Rise.Shared.Common;
+using Microsoft.Extensions.Localization;
 
 namespace Rise.Client.Home;
 
@@ -55,6 +56,16 @@ public partial class Index : ComponentBase
         ["News"] = typeof(Widgets.NewsWidget),
         ["Grades"] = typeof(Widgets.GradesWidget),
         ["Links"] = typeof(Widgets.LinksWidget)
+    };
+
+    private string GetWidgetName(Type t) => t.Name switch
+    {
+        "ScheduleWidget" => L["Home.Widget.Schedule"],
+        "RestoMenuWidget" => L["Home.Widget.Menus"],
+        "NewsWidget" => L["Home.Widget.News"],
+        "GradesWidget" => L["Home.Widget.Grades"],
+        "LinksWidget" => L["Home.Widget.Links"],
+        _ => t.Name
     };
 
     private static WidgetEntry CreateDefault(Type t, int height, int y) =>

@@ -40,7 +40,7 @@
             @if (Resto.NextOpeningTime.HasValue)
             {
                 <span class="text-[0.7rem] text-white bg-red-500 px-2 py-0.5 rounded-full shadow-sm">
-                    @L["Resto.OpensAt"] @Resto.NextOpeningTime.Value.ToString("HH:mm")
+                    @L["Resto.OpensAt"] @GetNextOpeningDisplay(Resto.NextOpeningTime)
                 </span>
             }
         </div>

@@ -1,24 +1,82 @@
 @namespace Rise.Client.Grades.Components
 @using Rise.Shared.Grades
 
-<div class="items-center min-h-15 border-2 rounded-xl p-4 m-4 shadow transition cursor-pointer font-montserrat @CardBackgroundClass"
+<div class="group relative bg-white rounded-2xl shadow-md hover:shadow-xl overflow-hidden border border-hogent-black-15 hover:border-hogent-black transition-all duration-300 cursor-pointer"
     @onclick="SeeGradeDetails">
 
-    <div class="flex justify-between items-center">
+    @* <div class="h-1.5 @ScoreBarClass"></div> *@
 
-        <div class="flex flex-col">
-            <h4 class="text-base font-semibold">@Grade.Name</h4>
-            <span class="text-xs text-hogent-black-50">@Grade.CourseName</span>
+    <div class="p-5">
+        <div class="flex justify-between items-start gap-4">
+            <div class="flex-1 min-w-0">
+                <h4 class="text-lg font-bold text-hogent-black group-hover:text-hogent-black-90 truncate">
+                    @Grade.Name
+                </h4>
+                <div class="flex items-center gap-2 mt-1">
+                    <i class="fa-solid fa-book text-hogent-black-30 text-xs"></i>
+                    <span class="text-sm text-hogent-black-50 truncate">@Grade.CourseName</span>
+                </div>
+            </div>
+
+            <div class="flex-shrink-0">
+                <div class="@ScoreBadgeClass px-4 py-2 rounded-xl text-center min-w-[80px] shadow-sm">
+                    <div class="text-xl font-bold">@Grade.Score</div>
+                    <div class="text-xs opacity-80">/ @Grade.MaxPoints</div>
+                </div>
+            </div>
         </div>
 
-        <div class="text-right font-semibold text-base ml-4">
-            @Grade.Score / @Grade.MaxPoints
+        <div class="flex flex-wrap items-center gap-3 mt-4 text-xs text-hogent-black-50">
+            @if (!string.IsNullOrEmpty(Grade.Year))
+            {
+                <div class="flex items-center gap-1.5 bg-hogent-black-5 px-2.5 py-1 rounded-full">
+                    <i class="fa-regular fa-calendar"></i>
+                    <span>@Grade.Year</span>
+                </div>
+            }
+            @if (Grade.Semester.HasValue)
+            {
+                <div class="flex items-center gap-1.5 bg-hogent-black-5 px-2.5 py-1 rounded-full">
+                    <i class="fa-solid fa-graduation-cap"></i>
+                    <span>@L["Grades.Semester"] @Grade.Semester</span>
+                </div>
+            }
+            @if (Grade.Date != default)
+            {
+                <div class="flex items-center gap-1.5 bg-hogent-black-5 px-2.5 py-1 rounded-full">
+                    <i class="fa-regular fa-clock"></i>
+                    <span>@Grade.Date.ToString("dd MMM yyyy")</span>
+                </div>
+            }
+        </div>
+
+        <div class="mt-4">
+            <div class="flex justify-between items-center text-xs mb-1.5">
+                <span class="text-hogent-black-50">@L["Grades.Score"]</span>
+                <span class="font-semibold @ScoreTextClass">@ScorePercentage%</span>
+            </div>
+            <div class="h-2 bg-hogent-black-10 rounded-full overflow-hidden">
+                <div class="h-full @ScoreBarClass rounded-full transition-all duration-500"
+                    style="width: @ScorePercentage%"></div>
+            </div>
+        </div>
+
+        @if (seeDetails && !string.IsNullOrEmpty(Grade.Feedback))
+        {
+            <div class="mt-4 pt-4 border-t border-hogent-black-10 animate-in fade-in slide-in-from-top-2 duration-200">
+                <div class="flex items-start gap-2">
+                    <i class="fa-solid fa-comment-dots text-hogent-black-30 mt-0.5"></i>
+                    <div>
+                        <span class="text-xs font-semibold text-hogent-black-50 uppercase tracking-wide">@L["Grades.Feedback"]</span>
+                        <p class="text-sm text-hogent-black-70 mt-1 leading-relaxed">@Grade.Feedback</p>
+                    </div>
+                </div>
+            </div>
+        }
+
+        <div class="flex justify-center mt-3">
+            <i
+                class="fa-solid @(seeDetails ? "fa-chevron-up" : "fa-chevron-down") text-hogent-black-20 text-xs group-hover:text-hogent-black-40 transition-colors"></i>
         </div>
     </div>
-
-    @if (seeDetails)
-    {
-        <div class="text-xs">@Grade.Feedback</div>
-    }
-
 </div>

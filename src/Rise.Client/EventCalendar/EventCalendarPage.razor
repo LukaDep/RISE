@@ -3,36 +3,149 @@
 @using Rise.Client.Components
 @inject IStringLocalizer<SharedResources> L
 
-<div>
-	<div class="flex items-center justify-between p-6">
-    
-        <!-- Title -->
-        <h3 class="text-4xl font-bold">@L["EventCalendar.Title"]</h3>
+<PageTitle>@L["EventCalendar.Title"]</PageTitle>
 
-    </div>
-
-    <EventMonthView Events=events?.ToList()
-					SelectedDate="DateTime.Today" />
-
-    <FilterLabels 
-        Filters=types />
-
-    @if (events != null)
-    {
-        foreach (var specificEvent in events)
+<BasePage Title="@L["EventCalendar.Title"]">
+    <HeaderContent>
+        <div class="flex flex-row items-center gap-3">
+            @if (types != null && types.Any())
+            {
+                <div class="flex flex-wrap gap-2">
+                    <button class="@GetFilterButtonClass(null)" @onclick="() => SetFilter(null)">
+                        <i class="fa-solid fa-calendar-days mr-1"></i>
+                        @L["EventCalendar.AllEvents"]
+                    </button>
+                    @foreach (var type in types.Take(3))
+                    {
+                        <button class="@GetFilterButtonClass(type)" @onclick="() => SetFilter(type)">
+                            @type
+                        </button>
+                    }
+                </div>
+            }
+        </div>
+    </HeaderContent>
+    <ChildContent>
+        @if (events == null)
         {
-            <EventCard 
-                specificEvent=specificEvent
-                OnClick="() => ShowDetails(specificEvent)" />
+            <div class="flex justify-center items-center h-64">
+                <LoadingComponent Item="@L["EventCalendar.Loading"]" />
+            </div>
         }
-    }
-    
-    @if (SelectedEvent != null)
-    {
-        <EventCardDetails
-            specificEvent=SelectedEvent
-            OnClose="CloseDetails" />
-    }
+        else
+        {
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden mb-6">
+                <EventMonthView Events=events?.ToList() SelectedDate="DateTime.Today" />
+            </div>
 
-</div>
+            @if (types != null && types.Count > 3)
+            {
+                <div class="mb-6">
+                    <div class="flex items-center gap-2 mb-3">
+                        <i class="fa-solid fa-filter text-hogent-black-50"></i>
+                        <span class="text-sm font-medium text-hogent-black-50">@L["EventCalendar.FilterByType"]</span>
+                    </div>
+                    <div class="flex flex-wrap gap-2">
+                        @foreach (var type in types)
+                        {
+                            <button class="@GetFilterChipClass(type)" @onclick="() => SetFilter(type)">
+                                <span class="w-2 h-2 rounded-full @GetEventTypeColor(type)"></span>
+                                @type
+                            </button>
+                        }
+                    </div>
+                </div>
+            }
 
+            <div class="space-y-1">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-semibold text-gray-900 flex items-center gap-2">
+                        <i class="fa-solid fa-list text-hogent-education"></i>
+                        @L["EventCalendar.UpcomingEvents"]
+                    </h2>
+                    <span class="text-sm text-hogent-black-50 bg-gray-100 px-3 py-1 rounded-full">
+                        @(events?.Count() ?? 0) @L["EventCalendar.Events"]
+                    </span>
+                </div>
+
+                @if (events == null || !events.Any())
+                {
+                    <div class="flex flex-col items-center justify-center py-16 text-hogent-black-50">
+                        <i class="fa-solid fa-calendar-xmark fa-3x mb-4 opacity-50"></i>
+                        <p class="text-xl font-medium">@L["EventCalendar.NoEvents"]</p>
+                        <p class="text-sm mt-2">@L["EventCalendar.NoEventsDescription"]</p>
+                    </div>
+                }
+                else
+                {
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                        @foreach (var specificEvent in events)
+                        {
+                            <div class="group bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-lg hover:border-hogent-education-30 transition-all duration-300 overflow-hidden">
+                                
+                                <div class="h-1 @GetEventTypeColor(specificEvent.Type)"></div>
+                                
+                                <div class="p-4">
+                                    <div class="flex items-start justify-between mb-3">
+                                        <div class="flex items-center gap-3">
+                                            <div class="flex flex-col items-center justify-center w-14 h-14 bg-hogent-education-15 rounded-xl">
+                                                <span class="text-xs font-semibold text-hogent-education uppercase">
+                                                    @specificEvent.StartDateTime.ToString("MMM", System.Globalization.CultureInfo.CurrentCulture)
+                                                </span>
+                                                <span class="text-xl font-bold text-hogent-black">
+                                                    @specificEvent.StartDateTime.Day
+                                                </span>
+                                            </div>
+                                            <div>
+                                                <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium @GetEventTypeBadgeClass(specificEvent.Type)">
+                                                    @specificEvent.Type
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <h3 class="text-base font-semibold text-gray-900 mb-2 group-hover:text-hogent-education transition-colors line-clamp-2">
+                                        @specificEvent.Name
+                                    </h3>
+                                    <p class="text-sm text-gray-500 mb-4 line-clamp-2">
+                                        @((specificEvent.Description?.Length ?? 0) > 100 
+                                            ? specificEvent.Description!.Substring(0, 100) + "..." 
+                                            : specificEvent.Description ?? "")
+                                    </p>
+
+                                    <div class="flex items-center gap-4 text-sm text-hogent-black-50">
+                                        <div class="flex items-center gap-1.5">
+                                            <i class="fa-regular fa-clock"></i>
+                                            <span>@specificEvent.StartDateTime.ToString("HH:mm") - @specificEvent.EndDateTime.ToString("HH:mm")</span>
+                                        </div>
+                                        @if (specificEvent.RegistrationLink != null)
+                                        {
+                                            <div class="flex items-center gap-1.5 text-hogent-education">
+                                                <i class="fa-solid fa-ticket"></i>
+                                                <span>@L["EventCard.RegistrationRequired"]</span>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    @if (specificEvent.RegistrationLink != null)
+                                    {
+                                        <div class="mt-4 pt-4 border-t border-gray-100">
+                                            <a href="@specificEvent.RegistrationLink"
+                                               class="inline-flex items-center gap-2 px-4 py-2 bg-hogent-education text-white text-sm font-medium rounded-lg hover:bg-hogent-education-dark transition-colors"
+                                               @onclick:stopPropagation="true">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                @L["EventCard.register"]
+                                            </a>
+                                        </div>
+                                    }
+                                </div>
+                            </div>
+                        }
+                    </div>
+                }
+            </div>
+        }
+
+        <ScrollToTop />
+    </ChildContent>
+</BasePage>

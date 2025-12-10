@@ -10,13 +10,20 @@
     <div class="sticky top-0 z-40 bg-white border-b border-gray-200">
         <div class="flex items-center justify-between gap-3 px-4 py-4">
             <h1 class="text-xl font-semibold text-gray-900">@L["Notifications.MyNotifications"]</h1>
-            @if (notifications != null && notifications.Any(n => !n.IsRead))
-            {
-                <button @onclick="MarkAllAsRead" 
-                    class="text-sm text-blue-600 hover:text-blue-800 font-medium">
-                    @L["Notifications.MarkAllAsRead"]
+            <div class="flex items-center gap-3">
+                <button @onclick='() => NavigationManager.NavigateTo("/account/notificationsettings")' 
+                        class="p-2 text-gray-600 hover:text-gray-800 hover:bg-gray-100 rounded-lg transition-colors"
+                        title="@L["Notifications.Settings"]">
+                    <i class="fa-solid fa-gear text-lg"></i>
                 </button>
-            }
+                @if (notifications != null && notifications.Any(n => !n.IsRead))
+                {
+                    <button @onclick="MarkAllAsRead" 
+                        class="text-sm text-blue-600 hover:text-blue-800 font-medium">
+                        @L["Notifications.MarkAllAsRead"]
+                    </button>
+                }
+            </div>
         </div>
     </div>
 
