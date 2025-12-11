@@ -32,7 +32,14 @@ public partial class SearchBar : ComponentBase
 
     private async Task ToggleSearch()
     {
-        await IsOpenChanged.InvokeAsync(!IsOpen);
+        if (string.IsNullOrWhiteSpace(Value))
+        {
+            await inputElement.FocusAsync();
+        }
+        else
+        {
+            await ValueChanged.InvokeAsync(string.Empty);
+        }
     }
 
     private async Task OnInputChanged(ChangeEventArgs e)

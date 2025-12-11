@@ -1,17 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!-- 
-    Microsoft ResX Schema 
-    
+  <!--
+    Microsoft ResX Schema
+
     Version 2.0
-    
-    The primary goals of this format is to allow a simple XML format 
-    that is mostly human readable. The generation and parsing of the 
-    various data types are done through the TypeConverter classes 
+
+    The primary goals of this format is to allow a simple XML format
+    that is mostly human readable. The generation and parsing of the
+    various data types are done through the TypeConverter classes
     associated with the data types.
-    
+
     Example:
-    
+
     ... ado.net/XML headers & schema ...
     <resheader name="resmimetype">text/microsoft-resx</resheader>
     <resheader name="version">2.0</resheader>
@@ -28,36 +28,36 @@
   object]</value>
         <comment>This is a comment</comment>
     </data>
-                
-    There are any number of "resheader" rows that contain simple 
+
+    There are any number of "resheader" rows that contain simple
     name/value pairs.
-    
-    Each data row contains a name, and value. The row also contains a 
-    type or mimetype. Type corresponds to a .NET class that support 
-    text/value conversion through the TypeConverter architecture. 
-    Classes that don't support this are serialized and stored with the 
+
+    Each data row contains a name, and value. The row also contains a
+    type or mimetype. Type corresponds to a .NET class that support
+    text/value conversion through the TypeConverter architecture.
+    Classes that don't support this are serialized and stored with the
     mimetype set.
-    
-    The mimetype is used for serialized objects, and tells the 
-    ResXResourceReader how to depersist the object. This is currently not 
+
+    The mimetype is used for serialized objects, and tells the
+    ResXResourceReader how to depersist the object. This is currently not
     extensible. For a given mimetype the value must be set accordingly:
-    
-    Note - application/x-microsoft.net.object.binary.base64 is the format 
-    that the ResXResourceWriter will generate, however the reader can 
+
+    Note - application/x-microsoft.net.object.binary.base64 is the format
+    that the ResXResourceWriter will generate, however the reader can
     read any of the formats listed below.
-    
+
     mimetype: application/x-microsoft.net.object.binary.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
             : and then encoded with base64 encoding.
-    
+
     mimetype: application/x-microsoft.net.object.soap.base64
-    value   : The object must be serialized with 
+    value   : The object must be serialized with
             : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
             : and then encoded with base64 encoding.
 
     mimetype: application/x-microsoft.net.object.bytearray.base64
-    value   : The object must be serialized into a byte array 
+    value   : The object must be serialized into a byte array
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
     -->
@@ -70,38 +70,38 @@
           <xsd:element name="metadata">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0"/>
               </xsd:sequence>
-              <xsd:attribute name="name" use="required" type="xsd:string" />
-              <xsd:attribute name="type" type="xsd:string" />
-              <xsd:attribute name="mimetype" type="xsd:string" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" use="required" type="xsd:string"/>
+              <xsd:attribute name="type" type="xsd:string"/>
+              <xsd:attribute name="mimetype" type="xsd:string"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="assembly">
             <xsd:complexType>
-              <xsd:attribute name="alias" type="xsd:string" />
-              <xsd:attribute name="name" type="xsd:string" />
+              <xsd:attribute name="alias" type="xsd:string"/>
+              <xsd:attribute name="name" type="xsd:string"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
-              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-              <xsd:attribute ref="xml:space" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1"/>
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3"/>
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4"/>
+              <xsd:attribute ref="xml:space"/>
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
             <xsd:complexType>
               <xsd:sequence>
-                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1"/>
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" use="required" />
+              <xsd:attribute name="name" type="xsd:string" use="required"/>
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
@@ -124,15 +124,19 @@
   </resheader>
   <data name="Home.AuthMessage" xml:space="preserve">
     <value>Nadat een gebruiker inlogt, toont het navigatiemenu een link naar de</value>
+    <comment/>
   </data>
   <data name="Home.HelloWorld" xml:space="preserve">
     <value>Hallo, wereld!</value>
+    <comment/>
   </data>
   <data name="Home.PrivatePage" xml:space="preserve">
     <value>Privé-pagina</value>
+    <comment/>
   </data>
   <data name="Home.WelcomeMessage" xml:space="preserve">
     <value>Welkom bij je nieuwe app.</value>
+    <comment/>
   </data>
   <data name="Home.Edit" xml:space="preserve">
     <value>Bewerken</value>
@@ -175,120 +179,154 @@
   </data>
   <data name="Schedule.Title" xml:space="preserve">
     <value>Agenda</value>
+    <comment/>
   </data>
   <data name="Schedule.Week" xml:space="preserve">
     <value>Week</value>
+    <comment/>
   </data>
   <data name="Schedule.To" xml:space="preserve">
     <value>tot</value>
+    <comment/>
   </data>
   <data name="Schedule.ToToday" xml:space="preserve">
     <value>Naar vandaag </value>
+    <comment/>
   </data>
   <data name="Schedule.Today" xml:space="preserve">
-    <value>Vandaag</value>
+    <value>Vandaag </value>
+    <comment/>
   </data>
   <data name="Schedule.Previous" xml:space="preserve">
     <value>Vorige</value>
+    <comment/>
   </data>
   <data name="Schedule.Next" xml:space="preserve">
     <value>Volgende</value>
+    <comment/>
   </data>
   <data name="Schedule.Time" xml:space="preserve">
     <value>Tijd</value>
+    <comment/>
   </data>
   <data name="Schedule.Day" xml:space="preserve">
     <value>Dag</value>
+    <comment/>
   </data>
   <data name="Schedule.Month" xml:space="preserve">
     <value>Maand</value>
+    <comment/>
   </data>
   <data name="Schedule.More" xml:space="preserve">
     <value>meer</value>
+    <comment/>
   </data>
   <data name="Schedule.NoClassesToday" xml:space="preserve">
     <value>Geen lessen vandaag!</value>
+    <comment/>
   </data>
   <data name="Schedule.ActiveLecture" xml:space="preserve">
     <value>Activerend Hoorcollege</value>
+    <comment/>
   </data>
   <data name="Schedule.Practicum" xml:space="preserve">
     <value>Practicum</value>
+    <comment/>
   </data>
   <data name="Schedule.Seminar" xml:space="preserve">
     <value>Seminarie</value>
+    <comment/>
   </data>
   <data name="Schedule.Test" xml:space="preserve">
     <value>Test</value>
+    <comment/>
   </data>
   <data name="Schedule.Close" xml:space="preserve">
     <value>Sluiten</value>
+    <comment/>
   </data>
   <data name="Schedule.Type" xml:space="preserve">
     <value>Type</value>
+    <comment/>
   </data>
   <data name="Schedule.Course" xml:space="preserve">
     <value>Cursus</value>
+    <comment/>
   </data>
   <data name="Schedule.Note" xml:space="preserve">
     <value>Notitie</value>
+    <comment/>
   </data>
   <data name="Schedule.Campus" xml:space="preserve">
     <value>Campus</value>
+    <comment/>
   </data>
   <data name="Schedule.Monday" xml:space="preserve">
     <value>Ma</value>
+    <comment/>
   </data>
   <data name="Schedule.Tuesday" xml:space="preserve">
     <value>Di</value>
+    <comment/>
   </data>
   <data name="Schedule.Wednesday" xml:space="preserve">
     <value>Wo</value>
+    <comment/>
   </data>
   <data name="Schedule.Thursday" xml:space="preserve">
     <value>Do</value>
+    <comment/>
   </data>
   <data name="Schedule.Friday" xml:space="preserve">
     <value>Vr</value>
+    <comment/>
   </data>
   <data name="Schedule.Saturday" xml:space="preserve">
     <value>Za</value>
+    <comment/>
   </data>
   <data name="Schedule.Sunday" xml:space="preserve">
     <value>Zo</value>
+    <comment/>
   </data>
   <data name="News.Title" xml:space="preserve">
     <value>Nieuws</value>
+    <comment/>
   </data>
   <data name="News.FilterPlaceholder" xml:space="preserve">
     <value>Filter nieuws...</value>
+    <comment/>
   </data>
   <data name="News.Loading" xml:space="preserve">
     <value>Nieuws laden...</value>
+    <comment/>
   </data>
   <data name="News.By" xml:space="preserve">
     <value>Door</value>
+    <comment/>
   </data>
   <data name="Auth.LoggedInAs" xml:space="preserve">
     <value>Je bent ingelogd als</value>
+    <comment/>
   </data>
   <data name="Auth.WithClaims" xml:space="preserve">
     <value>Met de volgende claims:</value>
+    <comment/>
   </data>
   <data name="Auth.Type" xml:space="preserve">
     <value>Type</value>
+    <comment/>
   </data>
   <data name="Auth.Value" xml:space="preserve">
     <value>Waarde</value>
+    <comment/>
   </data>
   <data name="Auth.EmailPlaceholder" xml:space="preserve">
     <value>E-mail</value>
+    <comment/>
   </data>
   <data name="Auth.PasswordPlaceholder" xml:space="preserve">
     <value>Wachtwoord</value>
-  </data>
-  <data name="Auth.EmailPlaceholderText" xml:space="preserve">
-    <value>naam@student.hogent.be</value>
     <comment/>
   </data>
   <data name="Auth.EmailPlaceholderText" xml:space="preserve">
@@ -297,72 +335,89 @@
   </data>
   <data name="Auth.Login" xml:space="preserve">
     <value>Inloggen</value>
+    <comment/>
   </data>
   <data name="Auth.Register" xml:space="preserve">
     <value>Registreren</value>
+    <comment/>
   </data>
   <data name="Auth.AlreadyLoggedIn" xml:space="preserve">
     <value>Je bent al ingelogd als</value>
+    <comment/>
   </data>
   <data name="Auth.RegisterNewUser" xml:space="preserve">
     <value>Heb je geen account?</value>
+    <comment/>
   </data>
   <data name="Auth.RegisterSuccess" xml:space="preserve">
     <value>Je hebt je succesvol geregistreerd. Nu kun je</value>
+    <comment/>
   </data>
   <data name="Auth.LoginLink" xml:space="preserve">
     <value>inloggen</value>
+    <comment/>
   </data>
   <data name="Auth.ConfirmPasswordPlaceholder" xml:space="preserve">
     <value>Bevestig wachtwoord</value>
+    <comment/>
   </data>
   <data name="Products.Title" xml:space="preserve">
     <value>Producten</value>
+    <comment/>
   </data>
   <data name="Products.FetchingData" xml:space="preserve">
     <value>Dit component toont data van de server.</value>
+    <comment/>
   </data>
   <data name="Products.Create" xml:space="preserve">
     <value>Aanmaken</value>
+    <comment/>
   </data>
   <data name="Products.Id" xml:space="preserve">
     <value>Id</value>
+    <comment/>
   </data>
   <data name="Products.Name" xml:space="preserve">
     <value>Naam</value>
+    <comment/>
   </data>
   <data name="Products.Description" xml:space="preserve">
     <value>Beschrijving</value>
+    <comment/>
   </data>
   <data name="Common.Loading" xml:space="preserve">
     <value>Laden...</value>
+    <comment/>
   </data>
   <data name="Common.ComingSoon" xml:space="preserve">
     <value>Binnenkort beschikbaar...</value>
+    <comment/>
   </data>
   <data name="Common.Claims" xml:space="preserve">
     <value>Claims</value>
   </data>
   <data name="Common.NotFound" xml:space="preserve">
     <value>Deze pagina kon niet worden gevonden.</value>
+    <comment/>
   </data>
   <data name="Common.NotAuthorized" xml:space="preserve">
     <value>Niet geautoriseerd</value>
+    <comment/>
   </data>
   <data name="Common.NotAuthorizedMessage" xml:space="preserve">
     <value>Je hebt geen toegang tot deze pagina. Log in om verder te gaan.</value>
+    <comment/>
   </data>
   <data name="Common.BackToHome" xml:space="preserve">
     <value>Terug naar Home</value>
+    <comment/>
   </data>
   <data name="Common.LoginToContinue" xml:space="preserve">
     <value>Log in</value>
+    <comment/>
   </data>
   <data name="Auth.SignIn" xml:space="preserve">
     <value>Log In</value>
-  </data>
-  <data name="Auth.WelcomeBack" xml:space="preserve">
-    <value>Welkom terug! Log in om verder te gaan.</value>
     <comment/>
   </data>
   <data name="Auth.WelcomeBack" xml:space="preserve">
@@ -371,36 +426,47 @@
   </data>
   <data name="Account.Title" xml:space="preserve">
     <value>Account</value>
+    <comment/>
   </data>
   <data name="Account.SelectOption" xml:space="preserve">
     <value>Selecteer een optie in het menu.</value>
+    <comment/>
   </data>
   <data name="Account.Logout" xml:space="preserve">
     <value>Uitloggen</value>
+    <comment/>
   </data>
   <data name="Schedule.Absent" xml:space="preserve">
     <value>Afwezig</value>
+    <comment/>
   </data>
   <data name="Resto.Title" xml:space="preserve">
     <value>Restaurants</value>
+    <comment/>
   </data>
   <data name="Resto.FilterPlaceholder" xml:space="preserve">
     <value>Zoek restaurants...</value>
+    <comment/>
   </data>
   <data name="Resto.NoResults" xml:space="preserve">
     <value>Geen restaurants gevonden</value>
+    <comment/>
   </data>
   <data name="Resto.Open" xml:space="preserve">
     <value>Open</value>
+    <comment/>
   </data>
   <data name="Resto.Closed" xml:space="preserve">
     <value>Gesloten</value>
+    <comment/>
   </data>
   <data name="Resto.OpensAt" xml:space="preserve">
     <value>Opent om</value>
+    <comment/>
   </data>
   <data name="Resto.ClosesAt" xml:space="preserve">
     <value>Sluit om</value>
+    <comment/>
   </data>
   <data name="Resto.KitchenType.Hot" xml:space="preserve">
     <value>Warm</value>
@@ -416,51 +482,67 @@
   </data>
   <data name="Resto.OpeningHours" xml:space="preserve">
     <value>Openingsuren</value>
+    <comment/>
   </data>
   <data name="Resto.ViewMenu" xml:space="preserve">
     <value>Bekijk menu</value>
+    <comment/>
   </data>
   <data name="Day.Monday" xml:space="preserve">
     <value>Maandag</value>
+    <comment/>
   </data>
   <data name="Day.Tuesday" xml:space="preserve">
     <value>Dinsdag</value>
+    <comment/>
   </data>
   <data name="Day.Wednesday" xml:space="preserve">
     <value>Woensdag</value>
+    <comment/>
   </data>
   <data name="Day.Thursday" xml:space="preserve">
     <value>Donderdag</value>
+    <comment/>
   </data>
   <data name="Day.Friday" xml:space="preserve">
     <value>Vrijdag</value>
+    <comment/>
   </data>
   <data name="Day.Saturday" xml:space="preserve">
     <value>Zaterdag</value>
+    <comment/>
   </data>
   <data name="Day.Sunday" xml:space="preserve">
     <value>Zondag</value>
+    <comment/>
   </data>
   <data name="News.LoadMore" xml:space="preserve">
     <value>Lees meer</value>
+    <comment/>
   </data>
   <data name="News.Count" xml:space="preserve">
     <value>van de</value>
+    <comment/>
   </data>
   <data name="Grades.Title" xml:space="preserve">
     <value>Mijn punten</value>
+    <comment/>
   </data>
   <data name="Grades.YearFilterPlaceholder" xml:space="preserve">
     <value>Jaar</value>
+    <comment/>
   </data>
   <data name="Grades.SemesterFilterPlaceholder" xml:space="preserve">
     <value>Semester</value>
+    <comment/>
   </data>
   <data name="Grades.SemesterFilterOption1" xml:space="preserve">
     <value>Semester 1</value>
+    <comment/>
   </data>
   <data name="Grades.SemesterFilterOption2" xml:space="preserve">
     <value>Semester 2</value>
+    <comment/>
   </data>
   <data name="Grades.Semester" xml:space="preserve">
     <value>Semester</value>
@@ -468,6 +550,7 @@
   </data>
   <data name="Grades.SearchTermPlaceholder" xml:space="preserve">
     <value>Zoek punten...</value>
+    <comment/>
   </data>
   <data name="Grades.NoGradesFound" xml:space="preserve">
     <value>Geen punten gevonden</value>
@@ -500,6 +583,7 @@
   </data>
   <data name="News.NotFound" xml:space="preserve">
     <value>Geen Nieuws Gevonden</value>
+    <comment/>
   </data>
   <data name="Resto.Student" xml:space="preserve">
     <value>Student</value>
@@ -539,28 +623,26 @@
   </data>
   <data name="Resto.Return" xml:space="preserve">
     <value>Terug naar overzicht</value>
+    <comment/>
   </data>
   <data name="Resto.BackShort" xml:space="preserve">
     <value>Terug</value>
+    <comment/>
   </data>
   <data name="Contact.Title" xml:space="preserve">
     <value>Contacten</value>
+    <comment/>
   </data>
   <data name="Contact.Loading" xml:space="preserve">
     <value>Contacten laden...</value>
+    <comment/>
   </data>
   <data name="Contact.Call" xml:space="preserve">
     <value>Bellen</value>
+    <comment/>
   </data>
   <data name="Contact.Mail" xml:space="preserve">
     <value>Mailen</value>
-  </data>
-  <data name="Contact.AllTypes" xml:space="preserve">
-    <value>Alles</value>
-    <comment/>
-  </data>
-  <data name="Contact.NotFound" xml:space="preserve">
-    <value>Geen contacten gevonden</value>
     <comment/>
   </data>
   <data name="Contact.AllTypes" xml:space="preserve">
@@ -573,6 +655,7 @@
   </data>
   <data name="Account.Calendar" xml:space="preserve">
     <value>Kalender</value>
+    <comment/>
   </data>
   <data name="Account.Absences" xml:space="preserve">
     <value>Afwezigheden</value>
@@ -580,12 +663,18 @@
   </data>
   <data name="Account.Grades" xml:space="preserve">
     <value>Cijfers</value>
+    <comment/>
   </data>
   <data name="Account.Notifications" xml:space="preserve">
     <value>Notificaties</value>
   </data>
   <data name="Account.Notificationsettings" xml:space="preserve">
     <value>Notificatie instellingen</value>
+    <comment/>
+  </data>
+  <data name="Account.StudentCard" xml:space="preserve">
+    <value>Studentenkaart</value>
+    <comment/>
   </data>
   <data name="Account.StudentCard" xml:space="preserve">
     <value>Studentenkaart</value>
@@ -593,57 +682,75 @@
   </data>
   <data name="Auth.LogoutTitle" xml:space="preserve">
     <value>Uitloggen</value>
+    <comment/>
   </data>
   <data name="Auth.LoggingOut" xml:space="preserve">
     <value>Je wordt uitgelogd...</value>
+    <comment/>
   </data>
   <data name="Auth.Redirecting" xml:space="preserve">
     <value>Je wordt doorgestuurd...</value>
+    <comment/>
   </data>
   <data name="Counter.Title" xml:space="preserve">
     <value>Teller</value>
+    <comment/>
   </data>
   <data name="Counter.CurrentCount" xml:space="preserve">
     <value>Huidige waarde: {0}</value>
+    <comment/>
   </data>
   <data name="Counter.ClickMe" xml:space="preserve">
     <value>Klik mij</value>
+    <comment/>
   </data>
   <data name="Home.AuthenticatedMessage" xml:space="preserve">
     <value>Hallo, {0}! Je bent ingelogd, dus je kunt deze pagina zien die je claims toont.</value>
+    <comment/>
   </data>
   <data name="Home.PrivateAdministratorPage" xml:space="preserve">
     <value>Privépagina voor beheerders</value>
+    <comment/>
   </data>
   <data name="Roles.Administrator" xml:space="preserve">
     <value>Beheerder</value>
+    <comment/>
   </data>
   <data name="Campus.Title" xml:space="preserve">
     <value>Campussen</value>
+    <comment/>
   </data>
   <data name="Campus.Loading" xml:space="preserve">
     <value>Campus laden...</value>
+    <comment/>
   </data>
   <data name="Campus.SearchPlaceholder" xml:space="preserve">
     <value>Zoekterm</value>
+    <comment/>
   </data>
   <data name="Campus.MapButton" xml:space="preserve">
     <value>Campuskaart</value>
+    <comment/>
   </data>
   <data name="Campus.LocationLabel" xml:space="preserve">
     <value>Locatie:</value>
+    <comment/>
   </data>
   <data name="Campus.ContactPhoneLabel" xml:space="preserve">
     <value>Telefoon:</value>
+    <comment/>
   </data>
   <data name="Campus.WebsiteLabel" xml:space="preserve">
     <value>Website:</value>
+    <comment/>
   </data>
   <data name="Campus.DescriptionLabel" xml:space="preserve">
     <value>Beschrijving:</value>
+    <comment/>
   </data>
   <data name="Campus.FacilitiesLabel" xml:space="preserve">
     <value>Faciliteiten:</value>
+    <comment/>
   </data>
   <data name="Campus.ReadMore" xml:space="preserve">
     <value>Lees meer</value>
@@ -655,57 +762,79 @@
   </data>
   <data name="Schedule.Room" xml:space="preserve">
     <value>Lokaal:</value>
+    <comment/>
   </data>
   <data name="Schedule.Teacher" xml:space="preserve">
     <value>Docent:</value>
+    <comment/>
   </data>
   <data name="Schedule.Environment" xml:space="preserve">
     <value>Omgeving:</value>
+    <comment/>
   </data>
   <data name="Products.CreateNew" xml:space="preserve">
     <value>Maak een nieuw product aan</value>
+    <comment/>
   </data>
   <data name="Products.NamePlaceholder" xml:space="preserve">
     <value>Naam</value>
+    <comment/>
   </data>
   <data name="Products.DescriptionPlaceholder" xml:space="preserve">
     <value>Beschrijving</value>
+    <comment/>
   </data>
   <data name="Common.Reset" xml:space="preserve">
     <value>Reset</value>
+    <comment/>
   </data>
   <data name="Campus.PlanLoading" xml:space="preserve">
     <value>Campus wordt geladen...</value>
+    <comment/>
   </data>
   <data name="Campus.Back" xml:space="preserve">
     <value>Terug naar campussen</value>
+    <comment/>
   </data>
   <data name="Common.NotFoundTitle" xml:space="preserve">
     <value>Niet gevonden</value>
+    <comment/>
   </data>
   <data name="News.Filter.All" xml:space="preserve">
     <value>Alle</value>
+    <comment/>
   </data>
   <data name="News.Filter.Today" xml:space="preserve">
     <value>Vandaag</value>
+    <comment/>
   </data>
   <data name="News.Filter.Week" xml:space="preserve">
     <value>Deze week</value>
+    <comment/>
   </data>
   <data name="News.Filter.Month" xml:space="preserve">
     <value>Deze maand</value>
+    <comment/>
   </data>
   <data name="Navigation.Home" xml:space="preserve">
     <value>Startpagina</value>
+    <comment/>
   </data>
   <data name="Navigation.News" xml:space="preserve">
     <value>Nieuws</value>
+    <comment/>
   </data>
   <data name="Navigation.Campus" xml:space="preserve">
     <value>Campus</value>
+    <comment/>
   </data>
   <data name="Navigation.Schedule" xml:space="preserve">
     <value>Rooster</value>
+    <comment/>
+  </data>
+  <data name="Navigation.Deadlines" xml:space="preserve">
+    <value>Deadlines</value>
+    <comment/>
   </data>
   <data name="Navigation.Deadlines" xml:space="preserve">
     <value>Deadlines</value>
@@ -713,12 +842,15 @@
   </data>
   <data name="Navigation.Account" xml:space="preserve">
     <value>Account</value>
+    <comment/>
   </data>
   <data name="Navigation.Resto" xml:space="preserve">
     <value>Resto</value>
+    <comment/>
   </data>
   <data name="Navigation.Login" xml:space="preserve">
     <value>Inloggen</value>
+    <comment/>
   </data>
   <data name="Navigation.Grades" xml:space="preserve">
     <value>Cijfers</value>
@@ -740,93 +872,130 @@
   </data>
   <data name="Account_NotificationSettings" xml:space="preserve">
     <value>Account | Notificatie-instellingen</value>
+    <comment/>
   </data>
   <data name="Notifications.Title" xml:space="preserve">
     <value>Notificaties</value>
+    <comment/>
   </data>
   <data name="Notifications.PushSection" xml:space="preserve">
     <value>Push notificaties</value>
+    <comment/>
   </data>
   <data name="Notifications.PushDescription" xml:space="preserve">
     <value>Meldingen op je apparaat</value>
+    <comment/>
   </data>
   <data name="Notifications.IsEnabled" xml:space="preserve">
     <value>Alle notificaties</value>
+    <comment/>
   </data>
   <data name="Notifications.IsEnabledDescription" xml:space="preserve">
     <value>Schakel alle meldingen in</value>
+    <comment/>
   </data>
   <data name="Notifications.Grades" xml:space="preserve">
     <value>Cijfers en resultaten</value>
+    <comment/>
   </data>
   <data name="Notifications.GradesDescription" xml:space="preserve">
     <value>Nieuwe cijfers beschikbaar</value>
+    <comment/>
   </data>
   <data name="Notifications.Schedule" xml:space="preserve">
     <value>Roosterwijzigingen</value>
+    <comment/>
   </data>
   <data name="Notifications.ScheduleDescription" xml:space="preserve">
     <value>Veranderingen in je rooster</value>
+    <comment/>
   </data>
   <data name="Notifications.Campus" xml:space="preserve">
     <value>Campus evenementen</value>
+    <comment/>
   </data>
   <data name="Notifications.CampusDescription" xml:space="preserve">
     <value>Updates over campus</value>
+    <comment/>
   </data>
   <data name="Notifications.News" xml:space="preserve">
     <value>Nieuws en aankondigingen</value>
+    <comment/>
   </data>
   <data name="Notifications.NewsDescription" xml:space="preserve">
     <value>Berichten van de school</value>
+    <comment/>
   </data>
   <data name="Notifications.InformationSection" xml:space="preserve">
     <value>Informatie</value>
+    <comment/>
   </data>
   <data name="Notifications.InformationText" xml:space="preserve">
     <value>Je moet push-notificaties toestaan om deze instellingen in werking te laten treden. Wijzig je instellingen om meldingen in te schakelen.</value>
+    <comment/>
   </data>
   <data name="EventCalendar.Title" xml:space="preserve">
     <value>Evenementen</value>
+    <comment/>
   </data>
   <data name="EventCard.register" xml:space="preserve">
     <value>Registreren</value>
+    <comment/>
+  </data>
+  <data name="EventCardDetails.register" xml:space="preserve">
+    <value>Registreren</value>
+    <comment/>
   </data>
   <data name="Home.Today" xml:space="preserve">
     <value>Vandaag</value>
+    <comment/>
   </data>
   <data name="Home.More" xml:space="preserve">
     <value>meer</value>
+    <comment/>
   </data>
   <data name="Home.LatestNews" xml:space="preserve">
     <value>Laatste Nieuws</value>
+    <comment/>
   </data>
   <data name="Home.LatestGrades" xml:space="preserve">
     <value>Laatste Punten</value>
+    <comment/>
   </data>
   <data name="Home.NoNews" xml:space="preserve">
     <value>geen nieuws verkrijgbaar</value>
+    <comment/>
   </data>
   <data name="Home.NoGrades" xml:space="preserve">
     <value>geen punten verkrijgbaar</value>
+    <comment/>
   </data>
   <data name="Home.NoRestos" xml:space="preserve">
     <value>geen restaurents</value>
+    <comment/>
   </data>
   <data name="Home.NoMenus" xml:space="preserve">
     <value>geen menus vandaag</value>
+    <comment/>
   </data>
   <data name="Home.NoClassesToday" xml:space="preserve">
     <value>Geen lessen vandaag</value>
   </data>
   <data name="News.Back" xml:space="preserve">
     <value>Terug naar nieuws</value>
+    <comment/>
   </data>
   <data name="Common.SearchPlaceholder" xml:space="preserve">
     <value>Zoek...</value>
+    <comment/>
   </data>
   <data name="Account.Back" xml:space="preserve">
     <value>Terug naar account</value>
+    <comment/>
+  </data>
+  <data name="StudentCard.Loading" xml:space="preserve">
+    <value>Studentenkaart laden...</value>
+    <comment/>
   </data>
   <data name="StudentCard.Loading" xml:space="preserve">
     <value>Studentenkaart laden...</value>
@@ -834,33 +1003,43 @@
   </data>
   <data name="Resto.Loading" xml:space="preserve">
     <value>Restaurants laden...</value>
+    <comment/>
   </data>
   <data name="Menu.Loading" xml:space="preserve">
     <value>Menu laden...</value>
+    <comment/>
   </data>
   <data name="Notifications.Loading" xml:space="preserve">
     <value>Meldingen laden...</value>
+    <comment/>
   </data>
   <data name="Grades.Loading" xml:space="preserve">
     <value>Punten laden...</value>
+    <comment/>
   </data>
   <data name="Resto.Back" xml:space="preserve">
     <value>Terug naar resto's</value>
+    <comment/>
   </data>
   <data name="Deadlines.Title" xml:space="preserve">
     <value>Deadlines</value>
+    <comment/>
   </data>
   <data name="Deadlines.Urgent" xml:space="preserve">
     <value>Nog maar {0} dagen!</value>
+    <comment/>
   </data>
   <data name="Deadlines.Urgent1Day" xml:space="preserve">
     <value>Nog maar {0} dag!</value>
+    <comment/>
   </data>
   <data name="Deadlines.UrgentToday" xml:space="preserve">
     <value>Vandaag is de laatste dag!</value>
+    <comment/>
   </data>
   <data name="Deadlines.Deadline" xml:space="preserve">
     <value>Deadline</value>
+    <comment/>
   </data>
   <data name="Deadlines.Expired" xml:space="preserve">
     <value>Verlopen</value>
@@ -897,9 +1076,11 @@
   </data>
   <data name="Schedule.Back" xml:space="preserve">
     <value>Terug naar agenda</value>
+    <comment/>
   </data>
   <data name="Campus.FacultiesLabel" xml:space="preserve">
     <value>Faculteiten:</value>
+    <comment/>
   </data>
   <data name="Notifications.MyNotifications" xml:space="preserve">
     <value>Mijn Meldingen</value>
@@ -968,6 +1149,9 @@
   <data name="Notifications.PromptAllow" xml:space="preserve">
     <value>Ja, inschakelen</value>
     <comment>Button to allow notification permissions</comment>
+  </data>
+  <data name="Status.Offline" xml:space="preserve">
+    <value>Je bent momenteel offline.</value>
   </data>
   <data name="EventCalendar.AllEvents" xml:space="preserve">
     <value>Alle</value>
