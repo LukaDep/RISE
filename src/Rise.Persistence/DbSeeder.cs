@@ -56,30 +56,6 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
 
         await dbContext.Roles.ToListAsync();
 
-        var admin = new IdentityUser
-        {
-            UserName = "admin@example.com",
-            Email = "admin@example.com",
-            EmailConfirmed = true,
-        };
-        await userManager.CreateAsync(admin, PasswordDefault);
-
-        var secretary = new IdentityUser
-        {
-            UserName = "secretary@example.com",
-            Email = "secretary@example.com",
-            EmailConfirmed = true,
-        };
-        await userManager.CreateAsync(secretary, PasswordDefault);
-
-        var lector1 = new IdentityUser
-        {
-            UserName = "lector@example.com",
-            Email = "lector@example.com",
-            EmailConfirmed = true,
-        };
-        await userManager.CreateAsync(lector1, PasswordDefault);
-
         var student1 = new IdentityUser
         {
             UserName = "jan.vermeulen@student.hogent.be",
@@ -119,15 +95,57 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             EmailConfirmed = true,
         };
         await userManager.CreateAsync(student5, PasswordDefault);
+        var student6 = new IdentityUser
+        {
+            UserName = "emma.peeters@student.hogent.be",
+            Email = "emma.peeters@student.hogent.be",
+            EmailConfirmed = true,
+        };
+        await userManager.CreateAsync(student6, PasswordDefault);
 
-        await userManager.AddToRoleAsync(admin, "Administrator");
-        await userManager.AddToRoleAsync(secretary, "Secretary");
-        await userManager.AddToRoleAsync(lector1, "Lector");
+        var student7 = new IdentityUser
+        {
+            UserName = "lucas.vandenberg@student.hogent.be",
+            Email = "lucas.vandenberg@student.hogent.be",
+            EmailConfirmed = true,
+        };
+        await userManager.CreateAsync(student7, PasswordDefault);
+
+        var student8 = new IdentityUser
+        {
+            UserName = "liesbeth.vanwynsberghe@student.hogent.be",
+            Email = "liesbeth.vanwynsberghe@student.hogent.be",
+            EmailConfirmed = true,
+        };
+        await userManager.CreateAsync(student8, PasswordDefault);
+
+        var student9 = new IdentityUser
+        {
+            UserName = "nathan.devos@student.hogent.be",
+            Email = "nathan.devos@student.hogent.be",
+            EmailConfirmed = true,
+        };
+        await userManager.CreateAsync(student9, PasswordDefault);
+
+        var student10 = new IdentityUser
+        {
+            UserName = "olivia.declercq@student.hogent.be",
+            Email = "olivia.declercq@student.hogent.be",
+            EmailConfirmed = true,
+        };
+        await userManager.CreateAsync(student10, PasswordDefault);
+
+
         await userManager.AddToRoleAsync(student1, "Student");
         await userManager.AddToRoleAsync(student2, "Student");
         await userManager.AddToRoleAsync(student3, "Student");
         await userManager.AddToRoleAsync(student4, "Student");
         await userManager.AddToRoleAsync(student5, "Student");
+        await userManager.AddToRoleAsync(student6, "Student");
+        await userManager.AddToRoleAsync(student7, "Student");
+        await userManager.AddToRoleAsync(student8, "Student");
+        await userManager.AddToRoleAsync(student9, "Student");
+        await userManager.AddToRoleAsync(student10, "Student");
 
         await dbContext.SaveChangesAsync();
         dbContext.StudentCards.AddRange(
@@ -175,6 +193,51 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
                 birthDate: new DateTime(2003, 1, 18),
                 expirationDate: DateTime.Now.AddYears(1),
                 profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Thomas_Maes"
+            ),
+            new StudentCard(
+                userId: student6.Id,
+                personalNumber: "111222333",
+                firstName: "Emma",
+                lastName: "Peeters",
+                birthDate: new DateTime(2003, 4, 12),
+                expirationDate: DateTime.UtcNow.AddYears(1),
+                profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Emma_Peeters"
+            ),
+            new StudentCard(
+                userId: student7.Id,
+                personalNumber: "222333444",
+                firstName: "Lucas",
+                lastName: "Vandenberg",
+                birthDate: new DateTime(2002, 9, 3),
+                expirationDate: DateTime.UtcNow.AddYears(1),
+                profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Lucas_Vandenberg"
+            ),
+            new StudentCard(
+                userId: student8.Id,
+                personalNumber: "333444555",
+                firstName: "Liesbeth",
+                lastName: "Vanwynsberghe",
+                birthDate: new DateTime(2001, 7, 21),
+                expirationDate: DateTime.UtcNow.AddYears(1),
+                profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Liesbeth_Vanwynsberghe"
+            ),
+            new StudentCard(
+                userId: student9.Id,
+                personalNumber: "444555666",
+                firstName: "Nathan",
+                lastName: "Devos",
+                birthDate: new DateTime(2002, 2, 2),
+                expirationDate: DateTime.UtcNow.AddYears(1),
+                profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Nathan_Devos"
+            ),
+            new StudentCard(
+                userId: student10.Id,
+                personalNumber: "555666777",
+                firstName: "Olivia",
+                lastName: "Declercq",
+                birthDate: new DateTime(2003, 6, 9),
+                expirationDate: DateTime.UtcNow.AddYears(1),
+                profilePicture: "https://api.dicebear.com/7.x/avataaars/svg?seed=Olivia_Declercq"
             )
         );
 
@@ -373,6 +436,13 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         var student1 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "jan.vermeulen@student.hogent.be");
         var student2 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "marie.dubois@student.hogent.be");
         var student3 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "pieter.janssens@student.hogent.be");
+        var student4 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "sophie.nguyen@student.hogent.be");
+        var student5 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "thomas.maes@student.hogent.be");
+        var student6 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "emma.peeters@student.hogent.be");
+        var student7 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "lucas.vandenberg@student.hogent.be");
+        var student8 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "liesbeth.vanwynsberghe@student.hogent.be");
+        var student9 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "nathan.devos@student.hogent.be");
+        var student10 = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == "olivia.declercq@student.hogent.be");
 
         // find widgets by type (created in WidgetsAsync)
         var newsWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "news");
@@ -381,7 +451,7 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         var gradesWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "grades");
         var linksWidget = await dbContext.Widgets.FirstOrDefaultAsync(w => w.TypeName == "links");
 
-        if (student1 == null || student2 == null || student3 == null ||
+        if (student1 == null || student2 == null || student3 == null || student4 == null || student5 == null || student6 == null || student7 == null || student8 == null || student9 == null || student10 == null ||
             newsWidget == null || menusWidget == null || scheduleWidget == null || gradesWidget == null || linksWidget == null)
         {
             // missing prerequisites; skip seeding user widgets
@@ -401,7 +471,56 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
             new UserWidget { Widget = newsWidget, UserId = student3.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
             new UserWidget { Widget = menusWidget, UserId = student3.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
             new UserWidget { Widget = scheduleWidget, UserId = student3.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
-            new UserWidget { Widget = gradesWidget, UserId = student3.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 }
+            new UserWidget { Widget = gradesWidget, UserId = student3.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+
+            // student4: all widgets
+            new UserWidget { Widget = newsWidget, UserId = student4.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student4.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student4.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student4.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = linksWidget, UserId = student4.Id, X = 0, Y = 24, Width = 12, Height = 4, MinWidth = 4 },
+
+            // student5: all widgets
+            new UserWidget { Widget = newsWidget, UserId = student5.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student5.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student5.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student5.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = linksWidget, UserId = student5.Id, X = 0, Y = 24, Width = 12, Height = 4, MinWidth = 4 },
+
+            // student6: all widgets
+            new UserWidget { Widget = newsWidget, UserId = student6.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student6.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student6.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student6.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = linksWidget, UserId = student6.Id, X = 0, Y = 24, Width = 12, Height = 4, MinWidth = 4 },
+
+            // student7: all widgets
+            new UserWidget { Widget = newsWidget, UserId = student7.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student7.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student7.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student7.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = linksWidget, UserId = student7.Id, X = 0, Y = 24, Width = 12, Height = 4, MinWidth = 4 },
+
+            // student8: all widgets
+            new UserWidget { Widget = newsWidget, UserId = student8.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student8.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student8.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student8.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = linksWidget, UserId = student8.Id, X = 0, Y = 24, Width = 12, Height = 4, MinWidth = 4 },
+
+            // student9: all widgets
+            new UserWidget { Widget = newsWidget, UserId = student9.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student9.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student9.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student9.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = linksWidget, UserId = student9.Id, X = 0, Y = 24, Width = 12, Height = 4, MinWidth = 4 },
+
+            // student10: all widgets
+            new UserWidget { Widget = newsWidget, UserId = student10.Id, X = 0, Y = 0, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = menusWidget, UserId = student10.Id, X = 0, Y = 6, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = scheduleWidget, UserId = student10.Id, X = 0, Y = 12, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = gradesWidget, UserId = student10.Id, X = 0, Y = 18, Width = 12, Height = 6, MinWidth = 4 },
+            new UserWidget { Widget = linksWidget, UserId = student10.Id, X = 0, Y = 24, Width = 12, Height = 4, MinWidth = 4 }
         );
 
         await dbContext.SaveChangesAsync();
