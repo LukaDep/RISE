@@ -24,7 +24,7 @@ public class MockScheduleService(ApplicationDbContext dbContext, ISessionContext
 
         var currentDirectory = Directory.GetCurrentDirectory();
 
-        _mockFilePath = Path.Combine(currentDirectory, "..", "Rise.Services", "Schedule", "MockData", "ScheduleMockdata.json");
+        _mockFilePath = Path.Combine(currentDirectory, "Schedule", "MockData", "ScheduleMockdata.json");
         if (!File.Exists(_mockFilePath))
         {
             Log.Warning("Mock data file not found at: {MockFilePath}", _mockFilePath);
