@@ -24,7 +24,8 @@ public class NewsServiceShould
                 Type = "Test",
                 PublishDate = DateTime.Now,
                 Content = "Test content 1",
-                Author = "Test Author 1"
+                Author = "Test Author 1",
+                ImageUrl = "https://example.com/image1.jpg"
             },
             new NewsArticle
             {
@@ -33,7 +34,8 @@ public class NewsServiceShould
                 Type = "Test",
                 PublishDate = DateTime.Now.AddMinutes(-10),
                 Content = "Test content 2",
-                Author = "Test Author 2"
+                Author = "Test Author 2",
+                ImageUrl = "https://example.com/image1.jpg"
             },
             new NewsArticle
             {
@@ -42,7 +44,8 @@ public class NewsServiceShould
                 Type = "Test",
                 PublishDate = DateTime.Now.AddHours(-1),
                 Content = "Test content 3",
-                Author = "Test Author 3"
+                Author = "Test Author 3",
+                ImageUrl = "https://example.com/image1.jpg"
             }
         );
         await dbContext.SaveChangesAsync();
@@ -80,7 +83,8 @@ public class NewsServiceShould
                 Type = "Test",
                 PublishDate = DateTime.Now,
                 Content = "Test content 1",
-                Author = "Test Author 1"
+                Author = "Test Author 1",
+                ImageUrl = "https://example.com/image1.jpg"
             },
             new NewsArticle
             {
@@ -89,7 +93,8 @@ public class NewsServiceShould
                 Type = "Test",
                 PublishDate = DateTime.Now.AddMinutes(-10),
                 Content = "Test content 2",
-                Author = "Test Author 2"
+                Author = "Test Author 2",
+                ImageUrl = "https://example.com/image1.jpg"
             },
             new NewsArticle
             {
@@ -98,7 +103,8 @@ public class NewsServiceShould
                 Type = "Test",
                 PublishDate = DateTime.Now.AddHours(-1),
                 Content = "Test content 3",
-                Author = "Test Author 3"
+                Author = "Test Author 3",
+                ImageUrl = "https://example.com/image1.jpg"
             }
         );
         await dbContext.SaveChangesAsync();
@@ -137,7 +143,8 @@ public class NewsServiceShould
             Type = "Test",
             PublishDate = DateTime.Now,
             Content = "Test content 1",
-            Author = "Test Author 1"
+            Author = "Test Author 1",
+            ImageUrl = "https://example.com/image1.jpg"
         };
 
         dbContext.NewsArticles.Add(newsArticle);
