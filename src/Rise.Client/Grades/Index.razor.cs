@@ -81,13 +81,21 @@ public partial class Index : ComponentBase
         Navigation.NavigateTo(uri);
     }
 
+    private static string NormalizeYear(string? y)
+    {
+        if (string.IsNullOrWhiteSpace(y)) return string.Empty;
+        var trimmed = y.Trim();
+        return trimmed.Contains('-') ? trimmed.Split('-')[0].Trim() : trimmed;
+    }
     private void ApplyFilters()
     {
         var query = Grades.AsQueryable();
 
         if (!string.IsNullOrWhiteSpace(selectedYear))
         {
-            query = query.Where(g => g.Year == selectedYear);
+
+            var selectedStart = NormalizeYear(selectedYear);
+            query = query.Where(g => NormalizeYear(g.Year) == selectedStart);
         }
 
         if (selectedSemester.HasValue)
