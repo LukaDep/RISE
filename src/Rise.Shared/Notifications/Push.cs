@@ -1,7 +1,7 @@
 namespace Rise.Shared.Notifications;
 
 /// <summary>
-/// Represents a static utility class containing request-related structures for products.
+/// Request wrappers for push notification operations.
 /// </summary>
 public static partial class Push
 {
@@ -16,6 +16,10 @@ public static partial class Push
         public const string News = "news";
     }
 
+    /// <summary>
+    /// Request to send a push notification.
+    /// Contains notification content (title, body, url) and optional targeting (userGuid) and categorization (notificationType).
+    /// </summary>
     public class Send
     {
         public Guid? userGuid { get; set; }

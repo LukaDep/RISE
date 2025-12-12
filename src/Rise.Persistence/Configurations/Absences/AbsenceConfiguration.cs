@@ -7,9 +7,14 @@ namespace Rise.Persistence.Configurations.Absences;
 
 /// <summary>
 /// Specific configuration for <see cref="Absence"/>.
+/// Configures property constraints for lecturer absence records.
 /// </summary>
 internal class AbsenceConfiguration : EntityConfiguration<Absence>
 {
+    /// <summary>
+    /// Configures the Absence entity properties including name, dates, and reason.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Absence.</param>
     public override void Configure(EntityTypeBuilder<Absence> builder)
     {
 

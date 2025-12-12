@@ -7,9 +7,14 @@ namespace Rise.Persistence.Configurations.Contact;
 
 /// <summary>
 /// Specific configuration for <see cref="Domain.Contact.Contact"/>.
+/// Configures property constraints and JSON serialization for campuses list.
 /// </summary>
 internal class ContactConfiguration : EntityConfiguration<Domain.Contact.Contact>
 {
+    /// <summary>
+    /// Configures the Contact entity properties including type, name, and JSON campuses list.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Contact.</param>
     public override void Configure(EntityTypeBuilder<Domain.Contact.Contact> builder)
     {
         base.Configure(builder);

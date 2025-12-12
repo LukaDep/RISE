@@ -5,19 +5,28 @@ namespace Rise.Server.Endpoints.Identity.Accounts;
 
 /// <summary>
 /// Login Endpoint.
-/// See https://fast-endpoints.com/
 /// </summary>
 /// <param name="signInManager"></param>
 public class Login(SignInManager<IdentityUser> signInManager) : Endpoint<AccountRequest.Login, Result>
 {
     private const bool UseCookies = true;
     private const bool UseSessionCookies = true;
+
+    /// <summary>
+    /// Configures the endpoint route and authorization.
+    /// </summary>
     public override void Configure()
     {
         Post("/api/identity/accounts/login");
         AllowAnonymous();
     }
 
+    /// <summary>
+    /// Authenticates a user with email and password, supporting two-factor authentication.
+    /// </summary>
+    /// <param name="req">The login request containing credentials.</param>
+    /// <param name="ctx">Cancellation token.</param>
+    /// <returns>A result indicating success or failure of the login attempt.</returns>
     public override async Task<Result> ExecuteAsync(AccountRequest.Login req, CancellationToken ctx)
     {
         var useCookieScheme = UseCookies || UseSessionCookies;

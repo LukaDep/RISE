@@ -4,8 +4,16 @@ using Rise.Domain.HomeWidgets;
 
 namespace Rise.Persistence.Configurations.Widgets;
 
+/// <summary>
+/// Entity Framework configuration for <see cref="Widget"/>.
+/// Configures the one-to-many relationship with UserWidget.
+/// </summary>
 internal class WidgetConfiguration : EntityConfiguration<Widget>
 {
+    /// <summary>
+    /// Configures the Widget entity including TypeName property and one-to-many relationship with UserWidgets.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Widget.</param>
     public override void Configure(EntityTypeBuilder<Widget> builder)
     {
         base.Configure(builder);

@@ -6,9 +6,14 @@ namespace Rise.Persistence.Configurations.Menu;
 
 /// <summary>
 /// Specific configuration for <see cref="MenuItem"/>.
+/// Configures property constraints and shadow foreign key for Menu relationship.
 /// </summary>
 internal class MenuItemConfiguration : EntityConfiguration<MenuItem>
 {
+    /// <summary>
+    /// Configures the MenuItem entity properties including name, description, type, and shadow MenuId foreign key.
+    /// </summary>
+    /// <param name="builder">The entity type builder for MenuItem.</param>
     public override void Configure(EntityTypeBuilder<MenuItem> builder)
     {
         base.Configure(builder);

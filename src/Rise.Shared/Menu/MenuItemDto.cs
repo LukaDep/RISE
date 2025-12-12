@@ -2,8 +2,15 @@ using Rise.Shared.Common;
 
 namespace Rise.Shared.Menu;
 
+/// <summary>
+/// Data transfer objects for menu items.
+/// </summary>
 public static class MenuItemDto
 {
+    /// <summary>
+    /// Represents a menu item for display and retrieval.
+    /// Contains item details including name, description, pricing, type, and dietary information.
+    /// </summary>
     public class Index
     {
         public required Guid Id { get; set; }

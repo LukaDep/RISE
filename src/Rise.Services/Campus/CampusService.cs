@@ -9,13 +9,17 @@ using Rise.Domain.Campus;
 
 namespace Rise.Services.Campus;
 
-// <summary>
-// Service for campus.
-// </summary>
-// <param name="dbContext"></param>
+/// <summary>
+/// Service for managing campus-related data.
+/// </summary>
 public class CampusService(ApplicationDbContext dbContext) : ICampusService
 {
-
+    /// <summary>
+    /// Retrieves a paginated list of campuses including their buildings.
+    /// </summary>
+    /// <param name="request">QueryRequest.SkipTake with Skip and Take for pagination</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result with CampusResponse.Index containing the list of campuses with their buildings</returns>
     public async Task<Result<CampusResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
     {
         var entities = await dbContext.Campuses
@@ -54,6 +58,12 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
         return Result.Success(new CampusResponse.Index { Campuses = campuses });
     }
 
+    /// <summary>
+    /// Retrieves a specific campus by ID including all buildings.
+    /// </summary>
+    /// <param name="id">The Guid of the campus to retrieve</param>
+    /// <param name="ct">CancellationToken to cancel the operation</param>
+    /// <returns>Result with CampusResponse.Get containing the campus, or NotFound if the campus does not exist</returns>
     public async Task<Result<CampusResponse.Get>> GetCampusByIdAsync(Guid id, CancellationToken ct = default)
     {
         var entitie = await dbContext.Campuses
@@ -93,6 +103,13 @@ public class CampusService(ApplicationDbContext dbContext) : ICampusService
         var response = new CampusResponse.Get { Campus = campus };
         return Result.Success(response);
     }
+
+    /// <summary>
+    /// Retrieves a specific building by building code.
+    /// </summary>
+    /// <param name="code">The building code of the building to retrieve</param>
+    /// <param name="ct">CancellationToken to cancel the operation</param>
+    /// <returns>Result with BuildingResponse.Get containing the building, or NotFound if the building does not exist</returns>
     public async Task<Result<BuildingResponse.Get>> GetBuildingByBuildingCodeAsync(string code, CancellationToken ct = default)
     {
         var query = dbContext.Buildings.AsQueryable();

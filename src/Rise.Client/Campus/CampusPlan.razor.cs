@@ -5,18 +5,37 @@ using Rise.Shared.Campus;
 
 namespace Rise.Client.Campus;
 
+/// <summary>
+/// Code-behind for the CampusPlan page component.
+/// Displays an interactive campus floor plan with building information.
+/// </summary>
 public partial class CampusPlan : ComponentBase
 {
+    /// <summary>Navigation manager for URL handling.</summary>
     [Inject] public required NavigationManager Navigation { get; set; }
+    
+    /// <summary>JavaScript runtime for interop calls.</summary>
     [Inject] public required IJSRuntime JS { get; set; }
+    
+    /// <summary>The campus ID to display.</summary>
     [Parameter] public required Guid campusId { get; set; }
+    
+    /// <summary>Return URL after viewing the campus plan.</summary>
     [SupplyParameterFromQuery(Name = "returnUrl")] public string returnUrlQuery { get; set; } = "campus";
+    
+    /// <summary>Service for campus data operations.</summary>
     [Inject] public required ICampusService CampusClientService { get; set; }
+    
+    /// <summary>Optional building code to highlight.</summary>
     [Parameter] public string? buildingCode { get; set; }
+    
     private CampusDto.Index? campus;
     private BuildingDto.Index? building;
     private string returnUrl = "/campus";
 
+    /// <summary>
+    /// Initializes the component by loading campus and building data.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         if (!string.IsNullOrWhiteSpace(returnUrlQuery))
@@ -47,6 +66,10 @@ public partial class CampusPlan : ComponentBase
 
     }
 
+    /// <summary>
+    /// Handles post-render logic to initialize the Leaflet map and display buildings.
+    /// </summary>
+    /// <param name="firstRender">True if this is the first render.</param>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         // building id from de url

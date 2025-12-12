@@ -5,13 +5,23 @@ using WebPush;
 
 namespace Rise.Client.Account.Notificationsettings;
 
+/// <summary>
+/// Code-behind for the Notification Settings Index page component.
+/// Allows users to configure their notification preferences.
+/// </summary>
 public partial class Index : ComponentBase
 {
+    /// <summary>Service for notification preferences operations.</summary>
     [Inject]
     public required INotificationPreferencesService NotificationPreferencesService { get; set; }
+    
     private NotificationPreferencesDTO.Index? notificationPreferences;
     private bool isLoading = true;
     private string? errorMessage;
+    
+    /// <summary>
+    /// Loads notification preferences on component initialization.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         try
@@ -26,6 +36,9 @@ public partial class Index : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Loads user notification preferences from the service.
+    /// </summary>
     private async Task LoadNotificationPreferencesAsync()
     {
         isLoading = true;
@@ -49,8 +62,23 @@ public partial class Index : ComponentBase
     }
 
     /// <summary>
-    /// Wordt aangeroepen telkens een toggle verandert.
+    /// Handles changes to notification preference toggles.
+    /// This method is called whenever a user toggles any notification setting.
+    /// 
+    /// For the main IsEnabled toggle:
+    /// - When enabled: Creates a new push subscription with the browser and server.
+    ///   This involves generating VAPID keys and registering the subscription endpoint.
+    /// - When disabled: Unsubscribes from push notifications, removing the subscription
+    ///   from both browser and server.
+    /// 
+    /// For category toggles (Grades, Schedule, Campus, News):
+    /// - Updates the specific preference value locally and immediately saves to the backend.
+    /// 
+    /// All changes are persisted to the backend via the EditAsync method.
+    /// If any operation fails, the toggle is reverted to its previous state and an error is shown.
     /// </summary>
+    /// <param name="fieldName">The name of the preference field that changed (e.g., "IsEnabled", "GradesNotifications").</param>
+    /// <param name="value">The new boolean value of the toggle.</param>
     private async Task OnNotificationChanged(string fieldName, bool value)
     {
         if (notificationPreferences == null)

@@ -5,9 +5,16 @@ using Rise.Domain.Restos;
 
 namespace Rise.Persistence.Configurations.Restos;
 
+/// <summary>
+/// Entity Framework configuration for <see cref="Resto"/>.
+/// Configures property constraints and JSON serialization for opening hours and kitchen types.
+/// </summary>
 internal class RestoConfiguration : EntityConfiguration<Resto>
 {
-
+    /// <summary>
+    /// Configures the Resto entity properties including JSON columns for opening hours and kitchen types.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Resto.</param>
     public override void Configure(EntityTypeBuilder<Resto> builder)
     {
         base.Configure(builder);

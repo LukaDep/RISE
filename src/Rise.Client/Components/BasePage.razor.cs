@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace Rise.Client.Components;
 
+/// <summary>
+/// Base page layout component with header and content areas.
+/// Provides a consistent page structure across the application.
+/// </summary>
 public partial class BasePage : ComponentBase
 {
     /// <summary>

@@ -6,9 +6,14 @@ namespace Rise.Persistence.Configurations.Deadlines;
 
 /// <summary>
 /// Specific configuration for <see cref="Deadlines"/>.
+/// Configures property constraints and foreign key relationship to IdentityUser.
 /// </summary>
 internal class DeadlineConfiguration : EntityConfiguration<Domain.Deadlines.Deadline>
 {
+    /// <summary>
+    /// Configures the Deadline entity properties including title, dates, and user foreign key with cascade delete.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Deadline.</param>
     public override void Configure(EntityTypeBuilder<Domain.Deadlines.Deadline> builder)
     {
         base.Configure(builder);

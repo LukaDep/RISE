@@ -6,6 +6,10 @@ using Rise.Shared.News;
 
 namespace Rise.Client.News;
 
+/// <summary>
+/// Code-behind for the News Index page component.
+/// Displays a searchable and filterable list of news articles with infinite scroll.
+/// </summary>
 public partial class Index
 {
     ElementReference _filterInput;
@@ -13,18 +17,28 @@ public partial class Index
 
     private IEnumerable<NewsDto.Index>? _news;
 
+    /// <summary>Service for news data operations.</summary>
     [Inject] public required INewsService NewsService { get; set; }
+    
+    /// <summary>Navigation manager for URL handling.</summary>
     [Inject] public NavigationManager NavigationManager { get; set; } = null!;
 
+    /// <summary>Search term from query string.</summary>
     [Parameter, EditorRequired]
     [SupplyParameterFromQuery]
     public string? SearchTerm { get; set; }
 
+    /// <summary>Start date filter from query string.</summary>
     [Parameter, SupplyParameterFromQuery]
     public DateTime? StartDate { get; set; }
+    
+    /// <summary>End date filter from query string.</summary>
     [Parameter, SupplyParameterFromQuery]
     public DateTime? EndDate { get; set; }
+    
+    /// <summary>JavaScript runtime for interop calls.</summary>
     [Inject] public required IJSRuntime JSRuntime { get; set; }
+    
     private int _skip = 0;
     private int _take = 10;
     private int _totalCount;
@@ -49,6 +63,9 @@ public partial class Index
     private DateTime? _startDate;
     private DateTime? _endDate;
 
+    /// <summary>
+    /// Loads news data when query parameters change.
+    /// </summary>
     protected override async Task OnParametersSetAsync()
     {
         // copy nullable query params locally
@@ -72,6 +89,9 @@ public partial class Index
         _skip = 0;
     }
 
+    /// <summary>
+    /// Initializes local filter state from query parameters.
+    /// </summary>
     protected override void OnParametersSet()
     {
         _searchTerm = string.IsNullOrWhiteSpace(SearchTerm) ? null : SearchTerm?.Trim();
@@ -80,12 +100,19 @@ public partial class Index
 
     }
 
+    /// <summary>
+    /// Handles search term changes and triggers filtering.
+    /// </summary>
+    /// <param name="value">The new search term value.</param>
     private void SearchTermChanged(string value)
     {
         _searchTerm = string.IsNullOrWhiteSpace(value) ? null : value.Trim();
         FilterNews();
     }
 
+    /// <summary>
+    /// Updates the URL with current filter parameters and navigates.
+    /// </summary>
     private void FilterNews()
     {
         var parameters = new Dictionary<string, string?>();
@@ -115,6 +142,9 @@ public partial class Index
         NavigationManager.NavigateTo(uri);
     }
 
+    /// <summary>
+    /// Loads additional news articles for infinite scroll pagination.
+    /// </summary>
     private async Task LoadMoreNews()
     {
         _skip += _take;
@@ -135,6 +165,10 @@ public partial class Index
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Initializes scroll-to-top functionality after first render.
+    /// </summary>
+    /// <param name="firstRender">Whether this is the first render.</param>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && !_initialized)
@@ -152,6 +186,10 @@ public partial class Index
         }
     }
 
+    /// <summary>
+    /// Handles date range filter selection changes.
+    /// </summary>
+    /// <param name="value">The selected date range option (today, week, month, or empty).</param>
     private void OnDateRangeChanged(string? value)
     {
         _selectedDateRange = value;

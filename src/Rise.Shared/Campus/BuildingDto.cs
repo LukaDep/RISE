@@ -1,7 +1,14 @@
 namespace Rise.Shared.Campus;
 
+/// <summary>
+/// Data transfer objects for building information.
+/// </summary>
 public class BuildingDto
 {
+    /// <summary>
+    /// Represents a building for display and retrieval.
+    /// Contains building details including name, address, type, building code, and location coordinates.
+    /// </summary>
     public class Index
     {
         public required Guid Id { get; set; }
@@ -12,7 +19,5 @@ public class BuildingDto
         public required string BuildingCode { get; set; }
         public double? Latitude { get; set; }
         public double? Longitude { get; set; }
-
-        // public List<ClassroomDto>? ClassRooms { get; set; }
     }
 }

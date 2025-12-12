@@ -3,8 +3,16 @@ using Rise.Domain.News;
 
 namespace Rise.Persistence.Configurations.News;
 
+/// <summary>
+/// Entity Framework configuration for <see cref="NewsArticle"/>.
+/// Configures property constraints for title, description, content, and other fields.
+/// </summary>
 internal class NewsConfiguration : EntityConfiguration<NewsArticle>
 {
+    /// <summary>
+    /// Configures the NewsArticle entity properties including max lengths and required fields.
+    /// </summary>
+    /// <param name="builder">The entity type builder for NewsArticle.</param>
     public override void Configure(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<NewsArticle> builder)
     {
         base.Configure(builder);

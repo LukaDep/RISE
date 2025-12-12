@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace Rise.Client.Components
 {
+    /// <summary>
+    /// Back navigation button component with optional text.
+    /// Renders a back arrow icon that navigates to the specified URL.
+    /// </summary>
     public partial class BackButton : ComponentBase
     {
         /// <summary>

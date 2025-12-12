@@ -24,12 +24,21 @@ public class GetSentNotificationsRequest
 public class GetSentNotifications(ISentNotificationService sentNotificationService)
     : Endpoint<GetSentNotificationsRequest, Result<SentNotificationResponse.Index>>
 {
+    /// <summary>
+    /// Configures the endpoint route and authorization.
+    /// </summary>
     public override void Configure()
     {
         Get("/api/notifications/sent");
         AllowAnonymous();
     }
 
+    /// <summary>
+    /// Retrieves a paginated list of sent notifications for the current user.
+    /// </summary>
+    /// <param name="req">The request containing pagination parameters.</param>
+    /// <param name="ct">Cancellation token.</param>
+    /// <returns>A result containing the list of sent notifications.</returns>
     public override async Task<Result<SentNotificationResponse.Index>> ExecuteAsync(GetSentNotificationsRequest req, CancellationToken ct)
     {
         // Ensure pagination values are within reasonable bounds

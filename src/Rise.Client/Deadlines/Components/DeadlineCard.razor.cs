@@ -3,17 +3,25 @@ using Rise.Shared.Deadlines;
 
 namespace Rise.Client.Deadlines.Components
 {
+    /// <summary>
+    /// Deadline card component that displays deadline information.
+    /// Shows deadline title, due date, and urgency indicator.
+    /// </summary>
     public partial class DeadlineCard
     {
+        /// <summary>The deadline data to display.</summary>
         [Parameter] public required DeadlineDto.Index Deadline { get; set; }
 
         private int DaysRemaining { get; set; }
 
         /// <summary>
-        /// Indicates if the deadline has expired (EndDate is in the past)
+        /// Indicates if the deadline has expired (EndDate is in the past).
         /// </summary>
         private bool IsExpired { get; set; }
 
+        /// <summary>
+        /// Calculates days remaining and expiration status.
+        /// </summary>
         protected override void OnInitialized()
         {
             var now = DateTime.Now;

@@ -7,11 +7,17 @@ using Rise.Shared.News;
 namespace Rise.Services.News;
 
 /// <summary>
-/// Service for News.
+/// Service for managing news articles.
 /// </summary>
-/// <param name="dbContext"></param>
 public class NewsService(ApplicationDbContext dbContext) : INewsService
 {
+    /// <summary>
+    /// Retrieves a filtered and paginated list of news articles.
+    /// Supports searching by title and author, sorting, and filtering by date range.
+    /// </summary>
+    /// <param name="request">QueryRequest.DateRange with SearchTerm, OrderBy, OrderDescending, StartDate, EndDate, Skip and Take</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result with NewsResponse.Index containing the list of news articles and the total count</returns>
     public async Task<Result<NewsResponse.Index>> GetIndexAsync(QueryRequest.DateRange request, CancellationToken ctx = default)
     {
         var query = dbContext.NewsArticles.AsQueryable();
@@ -89,6 +95,12 @@ public class NewsService(ApplicationDbContext dbContext) : INewsService
         );
     }
 
+    /// <summary>
+    /// Retrieves a specific news article by ID.
+    /// </summary>
+    /// <param name="id">The Guid of the news article to retrieve</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result with NewsResponse.Get containing the news article, or NotFound if the article does not exist</returns>
     public async Task<Result<NewsResponse.Get>> GetByIdAsync(Guid id, CancellationToken ctx = default)
     {
         var query = dbContext.NewsArticles.AsQueryable();

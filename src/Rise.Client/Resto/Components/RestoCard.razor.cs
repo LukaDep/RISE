@@ -3,18 +3,30 @@ using Rise.Shared.Resto;
 
 namespace Rise.Client.Resto.Components;
 
+/// <summary>
+/// Restaurant card component that displays restaurant information.
+/// Shows name, location, and expandable opening hours.
+/// </summary>
 public partial class RestoCard
 {
+    /// <summary>The restaurant data to display.</summary>
     [Parameter, EditorRequired]
     public RestoDto.Index Resto { get; set; } = default!;
 
     private bool showOpeningHours = false;
 
+    /// <summary>
+    /// Toggles the opening hours section visibility.
+    /// </summary>
     private void ToggleOpeningHours()
     {
         showOpeningHours = !showOpeningHours;
     }
 
+    /// <summary>
+    /// Gets the opening hours sorted by day of week (Monday first, Sunday last).
+    /// </summary>
+    /// <returns>Sorted collection of day and hours pairs.</returns>
     private IEnumerable<KeyValuePair<DayOfWeek, string>> GetSortedOpeningHours()
     {
         if (Resto.OpeningHours == null) return Enumerable.Empty<KeyValuePair<DayOfWeek, string>>();
@@ -26,11 +38,21 @@ public partial class RestoCard
         return sorted;
     }
 
+    /// <summary>
+    /// Checks if the specified day is today.
+    /// </summary>
+    /// <param name="day">The day of week to check.</param>
+    /// <returns>True if the day is today, false otherwise.</returns>
     private bool IsToday(DayOfWeek day)
     {
         return day == DateTime.Now.DayOfWeek;
     }
 
+    /// <summary>
+    /// Gets the localized name for a day of the week.
+    /// </summary>
+    /// <param name="day">The day of week.</param>
+    /// <returns>Localized day name.</returns>
     private string GetDayName(DayOfWeek day)
     {
         return day switch
@@ -46,11 +68,21 @@ public partial class RestoCard
         };
     }
 
+    /// <summary>
+    /// Gets the display text for opening hours, showing "Closed" if empty.
+    /// </summary>
+    /// <param name="hours">The opening hours string.</param>
+    /// <returns>The hours string or localized "Closed" text.</returns>
     private string GetOpeningHoursDisplay(string? hours)
     {
         return string.IsNullOrWhiteSpace(hours) ? L["Resto.Closed"] : hours;
     }
 
+    /// <summary>
+    /// Formats the next opening time for display.
+    /// </summary>
+    /// <param name="time">The next opening time.</param>
+    /// <returns>Formatted time string with day if not today.</returns>
     private string GetNextOpeningDisplay(DateTime? time)
     {
         if (!time.HasValue) return "";
@@ -60,12 +92,18 @@ public partial class RestoCard
             return $"{GetDayName(time.Value.DayOfWeek)} {time.Value.ToString("HH:mm")}";
     }
 
+    /// <summary>
+    /// Updates the restaurant status when parameters change.
+    /// </summary>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         UpdateRestoStatus();
     }
 
+    /// <summary>
+    /// Calculates and updates the restaurant's current open status and next opening/closing times.
+    /// </summary>
     private void UpdateRestoStatus()
     {
         if (Resto.OpeningHours == null || Resto.OpeningHours.Count == 0)
@@ -119,6 +157,11 @@ public partial class RestoCard
         Resto.NextOpeningTime = GetNextOpeningTime(now);
     }
 
+    /// <summary>
+    /// Finds the next opening time within the next 7 days.
+    /// </summary>
+    /// <param name="now">The current date and time.</param>
+    /// <returns>The next opening time, or null if no opening found in 7 days.</returns>
     private DateTime? GetNextOpeningTime(DateTime now)
     {
         // Loop maximaal 7 dagen vooruit

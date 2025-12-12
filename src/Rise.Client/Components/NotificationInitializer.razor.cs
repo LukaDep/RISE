@@ -4,17 +4,30 @@ using Rise.Shared.Notifications;
 
 namespace Rise.Client.Components;
 
+/// <summary>
+/// Component that manages push notification initialization and permission prompts.
+/// Handles browser subscription creation and server synchronization.
+/// </summary>
 public partial class NotificationInitializer
 {
+    /// <summary>JavaScript runtime for interop.</summary>
     [Inject]
     public IJSRuntime JS { get; set; } = default!;
+    
+    /// <summary>Service for notification preferences.</summary>
     [Inject]
     public required INotificationPreferencesService NotificationPreferencesService { get; set; }
+    
+    /// <summary>VAPID public key for web push notifications.</summary>
     [Parameter]
     public string VapIdPublicKey { get; set; } = "BCW-qlnpFfIjUDSN5cg0JUah1ktLevpGuU0HgBLvj76rpPinTndjtmEjZriWPsooBzKIJ4oEsTs8c1yAyCHBwGI";
 
+    /// <summary>Whether to show the notification permission prompt.</summary>
     public bool Show { get; set; } = false;
 
+    /// <summary>
+    /// Checks notification state on first render.
+    /// </summary>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -24,6 +37,9 @@ public partial class NotificationInitializer
         }
     }
 
+    /// <summary>
+    /// Checks the notification permission state and shows prompt if needed.
+    /// </summary>
     private async Task CheckStateAsync()
     {
         var permission = await JS.InvokeAsync<string>("eval", "Notification.permission");
@@ -51,6 +67,9 @@ public partial class NotificationInitializer
         }
     }
 
+    /// <summary>
+    /// Handles user denial of notification permissions.
+    /// </summary>
     private Task Deny()
     {
         Console.WriteLine("NotificationInitializer: User denied notifications");
@@ -59,6 +78,9 @@ public partial class NotificationInitializer
         return Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Handles user acceptance of notification permissions and creates subscription.
+    /// </summary>
     private async Task Allow()
     {
         try

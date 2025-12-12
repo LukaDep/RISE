@@ -1,7 +1,14 @@
 namespace Rise.Shared.Menu
 {
+    /// <summary>
+    /// Data transfer objects for daily menus.
+    /// </summary>
     public static class MenuDto
     {
+        /// <summary>
+        /// Represents a menu for display and retrieval.
+        /// Contains the menu date, associated restaurant, and list of menu items.
+        /// </summary>
         public class Index
         {
             public required Guid Id { get; set; }
@@ -10,6 +17,4 @@ namespace Rise.Shared.Menu
             public required List<MenuItemDto.Index> MenuItems { get; set; }
         }
     }
-
-
 }

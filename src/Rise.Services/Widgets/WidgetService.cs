@@ -8,14 +8,22 @@ namespace Rise.Services.Widgets;
 
 public class WidgetService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : IWidgetService
 {
-
+    /// <summary>
+    /// Retrieves the current user's ID from the session context.
+    /// Returns an empty string if the user is not authenticated.
+    /// </summary>
     private string GetCurrentUserId()
     {
         var userId = sessionContextProvider.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
         return (string.IsNullOrEmpty(userId) ? null : userId) ?? string.Empty;
     }
 
-
+    /// <summary>
+    /// Retrieves all widgets for the current user.
+    /// Returns an empty list if the user is not logged in.
+    /// </summary>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result with WidgetResponse.Index containing the list of UserWidgets</returns>
     public async Task<Result<WidgetResponse.Index>> GetIndexByUserIdAsync(CancellationToken ctx)
     {
         var userId = GetCurrentUserId();
@@ -54,6 +62,14 @@ public class WidgetService(ApplicationDbContext dbContext, ISessionContextProvid
         });
     }
 
+    /// <summary>
+    /// Updates the user's widgets based on the provided request.
+    /// Updates existing widgets, removes missing widgets, and adds new ones.
+    /// Validates that the user owns the widgets being modified.
+    /// </summary>
+    /// <param name="request">WidgetRequest.Update with the list of UserWidgets to update</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful update, Result.Forbidden when attempting to modify widgets owned by others, Result.NotFound for unknown widget types</returns>
     public async Task<Result> UpdateUserWidgetsAsync(WidgetRequest.Update request,
         CancellationToken ctx)
     {

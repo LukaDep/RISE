@@ -1,7 +1,14 @@
 namespace Rise.Domain.Grades;
 
+/// <summary>
+/// Represents a student grade record for an assignment, exam, or activity.
+/// Contains grade details, feedback, and associated course information.
+/// </summary>
 public class Grade : Entity
 {
+    /// <summary>
+    /// The name of the graded assignment or activity.
+    /// </summary>
     private string _name = string.Empty;
     public required string Name
     {
@@ -9,6 +16,9 @@ public class Grade : Entity
         set => _name = Guard.Against.NullOrWhiteSpace(value);
     }
 
+    /// <summary>
+    /// The type of activity (e.g., exam, assignment, project).
+    /// </summary>
     private string _activityType = string.Empty;
     public required string ActivityType
     {
@@ -16,6 +26,9 @@ public class Grade : Entity
         set => _activityType = Guard.Against.NullOrWhiteSpace(value);
     }
 
+    /// <summary>
+    /// The maximum points achievable for this grade.
+    /// </summary>
     private double? _maxPoints;
     public double? MaxPoints
     {
@@ -23,6 +36,9 @@ public class Grade : Entity
         set => _maxPoints = value;
     }
 
+    /// <summary>
+    /// The score achieved by the student.
+    /// </summary>
     private double? _score;
     public double? Score
     {
@@ -30,6 +46,9 @@ public class Grade : Entity
         set => _score = value;
     }
 
+    /// <summary>
+    /// Optional feedback provided by the instructor.
+    /// </summary>
     private string? _feedback;
     public string? Feedback
     {
@@ -37,6 +56,9 @@ public class Grade : Entity
         set => _feedback = value;
     }
 
+    /// <summary>
+    /// The date when the assignment was submitted. Stored in UTC.
+    /// </summary>
     private DateTime? _submissionDate;
     public DateTime? SubmissionDate
     {
@@ -46,6 +68,9 @@ public class Grade : Entity
             : null;
     }
 
+    /// <summary>
+    /// The date of the grade record. Stored in UTC.
+    /// </summary>
     private DateTime _date;
     public DateTime Date
     {
@@ -57,6 +82,9 @@ public class Grade : Entity
         }
     }
 
+    /// <summary>
+    /// The identifier of the course this grade belongs to.
+    /// </summary>
     private string? _courseId;
     public string? CourseId
     {
@@ -64,6 +92,9 @@ public class Grade : Entity
         set => _courseId = value;
     }
 
+    /// <summary>
+    /// The name of the course.
+    /// </summary>
     private string? _courseName;
     public string? CourseName
     {
@@ -71,6 +102,9 @@ public class Grade : Entity
         set => _courseName = value;
     }
 
+    /// <summary>
+    /// The academic year of the course.
+    /// </summary>
     private string? _year;
     public string? Year
     {
@@ -78,6 +112,9 @@ public class Grade : Entity
         set => _year = value;
     }
 
+    /// <summary>
+    /// The semester number of the course.
+    /// </summary>
     private int? _semester;
     public int? Semester
     {
@@ -85,5 +122,8 @@ public class Grade : Entity
         set => _semester = value;
     }
 
+    /// <summary>
+    /// The unique identifier of the student who owns this grade.
+    /// </summary>
     public string? UserId { get; set; }
 }

@@ -5,8 +5,18 @@ using Rise.Shared.Common;
 
 namespace Rise.Client.Schedule;
 
+/// <summary>
+/// Client-side service for schedule operations.
+/// </summary>
+/// <param name="httpClient">The HTTP client for API communication.</param>
 public class ScheduleClientService(HttpClient httpClient) : IScheduleService
 {
+    /// <summary>
+    /// Retrieves schedule data within the specified date range.
+    /// </summary>
+    /// <param name="req">The request containing date range and filter options.</param>
+    /// <param name="ctx">Cancellation token.</param>
+    /// <returns>A result containing the schedule data, or an error if unauthorized.</returns>
     public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.DateRange req, CancellationToken ctx = default)
     {
         var queryParams = new List<string>();

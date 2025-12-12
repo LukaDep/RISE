@@ -10,8 +10,17 @@ using WebPush;
 
 namespace Rise.Services.Notifications;
 
+/// <summary>
+/// Service for managing notification preferences and push subscriptions.
+/// </summary>
 public class NotificationPreferencesService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider, ISentNotificationService sentNotificationService) : INotificationPreferencesService
 {
+    /// <summary>
+    /// Retrieves the notification preferences for the current user.
+    /// Creates default preferences if they don't exist yet.
+    /// </summary>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result with NotificationPreferencesResponse.Index containing preferences and subscription status, or Unauthorized if not logged in</returns>
     public async Task<Result<NotificationPreferencesResponse.Index>> GetUserPreferencesByIdAsync(CancellationToken ctx = default)
     {
         try
@@ -95,6 +104,12 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
+    /// <summary>
+    /// Updates the notification preferences for the current user.
+    /// </summary>
+    /// <param name="req">NotificationPreferencesRequest.Edit with the new preference settings</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful update, Unauthorized if not logged in, NotFound if preferences don't exist</returns>
     public async Task<Result> EditAsync(NotificationPreferencesRequest.Edit req, CancellationToken ctx = default)
     {
         try
@@ -128,6 +143,12 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
+    /// <summary>
+    /// Registers or updates a push subscription for the current user.
+    /// </summary>
+    /// <param name="req">PushSubscriptionRequest.Create with endpoint and keys</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful registration, Unauthorized if not logged in</returns>
     public async Task<Result> Subscribe(PushSubscriptionRequest.Create req, CancellationToken ctx = default)
     {
         try
@@ -167,6 +188,11 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
+    /// <summary>
+    /// Removes all push subscriptions for the current user.
+    /// </summary>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful removal, Unauthorized if not logged in</returns>
     public async Task<Result> Unsubscribe(CancellationToken ctx = default)
     {
         try
@@ -188,6 +214,13 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
+    /// <summary>
+    /// Sends a test push notification to a specific user or to all users.
+    /// Saves the sent notification with delivery status.
+    /// </summary>
+    /// <param name="req">Push.Send with userGuid (null for all users), title, body, url and notificationType</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful send</returns>
     public async Task<Result> SendTestToUser(Push.Send req, CancellationToken ctx = default)
     {
         try
@@ -243,13 +276,13 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
     }
 
     /// <summary>
-    /// Sends a push notification to a specific subscription.
+    /// Sends a push notification to a specific subscription via WebPush.
     /// </summary>
-    /// <param name="sub">The push subscription to send to.</param>
-    /// <param name="title">The notification title.</param>
-    /// <param name="body">The notification body.</param>
-    /// <param name="url">Optional URL for the notification.</param>
-    /// <returns>True if the notification was successfully sent, false otherwise.</returns>
+    /// <param name="sub">The PushSubscription to send to</param>
+    /// <param name="title">The notification title</param>
+    /// <param name="body">The notification body</param>
+    /// <param name="url">Optional URL to open when clicking the notification</param>
+    /// <returns>True on successful send, false on failure or invalid subscription</returns>
     public async Task<bool> SendToSubscription(PushSubscription sub, string title, string body, string? url = null)
     {
         var client = new WebPushClient();
@@ -288,6 +321,15 @@ public class NotificationPreferencesService(ApplicationDbContext dbContext, ISes
         }
     }
 
+    /// <summary>
+    /// Sends a push notification to all users with an active subscription.
+    /// Saves the sent notification for each user with delivery status.
+    /// </summary>
+    /// <param name="title">The notification title</param>
+    /// <param name="body">The notification body</param>
+    /// <param name="url">Optional URL to open when clicking the notification</param>
+    /// <param name="notificationType">Optional notification type</param>
+    /// <returns>Result.Success after sending to all users</returns>
     public async Task<Result> SendTestToAllUsers(string title, string body, string? url = null, string? notificationType = null)
     {
         try

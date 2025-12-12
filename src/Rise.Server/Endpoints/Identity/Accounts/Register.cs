@@ -5,13 +5,15 @@ using Rise.Shared.Identity.Accounts;
 namespace Rise.Server.Endpoints.Identity.Accounts;
 
 /// <summary>
-/// Register a new user,
-/// See https://fast-endpoints.com/
+/// Register a new user.
 /// </summary>
 /// <param name="userManager"></param>
 /// <param name="userStore"></param>
 public class Register(UserManager<IdentityUser> userManager, IUserStore<IdentityUser> userStore) : Endpoint<AccountRequest.Register, Result>
 {
+    /// <summary>
+    /// Configures the endpoint route and authorization.
+    /// </summary>
     public override void Configure()
     {
         Post("/api/identity/accounts/register");
@@ -19,6 +21,12 @@ public class Register(UserManager<IdentityUser> userManager, IUserStore<Identity
                           // Roles(AppRoles.Administrator);
     }
 
+    /// <summary>
+    /// Registers a new user account with the provided email and password.
+    /// </summary>
+    /// <param name="req">The registration request containing email and password.</param>
+    /// <param name="ctx">Cancellation token.</param>
+    /// <returns>A result indicating success or failure of the registration.</returns>
     public override async Task<Result> ExecuteAsync(AccountRequest.Register req, CancellationToken ctx)
     {
         if (!userManager.SupportsUserEmail)

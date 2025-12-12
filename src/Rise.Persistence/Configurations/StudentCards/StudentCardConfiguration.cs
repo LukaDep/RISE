@@ -7,9 +7,15 @@ namespace Rise.Persistence.Configurations.StudentCards;
 
 /// <summary>
 /// Configuration for <see cref="StudentCard"/>.
+/// Configures property constraints and relationships for student identification cards.
 /// </summary>
 internal class StudentCardConfiguration : EntityConfiguration<StudentCard>
 {
+    /// <summary>
+    /// Configures the StudentCard entity including unique index on PersonalNumber,
+    /// foreign key to IdentityUser with cascade delete, and personal data properties.
+    /// </summary>
+    /// <param name="builder">The entity type builder for StudentCard.</param>
     public override void Configure(EntityTypeBuilder<StudentCard> builder)
     {
         base.Configure(builder);

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Rise.Persistence;
 using Rise.Shared.Common;
 using Rise.Shared.Events;
@@ -11,8 +11,18 @@ using System.Xml.Linq;
 
 namespace Rise.Services.Events
 {
+    /// <summary>
+    /// Service for managing events.
+    /// </summary>
     public class EventService(ApplicationDbContext dbContext) : IEventService
     {
+        /// <summary>
+        /// Retrieves a filtered and paginated list of events.
+        /// Supports searching by type and title, sorting, and filtering by event type.
+        /// </summary>
+        /// <param name="request">QueryRequest.SkipTake with SearchTerm, OrderBy, Filters, Skip and Take</param>
+        /// <param name="ctx">CancellationToken to cancel the operation</param>
+        /// <returns>Result with EventResponse.Index containing the list of events</returns>
         public async Task<Result<EventResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
         {
 

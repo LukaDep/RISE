@@ -1,26 +1,33 @@
 namespace Rise.Shared.Notifications;
 
+/// <summary>
+/// Request wrappers for notification preferences operations.
+/// </summary>
 public static partial class NotificationPreferencesRequest
 {
+    /// <summary>
+    /// Request to update notification preferences.
+    /// Contains flags for each notification category.
+    /// </summary>
     public class Edit
     {
         /// <summary>
-        /// Meldingen bij nieuwe of gewijzigde cijfers.
+        /// Notifications for new or updated grades.
         /// </summary>
         public bool GradesNotifications { get; set; }
 
         /// <summary>
-        /// Meldingen over rooster- of planningswijzigingen.
+        /// Notifications for schedule or planning changes.
         /// </summary>
         public bool ScheduleNotifications { get; set; }
 
         /// <summary>
-        /// Meldingen over campusgerelateerde aankondigingen.
+        /// Notifications for campus-related announcements.
         /// </summary>
         public bool CampusNotifications { get; set; }
 
         /// <summary>
-        /// Meldingen over nieuws of algemene updates.
+        /// Notifications for news or general updates.
         /// </summary>
         public bool NewsNotifications { get; set; }
     }

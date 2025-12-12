@@ -6,9 +6,14 @@ namespace Rise.Persistence.Configurations.Menu;
 
 /// <summary>
 /// Specific configuration for <see cref="Domain.Menu.Menu"/>.
+/// Configures the one-to-many relationship with MenuItems.
 /// </summary>
 internal class MenuConfiguration : EntityConfiguration<Domain.Menu.Menu>
 {
+    /// <summary>
+    /// Configures the Menu entity properties and one-to-many relationship with MenuItems using cascade delete.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Menu.</param>
     public override void Configure(EntityTypeBuilder<Domain.Menu.Menu> builder)
     {
         base.Configure(builder);

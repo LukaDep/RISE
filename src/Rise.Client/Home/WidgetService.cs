@@ -4,8 +4,17 @@ using Rise.Shared.Widgets;
 
 namespace Rise.Client.Home;
 
+/// <summary>
+/// Client-side service for widget operations.
+/// </summary>
+/// <param name="httpClient">The HTTP client for API communication.</param>
 public class WidgetService(HttpClient httpClient) : IWidgetService
 {
+    /// <summary>
+    /// Retrieves all widgets configured for the current user.
+    /// </summary>
+    /// <param name="ctx">Cancellation token.</param>
+    /// <returns>A result containing the user's widget configuration, or an error if unauthorized.</returns>
     public async Task<Result<WidgetResponse.Index>> GetIndexByUserIdAsync(CancellationToken ctx = default)
     {
 
@@ -23,6 +32,12 @@ public class WidgetService(HttpClient httpClient) : IWidgetService
 
     }
 
+    /// <summary>
+    /// Updates the widget configuration for the current user.
+    /// </summary>
+    /// <param name="request">The update request containing the new widget configuration.</param>
+    /// <param name="ctx">Cancellation token.</param>
+    /// <returns>A result indicating success or failure.</returns>
     public async Task<Result> UpdateUserWidgetsAsync(WidgetRequest.Update request, CancellationToken ctx = default)
     {
         try

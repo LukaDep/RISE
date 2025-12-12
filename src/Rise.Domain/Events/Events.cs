@@ -1,7 +1,14 @@
 ﻿namespace Rise.Domain.Events;
 
+/// <summary>
+/// Represents an event or activity.
+/// Contains event details including title, time period, location, type, and registration information.
+/// </summary>
 public class Event : Entity
 {
+    /// <summary>
+    /// The title of the event.
+    /// </summary>
     private string _title = string.Empty;
     public required string Title
     {
@@ -9,6 +16,9 @@ public class Event : Entity
         set => _title = Guard.Against.NullOrWhiteSpace(value);
     }
 
+    /// <summary>
+    /// The start date and time of the event. Stored in UTC.
+    /// </summary>
     private DateTime _startDateTime;
     public DateTime StartDateTime
     {
@@ -21,6 +31,9 @@ public class Event : Entity
         }
     }
 
+    /// <summary>
+    /// The end date and time of the event. Stored in UTC.
+    /// </summary>
     private DateTime _endDateTime;
     public DateTime EndDateTime
     {
@@ -32,6 +45,9 @@ public class Event : Entity
         }
     }
 
+    /// <summary>
+    /// The location where the event takes place.
+    /// </summary>
     private string _location = string.Empty;
     public required string Location
     {
@@ -39,6 +55,9 @@ public class Event : Entity
         set => _location = Guard.Against.NullOrWhiteSpace(value);
     }
 
+    /// <summary>
+    /// Optional URL for event registration.
+    /// </summary>
     private string? _registrationLink;
     public string? RegistrationLink
     {
@@ -46,6 +65,9 @@ public class Event : Entity
         set => _registrationLink = value;
     }
 
+    /// <summary>
+    /// The type or category of the event.
+    /// </summary>
     private string _type = string.Empty;
     public required string Type
     {
@@ -53,6 +75,9 @@ public class Event : Entity
         set => _type = Guard.Against.NullOrWhiteSpace(value);
     }
 
+    /// <summary>
+    /// Optional description of the event.
+    /// </summary>
     private string? _description;
     public string? Description
     {

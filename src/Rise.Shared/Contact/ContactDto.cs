@@ -1,7 +1,14 @@
 ﻿namespace Rise.Shared.Contact;
 
+/// <summary>
+/// Data transfer objects for contact information.
+/// </summary>
 public static class ContactDto
 {
+    /// <summary>
+    /// Represents a contact for display and retrieval.
+    /// Contains contact details including type, name, email, phone, contact person, and associated campuses.
+    /// </summary>
     public class Index
     {
         public required Guid Id { get; set; }

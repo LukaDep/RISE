@@ -4,8 +4,13 @@ using Rise.Shared.Notifications;
 
 namespace Rise.Client.Account.Notifications;
 
+/// <summary>
+/// Code-behind for the Notifications Index page component.
+/// Displays a paginated list of user notifications with read/unread status.
+/// </summary>
 public partial class Index : ComponentBase
 {
+    /// <summary>Service for sent notification operations.</summary>
     [Inject]
     public required ISentNotificationService SentNotificationService { get; set; }
 
@@ -21,11 +26,17 @@ public partial class Index : ComponentBase
     private int unreadCount = 0;
     private bool hasMoreNotifications = false;
 
+    /// <summary>
+    /// Loads notifications on component initialization.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         await LoadNotificationsAsync();
     }
 
+    /// <summary>
+    /// Loads paginated notifications from the service.
+    /// </summary>
     private async Task LoadNotificationsAsync()
     {
         try
@@ -59,6 +70,11 @@ public partial class Index : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Loads the next page of notifications for infinite scroll pagination.
+    /// Increments the current page counter and appends new notifications to the existing list.
+    /// Automatically tracks whether more notifications are available based on total count.
+    /// </summary>
     private async Task LoadMore()
     {
         if (isLoadingMore || !hasMoreNotifications)
@@ -88,6 +104,13 @@ public partial class Index : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Handles notification click events. Marks the notification as read if unread,
+    /// updates the local unread count, and navigates to the notification's target URL if present.
+    /// The read status is updated optimistically for better UX, with the actual timestamp
+    /// being set server-side.
+    /// </summary>
+    /// <param name="notification">The notification that was clicked.</param>
     private async Task OnNotificationClick(SentNotificationDTO.Index notification)
     {
         // Mark as read if not already
@@ -114,6 +137,11 @@ public partial class Index : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Marks all notifications as read in a single batch operation.
+    /// Updates the local state optimistically by setting IsRead=true on all notifications
+    /// and resetting the unread count to zero. Server handles the actual timestamp updates.
+    /// </summary>
     private async Task MarkAllAsRead()
     {
         try
@@ -145,6 +173,12 @@ public partial class Index : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Deletes a single notification by its ID.
+    /// Removes the notification from the local list, updates the total count,
+    /// and decrements the unread count if the deleted notification was unread.
+    /// </summary>
+    /// <param name="notificationId">The unique identifier of the notification to delete.</param>
     private async Task DeleteNotification(Guid notificationId)
     {
         try
@@ -176,6 +210,12 @@ public partial class Index : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Gets the CSS class for a notification item based on its read status.
+    /// Unread notifications have a blue tinted background for visual distinction.
+    /// </summary>
+    /// <param name="notification">The notification to get styling for.</param>
+    /// <returns>CSS classes for the notification container.</returns>
     private string GetNotificationClass(SentNotificationDTO.Index notification)
     {
         return notification.IsRead
@@ -183,6 +223,13 @@ public partial class Index : ComponentBase
             : "bg-blue-50/50 hover:bg-blue-50";
     }
 
+    /// <summary>
+    /// Gets the CSS classes for the notification icon container.
+    /// Applies a colored gradient background based on notification type:
+    /// grades=emerald, schedule=blue, campus=purple, news=orange, other=gray.
+    /// </summary>
+    /// <param name="notification">The notification to style.</param>
+    /// <returns>CSS classes for the icon container including type-specific gradient.</returns>
     private string GetIconContainerClass(SentNotificationDTO.Index notification)
     {
         var baseClass = "w-8 h-8 rounded-full flex items-center justify-center shadow-sm";
@@ -198,6 +245,13 @@ public partial class Index : ComponentBase
         return $"{baseClass} {gradientClass}";
     }
 
+    /// <summary>
+    /// Gets the Font Awesome icon class for a notification based on its type.
+    /// Maps notification types to appropriate icons: grades=graduation-cap,
+    /// schedule=calendar, campus=school, news=newspaper, other=bell.
+    /// </summary>
+    /// <param name="notification">The notification to get an icon for.</param>
+    /// <returns>Font Awesome icon class string.</returns>
     private string GetNotificationIcon(SentNotificationDTO.Index notification)
     {
         return notification.NotificationType switch
@@ -210,6 +264,12 @@ public partial class Index : ComponentBase
         };
     }
 
+    /// <summary>
+    /// Gets the CSS class for the notification title based on read status.
+    /// Unread notifications have bolder, darker text for emphasis.
+    /// </summary>
+    /// <param name="notification">The notification to style.</param>
+    /// <returns>CSS classes for title text styling.</returns>
     private string GetTitleClass(SentNotificationDTO.Index notification)
     {
         return notification.IsRead
@@ -217,6 +277,14 @@ public partial class Index : ComponentBase
             : "font-semibold text-gray-900";
     }
 
+    /// <summary>
+    /// Formats a notification timestamp into a human-readable relative time string.
+    /// Shows "just now" for &lt;1min, "X minutes ago" for &lt;1hr, "X hours ago" for &lt;24hr,
+    /// "X days ago" for &lt;7 days, and full date (dd MMM yyyy) for older notifications.
+    /// Uses localized strings for display.
+    /// </summary>
+    /// <param name="sentAt">The timestamp when the notification was sent.</param>
+    /// <returns>Localized relative time string.</returns>
     private string FormatDate(DateTime sentAt)
     {
         var now = DateTime.Now;

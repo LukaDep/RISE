@@ -1,7 +1,14 @@
 namespace Rise.Shared.Widgets;
 
+/// <summary>
+/// Data transfer objects for user widget configurations.
+/// </summary>
 public static class UserWidgetDto
 {
+    /// <summary>
+    /// Represents a user's widget instance for display.
+    /// Contains widget reference and layout properties (position, size).
+    /// </summary>
     public class Index
     {
         public required Guid Id { get; set; }
@@ -13,6 +20,11 @@ public static class UserWidgetDto
         public required int Height { get; set; }
         public required int MinWidth { get; set; }
     }
+
+    /// <summary>
+    /// Represents a user widget for update operations.
+    /// Contains widget identifier and updated layout properties.
+    /// </summary>
     public class Update
     {
         public required Guid Id { get; set; }

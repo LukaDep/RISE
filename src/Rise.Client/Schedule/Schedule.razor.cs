@@ -4,12 +4,22 @@ using System.Timers;
 
 namespace Rise.Client.Schedule;
 
+/// <summary>
+/// Code-behind for the Schedule page component.
+/// Displays a weekly schedule view with swipe navigation.
+/// </summary>
 public partial class Schedule : IAsyncDisposable
 {
+    /// <summary>Event callback when a day is clicked.</summary>
     [Parameter] public EventCallback<DateTime> OnDayClick { get; set; }
+    
+    /// <summary>The currently selected date.</summary>
     [Parameter] public DateTime SelectedDate { get; set; } = DateTime.Today;
+    
+    /// <summary>Event callback when date changes.</summary>
     [Parameter] public EventCallback<DateTime> OnDateChanged { get; set; }
 
+    /// <summary>JavaScript runtime for interop calls.</summary>
     [Inject] public required IJSRuntime JSRuntime { get; set; }
 
     private DotNetObjectReference<Schedule>? dotNetRef;
@@ -17,12 +27,19 @@ public partial class Schedule : IAsyncDisposable
     private System.Timers.Timer? currentTimeTimer;
     private DateTime currentTime = DateTime.Now;
 
+    /// <summary>
+    /// Handles parameter changes, adjusting weekends to next weekday.
+    /// </summary>
     protected override void OnParametersSet()
     {
         base.OnParametersSet();
         SelectedDate = GetNextWeekdayIfWeekend(SelectedDate);
     }
 
+    /// <summary>
+    /// Initializes swipe gestures and timer after first render.
+    /// </summary>
+    /// <param name="firstRender">True if this is the first render.</param>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
@@ -34,6 +51,9 @@ public partial class Schedule : IAsyncDisposable
         }
     }
 
+    /// <summary>
+    /// Starts the timer to update current time indicator.
+    /// </summary>
     private void StartCurrentTimeTimer()
     {
         currentTimeTimer = new System.Timers.Timer(60000);
@@ -42,12 +62,19 @@ public partial class Schedule : IAsyncDisposable
         currentTimeTimer.Start();
     }
 
+    /// <summary>
+    /// Handles timer elapsed event to update current time.
+    /// </summary>
     private void OnTimerElapsed(object? sender, ElapsedEventArgs e)
     {
         currentTime = DateTime.Now;
         InvokeAsync(StateHasChanged);
     }
 
+    /// <summary>
+    /// Animates a swipe transition in the specified direction.
+    /// </summary>
+    /// <param name="direction">Direction of swipe ("left" or "right").</param>
     private async Task AnimateSwipe(string direction)
     {
         swipeClass = direction == "left" ? "swipe-left" : "swipe-right";
@@ -63,6 +90,9 @@ public partial class Schedule : IAsyncDisposable
 
     private List<DateTime> WeekDays => ScheduleHelpers.GetWeekDays(SelectedDate);
 
+    /// <summary>
+    /// Navigates to today's schedule.
+    /// </summary>
     public async Task GoToToday()
     {
         var today = GetNextWeekdayIfWeekend(DateTime.Today);
@@ -75,6 +105,10 @@ public partial class Schedule : IAsyncDisposable
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Selects a specific day in the schedule.
+    /// </summary>
+    /// <param name="day">The day to select.</param>
     private async Task SelectDay(DateTime day)
     {
         var selectedDay = GetNextWeekdayIfWeekend(day);
@@ -87,6 +121,10 @@ public partial class Schedule : IAsyncDisposable
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Handles date changed events, adjusting for weekends.
+    /// </summary>
+    /// <param name="newDate">The new date.</param>
     private async Task HandleDateChanged(DateTime newDate)
     {
         var adjustedDate = GetNextWeekdayIfWeekend(newDate);
@@ -95,6 +133,11 @@ public partial class Schedule : IAsyncDisposable
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Adjusts a weekend date to the next weekday.
+    /// </summary>
+    /// <param name="date">The date to adjust.</param>
+    /// <returns>The same date if weekday, or next Monday if weekend.</returns>
     private static DateTime GetNextWeekdayIfWeekend(DateTime date)
     {
         return date.DayOfWeek switch
@@ -105,6 +148,9 @@ public partial class Schedule : IAsyncDisposable
         };
     }
 
+    /// <summary>
+    /// Navigates to the previous week with swipe animation.
+    /// </summary>
     public async Task PreviousWeekAnimated()
     {
         await AnimateSwipe("right");
@@ -112,6 +158,9 @@ public partial class Schedule : IAsyncDisposable
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Navigates to the next week with swipe animation.
+    /// </summary>
     public async Task NextWeekAnimated()
     {
         await AnimateSwipe("left");
@@ -119,7 +168,14 @@ public partial class Schedule : IAsyncDisposable
         StateHasChanged();
     }
 
+    /// <summary>
+    /// Navigates to the previous week by subtracting 7 days.
+    /// </summary>
     private async Task PreviousWeek() => await OnDateChanged.InvokeAsync(SelectedDate.AddDays(-7));
+
+    /// <summary>
+    /// Navigates to the next week by adding 7 days.
+    /// </summary>
     private async Task NextWeek() => await OnDateChanged.InvokeAsync(SelectedDate.AddDays(7));
 
     [JSInvokable]

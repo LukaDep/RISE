@@ -7,17 +7,40 @@ using Rise.Shared.Common;
 using Rise.Shared.Menu;
 using Rise.Shared.Resto;
 
+/// <summary>
+/// Dashboard widget that displays today's restaurant menu.
+/// Supports switching between multiple restaurants.
+/// </summary>
 public partial class RestoMenuWidget : ComponentBase
 {
+    /// <summary>Currently selected restaurant ID.</summary>
     [Parameter] public Guid? SelectedResto { get; set; }
+    
+    /// <summary>Callback when selected restaurant changes.</summary>
     [Parameter] public EventCallback<Guid?> SelectedRestoChanged { get; set; }
+    
+    /// <summary>Callback when widget is removed.</summary>
     [Parameter] public EventCallback<Guid> OnRemove { get; set; }
+    
+    /// <summary>Indicates if edit mode is active.</summary>
     [Parameter] public bool EditMode { get; set; }
+    
+    /// <summary>Widget index in the grid.</summary>
     [Parameter] public int Index { get; set; }
+    
+    /// <summary>Unique widget identifier.</summary>
     [Parameter] public Guid WidgetId { get; set; }
+    
+    /// <summary>JavaScript runtime for interop.</summary>
     [Inject] public IJSRuntime Js { get; set; } = default!;
+    
+    /// <summary>Navigation manager for routing.</summary>
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    
+    /// <summary>Service for menu data.</summary>
     [Inject] public IMenuService MenuClientService { get; set; } = default!;
+    
+    /// <summary>Service for restaurant data.</summary>
     [Inject]
     public IRestoService RestoClientService { get; set; } = default!;
     private MenuDto.Index? _currentMenu;
@@ -36,6 +59,13 @@ public partial class RestoMenuWidget : ComponentBase
     private bool _loading;
     private string? _error;
 
+    /// <summary>
+    /// Initializes the widget by loading restaurant and menu data.
+    /// Fetches all restaurants and today's menus, builds a lookup dictionary
+    /// for fast menu retrieval by restaurant ID, and sets the initial selection.
+    /// If a SelectedResto is provided, navigates to that restaurant's index;
+    /// otherwise defaults to the first restaurant in the list.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         _loading = true;
@@ -96,6 +126,12 @@ public partial class RestoMenuWidget : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Updates the current menu based on selected or displayed restaurant.
+    /// First tries to find a menu for the explicitly selected restaurant,
+    /// then falls back to the currently displayed restaurant's menu,
+    /// and finally defaults to any available menu for today.
+    /// </summary>
     private void SetCurrentMenu()
     {
         _currentMenu = null;
@@ -113,6 +149,11 @@ public partial class RestoMenuWidget : ComponentBase
         _currentMenu = _menuByRestoId.Values.FirstOrDefault();
     }
 
+    /// <summary>
+    /// Navigates to the previous restaurant in the carousel.
+    /// Uses modulo arithmetic to wrap around to the last restaurant when at the first.
+    /// Updates the selected restaurant and notifies parent via callback.
+    /// </summary>
     private async Task Prev()
     {
         if (!_canNavigate) return;
@@ -123,6 +164,11 @@ public partial class RestoMenuWidget : ComponentBase
         SetCurrentMenu();
     }
 
+    /// <summary>
+    /// Navigates to the next restaurant in the carousel.
+    /// Uses modulo arithmetic to wrap around to the first restaurant when at the last.
+    /// Updates the selected restaurant and notifies parent via callback.
+    /// </summary>
     private async Task Next()
     {
         if (!_canNavigate) return;
@@ -133,6 +179,9 @@ public partial class RestoMenuWidget : ComponentBase
         SetCurrentMenu();
     }
 
+    /// <summary>
+    /// Navigates to the full restaurant list page.
+    /// </summary>
     private void More()
     {
         NavigationManager.NavigateTo("/resto");

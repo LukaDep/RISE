@@ -1,10 +1,14 @@
 namespace Rise.Shared.Notifications;
 
 /// <summary>
-/// Represents a static utility class containing request-related structures for products.
+/// Request wrappers for push subscription operations.
 /// </summary>
 public static partial class PushSubscriptionRequest
 {
+    /// <summary>
+    /// Request to create or update a push subscription.
+    /// Contains the subscription endpoint and encryption keys required for web push notifications.
+    /// </summary>
     public class Create
     {
         public required string Endpoint { get; set; }

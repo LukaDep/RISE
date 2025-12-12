@@ -4,8 +4,16 @@ using Rise.Domain.Events;
 
 namespace Rise.Persistence.Configurations.Events;
 
+/// <summary>
+/// Entity Framework configuration for <see cref="Event"/>.
+/// Configures property constraints for calendar events.
+/// </summary>
 internal class EventConfiguration : EntityConfiguration<Event>
 {
+    /// <summary>
+    /// Configures the Event entity properties including title, location, type, and date/time fields.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Event.</param>
     public override void Configure(EntityTypeBuilder<Event> builder)
     {
         base.Configure(builder);

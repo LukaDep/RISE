@@ -1,14 +1,15 @@
 namespace Rise.Shared.Schedule;
 
 /// <summary>
-/// Contains data transfer objects (DTOs) used for schedule data retrieval.
+/// Response wrappers for external schedule API data.
+/// Contains structures for deserializing raw schedule data from the external API.
 /// </summary>
 public static class ScheduleApiResponse
 {
     /// <summary>
-    /// Represents a response from the schedule api.
+    /// Root response object from the external schedule API.
+    /// Contains column headers, metadata information, and the list of schedule entries.
     /// </summary>
-    // Root object
     public class ScheduleData
     {
         public string Email { get; set; } = default!;
@@ -17,14 +18,20 @@ public static class ScheduleApiResponse
         public List<Schedule> Schedules { get; set; } = new();
     }
 
-    // Info object
+    /// <summary>
+    /// Metadata information about the schedule response.
+    /// Includes limits and counts for pagination and data handling.
+    /// </summary>
     public class Info
     {
         public int ScheduleLimit { get; set; }
         public int ScheduleCount { get; set; }
     }
 
-    // Schedule object
+    /// <summary>
+    /// Individual schedule entry from the external API.
+    /// Contains raw schedule data including ID, date/time information, and column data that needs to be parsed.
+    /// </summary>
     public class Schedule
     {
         public string Id { get; set; } = default!;
@@ -34,6 +41,4 @@ public static class ScheduleApiResponse
         public string EndTime { get; set; } = default!;
         public List<string> Columns { get; set; } = new();
     }
-
-
 }

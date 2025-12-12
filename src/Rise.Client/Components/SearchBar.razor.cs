@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace Rise.Client.Components;
 
+/// <summary>
+/// Search bar component with toggle functionality.
+/// Provides an expandable search input with clear functionality.
+/// </summary>
 public partial class SearchBar : ComponentBase
 {
     private ElementReference inputElement;
@@ -30,6 +34,9 @@ public partial class SearchBar : ComponentBase
     [Parameter]
     public EventCallback<bool> IsOpenChanged { get; set; }
 
+    /// <summary>
+    /// Toggles the search bar state. Focuses input if empty, clears if has value.
+    /// </summary>
     private async Task ToggleSearch()
     {
         if (string.IsNullOrWhiteSpace(Value))
@@ -42,6 +49,10 @@ public partial class SearchBar : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Handles input change events and notifies parent of new value.
+    /// </summary>
+    /// <param name="e">The change event arguments.</param>
     private async Task OnInputChanged(ChangeEventArgs e)
     {
         var newValue = e.Value?.ToString() ?? string.Empty;

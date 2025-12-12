@@ -1,19 +1,17 @@
 namespace Rise.Shared.Grades;
 
+/// <summary>
+/// Data transfer objects for student grades and results.
+/// </summary>
 public static class GradesDto
 {
-    // public class Course
-    // {
-    //     public required string CourseId { get; set; }
-    //     public required string CourseName { get; set; }
-    //     public required int Year { get; set; }
-    //     public required int Semester { get; set; }
-    //     public double? FinalScore { get; set; }
-    //     public required List<Grade> Grades { get; set; }
-    // }
+    /// <summary>
+    /// Represents a grade record for display and retrieval.
+    /// Contains grade details (name, activity type, score, feedback) and associated course information.
+    /// </summary>
     public class Grade
     {
-        // grade
+        // Grade details
         public required Guid Id { get; set; }
         public required string Name { get; set; }
         public required string ActivityType { get; set; }
@@ -23,7 +21,7 @@ public static class GradesDto
         public DateTime? SubmissionDate { get; set; }
         public DateTime Date { get; set; }
 
-        // course
+        // Course details
         public string? CourseId { get; set; }
         public string? CourseName { get; set; }
         public string? Year { get; set; }

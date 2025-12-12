@@ -13,15 +13,25 @@ using Rise.Domain.StudentCards;
 using Rise.Shared.Common;
 
 namespace Rise.Persistence;
+
 /// <summary>
-/// Seeds the database
+/// Seeds the database with initial test data for development and testing purposes.
+/// Creates roles, users, news articles, absences, campuses, contacts, events,
+/// grades, restaurants with menus, deadlines, and widget configurations.
 /// </summary>
-/// <param name="dbContext"></param>
-/// <param name="roleManager"></param>
-/// <param name="userManager"></param>
+/// <param name="dbContext">The application database context.</param>
+/// <param name="roleManager">The ASP.NET Identity role manager.</param>
+/// <param name="userManager">The ASP.NET Identity user manager.</param>
 public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> roleManager, UserManager<IdentityUser> userManager)
 {
+    /// <summary>Default password used for all seeded user accounts.</summary>
     const string PasswordDefault = "A1b2C3!";
+    
+    /// <summary>
+    /// Seeds all data into the database.
+    /// Calls individual seeding methods in the correct order to maintain referential integrity.
+    /// </summary>
+    /// <returns>A task representing the asynchronous operation.</returns>
     public async Task SeedAsync()
     {
         await RolesAsync();
@@ -38,6 +48,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await UserWidgetsAsync();
     }
 
+    /// <summary>
+    /// Seeds the identity roles (Administrator, Secretary, Lector, Student).
+    /// Skips if roles already exist.
+    /// </summary>
     private async Task RolesAsync()
     {
         if (dbContext.Roles.Any())
@@ -49,6 +63,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await roleManager.CreateAsync(new IdentityRole("Student"));
     }
 
+    /// <summary>
+    /// Seeds test user accounts with the Student role.
+    /// Creates 10 student accounts with default passwords. Skips if users already exist.
+    /// </summary>
     private async Task UsersAsync()
     {
         if (dbContext.Users.Any())
@@ -244,6 +262,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds sample news articles with various types (Wallie, Onderwijs).
+    /// Skips if news articles already exist.
+    /// </summary>
     private async Task NewsAsync()
     {
         if (dbContext.NewsArticles.Any())
@@ -259,6 +281,11 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         );
         await dbContext.SaveChangesAsync();
     }
+    
+    /// <summary>
+    /// Seeds assignment deadlines linked to student users.
+    /// Creates deadlines for various courses with different due dates. Skips if deadlines already exist.
+    /// </summary>
     private async Task DeadlinesAsync()
     {
         if (dbContext.Deadlines.Any())
@@ -374,6 +401,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds lecturer absence records with various reasons (sick leave, conference, etc.).
+    /// Skips if absences already exist.
+    /// </summary>
     private async Task AbsencesAsync()
     {
         if (dbContext.Absences.Any())
@@ -396,6 +427,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds available widget definitions for the home dashboard.
+    /// Creates widget entries for schedule, menu, grades, and news. Skips if widgets already exist.
+    /// </summary>
     private async Task WidgetsAsync()
     {
         if (dbContext.Widgets.Any())
@@ -427,6 +462,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds user-specific widget configurations with positions and sizes.
+    /// Links widgets to student users for their personalized dashboards. Skips if user widgets already exist.
+    /// </summary>
     private async Task UserWidgetsAsync()
     {
         if (dbContext.UserWidgets.Any())
@@ -528,6 +567,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
 
 
 
+    /// <summary>
+    /// Seeds campus locations with addresses, coordinates, and associated buildings.
+    /// Includes all HOGENT campuses (Aalst, Bijloke, Mercator, Melle, Schoonmeersen). Skips if campuses already exist.
+    /// </summary>
     private async Task CampusesAsync()
     {
         if (dbContext.Campuses.Any())
@@ -748,6 +791,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds contact information for departments, campuses, and organization.
+    /// Includes phone numbers, emails, and contact persons. Skips if contacts already exist.
+    /// </summary>
     private async Task ContactsAsync()
     {
         if (dbContext.Contacts.Any())
@@ -766,6 +813,10 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
     }
 
 
+    /// <summary>
+    /// Seeds calendar events of various types (welzijn, sport, academisch, etc.).
+    /// Creates events with dates, locations, and descriptions. Skips if events already exist.
+    /// </summary>
     private async Task EventsAsync()
     {
         if (dbContext.Events.Any())
@@ -906,6 +957,11 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
 
         await dbContext.SaveChangesAsync();
     }
+    
+    /// <summary>
+    /// Seeds student grades linked to user accounts.
+    /// Creates grades for various courses across semesters and academic years. Skips if grades already exist.
+    /// </summary>
     private async Task GradesAsync()
     {
         if (dbContext.Grades.Any())
@@ -1215,6 +1271,11 @@ public class DbSeeder(ApplicationDbContext dbContext, RoleManager<IdentityRole> 
         await dbContext.SaveChangesAsync();
     }
 
+    /// <summary>
+    /// Seeds restaurants with opening hours and weekly menus.
+    /// Links restaurants to campus buildings and creates menu items for each weekday.
+    /// Skips if restaurants already exist.
+    /// </summary>
     private async Task RestosAndMenusAsync()
     {
         if (dbContext.Restos.Any())

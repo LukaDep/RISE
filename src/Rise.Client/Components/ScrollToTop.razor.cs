@@ -3,9 +3,17 @@ namespace Rise.Client.Components;
 using Microsoft.JSInterop;
 using Microsoft.AspNetCore.Components;
 
+/// <summary>
+/// Scroll-to-top button component.
+/// Shows a floating button that scrolls the page to the top when clicked.
+/// </summary>
 public partial class ScrollToTop : ComponentBase, IAsyncDisposable
 {
     private bool _initialized;
+    
+    /// <summary>
+    /// Initializes the scroll-to-top button via JavaScript interop.
+    /// </summary>
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender && !_initialized)
@@ -23,6 +31,9 @@ public partial class ScrollToTop : ComponentBase, IAsyncDisposable
         }
     }
 
+    /// <summary>
+    /// Disposes the scroll-to-top button JavaScript resources.
+    /// </summary>
     public async ValueTask DisposeAsync()
     {
         if (_initialized)

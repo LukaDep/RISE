@@ -5,9 +5,14 @@ namespace Rise.Persistence.Configurations.Grades;
 
 /// <summary>
 /// Specific configuration for <see cref="Grade"/>.
+/// Configures property constraints for student grade records.
 /// </summary>
 internal class GradeConfiguration : EntityConfiguration<Grade>
 {
+    /// <summary>
+    /// Configures the Grade entity properties including name, activity type, course info, and user ID.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Grade.</param>
     public override void Configure(EntityTypeBuilder<Grade> builder)
     {
         base.Configure(builder);

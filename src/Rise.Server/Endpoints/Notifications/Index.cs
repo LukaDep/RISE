@@ -9,6 +9,9 @@ namespace Rise.Server.Endpoints.Notifications;
 public class Index(INotificationPreferencesService notificationPreferencesService)
     : EndpointWithoutRequest<Result<NotificationPreferencesResponse.Index>>
 {
+    /// <summary>
+    /// Configures the endpoint route and authorization.
+    /// </summary>
     public override void Configure()
     {
         Get("/api/notifications/preferences");
@@ -16,6 +19,11 @@ public class Index(INotificationPreferencesService notificationPreferencesServic
         Roles(AppRoles.Student);
     }
 
+    /// <summary>
+    /// Retrieves the notification preferences for the current user.
+    /// </summary>
+    /// <param name="ct">Cancellation token.</param>
+    /// <returns>A result containing the user's notification preferences.</returns>
     public override async Task<Result<NotificationPreferencesResponse.Index>> ExecuteAsync(CancellationToken ct)
     {
         return await notificationPreferencesService.GetUserPreferencesByIdAsync(ct);

@@ -4,15 +4,29 @@ using Rise.Client.Components;
 
 namespace Rise.Client.Grades.Components;
 
+/// <summary>
+/// Component that displays a single grade item with progress bar.
+/// Shows course name, score, and expandable details.
+/// </summary>
 public partial class GradeItem : ComponentBase
 {
+    /// <summary>The grade data to display.</summary>
     [Parameter] public GradesDto.Grade Grade { get; set; } = default!;
+    
     private Boolean seeDetails = false;
+    
+    /// <summary>
+    /// Toggles the grade details visibility.
+    /// </summary>
     private void SeeGradeDetails()
     {
         seeDetails = !seeDetails;
     }
 
+    /// <summary>
+    /// Calculates the score as a percentage of maximum points.
+    /// Returns 0 if score or max points are not available or max points is zero.
+    /// </summary>
     private double ScorePercentage
     {
         get
@@ -25,8 +39,16 @@ public partial class GradeItem : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Determines if the grade is passing (>=50% of max points).
+    /// </summary>
     private bool IsPassing => ScorePercentage >= 50;
 
+    /// <summary>
+    /// Gets the CSS classes for the score progress bar.
+    /// Returns gray for no score, green gradient for passing (>=50%), 
+    /// or red gradient for failing (<50%).
+    /// </summary>
     private string ScoreBarClass
     {
         get
@@ -40,6 +62,11 @@ public partial class GradeItem : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Gets the CSS classes for the score badge.
+    /// Returns gray styling for no score, green with white text for passing,
+    /// or red with white text for failing.
+    /// </summary>
     private string ScoreBadgeClass
     {
         get
@@ -53,6 +80,10 @@ public partial class GradeItem : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Gets the CSS class for the score text color.
+    /// Returns black for no score, green for passing, or red for failing.
+    /// </summary>
     private string ScoreTextClass
     {
         get

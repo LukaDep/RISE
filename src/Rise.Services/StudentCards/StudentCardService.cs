@@ -7,11 +7,14 @@ using Rise.Shared.StudentCards;
 namespace Rise.Services.StudentCards;
 
 /// <summary>
-/// Service for managing Student Cards stored in the StudentCards table.
+/// Service for managing student cards.
 /// </summary>
 public class StudentCardService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : IStudentCardService
 {
-
+    /// <summary>
+    /// Retrieves the current user's ID from the session context.
+    /// Throws UnauthorizedAccessException if the user is not authenticated.
+    /// </summary>
     private string GetCurrentUserId()
     {
         var userId = sessionContextProvider.User?.FindFirst(System.Security.Claims.ClaimTypes.NameIdentifier)?.Value;
@@ -22,6 +25,12 @@ public class StudentCardService(ApplicationDbContext dbContext, ISessionContextP
         return userId;
     }
 
+    /// <summary>
+    /// Retrieves the student card for the current user.
+    /// Determines if the card is still valid based on the expiration date.
+    /// </summary>
+    /// <param name="ct">CancellationToken to cancel the operation</param>
+    /// <returns>Result with StudentCardDto containing card details, or NotFound if no card found</returns>
     public async Task<Result<StudentCardDto>> GetByUserIdAsync(CancellationToken ct = default)
     {
         var currentUserId = GetCurrentUserId();

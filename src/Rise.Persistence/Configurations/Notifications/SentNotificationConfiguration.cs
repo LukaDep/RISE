@@ -7,9 +7,15 @@ namespace Rise.Persistence.Configurations.Notifications;
 
 /// <summary>
 /// Entity configuration for <see cref="SentNotification"/>.
+/// Configures relationships with PushSubscriptions and property constraints for notification tracking.
 /// </summary>
 internal class SentNotificationConfiguration : EntityConfiguration<SentNotification>
 {
+    /// <summary>
+    /// Configures the SentNotification entity including foreign key to PushSubscriptions with cascade delete,
+    /// and properties for title, body, URL, and delivery status tracking.
+    /// </summary>
+    /// <param name="builder">The entity type builder for SentNotification.</param>
     public override void Configure(EntityTypeBuilder<SentNotification> builder)
     {
         base.Configure(builder);

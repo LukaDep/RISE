@@ -7,9 +7,14 @@ namespace Rise.Persistence.Configurations.Campus;
 
 /// <summary>
 /// Specific configuration for <see cref="Domain.Campus.Campus"/>.
+/// Configures property constraints and JSON serialization for facilities.
 /// </summary>
 internal class CampusConfiguration : EntityConfiguration<Domain.Campus.Campus>
 {
+    /// <summary>
+    /// Configures the Campus entity properties including address fields and JSON facilities list.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Campus.</param>
     public override void Configure(EntityTypeBuilder<Domain.Campus.Campus> builder)
     {
         base.Configure(builder);

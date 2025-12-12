@@ -8,9 +8,18 @@ using Rise.Shared.Common;
 
 namespace Rise.Services.Resto;
 
+/// <summary>
+/// Service for managing restaurant-related data.
+/// </summary>
 public class RestoService(ApplicationDbContext dbContext) : IRestoService
 {
-
+    /// <summary>
+    /// Retrieves a filtered and paginated list of restaurants.
+    /// Supports searching by name, description and kitchen type, and determines if a restaurant is currently open.
+    /// </summary>
+    /// <param name="req">QueryRequest.SkipTake with SearchTerm, Skip and Take for filtering and pagination</param>
+    /// <param name="ct">CancellationToken to cancel the operation</param>
+    /// <returns>Result with RestoResponse.Index containing the list of restaurants</returns>
     public async Task<Result<RestoResponse.Index>> GetIndexAsync(QueryRequest.SkipTake req, CancellationToken ct)
     {
         var query = dbContext.Restos.AsQueryable();
@@ -46,10 +55,15 @@ public class RestoService(ApplicationDbContext dbContext) : IRestoService
         var restos = allRestos.Skip(req.Skip).Take(req.Take).ToList();
 
         return Result.Success(new RestoResponse.Index { Restos = restos });
-
-
     }
 
+    /// <summary>
+    /// Checks if a restaurant is currently open based on opening hours and current time.
+    /// Supports multiple time blocks per day and overnight ranges.
+    /// </summary>
+    /// <param name="openingHours">Dictionary with opening hours per day of the week</param>
+    /// <param name="now">The current time to check</param>
+    /// <returns>True if the restaurant is open, otherwise false</returns>
     private static bool IsCurrentlyOpen(Dictionary<DayOfWeek, string>? openingHours, DateTimeOffset now)
     {
         if (openingHours == null || openingHours.Count == 0)

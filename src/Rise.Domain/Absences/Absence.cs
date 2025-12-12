@@ -1,7 +1,14 @@
 namespace Rise.Domain.Absences;
 
+/// <summary>
+/// Represents a teacher absence record.
+/// Contains the teacher's name, absence period (start and end dates), and reason for absence.
+/// </summary>
 public class Absence : Entity
 {
+    /// <summary>
+    /// The name of the absent teacher.
+    /// </summary>
     private string _name = string.Empty;
     public required string Name
     {
@@ -9,6 +16,9 @@ public class Absence : Entity
         set => _name = Guard.Against.NullOrWhiteSpace(value);
     }
 
+    /// <summary>
+    /// The start date of the absence period. Stored in UTC.
+    /// </summary>
     private DateTime _startDate;
     public required DateTime StartDate
     {
@@ -20,6 +30,9 @@ public class Absence : Entity
         }
     }
 
+    /// <summary>
+    /// The end date of the absence period. Stored in UTC.
+    /// </summary>
     private DateTime _endDate;
     public required DateTime EndDate
     {
@@ -31,6 +44,9 @@ public class Absence : Entity
         }
     }
 
+    /// <summary>
+    /// The reason for the teacher's absence.
+    /// </summary>
     private string _reason = string.Empty;
     public required string Reason
     {

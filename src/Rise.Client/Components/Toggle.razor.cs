@@ -2,6 +2,10 @@ using Microsoft.AspNetCore.Components;
 
 namespace Rise.Client.Components;
 
+/// <summary>
+/// Toggle switch component for boolean input.
+/// Provides an accessible on/off switch with optional disabled state.
+/// </summary>
 public partial class Toggle
 {
     private static int _idCounter = 0;
@@ -42,6 +46,10 @@ public partial class Toggle
         Id ??= $"toggle-{++_idCounter}";
     }
 
+    /// <summary>
+    /// Handles the toggle change event and notifies listeners.
+    /// </summary>
+    /// <param name="e">The change event arguments.</param>
     private async Task HandleToggleChange(ChangeEventArgs e)
     {
         if (Disabled)

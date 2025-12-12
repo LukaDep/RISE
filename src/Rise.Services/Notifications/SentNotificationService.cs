@@ -13,6 +13,14 @@ namespace Rise.Services.Notifications;
 /// </summary>
 public class SentNotificationService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : ISentNotificationService
 {
+    /// <summary>
+    /// Retrieves a paginated list of notifications for the current user.
+    /// Includes total count and unread count.
+    /// </summary>
+    /// <param name="page">Page number (default 1)</param>
+    /// <param name="pageSize">Number of items per page (default 20)</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result with SentNotificationResponse.Index containing notifications and counts, or Unauthorized if not logged in</returns>
     public async Task<Result<SentNotificationResponse.Index>> GetUserNotificationsAsync(int page = 1, int pageSize = 20, CancellationToken ctx = default)
     {
         try
@@ -58,6 +66,12 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
         }
     }
 
+    /// <summary>
+    /// Marks a specific notification as read for the current user.
+    /// </summary>
+    /// <param name="req">SentNotificationRequest.MarkAsRead with NotificationId</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful update, Unauthorized if not logged in, NotFound if notification doesn't exist</returns>
     public async Task<Result> MarkAsReadAsync(SentNotificationRequest.MarkAsRead req, CancellationToken ctx = default)
     {
         try
@@ -88,6 +102,11 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
         }
     }
 
+    /// <summary>
+    /// Marks all unread notifications as read for the current user.
+    /// </summary>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful update, Unauthorized if not logged in</returns>
     public async Task<Result> MarkAllAsReadAsync(CancellationToken ctx = default)
     {
         try
@@ -112,6 +131,11 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
         }
     }
 
+    /// <summary>
+    /// Retrieves the number of unread notifications for the current user.
+    /// </summary>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result with integer count of unread notifications, or Unauthorized if not logged in</returns>
     public async Task<Result<int>> GetUnreadCountAsync(CancellationToken ctx = default)
     {
         try
@@ -132,6 +156,12 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
         }
     }
 
+    /// <summary>
+    /// Deletes a notification (soft delete) for the current user.
+    /// </summary>
+    /// <param name="notificationId">The Guid of the notification to delete</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
+    /// <returns>Result.Success on successful deletion, Unauthorized if not logged in, NotFound if notification doesn't exist</returns>
     public async Task<Result> DeleteNotificationAsync(Guid notificationId, CancellationToken ctx = default)
     {
         try
@@ -158,6 +188,17 @@ public class SentNotificationService(ApplicationDbContext dbContext, ISessionCon
         }
     }
 
+    /// <summary>
+    /// Saves a sent notification to the database for a specific user.
+    /// Used to track notification history.
+    /// </summary>
+    /// <param name="userId">The Guid of the user receiving the notification</param>
+    /// <param name="title">The notification title</param>
+    /// <param name="body">The notification body</param>
+    /// <param name="url">Optional URL linked to the notification</param>
+    /// <param name="notificationType">Optional notification type</param>
+    /// <param name="deliveryStatus">Delivery status (default Pending)</param>
+    /// <param name="ctx">CancellationToken to cancel the operation</param>
     public async Task SaveSentNotificationAsync(Guid pushSubscriptionId, string title, string body, string? url = null, string? notificationType = null, DeliveryStatus deliveryStatus = DeliveryStatus.Pending, CancellationToken ctx = default)
     {
         try

@@ -7,9 +7,15 @@ namespace Rise.Persistence.Configurations.Widgets;
 
 /// <summary>
 /// Configuration for <see cref="UserWidget"/>.
+/// Configures position and size properties for user dashboard widget layouts.
 /// </summary>
 internal class UserWidgetConfiguration : EntityConfiguration<UserWidget>
 {
+    /// <summary>
+    /// Configures the UserWidget entity including position (X, Y), dimensions (Width, Height, MinWidth),
+    /// and foreign key relationships to Widget and IdentityUser.
+    /// </summary>
+    /// <param name="builder">The entity type builder for UserWidget.</param>
     public override void Configure(EntityTypeBuilder<UserWidget> builder)
     {
         base.Configure(builder);

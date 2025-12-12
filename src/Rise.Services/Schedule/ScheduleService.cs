@@ -10,12 +10,22 @@ using Serilog;
 
 namespace Rise.Services.Schedule;
 
+/// <summary>
+/// Mock service for managing class schedules, reads data from JSON file.
+/// </summary>
 public class MockScheduleService(ApplicationDbContext dbContext, ISessionContextProvider sessionContextProvider) : IScheduleService
 {
     private string? _mockFilePath;
 
     private AbsencesService _absencesService = new AbsencesService(dbContext);
 
+    /// <summary>
+    /// Retrieves schedule data from a JSON file, filtered by date range.
+    /// Marks classes where the teacher is absent.
+    /// </summary>
+    /// <param name="req">QueryRequest.DateRange with StartDate and EndDate for filtering</param>
+    /// <param name="ct">CancellationToken to cancel the operation</param>
+    /// <returns>Result with ScheduleDto.Data containing the list of schedule items, or NotFound/Error on problems</returns>
     public async Task<Result<ScheduleDto.Data>> GetIndexAsync(QueryRequest.DateRange req, CancellationToken ct)
     {
         var userEmail = sessionContextProvider.User?.GetEmail();
@@ -60,6 +70,11 @@ public class MockScheduleService(ApplicationDbContext dbContext, ISessionContext
         return Result.Success(data);
     }
 
+    /// <summary>
+    /// Converts JSON string to ScheduleDto.Data object.
+    /// </summary>
+    /// <param name="json">The JSON string to convert</param>
+    /// <returns>ScheduleDto.Data object with converted schedule data</returns>
     public static ScheduleDto.Data ConvertToDto(string json, string userEmail)
     {
         var allData = JsonSerializer.Deserialize<List<ScheduleApiResponse.ScheduleData>>(json, new JsonSerializerOptions

@@ -10,29 +10,68 @@ using Microsoft.Extensions.Localization;
 
 namespace Rise.Client.Home;
 
+/// <summary>
+/// Represents a single widget entry with its layout properties.
+/// </summary>
+/// <param name="Type">The widget component type.</param>
+/// <param name="Id">The unique identifier of the widget.</param>
+/// <param name="Width">The grid width of the widget.</param>
+/// <param name="Height">The grid height of the widget.</param>
+/// <param name="X">The X position in the grid.</param>
+/// <param name="Y">The Y position in the grid.</param>
+/// <param name="MinWidth">The minimum width of the widget.</param>
 public record WidgetEntry(Type Type, Guid Id, int Width, int Height, int X, int Y, int MinWidth);
 
+/// <summary>
+/// Code-behind for the Home Index page component.
+/// Manages the widget dashboard with drag-and-drop grid layout.
+/// </summary>
 public partial class Index : ComponentBase
 {
+    /// <summary>JavaScript runtime for interop calls.</summary>
     [Inject] public IJSRuntime Js { get; set; } = default!;
+    
+    /// <summary>Service for widget operations.</summary>
     [Inject] public IWidgetService WidgetService { get; set; } = default!;
+    
+    /// <summary>Service for schedule operations.</summary>
     [Inject] public IScheduleService ScheduleClientService { get; set; } = default!;
+    
+    /// <summary>Service for restaurant operations.</summary>
     [Inject] public IRestoService RestoClientService { get; set; } = default!;
+    
+    /// <summary>Navigation manager for URL handling.</summary>
     [Inject] public NavigationManager NavigationManager { get; set; } = default!;
+    
+    /// <summary>Optional start date for schedule filtering.</summary>
     [Parameter] public DateTime? StartDate { get; set; }
+    
+    /// <summary>Optional end date for schedule filtering.</summary>
     [Parameter] public DateTime? EndDate { get; set; }
+    
     private List<ScheduleDto.Schedule>? UpcomingClasses { get; set; }
+    
+    /// <summary>The current mode (e.g., "edit" for editing widgets).</summary>
     [Parameter] public string? Mode { get; set; }
+    
     private bool _isAddOpen;
 
+    /// <summary>The current authentication state.</summary>
     [CascadingParameter]
     private Task<AuthenticationState>? AuthState { get; set; }
 
+    /// <summary>
+    /// Toggles the add widget panel visibility.
+    /// </summary>
     private void ToggleAdd()
     {
         _isAddOpen = !_isAddOpen;
     }
 
+    /// <summary>
+    /// Closes the add widget panel.
+    /// </summary>
+    /// <param name="_">Optional focus event args (ignored).</param>
     private void CloseAdd(FocusEventArgs? _ = null)
     {
         _isAddOpen = false;
@@ -58,6 +97,11 @@ public partial class Index : ComponentBase
         ["Links"] = typeof(Widgets.LinksWidget)
     };
 
+    /// <summary>
+    /// Gets the localized display name for a widget type.
+    /// </summary>
+    /// <param name="t">The widget type.</param>
+    /// <returns>Localized widget name.</returns>
     private string GetWidgetName(Type t) => t.Name switch
     {
         "ScheduleWidget" => L["Home.Widget.Schedule"],
@@ -68,6 +112,13 @@ public partial class Index : ComponentBase
         _ => t.Name
     };
 
+    /// <summary>
+    /// Creates a default widget entry with specified height and Y position.
+    /// </summary>
+    /// <param name="t">The widget type.</param>
+    /// <param name="height">Widget height in grid units.</param>
+    /// <param name="y">Y position in grid.</param>
+    /// <returns>New widget entry with default settings.</returns>
     private static WidgetEntry CreateDefault(Type t, int height, int y) =>
         new WidgetEntry(t, Guid.NewGuid(), 12, height, 0, y, 4);
 
@@ -93,11 +144,17 @@ public partial class Index : ComponentBase
 
     private bool IsEditMode => string.Equals(Mode, "edit", StringComparison.OrdinalIgnoreCase);
 
+    /// <summary>
+    /// Navigates to edit mode for widget customization.
+    /// </summary>
     private void EnterEdit()
     {
         NavigationManager.NavigateTo("/edit");
     }
 
+    /// <summary>
+    /// Saves the current widget layout and exits edit mode.
+    /// </summary>
     private async Task SaveAndExit()
     {
         var updatedWidgets = await GetCurrentWidgetLayoutAsync();
@@ -137,6 +194,10 @@ public partial class Index : ComponentBase
         NavigationManager.NavigateTo("/");
     }
 
+    /// <summary>
+    /// Adds a new widget to the dashboard.
+    /// </summary>
+    /// <param name="widgetType">The type of widget to add.</param>
     private void AddWidget(Type widgetType)
     {
 
@@ -158,6 +219,11 @@ public partial class Index : ComponentBase
         _isAddOpen = false;
         StateHasChanged();
     }
+    
+    /// <summary>
+    /// Removes a widget from the dashboard by its ID.
+    /// </summary>
+    /// <param name="index">The widget ID to remove.</param>
     private Task RemoveItem(Guid index)
     {
         var idx = _currentWidgets.FindIndex(w => w.Id == index);
@@ -169,6 +235,9 @@ public partial class Index : ComponentBase
         return Task.CompletedTask;
     }
 
+    /// <summary>
+    /// Initializes the component by loading schedule, restaurant, and widget data.
+    /// </summary>
     protected override async Task OnInitializedAsync()
     {
         QueryRequest.DateRange request = new()
@@ -234,6 +303,10 @@ public partial class Index : ComponentBase
         }
     }
 
+    /// <summary>
+    /// Gets the current widget layout from the GridStack JavaScript interop.
+    /// </summary>
+    /// <returns>Collection of widget entries with current positions.</returns>
     private async Task<IEnumerable<WidgetEntry>> GetCurrentWidgetLayoutAsync()
     {
         var widgets = await Js.InvokeAsync<List<WidgetEntry>>("gridstackInterop.getWidgets");

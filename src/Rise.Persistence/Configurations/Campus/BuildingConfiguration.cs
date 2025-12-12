@@ -6,9 +6,14 @@ namespace Rise.Persistence.Configurations.Campus;
 
 /// <summary>
 /// Specific configuration for <see cref="Building"/>.
+/// Configures property constraints and shadow foreign key for Campus relationship.
 /// </summary>
 internal class BuildingConfiguration : EntityConfiguration<Building>
 {
+    /// <summary>
+    /// Configures the Building entity properties including name, address, and shadow CampusId foreign key.
+    /// </summary>
+    /// <param name="builder">The entity type builder for Building.</param>
     public override void Configure(EntityTypeBuilder<Building> builder)
     {
         base.Configure(builder);
