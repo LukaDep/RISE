@@ -63,8 +63,9 @@ public class GradesWidgetShould : TestContext
             .Add(p => p.EditMode, false));
 
         cut.WaitForState(() => !cut.Markup.Contains("Loading…"));
-        var moreLink = cut.Find("span.text-blue-600");
-        moreLink.Click();
+        // More button is now a button element with text-hogent-education class
+        var moreButton = cut.FindAll("button").First(b => b.ClassList.Contains("text-hogent-education"));
+        moreButton.Click();
 
         Assert.Contains("/grades", navManager.Uri);
     }
@@ -99,15 +100,15 @@ public class GradesWidgetShould : TestContext
     }
 
     [Fact]
-    public void DisplayDateInCorrectFormat()
+    public void DisplayGradeInfoCorrectly()
     {
         var cut = RenderComponent<GradesWidget>(parameters => parameters
             .Add(p => p.WidgetId, Guid.NewGuid())
             .Add(p => p.EditMode, false));
 
         cut.WaitForState(() => !cut.Markup.Contains("Loading…"));
-        var expectedDate = DateTime.UtcNow.AddDays(-1).ToString("dd MMM");
-        Assert.Contains(expectedDate, cut.Markup);
+        // The GradesWidget displays the latest grade info, not a date
+        Assert.Contains("Mathematics", cut.Markup);
     }
 }
 

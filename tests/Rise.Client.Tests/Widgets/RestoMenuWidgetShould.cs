@@ -64,8 +64,9 @@ public class RestoMenuWidgetShould : TestContext
             .Add(p => p.EditMode, false));
 
         cut.WaitForState(() => !cut.Markup.Contains("Loading…"), timeout: TimeSpan.FromSeconds(5));
-        var moreLink = cut.Find("span.text-blue-600");
-        moreLink.Click();
+        // More button is now a button element with text-hogent-education class
+        var moreButton = cut.FindAll("button").First(b => b.ClassList.Contains("text-hogent-education"));
+        moreButton.Click();
 
         Assert.Contains("/resto", navManager.Uri);
     }

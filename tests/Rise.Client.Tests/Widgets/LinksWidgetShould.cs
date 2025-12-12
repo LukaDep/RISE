@@ -2,6 +2,9 @@ using Rise.Client.Home.Widgets;
 
 namespace Rise.Client.Tests.Widgets;
 
+/// <summary>
+/// Unit tests for the <see cref="LinksWidget"/> component.
+/// </summary>
 public class LinksWidgetShould : TestContext
 {
     public LinksWidgetShould()
@@ -19,7 +22,6 @@ public class LinksWidgetShould : TestContext
         Assert.Contains("ibamaflex.hogent.be", cut.Markup);
         Assert.Contains("wallie.hogent.be", cut.Markup);
         Assert.Contains("outlook.com/owa/hogent.be", cut.Markup);
-        Assert.Contains("studentenkaart", cut.Markup);
         Assert.Contains("epurse.hogent.be", cut.Markup);
     }
 
@@ -51,9 +53,9 @@ public class LinksWidgetShould : TestContext
             .Add(p => p.WidgetId, Guid.NewGuid())
             .Add(p => p.EditMode, false));
 
+        // Icons used in the current component
         Assert.Contains("fa-bullhorn", cut.Markup);
         Assert.Contains("fa-envelope", cut.Markup);
-        Assert.Contains("fa-address-card", cut.Markup);
         Assert.Contains("fa-credit-card", cut.Markup);
         Assert.Contains("fa-calendar-days", cut.Markup);
     }
@@ -66,7 +68,8 @@ public class LinksWidgetShould : TestContext
             .Add(p => p.EditMode, false));
 
         var links = cut.FindAll("a");
-        Assert.Equal(6, links.Count);
+        // Component has 5 links: ibamaflex, wallie, outlook, epurse, sharepoint
+        Assert.Equal(5, links.Count);
     }
 
     [Fact]

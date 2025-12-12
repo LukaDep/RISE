@@ -2,6 +2,7 @@ using Ardalis.Result;
 using Bunit;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Localization;
 using Rise.Client.Campus;
 using Rise.Shared.Campus;
 using Rise.Shared.Common;
@@ -25,8 +26,8 @@ public class CampusInfoShould : TestContext
         var cut = RenderComponent<CampusInfo>();
 
         var markup = cut.Markup;
-        Assert.Contains("flex justify-between items-center", markup);
-        Assert.Contains("fa-search", markup);
+        // SearchBar uses fa-magnifying-glass icon
+        Assert.Contains("fa-magnifying-glass", markup);
     }
 
     [Fact]
@@ -52,7 +53,9 @@ public class CampusInfoShould : TestContext
         var cut = RenderComponent<CampusInfo>();
 
         var markup = cut.Markup;
-        Assert.Contains("<p>", markup);
+        // LoadingComponent renders a loading spinner and label
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
+        Assert.Contains(localizer["Campus.Loading"], markup);
     }
 
     [Fact]
@@ -65,7 +68,9 @@ public class CampusInfoShould : TestContext
 
         cut.WaitForAssertion(() =>
         {
-            Assert.Contains("width:94%", cut.Markup);
+            // SearchBar removes hidden class when open, shows input element
+            var markup = cut.Markup;
+            Assert.DoesNotContain("hidden", cut.Find("input[name='search']").GetAttribute("class") ?? "");
         });
     }
 
@@ -103,10 +108,13 @@ public class CampusInfoShould : TestContext
         var cut = RenderComponent<CampusInfo>();
         var searchButton = cut.Find("button");
 
+        // SearchBar now always shows input, clicking button clears/toggles the value
         searchButton.Click();
         searchButton.Click();
 
-        Assert.Contains("width:0px", cut.Markup);
+        // Input should still be present (SearchBar always shows input)
+        var input = cut.Find("input[name='search']");
+        Assert.NotNull(input);
     }
 
     [Fact]
@@ -159,7 +167,8 @@ public class CampusInfoShould : TestContext
         {
             var markup = cut.Markup;
             Assert.NotNull(markup);
-            Assert.Contains("flex justify-between", markup);
+            // BasePage uses min-h-screen bg-gray-50 styling
+            Assert.Contains("min-h-screen", markup);
         });
     }
 
@@ -200,14 +209,15 @@ public class CampusInfoShould : TestContext
     public void SearchInput_HasCorrectPlaceholder()
     {
         var cut = RenderComponent<CampusInfo>();
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
 
         var searchButton = cut.Find("button");
         searchButton.Click();
 
         cut.WaitForAssertion(() =>
         {
-            Assert.Contains("placeholder=", cut.Markup);
-            Assert.Contains("Zoekterm", cut.Markup);
+            // SearchBar uses Common.SearchPlaceholder resource
+            Assert.Contains($"placeholder=\"{localizer["Common.SearchPlaceholder"]}\"", cut.Markup);
         });
     }
 }

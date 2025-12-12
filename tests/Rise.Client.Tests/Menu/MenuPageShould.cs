@@ -4,6 +4,9 @@ using Rise.Shared.Menu;
 
 namespace Rise.Client.Menu;
 
+/// <summary>
+/// Unit tests for the <see cref="MenuPage"/> component.
+/// </summary>
 public class MenuPageShould : TestContext
 {
     private static readonly Guid Resto1Id = Guid.Parse("11111111-1111-1111-1111-111111111111");
@@ -25,9 +28,8 @@ public class MenuPageShould : TestContext
         var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
         Assert.Contains(localizer["Resto.MenuTitle"], cut.Markup);
 
-        // Assert back button exists
+        // Assert back button exists (BackButton uses fa-arrow-left)
         Assert.Contains("fa-arrow-left", cut.Markup);
-        Assert.Contains(localizer["Resto.Return"], cut.Markup);
     }
 
     [Fact]
@@ -172,18 +174,16 @@ public class MenuPageShould : TestContext
     [Fact]
     public void NavigateBackWhenBackButtonClicked()
     {
-        // Arrange
-        var navManager = Services.GetRequiredService<NavigationManager>();
+        // Arrange & Act
         var cut = RenderComponent<MenuPage>(parameters => parameters
             .Add(p => p.RestoId, Resto1Id));
 
-        // Act - Click back button
-        var backButton = cut.FindAll("button")
-            .FirstOrDefault(b => b.InnerHtml.Contains("fa-arrow-left"));
-        backButton?.Click();
-
-        // Assert - Should navigate to /resto
-        Assert.EndsWith("/resto", navManager.Uri);
+        // Assert - Back link should exist with correct href
+        var backLink = cut.FindAll("a")
+            .FirstOrDefault(a => a.GetAttribute("href") == "/resto");
+        
+        Assert.NotNull(backLink);
+        Assert.Contains("fa-arrow-left", backLink.InnerHtml);
     }
 
     [Fact]

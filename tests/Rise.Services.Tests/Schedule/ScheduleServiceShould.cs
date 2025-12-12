@@ -1,7 +1,9 @@
+using System.Security.Claims;
 using System.Text.Json;
 using Ardalis.Result;
 using Microsoft.EntityFrameworkCore;
 using Rise.Services.Schedule;
+using Rise.Services.Tests.Fakers;
 using Rise.Shared.Common;
 using Rise.Services.Tests.TestInfrastructure;
 
@@ -32,20 +34,24 @@ public class ScheduleServiceShould
             var mockDir = Path.Combine(tempRoot.FullName, "Rise.Services", "Schedule", "MockData");
             Directory.CreateDirectory(mockDir);
 
-            var mockData = new
+            var mockData = new[]
             {
-                columnheaders = new[] { "Olod", "Werkvorm", "Onderwerp", "Info werkvorm", "Leer- of toetsomgeving", "Lokaal", "Lesgever" },
-                info = new { schedulelimit = 1000, schedulecount = 1 },
-                schedules = new[]
+                new
                 {
-                    new
+                    email = "test@example.com",
+                    columnheaders = new[] { "Olod", "Werkvorm", "Onderwerp", "Info werkvorm", "Leer- of toetsomgeving", "Lokaal", "Lesgever" },
+                    info = new { schedulelimit = 1000, schedulecount = 1 },
+                    schedules = new[]
                     {
-                        id = "sched-001",
-                        startdate = "01-09-2025",
-                        starttime = "08:30",
-                        enddate = "01-09-2025",
-                        endtime = "10:30",
-                        columns = new[] { "Web Ontwikkeling 2", "Hoorcollege", "", "", "Digitaal (laptop/PC)", "GSCHB.2.009", "Bert Van Vreckem" }
+                        new
+                        {
+                            id = "sched-001",
+                            startdate = "01-09-2025",
+                            starttime = "08:30",
+                            enddate = "01-09-2025",
+                            endtime = "10:30",
+                            columns = new[] { "Web Ontwikkeling 2", "Hoorcollege", "", "", "Digitaal (laptop/PC)", "GSCHB.2.009", "Bert Van Vreckem" }
+                        }
                     }
                 }
             };
@@ -56,7 +62,12 @@ public class ScheduleServiceShould
             using var _ = UseWorkingDirectory(cwd); // so ..\Rise.Services\Schedule\MockData resolves into tempRoot
             using var fixture = new SqliteTestFixture();
             using var dbContext = fixture.CreateContext();
-            var service = new MockScheduleService(dbContext);
+            var userClaims = new ClaimsPrincipal(new ClaimsIdentity(new[]
+            {
+                new Claim(ClaimTypes.Email, "test@example.com")
+            }));
+            var mockSessionContext = new FakeSessionContextProvider(userClaims);
+            var service = new MockScheduleService(dbContext, mockSessionContext);
             var request = new QueryRequest.DateRange { Skip = 0, Take = 10 };
             var result = await service.GetIndexAsync(request, CancellationToken.None);
             if (result.IsSuccess)
@@ -106,9 +117,9 @@ public class ScheduleServiceShould
             }
         };
 
-        var json = JsonSerializer.Serialize(mockData);
+        var json = JsonSerializer.Serialize(new[] { new { email = "test@example.com", columnheaders = mockData.columnheaders, info = mockData.info, schedules = mockData.schedules } });
 
-        var result = MockScheduleService.ConvertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json, "test@example.com");
 
         result.ShouldNotBeNull();
         result.Schedules.Count.ShouldBe(2);
@@ -153,9 +164,9 @@ public class ScheduleServiceShould
             }
         };
 
-        var json = JsonSerializer.Serialize(mockData);
+        var json = JsonSerializer.Serialize(new[] { new { email = "test@example.com", columnheaders = mockData.columnheaders, info = mockData.info, schedules = mockData.schedules } });
 
-        var result = MockScheduleService.ConvertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json, "test@example.com");
 
         result.ShouldNotBeNull();
         result.Schedules.Count.ShouldBe(1);
@@ -208,9 +219,9 @@ public class ScheduleServiceShould
             }
         };
 
-        var json = JsonSerializer.Serialize(mockData);
+        var json = JsonSerializer.Serialize(new[] { new { email = "test@example.com", columnheaders = mockData.columnheaders, info = mockData.info, schedules = mockData.schedules } });
 
-        var result = MockScheduleService.ConvertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json, "test@example.com");
 
         result.ShouldNotBeNull();
         result.Schedules.Count.ShouldBe(3);
@@ -240,9 +251,9 @@ public class ScheduleServiceShould
             }
         };
 
-        var json = JsonSerializer.Serialize(mockData);
+        var json = JsonSerializer.Serialize(new[] { new { email = "test@example.com", columnheaders = mockData.columnheaders, info = mockData.info, schedules = mockData.schedules } });
 
-        var result = MockScheduleService.ConvertToDto(json);
+        var result = MockScheduleService.ConvertToDto(json, "test@example.com");
 
         var schedule = result.Schedules[0];
         schedule.StartDateTime.ShouldBe(new DateTime(2025, 12, 15, 23, 59, 0));

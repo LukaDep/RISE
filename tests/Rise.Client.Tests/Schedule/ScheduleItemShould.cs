@@ -26,16 +26,27 @@ public class ScheduleItemShould : TestContext
     [Fact]
     public void OpenOnEventClickAndClose()
     {
-        var cut = RenderComponent<DayView>(p => p.Add(x => x.SelectedDate, DateTime.Today));
+        // Arrange: render Agenda for today so the first fake item appears
+        // FakeScheduleService uses DateTime.Now.Date
+        var today = DateTime.Now.Date;
+        var cut = RenderComponent<Agenda>(p => p.Add(x => x.SelectedDate, today));
+
+        // Act: click the event containing the known course title from FakeScheduleService
         var eventDiv = cut.FindAll("div").First(e =>
             e.TextContent.Contains("Web Ontwikkeling 2") &&
             (e.GetAttribute("class")?.Contains("cursor-pointer") ?? false));
         eventDiv.Click();
+
+        // Assert: modal appears and contains expected details
         var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
         Assert.Contains("Web Ontwikkeling 2", cut.Markup);
         Assert.Contains(localizer["Schedule.Close"], cut.Markup);
+
+        // Act: close via the close button
         var closeBtn = cut.FindAll("button").First(b => b.TextContent.Contains(localizer["Schedule.Close"]));
         closeBtn.Click();
+
+        // Assert: modal closed (no Close button text anymore)
         Assert.DoesNotContain(localizer["Schedule.Close"], cut.Markup);
     }
 
@@ -153,6 +164,8 @@ public class ScheduleItemShould : TestContext
         var cut = RenderComponent<ScheduleItem>(parameters => parameters
             .Add(p => p.Schedule, schedule)
             .Add(p => p.OnClose, EventCallback.Factory.Create(this, () => closeCalled = true)));
+
+        // Click the background overlay (has bg-black/50 class)
         var overlay = cut.Find("div.bg-black\\/50");
         overlay.Click();
 
@@ -198,7 +211,9 @@ public class ScheduleItemShould : TestContext
 
         var navMan = Services.GetRequiredService<NavigationManager>();
         var campusId = buildingResponse.Building.CampusId;
-        Assert.Contains($"/campus-plan/{campusId}#building-GSCHB", navMan.Uri);
+        // NavigationManager.Uri contains full URL including scheme and host
+        Assert.Contains($"campus-plan/{campusId}", navMan.Uri);
+        Assert.Contains("#building-GSCHB", navMan.Uri);
     }
 
     [Fact]
@@ -216,6 +231,9 @@ public class ScheduleItemShould : TestContext
         var cut = RenderComponent<ScheduleItem>(parameters => parameters
             .Add(p => p.Schedule, schedule)
             .Add(p => p.OnClose, EventCallback.Factory.Create(this, () => { })));
+
+        // Should be truncated to 40 chars + "..."
+        // The exact truncation includes "This is a very long course title that sh..."
         Assert.Contains("This is a very long course title that", cut.Markup);
         Assert.Contains("...", cut.Markup);
     }

@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace Rise.Services.Events
 {
-    internal class EventService(ApplicationDbContext dbContext) : IEventService
+    public class EventService(ApplicationDbContext dbContext) : IEventService
     {
         public async Task<Result<EventResponse.Index>> GetIndexAsync(QueryRequest.SkipTake request, CancellationToken ctx = default)
         {
@@ -41,7 +41,8 @@ namespace Rise.Services.Events
             }
             if (!string.IsNullOrWhiteSpace(typeFilter))
             {
-                query = query.Where(n => n.Type.Equals(typeFilter, StringComparison.CurrentCultureIgnoreCase));
+                var lowerFilter = typeFilter.ToLower();
+                query = query.Where(n => n.Type.ToLower() == lowerFilter);
             }
 
             query = query.OrderBy(e => e.StartDateTime).ThenBy(p => p.Type);

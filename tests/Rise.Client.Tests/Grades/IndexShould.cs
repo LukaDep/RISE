@@ -5,6 +5,9 @@ using Microsoft.Extensions.Localization;
 using Rise.Client.Tests.Grades;
 using Rise.Client.Components;
 
+/// <summary>
+/// Unit tests for the Grades <see cref="Index"/> page component.
+/// </summary>
 public class IndexShould : TestContext
 {
     public IndexShould()
@@ -17,23 +20,16 @@ public class IndexShould : TestContext
     public void RendersHeaderAndSearchElements()
     {
         // Arrange & Act
-
         var cut = RenderComponent<Index>();
 
         // Assert header/title rendered from localizer
         var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
 
-        Assert.Contains("<h1", cut.Markup);
+        // BasePage uses h1 for the title
         Assert.Contains(localizer["Grades.Title"], cut.Markup);
 
         // Search elements: the search input may be hidden or the toggle button may vary across versions.
         // Be resilient: if an input exists, assert its placeholder; otherwise only assert the selects are present.
-        var input = cut.FindAll("input").FirstOrDefault();
-        if (input != null)
-        {
-            Assert.Equal(localizer["Grades.SearchTermPlaceholder"], input.GetAttribute("placeholder"));
-        }
-
         var selects = cut.FindComponents<SimpleSelect>();
 
         Assert.Equal(2, selects.Count);

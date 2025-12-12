@@ -61,8 +61,9 @@ public class ScheduleWidgetShould : TestContext
             .Add(p => p.EditMode, false));
 
         cut.WaitForState(() => !cut.Markup.Contains("Loading…"));
-        var moreLink = cut.Find("span.text-blue-600");
-        moreLink.Click();
+        // More button is now a button element with text-hogent-education class
+        var moreButton = cut.FindAll("button").First(b => b.ClassList.Contains("text-hogent-education"));
+        moreButton.Click();
 
         Assert.Contains("/schedule", navManager.Uri);
     }
@@ -82,8 +83,8 @@ public class ScheduleWidgetShould : TestContext
         cut.WaitForState(() => !cut.Markup.Contains("Loading…"), timeout: TimeSpan.FromSeconds(5));
         var localizer = ctx.Services.GetRequiredService<IStringLocalizer<SharedResources>>();
         
-        // When there are no classes today, verify the header is present
-        Assert.Contains(localizer["Home.Today"], cut.Markup);
+        // When there are no classes today, verify the "no classes" message is shown
+        Assert.Contains(localizer["Home.NoClassesToday"], cut.Markup);
     }
 
     [Fact]

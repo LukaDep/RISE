@@ -4,6 +4,9 @@ using Rise.Shared.Contact;
 using Rise.Client.Tests.Contact;
 using Microsoft.Extensions.Localization;
 
+/// <summary>
+/// Unit tests for the Contact search functionality.
+/// </summary>
 public class IndexSearchShould : TestContext
 {
     public IndexSearchShould()
@@ -13,22 +16,14 @@ public class IndexSearchShould : TestContext
     }
 
     [Fact]
-    public void ToggleSearch_RendersInput()
+    public void RenderSearchInput()
     {
         var cut = RenderComponent<ContactOverview>();
 
-        // find the search toggle button (SearchBar renders a button with magnifying icon)
-        var searchButton = cut.FindAll("button").FirstOrDefault(b => b.OuterHtml.Contains("fa-magnifying-glass") || b.OuterHtml.Contains("fa-xmark"));
-        Assert.NotNull(searchButton);
-
-        // initially no input
-        Assert.Empty(cut.FindAll("input"));
-
-        // open search
-        searchButton.Click();
-
+        // SearchBar always renders an input with the search placeholder
         var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
-        var input = cut.Find("input");
+        var input = cut.Find("input[name='search']");
+        Assert.NotNull(input);
         Assert.Equal(localizer["Common.SearchPlaceholder"], input.GetAttribute("placeholder"));
     }
 
@@ -37,10 +32,7 @@ public class IndexSearchShould : TestContext
     {
         var cut = RenderComponent<ContactOverview>();
 
-        var searchButton = cut.FindAll("button").FirstOrDefault(b => b.OuterHtml.Contains("fa-magnifying-glass") || b.OuterHtml.Contains("fa-xmark"));
-        searchButton.Click();
-
-        var input = cut.Find("input");
+        var input = cut.Find("input[name='search']");
         input.Input("John");
 
         Assert.Contains("John Doe", cut.Markup);

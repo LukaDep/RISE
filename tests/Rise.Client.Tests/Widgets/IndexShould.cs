@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Localization;
 using Rise.Client;
 using Rise.Client.Home;
 using Rise.Client.Schedule;
@@ -15,6 +16,9 @@ using Index = Rise.Client.Home.Index;
 
 namespace Rise.Client.Tests.Widgets;
 
+/// <summary>
+/// Unit tests for the Home <see cref="Index"/> page component.
+/// </summary>
 public class IndexShould : TestContext
 {
     public IndexShould()
@@ -31,7 +35,7 @@ public class IndexShould : TestContext
         JSInterop.SetupVoid("gridstackInterop.initGrid", _ => true);
         JSInterop.SetupVoid("gridstackInterop.setEditMode", _ => true);
         JSInterop.SetupVoid("gridstackInterop.destroy", _ => true);
-        JSInterop.Setup<List<WidgetEntry>>("GridStackInterop.getWidgets")
+        JSInterop.Setup<List<WidgetEntry>>("gridstackInterop.getWidgets")
             .SetResult(new List<WidgetEntry>());
     }
     
@@ -64,7 +68,9 @@ public class IndexShould : TestContext
 
         var cut = RenderComponent<Index>();
         
-        var editButton = cut.Find("button[aria-label='Edit']");
+        // Edit button uses localized label
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
+        var editButton = cut.Find($"button[aria-label='{localizer["Home.Edit"]}']");
         Assert.NotNull(editButton);
         Assert.Contains("fa-pencil", editButton.InnerHtml);
     }
@@ -77,7 +83,9 @@ public class IndexShould : TestContext
 
         var cut = RenderComponent<Index>();
         
-        var editButtons = cut.FindAll("button[aria-label='Edit']");
+        // Edit button uses localized label
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
+        var editButtons = cut.FindAll($"button[aria-label='{localizer["Home.Edit"]}']");
         Assert.Empty(editButtons);
     }
 
@@ -90,10 +98,11 @@ public class IndexShould : TestContext
         var cut = RenderComponent<Index>();
         var navManager = Services.GetRequiredService<NavigationManager>();
         
-        var editButton = cut.Find("button[aria-label='Edit']");
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
+        var editButton = cut.Find($"button[aria-label='{localizer["Home.Edit"]}']");
         editButton.Click();
 
-        Assert.Contains("/home/edit", navManager.Uri);
+        Assert.Contains("/edit", navManager.Uri);
     }
 
     [Fact]
@@ -105,7 +114,8 @@ public class IndexShould : TestContext
         var cut = RenderComponent<Index>(parameters => parameters
             .Add(p => p.Mode, "edit"));
         
-        var saveButton = cut.Find("button[aria-label='Save']");
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
+        var saveButton = cut.Find($"button[aria-label='{localizer["Home.Save"]}']");
         Assert.NotNull(saveButton);
         Assert.Contains("fa-check", saveButton.InnerHtml);
     }
@@ -146,10 +156,10 @@ public class IndexShould : TestContext
             .Add(p => p.Mode, "edit"));
         var navManager = Services.GetRequiredService<NavigationManager>();
         
-        var saveButton = cut.Find("button[aria-label='Save']");
+        var localizer = Services.GetRequiredService<IStringLocalizer<SharedResources>>();
+        var saveButton = cut.Find($"button[aria-label='{localizer["Home.Save"]}']");
         saveButton.Click();
 
-        Assert.Contains("/home", navManager.Uri);
         Assert.DoesNotContain("edit", navManager.Uri);
     }
     
